@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<c:import url="./layout/css.jsp"></c:import>
-<c:import url="./layout/topScript.jsp"></c:import>
-<link rel="stylesheet" href="/css/main.css" />
-
-</head>
-<body>
-<div id="wrap">
-      <section class="app">
+<section class="app">
         <aside class="sidebar">
           <nav class="sidebar-nav">
             <ul>
@@ -25,17 +12,7 @@
                       >전체 직원 목록</a
                     >
                   </li>
-                  <!-- <li>
-                    <a href="#"><i class="ion-ios-clock-outline"></i>Times</a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-android-star-outline"></i>Hates</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"><i class="ion-heart-broken"></i>Beat</a>
-                  </li> -->
+                  
                 </ul>
               </li>
               <li>
@@ -47,19 +24,7 @@
                   <li>
                     <a href="#">전체 회원 관리</a>
                   </li>
-                  <!-- <li>
-                    <a href="#"
-                      ><i class="ion-ios-camera-outline"></i>Creeper</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-chatboxes-outline"></i>Hate</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"><i class="ion-ios-cog-outline"></i>Grinder</a>
-                  </li> -->
+                
                 </ul>
               </li>
               <li>
@@ -71,26 +36,6 @@
                   <li>
                     <a href="#">이용권 목록</a>
                   </li>
-                  <!-- <li>
-                    <a href="#"
-                      ><i class="ion-ios-lightbulb-outline"></i>Bulbs</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-location-outline"></i>Where You</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-locked-outline"></i>On Lock</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-navigate-outline"></i>Ghostface</a
-                    >
-                  </li> -->
                 </ul>
               </li>
               <li>
@@ -112,17 +57,6 @@
                       >전체 락커 목록</a
                     >
                   </li>
-                 <!--  <li>
-                    <a href="#"
-                      ><i class="ion-ios-timer-outline"></i>Lookie Look</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-game-controller-a-outline"></i>Dork
-                      Mfer</a
-                    >
-                  </li> -->
                 </ul>
               </li>
               <li>
@@ -141,14 +75,6 @@
                       >회원 조회</a
                     >
                   </li>
-                  <!-- <li>
-                    <a href="#"
-                      ><i class="ion-ios-paperplane-outline"></i>Planes</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"><i class="ion-android-star-outline"></i>Shop</a>
-                  </li> -->
                 </ul>
               </li>
               <li>
@@ -170,16 +96,6 @@
                       >근태 수정 요청 목록</a
                     >
                   </li>
-                  <!-- <li> -->
-                    <!-- <a href="#"
-                      ><i class="ion-ios-locked-outline"></i>On Lock</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-navigate-outline"></i>Ghostface</a
-                    >
-                  </li> -->
                 </ul>
               </li>
               <li>
@@ -222,34 +138,3 @@
           </nav>
         </aside>
       </section>
-      <div id="right">
-        <header>
-          <div class="header_wrap">
-            <div class="header_message">
-              <p>이재혁 님 환영합니다</p>
-            </div>
-            <div class="header_navi">
-              <a href="#">조직도</a>
-              <a href="/employee/login">로그인</a>
-              <a href="#">로그아웃</a>
-              <a href="#">마이페이지</a>
-            </div>
-          </div>
-        </header>
-        <div style="background-color: rgb(183, 234, 234); height: 100%">
-          <div class="main_wrap">
-            <div class="main_top">
-              <div class="main_member">멤버정보자리</div>
-              <div class="main_notice">공지 자리</div>
-              <div class="main_calendar">달력자리</div>
-            </div>
-            <div class="main_bottom">
-              <div class="main_schedule">스케줄자리</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</body>
-<c:import url="./layout/btmScript.jsp"></c:import>
-</html>

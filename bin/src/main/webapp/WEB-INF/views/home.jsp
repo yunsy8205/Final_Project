@@ -230,7 +230,7 @@
             </div>
             <div class="header_navi">
               <a href="#">조직도</a>
-              <a href="/employee/login">로그인</a>
+              <a href="#">로그인</a>
               <a href="#">로그아웃</a>
               <a href="#">마이페이지</a>
             </div>
