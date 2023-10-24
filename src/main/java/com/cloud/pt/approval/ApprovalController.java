@@ -17,10 +17,11 @@ public class ApprovalController {
 	@Autowired
 	private ApprovalService approvalService;
 	
-	@GetMapping("main")
+	@GetMapping("list")
 	public void getMain(Model model,Pager pager) throws Exception{
 		List<ApprovalVO> al = approvalService.getApprovalList(pager);
 		model.addAttribute("list", al);
+		model.addAttribute("pager", pager);
 	}
 	
 
