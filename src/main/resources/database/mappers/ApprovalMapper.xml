@@ -4,7 +4,15 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.approval.ApprovalDAO">
-	<select id="getWatingList" resultType="ApprovalVO">
-		SELECT REGDATE,KIND,TITLE,STATE FROM APPROVAL WHERE STATE='대기중'
+	
+	<!-- 1. count  -->
+	<select id="getCount" parameterType="Pager" resultType="Long">
+		SELECT COUNT(APPROVALNUM) FROM APPROVAL
 	</select>
+	
+	<!-- 2. list -->
+	<select id="getApprovalList" resultType="ApprovalVO">
+		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
+	</select>
+	
 </mapper>

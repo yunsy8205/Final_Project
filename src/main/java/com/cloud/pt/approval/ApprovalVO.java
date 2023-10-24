@@ -10,7 +10,7 @@ import lombok.Setter;
 public class ApprovalVO {
 	private Long approvalNum;
 	private Long employeeNum;
-	private String kind;
+	private String category;
 	private String middle;
 	private String last;
 	private Date regDate;

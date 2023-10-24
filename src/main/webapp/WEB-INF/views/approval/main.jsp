@@ -1,36 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title he</title>
+<c:import url="../temp/bootStrap.jsp"></c:import>
 </head>
-<body>
-	<h1>approval 메인</h1>
-	
-	<a href="./select">새 결재 작성</a>
+<body id="page-top">
+<section class="container mt-5">
 	<table>
 		<thead>
 			<tr>
 				<th>기안일</th>
 				<th>결재양식</th>
 				<th>제목</th>
-				<th>상태</th>
+				<th>문서번호</th>
+				<th>결재상태</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${wating}" var="wl">
+			<c:forEach items="${list}" var="vo">
 				<tr>
-					<td>${wl.regDate}
-					<td>${wl.kind}
-					<td>${wl.title}
-					<td>${wl.state}
+					<td>${vo.regDate}</td>
+					<td>${vo.category}</td>
+					<td>${vo.title}</td>
+					<td>${vo.approvalNum}</td>
+					<td>${vo.state}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	
+</section>
 </body>
 </html>

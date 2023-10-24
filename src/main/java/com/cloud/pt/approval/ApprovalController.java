@@ -8,22 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cloud.pt.common.Pager;
+
 @Controller
 @RequestMapping("/approval/*")
 public class ApprovalController {
-	
+
 	@Autowired
 	private ApprovalService approvalService;
 	
 	@GetMapping("main")
-	public void getMain(Model model) throws Exception{
-		List<ApprovalVO> wl = approvalService.getWatingList();
-		model.addAttribute("wating",wl);
+	public void getMain(Model model,Pager pager) throws Exception{
+		List<ApprovalVO> al = approvalService.getApprovalList(pager);
+		model.addAttribute("list", al);
 	}
 	
-	@GetMapping("select")
-	public void getSelect() throws Exception{
-		
-	}
 
 }
