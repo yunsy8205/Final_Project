@@ -30,6 +30,11 @@ public class Pager {
 	private boolean pre;
 	// 다음 btn [true=중간블럭 | false=마지막블럭]
 	private boolean next;
+	
+	
+	//동찬 결재분류
+	private String division;
+	
 		
 	// 1. 보여질 data 갯수
 	public void makeRowNum() {
@@ -110,5 +115,11 @@ public class Pager {
 			this.perPage=10L;
 		}
 		return perPage;
+	}
+	public String getDivision() {
+		if(this.division == null) {
+			return "all";
+		}
+		return this.division;
 	}
 }

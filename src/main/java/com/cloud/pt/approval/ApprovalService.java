@@ -18,8 +18,8 @@ public class ApprovalService {
 		Long total = approvalDAO.getCount(pager);
 		pager.makePageNum(total);
 		return approvalDAO.getApprovalList(pager);
-		
 	}
+	
 	
 	
 	

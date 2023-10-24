@@ -18,11 +18,13 @@ public class ApprovalController {
 	private ApprovalService approvalService;
 	
 	@GetMapping("list")
-	public void getMain(Model model,Pager pager) throws Exception{
+	public void getApprovalList(Model model,Pager pager) throws Exception{
 		List<ApprovalVO> al = approvalService.getApprovalList(pager);
 		model.addAttribute("list", al);
 		model.addAttribute("pager", pager);
 	}
+	
+
 	
 
 }

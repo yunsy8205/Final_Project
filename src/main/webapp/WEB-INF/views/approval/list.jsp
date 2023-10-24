@@ -9,70 +9,12 @@
 <c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
 <c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
 <link rel="stylesheet" href="/css/main.css" />
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-	crossorigin="anonymous">
-</head>
+
+<c:import url="../temp/bootStrap.jsp"/>
 </head>
 <body>
 	<div id="wrap">
-		<section class="app">
-			<aside class="sidebar">
-				<nav class="sidebar-nav">
-					<ul>
-						<li><a href="#"><i class="fa-solid fa-user"></i> <span>직원관리</span></a>
-							<ul class="nav-flyout">
-								<li><a href="#">전체 직원 목록</a></li>
-
-							</ul></li>
-						<li><a href="#"><i class="fa-solid fa-users"></i> <span
-								class="">회원관리</span></a>
-							<ul class="nav-flyout">
-								<li><a href="#">전체 회원 관리</a></li>
-
-							</ul></li>
-						<li><a href="#"><i class="fa-solid fa-ticket"></i> <span
-								class="">이용권 관리</span></a>
-							<ul class="nav-flyout">
-								<li><a href="#">이용권 목록</a></li>
-							</ul></li>
-						<li><a href="#"><i class="fa-solid fa-dumbbell"></i> <span
-								class="">시설관리</span></a>
-							<ul class="nav-flyout">
-								<li><a href="#">전체 기구 목록</a></li>
-								<li><a href="#">기구 수리 요청 목록</a></li>
-								<li><a href="#">전체 락커 목록</a></li>
-							</ul></li>
-						<li><a href="#"><i class="fa-solid fa-list-check"></i> <span
-								class="">수업관리</span></a>
-							<ul class="nav-flyout">
-								<li><a href="#">수업 조회</a></li>
-								<li><a href="#">회원 조회</a></li>
-							</ul></li>
-						<li><a href="#"><i class="fa-solid fa-clipboard-user"></i>
-								<span class="">근태 관리</span></a>
-							<ul class="nav-flyout">
-								<li><a href="#">내 근태 조회</a></li>
-								<li><a href="#">전체 근태 조회</a></li>
-								<li><a href="#">근태 수정 요청 목록</a></li>
-							</ul></li>
-						<li><a href="#"><i class="fa-solid fa-file"></i> <span
-								class="">결재</span></a></li>
-						<li><a href="#"><i class="fa-solid fa-plane"></i> <span
-								class="">휴가</span></a></li>
-						<li><a href="#"><i class="fa-solid fa-comments"></i> <span
-								class="">채팅</span></a></li>
-						<li><a href="#"><i class="fa-solid fa-circle-user"></i> <span
-								class="">회원</span></a>
-							<ul class="nav-flyout">
-								<li><a href="#">운동일지</a></li>
-								<li><a href="#">PT일지</a></li>
-								<li><a href="#">식단관리</a></li>
-				</nav>
-			</aside>
-		</section>
+		<c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
 		<div id="right">
 			<header>
 				<div class="header_wrap">
@@ -87,30 +29,63 @@
 			</header>
 			<!-- main내용  -->
 			<section id="mainContents">
-				<table class="table table-bordered" id="dataTable" width="100%"
-					cellspacing="0">
-					<thead>
-						<tr>
-							<th>기안일</th>
-							<th>결재양식</th>
-							<th>제목</th>
-							<th>문서번호</th>
-							<th>결재상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list}" var="vo">
+			<div>
+				<!-- 검색창 -->
+				<div>
+					<form action="./list" method="get"
+						style="width: 20%; float: right; margin-right: 180px;">
+						<div id="frm" style="width: 300px;">
+							<input type="hidden" value="${pager.page}" id="page" name="page">
+							<input type="hidden" value="${pager.division}" name="division">
+							<!-- 파라미터 이름 kind -->
+							<select name="kind" id="k" class="search">
+								<option class="kind" value="title">제목</option>
+								<option class="kind" value="contents">내용</option>
+							</select> <input type="text" name="search" value="${pager.search}"
+								class="search" placeholder="검색어를 입력하세요."
+								style="text-align: center;">
+							<button type="submit">검색</button>
+						</div>
+
+					</form>
+				</div>
+				<div>
+					<form action="./list" id="divisionForm" method="get">
+						<input type="hidden" value="" id="division" name="division">
+					</form>
+					<button id="allBtn">전체</button>
+					<button id="proceedingBtn">진행</button>
+					<button id="rejectBtn">반려</button>
+					<button id="completeBtn">완료</button>
+					<button>임시저장</button>
+				</div>
+
+				<div>
+					<table class="table table-bordered" id="dataTable" width="100%"
+						cellspacing="0">
+						<thead>
 							<tr>
-								<td>${vo.regDate
-								}</td>
-								<td>${vo.category}</td>
-								<td>${vo.title}</td>
-								<td>${vo.approvalNum}</td>
-								<td>${vo.state}</td>
+								<th>기안일</th>
+								<th>결재양식</th>
+								<th>제목</th>
+								<th>문서번호</th>
+								<th>결재상태</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach items="${list}" var="vo">
+								<tr>
+									<td>${vo.regDate
+								}</td>
+									<td>${vo.category}</td>
+									<td>${vo.title}</td>
+									<td>${vo.approvalNum}</td>
+									<td>${vo.state}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 				<div class="col-sm-12 col-md-7">
 					<div class="dataTables_paginate paging_simple_numbers"
 						id="dataTable_paginate">
@@ -118,14 +93,14 @@
 							<li
 								class="paginate_button page-item previous ${pager.pre?'':'disabled'}"
 								id="dataTable_previous"><a
-								href="./list?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"
+								href="./list?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}&division=${pager.division}"
 								aria-controls="dataTable" data-dt-idx="0" tabindex="0"
 								class="page-link">Previous</a></li>
 							<c:forEach begin="${pager.startNum }" end="${pager.lastNum}"
 								var="i">
 								<li class="paginate_button page-item active" id="dataTable">
 									<a
-									href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}"
+									href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}&division=${pager.division}"
 									aria-controls="dataTable" data-dt-idx="1" tabindex="0"
 									class="page-link">${i}</a>
 								</li>
@@ -134,20 +109,21 @@
 							<li
 								class="paginate_button page-item next ${pager.next?'':'disabled'}"
 								id="dataTable_next"><a
-								href="./list?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}"
+								href="./list?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}&division=${pager.division}"
 								aria-controls="dataTable" data-dt-idx="7" tabindex="0"
 								class="page-link">Next</a></li>
 						</ul>
 					</div>
 				</div>
+				<button>
+					<a href="/approval/add">새결재작성</a>
+				</button>
+				</div>
 			</section>
 
 		</div>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-		crossorigin="anonymous"></script>
+	<script src="/resources/js/approval/list.js"></script>
 </body>
 <c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
 </html>

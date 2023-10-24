@@ -5,27 +5,31 @@
   
 <mapper namespace="com.cloud.pt.approval.ApprovalDAO">
 	<sql id="forPager">
-		<choose>
-			<when test="kind=='1'">
-				TITLE
-			</when>
-			<otherwise>
-				CONTENTS
-			</otherwise>
-		</choose>
+		<if test="kind=='title'">AND TITLE LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='contents'">AND CONTENTS LIKE CONCAT('%',#{search},'%')</if>
+	</sql>
+	
+	<sql id="state">
+		<if test="division=='proceeding'">AND STATE='진행중'</if>
+		<if test="division=='complete'">AND STATE='완료'</if>
+		<if test="division=='wating'">AND STATE='대기중'</if>
+		<if test="division=='reject'">AND STATE='반려'</if>
 	</sql>
 	
 	<!-- 1. count  -->
 	<select id="getCount" parameterType="Pager" resultType="Long">
-		<bind name="pattern" value="'%'+_parameter.getSearch()+'%'"/>
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
-		
+		WHERE APPROVALNUM>0
+		<include refid="state"></include>
+		<include refid="forPager"></include>
 	</select>
 	
 	<!-- 2. list -->
-	<select id="getApprovalList" resultType="ApprovalVO">
+	<select id="getApprovalList" resultType="ApprovalVO" parameterType="Pager">
 		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
-		
+		WHERE APPROVALNUM>0
+		<include refid="state"></include>
+		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{startRow},#{lastRow}
 	</select>
 	
