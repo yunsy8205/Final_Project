@@ -24,6 +24,10 @@ public class ApprovalController {
 		model.addAttribute("pager", pager);
 	}
 	
+	@GetMapping("add")
+	public void getAdd() throws Exception{
+		
+	}
 
 	
 

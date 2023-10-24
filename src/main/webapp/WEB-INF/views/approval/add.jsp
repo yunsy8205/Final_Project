@@ -30,7 +30,13 @@
         </header>
         <!-- main내용  -->
         <section id="mainContents"> 
-        	<p>예시입니다 여기서부터 내용 작성해 주세요 maincss는 변경하시면 안됩니당</p>
+        
+        	<div>
+        		<form>
+        			
+        		</form>
+        		
+        	</div>
         </section>
         
       </div>
