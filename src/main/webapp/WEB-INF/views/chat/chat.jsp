@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
 <c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
 <c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
 <link rel="stylesheet" href="/css/main.css" />
@@ -47,10 +48,11 @@
       </div>
     </div>
 <script>
-
-	const websocket = new WebSocket("ws://localhost:82/ws/chat");
+	console.log(${root});
+	let sock = new SockJS("${root}/ws/chat");
+		//new WebSocket("ws://localhost:82/ws/chat");
 	
-	websocket.onmessage=function(msg){
+	sock.onmessage=function(msg){
 		console.log(msg.data);
 		$('#msgArea').append(msg.data+"<br/>");
 	}
@@ -64,7 +66,7 @@
 	    let msg = document.getElementById("msg");
 	
 	    console.log(msg.value);
-	    websocket.send(msg.value);
+	    sock.send(msg.value);
 	    msg.value = '';
 	   
 	}

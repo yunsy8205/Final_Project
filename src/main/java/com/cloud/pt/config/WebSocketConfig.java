@@ -24,8 +24,8 @@ public class WebSocketConfig implements WebSocketConfigurer{
     
         registry
         	.addHandler(chatHandler, "/ws/chat")
-        	.setAllowedOrigins("*");
-        	//.withSockJS();
+        	.setAllowedOriginPatterns("*")
+        	.withSockJS();
     }
     //.withSockJS() 추가
     //setAllowedOrigins("*")에서 *라는 와일드 카드를 사용하면
