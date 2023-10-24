@@ -23,9 +23,9 @@ public class WebSocketConfig implements WebSocketConfigurer{
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
     
         registry
-        	.addHandler(chatHandler, "ws/chat")
-        	.setAllowedOrigins("http://localhost:8080")
-        	.withSockJS();
+        	.addHandler(chatHandler, "/ws/chat")
+        	.setAllowedOrigins("*");
+        	//.withSockJS();
     }
     //.withSockJS() 추가
     //setAllowedOrigins("*")에서 *라는 와일드 카드를 사용하면
