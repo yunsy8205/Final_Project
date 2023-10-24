@@ -1,5 +1,8 @@
 package com.cloud.pt.attendance;
 
-public class AttendanceDAO {
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface AttendanceDAO {
 
 }

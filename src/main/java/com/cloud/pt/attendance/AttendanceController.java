@@ -13,4 +13,10 @@ public class AttendanceController {
 		
 		return "attendance/info";
 	}
+	
+	@GetMapping("list")
+	public String getList() {
+		
+		return "attendance/list";
+	}
 }
