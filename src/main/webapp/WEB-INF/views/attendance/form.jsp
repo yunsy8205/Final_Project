@@ -4,19 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <title>Insert title here</title>
   <style>
     #mainContents > h1 {
       margin-top: 2.5em;
       text-align: center;
-    }
-    #req_btn {
-      text-align: right;
-      margin: 30px;
-    }
-    #req_list {
-      background-color: rgb(176, 191, 253);
     }
   </style>
 
@@ -44,19 +37,44 @@
         </header>
         <!-- main내용  -->
         <section id="mainContents"> 
-        	<h1>근태 수정 요청 목록</h1>
+        	<h1>근태 수정 요청서</h1>
 
-          <div id="req_btn">
-            <button>근태 수정 요청</button>
-          </div>
+          <form method="post" action="/attendance/add">
+            <label for="requestDate">수정요청일</label>
+            <input type="date" id="requestDate" name="workDate">
 
-          <div id="req_list">
-            목록 들어갈 자리
-          </div>
+            <label for="requestTime">수정요청시간</label>
+            <input type="time" id="requestTime" name="">
+            <br>
+            <label for="writer">작성자</label>
+            <input type="text" id="writer" name="">
+
+            <input type="radio" id="on" name="state">
+            <label for="on">출근</label>
+
+            <input type="radio" id="off" name="state">
+            <label for="off">퇴근</label>
+            <br>
+            <label for="content">요청사유</label>
+            <br>
+            <textarea name="reason" id="content" cols="30" rows="10"></textarea>
+            <br>
+            <button>제출</button>
+          </form>
         </section>
         
       </div>
     </div>
 </body>
 <c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
+<script>
+  $('#on').on('click', function(){
+    $('#requestTime').attr('name', 'onTime');
+  })
+
+  $('#off').on('click', function(){
+    $('#requestTime').attr('name', 'offTime');
+  })
+</script>
+
 </html>

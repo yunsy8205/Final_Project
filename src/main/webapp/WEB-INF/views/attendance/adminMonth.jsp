@@ -4,25 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-  <title>Insert title here</title>
-  <style>
-    #mainContents > h1 {
-      margin-top: 2.5em;
-      text-align: center;
-    }
-    #req_btn {
-      text-align: right;
-      margin: 30px;
-    }
-    #req_list {
-      background-color: rgb(176, 191, 253);
-    }
-  </style>
-
-  <c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
-  <c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
-  <link rel="stylesheet" href="/css/main.css" />
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
+	<link rel="stylesheet" href="/css/main.css" />
 
 </head>
 <body>
@@ -44,15 +30,7 @@
         </header>
         <!-- main내용  -->
         <section id="mainContents"> 
-        	<h1>근태 수정 요청 목록</h1>
-
-          <div id="req_btn">
-            <button>근태 수정 요청</button>
-          </div>
-
-          <div id="req_list">
-            목록 들어갈 자리
-          </div>
+        	<p>예시입니다 여기서부터 내용 작성해 주세요 maincss는 변경하시면 안됩니당</p>
         </section>
         
       </div>
