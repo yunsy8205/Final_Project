@@ -2,6 +2,11 @@ package com.cloud.pt.ptClass;
 
 import java.sql.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class PtClassVO {
 	
 	private Long ptNum;
