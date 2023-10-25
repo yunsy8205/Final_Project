@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
@@ -160,7 +161,8 @@
                 >
                 <ul class="nav-flyout">
                   <li>
-                    <a href="#">내 근태 조회</a>
+					<sec:authentication property="Principal" var="user"/>
+                    <a href="/attendance/info?employeeNum=${employeeNum}">내 근태 조회</a>
                   </li>
                   <li>
                     <a href="#"
