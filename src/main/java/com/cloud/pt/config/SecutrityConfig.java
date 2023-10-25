@@ -1,5 +1,6 @@
 package com.cloud.pt.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration // springBoot 실행 시, 가장 먼저 읽히는 파일 -> **-context.xml 파일 역할
 @EnableWebSecurity // security 활성화
 public class SecutrityConfig {
+	
+	@Autowired
+	private SecuritySuccessHandler successHandler;
+	
 	
 	@Bean // API이 객체생성
 	WebSecurityCustomizer webSecurityCustomizer() {
@@ -35,8 +40,12 @@ public class SecutrityConfig {
 				.antMatchers("/").permitAll()
 				.and()
 				
-			// login form
+			// login form 방식 인증
 			.formLogin()
+				.loginPage("/employee/login")    // login post 처리 (개발자가 만든 폼 요청)
+				.usernameParameter("employeeNum")// 기본 : username / 개발자 다른 파라미터이름 사용시, 꼭 작성
+				//.passwordParameter("password")
+				.successHandler(successHandler)  // 인증 성공후 실행
 				.permitAll()
 				.and()
 				

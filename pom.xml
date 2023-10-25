@@ -17,7 +17,7 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-		<!--검증관련 API -> annotation 검증-->
+		<!--spring Form 검증관련 API -> annotation 검증-->
 	      <dependency>
 	          <groupId>org.springframework.boot</groupId>
 	          <artifactId>spring-boot-starter-validation</artifactId>

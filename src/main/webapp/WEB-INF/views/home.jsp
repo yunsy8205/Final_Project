@@ -226,7 +226,7 @@
         <header>
           <div class="header_wrap">
             <div class="header_message">
-              <p>이재혁 님 환영합니다</p>
+              <p>${employeeVO.name} 님 환영합니다</p>
             </div>
             <div class="header_navi">
               <a href="#">조직도</a>

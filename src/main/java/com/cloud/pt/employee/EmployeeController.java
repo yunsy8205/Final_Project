@@ -35,6 +35,6 @@ public class EmployeeController {
 		if(!check.equals("anonymousUser")) {
 			return "redirect:/";
 		}
-		return "employee/login";
+		return "/employee/login";
 	}
 }
