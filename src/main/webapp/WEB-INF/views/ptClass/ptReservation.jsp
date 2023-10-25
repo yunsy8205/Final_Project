@@ -9,8 +9,8 @@
 <c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
 <c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
 <link rel="stylesheet" href="/css/main.css" />
-<link href='/fullcalendar-5.11.3/lib/main.css' rel='stylesheet' />
-    <script src='/fullcalendar-5.11.3/lib/main.js'></script>
+
+    <script src='/fullcalendar-6.1.9/fullcalendar-6.1.9/dist/index.global.js'></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');

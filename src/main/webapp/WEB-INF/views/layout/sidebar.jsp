@@ -66,7 +66,7 @@
                 >
                 <ul class="nav-flyout">
                   <li>
-                    <a href="#"
+                    <a href="/ptClass/ptReservation"
                       >수업 조회</a
                     >
                   </li>
