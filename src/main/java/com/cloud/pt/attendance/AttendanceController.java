@@ -2,6 +2,7 @@ package com.cloud.pt.attendance;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class AttendanceController {
+	@Autowired
+	private AttendanceService attendanceService;
 
 	@GetMapping("/attendance/info")
 	public String getInfo(EmployeeVO employeeVO, Model model) throws Exception {
+		employeeVO = attendanceService.getInfo(employeeVO);
+		log.info("vo: {}", employeeVO);
+		model.addAttribute("vo", employeeVO);
 		
 		return "attendance/info";
 	}

@@ -3,22 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.cloud.pt.attendance">
+<mapper namespace="com.cloud.pt.attendance.AttendanceDAO">
 	<select id="getInfo" resultMap="getInfoResult" parameterType="EmployeeVO">
 		SELECT A.*, E.*
 		FROM ATTENDANCE A 
 			JOIN EMPLOYEE E
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM
 		WHERE E.EMPLOYEENUM=${employeeNum}
-		AND A.WORKDATE=NOW()
+		AND A.WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</select>
 	
 	<resultMap type="EmployeeVO" id="getInfoResult">
 		<id column="EMPLOYEENUM" property="employeeNum"/>
 		<result column="NAME" property="name"/>
 		<result column="LEAVEDATE" property="leaveDate"/>
-		<association property="attendanceVO" javaType="AttendanceVO">
-		
-		</association>
+		<collection property="list" javaType="java.util.List" ofType="AttendanceVO">
+			<id column="ATTENDANCENUM" property="attendanceNum"/>
+				<result column="EMPLOYEENUM" property="employeeNum"/>
+				<result column="WORKDATE" property="workDate"/>
+				<result column="ONTIME" property="onTime"/>
+				<result column="OFFTIME" property="offTime"/>
+				<result column="STATE" property="state"/>
+		</collection>
 	</resultMap>
 </mapper>

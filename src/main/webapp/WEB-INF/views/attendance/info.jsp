@@ -99,7 +99,7 @@
               <img class="rounded-circle" src="/img/1.jpg" alt="">
             </div>
             <div class="name">
-              홍길동
+              ${vo.name}
             </div>
             <div class="time">
               <ul>

@@ -2,18 +2,19 @@ package com.cloud.pt.employee;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.cloud.pt.attendance.AttendanceVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,8 +36,6 @@ public class EmployeeVO implements UserDetails {
 	private String pwCheck;
 	@NotBlank
 	private String phone;
-	@Email
-	private String email;
 	@NotBlank
 	private String address;
 	@NotNull
@@ -56,7 +55,8 @@ public class EmployeeVO implements UserDetails {
 	private String proFile;
 	private String proOriginal;
 	
-	
+	// attendance
+	private List<AttendanceVO> list;
 	
 	
 	
