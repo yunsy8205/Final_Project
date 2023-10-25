@@ -1,5 +1,6 @@
 package com.cloud.pt.config;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,13 +27,14 @@ public class ChatHandler extends TextWebSocketHandler{
 
   //private static List<WebSocketSession> list = new ArrayList<WebSocketSession>();
   private static Map<String,WebSocketSession> map = new HashMap<String,WebSocketSession>();
-
+  
   
   
   @Override
   protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
       String payload = message.getPayload();
       log.info("payload : " + payload);
+      log.info(session);
       //클라이언트에 전달
       
       TextMessage msg=new TextMessage(session.getId()+">> "+message.getPayload());

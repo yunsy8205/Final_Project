@@ -18,6 +18,7 @@ public class ChatController {
 	@GetMapping("chat")
 	public String chatGet(Model model) {
 		log.info("@ChatConroller, chat GET()");
+		
 		List<String> list = new ArrayList<>();
 		list.add("ADMIN");
 		list.add("USER");
@@ -26,5 +27,4 @@ public class ChatController {
 		
 		return "chat/chat";
 	}
-
 }
