@@ -1,14 +1,21 @@
 package com.cloud.pt.attendance;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.cloud.pt.employee.EmployeeVO;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class AttendanceController {
 
 	@GetMapping("/attendance/info")
-	public String getInfo() {
+	public String getInfo(EmployeeVO employeeVO, Model model) throws Exception {
 		
 		return "attendance/info";
 	}
