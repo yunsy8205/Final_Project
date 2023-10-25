@@ -15,6 +15,8 @@ public class SecutrityConfig {
 	
 	@Autowired
 	private SecuritySuccessHandler successHandler;
+	@Autowired
+	private SecurityFailHandler failHandler;
 	
 	
 	@Bean // API이 객체생성
@@ -46,6 +48,7 @@ public class SecutrityConfig {
 				.usernameParameter("employeeNum")// 기본 : username / 개발자 다른 파라미터이름 사용시, 꼭 작성
 				//.passwordParameter("password")
 				.successHandler(successHandler)  // 인증 성공후 실행
+				.failureHandler(failHandler)     // 인증 실패후 실행
 				.permitAll()
 				.and()
 				

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,7 +228,15 @@
         <header>
           <div class="header_wrap">
             <div class="header_message">
-              <p>${employeeVO.name} 님 환영합니다</p>
+
+            	<!-- 로그인 성공 시, 사용자 이름 가져오기 -->
+            	<sec:authorize access="isAuthenticated()">
+            		<sec:authentication property="name" var="employeename"/>
+            		<p>
+            			<spring:message code="login.welcome.name" arguments="${employeename}"></spring:message>
+            		</p>
+            	</sec:authorize>
+
             </div>
             <div class="header_navi">
               <a href="#">조직도</a>
