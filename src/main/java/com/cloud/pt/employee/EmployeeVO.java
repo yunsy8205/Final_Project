@@ -35,8 +35,6 @@ public class EmployeeVO implements UserDetails {
 	private String pwCheck;
 	@NotBlank
 	private String phone;
-	@Email
-	private String email;
 	@NotBlank
 	private String address;
 	@NotNull
