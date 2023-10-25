@@ -3,7 +3,6 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -233,18 +232,22 @@
 
             	<!-- 로그인 성공 시, 사용자 이름 가져오기 -->
             	<sec:authorize access="isAuthenticated()">
-            		<sec:authentication property="name" var="employeename"/>
+            		<sec:authentication property="principal" var="employeeVO"/>
             		<p>
-            			<spring:message code="login.welcome.name" arguments="${employeename}"></spring:message>
+            			<spring:message code="login.welcome.name" arguments="${employeeVO.name}"></spring:message>
             		</p>
             	</sec:authorize>
 
             </div>
             <div class="header_navi">
               <a href="#">조직도</a>
-              <a href="/employee/login">로그인</a>
-              <a href="#">로그아웃</a>
-              <a href="#">마이페이지</a>
+              <sec:authorize access="!isAuthenticated()">
+                <a href="/employee/login">로그인</a>
+              </sec:authorize>
+              <sec:authorize access="isAuthenticated()">
+                <a href="/employee/logout">로그아웃</a>
+                <a href="#">마이페이지</a>
+              </sec:authorize>
             </div>
           </div>
         </header>
