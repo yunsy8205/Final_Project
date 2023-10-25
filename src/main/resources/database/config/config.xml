@@ -4,24 +4,14 @@
 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
-		<typeAlias type="com.cloud.pt.common.Pager" alias="Pager"/>
+		<!-- 채연 -->
+		<typeAlias type="com.cloud.pt.employee.EmployeeVO" alias="EmployeeVO"/>
 		
+		<!-- 유빈 -->
+		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
+
+<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
+		<typeAlias type="com.cloud.pt.common.Pager" alias="Pager"/>
+
 	</typeAliases>
 </configuration>
