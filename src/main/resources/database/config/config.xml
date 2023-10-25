@@ -7,5 +7,6 @@
 		<!-- 채연 -->
 		<typeAlias type="com.cloud.pt.employee.EmployeeVO" alias="EmployeeVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
+		<typeAlias type="com.cloud.pt.myPtMember.MemberVO" alias="MemberVO"/>
 	</typeAliases>
 </configuration>
