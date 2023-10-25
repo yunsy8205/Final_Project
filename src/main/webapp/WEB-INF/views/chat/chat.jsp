@@ -30,7 +30,14 @@
           </div>
         </header>
         <!-- main내용  -->
-        <section id="mainContents"> 
+        <section id="mainContents">
+        <div>
+        	<c:forEach items="${list}" var="f">
+        		<div>${f}</div>
+        	</c:forEach>
+        </div>
+        
+         
         	<h1>채팅방</h1>
         	<div>
 		        <div id="msgArea" class="col"></div>
@@ -48,9 +55,8 @@
       </div>
     </div>
 <script>
-	console.log(${root});
-	let sock = new SockJS("${root}/ws/chat");
-		//new WebSocket("ws://localhost:82/ws/chat");
+	//let sock = new SockJS("/ws/chat");
+		let sock = new WebSocket("ws://localhost:82/ws/chat");
 	
 	sock.onmessage=function(msg){
 		console.log(msg.data);

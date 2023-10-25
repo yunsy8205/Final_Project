@@ -27,6 +27,8 @@ public class ChatHandler extends TextWebSocketHandler{
   //private static List<WebSocketSession> list = new ArrayList<WebSocketSession>();
   private static Map<String,WebSocketSession> map = new HashMap<String,WebSocketSession>();
 
+  
+  
   @Override
   protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
       String payload = message.getPayload();
