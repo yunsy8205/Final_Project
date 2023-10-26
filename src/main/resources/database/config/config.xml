@@ -6,5 +6,8 @@
 	<typeAliases>
 		<!-- 채연 -->
 		<typeAlias type="com.cloud.pt.employee.EmployeeVO" alias="EmployeeVO"/>
+		
+		<!-- 유빈 -->
+		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
 	</typeAliases>
 </configuration>

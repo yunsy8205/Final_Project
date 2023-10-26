@@ -15,6 +15,10 @@ public class SecutrityConfig {
 	
 	@Autowired
 	private SecuritySuccessHandler successHandler;
+	@Autowired
+	private SecurityFailHandler failHandler;
+	@Autowired
+	private SecurityLogoutHandler logoutHandler;
 	
 	
 	@Bean // API이 객체생성
@@ -42,15 +46,18 @@ public class SecutrityConfig {
 				
 			// login form 방식 인증
 			.formLogin()
-				.loginPage("/employee/login")    // login post 처리 (개발자가 만든 폼 요청)
-				.usernameParameter("employeeNum")// 기본 : username / 개발자 다른 파라미터이름 사용시, 꼭 작성
+				.loginPage("/employee/login")       // login post 처리 경로 (개발자가 만든 폼 요청)
+				.usernameParameter("employeeNum")   // 기본 : username / 개발자 다른 파라미터이름 사용시, 꼭 작성
 				//.passwordParameter("password")
-				.successHandler(successHandler)  // 인증 성공후 실행
+				.successHandler(successHandler)     // 인증 성공후 실행
+				.failureHandler(failHandler)        // 인증 실패후 실행
 				.permitAll()
 				.and()
 				
 			// logout
 			.logout()
+				.logoutUrl("/employee/logout")      // logout post 처리 경로
+				.logoutSuccessHandler(logoutHandler)// logout 처리 메서드
 				.permitAll()
 				.and()
 				;
