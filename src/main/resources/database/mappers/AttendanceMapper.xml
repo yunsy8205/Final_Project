@@ -4,7 +4,14 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.attendance.AttendanceDAO">
-	<select id="getInfo" resultMap="getInfoResult" parameterType="EmployeeVO">
+	<select id="getNum" resultType="Long" parameterType="AttendanceModifyVO">
+		SELECT ATTENDANCENUM
+		FROM ATTENDANCE
+		WHERE WORKDATE=${modifyDate}
+		AND EMPLOYEENUM=${employeeNum}
+	</select>
+
+	<select id="getInfo" resultMap="getInfoResult" parameterType="AttendanceVO">
 		SELECT A.*, E.*
 		FROM ATTENDANCE A 
 			JOIN EMPLOYEE E

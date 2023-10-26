@@ -18,8 +18,8 @@ public class AttendanceController {
 	private AttendanceService attendanceService;
 
 	@GetMapping("/attendance/info")
-	public String getInfo(EmployeeVO employeeVO, Model model) throws Exception {
-		employeeVO = attendanceService.getInfo(employeeVO);
+	public String getInfo(AttendanceVO attendanceVO, Model model) throws Exception {
+		EmployeeVO employeeVO = attendanceService.getInfo(attendanceVO);
 		log.info("vo: {}", employeeVO);
 		model.addAttribute("vo", employeeVO);
 		
@@ -30,12 +30,6 @@ public class AttendanceController {
 	public String getList() {
 		
 		return "attendance/list";
-	}
-	
-	@GetMapping("/attendance/add")
-	public String setAdd() {
-		
-		return "attendance/form";
 	}
 	
 	@GetMapping("/admin/attendanceMonth")

@@ -10,7 +10,7 @@ public class AttendanceService {
 	@Autowired
 	private AttendanceDAO attendanceDAO;
 	
-	public EmployeeVO getInfo(EmployeeVO employeeVO) throws Exception {
-		return attendanceDAO.getInfo(employeeVO);
+	public EmployeeVO getInfo(AttendanceVO attendanceVO ) throws Exception {
+		return attendanceDAO.getInfo(attendanceVO);
 	}
 }

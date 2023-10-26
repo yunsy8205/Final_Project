@@ -161,9 +161,9 @@
                 <ul class="nav-flyout">
                   <li>
 	                <sec:authorize access="isAuthenticated()">
-						<sec:authentication property="Principal" var="user"/>
+						        <sec:authentication property="Principal" var="user"/>
 	                    <a href="/attendance/info?employeeNum=${user.employeeNum}">내 근태 조회</a>
-					</sec:authorize>
+					        </sec:authorize>
                   </li>
                   <li>
                     <a href="#"

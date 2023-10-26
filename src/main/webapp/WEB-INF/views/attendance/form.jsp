@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,25 +41,26 @@
         <section id="mainContents"> 
         	<h1>근태 수정 요청서</h1>
 
-          <form method="post" action="/attendance/add">
+          <form method="post" action="/attendanceModify/add">
             <label for="requestDate">수정요청일</label>
-            <input type="date" id="requestDate" name="workDate">
+            <input type="date" id="requestDate" name="modifyDate">
 
             <label for="requestTime">수정요청시간</label>
-            <input type="time" id="requestTime" name="">
+            <input type="time" id="requestTime" name="modifyTime">
             <br>
             <label for="writer">작성자</label>
-            <input type="text" id="writer" name="">
-
-            <input type="radio" id="on" name="state">
+            <sec:authentication property="Principal" var="user"/>
+              <input type="text" id="writer" value="${user.name}" readonly>
+              <input type="hidden" name="employeeNum" value="${user.employeeNum}">
+            <input type="radio" id="on" name="type">
             <label for="on">출근</label>
 
-            <input type="radio" id="off" name="state">
+            <input type="radio" id="off" name="type">
             <label for="off">퇴근</label>
             <br>
             <label for="content">요청사유</label>
             <br>
-            <textarea name="reason" id="content" cols="30" rows="10"></textarea>
+            <textarea name="reason" id="requestContents" cols="30" rows="10"></textarea>
             <br>
             <button>제출</button>
           </form>
