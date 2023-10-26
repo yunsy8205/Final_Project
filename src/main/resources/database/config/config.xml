@@ -10,5 +10,6 @@
 		
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
+		<typeAlias type="com.cloud.pt.myPtMember.MemberVO" alias="MemberVO"/>
 	</typeAliases>
 </configuration>
