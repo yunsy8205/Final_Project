@@ -1,11 +1,10 @@
 package com.cloud.pt.attendance;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cloud.pt.employee.EmployeeVO;
 
@@ -43,4 +42,26 @@ public class AttendanceController {
 		
 		return "attendance/adminDay";
 	}
+	
+	//-----------------------------------------------------------
+	@GetMapping("/attendanceModify/list")
+	public String getModifyList(EmployeeVO employeeVO, Model model) throws Exception {
+		
+		return "attendance/list";
+	}
+	
+
+	@GetMapping("/attendanceModify/add")
+	public String setModifyAdd() throws Exception {
+		
+		return "attendance/form";
+	}
+	
+	@PostMapping("/attendanceModify/add")
+	public String setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO) throws Exception {
+		int result = attendanceService.setModifyAdd(attendanceModifyVO, employeeVO);
+		
+		return "attendance/list";
+	}
+	
 }

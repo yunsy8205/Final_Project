@@ -21,4 +21,6 @@ public class AttendanceVO {
 	private Time offTime;
 	//상태 
 	private String state;
+	
+	private AttendanceModifyVO attendanceModifyVO;
 }

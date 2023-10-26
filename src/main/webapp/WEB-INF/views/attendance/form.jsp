@@ -41,7 +41,7 @@
         <section id="mainContents"> 
         	<h1>근태 수정 요청서</h1>
 
-          <form method="post" action="/attendanceModify/add">
+          <form id="frm" method="post" action="/attendanceModify/add">
             <label for="requestDate">수정요청일</label>
             <input type="date" id="requestDate" name="modifyDate">
 
@@ -52,17 +52,17 @@
             <sec:authentication property="Principal" var="user"/>
               <input type="text" id="writer" value="${user.name}" readonly>
               <input type="hidden" name="employeeNum" value="${user.employeeNum}">
-            <input type="radio" id="on" name="type">
+            <input type="radio" id="on" name="type" value="출근">
             <label for="on">출근</label>
 
-            <input type="radio" id="off" name="type">
+            <input type="radio" id="off" name="type" value="퇴근">
             <label for="off">퇴근</label>
             <br>
             <label for="content">요청사유</label>
             <br>
-            <textarea name="reason" id="requestContents" cols="30" rows="10"></textarea>
+            <textarea name="requestContents" id="content" cols="30" rows="10"></textarea>
             <br>
-            <button>제출</button>
+            <button type="button" id="btn">제출</button>
           </form>
         </section>
         
@@ -71,12 +71,8 @@
 </body>
 <c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
 <script>
-  $('#on').on('click', function(){
-    $('#requestTime').attr('name', 'onTime');
-  })
-
-  $('#off').on('click', function(){
-    $('#requestTime').attr('name', 'offTime');
+  $('#btn').on('click', function(){
+    $('#frm').submit();
   })
 </script>
 

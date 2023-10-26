@@ -85,10 +85,8 @@
                 >
                 <ul class="nav-flyout">
                   <li>
-                  	<sec:authorize access="isAuthenticated()">
-						<sec:authentication property="Principal" var="user"/>
-                    	<a href="/attendance/info?employeeNum=${user.employeeNum}">내 근태 조회</a>
-					</sec:authorize>
+                    <sec:authentication property="Principal" var="user"/>
+                      <a href="/attendance/info?employeeNum=${user.employeeNum}">내 근태 조회</a>
                   </li>
                   <li>
                     <a href="#"
@@ -96,9 +94,8 @@
                     >
                   </li>
                   <li>
-                    <a href="#"
-                      >근태 수정 요청 목록</a
-                    >
+                    <sec:authentication property="Principal" var="user"/>
+                      <a href="/attendance/list?employeeNum=${user.employeeNum}">근태 수정 요청 목록</a>
                   </li>
                 </ul>
               </li>

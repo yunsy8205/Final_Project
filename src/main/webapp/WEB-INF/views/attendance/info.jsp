@@ -119,11 +119,8 @@
               </ul>
             </div>
             <button class="attendance_btn" >내 정보 수정</button>
-            <sec:authorize access="isAuthenticated()">
-						    <sec:authentication property="Principal" var="user"/>
-                  <button class="attendance_btn" id="req_btn">근태 수정 요청</button>
-            </sec:authorize>
-            </div>
+            <button class="attendance_btn" id="req_btn">근태 수정 요청</button>
+          </div>
         	<div id="calendar">
           </div>
         </section>
@@ -133,7 +130,6 @@
 
     <script>
       const req_btn = document.getElementById('req_btn');
-      let num = req_btn.getAttribute('data-num');
 
       req_btn.addEventListener('click', function(){
         location.href = '/attendanceModify/add';

@@ -4,11 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.attendance.AttendanceDAO">
-	<select id="getNum" resultType="Long" parameterType="AttendanceModifyVO">
+	<select id="getNum" resultType="java.lang.Long" parameterType="java.util.Map">
 		SELECT ATTENDANCENUM
 		FROM ATTENDANCE
-		WHERE WORKDATE=${modifyDate}
-		AND EMPLOYEENUM=${employeeNum}
+		WHERE WORKDATE=#{modify.modifyDate}
+		AND EMPLOYEENUM=#{emp.employeeNum}
 	</select>
 
 	<select id="getInfo" resultMap="getInfoResult" parameterType="AttendanceVO">
@@ -16,7 +16,7 @@
 		FROM ATTENDANCE A 
 			JOIN EMPLOYEE E
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM
-		WHERE E.EMPLOYEENUM=${employeeNum}
+		WHERE E.EMPLOYEENUM=#{employeeNum}
 		AND A.WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</select>
 	
@@ -32,5 +32,35 @@
 				<result column="OFFTIME" property="offTime"/>
 				<result column="STATE" property="state"/>
 		</collection>
+	</resultMap>	
+	
+	<select id="getModifyList" resultMap="getListResult" parameterType="AttendanceVO">
+		SELECT AM.*, E.NAME 
+		FROM ATTENDANCEMODIFY AM 
+			JOIN ATTENDANCE A
+			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		WHERE EMPLOYEENUM=#{employeeNum}
+	</select>
+	
+	<resultMap type="AttendanceModifyVO" id="getListResult">
+		<id column="ATTENDANCEMODIFYNUM" property="employeeNum"/>
+		<result column="NAME" property="name"/>
+		<result column="LEAVEDATE" property="leaveDate"/>
+		<collection property="list" javaType="java.util.List" ofType="AttendanceVO">
+			<id column="ATTENDANCENUM" property="attendanceNum"/>
+				<result column="EMPLOYEENUM" property="employeeNum"/>
+				<result column="WORKDATE" property="workDate"/>
+				<result column="ONTIME" property="onTime"/>
+				<result column="OFFTIME" property="offTime"/>
+				<result column="STATE" property="state"/>
+		</collection>
 	</resultMap>
+
+	<insert id="setModifyAdd" parameterType="AttendanceModifyVO">
+		INSERT INTO ATTENDANCEMODIFY
+		(ATTENDANCENUM,REGDATE,MODIFYDATE,MODIFYTIME,REQUESTCONTENTS,TYPE,STATE)
+		VALUES (#{attendanceNum},NOW(),#{modifyDate},#{modifyTime},#{requestContents},#{type},'요청')
+	</insert>
 </mapper>

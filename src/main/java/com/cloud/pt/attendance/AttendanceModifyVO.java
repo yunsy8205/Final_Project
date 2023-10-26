@@ -1,9 +1,9 @@
-package com.cloud.pt.attendance.modify;
+package com.cloud.pt.attendance;
 
 import java.sql.Date;
 import java.sql.Time;
 
-import com.cloud.pt.attendance.AttendanceVO;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +20,9 @@ public class AttendanceModifyVO {
 	//작성일
 	private Date regDate;
 	//수정요청일
-	private Date modifyDate;
+	private String modifyDate;
 	//수정요청시간
-	private Time modifyTime;
+	private String modifyTime;
 	//요청사유
 	private String requestContents;
 	//타입
@@ -32,5 +32,4 @@ public class AttendanceModifyVO {
 	//수정의견
 	private String modifyContents;
 	
-	private AttendanceVO attendanceVO;
 }
