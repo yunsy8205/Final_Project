@@ -61,7 +61,7 @@ public class EmployeeVO implements UserDetails {
     // UserDetails의 override	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
+		// 사용자 권한을 Security에서 사용할 수 있도록 변환
 		return null;
 	}
 	@Override

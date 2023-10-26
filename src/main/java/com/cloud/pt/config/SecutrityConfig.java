@@ -1,5 +1,6 @@
 package com.cloud.pt.config;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,8 @@ public class SecutrityConfig {
 	private SecuritySuccessHandler successHandler;
 	@Autowired
 	private SecurityFailHandler failHandler;
+	@Autowired
+	private SecurityLogoutAdd logoutAdd;
 	@Autowired
 	private SecurityLogoutHandler logoutHandler;
 	
@@ -56,12 +59,17 @@ public class SecutrityConfig {
 				
 			// logout
 			.logout()
-				.logoutUrl("/employee/logout")      // logout post 처리 경로
-				.logoutSuccessHandler(logoutHandler)// logout 처리 메서드
+				.logoutUrl("/employee/logout")      // logout post 처리 경로 (기본적으로 POST요청)
+				.addLogoutHandler(logoutAdd)        // logout 처리 (세션 무효화 처리)
+				.logoutSuccessHandler(logoutHandler)// logout 성공 처리 메서드 (리다이렉트 처리)
+				.deleteCookies("JSESSIONID")		// logout 쿠키 삭제
 				.permitAll()
 				.and()
 				;
 		
 		return httpSecurity.build();
 	}
+	
+	
+	
 }
