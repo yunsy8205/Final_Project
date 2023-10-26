@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
+
 <c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
 <c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
 <link rel="stylesheet" href="/css/main.css" />
@@ -31,44 +31,50 @@
         </header>
         <!-- main내용  -->
         <section id="mainContents">
-         
-        	<h1>채팅방</h1>
+        <h1>채팅방 생성</h1>
         	<div>
-		        <div id="msgArea" class="col"></div>
-			        <div class="col-6">
-					    <div class="input-group mb-3">
-					    	<input type="text" id="msg" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="button" id="button-send">전송</button>
-							</div>
-				    </div>
-		        </div>
-            </div>
+	       	<form action="/chat/createRoom" method="post">
+		    	<input type="text" name="name" placeholder="채팅방 이름">
+		    	<button type="submit" >방 만들기</button>
+			</form>
+	
+			<table>
+		    	<tr>
+		    		<c:if test="${list ne null}">
+			    		<c:forEach items="${list}" var="li">
+					        <td>
+						        <a>${li.roomId} ${li.name}</a>
+					        </td>
+			    		</c:forEach>
+		    		</c:if>
+		    	</tr>
+			</table>
+        </div>
         </section>
         
       </div>
     </div>
 <script>
-	//let sock = new SockJS("/ws/chat");
-	const socket = new WebSocket("ws://localhost:82/ws/chat");
-	
-	socket.onmessage=function(msg){
-		console.log(msg.data);
-		$('#msgArea').append(msg.data+"<br/>");
-	}
-	
-	$('#button-send').click(function(){
-		send();
-	})
-	
-	function send(){
-	    
-	    let content=document.querySelector('#msg').value;
-        var talkMsg={"type" : "TALK","roomId":"${room.roomId}" ,"sender":"chee","message":content};
-        socket.send(JSON.stringify(talkMsg));
-	    msg.value = '';
-	   
-	}
+//let sock = new SockJS("/ws/chat");
+const socket = new WebSocket("ws://localhost:82/ws/chat");
+
+socket.onmessage=function(msg){
+	console.log(msg.data);
+	$('#msgArea').append(msg.data+"<br/>");
+}
+
+$('#button-send').click(function(){
+	send();
+})
+
+function send(){
+    
+    let content=document.querySelector('#msg').value;
+    var talkMsg={"type" : "TALK","roomId":"${room.roomId}" ,"sender":"chee","message":content};
+    socket.send(JSON.stringify(talkMsg));
+    msg.value = '';
+   
+}
     
 </script>
 </body>
