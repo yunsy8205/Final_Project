@@ -11,9 +11,7 @@
 <link rel="stylesheet" href="/css/main.css" />
 
 <c:import url="../temp/bootStrap.jsp"/>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+
 </head>
 <body>
 	<div id="wrap">
@@ -78,8 +76,7 @@
 						<tbody>
 							<c:forEach items="${list}" var="vo">
 								<tr>
-									<td>${vo.regDate
-								}</td>
+									<td>${vo.regDate}</td>
 									<td>${vo.category}</td>
 									<td>${vo.title}</td>
 									<td>${vo.approvalNum}</td>
