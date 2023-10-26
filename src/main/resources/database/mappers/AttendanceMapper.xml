@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.cloud.pt.attendance">
+	<select id="getInfo" resultMap="getInfoResult" parameterType="EmployeeVO">
+		SELECT A.*, E.*
+		FROM ATTENDANCE A 
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		WHERE E.EMPLOYEENUM=${employeeNum}
+		AND A.WORKDATE=NOW()
+	</select>
+	
+	<resultMap type="EmployeeVO" id="getInfoResult">
+		<id column="EMPLOYEENUM" property="employeeNum"/>
+		<result column="NAME" property="name"/>
+		<result column="LEAVEDATE" property="leaveDate"/>
+		<association property="attendanceVO" javaType="AttendanceVO">
+		
+		</association>
+	</resultMap>
+</mapper>

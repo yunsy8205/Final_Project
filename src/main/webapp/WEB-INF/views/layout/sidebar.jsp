@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <section class="app">
         <aside class="sidebar">
           <nav class="sidebar-nav">
@@ -84,7 +85,8 @@
                 >
                 <ul class="nav-flyout">
                   <li>
-                    <a href="#">내 근태 조회</a>
+                  	<sec:authentication property="Principal" var="user"/>
+                    <a href="/attendance/info?employeeNum=${user.employeeNum}">내 근태 조회</a>
                   </li>
                   <li>
                     <a href="#"

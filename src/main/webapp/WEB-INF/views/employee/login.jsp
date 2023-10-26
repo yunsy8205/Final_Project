@@ -25,6 +25,11 @@
   <div id="wrap">
     <div id="loginFrm">
       <h1>logo</h1> 
+      <div>
+        <!-- login 실패시 message가 뜸. code=키이름 var=키값을 담는 곳 -->
+        <spring:message code="${param.message}" var="message"></spring:message>
+        <h3>${message}</h3>
+      </div>
       <!-- action 생략가능, 현재 url = action -->
       <form:form modelAttribute="employeeVO" method="post">
         <div class="id_div">
@@ -43,6 +48,10 @@
       </form:form>
     </div>
   </div>
+  <script type="text/javascript">
+    // redirect 로 보냈을 때, URL 경로나타내는 것을 삭제.
+    history.replaceState({}, null, location.pathname);
+ </script>
 </body>
 <c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
 </html>
