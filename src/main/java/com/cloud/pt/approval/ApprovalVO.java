@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 public class ApprovalVO {
 	private Long approvalNum;
-	private Long employeeNum;
+	private String employeeNum;
 	private String category;
 	private String middle;
 	private String last;
