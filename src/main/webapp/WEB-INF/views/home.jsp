@@ -34,9 +34,9 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-		<!-- sidebar -->
+      <!-- sidebar -->
         <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
-		<!-- /sidebar -->
+      <!-- /sidebar -->
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
