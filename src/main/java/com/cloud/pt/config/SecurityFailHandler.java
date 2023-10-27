@@ -42,7 +42,7 @@ public class SecurityFailHandler implements AuthenticationFailureHandler{
 		}
 		
 		message = URLEncoder.encode(message, "UTF-8");
-		response.sendRedirect("/employee/login?message="+message);
+		response.sendRedirect("/?message="+message);
 		
 	}
 	
