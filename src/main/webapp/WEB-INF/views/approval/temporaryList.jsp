@@ -93,14 +93,14 @@
 							<li
 								class="paginate_button page-item previous ${pager.pre?'':'disabled'}"
 								id="dataTable_previous"><a
-								href="./list?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}&division=${pager.division}"
+								href="./temporaryList?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"
 								aria-controls="dataTable" data-dt-idx="0" tabindex="0"
 								class="page-link">Previous</a></li>
 							<c:forEach begin="${pager.startNum }" end="${pager.lastNum}"
 								var="i">
 								<li class="paginate_button page-item active" id="dataTable">
 									<a
-									href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}&division=${pager.division}"
+									href="./temporaryList?page=${i}&kind=${pager.kind}&search=${pager.search}"
 									aria-controls="dataTable" data-dt-idx="1" tabindex="0"
 									class="page-link">${i}</a>
 								</li>
@@ -109,15 +109,12 @@
 							<li
 								class="paginate_button page-item next ${pager.next?'':'disabled'}"
 								id="dataTable_next"><a
-								href="./list?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}&division=${pager.division}"
+								href="./temporaryList?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}}"
 								aria-controls="dataTable" data-dt-idx="7" tabindex="0"
 								class="page-link">Next</a></li>
 						</ul>
 					</div>
 				</div>
-				<button>
-					<a href="/approval/add">새결재작성</a>
-				</button>
 				</div>
 			</section>
 

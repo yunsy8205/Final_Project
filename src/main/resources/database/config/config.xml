@@ -11,6 +11,7 @@
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
 	
 		<!-- 동찬 -->
+		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
 		<typeAlias type="com.cloud.pt.common.Pager" alias="Pager"/>
 

@@ -1,6 +1,8 @@
 package com.cloud.pt.approval;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +16,15 @@ public class ApprovalService {
 	@Autowired
 	private ApprovalDAO approvalDAO;
 	
-	public List<ApprovalVO> getApprovalList(Pager pager) throws Exception{
+	public List<ApprovalVO> getApprovalList(Pager pager,ApprovalVO approvalVO) throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
 		pager.makeRowNum();
-		Long total = approvalDAO.getCount(pager);
+		map.put("id", approvalVO);
+		map.put("pager", pager);
+		Long total = approvalDAO.getMyCount(map);
 		pager.makePageNum(total);
-		return approvalDAO.getApprovalList(pager);
+		map.put("pager", pager);
+		return approvalDAO.getApprovalList(map);
 	}
 	
 	public List<EmployeeVO> getAnnualLine() throws Exception{
@@ -30,11 +36,15 @@ public class ApprovalService {
 		return approvalDAO.setAdd(approvalVO);
 	}
 	
-	public List<ApprovalVO> getApproverList(Pager pager) throws Exception{
+	public List<ApprovalVO> getApproverList(Pager pager,ApprovalVO approvalVO) throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
 		pager.makeRowNum();
-		Long total = approvalDAO.getCount(pager);
+		map.put("id", approvalVO);
+		map.put("pager", pager);
+		Long total = approvalDAO.getAllCount(map);
 		pager.makePageNum(total);
-		return approvalDAO.getApproverList(pager);
+		map.put("pager", pager);
+		return approvalDAO.getApproverList(map);
 	}
 	
 }

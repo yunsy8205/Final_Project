@@ -19,3 +19,6 @@ $("#completeBtn").click(function(){
     $("#divisionForm").submit();
 })
 
+$("#temporaryBtn").click(function(){
+	location.href='./temporaryList'
+})

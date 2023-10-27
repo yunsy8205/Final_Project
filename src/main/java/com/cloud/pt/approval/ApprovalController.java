@@ -1,6 +1,9 @@
 package com.cloud.pt.approval;
 
+import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +27,9 @@ public class ApprovalController {
 	private ApprovalService approvalService;
 	
 	@GetMapping("list")
-	public void getApprovalList(Model model,Pager pager) throws Exception{
-		List<ApprovalVO> al = approvalService.getApprovalList(pager);
+	public void getApprovalList(Model model,Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
+		approvalVO.setEmployeeNum(principal.getName());
+		List<ApprovalVO> al = approvalService.getApprovalList(pager,approvalVO);
 		model.addAttribute("list", al);
 		model.addAttribute("pager", pager);
 	}
@@ -47,10 +51,20 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("approverList")
-	public void getApproverList(Model model,Pager pager) throws Exception{
-		List<ApprovalVO> al = approvalService.getApproverList(pager);
+	public void getApproverList(Model model,Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
+		approvalVO.setEmployeeNum(principal.getName());
+		
+		List<ApprovalVO> al = approvalService.getApproverList(pager,approvalVO);
 		model.addAttribute("list", al);
 		model.addAttribute("pager", pager);
+		
+	}
+	
+	@GetMapping("temporaryList")
+	public void getTemporaryList(Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
+		approvalVO.setEmployeeNum(principal.getName());
+		
+		
 	}
 
 	
