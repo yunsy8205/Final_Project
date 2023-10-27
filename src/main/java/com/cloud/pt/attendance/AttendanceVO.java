@@ -1,6 +1,9 @@
 package com.cloud.pt.attendance;
 
 import java.sql.Date;
+import java.sql.Time;
+
+import com.cloud.pt.employee.EmployeeVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,9 +18,12 @@ public class AttendanceVO {
 	//출근일
 	private Date workDate;
 	//출근시간
-	private Date onTime;
+	private Time onTime;
 	//퇴근시간
-	private Date offTime;
+	private Time offTime;
 	//상태 
 	private String state;
+	
+	private AttendanceModifyVO attendanceModifyVO;
+	private EmployeeVO employeeVO;
 }

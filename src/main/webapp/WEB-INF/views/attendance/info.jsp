@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +68,7 @@
        	      end: 'today prev,next'
        	    },
        	  titleFormat: 'YYYY년 M월',
-           height: '90%',
+          height: '90%',
          // contentHeight: 'auto',
           fixedWeekCount: false
         });
@@ -99,17 +100,26 @@
               <img class="rounded-circle" src="/img/1.jpg" alt="">
             </div>
             <div class="name">
-              홍길동
+              ${vo.name}
             </div>
             <div class="time">
               <ul>
-                <li class="list">출근시간</li>
-                <li class="list">퇴근시간</li>
-                <li class="list">연차횟수</li>
+                <li class="list">출근시간 - 
+                  <c:forEach items="${vo.list}" var="l">
+		                ${l.onTime}
+	                </c:forEach>
+                </li>
+                <li class="list">퇴근시간 - 
+                  <c:forEach items="${vo.list}" var="l">
+		                ${l.offTime}
+	                </c:forEach>
+                </li>
+                <br>
+                <li class="list">연차개수 - ${vo.leaveDate}개</li>
               </ul>
             </div>
-            <button class="attendance_btn btn1" >내 정보 수정</button>
-            <button class="attendance_btn btn2">근태 수정 요청</button>
+            <button class="attendance_btn" >내 정보 수정</button>
+            <button class="attendance_btn" id="req_btn">근태 수정 요청</button>
           </div>
         	<div id="calendar">
           </div>
@@ -117,5 +127,13 @@
         
       </div>
     </div>
+
+    <script>
+      const req_btn = document.getElementById('req_btn');
+
+      req_btn.addEventListener('click', function(){
+        location.href = '/attendanceModify/add';
+      })
+    </script>
 </body>
 </html>
