@@ -15,6 +15,6 @@ public class RoomVO {
 
 	private String roomId;
     private String name;
-    private Set<WebSocketSession> sessions = new HashSet<>();//아이디
+    private Set<String> sessions = new HashSet<>();//아이디
     
 }

@@ -36,11 +36,8 @@ public class ChatHandler extends TextWebSocketHandler{
 	
     private final ChatService chatService = new ChatService();
 
-  //private static List<WebSocketSession> list = new ArrayList<WebSocketSession>();
-  private static Map<String,WebSocketSession> map = new HashMap<String,WebSocketSession>();
-  
-  
-  private static Set<WebSocketSession> sessions = new HashSet<>();
+  //private static List<WebSocketSession> list = new ArrayList<WebSocketSession>();  
+  private static Map<String, WebSocketSession> sessions = new HashMap<>();
   
   protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
       String payload = message.getPayload();
@@ -49,13 +46,7 @@ public class ChatHandler extends TextWebSocketHandler{
       
       ChatMessageVO chatMessage = objectMapper.readValue(payload, ChatMessageVO.class);
       RoomVO room = chatService.findRoomById(chatMessage.getRoomId());
-      
-      if(room.getSessions()== null) {
-    	  
-      }else {    	  
-    	  Set<WebSocketSession> sessions = room.getSessions();//방에 있는 현재 사용자 한명이 WebsocketSession
-      }
-      
+
       //클라이언트에 전달
       //TextMessage msg=new TextMessage(session.getId()+">> "+message.getPayload());
       //Set<String> keys = map.keySet();
@@ -64,11 +55,15 @@ public class ChatHandler extends TextWebSocketHandler{
       if (chatMessage.getType().equals(ChatMessageVO.MessageType.ENTER)) {
           //사용자가 방에 입장하면  Enter메세지를 보내도록 해놓음.  이건 새로운사용자가 socket 연결한 것이랑은 다름.
           //socket연결은 이 메세지 보내기전에 이미 되어있는 상태
-          
-    	  sessions.add(session);//세션을 방의 사용자를 구분하기 위해 넣어줌
+    	  if(room.getSessions().size() < 3) {
+        	  
+    		  sessions.put(session.getPrincipal().getName(), session);//세션을 방의 사용자를 구분하기 위해 넣어줌
+          }
           chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다.");  //TALK일 경우 msg가 있을 거고, ENTER일 경우 메세지 없으니까 message set
           sendToEachSocket(sessions,new TextMessage(objectMapper.writeValueAsString(chatMessage)) );
-      
+          
+        
+          
       }else if (chatMessage.getType().equals(ChatMessageVO.MessageType.QUIT)) {
           sessions.remove(session);
           chatMessage.setMessage(chatMessage.getSender() + "님이 퇴장했습니다..");
@@ -86,7 +81,7 @@ public class ChatHandler extends TextWebSocketHandler{
       //}
   }
 
-  private void sendToEachSocket(Set<WebSocketSession> sessions, TextMessage textMessage) {
+  private void sendToEachSocket(Map<String, WebSocketSession> sessions, TextMessage textMessage) {
 	// TODO Auto-generated method stub
 	
 }
@@ -95,7 +90,7 @@ public class ChatHandler extends TextWebSocketHandler{
   @Override
   public void afterConnectionEstablished(WebSocketSession session) throws Exception {
       String name = session.getPrincipal().getName();// config에 써준 코드 때문에 http세션을 가져옴
-      map.put(name, session);
+      sessions.put(name, session);
       log.info(session + name + " 클라이언트 접속");
   }
 
@@ -105,7 +100,7 @@ public class ChatHandler extends TextWebSocketHandler{
   public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 	  String name = session.getPrincipal().getName();
       log.info(session + name + " 클라이언트 접속 해제");
-      map.remove(name, session);
+      sessions.remove(name, session);
   }
 }
 

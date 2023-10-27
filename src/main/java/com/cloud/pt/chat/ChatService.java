@@ -22,10 +22,10 @@ public class ChatService {
 	private final ObjectMapper objectMapper = new ObjectMapper();
     private Map<String, RoomVO> chatRooms = new HashMap<>();
 
-    @PostConstruct
-    private void init() {
-        chatRooms = new LinkedHashMap<>();
-    }
+//    @PostConstruct
+//    private void init() {
+//        chatRooms = new LinkedHashMap<>();
+//    }
 
     public List<RoomVO> findAllRoom() throws Exception{
 
