@@ -72,7 +72,7 @@
                     >
                   </li>
                   <li>
-                    <a href="#"
+                    <a href="/ptClass/myPtList"
                       >회원 조회</a
                     >
                   </li>
