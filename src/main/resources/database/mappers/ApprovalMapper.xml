@@ -16,6 +16,12 @@
 		<if test="division=='reject'">AND STATE='반려'</if>
 	</sql>
 	
+	<sql id="category">
+		<if test="division=='휴가신청'">AND CATEGORY='휴가신청서'</if>
+		<if test="division=='지출신청'">AND CATEGORY='지출결의서'</if>
+		<if test="division=='휴직신청'">AND CATEGORY='휴직신청서'</if>
+	</sql>
+	
 	<!-- 1. count  -->
 	<select id="getCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
@@ -33,4 +39,22 @@
 		ORDER BY APPROVALNUM DESC LIMIT #{startRow},#{lastRow}
 	</select>
 	
+	<!-- 3.직원목록 -->
+	<select id="getAnnualLine" resultType="EmployeeVO">
+		SELECT NAME,POSITION FROM EMPLOYEE ORDER BY EMPLOYEENUM
+	</select>
+	
+	<!-- 결재등록 -->
+	<insert id="setAdd" parameterType="ApprovalVO">
+		INSERT INTO APPROVAL(CATEGORY,MIDDLE,LAST,NAME,CONTENTS,LEAVEKIND,USEDATE,STARTDATE,ENDDATE)
+		VALUES(#{category},#{middle},#{last},#{name},#{contents},#{leaveKind},#{useDate},#{startDate},#{endDate})
+	</insert>
+	<!-- 결재자결재문서 리스 -->
+	<select id="getApproverList" resultType="ApprovalVO" parameterType="Pager">
+		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
+		WHERE APPROVALNUM>0
+		<include refid="category"></include>
+		<include refid="forPager"></include>
+		ORDER BY APPROVALNUM DESC LIMIT #{startRow},#{lastRow}
+	</select>
 </mapper>

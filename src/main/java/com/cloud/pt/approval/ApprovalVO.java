@@ -21,5 +21,9 @@ public class ApprovalVO {
 	private String reason;
 	private Date middleDate;
 	private Date finalDate;
+	private Date startDate;
+	private Date endDate;
+	private String leaveKind;
+	private Double useDate;
 	
 }
