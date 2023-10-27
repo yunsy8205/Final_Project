@@ -15,8 +15,6 @@ public class AttendanceModifyVO {
 	private Long attendanceModifyNum;
 	//근태번호
 	private Long attendanceNum;
-	//직원번호
-	private Long employeeNum;
 	//작성일
 	private Date regDate;
 	//수정요청일

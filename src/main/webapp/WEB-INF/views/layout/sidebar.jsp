@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -178,7 +179,7 @@
               <ul class="menu-sub">
                 <li class="menu-item">
                   <sec:authentication property="Principal" var="user"/>
-                    <a href="/attendance/info?employeeNum=${user.employeeNum}" class="menu-link">
+                    <a href="#" class="menu-link">
                       <div data-i18n="Accordion">내 근태 조회</div>
                     </a>
                 </li>

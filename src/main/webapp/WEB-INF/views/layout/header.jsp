@@ -5,10 +5,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <style>
-	  nav {
+	nav {
     width: 100%;
     height: 5rem;
-   background-color: rgb(154, 205, 237);
+    background-color: rgb(154, 205, 237);
   }
   .header_wrap {
     height: 100%;
@@ -85,5 +85,3 @@
               </ul>
             </div>
           </nav>
-
-          <!-- / Navbar -->
