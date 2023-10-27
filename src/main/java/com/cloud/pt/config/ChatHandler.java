@@ -39,6 +39,7 @@ public class ChatHandler extends TextWebSocketHandler{
   //private static List<WebSocketSession> list = new ArrayList<WebSocketSession>();
   private static Map<String,WebSocketSession> map = new HashMap<String,WebSocketSession>();
   
+  
   private static Set<WebSocketSession> sessions = new HashSet<>();
   
   protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -93,18 +94,18 @@ public class ChatHandler extends TextWebSocketHandler{
 /* Client가 접속 시 호출되는 메서드 */
   @Override
   public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-      session.getPrincipal().getName();//수정하기 http세션 불러오는 법
-	  map.put(session.getId(), session);
-      log.info(session + " 클라이언트 접속");
+      String name = session.getPrincipal().getName();// config에 써준 코드 때문에 http세션을 가져옴
+      map.put(name, session);
+      log.info(session + name + " 클라이언트 접속");
   }
 
   /* Client가 접속 해제 시 호출되는 메서드드 */
 
   @Override
   public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-
-      log.info(session + " 클라이언트 접속 해제");
-      map.remove(session.getId(), session);
+	  String name = session.getPrincipal().getName();
+      log.info(session + name + " 클라이언트 접속 해제");
+      map.remove(name, session);
   }
 }
 
