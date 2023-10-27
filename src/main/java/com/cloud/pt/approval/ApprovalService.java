@@ -47,4 +47,16 @@ public class ApprovalService {
 		return approvalDAO.getApproverList(map);
 	}
 	
+	public ApprovalVO getMyDetail(ApprovalVO approvalVO)throws Exception{
+		return approvalDAO.getMyDetail(approvalVO);
+	}
+	
+	public EmployeeVO getMiddleEmployee(ApprovalVO approvalVO)throws Exception{
+		return approvalDAO.getMiddleEmployee(approvalVO);
+	}
+	
+	public EmployeeVO getLastEmployee(ApprovalVO approvalVO)throws Exception{
+		return approvalDAO.getLastEmployee(approvalVO);
+	}
+	
 }

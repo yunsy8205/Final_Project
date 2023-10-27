@@ -64,14 +64,28 @@
 		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
-	<!-- 본인 임시저장 리스트 -->
+	<!-- 내 임시저장 리스트 -->
 	<select id="getTemporaryList" resultType="ApprovalVO" parameterType="Map">
 		SELECT REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
 		WHERE EMPLOYEENUM=${id.employeeNum} AND STATE='임시저장'
 		<include refid="forPager"></include>
-		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
-		
-		
+		ORDER BY APPROVAL
+		NUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
+	</select>
+	
+	<!-- 내 문서 디테일 -->
+	<select id="getMyDetail" resultType="ApprovalVO" parameterType="ApprovalVO">
+		SELECT * FROM APPROVAL WHERE APPROVALNUM=#{approvalNum}
+	</select>
+	
+	<!-- 중간결재자정보 -->
+	<select id="getMiddleEmployee" resultType="EmployeeVO" parameterType="ApprovalVO">
+		SELECT POSITION FROM EMPLOYEE WHERE NAME=#{middle}
+	</select>
+	
+	<!-- 최종결재자정보 -->
+	<select id="getLastEmployee" resultType="EmployeeVO" parameterType="ApprovalVO">
+		SELECT POSITION FROM EMPLOYEE WHERE NAME=#{last}
 	</select>
 	
 </mapper>

@@ -81,10 +81,11 @@
 							<c:forEach items="${list}" var="vo">
 								<tr>
 									<td>${vo.regDate}</td>
-									<td>${vo.category}</td>
+									<td><a href="./detail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
 									<td>${vo.title}</td>
 									<td>${vo.approvalNum}</td>
 									<td>${vo.state}</td>
+									
 								</tr>
 							</c:forEach>
 						</tbody>

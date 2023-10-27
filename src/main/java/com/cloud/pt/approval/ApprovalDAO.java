@@ -23,4 +23,10 @@ public interface ApprovalDAO {
 	
 	public List<ApprovalVO> getApproverList(Map<String,Object> map) throws Exception;
 	
+	public ApprovalVO getMyDetail(ApprovalVO approvalVO) throws Exception;
+	
+	public EmployeeVO getMiddleEmployee(ApprovalVO approvalVO) throws Exception;
+	
+	public EmployeeVO getLastEmployee(ApprovalVO approvalVO) throws Exception;
+	
 }

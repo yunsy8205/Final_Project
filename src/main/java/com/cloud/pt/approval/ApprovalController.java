@@ -66,7 +66,17 @@ public class ApprovalController {
 		
 		
 	}
-
 	
+	@GetMapping("detail")
+	public void getMyDetail(ApprovalVO approvalVO,Model model)throws Exception{
+		
+		approvalVO=approvalService.getMyDetail(approvalVO);
+		EmployeeVO empVO = new EmployeeVO();
+		empVO=approvalService.getMiddleEmployee(approvalVO);
+		model.addAttribute("middle", empVO);
+		empVO=approvalService.getLastEmployee(approvalVO);
+		model.addAttribute("last", empVO);
+		model.addAttribute("approvalVO", approvalVO);
+	}
 
 }
