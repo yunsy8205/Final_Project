@@ -18,8 +18,8 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class ChatController {
 	
-	
-	private final ChatService chatService = new ChatService();
+	@Autowired
+	private ChatService chatService;
 	
 	@GetMapping("chat")
     public String chatRoom(Model model, @RequestParam String roomId){

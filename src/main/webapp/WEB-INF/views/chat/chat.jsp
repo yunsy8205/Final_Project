@@ -176,5 +176,46 @@
     
     <!-- icon js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  	<script>
+	//let sock = new SockJS("/ws/chat");
+	function enterRoom(socket){
+	    let enterMsg={"type" : "ENTER","roomId":"${room.roomId}","sender":"chee","message":""};
+	    socket.send(JSON.stringify(enterMsg));
+	}
+	
+	const socket = new WebSocket("ws://localhost:82/ws/chat");
+	
+	socket.onopen = function (e) {
+        console.log('open server!')
+        enterRoom(socket);
+    };
+    
+    socket.onclose=function(e){
+        console.log('disconnet');
+    }
+
+    socket.onerror = function (e){
+        console.log(e);
+    }
+	
+	socket.onmessage=function(msg){
+		console.log(msg.data);
+		$('#msgArea').append(msg.data+"<br/>");
+	}
+	
+	$('#button-send').click(function(){
+		send();
+	})
+	
+	function send(){
+	    
+	    let content=document.querySelector('#msg').value;
+        var talkMsg={"type" : "TALK","roomId":"${room.roomId}" ,"sender":"chee","message":content};
+        socket.send(JSON.stringify(talkMsg));
+	    msg.value = '';
+	   
+	}
+    
+</script>
   </body>
 </html>

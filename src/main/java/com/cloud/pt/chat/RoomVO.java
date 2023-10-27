@@ -15,6 +15,7 @@ public class RoomVO {
 
 	private String roomId;
     private String name;
-    private Set<String> sessions = new HashSet<>();//아이디
+    private String user1;
+    private String user2;
     
 }

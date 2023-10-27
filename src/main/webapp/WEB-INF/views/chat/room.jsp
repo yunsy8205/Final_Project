@@ -101,7 +101,7 @@
 		    		<c:if test="${list ne null}">
 			    		<c:forEach items="${list}" var="li">
 					        <td>
-						        <a>${li.roomId} ${li.name}</a>
+						        <a href="/chat/chat?roomId=${li.roomId}">${li.roomId} ${li.name}</a>
 					        </td>
 			    		</c:forEach>
 		    		</c:if>
@@ -182,5 +182,7 @@
     
     <!-- icon js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
   </body>
 </html>

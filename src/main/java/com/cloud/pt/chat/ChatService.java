@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
@@ -13,14 +14,17 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@Getter
 public class ChatService {
 	
 	private final ObjectMapper objectMapper = new ObjectMapper();
     private Map<String, RoomVO> chatRooms = new HashMap<>();
+    private Map<String, Set<String>> memers = new HashMap<>();
 
 //    @PostConstruct
 //    private void init() {
