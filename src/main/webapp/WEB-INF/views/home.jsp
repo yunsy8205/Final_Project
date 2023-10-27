@@ -4,263 +4,165 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<c:import url="./layout/css.jsp"></c:import>
-<c:import url="./layout/topScript.jsp"></c:import>
-<link rel="stylesheet" href="/css/main.css" />
 
-</head>
-<body>
-<div id="wrap">
-      <section class="app">
-        <aside class="sidebar">
-          <nav class="sidebar-nav">
-            <ul>
-              <li>
-                <a href="#"><i class="fa-solid fa-user"></i> <span>직원관리</span></a>
-                <ul class="nav-flyout">
-                  <li>
-                    <a href="/employee/join">전체 직원 목록</a>
-                  </li>
-                  <!-- <li>
-                    <a href="#"><i class="ion-ios-clock-outline"></i>Times</a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-android-star-outline"></i>Hates</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"><i class="ion-heart-broken"></i>Beat</a>
-                  </li> -->
-                </ul>
-              </li>
-              <li>
-                <a href="#"
-                  ><i class="fa-solid fa-users"></i>
-                  <span class="">회원관리</span></a
-                >
-                <ul class="nav-flyout">
-                  <li>
-                    <a href="#">전체 회원 관리</a>
-                  </li>
-                  <!-- <li>
-                    <a href="#"
-                      ><i class="ion-ios-camera-outline"></i>Creeper</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-chatboxes-outline"></i>Hate</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"><i class="ion-ios-cog-outline"></i>Grinder</a>
-                  </li> -->
-                </ul>
-              </li>
-              <li>
-                <a href="#"
-                  ><i class="fa-solid fa-ticket"></i>
-                  <span class="">이용권 관리</span></a
-                >
-                <ul class="nav-flyout">
-                  <li>
-                    <a href="#">이용권 목록</a>
-                  </li>
-                  <!-- <li>
-                    <a href="#"
-                      ><i class="ion-ios-lightbulb-outline"></i>Bulbs</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-location-outline"></i>Where You</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-locked-outline"></i>On Lock</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-navigate-outline"></i>Ghostface</a
-                    >
-                  </li> -->
-                </ul>
-              </li>
-              <li>
-                <a href="#"
-                  ><i class="fa-solid fa-dumbbell"></i>
-                  <span class="">시설관리</span></a
-                >
-                <ul class="nav-flyout">
-                  <li>
-                    <a href="#">전체 기구 목록</a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      >기구 수리 요청 목록</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      >전체 락커 목록</a
-                    >
-                  </li>
-                 <!--  <li>
-                    <a href="#"
-                      ><i class="ion-ios-timer-outline"></i>Lookie Look</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-game-controller-a-outline"></i>Dork
-                      Mfer</a
-                    >
-                  </li> -->
-                </ul>
-              </li>
-              <li>
-                <a href="#"
-                  ><i class="fa-solid fa-list-check"></i>
-                  <span class="">수업관리</span></a
-                >
-                <ul class="nav-flyout">
-                  <li>
-                    <a href="#"
-                      >수업 조회</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      >회원 조회</a
-                    >
-                  </li>
-                  <!-- <li>
-                    <a href="#"
-                      ><i class="ion-ios-paperplane-outline"></i>Planes</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"><i class="ion-android-star-outline"></i>Shop</a>
-                  </li> -->
-                </ul>
-              </li>
-              <li>
-                <a href="#"
-                  ><i class="fa-solid fa-clipboard-user"></i>
-                  <span class="">근태 관리</span></a
-                >
-                <ul class="nav-flyout">
-                  <li>
-					<sec:authentication property="Principal" var="user"/>
-                    <a href="/attendance/info?employeeNum=${employeeNum}">내 근태 조회</a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      >전체 근태 조회</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      >근태 수정 요청 목록</a
-                    >
-                  </li>
-                  <!-- <li> -->
-                    <!-- <a href="#"
-                      ><i class="ion-ios-locked-outline"></i>On Lock</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ion-ios-navigate-outline"></i>Ghostface</a
-                    >
-                  </li> -->
-                </ul>
-              </li>
-              <li>
-                <a href="#"
-                  ><i class="fa-solid fa-file"></i>
-                  <span class="">결재</span></a
-                >
-              </li>
-              <li>
-                <a href="#"
-                  ><i class="fa-solid fa-plane"></i>
-                  <span class="">휴가</span></a
-                >
-              </li>
-              <li>
-                <a href="#"
-                  ><i class="fa-solid fa-comments"></i>
-                  <span class="">채팅</span></a
-                >
-              </li>
-            	<li>
-                <a href="#"
-                  ><i class="fa-solid fa-circle-user"></i>
-                  <span class="">회원</span></a
-                >
-                <ul class="nav-flyout">
-                  <li>
-                    <a href="#">운동일지</a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      >PT일지</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      >식단관리</a
-                    >
-                  </li>
-          </nav>
-        </aside>
-      </section>
-      <div id="right">
-        <header>
-          <div class="header_wrap">
-            <div class="header_message">
-            	<!-- 로그인 성공 시, 사용자 이름 가져오기 -->
-            	<sec:authorize access="isAuthenticated()">
-            		<sec:authentication property="Principal" var="VO"/>
-            		<p>
-            			<spring:message code="login.welcome.name" arguments="${VO.name}"></spring:message>
-            		</p>
-            	</sec:authorize>
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+	<script src="https://kit.fontawesome.com/4d61d0b940.js" crossorigin="anonymous"></script>
+    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+		<!-- sidebar -->
+        <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
+		<!-- /sidebar -->
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              
             </div>
-            <div class="header_navi">
-              <a href="#">조직도</a>
-              <sec:authorize access="!isAuthenticated()">
-                <a href="/employee/login">로그인</a>
-              </sec:authorize>
-              <sec:authorize access="isAuthenticated()">
-                <a href="/employee/logout">로그아웃</a>
-                <a href="#">마이페이지</a>
-              </sec:authorize>
-            </div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <!-- <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with ❤️ by
+                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+                </div>
+                <div>
+                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+
+                  <a
+                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                    target="_blank"
+                    class="footer-link me-4"
+                    >Documentation</a
+                  >
+
+                  <a
+                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                    target="_blank"
+                    class="footer-link me-4"
+                    >Support</a
+                  >
+                </div>
+              </div>
+            </footer> -->
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
           </div>
-        </header>
-        <div style="background-color: rgb(183, 234, 234); height: 100%">
-          <div class="main_wrap">
-            <div class="main_top">
-              <div class="main_member">멤버정보자리</div>
-              <div class="main_notice">공지 자리</div>
-              <div class="main_calendar">달력자리</div>
-            </div>
-            <div class="main_bottom">
-              <div class="main_schedule">스케줄자리</div>
-            </div>
-          </div>
+          <!-- Content wrapper -->
         </div>
+        <!-- / Layout page -->
       </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-</body>
-<c:import url="./layout/btmScript.jsp"></c:import>
+    <!-- / Layout wrapper -->
+
+    
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="../assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="../assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="../assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
+    <!-- icon js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  </body>
 </html>
