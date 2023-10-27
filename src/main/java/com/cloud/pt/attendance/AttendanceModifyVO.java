@@ -20,7 +20,7 @@ public class AttendanceModifyVO {
 	//작성일
 	private Date regDate;
 	//수정요청일
-	private String modifyDate;
+	private Date modifyDate;
 	//수정요청시간
 	private String modifyTime;
 	//요청사유

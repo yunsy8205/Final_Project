@@ -47,11 +47,11 @@
         	<h1>근태 수정 요청 목록</h1>
 
           <div id="req_btn">
-            <button>근태 수정 요청</button>
+            <button id="btn">근태 수정 요청</button>
           </div>
 
           <div id="req_list">
-            목록 들어갈 자리
+            
           </div>
         </section>
         
@@ -59,4 +59,12 @@
     </div>
 </body>
 <c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
+
+<script>
+  const btn = document.getElementById('btn');
+
+  btn.addEventListener('click', function(){
+    location.href = '/attendanceModify/add';
+  })
+</script>
 </html>

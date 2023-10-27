@@ -95,7 +95,7 @@
                   </li>
                   <li>
                     <sec:authentication property="Principal" var="user"/>
-                      <a href="/attendance/list?employeeNum=${user.employeeNum}">근태 수정 요청 목록</a>
+                      <a href="/attendanceModify/list?employeeNum=${user.employeeNum}">근태 수정 요청 목록</a>
                   </li>
                 </ul>
               </li>

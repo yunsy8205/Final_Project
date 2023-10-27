@@ -1,5 +1,7 @@
 package com.cloud.pt.attendance;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +48,7 @@ public class AttendanceController {
 	//-----------------------------------------------------------
 	@GetMapping("/attendanceModify/list")
 	public String getModifyList(EmployeeVO employeeVO, Model model) throws Exception {
+	//	List<AttendanceModifyVO> ar = attendanceService.getModifyList(employeeVO);
 		
 		return "attendance/list";
 	}
