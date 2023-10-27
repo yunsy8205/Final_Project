@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.cloud.pt.myPtMember.MyPtMemberDAO">
-  		<select id="getPtList" parameterType="MemberVO" resultMap="getMemberResult">
+  <mapper namespace="com.cloud.pt.myPtMember.MemberDAO">
+  		<select id="getPtList" parameterType="MemberVO" >
   			SELECT MEMBERNUM, NAME , GENDER, BIRTH, PHONE , PTCOUNT
   			FROM MEMBER 
   			WHERE EMPLOYEENUM = #{employeeNum}
