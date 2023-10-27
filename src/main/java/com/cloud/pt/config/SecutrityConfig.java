@@ -30,7 +30,9 @@ public class SecutrityConfig {
 		
 		return web -> web
 				.ignoring()
-				.antMatchers("/css/**");
+				.antMatchers("/css/**")
+				.antMatchers("/img/**")
+				.antMatchers("/js/**");
 	}
 	
 	

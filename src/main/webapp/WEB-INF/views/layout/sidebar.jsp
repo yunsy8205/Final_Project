@@ -9,9 +9,7 @@
                 <a href="#"><i class="fa-solid fa-user"></i> <span>직원관리</span></a>
                 <ul class="nav-flyout">
                   <li>
-                    <a href="#"
-                      >전체 직원 목록</a
-                    >
+                    <a href="/employee/join">전체 직원 목록</a>
                   </li>
                   
                 </ul>

@@ -44,9 +44,9 @@ public class EmployeeVO implements UserDetails {
 	private Date joinDate;
 	@Future
 	private Date quitDate;
-	@NotNull
+	@NotBlank
 	private String state;
-	@NotNull
+	@NotBlank
 	private String position;
 	private Long leaveDate;
 	private String signFile;

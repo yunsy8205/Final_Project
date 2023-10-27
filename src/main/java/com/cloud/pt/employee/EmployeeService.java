@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,8 +47,27 @@ public class EmployeeService implements UserDetailsService{
 		}
 		return employeeVO;
 	}
+	 
+	
+	
+	public boolean getEmpError(EmployeeVO employeeVO, BindingResult bindingResult)throws Exception{
+		// false(오류없음) | true(오류있음)
+		boolean check = false;
+		
+
+		return check;
+	}
 	
 	
 	
+	@Transactional(rollbackFor = Exception.class)
+	public int setJoin(EmployeeVO employeeVO)throws Exception{
+		// 비밀번호 암호화
+		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
+		
+		int result = employeeDAO.setJoin(employeeVO);
+		
+		return result;
+	}
 	
 }

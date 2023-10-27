@@ -23,9 +23,7 @@
                 <a href="#"><i class="fa-solid fa-user"></i> <span>직원관리</span></a>
                 <ul class="nav-flyout">
                   <li>
-                    <a href="#"
-                      >전체 직원 목록</a
-                    >
+                    <a href="/employee/join">전체 직원 목록</a>
                   </li>
                   <!-- <li>
                     <a href="#"><i class="ion-ios-clock-outline"></i>Times</a>
@@ -229,15 +227,13 @@
         <header>
           <div class="header_wrap">
             <div class="header_message">
-
             	<!-- 로그인 성공 시, 사용자 이름 가져오기 -->
             	<sec:authorize access="isAuthenticated()">
-            		<sec:authentication property="principal" var="employeeVO"/>
+            		<sec:authentication property="Principal" var="VO"/>
             		<p>
-            			<spring:message code="login.welcome.name" arguments="${employeeVO.name}"></spring:message>
+            			<spring:message code="login.welcome.name" arguments="${VO.name}"></spring:message>
             		</p>
             	</sec:authorize>
-
             </div>
             <div class="header_navi">
               <a href="#">조직도</a>

@@ -10,4 +10,9 @@
 		WHERE EMPLOYEENUM = #{employeeNum}
 	</select>
 	
+	<insert id="setJoin" parameterType="EmployeeVO">
+		INSERT INTO EMPLOYEE
+		VALUES (DEFAULT, #{name}, #{password}, #{phone}, #{address}, #{gender}, #{birth}, now(), #{quitDate}, #{state}, #{position}, 12, null, null, #{proFile}, #{proOriginal})
+	</insert>
+	
 </mapper>
