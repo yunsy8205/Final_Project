@@ -89,7 +89,7 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="/employee/join" class="menu-link">
                     <div data-i18n="Without menu">전체 직원 목록</div>
                   </a>
                 </li>
