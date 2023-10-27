@@ -17,13 +17,11 @@ public class MemberService {
 	@Autowired
 	private HttpSession httpSession;
 	
-	public void getPtList(MemberVO memberVO) throws Exception{
-		/*
-		 * EmployeeVO employee = (EmployeeVO) httpSession.getAttribute("employee");
-		 * 
-		 * memberVO.setEmployeeNum(employee.getEmployeeNum()); return
-		 * memberDAO.getPtList(memberVO);
-		 */
+	public List<MemberVO> getPtList(MemberVO memberVO) throws Exception{
+		Long employee = (Long) httpSession.getAttribute("employee");
+		
+		memberVO.setEmployeeNum(employee.getEmployeeNum());
+		return memberDAO.getPtList(memberVO);
 	}
 	
 }
