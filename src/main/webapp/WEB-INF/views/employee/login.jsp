@@ -45,7 +45,7 @@
         <h3>${message}</h3>
       </div>
       <!-- action 생략가능, 현재 url = action -->
-      <form:form modelAttribute="employeeVO" method="post">
+      <form:form modelAttribute="employeeVO" action="/employee/login" method="post">
         <div class="id_div">
           <form:label path="employeeNum">직원 아이디</form:label>
           <form:input path="employeeNum"/>

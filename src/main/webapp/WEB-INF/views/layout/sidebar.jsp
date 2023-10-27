@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="index.html" class="app-brand-link">
@@ -87,7 +88,7 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="/employee/join" class="menu-link">
                     <div data-i18n="Without menu">전체 직원 목록</div>
                   </a>
                 </li>
@@ -176,9 +177,8 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="ui-accordion.html" class="menu-link">
-                    <div data-i18n="Accordion">내 근태 조회</div>
-                  </a>
+                  <sec:authentication property="Principal" var="user"/>
+                    
                 </li>
                 <li class="menu-item">
                   <a href="ui-alerts.html" class="menu-link">

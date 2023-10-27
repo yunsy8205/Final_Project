@@ -31,7 +31,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
-	<script src="https://kit.fontawesome.com/4d61d0b940.js" crossorigin="anonymous"></script>
+   <script src="https://kit.fontawesome.com/4d61d0b940.js" crossorigin="anonymous"></script>
     <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
@@ -75,9 +75,9 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-		<!-- sidebar -->
+      <!-- sidebar -->
         <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
-		<!-- /sidebar -->
+      <!-- /sidebar -->
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
