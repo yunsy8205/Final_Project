@@ -1,37 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-			<!DOCTYPE html>
-			<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<!DOCTYPE html>
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+<head>
+	
+  <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
+</head>
 
-			<head>
-				<meta charset="UTF-8">
-				<title>Insert title here</title>
-				<c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
-				<c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
-				<link rel="stylesheet" href="/css/main.css" />
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+		      <!-- sidebar -->
+          <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
+          <!-- Layout container -->
+          <div class="layout-page">
+            <!-- Navbar -->
+            <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
-				<c:import url="../temp/bootStrap.jsp" />
-			</head>
-
-			<body>
-				<div id="wrap">
-					<c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
-					<div id="right">
-						<header>
-							<div class="header_wrap">
-								<div class="header_message">
-									<p>이재혁 님 환영합니다</p>
-								</div>
-								<div class="header_navi">
-									<a href="#">조직도</a> <a href="#">로그인</a> <a href="#">로그아웃</a> <a href="#">마이페이지</a>
-								</div>
-							</div>
-						</header>
-						<!-- main내용  -->
-						<section id="mainContents">
-
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+              <!-- Content 내용 여기로 -->
+              <div class="container-xxl flex-grow-1 container-p-y">
+                
 							<div>
 								<button id=leaveBtn>휴가신청</button>
 								<button>휴직신청서</button>
@@ -276,12 +280,57 @@
 
 
 							</div>
-						</section>
 
-					</div>
-				</div>
-				<script src="/resources/js/approval/add.js"></script>
-			</body>
-			<c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
+              </div>
+              <!-- / Content --> 
+              
+              
+              <!-- Footer -->
+                <!-- <footer class="content-footer footer bg-footer-theme">
+                  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                    <div class="mb-2 mb-md-0">
+                      ©
+                      <script>
+                        document.write(new Date().getFullYear());
+                      </script>
+                      , made with ❤️ by
+                      <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+                    </div>
+                    <div>
+                      <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                      <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
 
-			</html>
+                      <a
+                        href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                        target="_blank"
+                        class="footer-link me-4"
+                        >Documentation</a
+                      >
+
+                      <a
+                        href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                        target="_blank"
+                        class="footer-link me-4"
+                        >Support</a
+                      >
+                    </div>
+                  </div>
+                </footer> -->
+                <!-- / Footer -->       
+
+              <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+          </div>
+        <!-- / Layout page -->
+      <div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+  
+	<script src="/resources/js/approval/add.js"></script>
+    <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+  </body>
+</html>
