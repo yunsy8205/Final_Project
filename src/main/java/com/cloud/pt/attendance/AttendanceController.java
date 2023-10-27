@@ -46,6 +46,12 @@ public class AttendanceController {
 	}
 	
 	//-----------------------------------------------------------
+	@GetMapping("/attendanceModify/detail")
+	public String getModifyDetail(AttendanceModifyVO attendanceModifyVO, Model model) throws Exception {
+		
+		return "attendance/detail";
+	}
+	
 	@GetMapping("/attendanceModify/list")
 	public String getModifyList(EmployeeVO employeeVO, Model model) throws Exception {
 		List<AttendanceVO> ar = attendanceService.getModifyList(employeeVO);
@@ -53,7 +59,6 @@ public class AttendanceController {
 		
 		return "attendance/list";
 	}
-	
 
 	@GetMapping("/attendanceModify/add")
 	public String setModifyAdd() throws Exception {

@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
   <title>Insert title here</title>
   <style>
-    h1 {
-      margin-top: 2.5em;
+    h3 {
+      margin-top: 40px !important;
       text-align: center;
     }
     #req_btn {
@@ -36,37 +36,37 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-                <h1>근태 수정 요청 목록</h1>
+                <h3>근태 수정 요청 목록</h3>
 
                 <div id="req_btn">
                   <button id="btn" class="btn btn-primary">근태 수정 요청</button>
                 </div>
-				<div class="card">
-                <div id="req_list" class="table-responsive text-nowrap">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>번호</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
-                        <th>근태수정요청일</th>
-                        <th>상태</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <c:forEach items="${list}" var="vo" varStatus="i">
+				        <div class="card">
+                  <div id="req_list" class="table-responsive text-nowrap">
+                    <table class="table table-hover">
+                      <thead>
                         <tr>
-                          <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">${i.index+1}</a></td>
-                          <td>${vo.employeeVO.name}</td>
-                          <td>${vo.attendanceModifyVO.regDate}</td>
-                          <td>${vo.attendanceModifyVO.modifyDate}</td>
-                          <td>${vo.attendanceModifyVO.state}</td>
+                          <th>번호</th>
+                          <th>작성자</th>
+                          <th>작성일</th>
+                          <th>근태수정요청일</th>
+                          <th>상태</th>
                         </tr>
-                      </c:forEach>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <c:forEach items="${list}" var="vo" varStatus="i">
+                          <tr>
+                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">${i.index+1}</a></td>
+                            <td>${vo.employeeVO.name}</td>
+                            <td>${vo.attendanceModifyVO.regDate}</td>
+                            <td>${vo.attendanceModifyVO.modifyDate}</td>
+                            <td>${vo.attendanceModifyVO.state}</td>
+                          </tr>
+                        </c:forEach>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-
               </div>
                          
 
