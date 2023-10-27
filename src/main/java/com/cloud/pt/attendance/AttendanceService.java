@@ -25,7 +25,7 @@ public class AttendanceService {
 	
 	//---------------------------------------------------
 	
-	public List<AttendanceModifyVO> getModifyList(EmployeeVO employeeVO) throws Exception {
+	public List<AttendanceVO> getModifyList(EmployeeVO employeeVO) throws Exception {
 		return attendanceDAO.getModifyList(employeeVO);
 	}
 	

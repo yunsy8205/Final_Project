@@ -15,6 +15,6 @@ public interface AttendanceDAO {
 	//----------------------------------------
 	public Long getNum(Map<String, Object> map) throws Exception;
 	
-	public List<AttendanceModifyVO> getModifyList(EmployeeVO employeeVO) throws Exception;
+	public List<AttendanceVO> getModifyList(EmployeeVO employeeVO) throws Exception;
 	public int setModifyAdd(AttendanceModifyVO attendanceModifyVO) throws Exception;
 }

@@ -51,7 +51,28 @@
           </div>
 
           <div id="req_list">
-            
+            <table>
+              <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>작성자</th>
+                  <th>작성일</th>
+                  <th>근태수정요청일</th>
+                  <th>상태</th>
+                </tr>
+              </thead>
+              <tbody>
+                <c:forEach items="${list}" var="vo" varStatus="i">
+                  <tr>
+                    <td>${i.index+1}</td>
+                    <td>${vo.employeeVO.name}</td>
+                    <td>${vo.attendanceModifyVO.regDate}</td>
+                    <td>${vo.attendanceModifyVO.modifyDate}</td>
+                    <td>${vo.attendanceModifyVO.state}</td>
+                  </tr>
+                </c:forEach>
+              </tbody>
+            </table>
           </div>
         </section>
         
