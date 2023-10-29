@@ -47,6 +47,7 @@ function adr() {
             document.getElementById('adr_postNum').value = data.zonecode;
             document.getElementById("adr_address").value = addr + a;
             // 커서를 상세주소 필드로 이동한다.
+            checks[2]=true;
             document.getElementById("adr_detail").focus();
         }
     }).open();
@@ -68,3 +69,94 @@ $(document).ready(function() {
 
     $("#joinDate").val(join);
 });
+
+
+
+// form 전체 입력
+const frm = document.getElementById("frm");
+const nameI = document.getElementById("name");
+const phone = document.getElementById("phone");
+const address = document.getElementById("adr_address");
+const birth = document.getElementById("birth");
+const nMsg = document.getElementById("nameMsg");
+const pMsg = document.getElementById("phoneMsg");
+const aMsg = document.getElementById("addressMsg");
+const bMsg = document.getElementById("birthMsg");
+const addBtn = document.getElementById("addBtn");
+let phoneCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+let birthCheck = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+let checks = [false, false, false, false];
+
+// nameI.addEventListener("blur",function(){
+//     nMsg.innerHTML="";
+//     if(nameI.value == ''){
+//         nMsg.innerHTML = '이름을 입력해주세요.';
+//         nMsg.className = 'f';
+//     } else {
+//         checks[0]=true;
+//     }
+// })
+// phone.addEventListener("blur",function(){
+//     pMsg.innerHTML="";
+//     if(phone.value == ''){
+//         pMsg.innerHTML="전화번호를 입력해주세요.";
+//         pMsg.className = 'f';
+//     }else if(!phoneCheck.test(phone.value)){
+//         pMsg.innerHTML="정확한 전화번호를 다시 입력해주세요.";
+//         pMsg.className = 'f';
+//     }else{
+//         checks[1]=true;
+//     }
+// })
+// address.addEventListener("blur",function(){
+//     aMsg.innerHTML="";
+//     if(address.value=""){
+//         aMsg.innerHTML="주소를 입력해주세요.";
+//         aMsg.className="f";
+//     }
+// })
+// birth.addEventListener("blur",function(){
+//     bMsg.innerHTML="";
+//     if(birth.value==""){
+//         bMsg.innerHTML="생년월일을 입력해주세요."
+//         bMsg.className="f";
+//     }else if(!birthCheck.test(birth.value)){
+//         bMsg.innerHTML="정확한 생년월일을 다시 입력해주세요."
+//         bMsg.className="f";
+//     }else{
+//         const birthDate = new Date(birth.value);
+//         const today = new Date();
+//         if(birthDate > today){
+//             bMsg.innerHTML="미래의 날짜는 입력할 수 없습니다.";
+//             bMsg.className="f";
+//         }else{
+//             checks[3]=true;
+//         }
+//     }
+// })
+
+// addBtn.addEventListener("click", function(){
+//     let allCheck = checks.includes(false);
+//     if(!allCheck){
+//         frm.submit();
+//         location.href="/employee/list";
+//     }else{
+//         for(let i = 0; i < checks.length; i++){
+//             if(checks[i] == false){
+//                 alert("모든 항목은 필수 입력입니다.");
+//                 console.log("false : "+checks[i]);
+//                 return;
+//             }
+//         }
+//     }
+// })
+
+
+// 이전 페이지
+const backBtn = document.getElementById("backBtn")
+const r = document.referrer; // 이전 url 확인
+
+backBtn.addEventListener("click", function() {
+    window.location.href="/employee/list";
+});
+

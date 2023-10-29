@@ -7,12 +7,19 @@
 	
 	<select id="getEmpLogin" parameterType="EmployeeVO" resultType="EmployeeVO">
 		SELECT * FROM EMPLOYEE 
-		WHERE EMPLOYEENUM = #{employeeNum}
+		WHERE EMPLOYEENUM = #{employeeNum} 
 	</select>
 	
 	<insert id="setJoin" parameterType="EmployeeVO">
 		INSERT INTO EMPLOYEE
 		VALUES (DEFAULT, #{name}, #{password}, #{phone}, #{address}, #{gender}, #{birth}, now(), #{quitDate}, #{state}, #{position}, 12, null, null, #{proFile}, #{proOriginal})
 	</insert>
+	
+	<select id="getEmpList" parameterType="Pager" resultType="EmployeeVO">
+		SELECT EMPLOYEENUM,NAME,POSITION,PHONE,STATE FROM EMPLOYEE
+		ORDER BY EMPLOYEENUM  DESC
+		LIMIT #{startRow},#{lastRow}
+	</select>
+	
 	
 </mapper>

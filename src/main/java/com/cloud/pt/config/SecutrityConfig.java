@@ -74,6 +74,11 @@ public class SecutrityConfig {
 				.deleteCookies("JSESSIONID")		// logout 쿠키 삭제
 				.permitAll()
 				.and()
+				
+			// 403 예외처리
+			.exceptionHandling()
+				.accessDeniedPage("/error/denied")
+			
 				;
 		
 		return httpSecurity.build();
