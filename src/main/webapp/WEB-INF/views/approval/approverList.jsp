@@ -73,6 +73,7 @@
 								<th>결재양식</th>
 								<th>제목</th>
 								<th>문서번호</th>
+								<th>기안자</th>
 								<th>결재상태</th>
 							</tr>
 						</thead>
@@ -81,8 +82,9 @@
 								<tr>
 									<td>${vo.regDate}</td>
 									<td>${vo.category}</td>
-									<td>${vo.title}</td>
+									<td><a href="./approverDetail?approvalNum=${vo.approvalNum}">${vo.title}</a></td>
 									<td>${vo.approvalNum}</td>
+									<td>${vo.name}</td>
 									<td>${vo.state}</td>
 								</tr>
 							</c:forEach>
@@ -118,9 +120,6 @@
 						</ul>
 					</div>
 				</div>
-				<button>
-					<a href="/approval/add">새결재작성</a>
-				</button>
 				</div>
 
               </div>

@@ -1,88 +1,105 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <!DOCTYPE html>
-        <html lang="ko">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+    <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<!DOCTYPE html>
+<html lang="ko">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
-        </head>
-        <style>
-            .submenu {
-                list-style-type: none;
-                position: right;
-                display: none;
-            }
-        </style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<style>
+    /* Remove default bullets */
+ul, #myUL {
+  list-style-type: none;
+}
 
-        <body>
-            <div id="orgChart">
-                <ul id="menu">
-                    <c:forEach items="${employeeVO}" var="emp" varStatus="i">
-                        <c:if test="${emp.position!='트레이너'}">
-                            <li id="employee${i.index}" class="empList" data-name="${emp.name}" data-position="${emp.position}">${emp.name}:${emp.position}</li>
-                        </c:if>
-                    </c:forEach>
-                    <li>
-                      트레이너
-                      <ul class="submenu">
-                        <c:forEach items="${employeeVO}" var="emp" varStatus="i">
-                            <c:if test="${emp.position=='트레이너'}">
-                                <li id="trainer${i.index}" data-name="${emp.name}" data-position="${emp.position}" class="trainerList">${emp.name}</li>
-                            </c:if>
-                        
-                        </c:forEach>
-                      </ul>
-                    </li>
-                  </ul>
+/* Remove margins and padding from the parent ul */
+#myUL {
+  margin: 0;
+  padding: 0;
+}
 
-                <!-- <c:forEach items="${employeeVO}" var="emp" varStatus="i">
-                <c:if test="${emp.position!='트레이너'}">
-                    <ul id="employee${i.index}">
-                    <li class="employee" data-name="${emp.name}" data-position="${emp.position}">${emp.position}:${emp.name}</li>
-                    </ul>
-                </c:if>
-            </c:forEach> -->
-                <!-- <ul>
-                
-                    <c:forEach items="${employeeVO}" var="emp" varStatus="i">
-                        <c:if test="${emp.position=='트레이너'}">
-                            <li id="trainer${i.index}" class="trainer">${emp.name}</li>
-                        </c:if>
-                    
-                    </c:forEach>
-            </ul> -->
-            </div>
-            <div>
-                <table>
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>타입</th>
-                                <th>결재자</th>
-                                <th>직급</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                            <tr id="middleRow">
-                                <th>중간</th>
+/* Style the caret/arrow */
+.caret {
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
 
-                            </tr>
-                            <tr id="lastRow">
-                                <th>최종</th>
-                            </tr>
-                        </tbody>
-                    </table>
-                </table>
-            </div>
-            <form action="./add.jsp">
-                <input type="hidden" id="middle" name="middle">
-                <input type="hidden" id="last" name="last">
-            <button id="okBtn">확인</button>
-             </form>
-            <script src="/resources/js/approval/line.js"></script>
-        </body>
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
 
-        </html>
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
+}
+</style>
+</head>
+
+<body>
+    <h3>결재선 선택</h3>
+	<ul id="myUL">
+		<li><span class="caret">대표</span>
+			<ul class="nested">
+                <c:forEach items="${employeeVO}" var="vo">
+                    <c:if test="${vo.position=='대표'}">
+                        <li id="ceo" class="ceo" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+                    </c:if>
+                </c:forEach>
+			</ul>
+		</li>
+        <li><span class="caret">총괄매니저</span>
+			<ul class="nested">
+                <c:forEach items="${employeeVO}" var="vo">
+                    <c:if test="${vo.position=='총괄매니저'}">
+                        <li id="general" class="general" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+                    </c:if>
+                </c:forEach>
+			</ul>
+		</li>
+        <li><span class="caret">인사매니저</span>
+			<ul class="nested">
+                <c:forEach items="${employeeVO}" var="vo">
+                    <c:if test="${vo.position=='인사매니저'}">
+                        <li id="personnel"class="personnel" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+                    </c:if>
+                </c:forEach>
+			</ul>
+		</li>
+        <li><span class="caret">트레이너</span>
+			<ul class="nested">
+                <c:forEach items="${employeeVO}" var="vo" varStatus="i">
+                    <c:if test="${vo.position=='트레이너'}">
+                        <li id="trainer${i.index}" class="trainer">${vo.name}</li>
+                    </c:if>
+                </c:forEach>
+			</ul>
+		</li>
+    </ul>
+    <h3>선택한 사원</h3>
+    <div id="middle" data-name="" data-position=""></div>
+    <div id="last" data-name="" data-position=""></div>
+    <button type="button" id="okBtn">확인</button>
+	<script src="/resources/js/approval/line.js"></script>
+</body>
+
+</html>

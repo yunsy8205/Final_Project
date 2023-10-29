@@ -35,19 +35,21 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("add")
-	public void getAdd(String middle,String last) throws Exception{
+	public void getAdd() throws Exception{
 		
 	}
 	@PostMapping("add")
-	public void setAdd(ApprovalVO approvalVO) throws Exception{
-		log.info("============="+approvalVO.getMiddle());
+	public String setAdd(ApprovalVO approvalVO,Principal principal) throws Exception{
+		approvalVO.setEmployeeNum(principal.getName());
 		int result=approvalService.setAdd(approvalVO);
+		return "redirect:./list";
 	}
 	
 	@GetMapping("line")
 	public void getAnnualLine(Model model) throws Exception{
 		List<EmployeeVO> el = approvalService.getAnnualLine();
 		model.addAttribute("employeeVO", el);
+		
 	}
 	
 	@GetMapping("approverList")
@@ -61,9 +63,11 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("temporaryList")
-	public void getTemporaryList(Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
+	public void getTemporaryList(Pager pager,ApprovalVO approvalVO,Principal principal,Model model) throws Exception{
 		approvalVO.setEmployeeNum(principal.getName());
-		
+		List<ApprovalVO> al = approvalService.getTemporaryList(pager,approvalVO);
+		model.addAttribute("list", al);
+		model.addAttribute("pager",pager);
 		
 	}
 	
@@ -77,6 +81,28 @@ public class ApprovalController {
 		empVO=approvalService.getLastEmployee(approvalVO);
 		model.addAttribute("last", empVO);
 		model.addAttribute("approvalVO", approvalVO);
+	}
+	
+	@GetMapping("approverDetail")
+	public void getApproverDetail(ApprovalVO approvalVO,Model model)throws Exception{
+		
+		approvalVO=approvalService.getMyDetail(approvalVO);
+		EmployeeVO empVO = new EmployeeVO();
+		empVO=approvalService.getMiddleEmployee(approvalVO);
+		model.addAttribute("middle", empVO);
+		empVO=approvalService.getLastEmployee(approvalVO);
+		model.addAttribute("last", empVO);
+		model.addAttribute("approvalVO", approvalVO);
+	}
+	
+	@PostMapping("tempAdd")
+	public String setTempAdd(ApprovalVO approvalVO,Model model)throws Exception{
+		int result=approvalService.setTempAdd(approvalVO);
+		
+		model.addAttribute("message", "임시저장 되었습니다.");
+		model.addAttribute("url", "./temporaryList");
+		return "ajax/ajaxResult";
+		
 	}
 
 }

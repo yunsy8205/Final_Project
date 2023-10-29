@@ -5,14 +5,12 @@ function click_add(){
 	window.open(url,name,option)
 	
 }
-
-$("#leaveBtn").click(function(){
-	
+$("#tempBtn").click(function(){
+	$("#addForm").attr("action","tempAdd")
+	$("#addForm").submit();
 })
 
-$("#approvalInfoBtn").click(function(){
 
-})
 $(document).ready(function() {
   $('#summernote').summernote({
 	  placeholder: '내용을 작성하세요',

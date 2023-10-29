@@ -1,46 +1,54 @@
+
+
+
+
+var toggler = document.getElementsByClassName("caret");
+var i;
+
 $("#okBtn").click(function(){
-    $(opener.document).find("#middle").val($("#aname0").text())
-    $(opener.document).find("#last").val($("#aname1").text())
-    $(opener.document).find("#middlePosition").val($("#aposition0").text())
-    $(opener.document).find("#lastPosition").val($("#aposition1").text())
+    $(opener.document).find("#middle").val($("#middle").attr("data-name"))
+    $(opener.document).find("#last").val($("#last").attr("data-name"))
+    $(opener.document).find("#middlePosition").val($("#middle").attr("data-position"))
+    $(opener.document).find("#lastPosition").val($("#last").attr("data-position"))
     window.close();
 })
 
-
-
-$("li").click(function () {
-    if ($(this).hasClass("active")) {
-      $(this).children().css("display", "none");
-      $(this).removeClass();
-    } else {
-      $(this).addClass("active");
-      $(this).children().css("display", "block");
-    }
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
   });
+}
 
-let count=0;
-for(let i=0;i<$(".empList").length;i++){
-    $("#employee"+i).click(function(){
-        if(count==0){
-            count++;
-        $("#middleRow").append('<td id="aname'+i+'"></td><td id="aposition'+i+'"></td>')
-        $("#aname"+i).text($("#employee"+i).attr("data-name"))
-        $("#aposition"+i).text($("#employee"+i).attr("data-position"))
-        $("#middle").val($("#employee"+i).attr("data-name"))
-        }else if(count==1){
-            count++;
-            $("#lastRow").append('<td id="aname'+i+'"></td><td id="aposition'+i+'"></td>')
-            $("#aname"+i).text($("#employee"+i).attr("data-name"))
-            $("#aposition"+i).text($("#employee"+i).attr("data-position"))
-            $("#last").val($("#employee"+i).attr("data-name"))
+    
+$("#ceo").click(function(){
+     if($("#last").text()==''){
+        $("#last").text("최종결재자:"+$("#ceo").text()+"-"+$("#ceo").attr("data-position"));
+        $("#last").attr("data-name",$("#ceo").attr("data-name"))
+        $("#last").attr("data-position",$("#ceo").attr("data-position"))
+    }
+})
+
+$("#general").click(function(){
+    if($("#last").text()==''){
+        $("#last").text("최종결재자:"+$("#general").text()+"-"+$("#general").attr("data-position"));
+        $("#last").attr("data-name",$("#general").attr("data-name"))
+        $("#last").attr("data-position",$("#general").attr("data-position"))
+    }else{
+        if($("#middle").text()==''){
+            $("#middle").text("중간결재자:"+$("#general").text()+"-"+$("#general").attr("data-position"));
+            $("#middle").attr("data-name",$("#general").attr("data-name"))
+            $("#middle").attr("data-position",$("#general").attr("data-position"))
         }
-    })
-}
+    }
+})
 
+$("#personnel").click(function(){
+    if($("#middle").text()==''){
+        $("#middle").text("중간결재자:"+$("#personnel").text()+"-"+$("#personnel").attr("data-position"));
+        $("#middle").attr("data-name",$("#personnel").attr("data-name"))
+        $("#middle").attr("data-position",$("#personnel").attr("data-position"))
+    }
+})
 
-for(let i=0;i<$(".trainerList").length;i++){
-    $("#trainer"+i).click(function(){
-        console.log($("#trainer"+i).attr("data-name"))
-    })
-}
   

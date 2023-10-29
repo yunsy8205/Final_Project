@@ -3,6 +3,7 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <!-- beautify ignore:start -->
 <html
@@ -43,7 +44,8 @@
 							</div>
 							<div>
 								<button id="approvalInfoBtn" onclick="click_add()">결재정보</button>
-								<form action="add" method="post">
+								<button id="tempBtn">임시저장</button>
+								<form action="add" method="post" id="addForm">
 									<table
 										style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 										<!-- Header -->
@@ -225,6 +227,16 @@
 											<col width="200">
 										</colgroup>
 										<tbody>
+										<tr>
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													제목</td>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3">
+													<input type="text" name="title">
+												</td>
+											</tr>
 											<tr>
 												<td
 													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">

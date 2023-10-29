@@ -37,6 +37,12 @@
 		<include refid="forPager"></include>
 	</select>
 	
+	<select id="getTemporaryCount" parameterType="Map" resultType="Long">
+		SELECT COUNT(APPROVALNUM) FROM APPROVAL
+		WHERE EMPLOYEENUM= #{id.employeeNum} AND STATE='임시저장'
+		<include refid="forPager"></include>
+	</select>
+	
 	<!-- list -->
 	<select id="getApprovalList" resultType="ApprovalVO" parameterType="Map">
 		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
@@ -53,12 +59,18 @@
 	
 	<!-- 결재등록 -->
 	<insert id="setAdd" parameterType="ApprovalVO">
-		INSERT INTO APPROVAL(CATEGORY,MIDDLE,LAST,NAME,CONTENTS,LEAVEKIND,USEDATE,STARTDATE,ENDDATE)
-		VALUES(#{category},#{middle},#{last},#{name},#{contents},#{leaveKind},#{useDate},#{startDate},#{endDate})
+		INSERT INTO APPROVAL(EMPLOYEENUM,CATEGORY,MIDDLE,LAST,NAME,CONTENTS,TITLE,LEAVEKIND,USEDATE,STARTDATE,ENDDATE)
+		VALUES(#{employeeNum},#{category},#{middle},#{last},#{name},#{contents},#{title},#{leaveKind},#{useDate},#{startDate},#{endDate})
 	</insert>
+	<!-- 임시저장 -->
+	<insert id="setTempAdd" parameterType="ApprovalVO">
+		INSERT INTO APPROVAL(EMPLOYEENUM,CATEGORY,MIDDLE,LAST,NAME,CONTENTS,TITLE,STATE,LEAVEKIND,USEDATE,STARTDATE,ENDDATE)
+		VALUES(#{employeeNum},#{category},#{middle},#{last},#{name},#{contents},#{title},'임시저장',#{leaveKind},#{useDate},#{startDate},#{endDate})
+	</insert>
+	
 	<!-- 결재자결재문서 리스트 -->
 	<select id="getApproverList" resultType="ApprovalVO" parameterType="Map">
-		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
+		SELECT APPROVALNUM,REGDATE,NAME,CATEGORY,TITLE,STATE FROM APPROVAL
 		WHERE EMPLOYEENUM NOT IN (${id.employeeNum})
 		<include refid="category"></include>
 		<include refid="forPager"></include>
@@ -69,8 +81,7 @@
 		SELECT REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
 		WHERE EMPLOYEENUM=${id.employeeNum} AND STATE='임시저장'
 		<include refid="forPager"></include>
-		ORDER BY APPROVAL
-		NUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
+		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
 	
 	<!-- 내 문서 디테일 -->

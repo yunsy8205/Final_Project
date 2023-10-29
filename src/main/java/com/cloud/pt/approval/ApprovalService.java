@@ -59,4 +59,18 @@ public class ApprovalService {
 		return approvalDAO.getLastEmployee(approvalVO);
 	}
 	
+	public List<ApprovalVO> getTemporaryList(Pager pager,ApprovalVO approvalVO)throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", approvalVO);
+		map.put("pager", pager);
+		Long total = approvalDAO.getTemporaryCount(map);
+		pager.makePageNum(total);
+		map.put("pager", pager);
+		return approvalDAO.getTemporaryList(map);
+	}
+	
+	public int setTempAdd(ApprovalVO approvalVO)throws Exception{
+		return approvalDAO.setTempAdd(approvalVO);
+	}
+	
 }

@@ -15,6 +15,8 @@ public interface ApprovalDAO {
 	
 	public Long getAllCount(Map<String,Object> map) throws Exception;
 	
+	public Long getTemporaryCount(Map<String,Object> map) throws Exception;
+	
 	public List<ApprovalVO> getApprovalList(Map<String, Object> map) throws Exception;
 	
 	public List<EmployeeVO> getAnnualLine() throws Exception;
@@ -28,5 +30,10 @@ public interface ApprovalDAO {
 	public EmployeeVO getMiddleEmployee(ApprovalVO approvalVO) throws Exception;
 	
 	public EmployeeVO getLastEmployee(ApprovalVO approvalVO) throws Exception;
+	
+	public int setTempAdd(ApprovalVO approvalVO)throws Exception;
+	
+	public List<ApprovalVO> getTemporaryList(Map<String, Object> map) throws Exception;
+	
 	
 }
