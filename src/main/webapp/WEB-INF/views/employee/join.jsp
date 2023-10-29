@@ -66,7 +66,7 @@
                     <div class="proRight">
                       <div class="prodiv">
                         <form:label path="joinDate">입사일</form:label>
-                        <form:input path="joinDate" id="joinDate" cssClass="input_con" value="0518"></form:input>
+                        <form:input path="joinDate" id="joinDate" cssClass="input_con" value="" aria-readonly="true"></form:input>
                       </div>
                       <div class="prodiv">
                         <label for="gender">성별</label>
