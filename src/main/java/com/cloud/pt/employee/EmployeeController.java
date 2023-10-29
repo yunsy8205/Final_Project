@@ -62,6 +62,8 @@ public class EmployeeController {
 		employeeVO.setPassword("0000");
 		int result = employeeService.setJoin(employeeVO);
 		
-		return "redirect:../";
+		log.info("====>>>>>>>>>>>>>>>>>>> authorities :{} ", employeeVO.getAuthorities());
+		
+		return "redirect:/home";
 	}
 }

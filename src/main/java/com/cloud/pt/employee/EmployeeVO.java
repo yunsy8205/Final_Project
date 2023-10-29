@@ -1,6 +1,7 @@
 package com.cloud.pt.employee;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.cloud.pt.attendance.AttendanceVO;
@@ -64,7 +66,9 @@ public class EmployeeVO implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// 사용자 권한을 Security에서 사용할 수 있도록 변환
-		return null;
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(this.getPosition()));
+		return authorities;
 	}
 	@Override
 	public String getUsername() {

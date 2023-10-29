@@ -79,13 +79,13 @@
                       </div>
                       <div class="prodiv">
                         <select name="position" id="position">직급
-                          <option value="CEO">대표</option>
-                          <option value="GENERAL">총괄 매니저</option>
-                          <option value="CUSTOMER">고객관리 매니저</option>
-                          <option value="RESOURCES">인사 매니저</option>
-                          <option value="FACILITY">시설 매니저</option>
-                          <option value="TRAINER">트레이너</option>
-                          <option value="EX">가발령</option>
+                          <option value="ROLE_CEO">대표</option>
+                          <option value="ROLE_GENERAL">총괄 매니저</option>
+                          <option value="ROLE_CUSTOMER">고객관리 매니저</option>
+                          <option value="ROLE_RESOURCES">인사 매니저</option>
+                          <option value="ROLE_FACILITY">시설 매니저</option>
+                          <option value="ROLE_TRAINER">트레이너</option>
+                          <option value="ROLE_EX">가발령</option>
                         </select>
                       </div>
                     </div>
