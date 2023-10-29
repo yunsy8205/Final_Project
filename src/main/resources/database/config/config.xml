@@ -11,5 +11,9 @@
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
 		<typeAlias type="com.cloud.pt.myPtMember.MemberVO" alias="MemberVO"/>
+	
+		<!-- 소영 -->
+		<typeAlias type="com.cloud.pt.chat.RoomVO" alias="RoomVO"/>
+		
 	</typeAliases>
 </configuration>

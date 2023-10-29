@@ -10,8 +10,10 @@ import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cloud.pt.employee.EmployeeVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Getter;
@@ -21,6 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Getter
 public class ChatService {
+	
+	@Autowired
+	private ChatDAO chatDAO;
 	
 	private final ObjectMapper objectMapper = new ObjectMapper();
     private Map<String, RoomVO> chatRooms = new HashMap<>();
@@ -42,7 +47,7 @@ public class ChatService {
     	List<RoomVO> a = new ArrayList<>(chatRooms.values());
     	for(RoomVO c:a) {
     		
-    		log.info(c.getRoomId());
+//    		log.info(c.getRoomId());
     		
     	}
     	return chatRooms.get(roomId);
@@ -51,12 +56,20 @@ public class ChatService {
     public RoomVO createRoom(String name) {
         String randomId = UUID.randomUUID().toString();
         RoomVO roomVO = new RoomVO();
-        roomVO.setRoomId(randomId);
-        roomVO.setName(name);
+//        roomVO.setRoomId(randomId);
+//        roomVO.setName(name);
         
         chatRooms.put(randomId, roomVO);
-        log.info("============="+(chatRooms.get(randomId)).getRoomId());
+        log.info("============="+(chatRooms.get(randomId)).getRoomNum());
         return roomVO;
     }
+    
+    public List<EmployeeVO> getChatList(String employeeNum)throws Exception{
+    	return chatDAO.getChatList(employeeNum);
+    }
+    
+    public RoomVO roomCheck(RoomVO roomVO)throws Exception{
+    	return chatDAO.roomCheck(roomVO);
+    };
 
 }

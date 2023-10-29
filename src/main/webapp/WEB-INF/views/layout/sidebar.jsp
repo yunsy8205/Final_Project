@@ -207,7 +207,7 @@
             </li>
             
             <li class="menu-item">
-              <a href="icons-boxicons.html" class="menu-link">
+              <a href="/chat/room" class="menu-link">
                 <i class="menu-icon fa-solid fa-comments"></i>
                 <div data-i18n="Boxicons">채팅</div>
               </a>

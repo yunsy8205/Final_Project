@@ -13,9 +13,8 @@ import lombok.Setter;
 @Getter
 public class RoomVO {
 
-	private String roomId;
-    private String name;
-    private String user1;
-    private String user2;
+	private Long roomNum;
+    private Long user1;
+    private Long user2;
     
 }
