@@ -1,6 +1,9 @@
 package com.cloud.pt.approval;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
+import com.cloud.pt.employee.EmployeeVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,5 +28,7 @@ public class ApprovalVO {
 	private Date endDate;
 	private String leaveKind;
 	private Double useDate;
+	private String halfKind;
+	private EmployeeVO employeeVO;
 	
 }

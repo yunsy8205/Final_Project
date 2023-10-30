@@ -1,6 +1,8 @@
 package com.cloud.pt.approval;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,8 +41,7 @@ public class ApprovalController {
 		
 	}
 	@PostMapping("add")
-	public String setAdd(ApprovalVO approvalVO,Principal principal) throws Exception{
-		approvalVO.setEmployeeNum(principal.getName());
+	public String setAdd(ApprovalVO approvalVO) throws Exception{
 		int result=approvalService.setAdd(approvalVO);
 		return "redirect:./list";
 	}
@@ -102,6 +103,20 @@ public class ApprovalController {
 		model.addAttribute("message", "임시저장 되었습니다.");
 		model.addAttribute("url", "./temporaryList");
 		return "ajax/ajaxResult";
+		
+	}
+	@GetMapping("tempDetail")
+	public void getTempDetail(ApprovalVO approvalVO,Model model)throws Exception{
+		approvalVO=approvalService.getMyDetail(approvalVO);
+		EmployeeVO empVO = new EmployeeVO();
+		empVO=approvalService.getMiddleEmployee(approvalVO);
+		model.addAttribute("middle", empVO);
+		empVO=approvalService.getLastEmployee(approvalVO);
+		model.addAttribute("last", empVO);
+		model.addAttribute("approvalVO", approvalVO);
+	}
+	@PostMapping("tempUpdate")
+	public void setTempUpdate(ApprovalVO approvalVO) throws Exception {
 		
 	}
 

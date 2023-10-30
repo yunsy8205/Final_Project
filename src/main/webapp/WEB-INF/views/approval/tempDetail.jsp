@@ -37,16 +37,9 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 
 							<div>
-								<button id=leaveBtn>휴가신청</button>
-								<button>휴직신청서</button>
-								<button>지출신청서</button>
-							</div>
-							<div>
 								<button id="approvalInfoBtn" onclick="click_add()">결재정보</button>
 								<button id="tempBtn">임시저장</button>
-								
- 
-								<form action="add" method="post" id="addForm">
+								<form action="tempUpdate" method="post" id="updateForm">
 									<sec:authorize access="isAuthenticated()">
 										<sec:authentication property="principal.username" var="username" />
 											<input type="hidden" name="employeeNum" value="${username}">
@@ -135,10 +128,11 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																직급</td>
-															<td id="middlePosition"
+															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																
+																<input type="text" id="middlePosition" value="${middle.position}"
+																	readonly>
 															</td>
 														</tr>
 														<tr>
@@ -146,11 +140,12 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재자</td>
-															<td id="middleName"
+															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-															
-																
+																<input type="text" id="middle" name="middle" value="${approvalVO.middle}"
+																	readonly>
+
 															</td>
 														</tr>
 														<tr>
@@ -182,10 +177,11 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																직급</td>
-															<td id="lastPosition"
+															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																
+																<input type="text" id="lastPosition" value="${last.position}"
+																	readonly>
 															</td>
 														</tr>
 														<tr>
@@ -193,15 +189,16 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재자</td>
-															<td id="lastName"
+															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																
-															
+																<input type="text" id="last" name="last" value="${approvalVO.last}"
+																	readonly>
+
 															</td>
 														</tr>
 														<tr>
-															<td 
+															<td
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재일</td>
@@ -229,14 +226,14 @@
 											<col width="200">
 										</colgroup>
 										<tbody>
-										<tr>
+											<tr>
 												<td
 													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
 
 													제목</td>
 												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
 													colspan="3">
-													<input type="text" name="title">
+													<input type="text" name="title" value="${approvalVO.title}">
 												</td>
 											</tr>
 											<tr>
@@ -246,12 +243,12 @@
 													휴가종류</td>
 												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
 													colspan="3">
-													<select name="leaveKind" id="leaveSelect">
+													<select name="leaveKind" id="leaveSelect" value="${approvalVO.leaveKind}">
 														<option value="">=== 휴가 종류 선택 ===</option>
-														<option value="연차" name="leaveKind">연차</option>
-														<option value="반차" name="leaveKind">반차</option>
-														<option value="병가" name="leaveKind">병가</option>
-														<option value="기타" name="leaveKind">기타</option>
+														<option value="연차" name="leaveKind" <c:if test="${approvalVO.leaveKind=='연차'}">selected</c:if>>연차</option>
+														<option value="반차" name="leaveKind" <c:if test="${approvalVO.leaveKind=='반차'}">selected</c:if>>반차</option>
+														<option value="병가" name="leaveKind" <c:if test="${approvalVO.leaveKind=='병가'}">selected</c:if>>병가</option>
+														<option value="기타" name="leaveKind" <c:if test="${approvalVO.leaveKind=='기타'}">selected</c:if>>기타</option>
 													</select>
 												</td>
 											</tr>
@@ -262,12 +259,49 @@
 													휴가일자</td>
 												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
 													colspan="3">
-													<input type="date" id="startDate" name="startDate">
-													~ <input type="date" id="endDate" name="endDate">
+													<input type="date" id="startDate" name="startDate" value="${approvalVO.startDate}">
+													~ <input type="date" id="endDate" name="endDate" value="${approvalVO.endDate}">
 												</td>
 
 											</tr>
+											<c:if test="${approvalVO.leaveKind=='연차'}">
+											<tr id="annualRow">
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
 
+													연차일수</td>
+												<td
+													style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3">
+													<input type="text" id="useDate" name="useDate" value="${approvalVO.useDate }" readonly>
+													</td>
+
+											</tr>
+										</c:if>
+										<c:if test="${approvalVO.leaveKind=='반차'}">
+											<tr id="annualRow">
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													연차일수</td>
+												<td
+													style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3"><input type="text" id="useDate" name="useDate" value="${approvalVO.useDate }" readonly></td>
+
+											</tr>
+											<tr id="offKind">
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													반차종류</td>
+												<td
+													style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3">
+													<input type="radio" id="off"name="halfKind" value="오전" <c:if test="${approvalVO.halfKind=='오전'}">checked</c:if>>오전<input type="radio" id="off"name="halfKind" value="오후" <c:if test="${approvalVO.halfKind=='오후'}">checked</c:if>>오후
+												</td>
+
+											</tr>
+										</c:if>
 											<tr id="leaveReasonRow">
 												<td
 													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
@@ -275,7 +309,7 @@
 													휴가사유</td>
 												<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
 													colspan="3" class="dext_table_border_t">
-													<textarea id="summernote" name="contents"></textarea>
+													<textarea id="summernote" name="contents" value="${approvalVO.contents}"></textarea>
 
 												</td>
 
@@ -288,8 +322,6 @@
 											</tr>
 										</tbody>
 									</table>
-									<input type="hidden" id="middle" name="middle">
-									<input type="hidden" id="last" name="last">
 									<input type="hidden" name="category" value="휴가신청서">
 									<input type="submit" id="testBtn">
 								</form>
@@ -346,7 +378,8 @@
     </div>
     <!-- / Layout wrapper -->
   
-	<script src="/resources/js/approval/add.js"></script>
+  
+	<script src="/resources/js/approval/tempDetail.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>

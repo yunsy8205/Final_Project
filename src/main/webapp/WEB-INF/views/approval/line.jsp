@@ -56,13 +56,14 @@ ul, #myUL {
 </head>
 
 <body>
+  
     <h3>결재선 선택</h3>
 	<ul id="myUL">
 		<li><span class="caret">대표</span>
 			<ul class="nested">
                 <c:forEach items="${employeeVO}" var="vo">
                     <c:if test="${vo.position=='대표'}">
-                        <li id="ceo" class="ceo" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+                        <li id="ceo" class="ceo" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
                     </c:if>
                 </c:forEach>
 			</ul>
@@ -71,7 +72,7 @@ ul, #myUL {
 			<ul class="nested">
                 <c:forEach items="${employeeVO}" var="vo">
                     <c:if test="${vo.position=='총괄매니저'}">
-                        <li id="general" class="general" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+                        <li id="general" class="general" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
                     </c:if>
                 </c:forEach>
 			</ul>
@@ -80,7 +81,7 @@ ul, #myUL {
 			<ul class="nested">
                 <c:forEach items="${employeeVO}" var="vo">
                     <c:if test="${vo.position=='인사매니저'}">
-                        <li id="personnel"class="personnel" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+                        <li id="personnel"class="personnel" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
                     </c:if>
                 </c:forEach>
 			</ul>
@@ -96,9 +97,10 @@ ul, #myUL {
 		</li>
     </ul>
     <h3>선택한 사원</h3>
-    <div id="middle" data-name="" data-position=""></div>
-    <div id="last" data-name="" data-position=""></div>
+    <div id="middle" data-empnum=""  data-name="" data-position=""></div>
+    <div id="last" data-empnum="" data-name="" data-position=""></div>
     <button type="button" id="okBtn">확인</button>
+    <button type="button" id="dddd"></button>
 	<script src="/resources/js/approval/line.js"></script>
 </body>
 

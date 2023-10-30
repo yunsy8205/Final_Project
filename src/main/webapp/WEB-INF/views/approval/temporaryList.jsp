@@ -79,8 +79,8 @@
 						<tbody>
 							<c:forEach items="${list}" var="vo">
 								<tr>
-									<td>${vo.regDate}</td>
-									<td>${vo.category}</td>
+									<td>${vo.regDate}</td>	
+									<td><a href="./tempDetail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
 									<td>${vo.title}</td>
 									<td>${vo.approvalNum}</td>
 									<td>${vo.state}</td>

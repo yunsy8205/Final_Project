@@ -25,7 +25,7 @@
 	<!-- 개인count  -->
 	<select id="getMyCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
-		WHERE EMPLOYEENUM=${id.employeeNum}
+		WHERE EMPLOYEENUM=${id.employeeNum} AND STATE NOT IN ('임시저장')
 		<include refid="state"></include>
 		<include refid="forPager"></include>
 	</select>
@@ -46,7 +46,7 @@
 	<!-- list -->
 	<select id="getApprovalList" resultType="ApprovalVO" parameterType="Map">
 		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
-		WHERE EMPLOYEENUM=${id.employeeNum}
+		WHERE EMPLOYEENUM=${id.employeeNum} AND STATE NOT IN ('임시저장')
 		<include refid="state"></include>
 		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
@@ -54,18 +54,18 @@
 	
 	<!-- 3.직원목록 -->
 	<select id="getAnnualLine" resultType="EmployeeVO">
-		SELECT NAME,POSITION FROM EMPLOYEE ORDER BY EMPLOYEENUM
+		SELECT EMPLOYEENUM,NAME,POSITION FROM EMPLOYEE ORDER BY EMPLOYEENUM
 	</select>
 	
 	<!-- 결재등록 -->
 	<insert id="setAdd" parameterType="ApprovalVO">
-		INSERT INTO APPROVAL(EMPLOYEENUM,CATEGORY,MIDDLE,LAST,NAME,CONTENTS,TITLE,LEAVEKIND,USEDATE,STARTDATE,ENDDATE)
-		VALUES(#{employeeNum},#{category},#{middle},#{last},#{name},#{contents},#{title},#{leaveKind},#{useDate},#{startDate},#{endDate})
+		INSERT INTO APPROVAL(EMPLOYEENUM,CATEGORY,MIDDLE,LAST,NAME,CONTENTS,TITLE,STATE,LEAVEKIND,USEDATE,STARTDATE,ENDDATE,HALFKIND)
+		VALUES(#{employeeNum},#{category},#{middle},#{last},#{name},#{contents},#{title},'대기중',#{leaveKind},#{useDate},#{startDate},#{endDate},#{halfKind})
 	</insert>
 	<!-- 임시저장 -->
 	<insert id="setTempAdd" parameterType="ApprovalVO">
-		INSERT INTO APPROVAL(EMPLOYEENUM,CATEGORY,MIDDLE,LAST,NAME,CONTENTS,TITLE,STATE,LEAVEKIND,USEDATE,STARTDATE,ENDDATE)
-		VALUES(#{employeeNum},#{category},#{middle},#{last},#{name},#{contents},#{title},'임시저장',#{leaveKind},#{useDate},#{startDate},#{endDate})
+		INSERT INTO APPROVAL(EMPLOYEENUM,CATEGORY,MIDDLE,LAST,NAME,CONTENTS,TITLE,STATE,LEAVEKIND,USEDATE,STARTDATE,ENDDATE,HALFKIND)
+		VALUES(#{employeeNum},#{category},#{middle},#{last},#{name},#{contents},#{title},'임시저장',#{leaveKind},#{useDate},#{startDate},#{endDate},#{halfKind})
 	</insert>
 	
 	<!-- 결재자결재문서 리스트 -->
@@ -78,7 +78,7 @@
 	</select>
 	<!-- 내 임시저장 리스트 -->
 	<select id="getTemporaryList" resultType="ApprovalVO" parameterType="Map">
-		SELECT REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
+		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
 		WHERE EMPLOYEENUM=${id.employeeNum} AND STATE='임시저장'
 		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
@@ -88,6 +88,11 @@
 	<select id="getMyDetail" resultType="ApprovalVO" parameterType="ApprovalVO">
 		SELECT * FROM APPROVAL WHERE APPROVALNUM=#{approvalNum}
 	</select>
+	<resultMap type="ApprovalVO" id="getEmpResult">
+		<id column="APPROVALNUM" property="approvalNum"/>
+		<result column=""
+	</resultMap>
+	
 	
 	<!-- 중간결재자정보 -->
 	<select id="getMiddleEmployee" resultType="EmployeeVO" parameterType="ApprovalVO">
@@ -98,5 +103,10 @@
 	<select id="getLastEmployee" resultType="EmployeeVO" parameterType="ApprovalVO">
 		SELECT POSITION FROM EMPLOYEE WHERE NAME=#{last}
 	</select>
+	
+	<!-- 임시저장문서 결재 -->
+	<update id="setTempUpdate" parameterType="ApprovalVO">
+		
+	</update>
 	
 </mapper>
