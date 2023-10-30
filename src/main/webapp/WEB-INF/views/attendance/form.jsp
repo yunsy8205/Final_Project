@@ -58,7 +58,7 @@
                       <label for="writer" class="form-label">작성자</label>
                       <sec:authentication property="Principal" var="user"/>
                         <input type="text" id="writer" value="${user.name}" class="form-control" readonly>
-                        <input type="hidden" name="employeeNum" value="${user.employeeNum}">
+                        <input type="hidden" id="num" name="employeeNum" value="${user.employeeNum}">
                     </div>
                     <div class="col-md-6">
                       <input type="radio" id="on" name="type" value="출근" class="form-check-input">
@@ -72,7 +72,8 @@
                     <label for="content" class="form-label">요청사유</label>
                     <textarea name="requestContents" id="content" cols="30" rows="5" class="form-control"></textarea>
                   </div>
-                  <button type="button" id="btn" class="btn btn-primary">제출</button>
+                  <button type="button" id="before_btn" class="btn btn-primary">이전</button>
+                  <button type="button" id="submit_btn" class="btn btn-primary">제출</button>
                 </form>
 
               </div>
@@ -94,7 +95,12 @@
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 
     <script>
-      $('#btn').on('click', function(){
+      //이전버튼
+      $('#before_btn').on('click', function(){
+        $(location).attr('href', '/attendanceModify/list?employeeNum='+$('#num').val());
+      })
+      //제출버튼
+      $('#submit_btn').on('click', function(){
         $('#frm').submit();
       })
     </script>

@@ -74,7 +74,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="index.html" class="menu-link">
+              <a href="/home" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">홈</div>
               </a>
@@ -179,7 +179,7 @@
               <ul class="menu-sub">
                 <li class="menu-item">
                   <sec:authentication property="Principal" var="user"/>
-                    <a href="#" class="menu-link">
+                    <a href="/attendance/info?employeeNum=${user.employeeNum}" class="menu-link">
                       <div data-i18n="Accordion">내 근태 조회</div>
                     </a>
                 </li>
@@ -189,9 +189,10 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="ui-badges.html" class="menu-link">
-                    <div data-i18n="Badges">근태 수정 요청 목록</div>
-                  </a>
+                  <sec:authentication property="Principal" var="user"/>
+                    <a href="/attendanceModify/list?employeeNum=${user.employeeNum}" class="menu-link">
+                      <div data-i18n="Badges">근태 수정 요청 목록</div>
+                    </a>
                 </li>
                 </ul>
                 
