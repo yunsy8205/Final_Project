@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
   <title>Insert title here</title>
   <style>
-    #mainContents > h1 {
+    h1 {
       margin-top: 2.5em;
       text-align: center;
     }
@@ -15,48 +15,82 @@
       text-align: right;
       margin: 30px;
     }
-    #req_list {
-      background-color: rgb(176, 191, 253);
-    }
+   
   </style>
 
-  <c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
-  <c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
-  <link rel="stylesheet" href="/css/main.css" />
-
+  <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 </head>
 <body>
-<div id="wrap">
-      <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
-      <div id="right">
-        <header>
-          <div class="header_wrap">
-            <div class="header_message">
-              <p>이재혁 님 환영합니다</p>
-            </div>
-            <div class="header_navi">
-              <a href="#">조직도</a>
-              <a href="#">로그인</a>
-              <a href="#">로그아웃</a>
-              <a href="#">마이페이지</a>
-            </div>
-          </div>
-        </header>
-        <!-- main내용  -->
-        <section id="mainContents"> 
-        	<h1>근태 수정 요청 목록</h1>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+		      <!-- sidebar -->
+          <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
+          <!-- Layout container -->
+          <div class="layout-page">
+            <!-- Navbar -->
+            <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
-          <div id="req_btn">
-            <button>근태 수정 요청</button>
-          </div>
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+              <!-- Content 내용 여기로 -->
+              <div class="container-xxl flex-grow-1 container-p-y">
+                <h1>근태 수정 요청 목록</h1>
 
-          <div id="req_list">
-            목록 들어갈 자리
+                <div id="req_btn">
+                  <button id="btn" class="btn btn-primary">근태 수정 요청</button>
+                </div>
+				<div class="card">
+                <div id="req_list" class="table-responsive text-nowrap">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>번호</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>근태수정요청일</th>
+                        <th>상태</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach items="${list}" var="vo" varStatus="i">
+                        <tr>
+                          <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">${i.index+1}</a></td>
+                          <td>${vo.employeeVO.name}</td>
+                          <td>${vo.attendanceModifyVO.regDate}</td>
+                          <td>${vo.attendanceModifyVO.modifyDate}</td>
+                          <td>${vo.attendanceModifyVO.state}</td>
+                        </tr>
+                      </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+                         
+
+              <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
           </div>
-        </section>
-        
-      </div>
+        <!-- / Layout page -->
+      <div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+    <!-- / Layout wrapper -->
+  
+  <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+  
+  <script>
+    const btn = document.getElementById('btn');
+    
+    btn.addEventListener('click', function(){
+      location.href = '/attendanceModify/add';
+    })
+  </script>
+
 </body>
-<c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
 </html>

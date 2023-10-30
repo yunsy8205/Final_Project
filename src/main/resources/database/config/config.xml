@@ -10,6 +10,8 @@
 		
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
+		<typeAlias type="com.cloud.pt.attendance.AttendanceModifyVO" alias="AttendanceModifyVO"/>
+		
 		
 		
 		
