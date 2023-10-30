@@ -5,7 +5,7 @@
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="/" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -74,7 +74,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="index.html" class="menu-link">
+              <a href="/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">홈</div>
               </a>
@@ -152,18 +152,18 @@
             
             <!-- Cards -->
             <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon fa-solid fa-list-check"></i>
                 <div data-i18n="Misc">수업 관리</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="pages-misc-error.html" class="menu-link">
+                  <a href="/ptClass/ptReservation" class="menu-link">
                     <div data-i18n="Error">수업 조회</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="pages-misc-under-maintenance.html" class="menu-link">
+                  <a href="/ptClass/myPtList" class="menu-link">
                     <div data-i18n="Under Maintenance">회원 조회</div>
                   </a>
                 </li>
