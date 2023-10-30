@@ -30,8 +30,8 @@ public class ChatController {
 	private ChatService chatService;
 	
 	@GetMapping("chat")
-    public String chatRoom(Model model, @RequestParam String roomId){
-        RoomVO room = chatService.findRoomById(roomId);
+    public String chatRoom(Model model, @RequestParam Long roomNum){
+        RoomVO room = chatService.findRoomById(roomNum);
         model.addAttribute("room",room);   //현재 방에 들어오기위해서 필요한데...... 접속자 수 등등은 실시간으로 보여줘야 돼서 여기서는 못함
         return "chat/chat";
     }
@@ -51,35 +51,41 @@ public class ChatController {
 	}
 	
 	@PostMapping("createRoom")  //방을 만들었으면 해당 방으로 가야지.
-    public String createRoom(Model model, @RequestParam String name, String username) {
+    public String createRoom(Model model, RoomVO roomVO) throws Exception{
 		log.info("@ChatConroller, createRoom()");
-		//방생성
-		RoomVO room = chatService.createRoom(name);
-		log.info(username);
-		log.info("createRoom()끝");
-        model.addAttribute("room",room);
-        model.addAttribute("username",username);
-        return "chat/chat";  //만든사람이 채팅방 1빠로 들어가게 됩니다
+		
+		SecurityContext context = SecurityContextHolder.getContext();
+		org.springframework.security.core.Authentication b = context.getAuthentication();
+		roomVO.setUser1(Long.valueOf(b.getName()));
+		log.info("user1 : {}", roomVO.getUser1());
+		log.info("user2 : {}", roomVO.getUser2());
+		
+		//방 db 저장하기 위해 서비스로
+		int result = chatService.createRoom(roomVO);
+		
+        model.addAttribute("result",result);
+        
+        return "commons/ajaxResult";  //만든사람이 채팅방 1빠로 들어가게 됩니다
     }
 	
 	@GetMapping("roomCheck")
 	public String roomCheck(Model model, RoomVO roomVO)throws Exception{
 		//자신의 아이디도 넣어줌
-		//RoomVO roomVO = new RoomVO();
+		
 		SecurityContext context = SecurityContextHolder.getContext();
 		org.springframework.security.core.Authentication b = context.getAuthentication();
 		roomVO.setUser1(Long.valueOf(b.getName()));
-		//roomVO.setUser2(Long.valueOf(user2));
+		
 		roomVO=chatService.roomCheck(roomVO);
 		
-		//방이 있을때 없을때(1,0 으로 결과)
-		if(roomVO.getRoomNum()!= null) {
-			
-			model.addAttribute("result",1);
+		//방이 있을때 없을때
+		if(roomVO==null) {//getRoomNum이 아닌 roomVO 자체가 null이 나오므로 roomVO로 넣어줌
+			model.addAttribute("result",0);		
 		}else {
-			model.addAttribute("result",0);
+			model.addAttribute("result",roomVO.getRoomNum());
 		}
 		
 		return "commons/ajaxResult";
+		
 	}
 }

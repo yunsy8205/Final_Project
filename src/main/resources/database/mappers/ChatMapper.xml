@@ -16,4 +16,18 @@
 		   OR USER1=#{user2} AND USER2=#{user1}
 	</select>
 	
+	<insert id="createRoom" parameterType="RoomVO">
+		INSERT INTO ROOM (ROOMNUM, USER1, USER2)
+		VALUES (NULL, #{user1}, #{user2})
+	</insert>
+	
+	<insert id="messageAdd" parameterType="ChatMessageVO">
+		INSERT INTO CHAT (CHATNUM, ROOMNUM, CHATUSER, MESSAGE, CHATDATE)
+		VALUES (NULL, #{roomNum}, #{chatUser}, #{message}, NOW())
+	</insert>
+	
+	<select id="chatMessageList" parameterType="RoomVO" resultType="ChatMessageVO">
+		SELECT * FROM CHAT
+		WHERE ROOMNUM = #{roomNum}
+	</select>
 </mapper>

@@ -12,5 +12,11 @@ public interface ChatDAO {
 	public List<EmployeeVO> getChatList(String employeeNum)throws Exception;
 	
 	public RoomVO roomCheck(RoomVO roomVO)throws Exception;
+	
+	public int createRoom(RoomVO roomVO)throws Exception;
+	
+	public int messageAdd(ChatMessageVO chatMessageVO)throws Exception;
+	
+	public List<ChatMessageVO> chatMessageList(RoomVO roomVO)throws Exception;
 
 }

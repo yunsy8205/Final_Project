@@ -1,5 +1,7 @@
 package com.cloud.pt.chat;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +13,10 @@ public class ChatMessageVO {
         ENTER, TALK, QUIT
     }
     private MessageType type; // 메시지 타입
-    private String roomId; // 방번호
-    private String sender; // 메시지 보낸사람
+    private Long roomNum; // 방번호
+    private String chatUser; // 메시지 보낸사람
+    private String receiver; // 메시지 받는사람
     private String message; // 메시지
+    private Date chatDate; //보낸 날짜시간
 
 }

@@ -28,7 +28,7 @@ public class ChatService {
 	private ChatDAO chatDAO;
 	
 	private final ObjectMapper objectMapper = new ObjectMapper();
-    private Map<String, RoomVO> chatRooms = new HashMap<>();
+    private Map<Long, RoomVO> chatRooms = new HashMap<>();//방저장
     private Map<String, Set<String>> memers = new HashMap<>();
 
 //    @PostConstruct
@@ -42,26 +42,15 @@ public class ChatService {
     	
     }
 
-    public RoomVO findRoomById(String roomId) {
+    public RoomVO findRoomById(Long roomNum) {
         
-    	List<RoomVO> a = new ArrayList<>(chatRooms.values());
-    	for(RoomVO c:a) {
-    		
-//    		log.info(c.getRoomId());
-    		
-    	}
-    	return chatRooms.get(roomId);
+    	return chatRooms.get(roomNum);
     }
-
-    public RoomVO createRoom(String name) {
-        String randomId = UUID.randomUUID().toString();
-        RoomVO roomVO = new RoomVO();
-//        roomVO.setRoomId(randomId);
-//        roomVO.setName(name);
-        
-        chatRooms.put(randomId, roomVO);
-        log.info("============="+(chatRooms.get(randomId)).getRoomNum());
-        return roomVO;
+    
+    // 방생성
+    public int createRoom(RoomVO roomVO) throws Exception{
+ 
+        return chatDAO.createRoom(roomVO);
     }
     
     public List<EmployeeVO> getChatList(String employeeNum)throws Exception{
@@ -69,7 +58,20 @@ public class ChatService {
     }
     
     public RoomVO roomCheck(RoomVO roomVO)throws Exception{
-    	return chatDAO.roomCheck(roomVO);
+    	roomVO = chatDAO.roomCheck(roomVO);
+    	if(roomVO!=null) {
+    		
+    		chatRooms.put(roomVO.getRoomNum(), roomVO);
+    	}
+    	return roomVO;
     };
+    
+    public int messageAdd(ChatMessageVO chatMessageVO)throws Exception{
+    	return chatDAO.messageAdd(chatMessageVO);
+    }
+    
+    public List<ChatMessageVO> chatMessageList(RoomVO roomVO)throws Exception{
+    	return chatDAO.chatMessageList(roomVO);
+    }
 
 }

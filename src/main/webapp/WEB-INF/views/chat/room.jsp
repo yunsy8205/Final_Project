@@ -76,6 +76,11 @@
 		    padding-top: 0;
 		    height: 550px;
 		}
+		#msgArea{
+			width: 100%;
+		    height: 90%;
+		    border: 1px solid;
+		}
     </style>
   </head>
 
@@ -107,7 +112,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                       <h5 class="mb-0">LIST</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" data-sender="${VO}">
                     	<c:forEach items="${list}" var="li">
                         	<a href="#" class="chatList" data-empNum="${li.employeeNum}">${li.name} ${li.position}</a><br>                   		
                     	</c:forEach>
@@ -117,92 +122,13 @@
                 <div class="col-xl">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">Basic with Icons</h5>
-                      <small class="text-muted float-end">Merged input group</small>
+                      <h5 class="mb-0">Chatting</h5>
+                      
                     </div>
                     <div class="card-body">
-                      <form>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-fullname2" class="input-group-text"
-                              ><i class="bx bx-user"></i
-                            ></span>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="basic-icon-default-fullname"
-                              placeholder="John Doe"
-                              aria-label="John Doe"
-                              aria-describedby="basic-icon-default-fullname2"
-                            />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-company">Company</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"
-                              ><i class="bx bx-buildings"></i
-                            ></span>
-                            <input
-                              type="text"
-                              id="basic-icon-default-company"
-                              class="form-control"
-                              placeholder="ACME Inc."
-                              aria-label="ACME Inc."
-                              aria-describedby="basic-icon-default-company2"
-                            />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-email">Email</label>
-                          <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                            <input
-                              type="text"
-                              id="basic-icon-default-email"
-                              class="form-control"
-                              placeholder="john.doe"
-                              aria-label="john.doe"
-                              aria-describedby="basic-icon-default-email2"
-                            />
-                            <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
-                          </div>
-                          <div class="form-text">You can use letters, numbers & periods</div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">Phone No</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-phone2" class="input-group-text"
-                              ><i class="bx bx-phone"></i
-                            ></span>
-                            <input
-                              type="text"
-                              id="basic-icon-default-phone"
-                              class="form-control phone-mask"
-                              placeholder="658 799 8941"
-                              aria-label="658 799 8941"
-                              aria-describedby="basic-icon-default-phone2"
-                            />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-message">Message</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-message2" class="input-group-text"
-                              ><i class="bx bx-comment"></i
-                            ></span>
-                            <textarea
-                              id="basic-icon-default-message"
-                              class="form-control"
-                              placeholder="Hi, Do you have a moment to talk Joe?"
-                              aria-label="Hi, Do you have a moment to talk Joe?"
-                              aria-describedby="basic-icon-default-message2"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                      </form>
+                    	<div id="msgArea"></div>  
+                    	<input id="msg" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                      	<button id="button-send" data-room="" data-receiver="" class="btn btn-outline-primary" type="button">보내기</button>
                     </div>
                   </div>
                 </div>
@@ -285,63 +211,105 @@
 	
 	const socket = new WebSocket("ws://localhost:82/ws/chat");
 	
+	$('#button-send').click(function(){
+		let roomNum = $('#button-send').attr("data-room");
+		let num = $('#button-send').attr("data-receiver");
+		send(roomNum, num);
+	});
+	
 	$('.chatList').click(function(){
+		
 		//회원번호
 		let employeeNum=$(this).attr("data-empNum");
 		//db에서 방있는지 확인!
-		$.ajax({
-		type:"get",
-		url:"./roomCheck",
-		async:false,
-		data:{
-			"user2":employeeNum
-		},
-		success:function(response){
-			r=response.trim();
-			console.log(r);
-		},
-		error:function(){
-			console.log("실패");
-		}
-
-	})
+		roomCheck(employeeNum);
 		
-	})
-	
-	function enterRoom(socket){
-	    let enterMsg={"type" : "ENTER","roomId":"${room.roomId}","sender":"chee","message":""};
-	    socket.send(JSON.stringify(enterMsg));
-	}
+		
+	});
 	
 	socket.onopen = function (e) {
-        console.log('open server!')
-        //enterRoom(socket);
+		console.log('open server!');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    console.log('open server!')
     };
     
     socket.onclose=function(e){
         console.log('disconnet');
-    }
+    };
 
     socket.onerror = function (e){
         console.log(e);
-    }
+    };
 	
 	socket.onmessage=function(msg){
-		console.log(msg.data);
+		let jsonObj = JSON.parse(msg.data);
+		
 		$('#msgArea').append(msg.data+"<br/>");
+		// 보내온 값에서 방번호를 보내기 버튼의 속성에 저장해줌
+		$('#button-send').attr("data-room",jsonObj.roomNum);
+		$('#button-send').attr("data-receiver",jsonObj.receiver);
+	};
+	
+	function roomCheck(employeeNum){
+		
+			$.ajax({
+			type:"get",
+			url:"./roomCheck",
+			data:{
+				"user2":employeeNum
+			},
+			success:function(response){
+				r=response.trim();//방번호
+	
+	
+				if(r>0){
+					enterRoom(socket, employeeNum, r);
+				}else{
+					createRoom(employeeNum);
+				}
+			},
+			error:function(){
+				console.log("ajax 실패");
+			}
+			})	
 	}
 	
-	$('#button-send').click(function(){
-		send();
-	})
+	function enterRoom(socket, num, roomNum){
+		$('#msgArea').empty();
+	    let enterMsg={"type" : "ENTER","roomNum":roomNum,"receiver":num,"message":""};
+	    socket.send(JSON.stringify(enterMsg));
+	}
 	
-	function send(){
-	    
+	function send(roomNum, num){
 	    let content=document.querySelector('#msg').value;
-        var talkMsg={"type" : "TALK","roomId":"${room.roomId}" ,"sender":"chee","message":content};
+        var talkMsg={"type" : "TALK","roomNum":roomNum, "receiver":num,"message":content};
         socket.send(JSON.stringify(talkMsg));
 	    msg.value = '';
 	   
+	}
+	
+	//방나가기  function quit(){
+	
+	function createRoom(employeeNum){
+		$.ajax({
+			type:"post",
+			url:"./createRoom",
+			data:{
+				"user2":employeeNum
+			},
+			success:function(response){
+				r=response.trim();
+				console.log(r);
+				
+				if(r>0){
+					
+				}else{
+					createRoom(employeeNum);
+				}
+				
+			},
+			error:function(){
+				console.log("ajax 실패");
+			}
+		})
 	}
     
 	</script>
