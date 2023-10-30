@@ -111,4 +111,13 @@ public class EmployeeService implements UserDetailsService{
 	public List<EmployeeVO> getEmpList(Pager pager)throws Exception{
 		return employeeDAO.getEmpList(pager);
 	}
+	
+	
+	public EmployeeVO getEmpDetail (EmployeeVO employeeVO)throws Exception{
+		return employeeDAO.getEmpDetail(employeeVO);
+	}
+	
+	public int setEmpUpdate (EmployeeVO employeeVO)throws Exception{
+		return employeeDAO.setEmpUpdate(employeeVO);
+	}
 }

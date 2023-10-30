@@ -14,4 +14,8 @@ public interface EmployeeDAO {
 	public int setJoin(EmployeeVO employeeVO)throws Exception;
 	
 	public List<EmployeeVO> getEmpList(Pager pager)throws Exception;
+	
+	public EmployeeVO getEmpDetail(EmployeeVO employeeVO)throws Exception;
+	
+	public int setEmpUpdate(EmployeeVO employeeVO)throws Exception;
 }

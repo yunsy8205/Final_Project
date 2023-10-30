@@ -21,5 +21,15 @@
 		LIMIT #{startRow},#{lastRow}
 	</select>
 	
+	<select id="getEmpDetail" parameterType="EmployeeVO" resultType="EmployeeVO" >
+		SELECT * FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum}
+	</select>
+	
+	<update id="setEmpUpdate" parameterType="EmployeeVO">
+		UPDATE EMPLOYEE
+		SET NAME=#{name},PHONE=#{phone},ADDRESS=#{address},STATE=#{state},POSITION=#{position}
+		WHERE EMPLOYEENUM = #{employeeNum}
+	</update>
+	
 	
 </mapper>

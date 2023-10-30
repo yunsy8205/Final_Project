@@ -97,4 +97,19 @@ public class EmployeeController {
 		return "employee/list";
 	}
 	
+	
+	@GetMapping("detail")
+	public String getEmpDetail(EmployeeVO employeeVO, Model model)throws Exception{
+		employeeVO = employeeService.getEmpDetail(employeeVO);
+		model.addAttribute("employeeVO", employeeVO);
+		
+		return "employee/detail";
+	}
+	
+	
+	@GetMapping("update")
+	public void setEmpUpdate(EmployeeVO employeeVO, Model model)throws Exception{
+		employeeVO = employeeService.getEmpDetail(employeeVO);
+		model.addAttribute("employeeVO", employeeVO);
+	}
 }
