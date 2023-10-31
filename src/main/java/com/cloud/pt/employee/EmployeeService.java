@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cloud.pt.commons.FileManager;
 import com.cloud.pt.commons.Pager;
@@ -36,6 +37,8 @@ public class EmployeeService implements UserDetailsService{
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private FileManager fileManager;
+	
+	private String uploadPath;
 	
 	
 	
@@ -105,11 +108,22 @@ public class EmployeeService implements UserDetailsService{
 	
 	
 	@Transactional(rollbackFor = Exception.class)
-	public int setJoin(EmployeeVO employeeVO)throws Exception{
+	public int setJoin(EmployeeVO employeeVO, MultipartFile[] files)throws Exception{
 		// 비밀번호 암호화
 		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
 		
 		int result = employeeDAO.setJoin(employeeVO);
+		
+		
+		// file 등록
+//		for(MultipartFile file : files) {
+//			if(file.isEmpty()) {
+//				continue;
+//			}	
+//			
+////			String fileName = fileManager.save()
+//		}
+		
 		
 		return result;
 	}
