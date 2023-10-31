@@ -1,5 +1,7 @@
 package com.cloud.pt.ptClass;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +10,8 @@ public class PtClassService {
 	@Autowired
 	private PtClassDAO ptClassDAO;
 	
-	public int setPtClass(PtClassVO ptClassVO) throws Exception{
-		ptClassDAO.setPtClass(ptClassVO);
-		return 0;
+	public ArrayList<PtClassVO> ptClassList() throws Exception{
+		return ptClassDAO.ptClassList();
 	}
 	
 }

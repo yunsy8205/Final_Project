@@ -1,11 +1,14 @@
 package com.cloud.pt.ptClass;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 @Mapper
-public interface PtClassDAO {
+public class PtClassDAO {
 	
-	public int setPtClass(PtClassVO ptClassVO) throws Exception;
+	public ArrayList<PtClassVO> ptClassList() throws Exception;
 	
 }

@@ -18,5 +18,8 @@
 		<!-- 재혁 -->
 		<typeAlias type="com.cloud.pt.myPtMember.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
+		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
+		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
+		
 	</typeAliases>
 </configuration>

@@ -5,7 +5,7 @@
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="/" class="app-brand-link">
+            <a href="/home" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -74,7 +74,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="/" class="menu-link">
+              <a href="/home" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">홈</div>
               </a>
@@ -223,7 +223,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="ui-accordion.html" class="menu-link">
+                  <a href="#" class="menu-link">
                     <div data-i18n="Accordion">운동 일지</div>
                   </a>
                 </li>
@@ -233,7 +233,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="ui-badges.html" class="menu-link">
+                  <a href="/trainer/diet" class="menu-link">
                     <div data-i18n="Badges">식단 관리</div>
                   </a>
                 </li>

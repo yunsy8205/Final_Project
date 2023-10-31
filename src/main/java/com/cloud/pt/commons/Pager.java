@@ -27,10 +27,10 @@ public class Pager {
 	}
 	
 	public Long getLastRow() {
-		if(this.lastRow==null || this.lastRow<0) {
-			return 10L;
-		}
-		return this.getLastRow();
+	    if(this.lastRow==null || this.lastRow<0) {
+	        return 0L;
+	    }
+	    return this.lastRow;
 	}
 	
 	public String getSearch() {

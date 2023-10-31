@@ -12,7 +12,7 @@ import lombok.ToString;
 public class MemberVO {
 	
 	private Long memberNum;
-	private Long employeeNum;
+	private String employeeNum;
 	private String name;
 	private String phone;
 	private String gender;
