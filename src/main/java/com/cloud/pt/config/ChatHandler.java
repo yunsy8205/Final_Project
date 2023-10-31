@@ -43,7 +43,6 @@ public class ChatHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
       String payload = message.getPayload();
       log.info("payload : {}", payload);
-      log.info("session : {}", session);
       
       ChatMessageVO chatMessage = objectMapper.readValue(payload, ChatMessageVO.class);
       
@@ -51,37 +50,44 @@ public class ChatHandler extends TextWebSocketHandler{
       log.info("방 번호 : {}", room.getRoomNum());
       
       Long name = Long.valueOf(session.getPrincipal().getName());//sender
-      chatMessage.setChatUser(String.valueOf(name));
+      chatMessage.setSender(String.valueOf(name));
       
-      log.info("sender : {}",name);
+      log.info("chatUser : {}",name);
 
       if (chatMessage.getType().equals(ChatMessageVO.MessageType.ENTER)) {
 
-    	  if(room.getUser1() == name) {
+    	  if(room.getUser1().equals(name)) {
     		  
     		  log.info("user1 맵에 담음:"+room.getUser1());
     		  sessions.put(name, session);
     		  
     	  }else {
-    		  if(room.getUser2()==name) {
+    		  if(room.getUser2().equals(name)) {
     			  
     			  log.info("user2 맵에 담음:"+room.getUser2());
     			  sessions.put(name, session);
     		  }else {
-    			  log.info("채팅방에 들어올 수 없습니다.");
+    			  log.info("방에 들어올 수 없는 회원 입니다.");
     		  }
     	  }
-
-          //chatMessage.setMessage(name + "님이 입장했습니다.");  //TALK일 경우 msg가 있을 거고, ENTER일 경우 메세지 없으니까 message set
+    	  
+    	  chatMessage.setMessage(name + "님이 입장했습니다.");  //TALK일 경우 msg가 있을 거고, 실제 보이지는 않게함
+    	  sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room);
+    	  
+    	  //이전 메세지들을 list에 넣음
     	  List<ChatMessageVO> list = new ArrayList<>();
     	  list = chatService.chatMessageList(room);
     	  
-          sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room);
-          
+    	  //반복문으로 이전 메세지 뿌려줌
+    	  for(ChatMessageVO c : list) {
+    		  c.setType(ChatMessageVO.MessageType.ENTER);
+    		  sendToEachSocket(c, new TextMessage(objectMapper.writeValueAsString(c)), room);
+    	  }
+    	  
       }else if (chatMessage.getType().equals(ChatMessageVO.MessageType.QUIT)) {
           sessions.remove(session.getPrincipal().getName());
 
-          chatMessage.setMessage(chatMessage.getChatUser() + "님이 퇴장했습니다..");
+          chatMessage.setMessage(chatMessage.getSender() + "님이 퇴장했습니다..");
           sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room);
       
       }else {
@@ -112,14 +118,23 @@ public class ChatHandler extends TextWebSocketHandler{
 
         chatMember.parallelStream().forEach(a -> {
   		try {
-  			a.sendMessage(textMessage);
-  			//보낼때 DB에 바로 저장
-  			int result = chatService.messageAdd(chatMessageVO);
   			
-  			if(result>0) {
-  				log.info("DB 저장 성공");
-  			}else{
-  				log.info("DB 저장 실패");
+  			a.sendMessage(textMessage);
+  			
+  			log.info(chatMessageVO.getChatDate());
+  			
+  			//보낼때 DB에 바로 저장
+  			if(chatMessageVO.getType().equals(ChatMessageVO.MessageType.ENTER)){
+  			//입장 메세지는 저장 안함
+  			}else {
+  				
+  				int result = chatService.messageAdd(chatMessageVO);
+  				
+  				if(result>0) {
+  					log.info("DB 저장 성공");
+  				}else{
+  					log.info("DB 저장 실패");
+  				}
   			}
   			
   		} catch (Exception e) {

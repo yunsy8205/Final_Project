@@ -1,6 +1,8 @@
 package com.cloud.pt.chat;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -73,5 +75,9 @@ public class ChatService {
     public List<ChatMessageVO> chatMessageList(RoomVO roomVO)throws Exception{
     	return chatDAO.chatMessageList(roomVO);
     }
+    
+//    public java.util.Date addDate(){
+//    	
+//    }
 
 }

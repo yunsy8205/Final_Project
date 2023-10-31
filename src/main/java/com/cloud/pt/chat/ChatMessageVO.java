@@ -14,9 +14,9 @@ public class ChatMessageVO {
     }
     private MessageType type; // 메시지 타입
     private Long roomNum; // 방번호
-    private String chatUser; // 메시지 보낸사람
+    private String sender; // 메시지 보낸사람
     private String receiver; // 메시지 받는사람
     private String message; // 메시지
-    private Date chatDate; //보낸 날짜시간
+    private String chatDate; //보낸 날짜시간
 
 }

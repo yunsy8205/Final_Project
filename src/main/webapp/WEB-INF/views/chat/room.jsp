@@ -3,6 +3,7 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <!-- =========================================================
@@ -123,7 +124,7 @@
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
                       <h5 class="mb-0">Chatting</h5>
-                      
+               
                     </div>
                     <div class="card-body">
                     	<div id="msgArea"></div>  
@@ -181,8 +182,6 @@
     </div>
     <!-- / Layout wrapper -->
 
-    
-
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
@@ -207,112 +206,9 @@
     
     <!-- icon js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-	<script>
-	
-	const socket = new WebSocket("ws://localhost:82/ws/chat");
-	
-	$('#button-send').click(function(){
-		let roomNum = $('#button-send').attr("data-room");
-		let num = $('#button-send').attr("data-receiver");
-		send(roomNum, num);
-	});
-	
-	$('.chatList').click(function(){
-		
-		//회원번호
-		let employeeNum=$(this).attr("data-empNum");
-		//db에서 방있는지 확인!
-		roomCheck(employeeNum);
-		
-		
-	});
-	
-	socket.onopen = function (e) {
-		console.log('open server!');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    console.log('open server!')
-    };
     
-    socket.onclose=function(e){
-        console.log('disconnet');
-    };
-
-    socket.onerror = function (e){
-        console.log(e);
-    };
-	
-	socket.onmessage=function(msg){
-		let jsonObj = JSON.parse(msg.data);
-		
-		$('#msgArea').append(msg.data+"<br/>");
-		// 보내온 값에서 방번호를 보내기 버튼의 속성에 저장해줌
-		$('#button-send').attr("data-room",jsonObj.roomNum);
-		$('#button-send').attr("data-receiver",jsonObj.receiver);
-	};
-	
-	function roomCheck(employeeNum){
-		
-			$.ajax({
-			type:"get",
-			url:"./roomCheck",
-			data:{
-				"user2":employeeNum
-			},
-			success:function(response){
-				r=response.trim();//방번호
-	
-	
-				if(r>0){
-					enterRoom(socket, employeeNum, r);
-				}else{
-					createRoom(employeeNum);
-				}
-			},
-			error:function(){
-				console.log("ajax 실패");
-			}
-			})	
-	}
-	
-	function enterRoom(socket, num, roomNum){
-		$('#msgArea').empty();
-	    let enterMsg={"type" : "ENTER","roomNum":roomNum,"receiver":num,"message":""};
-	    socket.send(JSON.stringify(enterMsg));
-	}
-	
-	function send(roomNum, num){
-	    let content=document.querySelector('#msg').value;
-        var talkMsg={"type" : "TALK","roomNum":roomNum, "receiver":num,"message":content};
-        socket.send(JSON.stringify(talkMsg));
-	    msg.value = '';
-	   
-	}
-	
-	//방나가기  function quit(){
-	
-	function createRoom(employeeNum){
-		$.ajax({
-			type:"post",
-			url:"./createRoom",
-			data:{
-				"user2":employeeNum
-			},
-			success:function(response){
-				r=response.trim();
-				console.log(r);
-				
-				if(r>0){
-					
-				}else{
-					createRoom(employeeNum);
-				}
-				
-			},
-			error:function(){
-				console.log("ajax 실패");
-			}
-		})
-	}
+    <!-- room js -->
+    <script src="../js/room.js"></script>
     
-	</script>
-
   </body>
 </html>

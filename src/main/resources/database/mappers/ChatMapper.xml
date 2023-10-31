@@ -22,8 +22,8 @@
 	</insert>
 	
 	<insert id="messageAdd" parameterType="ChatMessageVO">
-		INSERT INTO CHAT (CHATNUM, ROOMNUM, CHATUSER, MESSAGE, CHATDATE)
-		VALUES (NULL, #{roomNum}, #{chatUser}, #{message}, NOW())
+		INSERT INTO CHAT (CHATNUM, ROOMNUM, SENDER, RECEIVER, MESSAGE, CHATDATE)
+		VALUES (NULL, #{roomNum}, #{sender}, #{receiver}, #{message}, #{chatDate})
 	</insert>
 	
 	<select id="chatMessageList" parameterType="RoomVO" resultType="ChatMessageVO">
