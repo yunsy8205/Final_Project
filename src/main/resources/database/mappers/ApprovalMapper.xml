@@ -102,16 +102,9 @@
 		SELECT POSITION,NAME FROM EMPLOYEE WHERE EMPLOYEENUM=#{last}
 	</select>
 	
-	<!-- 임시저장문서 결재 -->
-	<update id="setTempUpdate" parameterType="ApprovalVO">
-		UPDATE APPROVAL SET CATEGORY=#{category},MIDDLE=#{middle},LAST=#{last},CONTENTS=#{contents},TITLE=#{title},STATE='대기중',
-		LEAVEKIND=#{leaveKind},USEDATE=#{useDate},STARTDATE=#{startDate},ENDDATE=#{endDate},HALFKIND=#{halfKind}
-		WHERE APPROVALNUM=${approvalNum}
-	</update>
 	
 	<delete id="setDelete" parameterType="ApprovalVO">
 		DELETE FROM APPROVAL WHERE APPROVALNUM=${approvalNum}
 	</delete>
-	
 	
 </mapper>
