@@ -57,7 +57,7 @@
                             <td>${vo.employeeVO.name}</td>
                             <td>${vo.attendanceModifyVO.regDate}</td>
                             <td>${vo.attendanceModifyVO.modifyDate}</td>
-                            <td>${vo.attendanceModifyVO.state}</td>
+                            <td>${vo.attendanceModifyVO.status}</td>
                           </tr>
                         </c:forEach>
                       </tbody>

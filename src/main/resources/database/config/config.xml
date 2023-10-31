@@ -11,6 +11,8 @@
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
 		<typeAlias type="com.cloud.pt.attendance.AttendanceModifyVO" alias="AttendanceModifyVO"/>
+		<typeAlias type="java.util.Map" alias="Map"/>
+		
 		
 		<typeAlias type="com.cloud.pt.myPtMember.MemberVO" alias="MemberVO"/>
 	</typeAliases>

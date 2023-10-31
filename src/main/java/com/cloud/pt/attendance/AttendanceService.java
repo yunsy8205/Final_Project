@@ -55,6 +55,30 @@ public class AttendanceService {
 	}
 	
 	//---------------------------------------------------
+	@Transactional(rollbackFor = Exception.class)
+	public int setUpdate(AttendanceVO attendanceVO, AttendanceModifyVO attendanceModifyVO) throws Exception {
+		String status = attendanceModifyVO.getStatus();
+		System.out.println(status);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("attendance", attendanceVO);
+		map.put("modoify", attendanceModifyVO);
+		
+		int result = 0;
+		
+		if(status.equals("승인")) {
+			result = attendanceDAO.setUpdateA(map);
+			
+			if(result>0) {
+				result = attendanceDAO.setUpdateAM(attendanceModifyVO);
+			}
+		}else { //반려일 때 
+			attendanceDAO.setUpdateAM(attendanceModifyVO);
+		}
+		
+		return result;
+	}
+	
 	public AttendanceVO getRequestDetail(AttendanceModifyVO attendanceModifyVO) throws Exception {
 		return attendanceDAO.getRequestDetail(attendanceModifyVO);
 	}

@@ -24,7 +24,7 @@ public class AttendanceController {
 
 	@GetMapping("/attendance/info")
 	public String getInfo(EmployeeVO employeeVO, Model model) throws Exception {
-		log.info("vo: {}", employeeVO);
+//		log.info("vo: {}", employeeVO);
 		AttendanceVO attendanceVO = attendanceService.getInfo(employeeVO);
 		model.addAttribute("vo", attendanceVO);
 		
@@ -59,11 +59,12 @@ public class AttendanceController {
 		String employeeNum = principal.getName();
 		EmployeeVO employeeVO = new EmployeeVO();
 		employeeVO.setEmployeeNum(employeeNum);
-		
-		if(attendanceService.getInfo(employeeVO).getOffTime() == null) {
-			model.addAttribute("result", 0);
+
+		if(attendanceService.getInfo(employeeVO) != null) {
+			if(attendanceService.getInfo(employeeVO).getOffTime() != null)
+				model.addAttribute("result", 1);
 		}else {
-			model.addAttribute("result", 1);
+			model.addAttribute("result", 0);
 		}
 		
 		return "commons/ajaxResult";
@@ -92,6 +93,16 @@ public class AttendanceController {
 		model.addAttribute("list", ar);
 		
 		return "attendance/adminList";
+	}
+	
+	@PostMapping("/admin/attendanceModify/update")
+	public String setUpdate(AttendanceVO attendanceVO, AttendanceModifyVO attendanceModifyVO) throws Exception {
+		log.info("attendanceVO: {}", attendanceVO);
+		log.info("attendanceModifyVO: {}", attendanceModifyVO);
+		
+		int result = attendanceService.setUpdate(attendanceVO, attendanceModifyVO);
+		
+		return "redirect:./list";
 	}
 	
 	@GetMapping("/admin/attendanceMonth")

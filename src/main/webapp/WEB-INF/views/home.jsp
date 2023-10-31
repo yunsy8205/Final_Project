@@ -14,6 +14,12 @@
   data-template="vertical-menu-template-free"
 >
   <head>
+    <style>
+      #off {
+        display: none;
+      }
+    </style>
+
     <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
   </head>
 
@@ -43,6 +49,7 @@
 	              </div>
               <div id="btn_block">
                 <button type="button" id="on" class="btn btn-primary">출근하기</button>
+                <button type="button" id="off" class="btn btn-primary">퇴근하기</button>
               </div>
             </div>
             <!-- / Content -->
@@ -66,43 +73,59 @@
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 
     <script>
-
       //문서의 로딩을 시작할 때 
+      //출근기록이 있는 경우  
       $(document).ready(function(){
-        if($('#btn_block').children().attr('id')=='on'){
-          $.ajax({
-            type: 'get',
-            url: '/attendance/on',
-            success: function(result){
-              if(result.trim()>0){
-                $('#on').attr('id', 'off');
-                $('#off').text('퇴근하기');
-              }
-            },
-            error: function(){
-              alert('관리자에게 문의하세요');
+        $.ajax({
+          type: 'get',
+          url: '/attendance/on',
+          success: function(result){
+            if(result.trim()>0){
+              // $('#on').attr('id', 'off');
+              // $('#off').text('퇴근하기');
+              $('#on').css('display', 'none');
+              $('#off').css('display', 'block');
             }
-          })
-        }
+          },
+          error: function(){
+            alert('관리자에게 문의하세요');
+          }
+        }) 
+      })
+      //퇴근기록이 있는 경우
+      $(document).ready(function(){
+          $.ajax({
+          type: 'get',
+          url: '/attendance/off',
+          success: function(result){
+            if(result.trim()>0){
+              $('#off').attr('disabled', true);
+            }
+          },
+          error: function(){
+            alert('관리자에게 문의하세요');
+          }
+        })
       })
 
       //로딩 완료되었을 때
-      $(window).on('load', function(){
-          if($('#btn_block').children().attr('id')=='off'){
-            $.ajax({
-            type: 'get',
-            url: '/attendance/off',
-            success: function(result){
-              if(result.trim()>0){
-                $('#btn_block').children().attr('disabled', true);
-              }
-            },
-            error: function(){
-              alert('관리자에게 문의하세요');
-            }
-          })
-        }
-      })
+      //퇴근기록이 있는 경우  
+      // $(window).on('load', function(){
+      //     if($('#btn_block').children().attr('id')=='off'){
+      //       $.ajax({
+      //       type: 'get',
+      //       url: '/attendance/off',
+      //       success: function(result){
+      //         if(result.trim()>0){
+      //           $('#btn_block').children().attr('disabled', true);
+      //         }
+      //       },
+      //       error: function(){
+      //         alert('관리자에게 문의하세요');
+      //       }
+      //     })
+      //   }
+      // })
 
       //출근
       function setOn(){
@@ -112,6 +135,8 @@
           success: function(result){
             if(result.trim()>0){
               alert('출근하였습니다');
+              $('#on').css('display', 'none');
+              $('#off').css('display', 'block');
             }
           },
           error: function(){
@@ -128,6 +153,7 @@
           success: function(result){
             if(result.trim()>0){
               alert('퇴근하였습니다');
+              $('#off').attr('disabled', true);
             }
           },
           error: function(){
@@ -137,16 +163,13 @@
       }
 
       //출근버튼 클릭 시 
-      $('#btn_block').on('click', '#on', function(){
+      $('#on').on('click', function(){
         setOn();
-        $('#on').attr('id', 'off');
-        $('#off').text('퇴근하기');
       })
 
       //퇴근버튼 클릭 시
       $('#btn_block').on('click', '#off', function(){
         setOff();
-        $('#off').attr('disabled', true);
       })
  
     </script>

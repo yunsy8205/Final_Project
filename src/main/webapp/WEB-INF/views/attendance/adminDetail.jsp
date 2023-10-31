@@ -110,7 +110,7 @@
                   </div>
                 </div>
                 <div>
-                  <form id="frm" method="post" action="/admin/attendanceModify/add">
+                  <form id="frm" method="post" action="/admin/attendanceModify/update">
                     <div class="row g-3">
                       <div class="col-md-6">
                         <input type="radio" id="normal" name="state" value="정상" class="form-check-input">
@@ -130,7 +130,11 @@
                       <label for="contents" class="form-label">수정의견</label>
                       <textarea name="modifyContents" id="contents" cols="30" rows="5" class="form-control"></textarea>
                     </div>
-                    <input type="hidden" id="" name="state">
+                    <input type="hidden" name="modifyTime" class="form-control" value="${vo.attendanceModifyVO.modifyTime}">
+                    <input type="hidden" name="attendanceNum" value="${vo.attendanceNum}">
+                    <input type="hidden" name="attendanceModifyNum" value="${vo.attendanceModifyVO.attendanceModifyNum}">
+                    <input type="hidden" id="status" name="status">
+                    <input type="hidden" name="type" value="${vo.attendanceModifyVO.type}">
                   </form>
                 </div>
                 <div class="totalBtn">
@@ -162,7 +166,14 @@
       })
 
       $('#approve_btn').on('click', function(){
-        
+        $('#status').val('승인');
+        alert('승인되었습니다')
+        $('#frm').submit();
+      })
+
+      $('#reject_btn').on('click', function(){
+        $('#status').val('반려');
+        alert('반려되었습니다')
         $('#frm').submit();
       })
     </script>

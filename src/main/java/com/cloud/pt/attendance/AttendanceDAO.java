@@ -17,6 +17,8 @@ public interface AttendanceDAO {
 	public int setState(Map<String, Object> map) throws Exception;
 	
 	//----------------------------------------
+	public int setUpdateA(Map<String, Object> map) throws Exception;
+	public int setUpdateAM(AttendanceModifyVO attendanceModifyVO) throws Exception;
 	public AttendanceVO getRequestDetail(AttendanceModifyVO attendanceModifyVO) throws Exception;
 	public List<AttendanceVO> getRequestList() throws Exception;
 	

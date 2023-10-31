@@ -24,7 +24,7 @@
 			AND WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</update>
 	
-	<update id="setState" parameterType="java.util.Map">
+	<update id="setState" parameterType="Map">
 		UPDATE ATTENDANCE
 		<set>
 			<if test="vo.onTime lt on and vo.offTime gte off">STATE='정상'</if>
@@ -58,9 +58,25 @@
 		</association>
 	</resultMap>	
 	
+	
+	<update id="setUpdateA" parameterType="Map">
+		UPDATE ATTENDANCE
+			<set> STATE=#{attendance.state},
+				<if test="modify.type.equals('출근')">ONTIME=#{modify.modifyTime}</if>
+				<if test="modify.type.equals('퇴근')">OFFTIME=#{modify.modifyTime}</if>
+			</set>
+			WHERE ATTENDANCENUM=#{attendance.attendanceNum}
+	</update>
+	
+	<update id="setUpdateAM" parameterType="AttendanceModifyVO">
+		UPDATE ATTENDANCEMODIFY
+			SET MODIFYCONTENTS=#{modifyContents},
+			STATUS=#{status}
+			WHERE ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
+	</update>
+	
 	<select id="getRequestDetail" resultMap="getDetailResult" parameterType="AttendanceModifyVO">
-		SELECT AM.ATTENDANCEMODIFYNUM, AM.REGDATE, AM.MODIFYDATE, AM.MODIFYTIME, 
-		AM.REQUESTCONTENTS, AM.TYPE, A.*, E.NAME, E.EMPLOYEENUM
+		SELECT AM.*, A.*, E.NAME, E.EMPLOYEENUM
 		FROM ATTENDANCEMODIFY AM
 			JOIN ATTENDANCE A
 			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
@@ -107,7 +123,7 @@
 			<result column="REGDATE" property="regDate"/>
 			<result column="MODIFYDATE" property="modifyDate"/>
 			<result column="MODIFYTIME" property="modifyTime"/>
-			<result column="STATE" property="state"/>
+			<result column="STATUS" property="status"/>
 		</association>
 		<association property="employeeVO" javaType="EmployeeVO">
 			<id column="EMPLOYEENUM" property="employeeNum"/>
@@ -142,7 +158,7 @@
 			<result column="REGDATE" property="regDate"/>
 			<result column="MODIFYDATE" property="modifyDate"/>
 			<result column="MODIFYTIME" property="modifyTime"/>
-			<result column="STATE" property="state"/>
+			<result column="STATUS" property="status"/>
 		</association>
 		<association property="employeeVO" javaType="EmployeeVO">
 			<id column="EMPLOYEENUM" property="employeeNum"/>
@@ -152,7 +168,7 @@
 
 	<insert id="setModifyAdd" parameterType="AttendanceModifyVO">
 		INSERT INTO ATTENDANCEMODIFY
-		(ATTENDANCENUM,REGDATE,MODIFYDATE,MODIFYTIME,REQUESTCONTENTS,TYPE,STATE)
+		(ATTENDANCENUM,REGDATE,MODIFYDATE,MODIFYTIME,REQUESTCONTENTS,TYPE,STATUS)
 		VALUES (#{attendanceNum},NOW(),#{modifyDate},#{modifyTime},#{requestContents},#{type},'요청')
 	</insert>
 </mapper>
