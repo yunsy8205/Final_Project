@@ -36,10 +36,10 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                      <h1 class="mb-0">${employeeVO.name} ${employeeVO.position} 인적사항</h1>
+                      <h1 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 인적사항</h1>
                     </div>
                     <div class="card-body">
-                      <form id="detailfrm">
+                      <div id="detailCon">
                         <div id="detail_left">
                           <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">사번</label>
@@ -98,10 +98,10 @@
                             </div>
                           </div>
                           <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">직급</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.position}" readonly/>
-                            </div>
+                              <label class="col-sm-2 col-form-label" for="basic-default-name">직급</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.position}" readonly/>
+                              </div>
                           </div>
                           <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">연차갯수</label>
@@ -110,12 +110,15 @@
                             </div>
                           </div>
                         </div>
+                        <form action="" id="upfrm">
+                          <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
+                        </form>
                         <div class="proBtn">
                           <button type="button" id="backBtn">이전</button>
                           <button type="button" id="upBtn" class="actionBtn" data-url="/employee/update">수정</button>
-                          <button type="button" id="delBtn" class="actionBtn" date-url="/employee/delete">삭제</button>
+                          <button type="button" id="delBtn" class="actionBtn" data-url="/employee/delete">삭제</button>
                         </div>
-                      </form>
+                      </div>
                     </div>
                   </div>
                 </div>

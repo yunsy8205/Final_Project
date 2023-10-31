@@ -1,5 +1,8 @@
 package com.cloud.pt.employee;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cloud.pt.commons.Pager;
 import com.cloud.pt.member.MemberVO;
@@ -108,8 +112,35 @@ public class EmployeeController {
 	
 	
 	@GetMapping("update")
-	public void setEmpUpdate(EmployeeVO employeeVO, Model model)throws Exception{
+	public String setEmpUpdate(EmployeeVO employeeVO, Model model)throws Exception{
 		employeeVO = employeeService.getEmpDetail(employeeVO);
 		model.addAttribute("employeeVO", employeeVO);
+		
+		return "employee/update";
+	}
+	
+	@PostMapping("update")
+	public String setEmpUpdate(EmployeeVO employeeVO, MultipartFile  photo, RedirectAttributes attributes)throws Exception{
+		String quit = employeeVO.getQuitDate();
+		// 퇴직 -> 재직('' 값)
+		if(quit==null || quit.equals("")) {
+			
+			employeeVO.setQuitDate(null);
+			log.info(">>>>>>quitdate : {} ", employeeVO.getQuitDate());
+		}
+		
+		int result = employeeService.setEmpUpdate(employeeVO);
+		
+		attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
+		
+		return "redirect:/employee/detail";
+	}
+	
+	
+	@PostMapping("delete")
+	public String setEmpDelete(EmployeeVO employeeVO)throws Exception{
+		int result = employeeService.setEmpDelete(employeeVO);
+		
+		return "redirect:./list";
 	}
 }

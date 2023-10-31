@@ -18,4 +18,6 @@ public interface EmployeeDAO {
 	public EmployeeVO getEmpDetail(EmployeeVO employeeVO)throws Exception;
 	
 	public int setEmpUpdate(EmployeeVO employeeVO)throws Exception;
+	
+	public int setEmpDelete(EmployeeVO employeeVO)throws Exception;
 }

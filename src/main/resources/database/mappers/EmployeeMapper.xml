@@ -27,7 +27,15 @@
 	
 	<update id="setEmpUpdate" parameterType="EmployeeVO">
 		UPDATE EMPLOYEE
-		SET NAME=#{name},PHONE=#{phone},ADDRESS=#{address},STATE=#{state},POSITION=#{position}
+		SET 
+		NAME=#{name},PHONE=#{phone},ADDRESS=#{address},GENDER=#{gender},BIRTH=#{birth},QUITDATE=#{quitDate},STATE=#{state},POSITION=#{position}
+		WHERE EMPLOYEENUM = #{employeeNum}
+	</update>
+	
+	<update id="setEmpDelete" parameterType="EmployeeVO">
+		UPDATE EMPLOYEE
+		SET
+		PASSWORD='0',PHONE='0',ADDRESS=NULL,GENDER=NULL,BIRTH=NULL,JOINDATE=NULL,QUITDATE=NULL,STATE=NULL,POSITION=NULL,LEAVEDATE=NULL,SIGNFILE=NULL,SIGNORIGINAL=NULL,PROFILE=NULL,PROORIGINAL=NULL
 		WHERE EMPLOYEENUM = #{employeeNum}
 	</update>
 	

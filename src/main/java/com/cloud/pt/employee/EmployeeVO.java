@@ -1,5 +1,6 @@
 package com.cloud.pt.employee;
 
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,6 +9,7 @@ import java.util.List;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -47,8 +49,9 @@ public class EmployeeVO implements UserDetails {
 	@Past(message="과거일자만 입력가능합니다.")
 	private Date birth;
 	private Date joinDate;
-	@Future
-	private Date quitDate;
+	@Null
+	//@DateTimeFormat(pattern = "yyyy-mm-dd")
+	private String quitDate;
 	@NotBlank
 	private String state;
 	@NotBlank

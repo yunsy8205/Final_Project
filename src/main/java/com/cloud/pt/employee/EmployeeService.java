@@ -1,5 +1,6 @@
 package com.cloud.pt.employee;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,6 +119,11 @@ public class EmployeeService implements UserDetailsService{
 	}
 	
 	public int setEmpUpdate (EmployeeVO employeeVO)throws Exception{
+		
 		return employeeDAO.setEmpUpdate(employeeVO);
+	}
+	
+	public int setEmpDelete (EmployeeVO employeeVO)throws Exception{
+		return employeeDAO.setEmpDelete(employeeVO);
 	}
 }
