@@ -74,7 +74,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="index.html" class="menu-link">
+              <a href="/home" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">홈</div>
               </a>
@@ -89,7 +89,7 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="/employee/join" class="menu-link">
+                  <a href="/employee/list" class="menu-link">
                     <div data-i18n="Without menu">전체 직원 목록</div>
                   </a>
                 </li>

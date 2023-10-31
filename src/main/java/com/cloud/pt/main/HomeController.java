@@ -19,13 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/")
 public class HomeController {
 	
-	@GetMapping("home")
-	public String getHome() throws Exception{
-		return "home";
-	}
 	
-	@GetMapping("/")
-	public String getIndex(@ModelAttribute EmployeeVO employeeVO) throws Exception {
+	@GetMapping("home")
+	public String getIndex() throws Exception {
 		
 		SecurityContext context = SecurityContextHolder.getContext();
 		
@@ -35,9 +31,13 @@ public class HomeController {
 		log.info("==>>> GetPrincipal :{}", a.getPrincipal());  // 사용자 정보
 		log.info("==>>> GetRole :{}", a.getAuthorities());// 사용자 권한s 
 		
-		return "/employee/login";
+		return "home";
 	}
 	
+	@GetMapping("/")
+	public String getEmpLogin(@ModelAttribute EmployeeVO employeeVO)throws Exception{
+		return "/employee/login";
+	}
 	
 	
 }
