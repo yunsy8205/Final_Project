@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.cloud.pt.common.Pager;
+import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
 
 @Mapper
