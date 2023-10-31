@@ -30,6 +30,7 @@
 				<!-- Content wrapper -->
 				<div class="content-wrapper">
 					<!-- Content 내용 여기로 -->
+
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<div class="container-xxl flex-grow-1 container-p-y">
 
@@ -112,7 +113,8 @@
 																직급</td>
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																${middle.position }</td>
+																${middle.position}
+															</td>
 														</tr>
 														<tr>
 															<td
@@ -121,8 +123,8 @@
 																결재자</td>
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-																${approvalVO.middle}</td>
+																${middle.name}
+																</td>
 														</tr>
 														<tr>
 															<td
@@ -156,7 +158,7 @@
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																${last.position }</td>
+																${last.position}</td>
 														</tr>
 														<tr>
 															<td
@@ -166,7 +168,7 @@
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																${approvalVO.last }</td>
+																${last.name}</td>
 														</tr>
 														<tr>
 															<td

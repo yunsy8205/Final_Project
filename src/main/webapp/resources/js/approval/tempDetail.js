@@ -1,3 +1,10 @@
+function click_add(){
+	let url = "line";
+	let name = "line";
+	let option="width = 600, height = 600, left = 100, top=50,location=no";
+	window.open(url,name,option)
+}
+
 $("#leaveSelect").change(function(){
     if($("#leaveSelect").val()=='연차'){
         $("#endDate").change(function(){

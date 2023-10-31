@@ -82,7 +82,6 @@
 									<td>${vo.regDate}</td>	
 									<td><a href="./tempDetail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
 									<td>${vo.title}</td>
-									<td>${vo.approvalNum}</td>
 									<td>${vo.state}</td>
 								</tr>
 							</c:forEach>

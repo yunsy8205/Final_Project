@@ -4,10 +4,7 @@
 
 var toggler = document.getElementsByClassName("caret");
 var i;
-$("#dddd").click(function(){
-   console.log($("#middle").attr("data-empnum"))
-    console.log($("#last").attr("data-empnum"))
-})
+
 $("#okBtn").click(function(){
     $(opener.document).find("#middleName").text($("#middle").attr("data-name"))
     $(opener.document).find("#lastName").text($("#last").attr("data-name"))

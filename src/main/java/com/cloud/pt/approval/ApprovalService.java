@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cloud.pt.common.Pager;
 import com.cloud.pt.employee.EmployeeVO;
@@ -31,7 +32,7 @@ public class ApprovalService {
 		
 		return approvalDAO.getAnnualLine();
 	}
-	
+	@Transactional
 	public int setAdd(ApprovalVO approvalVO)throws Exception{
 		return approvalDAO.setAdd(approvalVO);
 	}
@@ -71,6 +72,14 @@ public class ApprovalService {
 	
 	public int setTempAdd(ApprovalVO approvalVO)throws Exception{
 		return approvalDAO.setTempAdd(approvalVO);
+	}
+	
+	public int setTempUpdate(ApprovalVO approvalVO) throws Exception{
+		return approvalDAO.setTempUpdate(approvalVO);
+	}
+	@Transactional
+	public int setDelete(ApprovalVO approvalVO) throws Exception{
+		return approvalDAO.setDelete(approvalVO);
 	}
 	
 }

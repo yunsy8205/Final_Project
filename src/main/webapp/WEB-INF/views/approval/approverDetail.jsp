@@ -112,7 +112,8 @@
 																직급</td>
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																${middle.position }</td>
+																${middle.position}
+															</td>
 														</tr>
 														<tr>
 															<td
@@ -121,8 +122,8 @@
 																결재자</td>
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-																${approvalVO.middle}</td>
+																${middle.name}
+																</td>
 														</tr>
 														<tr>
 															<td
@@ -156,7 +157,7 @@
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																${last.position }</td>
+																${last.position}</td>
 														</tr>
 														<tr>
 															<td
@@ -166,7 +167,7 @@
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																${approvalVO.last }</td>
+																${last.name}</td>
 														</tr>
 														<tr>
 															<td
@@ -247,7 +248,9 @@
 													반차종류</td>
 												<td
 													style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
-													colspan="3"></td>
+													colspan="3">
+													<input type="radio" id="off"name="halfKind" value="오전" <c:if test="${approvalVO.halfKind=='오전'}">checked</c:if>>오전<input type="radio" id="off"name="halfKind" value="오후" <c:if test="${approvalVO.halfKind=='오후'}">checked</c:if>>오후
+												</td>
 
 											</tr>
 										</c:if>
@@ -272,8 +275,9 @@
 										</tr>
 									</tbody>
 								</table>
-								
 
+								<button>결재</button>
+								<button>반려</button>
 
 							</div>
 

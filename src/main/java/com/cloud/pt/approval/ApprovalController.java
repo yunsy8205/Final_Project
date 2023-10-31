@@ -116,7 +116,23 @@ public class ApprovalController {
 		model.addAttribute("approvalVO", approvalVO);
 	}
 	@PostMapping("tempUpdate")
-	public void setTempUpdate(ApprovalVO approvalVO) throws Exception {
+	public String setTempUpdate(ApprovalVO approvalVO) throws Exception {
+		approvalService.setAdd(approvalVO);
+		approvalService.setDelete(approvalVO);
+		
+		return "redirect:./list";
+	}
+	
+	@GetMapping("signMain")
+	public void getSignMain() throws Exception{
+		
+	}
+	@GetMapping("sign")
+	public void setSign() throws Exception{
+		
+	}
+	@GetMapping("mySign")
+	public void setMySign() throws Exception{
 		
 	}
 

@@ -40,10 +40,6 @@
 								<button id="approvalInfoBtn" onclick="click_add()">결재정보</button>
 								<button id="tempBtn">임시저장</button>
 								<form action="tempUpdate" method="post" id="updateForm">
-									<sec:authorize access="isAuthenticated()">
-										<sec:authentication property="principal.username" var="username" />
-											<input type="hidden" name="employeeNum" value="${username}">
-									</sec:authorize>
 									
 									<table
 										style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
@@ -128,11 +124,10 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																직급</td>
-															<td
+															<td id="middlePosition"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																<input type="text" id="middlePosition" value="${middle.position}"
-																	readonly>
+																${middle.position}
 															</td>
 														</tr>
 														<tr>
@@ -140,11 +135,10 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재자</td>
-															<td
+															<td id="middleName"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																<input type="text" id="middle" name="middle" value="${approvalVO.middle}"
-																	readonly>
+																${middle.name}
 
 															</td>
 														</tr>
@@ -177,11 +171,10 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																직급</td>
-															<td
+															<td id="lastPosition"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																<input type="text" id="lastPosition" value="${last.position}"
-																	readonly>
+																${last.position}
 															</td>
 														</tr>
 														<tr>
@@ -189,11 +182,10 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재자</td>
-															<td
+															<td id="lastName"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																<input type="text" id="last" name="last" value="${approvalVO.last}"
-																	readonly>
+																${last.name}
 
 															</td>
 														</tr>
@@ -322,6 +314,13 @@
 											</tr>
 										</tbody>
 									</table>
+									<sec:authorize access="isAuthenticated()">
+										<sec:authentication property="principal.username" var="username" />
+											<input type="hidden" name="employeeNum" value="${username}">
+									</sec:authorize>
+									<input type="hidden" name="approvalNum" value="${approvalVO.approvalNum}">
+									<input type="hidden" id="middle" name="middle" value="${approvalVO.middle}">
+									<input type="hidden" id="last" name="last" value="${approvalVO.last}">
 									<input type="hidden" name="category" value="휴가신청서">
 									<input type="submit" id="testBtn">
 								</form>

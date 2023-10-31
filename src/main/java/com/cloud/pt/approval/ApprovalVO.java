@@ -2,6 +2,7 @@ package com.cloud.pt.approval;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.cloud.pt.employee.EmployeeVO;
 
@@ -29,6 +30,5 @@ public class ApprovalVO {
 	private String leaveKind;
 	private Double useDate;
 	private String halfKind;
-	private EmployeeVO employeeVO;
 	
 }

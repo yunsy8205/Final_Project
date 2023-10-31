@@ -35,5 +35,9 @@ public interface ApprovalDAO {
 	
 	public List<ApprovalVO> getTemporaryList(Map<String, Object> map) throws Exception;
 	
+	public int setTempUpdate(ApprovalVO approvalVO)throws Exception;
+	
+	public int setDelete(ApprovalVO approvalVO)throws Exception;
+	
 	
 }
