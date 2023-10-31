@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
+import com.cloud.pt.commons.FileManager;
 import com.cloud.pt.commons.Pager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +34,8 @@ public class EmployeeService implements UserDetailsService{
 	// 비밀번호 암호화
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private FileManager fileManager;
 	
 	
 	
@@ -43,11 +49,12 @@ public class EmployeeService implements UserDetailsService{
 		log.info("num : {} ", username);
 		employeeVO.setEmployeeNum(username);
 		log.info("num : {} ",employeeVO.getEmployeeNum());
-		
+
 		// passwordEncoder.encode("비밀번호");
-		System.out.println(passwordEncoder.encode("1234"));
+		System.out.println(passwordEncoder.encode("0000"));
 		
 		try {
+			
 			employeeVO = employeeDAO.getEmpLogin(employeeVO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
