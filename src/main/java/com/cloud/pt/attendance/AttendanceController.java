@@ -33,14 +33,15 @@ public class AttendanceController {
 		System.out.println(list);
 		
 		JSONObject jsonObj; 
-		JSONArray jsonArr; 
+		JSONArray jsonArr = new JSONArray(); //대괄호
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		for(int i=0; i<list.size(); i++) {
 			map.put("title", list.get(i).get("STATE"));
 			map.put("start", list.get(i).get("WORKDATE"));
 			
-			jsonObj = new JSONObject(map);
+			jsonObj = new JSONObject(map); //중괄호 {key:value, key:value}
+			jsonArr.add(jsonObj); //대괄호 안에 넣어주기[{key:value, key:value},{key:value, key:value}]
 		}
 	}
 	
