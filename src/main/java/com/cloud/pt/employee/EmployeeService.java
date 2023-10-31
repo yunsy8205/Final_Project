@@ -1,5 +1,10 @@
 package com.cloud.pt.employee;
 
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,6 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+
+import com.cloud.pt.commons.Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,8 +63,36 @@ public class EmployeeService implements UserDetailsService{
 		// false(오류없음) | true(오류있음)
 		boolean check = false;
 		
+//		if(employeeVO.getName() == null) {
+//			check = true;
+//			bindingResult.rejectValue("name", "empJoin.name");
+//		}
+//		if(employeeVO.getPhone() == null) {
+//			check =true;
+//			bindingResult.rejectValue("phone", "empJoin.phone");
+//		}
+//		if(employeeVO.getAddress() == null) {
+//			check =true;
+//			bindingResult.rejectValue("address", "empJoin.address");
+//		}
+//		if(employeeVO.getBirth() == null) {
+//			check =true;
+//			bindingResult.rejectValue("birth", "empJoin.birth");
+//		}
 
 		return check;
+	}
+	
+	
+	@Transactional(readOnly=true)
+	public Map<String,String> validateHandling(Errors errors)throws Exception{
+		Map<String, String> validatorResult = new HashMap<>();
+		
+		for(FieldError error : errors.getFieldErrors()) {
+			String validKeyName = String.format("valid_%s", error.getField());
+			validatorResult.put(validKeyName, error.getDefaultMessage());
+		}
+		return validatorResult;
 	}
 	
 	
@@ -70,4 +107,23 @@ public class EmployeeService implements UserDetailsService{
 		return result;
 	}
 	
+	
+	
+	public List<EmployeeVO> getEmpList(Pager pager)throws Exception{
+		return employeeDAO.getEmpList(pager);
+	}
+	
+	
+	public EmployeeVO getEmpDetail (EmployeeVO employeeVO)throws Exception{
+		return employeeDAO.getEmpDetail(employeeVO);
+	}
+	
+	public int setEmpUpdate (EmployeeVO employeeVO)throws Exception{
+		
+		return employeeDAO.setEmpUpdate(employeeVO);
+	}
+	
+	public int setEmpDelete (EmployeeVO employeeVO)throws Exception{
+		return employeeDAO.setEmpDelete(employeeVO);
+	}
 }

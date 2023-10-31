@@ -37,7 +37,7 @@
             <div class="col-xxl">
               <div class="card mb-4">
                 <h1 class="emp_title">직원 인적사항</h1>
-                <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data">
+                <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" id="frm" action="./join">
                   <div class="proFile">
                     <input type="file" name="photo" id="photo">
                   </div>
@@ -45,28 +45,33 @@
                     <div class="proLeft">
                       <div class="prodiv">
                         <form:label path="name">이름</form:label>
-                        <form:input path="name" id="name" cssClass="input_con"></form:input>
+                        <form:input path="name" id="name" cssClass="input_con" required="true"></form:input>
+                        <span id="nameMsg">${valid_name}</span>
                       </div>
                       <div class="prodiv">
                         <form:label path="phone">전화번호</form:label>
-                        <form:input path="phone" id="phone" cssClass="input_con"></form:input>
+                        <form:input path="phone" id="phone" cssClass="input_con" required="true"></form:input>
+                        <span id="phoneMsg">${valid_phone}</span>
                       </div>
                       <div class="prodiv">
                         <form:label path="address">주소</form:label>
-                        <form:input path="address" id="adr_postNum" cssClass="input_con" placeholder="우편번호"></form:input>
+                        <form:input path="address" id="adr_postNum" cssClass="input_con" placeholder="우편번호" value=""></form:input>
                         <button type="button" id="addressBtn">우편번호 찾기</button>
-                        <form:input path="address" id="adr_address" placeholder="주소"></form:input>
-                        <form:input path="address" id="adr_detail" placeholder="상세주소"></form:input>
+                        <form:input path="address" id="adr_address" placeholder="주소" vlaue="" required="true"></form:input>
+                        <form:input path="address" id="adr_detail" placeholder="상세주소" value=""></form:input>
+                        <span id="addressMsg">${valid_address}</span>
                       </div>
                       <div class="prodiv">
                         <form:label path="birth">생년월일</form:label>
-                        <form:input type="date" path="birth" id="birth" cssClass="input_con"></form:input>
+                        <form:input type="date" path="birth" id="birth" cssClass="input_con" required="true"></form:input>
+                        <span id="birthMsg">${valid_birth}</span>
                       </div>
                     </div>
                     <div class="proRight">
                       <div class="prodiv">
                         <form:label path="joinDate">입사일</form:label>
-                        <form:input path="joinDate" id="joinDate" cssClass="input_con" value="0518"></form:input>
+                        <form:input path="joinDate" id="joinDate" cssClass="input_con" value="" readonly="true"></form:input>
+                        <form:errors path="joinDate"></form:errors>
                       </div>
                       <div class="prodiv">
                         <label for="gender">성별</label>
@@ -79,20 +84,20 @@
                       </div>
                       <div class="prodiv">
                         <select name="position" id="position">직급
-                          <option value="CEO">대표</option>
-                          <option value="GENERAL">총괄 매니저</option>
-                          <option value="CUSTOMER">고객관리 매니저</option>
-                          <option value="RESOURCES">인사 매니저</option>
-                          <option value="FACILITY">시설 매니저</option>
-                          <option value="TRAINER">트레이너</option>
-                          <option value="EX">가발령</option>
+                          <option value="ROLE_CEO">대표</option>
+                          <option value="ROLE_GENERAL">총괄 매니저</option>
+                          <option value="ROLE_CUSTOMER">고객관리 매니저</option>
+                          <option value="ROLE_RESOURCES">인사 매니저</option>
+                          <option value="ROLE_FACILITY">시설 매니저</option>
+                          <option value="ROLE_TRAINER">트레이너</option>
+                          <option value="ROLE_EX">가발령</option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="proBtn">
-                    <button type="submit">이전</button>
-                    <button type="submit">등록</button>
+                    <button type="button" id="backBtn">이전</button>
+                    <button type="submit" id="addBtn">등록</button>
                   </div>
                 </form:form>
               </div>
@@ -145,6 +150,6 @@
 <!-- / Layout wrapper -->
 <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/js/join.js"></script>
+<script src="/js/employee/join.js"></script>
 </body>
 </html>
