@@ -33,6 +33,7 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
+                <a href="/employee/join">직원등록</a>
                 <div id="req_list" class="table-responsive text-nowrap">
                   <table class="table table-hover">
                     <thead>
@@ -55,13 +56,13 @@
                           <td>${vo.position}</td>
                           <td>${vo.phone}</td>
                           <td>${vo.state}</td>
-                          <td><a href="./detail?employeeNum=${vo.employeeNum}">상세</a></td>
+                          <td><a href="./detail?employeeNum=${vo.employeeNum}">보기</a></td>
                         </tr>
                       </c:forEach>
                     </tbody>
                   </table>
                 </div>
-                <a href="/employee/join">직원등록</a>
+                
               </div>
               <!-- / Content --> 
               

@@ -7,9 +7,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class AttendanceModifyVO {
 	//수정요청번호
 	private Long attendanceModifyNum;
@@ -26,7 +28,7 @@ public class AttendanceModifyVO {
 	//타입
 	private String type;
 	//상태
-	private String state;
+	private String status;
 	//수정의견
 	private String modifyContents;
 	

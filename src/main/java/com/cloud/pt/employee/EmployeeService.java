@@ -1,11 +1,13 @@
 package com.cloud.pt.employee;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cloud.pt.commons.FileManager;
 import com.cloud.pt.commons.Pager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +34,10 @@ public class EmployeeService implements UserDetailsService{
 	// 비밀번호 암호화
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private FileManager fileManager;
+	
+	private String uploadPath;
 	
 	
 	
@@ -43,11 +51,12 @@ public class EmployeeService implements UserDetailsService{
 		log.info("num : {} ", username);
 		employeeVO.setEmployeeNum(username);
 		log.info("num : {} ",employeeVO.getEmployeeNum());
-		
+
 		// passwordEncoder.encode("비밀번호");
-		System.out.println(passwordEncoder.encode("1234"));
+		System.out.println(passwordEncoder.encode("0000"));
 		
 		try {
+			
 			employeeVO = employeeDAO.getEmpLogin(employeeVO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -98,11 +107,22 @@ public class EmployeeService implements UserDetailsService{
 	
 	
 	@Transactional(rollbackFor = Exception.class)
-	public int setJoin(EmployeeVO employeeVO)throws Exception{
+	public int setJoin(EmployeeVO employeeVO, MultipartFile[] files)throws Exception{
 		// 비밀번호 암호화
 		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
 		
 		int result = employeeDAO.setJoin(employeeVO);
+		
+		
+		// file 등록
+//		for(MultipartFile file : files) {
+//			if(file.isEmpty()) {
+//				continue;
+//			}	
+//			
+////			String fileName = fileManager.save()
+//		}
+		
 		
 		return result;
 	}

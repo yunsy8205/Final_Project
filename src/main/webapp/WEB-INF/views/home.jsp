@@ -5,18 +5,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
 <html
   lang="en"
   class="light-style layout-menu-fixed"
@@ -26,6 +14,12 @@
   data-template="vertical-menu-template-free"
 >
   <head>
+    <style>
+      #off {
+        display: none;
+      }
+    </style>
+
     <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
   </head>
 
@@ -48,41 +42,20 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              
+              <sec:authentication property="principal" var="user"/>
+	              <div id="user" data-num="${user.employeeNum}">
+	                ${user.name} 
+	                ${user.position}
+	              </div>
+              <div id="btn_block">
+                <button type="button" id="on" class="btn btn-primary">출근하기</button>
+                <button type="button" id="off" class="btn btn-primary">퇴근하기</button>
+              </div>
             </div>
             <!-- / Content -->
 
             <!-- Footer -->
-            <!-- <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                <div>
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer> -->
+            
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
@@ -98,5 +71,107 @@
     <!-- / Layout wrapper -->
 
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+
+    <script>
+      //문서의 로딩을 시작할 때 
+      //출근기록이 있는 경우  
+      $(document).ready(function(){
+        $.ajax({
+          type: 'get',
+          url: '/attendance/on',
+          success: function(result){
+            if(result.trim()>0){
+              // $('#on').attr('id', 'off');
+              // $('#off').text('퇴근하기');
+              $('#on').css('display', 'none');
+              $('#off').css('display', 'block');
+            }
+          },
+          error: function(){
+            alert('관리자에게 문의하세요');
+          }
+        }) 
+      })
+      //퇴근기록이 있는 경우
+      $(document).ready(function(){
+          $.ajax({
+          type: 'get',
+          url: '/attendance/off',
+          success: function(result){
+            if(result.trim()>0){
+              $('#off').attr('disabled', true);
+            }
+          },
+          error: function(){
+            alert('관리자에게 문의하세요');
+          }
+        })
+      })
+
+      //로딩 완료되었을 때
+      //퇴근기록이 있는 경우  
+      // $(window).on('load', function(){
+      //     if($('#btn_block').children().attr('id')=='off'){
+      //       $.ajax({
+      //       type: 'get',
+      //       url: '/attendance/off',
+      //       success: function(result){
+      //         if(result.trim()>0){
+      //           $('#btn_block').children().attr('disabled', true);
+      //         }
+      //       },
+      //       error: function(){
+      //         alert('관리자에게 문의하세요');
+      //       }
+      //     })
+      //   }
+      // })
+
+      //출근
+      function setOn(){
+        $.ajax({
+          type: 'post',
+          url: '/attendance/on',
+          success: function(result){
+            if(result.trim()>0){
+              alert('출근하였습니다');
+              $('#on').css('display', 'none');
+              $('#off').css('display', 'block');
+            }
+          },
+          error: function(){
+            alert('관리자에게 문의하세요');
+          }
+        })
+      }
+
+      //퇴근
+      function setOff(){
+        $.ajax({
+          type: 'post',
+          url: '/attendance/off',
+          success: function(result){
+            if(result.trim()>0){
+              alert('퇴근하였습니다');
+              $('#off').attr('disabled', true);
+            }
+          },
+          error: function(){
+            alert('관리자에게 문의하세요');
+          }
+        })
+      }
+
+      //출근버튼 클릭 시 
+      $('#on').on('click', function(){
+        setOn();
+      })
+
+      //퇴근버튼 클릭 시
+      $('#btn_block').on('click', '#off', function(){
+        setOff();
+      })
+ 
+    </script>
   </body>
 </html>
