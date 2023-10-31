@@ -62,27 +62,7 @@
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>
 	<!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@6.1.9/index.global.min.js'></script>
-	<script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-       	  headerToolbar: {
-       	      start: '',
-       	      center: 'title',
-       	      end: 'today prev,next'
-       	    },
-       	  titleFormat: 'YYYY년 M월',
-          height: '90%',
-         // contentHeight: 'auto',
-          fixedWeekCount: false,
-          events: [
-              
-            ]
-        });
-        calendar.render();
-      });
-  </script>
+
 </head>
 
 <body>
@@ -144,10 +124,39 @@
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 
     <script>
-      $('#req_btn').on('click', function(){
-        $(location).attr('href', '/attendanceModify/add');
-      })
-
+    $(document).ready(function(){
+          var request = $.ajax({
+            url: "/attendance/month",
+            method: "get",
+            dataType: "json"
+          });
+          
+          request.done(function(data) {
+              console.log(data);
+              
+              var calendarEl = document.getElementById('calendar');
+            
+              var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                  start: '',
+                  center: 'title',
+                  end: 'today prev,next'
+                },
+                titleFormat: 'YYYY년 M월',
+                height: '90%',
+              // contentHeight: 'auto',
+                fixedWeekCount: false,
+                events: data
+              });
+        
+              calendar.render();								
+          });
+          
+          request.fail(function(jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+          });
+    });
     </script>
   </body>
 </html>

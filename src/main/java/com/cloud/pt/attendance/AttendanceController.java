@@ -1,20 +1,19 @@
 package com.cloud.pt.attendance;
 
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,27 +24,11 @@ public class AttendanceController {
 	@Autowired
 	private AttendanceService attendanceService;
 
-	
+	@ResponseBody
 	@GetMapping("/attendance/month")
 	public List<Map<String, Object>> monthAttendance(@AuthenticationPrincipal EmployeeVO employeeVO) throws Exception {
-		List<Map<String, Object>> list = attendanceService.getList(employeeVO);
-//		System.out.println(list);
-		
-		JSONObject jsonObj; 
-		JSONArray jsonArr = new JSONArray(); //대괄호
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		for(int i=0; i<list.size(); i++) {
-			map.put("title", list.get(i).get("STATE"));
-			map.put("start", list.get(i).get("WORKDATE"));
-			
-			jsonObj = new JSONObject(map); //중괄호 {key:value, key:value}
-			jsonArr.add(jsonObj); //대괄호 안에 넣어주기[{key:value, key:value},{key:value, key:value}]
-		}
-		
-		log.info("jsonArr: {}", jsonArr);
-		
-		return jsonArr;
+		//List<Map<String, Object>>의 자료형으로 보낼시 자동으로 JSON으로 변경됨
+		return attendanceService.getList(employeeVO);
 	}
 	
 	@GetMapping("/attendance/info")
@@ -133,13 +116,13 @@ public class AttendanceController {
 		return "redirect:./list";
 	}
 	
-	@GetMapping("/admin/attendanceMonth")
+	@GetMapping("/admin/attendance/month")
 	public String getAdminMonth() {
 		
 		return "attendance/adminMonth";
 	}
 	
-	@GetMapping("/admin/attendanceDay")
+	@GetMapping("/admin/attendance/day")
 	public String getAdminDay() {
 		
 		return "attendance/adminDay";
@@ -155,9 +138,10 @@ public class AttendanceController {
 	}
 	
 	@GetMapping("/attendanceModify/list")
-	public String getModifyList(@AuthenticationPrincipal EmployeeVO employeeVO, Model model) throws Exception {
-		List<AttendanceVO> ar = attendanceService.getModifyList(employeeVO);
+	public String getModifyList(@AuthenticationPrincipal EmployeeVO employeeVO, Model model, Pager pager) throws Exception {
+		List<AttendanceVO> ar = attendanceService.getModifyList(employeeVO, pager);
 		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
 		
 		return "attendance/list";
 	}

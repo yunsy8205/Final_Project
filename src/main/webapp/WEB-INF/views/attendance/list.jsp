@@ -41,7 +41,7 @@
                 <div id="req_btn">
                   <button id="btn" class="btn btn-primary">근태 수정 요청</button>
                 </div>
-				        <div class="card">
+				 <div class="card">
                   <div id="req_list" class="table-responsive text-nowrap">
                     <table class="table table-hover">
                       <thead>
@@ -68,7 +68,20 @@
                   </div>
                 </div>
               </div>
-                         
+              
+              <ul class="pagination justify-content-center">
+                <li class="page-item prev ${pager.pre?'':'disabled'}">
+                  <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+                </li>
+                <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+	                <li class="page-item">
+	                  <a class="page-link move" data-num="${i}" href="#">${i}</a>
+	                </li>
+                </c:forEach>
+                <li class="page-item next ${pager.next?'':'disabled'}">
+                  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+                </li>
+              </ul>
 
               <div class="content-backdrop fade"></div>
             </div>

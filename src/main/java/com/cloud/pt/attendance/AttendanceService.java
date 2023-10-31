@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +23,35 @@ public class AttendanceService {
 	private AttendanceDAO attendanceDAO;
 	
 	public List<Map<String, Object>> getList(EmployeeVO employeeVO) throws Exception {
-		return attendanceDAO.getList(employeeVO);
+		List<Map<String, Object>> list = attendanceDAO.getList(employeeVO);
+		
+		JSONObject jsonObj; 
+		JSONArray jsonArr = new JSONArray(); //대괄호
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		for(int i=0; i<list.size(); i++) {
+			map.put("title", list.get(i).get("STATE"));
+			map.put("start", list.get(i).get("WORKDATE"));
+			if(list.get(i).get("STATE").equals("조퇴")) {
+				map.put("color", "#F5D0A9");
+			}else if(list.get(i).get("STATE").equals("정상")) {
+				map.put("color", "#BCF5A9");
+			}else if(list.get(i).get("STATE").equals("결근")) {
+				map.put("color", "#F6CECE");
+			}else if(list.get(i).get("STATE").equals("지각")) {
+				map.put("color", "#F3F781");
+			}else {
+				map.put("color", "#CEE3F6");
+			}
+			map.put("textColor", "#000000");
+			
+			jsonObj = new JSONObject(map); //중괄호 {key:value, key:value}
+			jsonArr.add(jsonObj); //대괄호 안에 넣어주기[{key:value, key:value},{key:value, key:value}]
+		}
+		
+		log.info("jsonArr: {}", jsonArr);
+		
+		return jsonArr;
 	}
 	
 //	public List<AttendanceVO> getList(EmployeeVO employeeVO) throws Exception {
@@ -100,8 +131,16 @@ public class AttendanceService {
 		return attendanceDAO.getModifyDetail(attendanceModifyVO);
 	}
 	
-	public List<AttendanceVO> getModifyList(EmployeeVO employeeVO) throws Exception {
-		return attendanceDAO.getModifyList(employeeVO);
+	public List<AttendanceVO> getModifyList(EmployeeVO employeeVO, Pager pager) throws Exception {
+		pager.makeRowNum();
+		Long total = attendanceDAO.getModifyTotal(employeeVO);
+		pager.makePageNum(total);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("vo", employeeVO);
+		map.put("pager", pager);
+		
+		return attendanceDAO.getModifyList(map);
 	}
 	
 	public int setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO) throws Exception {

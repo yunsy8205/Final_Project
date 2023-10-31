@@ -137,7 +137,16 @@
 		</association>
 	</resultMap> 
 	
-
+	
+	<select id="getModifyTotal" parameterType="EmployeeVO" resultType="Long">
+		SELECT COUNT(ATTENDANCEMODIFYNUM)
+		FROM ATTENDANCEMODIFY AM
+			JOIN ATTENDANCE A
+			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		WHERE E.EMPLOYEENUM=#{employeeNum}
+	</select>
 	
 	<select id="getModifyDetail" resultType="AttendanceModifyVO" parameterType="AttendanceModifyVO">
 		SELECT * 
@@ -145,15 +154,16 @@
 		WHERE ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
 	</select>
 	
-	<select id="getModifyList" resultMap="getListResult" parameterType="EmployeeVO">
+	<select id="getModifyList" resultMap="getListResult" parameterType="Map">
 		SELECT AM.*, E.NAME 
 		FROM ATTENDANCEMODIFY AM 
 			JOIN ATTENDANCE A
 			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
 			JOIN EMPLOYEE E
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM
-		WHERE E.EMPLOYEENUM=#{employeeNum}
+		WHERE E.EMPLOYEENUM=#{vo.employeeNum}
 		ORDER BY AM.ATTENDANCEMODIFYNUM DESC
+		LIMIT #{pager.startRow}, #{pager.lastRow}
 	</select>
 	
 	<resultMap type="AttendanceVO" id="getListResult">
