@@ -10,6 +10,8 @@ import com.cloud.pt.employee.EmployeeVO;
 @Mapper
 public interface AttendanceDAO {
 	
+	public List<Map<String, Object>> getList(EmployeeVO employeeVO) throws Exception;
+//	public List<AttendanceVO> getList(EmployeeVO employeeVO) throws Exception;
 	public AttendanceVO getInfo(EmployeeVO employeeVO) throws Exception;
 	
 	public int setOn(EmployeeVO employeeVO) throws Exception;

@@ -1,11 +1,14 @@
 package com.cloud.pt.attendance;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +25,32 @@ public class AttendanceController {
 	@Autowired
 	private AttendanceService attendanceService;
 
+	
+	@GetMapping("/attendance/month")
+	public void monthAttendance(@AuthenticationPrincipal EmployeeVO employeeVO) throws Exception {
+		List<Map<String, Object>> list = attendanceService.getList(employeeVO);
+		
+		System.out.println(list);
+		
+		JSONObject jsonObj; 
+		JSONArray jsonArr; 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		for(int i=0; i<list.size(); i++) {
+			map.put("title", list.get(i).get("STATE"));
+			map.put("start", list.get(i).get("WORKDATE"));
+			
+			jsonObj = new JSONObject(map);
+		}
+	}
+	
 	@GetMapping("/attendance/info")
-	public String getInfo(EmployeeVO employeeVO, Model model) throws Exception {
+	public String getInfo(@AuthenticationPrincipal EmployeeVO employeeVO, Model model) throws Exception {
 //		log.info("vo: {}", employeeVO);
 		AttendanceVO attendanceVO = attendanceService.getInfo(employeeVO);
 		model.addAttribute("vo", attendanceVO);
+//		List<AttendanceVO> ar = attendanceService.getList(employeeVO);
+//		model.addAttribute("list", ar);
 		
 		return "attendance/info";
 	}
@@ -127,7 +151,7 @@ public class AttendanceController {
 	}
 	
 	@GetMapping("/attendanceModify/list")
-	public String getModifyList(EmployeeVO employeeVO, Model model) throws Exception {
+	public String getModifyList(@AuthenticationPrincipal EmployeeVO employeeVO, Model model) throws Exception {
 		List<AttendanceVO> ar = attendanceService.getModifyList(employeeVO);
 		model.addAttribute("list", ar);
 		

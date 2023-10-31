@@ -167,13 +167,11 @@
 
       $('#approve_btn').on('click', function(){
         $('#status').val('승인');
-        alert('승인되었습니다')
         $('#frm').submit();
       })
 
       $('#reject_btn').on('click', function(){
         $('#status').val('반려');
-        alert('반려되었습니다')
         $('#frm').submit();
       })
     </script>

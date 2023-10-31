@@ -35,6 +35,12 @@
 			WHERE ATTENDANCENUM=#{vo.attendanceNum}
 	</update>
 	
+	<select id="getList" resultType="Map" parameterType="EmployeeVO">
+		SELECT *
+		FROM ATTENDANCE
+		WHERE EMPLOYEENUM=#{employeeNum}
+	</select>
+	
 	<select id="getInfo" resultMap="getInfoResult" parameterType="EmployeeVO">
 		SELECT A.*, E.*
 		FROM ATTENDANCE A 
@@ -62,8 +68,8 @@
 	<update id="setUpdateA" parameterType="Map">
 		UPDATE ATTENDANCE
 			<set> STATE=#{attendance.state},
-				<if test="modify.type.equals('출근')">ONTIME=#{modify.modifyTime}</if>
-				<if test="modify.type.equals('퇴근')">OFFTIME=#{modify.modifyTime}</if>
+				<if test="modify.type eq '출근'.toString()">ONTIME=#{modify.modifyTime}</if>
+				<if test="modify.type eq '퇴근'.toString()">OFFTIME=#{modify.modifyTime}</if>
 			</set>
 			WHERE ATTENDANCENUM=#{attendance.attendanceNum}
 	</update>

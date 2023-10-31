@@ -56,7 +56,7 @@
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 
-  <!-- moment lib -->
+  	<!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 	<!-- fullcalendar bundle -->
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>
@@ -75,7 +75,10 @@
        	  titleFormat: 'YYYY년 M월',
           height: '90%',
          // contentHeight: 'auto',
-          fixedWeekCount: false
+          fixedWeekCount: false,
+          events: [
+              
+            ]
         });
         calendar.render();
       });

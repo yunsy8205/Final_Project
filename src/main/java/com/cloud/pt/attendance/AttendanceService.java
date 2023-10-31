@@ -19,6 +19,14 @@ public class AttendanceService {
 	@Autowired
 	private AttendanceDAO attendanceDAO;
 	
+	public List<Map<String, Object>> getList(EmployeeVO employeeVO) throws Exception {
+		return attendanceDAO.getList(employeeVO);
+	}
+	
+//	public List<AttendanceVO> getList(EmployeeVO employeeVO) throws Exception {
+//		return attendanceDAO.getList(employeeVO);
+//	}
+	
 	public AttendanceVO getInfo(EmployeeVO employeeVO) throws Exception {
 		return attendanceDAO.getInfo(employeeVO);
 	}
@@ -62,7 +70,7 @@ public class AttendanceService {
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("attendance", attendanceVO);
-		map.put("modoify", attendanceModifyVO);
+		map.put("modify", attendanceModifyVO);
 		
 		int result = 0;
 		
