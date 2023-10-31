@@ -7,10 +7,14 @@
 		<!-- 채연 -->
 		<typeAlias type="com.cloud.pt.employee.EmployeeVO" alias="EmployeeVO"/>
 		
+		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
+		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
 		
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
 		<typeAlias type="com.cloud.pt.attendance.AttendanceModifyVO" alias="AttendanceModifyVO"/>
+		<typeAlias type="java.util.Map" alias="Map"/>
+		
 		
 		
 		
@@ -21,5 +25,11 @@
 		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
 		
+<!-- 동찬 -->
+		<typeAlias type="java.util.Map" alias="Map"/>
+		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
+		<typeAlias type="com.cloud.pt.common.Pager" alias="Pager"/>
+
+
 	</typeAliases>
 </configuration>

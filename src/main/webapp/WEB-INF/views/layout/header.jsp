@@ -50,10 +50,10 @@
                 <div class="nav-item d-flex align-items-center">
                   <!-- 로그인 성공 시, 사용자 이름 가져오기 -->
                   <sec:authorize access="isAuthenticated()">
-                     <!-- <sec:authentication property="Principal" var="VO"/>
+                     <sec:authentication property="Principal" var="VO"/>
                      <p>
                         <spring:message code="login.welcome.name" arguments="${VO.name}"></spring:message>
-                     </p> -->
+                     </p>
                   </sec:authorize>
                 </div>
               </div>

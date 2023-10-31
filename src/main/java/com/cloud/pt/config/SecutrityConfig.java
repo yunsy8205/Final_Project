@@ -30,9 +30,14 @@ public class SecutrityConfig {
 		
 		return web -> web
 				.ignoring()
-				.antMatchers("/css/**")
-				.antMatchers("/img/**")
-				.antMatchers("/js/**");
+				.antMatchers("/assets/**")
+				.antMatchers("/fonts/**")
+				.antMatchers("/fullcalendar-6.1.9/**")
+				.antMatchers("/html/**")
+				.antMatchers("/js/**")
+				.antMatchers("/libs/**")
+				.antMatchers("/scss/**")
+				.antMatchers("/tasks/**");
 	}
 	
 	
@@ -41,11 +46,12 @@ public class SecutrityConfig {
 	SecurityFilterChain securityFilteChain(HttpSecurity httpSecurity)throws Exception{
 		
 		httpSecurity
-			.cors()
+			.cors()	
 			.and()
 			.csrf()
 			.disable()
 			.authorizeHttpRequests()
+				.antMatchers("/employee/join").hasRole("GENERAL")	
 				.antMatchers("/").permitAll()
 				.and()
 				
@@ -64,9 +70,15 @@ public class SecutrityConfig {
 				.logoutUrl("/employee/logout")      // logout post 처리 경로 (기본적으로 POST요청)
 				.addLogoutHandler(logoutAdd)        // logout 처리 (세션 무효화 처리)
 				.logoutSuccessHandler(logoutHandler)// logout 성공 처리 메서드 (리다이렉트 처리)
+				.invalidateHttpSession(true)        // logout 시 session 만료
 				.deleteCookies("JSESSIONID")		// logout 쿠키 삭제
 				.permitAll()
 				.and()
+				
+			// 403 예외처리 (권한에 따른 페이지 처리)
+			.exceptionHandling()
+				.accessDeniedPage("/error/denied")
+			
 				;
 		
 		return httpSecurity.build();
