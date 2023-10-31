@@ -27,10 +27,9 @@ public class AttendanceController {
 
 	
 	@GetMapping("/attendance/month")
-	public void monthAttendance(@AuthenticationPrincipal EmployeeVO employeeVO) throws Exception {
+	public List<Map<String, Object>> monthAttendance(@AuthenticationPrincipal EmployeeVO employeeVO) throws Exception {
 		List<Map<String, Object>> list = attendanceService.getList(employeeVO);
-		
-		System.out.println(list);
+//		System.out.println(list);
 		
 		JSONObject jsonObj; 
 		JSONArray jsonArr = new JSONArray(); //대괄호
@@ -43,6 +42,10 @@ public class AttendanceController {
 			jsonObj = new JSONObject(map); //중괄호 {key:value, key:value}
 			jsonArr.add(jsonObj); //대괄호 안에 넣어주기[{key:value, key:value},{key:value, key:value}]
 		}
+		
+		log.info("jsonArr: {}", jsonArr);
+		
+		return jsonArr;
 	}
 	
 	@GetMapping("/attendance/info")
