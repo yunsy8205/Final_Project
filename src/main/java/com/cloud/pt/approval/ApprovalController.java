@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cloud.pt.common.Pager;
+import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
 
 import lombok.extern.slf4j.Slf4j;

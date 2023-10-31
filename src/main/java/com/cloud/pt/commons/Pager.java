@@ -1,4 +1,4 @@
-package com.cloud.pt.common;
+package com.cloud.pt.commons;
 
 import lombok.Getter;
 import lombok.Setter;

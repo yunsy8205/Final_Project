@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cloud.pt.common.Pager;
+import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
 
 @Service
