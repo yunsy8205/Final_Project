@@ -10,6 +10,11 @@
 		WHERE EMPLOYEENUM != #{employeeNum}
 	</select>
 	
+	<select id="getSearch" parameterType="String" resultType="EmployeeVO">
+		SELECT * FROM EMPLOYEE
+		WHERE NAME LIKE CONCAT('%',#{name},'%')
+	</select>
+	
 	<select id="roomCheck" parameterType="RoomVO" resultType="RoomVO">
 		SELECT * FROM ROOM
 		WHERE USER1=#{user1} AND USER2=#{user2}
@@ -30,4 +35,5 @@
 		SELECT * FROM CHAT
 		WHERE ROOMNUM = #{roomNum}
 	</select>
+
 </mapper>

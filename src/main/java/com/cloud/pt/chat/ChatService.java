@@ -59,6 +59,10 @@ public class ChatService {
     	return chatDAO.getChatList(employeeNum);
     }
     
+    public List<EmployeeVO> getSearch(String name)throws Exception{
+    	return chatDAO.getSearch(name);
+    }
+    
     public RoomVO roomCheck(RoomVO roomVO)throws Exception{
     	roomVO = chatDAO.roomCheck(roomVO);
     	if(roomVO!=null) {
@@ -75,9 +79,5 @@ public class ChatService {
     public List<ChatMessageVO> chatMessageList(RoomVO roomVO)throws Exception{
     	return chatDAO.chatMessageList(roomVO);
     }
-    
-//    public java.util.Date addDate(){
-//    	
-//    }
 
 }

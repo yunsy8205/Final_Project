@@ -1,6 +1,5 @@
 package com.cloud.pt.config;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,7 +96,7 @@ public class ChatHandler extends TextWebSocketHandler{
       
   }
 
-	private void sendToEachSocket(ChatMessageVO chatMessageVO, TextMessage textMessage,RoomVO room) throws IOException {
+	private void sendToEachSocket(ChatMessageVO chatMessageVO, TextMessage textMessage,RoomVO room) throws Exception {
 		
 		Set<WebSocketSession> chatMember = new HashSet<>();
 		
@@ -115,27 +114,25 @@ public class ChatHandler extends TextWebSocketHandler{
 			chatMember.add(sessions.get(room.getUser2()));
 			log.info("User2:"+room.getUser2());
 		}
-
+		
+		//보낼때 DB에 바로 저장
+		if(chatMessageVO.getType().equals(ChatMessageVO.MessageType.ENTER)){
+		//입장 메세지는 저장 안함
+		}else {
+			
+			int result = chatService.messageAdd(chatMessageVO);
+			
+			if(result>0) {
+				log.info("DB 저장 성공");
+			}else{
+				log.info("DB 저장 실패");
+			}
+		}
+		
         chatMember.parallelStream().forEach(a -> {
   		try {
   			
   			a.sendMessage(textMessage);
-  			
-  			log.info(chatMessageVO.getChatDate());
-  			
-  			//보낼때 DB에 바로 저장
-  			if(chatMessageVO.getType().equals(ChatMessageVO.MessageType.ENTER)){
-  			//입장 메세지는 저장 안함
-  			}else {
-  				
-  				int result = chatService.messageAdd(chatMessageVO);
-  				
-  				if(result>0) {
-  					log.info("DB 저장 성공");
-  				}else{
-  					log.info("DB 저장 실패");
-  				}
-  			}
   			
   		} catch (Exception e) {
   			// TODO Auto-generated catch block

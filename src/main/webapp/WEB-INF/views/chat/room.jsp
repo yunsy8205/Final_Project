@@ -80,7 +80,20 @@
 		#msgArea{
 			width: 100%;
 		    height: 90%;
-		    border: 1px solid;
+		    background-color: #E7E7FF;
+		    padding: 0.8rem 0 1.5rem;
+		}
+		.alert-primary{
+			background-color: #696CFF;
+			color: white;
+		}
+		.msg{
+			padding: 1rem 2rem;
+			margin: 0.7rem 1.5rem 0 1.5rem;
+		}
+		#chatDate{
+			padding-left: 83%;
+			font-size: 11px;
 		}
     </style>
   </head>
@@ -111,25 +124,50 @@
                 <div class="col-xl1">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">LIST</h5>
+                      <h5 class="mb-0">이름 직급</h5>
                     </div>
-                    <div class="card-body" data-sender="${VO}">
-                    	<c:forEach items="${list}" var="li">
-                        	<a href="#" class="chatList" data-empNum="${li.employeeNum}">${li.name} ${li.position}</a><br>                   		
-                    	</c:forEach>
+                    <div class="card-body">
+                    	<div class="input-group mb-4">
+	                        <input
+	                          id="searchName"
+	                          type="text"
+	                          class="form-control"
+	                          aria-label="Recipient's username"
+	                          aria-describedby="button-addon2"
+	                        />
+	                        <button class="btn btn-outline-primary" type="button" id="search">조회</button>
+                      	</div>
+                    	<div id="listBox">
+	                    	<c:forEach items="${list}" var="li">
+	                        	<a href="#" class="chatList" data-empNum="${li.employeeNum}">${li.name} ${li.position}</a><br>                   		
+	                    	</c:forEach>
+                    	</div>
                     </div>
                   </div>
                 </div>
                 <div class="col-xl">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">Chatting</h5>
+                      <h5 class="mb-0">채팅하려는 대상을 선택해 주세요</h5>
                
                     </div>
                     <div class="card-body">
-                    	<div id="msgArea"></div>  
-                    	<input id="msg" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                      	<button id="button-send" data-room="" data-receiver="" class="btn btn-outline-primary" type="button">보내기</button>
+                    	<div id="msgArea" class="card mb-4"></div>  
+                    	<div class="input-group">
+	                        <input
+	                          id="msg"
+	                          type="text"
+	                          class="form-control"
+	                          aria-label="Recipient's username"
+	                          aria-describedby="button-addon2"
+	                        />
+	                        <button class="btn btn-outline-primary"
+	                                type="button"
+	                                id="button-send"
+	                                data-room=""
+	                                data-receiver=""
+	                                >보내기</button>
+                      	</div>
                     </div>
                   </div>
                 </div>
