@@ -176,10 +176,9 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <sec:authentication property="Principal" var="user"/>
-                    <a href="#" class="menu-link">
-                      <div data-i18n="Accordion">내 근태 조회</div>
-                    </a>
+                  <a href="/attendance/info" class="menu-link">
+                    <div data-i18n="Accordion">내 근태 조회</div>
+                  </a>
                 </li>
                 <li class="menu-item">
                   <a href="ui-alerts.html" class="menu-link">
@@ -187,7 +186,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="ui-badges.html" class="menu-link">
+                  <a href="/attendanceModify/list" class="menu-link">
                     <div data-i18n="Badges">근태 수정 요청 목록</div>
                   </a>
                 </li>

@@ -38,9 +38,6 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 <h3>근태 수정 요청 목록</h3>
 
-                <div id="req_btn">
-                  <button id="btn" class="btn btn-primary">근태 수정 요청</button>
-                </div>
 				        <div class="card">
                   <div id="req_list" class="table-responsive text-nowrap">
                     <table class="table table-hover">
@@ -83,12 +80,7 @@
     <!-- / Layout wrapper -->
   
   <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-  
-  <script>
-    $('#btn').on('click', function(){
-      $(location).attr('href', '/attendanceModify/add');
-    })
-  </script>
+
 
 </body>
 </html>

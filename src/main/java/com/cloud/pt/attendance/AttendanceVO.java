@@ -7,9 +7,11 @@ import com.cloud.pt.employee.EmployeeVO;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class AttendanceVO {
 	//근태번호
 	private Long attendanceNum;

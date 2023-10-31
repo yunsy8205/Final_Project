@@ -2,12 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
-<html>
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
   <style>
     .attendance {display: flex;}
     .attendance #my {
@@ -36,7 +42,7 @@
       margin-bottom: 30px;
       text-align: center;
     }
-    .attendance_btn {
+    .btn-primary {
       margin-top: 30px;
       margin-bottom: 15px;
       text-align: center;
@@ -47,11 +53,10 @@
       line-height: 2;
     }
   </style>
-	<c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
-	<c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
-	<link rel="stylesheet" href="/css/main.css" />
-	
-	<!-- moment lib -->
+
+  <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+
+  	<!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 	<!-- fullcalendar bundle -->
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>
@@ -70,70 +75,79 @@
        	  titleFormat: 'YYYY년 M월',
           height: '90%',
          // contentHeight: 'auto',
-          fixedWeekCount: false
+          fixedWeekCount: false,
+          events: [
+              
+            ]
         });
         calendar.render();
       });
   </script>
 </head>
+
 <body>
-	<div id="wrap">
-      <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
-      <div id="right">
-        <header>
-          <div class="header_wrap">
-            <div class="header_message">
-              <p>이재혁 님 환영합니다</p>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+		      <!-- sidebar -->
+          <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
+          <!-- Layout container -->
+          <div class="layout-page">
+            <!-- Navbar -->
+            <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
+
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+              <!-- Content 내용 여기로 -->
+              <div class="container-xxl flex-grow-1 container-p-y attendance">
+                <div id="my">
+                  <div class="profile">
+                    <img class="rounded-circle" src="/img/1.jpg" alt="">
+                  </div>
+                  <div class="name">
+                    ${vo.employeeVO.name}
+                  </div>
+                  <div class="time">
+                    <ul>
+                      <li class="list">
+                        출근시간 - ${vo.onTime}
+                      </li>
+                      <li class="list">퇴근시간 - ${vo.offTime}
+                      </li>
+                      <br>
+                      <li class="list">연차개수 - ${vo.employeeVO.leaveDate}개</li>
+                    </ul>
+                  </div>
+                  <button class="btn btn-primary">내 정보 수정</button>
+                  <button class="btn btn-primary" id="req_btn">근태 수정 요청</button>
+                </div>
+                <div id="calendar">
+                </div>
+
+              </div>
+              <!-- / Content -->  
+
+              <div class="content-backdrop fade"></div>
             </div>
-            <div class="header_navi">
-              <a href="#">조직도</a>
-              <a href="#">로그인</a>
-              <a href="#">로그아웃</a>
-              <a href="#">마이페이지</a>
-            </div>
+            <!-- Content wrapper -->
           </div>
-        </header>
-        <!-- main내용  -->
-        <section id="mainContents" class="attendance"> 
-        	<div id="my">
-            <div class="profile">
-              <img class="rounded-circle" src="/img/1.jpg" alt="">
-            </div>
-            <div class="name">
-              ${vo.name}
-            </div>
-            <div class="time">
-              <ul>
-                <li class="list">출근시간 - 
-                  <c:forEach items="${vo.list}" var="l">
-		                ${l.onTime}
-	                </c:forEach>
-                </li>
-                <li class="list">퇴근시간 - 
-                  <c:forEach items="${vo.list}" var="l">
-		                ${l.offTime}
-	                </c:forEach>
-                </li>
-                <br>
-                <li class="list">연차개수 - ${vo.leaveDate}개</li>
-              </ul>
-            </div>
-            <button class="attendance_btn" >내 정보 수정</button>
-            <button class="attendance_btn" id="req_btn">근태 수정 요청</button>
-          </div>
-        	<div id="calendar">
-          </div>
-        </section>
-        
-      </div>
+        <!-- / Layout page -->
+      <div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+    <!-- / Layout wrapper -->
+  
+
+    <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 
     <script>
-      const req_btn = document.getElementById('req_btn');
-
-      req_btn.addEventListener('click', function(){
-        location.href = '/attendanceModify/add';
+      $('#req_btn').on('click', function(){
+        $(location).attr('href', '/attendanceModify/add');
       })
+
     </script>
-</body>
+  </body>
 </html>
