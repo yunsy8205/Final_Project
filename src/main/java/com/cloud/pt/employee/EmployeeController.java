@@ -60,7 +60,7 @@ public class EmployeeController {
 	
 	
 	@PostMapping("join")
-	public String setJoin(@Valid EmployeeVO employeeVO,Errors errors, BindingResult bindingResult, Model model, MultipartFile photo)throws Exception{
+	public String setJoin(@Valid EmployeeVO employeeVO,Errors errors, BindingResult bindingResult, Model model, MultipartFile[] photo)throws Exception{
 		employeeVO.setPassword("0000");
 		
 //		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
@@ -78,7 +78,7 @@ public class EmployeeController {
 			return "/employee/join";
 		}
 		
-		int result = employeeService.setJoin(employeeVO);
+		int result = employeeService.setJoin(employeeVO,photo);
 		
 		log.info("====>>>>>>>>>>>>>>>>>>> authorities :{} ", employeeVO.getAuthorities());
 		
