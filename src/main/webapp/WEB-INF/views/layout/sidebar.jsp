@@ -158,7 +158,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="/ptClass/ptReservation" class="menu-link">
+                  <a href="/ptClass/ptList" class="menu-link">
                     <div data-i18n="Error">수업 조회</div>
                   </a>
                 </li>

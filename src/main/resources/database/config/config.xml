@@ -24,11 +24,11 @@
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
 		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
-		
+		<!-- <typeAlias type="com.cloud.pt.calendar.CalendarVO" alias="CalendarVO"/> -->
 <!-- 동찬 -->
-		<typeAlias type="java.util.Map" alias="Map"/>
+		
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
-		<typeAlias type="com.cloud.pt.common.Pager" alias="Pager"/>
+		
 
 
 	</typeAliases>

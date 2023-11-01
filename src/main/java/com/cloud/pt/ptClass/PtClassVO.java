@@ -12,7 +12,7 @@ public class PtClassVO {
 	private Long ptNum;
 	private Long memberNum;
 	private Long employeeNum;
-	private Date startTime;
-	private Date finishTime;
-	
+	private String startTime;
+	private String finishTime;
+	private String name;
 }
