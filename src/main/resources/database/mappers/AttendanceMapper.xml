@@ -10,8 +10,38 @@
 		WHERE WORKDATE=#{modify.modifyDate}
 		AND EMPLOYEENUM=#{emp.employeeNum}
 	</select>
-
-	<select id="getInfo" resultMap="getInfoResult" parameterType="AttendanceVO">
+	
+	<insert id="setOn" parameterType="EmployeeVO">
+		INSERT INTO ATTENDANCE
+		(EMPLOYEENUM, WORKDATE, ONTIME)
+		VALUES (#{employeeNum}, NOW(), NOW())
+	</insert>
+	
+	<update id="setOff" parameterType="EmployeeVO">
+		UPDATE ATTENDANCE
+			SET OFFTIME=NOW()
+			WHERE EMPLOYEENUM=#{employeeNum}
+			AND WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
+	</update>
+	
+	<update id="setState" parameterType="Map">
+		UPDATE ATTENDANCE
+		<set>
+			<if test="vo.onTime lt on and vo.offTime gte off">STATE='정상'</if>
+			<if test="vo.onTime gte on and vo.offTime gte off">STATE='지각'</if>
+			<if test="vo.onTime gte on and vo.offTime lt off">STATE='조퇴'</if>
+			<if test="vo.onTime lt on and vo.offTime lt off">STATE='조퇴'</if>
+		</set>
+			WHERE ATTENDANCENUM=#{vo.attendanceNum}
+	</update>
+	
+	<select id="getList" resultType="Map" parameterType="EmployeeVO">
+		SELECT *
+		FROM ATTENDANCE
+		WHERE EMPLOYEENUM=#{employeeNum}
+	</select>
+	
+	<select id="getInfo" resultMap="getInfoResult" parameterType="EmployeeVO">
 		SELECT A.*, E.*
 		FROM ATTENDANCE A 
 			JOIN EMPLOYEE E
@@ -20,19 +50,100 @@
 		AND A.WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</select>
 	
-	<resultMap type="EmployeeVO" id="getInfoResult">
-		<id column="EMPLOYEENUM" property="employeeNum"/>
-		<result column="NAME" property="name"/>
-		<result column="LEAVEDATE" property="leaveDate"/>
-		<collection property="list" javaType="java.util.List" ofType="AttendanceVO">
-			<id column="ATTENDANCENUM" property="attendanceNum"/>
-				<result column="EMPLOYEENUM" property="employeeNum"/>
-				<result column="WORKDATE" property="workDate"/>
-				<result column="ONTIME" property="onTime"/>
-				<result column="OFFTIME" property="offTime"/>
-				<result column="STATE" property="state"/>
-		</collection>
+	<resultMap type="AttendanceVO" id="getInfoResult">
+		<id column="ATTENDANCENUM" property="attendanceNum"/>
+		<result column="EMPLOYEENUM" property="employeeNum"/>
+		<result column="WORKDATE" property="workDate"/>
+		<result column="ONTIME" property="onTime"/>
+		<result column="OFFTIME" property="offTime"/>
+		<result column="STATE" property="state"/>
+		<association property="employeeVO" javaType="EmployeeVO">			
+			<id column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="NAME" property="name"/>
+			<result column="LEAVEDATE" property="leaveDate"/>
+		</association>
 	</resultMap>	
+	
+	
+	<update id="setUpdateA" parameterType="Map">
+		UPDATE ATTENDANCE
+			<set> STATE=#{attendance.state},
+				<if test="modify.type eq '출근'.toString()">ONTIME=#{modify.modifyTime}</if>
+				<if test="modify.type eq '퇴근'.toString()">OFFTIME=#{modify.modifyTime}</if>
+			</set>
+			WHERE ATTENDANCENUM=#{attendance.attendanceNum}
+	</update>
+	
+	<update id="setUpdateAM" parameterType="AttendanceModifyVO">
+		UPDATE ATTENDANCEMODIFY
+			SET MODIFYCONTENTS=#{modifyContents},
+			STATUS=#{status}
+			WHERE ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
+	</update>
+	
+	<select id="getRequestDetail" resultMap="getDetailResult" parameterType="AttendanceModifyVO">
+		SELECT AM.*, A.*, E.NAME, E.EMPLOYEENUM
+		FROM ATTENDANCEMODIFY AM
+			JOIN ATTENDANCE A
+			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		WHERE AM.ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
+	</select>
+	
+	<resultMap type="AttendanceVO" id="getDetailResult">
+		<id column="ATTENDANCENUM" property="attendanceNum"/>
+		<result column="WORKDATE" property="workDate"/>
+		<result column="ONTIME" property="onTime"/>
+		<result column="OFFTIME" property="offTime"/>
+		<result column="STATE" property="state"/>
+		<association property="attendanceModifyVO" javaType="AttendanceModifyVO">
+			<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
+			<result column="REGDATE" property="regDate"/>
+			<result column="MODIFYDATE" property="modifyDate"/>
+			<result column="MODIFYTIME" property="modifyTime"/>
+			<result column="REQUESTCONTENTS" property="requestContents"/>
+			<result column="TYPE" property="type"/>			
+		</association>
+		<association property="employeeVO" javaType="EmployeeVO">
+			<id column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="NAME" property="name"/>
+		</association>
+	</resultMap>	
+
+	<select id="getRequestList" resultMap="getRequestResult" parameterType="AttendanceModifyVO">
+		SELECT AM.*, E.NAME 
+		FROM ATTENDANCEMODIFY AM 
+			JOIN ATTENDANCE A
+			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		ORDER BY AM.ATTENDANCEMODIFYNUM DESC
+	</select>
+	
+	<resultMap type="AttendanceVO" id="getRequestResult">
+		<id column="ATTENDANCENUM" property="attendanceNum"/>
+		<association property="attendanceModifyVO" javaType="AttendanceModifyVO">
+			<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
+			<result column="ATTENDANCENUM" property="attendanceNum"/>
+			<result column="REGDATE" property="regDate"/>
+			<result column="MODIFYDATE" property="modifyDate"/>
+			<result column="MODIFYTIME" property="modifyTime"/>
+			<result column="STATUS" property="status"/>
+		</association>
+		<association property="employeeVO" javaType="EmployeeVO">
+			<id column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="NAME" property="name"/>
+		</association>
+	</resultMap> 
+	
+
+	
+	<select id="getModifyDetail" resultType="AttendanceModifyVO" parameterType="AttendanceModifyVO">
+		SELECT * 
+		FROM ATTENDANCEMODIFY
+		WHERE ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
+	</select>
 	
 	<select id="getModifyList" resultMap="getListResult" parameterType="EmployeeVO">
 		SELECT AM.*, E.NAME 
@@ -49,11 +160,11 @@
 		<id column="ATTENDANCENUM" property="attendanceNum"/>
 		<association property="attendanceModifyVO" javaType="AttendanceModifyVO">
 			<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
-				<result column="ATTENDANCENUM" property="attendanceNum"/>
-				<result column="REGDATE" property="regDate"/>
-				<result column="MODIFYDATE" property="modifyDate"/>
-				<result column="MODIFYTIME" property="modifyTime"/>
-				<result column="STATE" property="state"/>
+			<result column="ATTENDANCENUM" property="attendanceNum"/>
+			<result column="REGDATE" property="regDate"/>
+			<result column="MODIFYDATE" property="modifyDate"/>
+			<result column="MODIFYTIME" property="modifyTime"/>
+			<result column="STATUS" property="status"/>
 		</association>
 		<association property="employeeVO" javaType="EmployeeVO">
 			<id column="EMPLOYEENUM" property="employeeNum"/>
@@ -63,7 +174,7 @@
 
 	<insert id="setModifyAdd" parameterType="AttendanceModifyVO">
 		INSERT INTO ATTENDANCEMODIFY
-		(ATTENDANCENUM,REGDATE,MODIFYDATE,MODIFYTIME,REQUESTCONTENTS,TYPE,STATE)
+		(ATTENDANCENUM,REGDATE,MODIFYDATE,MODIFYTIME,REQUESTCONTENTS,TYPE,STATUS)
 		VALUES (#{attendanceNum},NOW(),#{modifyDate},#{modifyTime},#{requestContents},#{type},'요청')
 	</insert>
 </mapper>

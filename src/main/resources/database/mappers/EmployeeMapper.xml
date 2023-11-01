@@ -7,12 +7,37 @@
 	
 	<select id="getEmpLogin" parameterType="EmployeeVO" resultType="EmployeeVO">
 		SELECT * FROM EMPLOYEE 
-		WHERE EMPLOYEENUM = #{employeeNum}
+		WHERE EMPLOYEENUM = #{employeeNum} 
 	</select>
 	
 	<insert id="setJoin" parameterType="EmployeeVO">
 		INSERT INTO EMPLOYEE
 		VALUES (DEFAULT, #{name}, #{password}, #{phone}, #{address}, #{gender}, #{birth}, now(), #{quitDate}, #{state}, #{position}, 12, null, null, #{proFile}, #{proOriginal})
 	</insert>
+	
+	<select id="getEmpList" parameterType="Pager" resultType="EmployeeVO">
+		SELECT EMPLOYEENUM,NAME,POSITION,PHONE,STATE FROM EMPLOYEE
+		ORDER BY EMPLOYEENUM  DESC
+		LIMIT #{startRow},#{lastRow}
+	</select>
+	
+	<select id="getEmpDetail" parameterType="EmployeeVO" resultType="EmployeeVO" >
+		SELECT * FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum}
+	</select>
+	
+	<update id="setEmpUpdate" parameterType="EmployeeVO">
+		UPDATE EMPLOYEE
+		SET 
+		NAME=#{name},PHONE=#{phone},ADDRESS=#{address},GENDER=#{gender},BIRTH=#{birth},QUITDATE=#{quitDate},STATE=#{state},POSITION=#{position}
+		WHERE EMPLOYEENUM = #{employeeNum}
+	</update>
+	
+	<update id="setEmpDelete" parameterType="EmployeeVO">
+		UPDATE EMPLOYEE
+		SET
+		PASSWORD='0',PHONE='0',ADDRESS=NULL,GENDER=NULL,BIRTH=NULL,JOINDATE=NULL,QUITDATE=NULL,STATE=NULL,POSITION=NULL,LEAVEDATE=NULL,SIGNFILE=NULL,SIGNORIGINAL=NULL,PROFILE=NULL,PROORIGINAL=NULL
+		WHERE EMPLOYEENUM = #{employeeNum}
+	</update>
+	
 	
 </mapper>
