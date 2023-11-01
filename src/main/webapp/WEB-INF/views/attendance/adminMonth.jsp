@@ -36,37 +36,47 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-                <h3>근태 수정 요청 목록</h3>
 
-                <div id="req_btn">
-                  <button id="btn" class="btn btn-primary">근태 수정 요청</button>
-                </div>
-				        <div class="card">
-                  <div id="req_list" class="table-responsive text-nowrap">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>번호</th>
-                          <th>작성자</th>
-                          <th>작성일</th>
-                          <th>근태수정요청일</th>
-                          <th>상태</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <c:forEach items="${list}" var="vo" varStatus="i">
-                          <tr>
-                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">${i.index+1}</a></td>
-                            <td>${vo.employeeVO.name}</td>
-                            <td>${vo.attendanceModifyVO.regDate}</td>
-                            <td>${vo.attendanceModifyVO.modifyDate}</td>
-                            <td>${vo.attendanceModifyVO.status}</td>
-                          </tr>
-                        </c:forEach>
-                      </tbody>
-                    </table>
+                <div class="nav-align-top mb-4">
+                  <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item">
+                      <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-home" aria-controls="navs-justified-home" aria-selected="true">
+                        전체 트레이너 근태 조회 
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-profile" aria-controls="navs-justified-profile" aria-selected="false">
+                        근태 수정 요청 목록
+                      </button>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
+                      <p>
+                        Icing pastry pudding oat cake. Lemon drops cotton candy caramels cake caramels sesame snaps
+                        powder. Bear claw candy topping.
+                      </p>
+                      <p class="mb-0">
+                        Tootsie roll fruitcake cookie. Dessert topping pie. Jujubes wafer carrot cake jelly. Bonbon
+                        jelly-o jelly-o ice cream jelly beans candy canes cake bonbon. Cookie jelly beans marshmallow
+                        jujubes sweet.
+                      </p>
+                    </div>
+                    <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
+                      <p>
+                        Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
+                        cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
+                        cheesecake fruitcake.
+                      </p>
+                      <p class="mb-0">
+                        Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah
+                        cotton candy liquorice caramels.
+                      </p>
+                    </div>
+                   
                   </div>
                 </div>
+
               </div>
                          
 

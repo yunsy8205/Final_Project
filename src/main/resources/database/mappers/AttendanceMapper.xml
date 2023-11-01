@@ -4,6 +4,26 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.attendance.AttendanceDAO">
+	<sql id="searchSql">
+		WHERE 
+		<choose>
+			<when test="kind=='name'">
+				E.NAME LIKE '%'||#{search}||'%'
+			</when>
+			<otherwise>
+				AM.STATUS LIKE '%'||#{search}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<sql id="joinSql">
+		FROM ATTENDANCEMODIFY AM
+			JOIN ATTENDANCE A
+			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+	</sql>
+
 	<select id="getNum" resultType="java.lang.Long" parameterType="Map">
 		SELECT ATTENDANCENUM
 		FROM ATTENDANCE
@@ -83,11 +103,7 @@
 	
 	<select id="getRequestDetail" resultMap="getDetailResult" parameterType="AttendanceModifyVO">
 		SELECT AM.*, A.*, E.NAME, E.EMPLOYEENUM
-		FROM ATTENDANCEMODIFY AM
-			JOIN ATTENDANCE A
-			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
-			JOIN EMPLOYEE E
-			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		<include refid="joinSql"></include>
 		WHERE AM.ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
 	</select>
 	
@@ -110,15 +126,19 @@
 			<result column="NAME" property="name"/>
 		</association>
 	</resultMap>	
+	
+	<select id="getRequestTotal" resultType="Long" parameterType="Pager">
+		SELECT COUNT(ATTENDANCEMODIFYNUM)
+		<include refid="joinSql"></include>
+		<include refid="searchSql"></include>
+	</select>
 
-	<select id="getRequestList" resultMap="getRequestResult" parameterType="AttendanceModifyVO">
+	<select id="getRequestList" resultMap="getRequestResult" parameterType="Pager">
 		SELECT AM.*, E.NAME 
-		FROM ATTENDANCEMODIFY AM 
-			JOIN ATTENDANCE A
-			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
-			JOIN EMPLOYEE E
-			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		<include refid="joinSql"></include>
+		<include refid="searchSql"></include>
 		ORDER BY AM.ATTENDANCEMODIFYNUM DESC
+		LIMIT #{startRow}, #{lastRow}
 	</select>
 	
 	<resultMap type="AttendanceVO" id="getRequestResult">
@@ -140,11 +160,7 @@
 	
 	<select id="getModifyTotal" parameterType="EmployeeVO" resultType="Long">
 		SELECT COUNT(ATTENDANCEMODIFYNUM)
-		FROM ATTENDANCEMODIFY AM
-			JOIN ATTENDANCE A
-			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
-			JOIN EMPLOYEE E
-			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		<include refid="joinSql"></include>
 		WHERE E.EMPLOYEENUM=#{employeeNum}
 	</select>
 	
@@ -156,11 +172,7 @@
 	
 	<select id="getModifyList" resultMap="getListResult" parameterType="Map">
 		SELECT AM.*, E.NAME 
-		FROM ATTENDANCEMODIFY AM 
-			JOIN ATTENDANCE A
-			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
-			JOIN EMPLOYEE E
-			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		<include refid="joinSql"></include>
 		WHERE E.EMPLOYEENUM=#{vo.employeeNum}
 		ORDER BY AM.ATTENDANCEMODIFYNUM DESC
 		LIMIT #{pager.startRow}, #{pager.lastRow}

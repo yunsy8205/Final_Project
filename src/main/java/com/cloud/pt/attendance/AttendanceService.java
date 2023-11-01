@@ -35,6 +35,8 @@ public class AttendanceService {
 			}
 			map.put("title", list.get(i).get("STATE"));
 			map.put("start", list.get(i).get("WORKDATE"));
+			map.put("onTime", list.get(i).get("ONTIME"));
+			map.put("offTime", list.get(i).get("OFFTIME"));
 			
 			if(list.get(i).get("STATE").equals("조퇴")) {
 				map.put("color", "#F5D0A9");
@@ -127,8 +129,14 @@ public class AttendanceService {
 		return attendanceDAO.getRequestDetail(attendanceModifyVO);
 	}
 	
-	public List<AttendanceVO> getRequestList() throws Exception {
-		return attendanceDAO.getRequestList();
+	public List<AttendanceVO> getRequestList(Pager pager) throws Exception {
+		pager.makeRowNum();
+		Long total = attendanceDAO.getRequestTotal(pager);
+		pager.makePageNum(total);
+		
+		log.info("pager: {}", pager);
+		
+		return attendanceDAO.getRequestList(pager);
 	}
 	
 	//---------------------------------------------------

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
 
 @Mapper
@@ -19,15 +20,18 @@ public interface AttendanceDAO {
 	public int setState(Map<String, Object> map) throws Exception;
 	
 	//----------------------------------------
+	public Long getRequestTotal(Pager pager) throws Exception;
+	
 	public int setUpdateA(Map<String, Object> map) throws Exception;
 	public int setUpdateAM(AttendanceModifyVO attendanceModifyVO) throws Exception;
 	public AttendanceVO getRequestDetail(AttendanceModifyVO attendanceModifyVO) throws Exception;
-	public List<AttendanceVO> getRequestList() throws Exception;
+	public List<AttendanceVO> getRequestList(Pager pager) throws Exception;
 	
 	//----------------------------------------
 	public Long getNum(Map<String, Object> map) throws Exception;
 	
 	public Long getModifyTotal(EmployeeVO employeeVO) throws Exception;
+	
 	public AttendanceModifyVO getModifyDetail(AttendanceModifyVO attendanceModifyVO) throws Exception;
 	public List<AttendanceVO> getModifyList(Map<String, Object> map) throws Exception;
 	public int setModifyAdd(AttendanceModifyVO attendanceModifyVO) throws Exception;

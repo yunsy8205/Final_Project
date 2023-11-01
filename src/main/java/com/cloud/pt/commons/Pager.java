@@ -2,9 +2,11 @@ package com.cloud.pt.commons;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Pager {
 	
 	// 시작 인덱스 번호 (limit)

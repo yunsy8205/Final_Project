@@ -37,8 +37,20 @@
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
                 <h3>근태 수정 요청 목록</h3>
-
-				        <div class="card">
+                
+                <div>
+                  <form action="./list" method="get" id="frm">
+                      <input type="hidden" value="1" name="page" id="page">
+                      <select name="kind" class="form-select" id="k" data-kind="${pager.kind}" aria-label="Default select example">
+                          <option class="kind" value="name">이름</option>
+                          <option class="kind" value="status">상태</option>
+                      </select>
+                      <input type="text" name="search" value="${pager.search}" placeholder="검색어를 입력하세요" class="form-control" aria-label="Search">
+                      <button type="submit" class="btn btn-primary">조회</button>
+                  </form>
+                </div>
+				        
+                <div class="card">
                   <div id="req_list" class="table-responsive text-nowrap">
                     <table class="table table-hover">
                       <thead>
@@ -94,6 +106,6 @@
   
   <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 
-
+  <script src="/js/list.js"></script>
 </body>
 </html>

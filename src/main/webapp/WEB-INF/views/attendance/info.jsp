@@ -52,6 +52,9 @@
     .list {
       line-height: 2;
     }
+    #smallModal {
+      display: none;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -81,6 +84,40 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y attendance">
+              
+                <!-- Modal -->
+                <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="workDate"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col mb-3">
+                            <p>
+                              출근
+                            </p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col mb-3">
+                            <p>
+                              퇴근 
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-target="#smallModal" data-bs-toggle="modal">
+                          확인
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div id="my">
                   <div class="profile">
                     <img class="rounded-circle" src="/img/1.jpg" alt="">
@@ -147,10 +184,18 @@
                   height: '90%',
                 // contentHeight: 'auto',
                   fixedWeekCount: false,
-                  events: data
+                  events: data,
+                  //이벤트 클릭 시 
+                  eventClick: function(data) {
+                      $('#smallModal').addClass('show');
+                      $('#smallModal').css('display', 'block');
+                      $('#smallModal').attr('role', 'dialog');
+                   }
                 });
-          
-                calendar.render();								
+                //캘린더 그리기
+                calendar.render();
+                
+                
             });
             
             request.fail(function(jqXHR, textStatus) {
@@ -158,9 +203,6 @@
             });
       });
 
-      $('#req_btn').on('click', function(){
-        $(location).attr('href', '/attendanceModify/add');
-      })
     </script>
   </body>
 </html>
