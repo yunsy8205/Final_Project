@@ -10,13 +10,13 @@
 		send(roomNum, num);
 	});
 	
-	$('.chatList').click(function(){
-		
+	$("#listBox").on("click", ".chatList", function(){
 		//회원번호
 		let employeeNum=$(this).attr("data-empNum");
 		//db에서 방있는지 확인!
 		roomCheck(employeeNum);	
 	});
+
 	
     
     socket.onclose=function(e){
@@ -45,12 +45,9 @@
 		let name = $("#searchName").val();
 		
 		console.log(name);
-		
-		if(name == ""){
-			//입력 안하면 검색 안됨
-		}else{			
-			getSearch(name);
-		}
+		$('#listBox').empty();
+		getSearch(name);
+
 	})
 	
 	function roomCheck(employeeNum){

@@ -15,5 +15,10 @@ public class NoticeController {
 	public String setNoticeAdd()throws Exception{
 		return "notice/add";
 	}
+	
+	@GetMapping("list")
+	public String getNoticeList()throws Exception{
+		return "notice/list";
+	}
 
 }
