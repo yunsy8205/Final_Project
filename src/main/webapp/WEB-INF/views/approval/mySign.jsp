@@ -12,9 +12,12 @@
     <div id="signImage"></div>
     <div>
         <form action="signUpload" method="post" enctype="multipart/form-data">
+            <img alt="" src="../file/employee/${file.signFile}">
+            
             <input type="file" name="signImage">
 
             <input type="submit" value="업로드">
+
         </form>
     </div>
 </body>

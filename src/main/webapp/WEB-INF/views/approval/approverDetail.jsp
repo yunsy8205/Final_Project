@@ -123,6 +123,7 @@
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																${middle.name}
+											
 																</td>
 														</tr>
 														<tr>
@@ -168,6 +169,7 @@
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
 																${last.name}</td>
+											
 														</tr>
 														<tr>
 															<td

@@ -41,5 +41,7 @@ public interface ApprovalDAO {
 	
 	public int setSignUpload(EmployeeVO employeeVO)throws Exception;
 	
+	public EmployeeVO getMySignImage(EmployeeVO employeeVO) throws Exception;
+	
 	
 }

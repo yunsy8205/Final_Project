@@ -102,4 +102,9 @@ public class ApprovalService {
 		return result;
 		
 	}
+	
+	public EmployeeVO getMySignImage(EmployeeVO employeeVO) throws Exception{
+		return approvalDAO.getMySignImage(employeeVO);
+	}
+	
 }

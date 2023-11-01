@@ -132,8 +132,10 @@ public class ApprovalController {
 		
 	}
 	@GetMapping("mySign")
-	public void setMySign() throws Exception{
-		
+	public void setMySign(EmployeeVO employeeVO,Principal principal,Model model) throws Exception{
+		employeeVO.setEmployeeNum(principal.getName());
+		EmployeeVO empVO=approvalService.getMySignImage(employeeVO);
+		model.addAttribute("file", empVO);
 	}
 	@PostMapping("signUpload")
 	public String setSignUpload(MultipartFile signImage,Principal principal) throws Exception{

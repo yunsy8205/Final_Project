@@ -25,15 +25,16 @@
 	<!-- 개인count  -->
 	<select id="getMyCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
-		WHERE EMPLOYEENUM=${id.employeeNum} AND STATE NOT IN ('임시저장')
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장')
 		<include refid="state"></include>
 		<include refid="forPager"></include>
 	</select>
-	<!-- 자기제외count  -->
+	<!-- 결재자count  -->
 	<select id="getAllCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
-		WHERE EMPLOYEENUM NOT IN (#{id.employeeNum})
-		<include refid="state"></include>
+		WHERE MIDDLE=#{id.employeeNum}
+		<include refid="category"></include>
+		OR LAST=${id.employeeNum}
 		<include refid="forPager"></include>
 	</select>
 	
@@ -46,7 +47,7 @@
 	<!-- list -->
 	<select id="getApprovalList" resultType="ApprovalVO" parameterType="Map">
 		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
-		WHERE EMPLOYEENUM=${id.employeeNum} AND STATE NOT IN ('임시저장')
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장')
 		<include refid="state"></include>
 		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
@@ -71,15 +72,16 @@
 	<!-- 결재자결재문서 리스트 -->
 	<select id="getApproverList" resultType="ApprovalVO" parameterType="Map">
 		SELECT APPROVALNUM,REGDATE,NAME,CATEGORY,TITLE,STATE FROM APPROVAL
-		WHERE EMPLOYEENUM NOT IN (${id.employeeNum})
+		WHERE MIDDLE=#{id.employeeNum}
 		<include refid="category"></include>
+		OR LAST=#{id.employeeNum}
 		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
 	<!-- 내 임시저장 리스트 -->
 	<select id="getTemporaryList" resultType="ApprovalVO" parameterType="Map">
 		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
-		WHERE EMPLOYEENUM=${id.employeeNum} AND STATE='임시저장'
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE='임시저장'
 		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
@@ -94,12 +96,12 @@
 	
 	<!-- 중간결재자정보 -->
 	<select id="getMiddleEmployee" resultType="EmployeeVO" parameterType="ApprovalVO">
-		SELECT POSITION,NAME FROM EMPLOYEE WHERE EMPLOYEENUM=#{middle}
+		SELECT POSITION,NAME,SIGNFILE FROM EMPLOYEE WHERE EMPLOYEENUM=#{middle}
 	</select>
 	
 	<!-- 최종결재자정보 -->
 	<select id="getLastEmployee" resultType="EmployeeVO" parameterType="ApprovalVO">
-		SELECT POSITION,NAME FROM EMPLOYEE WHERE EMPLOYEENUM=#{last}
+		SELECT POSITION,NAME,SIGNFILE FROM EMPLOYEE WHERE EMPLOYEENUM=#{last}
 	</select>
 	
 	
@@ -111,4 +113,8 @@
 	<update id="setSignUpload" parameterType="EmployeeVO">
 		UPDATE EMPLOYEE SET SIGNFILE=#{signFile},SIGNORIGINAL=#{signOriginal} WHERE EMPLOYEENUM=#{employeeNum}
 	</update>
+	
+	<select id="getMySignImage" parameterType="EmployeeVO" resultType="EmployeeVO">
+		SELECT SIGNFILE,SIGNORIGINAL FROM EMPLOYEE WHERE EMPLOYEENUM=#{employeeNum}
+	</select>
 </mapper>
