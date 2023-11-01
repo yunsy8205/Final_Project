@@ -12,7 +12,7 @@
     <div id="signImage"></div>
     <div>
         <form action="signUpload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
+            <input type="file" name="signImage">
 
             <input type="submit" value="업로드">
         </form>

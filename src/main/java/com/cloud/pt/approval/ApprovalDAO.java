@@ -39,5 +39,7 @@ public interface ApprovalDAO {
 	
 	public int setDelete(ApprovalVO approvalVO)throws Exception;
 	
+	public int setSignUpload(EmployeeVO employeeVO)throws Exception;
+	
 	
 }

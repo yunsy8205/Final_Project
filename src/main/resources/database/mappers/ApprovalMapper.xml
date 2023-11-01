@@ -104,7 +104,11 @@
 	
 	
 	<delete id="setDelete" parameterType="ApprovalVO">
-		DELETE FROM APPROVAL WHERE APPROVALNUM=${approvalNum}
+		DELETE FROM APPROVAL WHERE APPROVALNUM=#{approvalNum}
 	</delete>
 	
+	<!-- 파일-->
+	<update id="setSignUpload" parameterType="EmployeeVO">
+		UPDATE EMPLOYEE SET SIGNFILE=#{signFile},SIGNORIGINAL=#{signOriginal} WHERE EMPLOYEENUM=#{employeeNum}
+	</update>
 </mapper>
