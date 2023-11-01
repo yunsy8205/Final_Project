@@ -41,7 +41,7 @@
                 <div id="req_btn">
                   <button id="btn" class="btn btn-primary">근태 수정 요청</button>
                 </div>
-				 <div class="card">
+				      <div class="card">
                   <div id="req_list" class="table-responsive text-nowrap">
                     <table class="table table-hover">
                       <thead>

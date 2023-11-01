@@ -32,16 +32,18 @@ public class AttendanceService {
 		for(int i=0; i<list.size(); i++) {
 			map.put("title", list.get(i).get("STATE"));
 			map.put("start", list.get(i).get("WORKDATE"));
-			if(list.get(i).get("STATE").equals("조퇴")) {
-				map.put("color", "#F5D0A9");
-			}else if(list.get(i).get("STATE").equals("정상")) {
-				map.put("color", "#BCF5A9");
-			}else if(list.get(i).get("STATE").equals("결근")) {
-				map.put("color", "#F6CECE");
-			}else if(list.get(i).get("STATE").equals("지각")) {
-				map.put("color", "#F3F781");
-			}else {
-				map.put("color", "#CEE3F6");
+			if(list.get(i).get("STATE") != null) {
+				if(list.get(i).get("STATE").equals("조퇴")) {
+					map.put("color", "#F5D0A9");
+				}else if(list.get(i).get("STATE").equals("정상")) {
+					map.put("color", "#BCF5A9");
+				}else if(list.get(i).get("STATE").equals("결근")) {
+					map.put("color", "#F6CECE");
+				}else if(list.get(i).get("STATE").equals("지각")) {
+					map.put("color", "#F3F781");
+				}else {
+					map.put("color", "#CEE3F6");
+				}
 			}
 			map.put("textColor", "#000000");
 			
