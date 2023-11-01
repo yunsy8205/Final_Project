@@ -1,3 +1,4 @@
+
 package com.cloud.pt.employee;
 
 import java.util.List;
@@ -47,6 +48,8 @@ public class EmployeeController {
 		if(!check.equals("anonymousUser")) {
 			return "redirect:/";
 		}*/
+		
+		
 		return "employee/login";
 	}
 	
