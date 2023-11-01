@@ -20,20 +20,9 @@ public class PtClassController {
 	@Autowired
 	private PtClassService ptClassService;
 	
-	@GetMapping("ptReservation")
-	public ModelAndView getCalendar(PtClassVO ptClassVO) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		mv.addObject("pt",ptClassVO);
-		mv.setViewName("ptClass/ptReservation");
-		
-		return mv;
-		
-	}
-/*
- * @GetMapping("myList") public String documentFormList(Model model,Long
- * employeeNum)throws Exception{ List<PtClassVO> ar =
- * ptClassService.getMyList(); model.addAttribute("list", ar); return
- * "/ptClass/list"; } }
- */
+	@GetMapping("ptList") 
+	  public void getCalendar() throws Exception{
+	  
+	  }
+
 }
