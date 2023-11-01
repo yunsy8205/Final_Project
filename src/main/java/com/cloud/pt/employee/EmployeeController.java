@@ -1,6 +1,7 @@
 
 package com.cloud.pt.employee;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -34,31 +35,29 @@ public class EmployeeController {
 	
 	
 	@GetMapping("login")
-	public String getEmpLogin(@ModelAttribute EmployeeVO employeeVO)throws Exception{
-		
-		// 로그인 성공 시, 뒤로가기 처리. context(사용자정보)
-/*		SecurityContext context = SecurityContextHolder.getContext();
-		
-		context.getAuthentication().getName();
-		
-		log.info("===== CONTEXT : {}=====", context);
-		log.info("==== CONTEXT_NAME :{} =====", context.getAuthentication().getName());
-		
-		String check = context.getAuthentication().getPrincipal().toString();
-		
-		if(!check.equals("anonymousUser")) {
-			return "redirect:/";
-		}*/
-		
-		
+	public String getEmpLogin(@ModelAttribute EmployeeVO employeeVO)throws Exception{		
 		return "employee/login";
 	}
+	
+	
+	@GetMapping("info")
+	public void getInfo(Principal principal, EmployeeVO employeeVO, Model model)throws Exception{
+		
+		log.info(">>>>>>>> employeenum : {}", principal.getName());
+		
+		employeeVO.setEmployeeNum(principal.getName());
+		
+		log.info(">>>>>>>> employeenum : {}", employeeVO.getEmployeeNum());
+		
+		employeeVO = employeeService.getInfo(employeeVO);
+		model.addAttribute("employeeVO", employeeVO);
+	}
+	
 	
 	
 	
 	@GetMapping("join")
 	public void setJoin(@ModelAttribute EmployeeVO employeeVO)throws Exception{
-		
 		
 	}
 	
@@ -93,11 +92,11 @@ public class EmployeeController {
 	
 	
 	@GetMapping("list")
-	public String getEmpList(Pager pager, Model model)throws Exception{
-		List<EmployeeVO> ar = employeeService.getEmpList(pager);
+	public String getEmpList(EmployeeVO employeeVO, Pager pager, Model model)throws Exception{
+		List<EmployeeVO> ar = employeeService.getEmpList(employeeVO, pager);
 		model.addAttribute("list", ar);
-		
-		return "employee/list";
+		model.addAttribute("pager", pager);
+		return "/employee/list";
 	}
 	
 	

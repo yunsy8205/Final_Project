@@ -1,6 +1,7 @@
 package com.cloud.pt.employee;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,9 +12,13 @@ public interface EmployeeDAO {
 
 	public EmployeeVO getEmpLogin(EmployeeVO employeeVO)throws Exception;
 	
+	public EmployeeVO getInfo(EmployeeVO employeeVO)throws Exception;
+	
 	public int setJoin(EmployeeVO employeeVO)throws Exception;
 	
-	public List<EmployeeVO> getEmpList(Pager pager)throws Exception;
+	public Long getEmpTotal(Pager pager)throws Exception;
+	
+	public List<EmployeeVO> getEmpList(Map<String, Object> map)throws Exception;
 	
 	public EmployeeVO getEmpDetail(EmployeeVO employeeVO)throws Exception;
 	

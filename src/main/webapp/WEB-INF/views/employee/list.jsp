@@ -34,6 +34,22 @@
               <!-- Content 내용 여기로 -->
               <h3>전체 직원 목록</h3>
               <div class="container-xxl flex-grow-1 container-p-y">
+                <div>
+                  <div>
+                    <form action="./list" method="get" id="frm">
+                      <input type="hidden" value="${pager.page}" id="page" name="page">
+                      <!-- 파라미터 이름 kind -->
+                      <select name="kind" id="k" class="search" data-kind="${pager.kind}" >
+                        <option class="kind" value="name">이름</option>
+                        <option class="kind" value="position">직급</option>
+                        <option class="kind" value="stateEmpIn">재직 직원</option>
+                        <option class="kind" value="stateOut">퇴직</option>
+                      </select> 
+                      <input type="text" name="search" value="${pager.search}" class="search" placeholder="검색어를 입력하세요.">
+                      <button type="submit" class="btn btn-primary">검색</button>
+                    </form>
+                  </div>
+                </div>
                 <a href="/employee/join">직원등록</a>
                 <div id="req_list" class="table-responsive text-nowrap">
                   <table class="table table-hover">
@@ -71,13 +87,35 @@
                 </li>
                 <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
                    <li class="page-item">
-                     <a class="page-link move" data-num="${i}" href="#">${i}</a>
+                     <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
                    </li>
                 </c:forEach>
                 <li class="page-item next ${pager.next?'':'disabled'}">
                   <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
                 </li>
               </ul>
+              <!-- 페이징 -->
+							<!-- <nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+									<c:if test="${pager.pre}">
+									<li class="page-item ${pager.pre?'':'disabled'}"><a class="page-link"
+										href="./list?page=${pager.startNum - 1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous"> 
+                      <span aria-hidden="true">&laquo;</span>
+									</a></li>
+									</c:if>
+									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+										var="i">
+										<li class="page-item"><a class="page-link"
+											href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+									</c:forEach>
+									<c:if test="${pager.next}">
+										<li class="page-item"><a class="page-link"
+											href="./list?page=${pager.lastNum + 1}&kind=${pager.kind}&search=${pager.search}"
+											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										</a></li>
+									</c:if>
+								</ul>
+							</nav> -->
               <!-- / Content --> 
               
               
@@ -128,5 +166,6 @@
   
 
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+    <script type="text/javascript" src="/js/employee/list.js"></script>
   </body>
 </html>

@@ -36,7 +36,7 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                      <h1 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 인적사항</h1>
+                      <h1 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 정보</h1>
                     </div>
                     <div class="card-body">
                       <div id="detailCon">
@@ -92,19 +92,19 @@
                             </div>
                           </div>
                           <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">직원상태</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-name">경력</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.state}" readonly/>
                             </div>
                           </div>
                           <div class="row mb-3">
-                              <label class="col-sm-2 col-form-label" for="basic-default-name">직급</label>
+                              <label class="col-sm-2 col-form-label" for="basic-default-name">자격증</label>
                               <div class="col-sm-10">
                                 <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.position}" readonly/>
                               </div>
                           </div>
                           <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">연차갯수</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-name">서명이미지</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.leaveDate}" readonly/>
                             </div>
@@ -116,7 +116,6 @@
                         <div class="proBtn">
                           <button type="button" id="backBtn">이전</button>
                           <button type="button" id="upBtn" class="actionBtn" data-url="/employee/update">수정</button>
-                          <button type="button" id="delBtn" class="actionBtn" data-url="/employee/delete">삭제</button>
                         </div>
                       </div>
                     </div>
@@ -170,7 +169,7 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
+    <script src="/resources/js/employee/detail.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-    <script type="text/javascript" src="/js/employee/detail.js"></script>
   </body>
 </html>

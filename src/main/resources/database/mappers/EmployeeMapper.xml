@@ -4,10 +4,26 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.employee.EmployeeDAO">
+	<sql id="search">
+		<if test="kind=='name'">WHERE NAME LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='position'">WHERE POSITION LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='stateEmpIn'">WHERE STATE='재직' AND NAME LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='stateOut'">WHERE STATE = '퇴직'</if>
+	</sql>
+	
+	
+	<select id="getEmpTotal" parameterType="Pager" resultType="Long">
+		SELECT COUNT(EMPLOYEENUM) FROM EMPLOYEE 
+		<include refid="search"></include>
+	</select>
 	
 	<select id="getEmpLogin" parameterType="EmployeeVO" resultType="EmployeeVO">
 		SELECT * FROM EMPLOYEE 
 		WHERE EMPLOYEENUM = #{employeeNum} 
+	</select>
+	
+	<select id="getInfo" parameterType="EmployeeVO" resultType="EmployeeVO">
+		SELECT * FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum}
 	</select>
 	
 	<insert id="setJoin" parameterType="EmployeeVO">
@@ -15,10 +31,16 @@
 		VALUES (DEFAULT, #{name}, #{password}, #{phone}, #{address}, #{gender}, #{birth}, now(), #{quitDate}, #{state}, #{position}, 12, null, null, #{proFile}, #{proOriginal})
 	</insert>
 	
-	<select id="getEmpList" parameterType="Pager" resultType="EmployeeVO">
+	<select id="getEmpList" parameterType="Map" resultType="EmployeeVO">
 		SELECT EMPLOYEENUM,NAME,POSITION,PHONE,STATE FROM EMPLOYEE
+		
+			<if test="kind=='name'">WHERE NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+			<if test="kind=='position'">WHERE POSITION LIKE CONCAT('%',#{pager.search},'%')</if>
+			<if test="kind=='stateEmpIn'">WHERE STATE='재직' AND NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+			<if test="kind=='stateOut'">WHERE STATE = '퇴직'</if>
+		
 		ORDER BY EMPLOYEENUM  DESC
-		LIMIT #{startRow},#{lastRow}
+		LIMIT #{pager.startRow},#{pager.perPage}
 	</select>
 	
 	<select id="getEmpDetail" parameterType="EmployeeVO" resultType="EmployeeVO" >

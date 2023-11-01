@@ -78,27 +78,6 @@ public class EmployeeService implements UserDetailsService{
 	public boolean getEmpError(EmployeeVO employeeVO, BindingResult bindingResult)throws Exception{
 		// false(오류없음) | true(오류있음)
 		//boolean check = false;
-//		
-//		if(employeeVO.getProFile() == null) {
-//			check = true;
-//			bindingResult.rejectValue("proFile", "empJoin.profile");
-//		}
-//		if(employeeVO.getName() == null) {
-//			check = true;
-//			bindingResult.rejectValue("name", "empJoin.name");
-//		}
-//		if(employeeVO.getPhone() == null) {
-//			check =true;
-//			bindingResult.rejectValue("phone", "empJoin.phone");
-//		}
-//		if(employeeVO.getAddress() == null) {
-//			check =true;
-//			bindingResult.rejectValue("address", "empJoin.address");
-//		}
-//		if(employeeVO.getBirth() == null) {
-//			check =true;
-//			bindingResult.rejectValue("birth", "empJoin.birth");
-//		}
 		
 		// annotation 검증
 		boolean check = bindingResult.hasErrors();
@@ -119,13 +98,15 @@ public class EmployeeService implements UserDetailsService{
 	}
 	
 	
+	public EmployeeVO getInfo(EmployeeVO employeeVO)throws Exception{
+		return employeeDAO.getInfo(employeeVO);
+	}
+	
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int setJoin(EmployeeVO employeeVO, MultipartFile proFile)throws Exception{
 		// 비밀번호 암호화
 		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
-		log.info(">>>>>>>>>>>>> FILE NAME : {}",employeeVO.getProFile());
-		log.info(">>>>>>>>>>>>> FILE ORIGINAL : {}",employeeVO.getProOriginal());
 		
 		// file 등록
 		String fileName = fileManager.save(this.uploadPath+this.empFileName, proFile);
@@ -142,8 +123,20 @@ public class EmployeeService implements UserDetailsService{
 	
 	
 	
-	public List<EmployeeVO> getEmpList(Pager pager)throws Exception{
-		return employeeDAO.getEmpList(pager);
+	public List<EmployeeVO> getEmpList(EmployeeVO employeeVO, Pager pager)throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		pager.makeRowNum();
+		System.out.println("1 :" +pager);
+		Long total = employeeDAO.getEmpTotal(pager);
+		System.out.println("total : "+total);
+		System.out.println("2 :" +pager);
+		pager.makePageNum(total);
+		System.out.println("3 :" +pager);
+		
+		map.put("pager", pager);
+		map.put("emp", employeeVO);
+		
+		return employeeDAO.getEmpList(map);
 	}
 	
 	
