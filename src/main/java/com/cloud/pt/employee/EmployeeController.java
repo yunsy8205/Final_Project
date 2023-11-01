@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -60,25 +61,27 @@ public class EmployeeController {
 	
 	
 	@PostMapping("join")
-	public String setJoin(@Valid EmployeeVO employeeVO,Errors errors, BindingResult bindingResult, Model model, MultipartFile[] photo)throws Exception{
+	public String setJoin(@Valid EmployeeVO employeeVO,BindingResult bindingResult,Errors errors ,Model model, MultipartFile empfile)throws Exception{
 		employeeVO.setPassword("0000");
 		
-//		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
-//		if(bindingResult.hasErrors() || check) {
-//		
-//			return "employee/join";
-//		}
-		if(errors.hasErrors()) {
-			model.addAttribute("employeeVO", employeeVO);
-			
-			Map<String,String> validatorResult = employeeService.validateHandling(errors);
-			for(String key : validatorResult.keySet()) {
-				model.addAttribute(key, validatorResult.get(key));
-			}
-			return "/employee/join";
+		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
+		if(check) {
+			log.info("==========================검증 에러 ===================");
+			return "employee/join";
 		}
 		
-		int result = employeeService.setJoin(employeeVO,photo);
+		// 성공되는 검증
+//		if(errors.hasErrors()) {
+//			model.addAttribute("employeeVO", employeeVO);
+//			
+//			Map<String,String> validatorResult = employeeService.validateHandling(errors);
+//			for(String key : validatorResult.keySet()) {
+//				model.addAttribute(key, validatorResult.get(key));
+//			}
+//			return "/employee/join";
+//		}
+		
+		int result = employeeService.setJoin(employeeVO,empfile);
 		
 		log.info("====>>>>>>>>>>>>>>>>>>> authorities :{} ", employeeVO.getAuthorities());
 		

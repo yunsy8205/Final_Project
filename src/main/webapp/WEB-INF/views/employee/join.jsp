@@ -38,33 +38,33 @@
               <div class="card mb-4">
                 <h1 class="emp_title">직원 인적사항</h1>
                 <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" id="frm" action="./join">
-                  <div class="proFile">
-                    <input type="file" name="photo" id="photo">
+                  <div class="proFile_con">
+                    <input type="file" name="empfile" id="proFile" required="true"/>
                   </div>
                   <div class="proContent">
                     <div class="proLeft">
                       <div class="prodiv">
                         <form:label path="name">이름</form:label>
                         <form:input path="name" id="name" cssClass="input_con" required="true"></form:input>
-                        <span id="nameMsg">${valid_name}</span>
+                        <form:errors path="name"></form:errors>
                       </div>
                       <div class="prodiv">
                         <form:label path="phone">전화번호</form:label>
                         <form:input path="phone" id="phone" cssClass="input_con" required="true"></form:input>
-                        <span id="phoneMsg">${valid_phone}</span>
+                        <form:errors path="phone"></form:errors>
                       </div>
                       <div class="prodiv">
                         <form:label path="address">주소</form:label>
                         <form:input path="address" id="adr_postNum" cssClass="input_con" placeholder="우편번호" value=""></form:input>
                         <button type="button" id="addressBtn">우편번호 찾기</button>
-                        <form:input path="address" id="adr_address" placeholder="주소" vlaue="" required="true"></form:input>
-                        <form:input path="address" id="adr_detail" placeholder="상세주소" value=""></form:input>
-                        <span id="addressMsg">${valid_address}</span>
+                        <form:input path="address" id="adr_address" placeholder="주소" required="true"></form:input>
+                        <form:input path="address" id="adr_detail" placeholder="상세주소" value ="" required="true"></form:input>
+                        <form:errors path="address"></form:errors>
                       </div>
                       <div class="prodiv">
                         <form:label path="birth">생년월일</form:label>
                         <form:input type="date" path="birth" id="birth" cssClass="input_con" required="true"></form:input>
-                        <span id="birthMsg">${valid_birth}</span>
+                        <form:errors path="birth"></form:errors>
                       </div>
                     </div>
                     <div class="proRight">

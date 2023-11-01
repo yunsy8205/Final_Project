@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,7 +40,11 @@ public class EmployeeService implements UserDetailsService{
 	@Autowired
 	private FileManager fileManager;
 	
+	// properties 값을 java 사용. (@Value("${properties 키}"))
+	@Value("${app.upload}")
 	private String uploadPath;
+	@Value("${app.emp}")
+	private String empFileName;
 	
 	
 	
@@ -70,8 +77,12 @@ public class EmployeeService implements UserDetailsService{
 	
 	public boolean getEmpError(EmployeeVO employeeVO, BindingResult bindingResult)throws Exception{
 		// false(오류없음) | true(오류있음)
-		boolean check = false;
-		
+		//boolean check = false;
+//		
+//		if(employeeVO.getProFile() == null) {
+//			check = true;
+//			bindingResult.rejectValue("proFile", "empJoin.profile");
+//		}
 //		if(employeeVO.getName() == null) {
 //			check = true;
 //			bindingResult.rejectValue("name", "empJoin.name");
@@ -88,6 +99,9 @@ public class EmployeeService implements UserDetailsService{
 //			check =true;
 //			bindingResult.rejectValue("birth", "empJoin.birth");
 //		}
+		
+		// annotation 검증
+		boolean check = bindingResult.hasErrors();
 
 		return check;
 	}
@@ -107,23 +121,22 @@ public class EmployeeService implements UserDetailsService{
 	
 	
 	@Transactional(rollbackFor = Exception.class)
-	public int setJoin(EmployeeVO employeeVO, MultipartFile[] files)throws Exception{
+	public int setJoin(EmployeeVO employeeVO, MultipartFile proFile)throws Exception{
 		// 비밀번호 암호화
 		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
-		
-		int result = employeeDAO.setJoin(employeeVO);
-		
+		log.info(">>>>>>>>>>>>> FILE NAME : {}",employeeVO.getProFile());
+		log.info(">>>>>>>>>>>>> FILE ORIGINAL : {}",employeeVO.getProOriginal());
 		
 		// file 등록
-//		for(MultipartFile file : files) {
-//			if(file.isEmpty()) {
-//				continue;
-//			}	
-//			
-////			String fileName = fileManager.save()
-//		}
+		String fileName = fileManager.save(this.uploadPath+this.empFileName, proFile);
 		
+		employeeVO.setProFile(fileName);
+		employeeVO.setProOriginal(proFile.getOriginalFilename());
 		
+		int result = employeeDAO.setJoin(employeeVO);
+
+			
+
 		return result;
 	}
 	
