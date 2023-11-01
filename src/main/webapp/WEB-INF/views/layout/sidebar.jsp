@@ -93,7 +93,6 @@
                     <div data-i18n="Without menu">전체 직원 목록</div>
                   </a>
                 </li>
-                
               </ul>
             </li>
 
@@ -109,7 +108,6 @@
                     <div data-i18n="Account">전체 회원 관리</div>
                   </a>
                 </li>
-                
               </ul>
             </li>
             <li class="menu-item">

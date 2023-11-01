@@ -28,7 +28,7 @@
 <!-- 동찬 -->
 		
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
-		
+
 
 
 	</typeAliases>
