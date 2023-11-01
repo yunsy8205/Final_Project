@@ -97,7 +97,7 @@
     <script>
       //이전버튼
       $('#before_btn').on('click', function(){
-        $(location).attr('href', '/attendanceModify/list?employeeNum='+$('#num').val());
+        $(location).attr('href', '/attendanceModify/list');
       })
       //제출버튼
       $('#submit_btn').on('click', function(){

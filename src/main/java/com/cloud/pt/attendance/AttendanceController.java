@@ -153,11 +153,11 @@ public class AttendanceController {
 	}
 	
 	@PostMapping("/attendanceModify/add")
-	public String setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO, RedirectAttributes attributes) throws Exception {
+	public String setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO) throws Exception {
 		int result = attendanceService.setModifyAdd(attendanceModifyVO, employeeVO);
 		
 		//파라미터 추가
-		attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
+//		attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
 		
 		return "redirect:./list";
 	}
