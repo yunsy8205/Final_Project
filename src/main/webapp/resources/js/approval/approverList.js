@@ -18,3 +18,12 @@ $("#abBtn").click(function(){
     $("#division").val('휴직신청');
     $("#divisionForm").submit();
 })
+
+$("#before").click(function(){
+    $("#progress").val('결재전');
+    $("#progressForm").submit();
+})
+$("#after").click(function(){
+    $("#progress").val('결재완료');
+    $("#progressForm").submit();
+})

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
@@ -56,7 +57,6 @@ public class ApprovalController {
 	@GetMapping("approverList")
 	public void getApproverList(Model model,Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
 		approvalVO.setEmployeeNum(principal.getName());
-		
 		List<ApprovalVO> al = approvalService.getApproverList(pager,approvalVO);
 		model.addAttribute("list", al);
 		model.addAttribute("pager", pager);
@@ -132,8 +132,32 @@ public class ApprovalController {
 		
 	}
 	@GetMapping("mySign")
-	public void setMySign() throws Exception{
-		
+	public void setMySign(EmployeeVO employeeVO,Principal principal,Model model) throws Exception{
+		employeeVO.setEmployeeNum(principal.getName());
+		EmployeeVO empVO=approvalService.getMySignImage(employeeVO);
+		model.addAttribute("file", empVO);
 	}
+	@PostMapping("signUpload")
+	public String setSignUpload(MultipartFile signImage,Principal principal) throws Exception{
+		String empNum=principal.getName();
+		int result=approvalService.setSignUpload(signImage,empNum);
+		
+		return "redirect:./mySign";
+	}
+	@PostMapping("middleApproval")
+	public String setMiddleApproval(ApprovalVO approvalVO) throws Exception{
+		int result=approvalService.setMiddleApproval(approvalVO);
+		
+		return "redirect:./approverList";
+	}
+	
+	@PostMapping("finalApproval")
+	public String setFinalApproval(ApprovalVO approvalVO) throws Exception{
+		int result=approvalService.setFinalApproval(approvalVO);
+		
+		return "redirect:./approverList";
+	}
+	
+	
 
 }

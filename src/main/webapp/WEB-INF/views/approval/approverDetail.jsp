@@ -101,8 +101,8 @@
 													style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 													<!-- User -->
 													<colgroup>
-														<col width="100">
-														<col width="220">
+														<col width="50">
+														<col width="50">
 													</colgroup>
 													<tbody>
 														<tr>
@@ -110,30 +110,40 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																직급</td>
-															<td
+															<td colspan="2"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																${middle.position}
 															</td>
+															
 														</tr>
 														<tr>
 															<td
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재자</td>
-															<td
+															<td 
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																${middle.name}
+												
+															</td>
+															<c:if test="${approvalVO.middleDate!=null}">
+																<td>
+																	<img style="width: 5rem;height: 3rem" alt="" src="../file/employee/${middle.signFile}">
 																</td>
+															</c:if>
+																
+																
 														</tr>
 														<tr>
 															<td
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재일</td>
-															<td
+															<td colspan="2" 
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
+																${approvalVO.middleDate}
 															</td>
+															
 														</tr>
 
 													</tbody>
@@ -145,8 +155,8 @@
 													style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 													<!-- User -->
 													<colgroup>
-														<col width="100">
-														<col width="220">
+														<col width="50">
+														<col width="50">
 													</colgroup>
 													<tbody>
 														<tr>
@@ -154,7 +164,7 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																직급</td>
-															<td
+															<td colspan="2"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
 																${last.position}</td>
@@ -164,21 +174,25 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재자</td>
-															<td
+															<td 
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
 																${last.name}</td>
+																<c:if test="${approvalVO.finalDate!=null}">
+																	<td>
+																		<img style="width: 5rem;height: 3rem" alt="" src="../file/employee/${last.signFile}">
+																	</td>
+																</c:if>
+																
 														</tr>
 														<tr>
 															<td
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재일</td>
-															<td
+															<td  colspan="2"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-
-
+																${approvalVO.finalDate}
 															</td>
 														</tr>
 
@@ -275,8 +289,19 @@
 										</tr>
 									</tbody>
 								</table>
-
-								<button>결재</button>
+								<c:if test="${approvalVO.middleDate==null}">
+								<form action="middleApproval" method="post">
+									<input type="hidden" name="approvalNum" value="${approvalVO.approvalNum}">
+									<button>결재</button>
+								</form>
+								</c:if>
+								<c:if test="${approvalVO.middleDate!=null}">
+								<form action="finalApproval" method="post">
+									<input type="hidden" name="approvalNum" value="${approvalVO.approvalNum}">
+									<button>결재</button>
+								</form>
+								</c:if>
+								
 								<button>반려</button>
 
 							</div>

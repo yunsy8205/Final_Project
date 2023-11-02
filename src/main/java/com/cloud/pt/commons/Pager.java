@@ -34,6 +34,7 @@ public class Pager {
 	
 	//동찬 결재분류
 	private String division;
+	private String progress;
 	
 		
 	// 1. 보여질 data 갯수
