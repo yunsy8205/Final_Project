@@ -9,27 +9,24 @@
 		<typeAlias type="com.cloud.pt.employee.CareerVO" alias="CareerVO"/>
 		<typeAlias type="com.cloud.pt.employee.CertificationVO" alias="CertificationVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
-		<typeAlias type="java.util.Map" alias="Map"/>
+		
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
 		<typeAlias type="com.cloud.pt.attendance.AttendanceModifyVO" alias="AttendanceModifyVO"/>
 		<typeAlias type="java.util.Map" alias="Map"/>
-		
-		
-		
-		
-		
+
 		<!-- 재혁 -->
 		<typeAlias type="com.cloud.pt.myPtMember.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
-		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
-		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
-		<!-- <typeAlias type="com.cloud.pt.calendar.CalendarVO" alias="CalendarVO"/> -->
-<!-- 동찬 -->
 		
+		<!-- <typeAlias type="com.cloud.pt.calendar.CalendarVO" alias="CalendarVO"/> -->
+		
+		<!-- 동찬 -->
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
-
-
-
+		
+		<!-- 소영 -->
+		<typeAlias type="com.cloud.pt.chat.RoomVO" alias="RoomVO"/>
+		<typeAlias type="com.cloud.pt.chat.ChatMessageVO" alias="ChatMessageVO"/>
+		<typeAlias type="java.lang.String" alias="String"/>
 	</typeAliases>
 </configuration>
