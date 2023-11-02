@@ -119,7 +119,7 @@
                           <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
                         </form>
                         <div class="proBtn">
-                          <button type="button" id="upBtn" class="actionBtn" data-url="/employee/update">수정</button>
+                          <button type="button" id="upBtn" data-url="/employee/infoUpdate">수정</button>
                         </div>
                       </div>
                     </div>
@@ -174,12 +174,6 @@
     </div>
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-    <script>
-      // console.log($("#sign").value);
-      
-      // if($("#sign").value == null){
-      //   $("#sign").hide;
-      // }
-    </script>
+    <script type="text/javascript" src="/js/employee/info.js"></script>
   </body>
 </html>

@@ -99,11 +99,13 @@
 		</collection>
 	</resultMap>
 	
-	<update id="setUpdate" parameterType="EmployeeVO">
+	<update id="setInfoUpdate" parameterType="EmployeeVO">
 		UPDATE EMPLOYEE
 		SET 
 		NAME=#{name},PHONE=#{phone},ADDRESS=#{address},GENDER=#{gender},BIRTH=#{birth},QUITDATE=#{quitDate},STATE=#{state},POSITION=#{position}
 		WHERE EMPLOYEENUM = #{employeeNum}
 	</update>
+	
+	
 	
 </mapper>

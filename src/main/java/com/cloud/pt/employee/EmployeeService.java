@@ -102,6 +102,10 @@ public class EmployeeService implements UserDetailsService{
 		return employeeDAO.getInfo(employeeVO);
 	}
 	
+	public int setInfoUpdate(EmployeeVO employeeVO)throws Exception{
+		return employeeDAO.setInfoUpdate(employeeVO);
+	}
+	
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int setJoin(EmployeeVO employeeVO, MultipartFile proFile)throws Exception{
@@ -141,7 +145,6 @@ public class EmployeeService implements UserDetailsService{
 	}
 	
 	public int setEmpUpdate (EmployeeVO employeeVO)throws Exception{
-		
 		return employeeDAO.setEmpUpdate(employeeVO);
 	}
 	

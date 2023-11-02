@@ -14,6 +14,8 @@ public interface EmployeeDAO {
 	
 	public EmployeeVO getInfo(EmployeeVO employeeVO)throws Exception;
 	
+	public int setInfoUpdate(EmployeeVO employeeVO)throws Exception;
+	
 	public int setJoin(EmployeeVO employeeVO)throws Exception;
 	
 	public Long getEmpTotal(Pager pager)throws Exception;

@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,18 +44,33 @@ public class EmployeeController {
 	
 	@GetMapping("info")
 	public void getInfo(Principal principal, EmployeeVO employeeVO, Model model)throws Exception{	
-		log.info("empnum : {}", employeeVO.getEmployeeNum());
 		employeeVO.setEmployeeNum(principal.getName());
-		log.info("Snum : {}", employeeVO.getEmployeeNum());
-		log.info(">>>>>>>>>>>>>>>>> employee defaulinfo : {}", employeeVO);
+		
 		employeeVO = employeeService.getInfo(employeeVO);
 		
-		log.info(">>>>>>>>>>>>>>>>> employee info : {}", employeeVO);
 		model.addAttribute("employeeVO", employeeVO);
 	}
 	
 	
+	@GetMapping("infoUpdate")
+	public void setInfoUpdate(@AuthenticationPrincipal EmployeeVO employeeVO, Model model)throws Exception{
+		// update 전 검증 정보
+		employeeVO = employeeService.getInfo(employeeVO);
+		model.addAttribute("employeeVO", employeeVO);
+	}
 	
+	@PostMapping("infoUpdate")
+	public String setInfoUpdate(@Valid EmployeeVO employeeVO,BindingResult bindingResult, RedirectAttributes attributes, MultipartFile multipartFile)throws Exception{
+		// update 후 검증 진행
+		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmployeeVO emp = (EmployeeVO)obj;
+		employeeVO.setEmployeeNum(emp.getEmployeeNum());
+
+		int result = employeeService.setInfoUpdate(employeeVO);
+
+		attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
+		return "redirect:/employee/info";
+	}
 	
 	@GetMapping("join")
 	public void setJoin(@ModelAttribute EmployeeVO employeeVO)throws Exception{
@@ -83,8 +100,6 @@ public class EmployeeController {
 //		}
 		
 		int result = employeeService.setJoin(employeeVO,empfile);
-		
-		log.info("====>>>>>>>>>>>>>>>>>>> authorities :{} ", employeeVO.getAuthorities());
 		
 		return "redirect:/employee/list";
 	}
