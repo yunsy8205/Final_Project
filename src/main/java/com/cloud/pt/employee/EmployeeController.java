@@ -72,11 +72,23 @@ public class EmployeeController {
 		return "redirect:/employee/info";
 	}
 	
+	@GetMapping("infoFileDelete")
+	public String setInfoFileDelete(@AuthenticationPrincipal EmployeeVO employeeVO, Model model)throws Exception{
+		employeeVO.setEmployeeNum(employeeVO.getEmployeeNum());
+		
+		log.info(">>>> fileDelete : {} ", employeeVO.getEmployeeNum());
+		int result = employeeService.setInfoFileDelete(employeeVO);
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
+	}
+	
+	
+	
 	@GetMapping("join")
 	public void setJoin(@ModelAttribute EmployeeVO employeeVO)throws Exception{
 		
 	}
-	
 	
 	@PostMapping("join")
 	public String setJoin(@Valid EmployeeVO employeeVO,BindingResult bindingResult,Errors errors ,Model model, MultipartFile empfile)throws Exception{

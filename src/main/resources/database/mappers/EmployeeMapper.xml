@@ -106,6 +106,15 @@
 		WHERE EMPLOYEENUM = #{employeeNum}
 	</update>
 	
+	<select id="getInfoFileDetail" parameterType="EmployeeVO" resultType="EmployeeVO">
+		SELECT PROFILE, PROORIGINAL FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum}
+	</select>
+	
+	<update id="setInfoFileDelete">
+		UPDATE EMPLOYEE 
+		SET PROFILE = NULL, PROORIGINAL = NULL 
+		WHERE EMPLOYEENUM = #{employeeNum}
+	</update>
 	
 	
 </mapper>

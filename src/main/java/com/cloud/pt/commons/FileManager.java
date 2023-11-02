@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cloud.pt.employee.EmployeeVO;
+
 @Component
 public class FileManager {
 	
@@ -32,6 +34,15 @@ public class FileManager {
 		multipartFile.transferTo(file);
 		
 		return fileName;
+	}
+	
+	
+	// infoUpdate시 fileDelete
+	public boolean fileDelete(String path, EmployeeVO employeeVO)throws Exception{
+		// 1. file에 '삭제할 파일경로'(1)과 fileName 넣기
+		File file = new File(path, employeeVO.getProFile());
+				
+		return file.delete();
 	}
 
 }

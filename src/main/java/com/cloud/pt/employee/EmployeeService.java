@@ -106,6 +106,16 @@ public class EmployeeService implements UserDetailsService{
 		return employeeDAO.setInfoUpdate(employeeVO);
 	}
 	
+	public int setInfoFileDelete(EmployeeVO employeeVO)throws Exception{
+		employeeVO = employeeDAO.getInfoFileDetail(employeeVO);
+		boolean check = fileManager.fileDelete(this.uploadPath+this.empFileName, employeeVO);
+		
+		if(check) {
+			return employeeDAO.setInfoFileDelete(employeeVO);
+		}
+		return 0;
+	}
+	
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int setJoin(EmployeeVO employeeVO, MultipartFile proFile)throws Exception{

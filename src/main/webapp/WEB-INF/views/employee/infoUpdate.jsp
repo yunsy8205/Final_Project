@@ -45,6 +45,7 @@
                           <div class="proFile_con">
                             <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
                             <p>${employeeVO.proOriginal}</p>
+                            <span id="delFile" data-delete-file="${employeeVO.employeeNum}">X</span>
                             <input type="file" name="empfile" id="proFile"/>
                           </div>
                           <div class="proContent">
@@ -157,5 +158,6 @@
     </div>
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+    <script type="text/javascript" src="/js/employee/infoUpdate.js"></script>
   </body>
 </html>
