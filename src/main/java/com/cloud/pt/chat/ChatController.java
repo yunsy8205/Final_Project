@@ -41,7 +41,7 @@ public class ChatController {
 	
 	@GetMapping("room")
 	public String chatList(Model model) throws Exception{
-		log.info("@ChatConroller, chatList()");
+		log.info("메신저 시작");
 		
 		SecurityContext context = SecurityContextHolder.getContext();
 		org.springframework.security.core.Authentication b = context.getAuthentication();
@@ -55,7 +55,7 @@ public class ChatController {
 	
 	@PostMapping("createRoom")  //방을 만들었으면 해당 방으로 가야지.
     public String createRoom(Model model, RoomVO roomVO) throws Exception{
-		log.info("@ChatConroller, createRoom()");
+		log.info("방생성 중");
 		
 		SecurityContext context = SecurityContextHolder.getContext();
 		org.springframework.security.core.Authentication b = context.getAuthentication();
