@@ -43,7 +43,7 @@ public class EmployeeService implements UserDetailsService{
 	// properties 값을 java 사용. (@Value("${properties 키}"))
 	@Value("${app.upload}")
 	private String uploadPath;
-	@Value("${app.emp}")
+	@Value("${app.upload.employee}")
 	private String empFileName;
 	
 	

@@ -9,6 +9,8 @@
 		<typeAlias type="com.cloud.pt.employee.CareerVO" alias="CareerVO"/>
 		<typeAlias type="com.cloud.pt.employee.CertificationVO" alias="CertificationVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
+		<typeAlias type="java.lang.Long" alias="Long"/>
+		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
 		
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>

@@ -110,7 +110,8 @@
                           <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">서명이미지</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.signFile}" readonly/>
+                              <!-- <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.signFile}" readonly/> -->
+                              <img src="../file/employee/${employeeVO.signFile}" id="basic-default-name sign" alt="개인 싸인">
                             </div>
                           </div>
                         </div>
@@ -172,7 +173,13 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-    <script src="/resources/js/employee/detail.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+    <script>
+      // console.log($("#sign").value);
+      
+      // if($("#sign").value == null){
+      //   $("#sign").hide;
+      // }
+    </script>
   </body>
 </html>

@@ -60,15 +60,15 @@
 	
 	
 	<!-- Employee 개인 -->
-	<select id="getInfo" parameterType="EmployeeVO" resultMap="getEmpInfoResult">
+	<select id="getInfo" parameterType="EmployeeVO" resultMap="getEmpResult">
 		SELECT * FROM EMPLOYEE E
-		JOIN CAREER CA
+		LEFT OUTER JOIN CAREER CA
 		ON E.EMPLOYEENUM = CA.EMPLOYEENUM
-		JOIN CERTIFICATION CE
+		LEFT OUTER JOIN CERTIFICATION CE
 		ON E.EMPLOYEENUM = CE.EMPLOYEENUM
 		WHERE E.EMPLOYEENUM = #{employeeNum}
 	</select>
-	<resultMap type="EmployeeVO" id="getEmpInfoResult">
+	<resultMap type="EmployeeVO" id="getEmpResult">
 		<id column="EMPLOYEENUM" property="employeeNum"/>
 		<result column="NAME" property="name"/>
 		<result column="PASSWORD" property="password"/>
@@ -98,5 +98,12 @@
 			<result column="PASSDATE" property="passDate"/>
 		</collection>
 	</resultMap>
+	
+	<update id="setUpdate" parameterType="EmployeeVO">
+		UPDATE EMPLOYEE
+		SET 
+		NAME=#{name},PHONE=#{phone},ADDRESS=#{address},GENDER=#{gender},BIRTH=#{birth},QUITDATE=#{quitDate},STATE=#{state},POSITION=#{position}
+		WHERE EMPLOYEENUM = #{employeeNum}
+	</update>
 	
 </mapper>
