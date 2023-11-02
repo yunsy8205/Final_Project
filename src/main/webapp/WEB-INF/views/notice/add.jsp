@@ -15,6 +15,9 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<style>
     	h3 {
 	    	margin-top: 40px !important;
@@ -23,6 +26,11 @@
 	   	.radio1{
 	   		margin-right: 1rem;
 	   	}
+	   	.form-label, .col-form-label {
+		    font-size: 1rem;
+		    text-transform: uppercase;
+		    letter-spacing: inherit;
+		}
 	</style>
 </head>
 <body>
@@ -46,68 +54,68 @@
               <div class="row">
                 <div class="card mb-4">
                     <div class="card-body">
-                      <form>
+                      <form action="./add" method="post" enctype="multipart/form-data">
                         <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-name">카테고리</label>
 	                        <div class="col-md">
 		                        <span class="radio1">
 			                        <input
-			                        name="default-radio-1"
+			                        name="category"
 			                        class="form-check-input"
 			                        type="radio"
-			                        value=""
-			                        id="defaultRadio1"
+			                        value="인사"
+			                        id="cat1"
 			                        checked
 			                        />
-		                        	<label class="form-check-label" for="defaultRadio1"> 인사 </label>
+		                        	<label class="form-check-label" for="cat1"> 인사 </label>
 		                        </span>
 		                        <span class="radio1">
 			                        <input
-			                        name="default-radio-1"
+			                        name="category"
 			                        class="form-check-input"
 			                        type="radio"
-			                        value=""
-			                        id="defaultRadio2"
+			                        value="휴무"
+			                        id="cat2"
 			                        />
-		                        	<label class="form-check-label" for="defaultRadio2"> 휴무 </label>
+		                        	<label class="form-check-label" for="cat2"> 휴무 </label>
 	                        	</span>
 	                        	<span class="radio1">
 			                        <input
-			                        name="default-radio-1"
+			                        name="category"
 			                        class="form-check-input"
 			                        type="radio"
-			                        value=""
-			                        id="defaultRadio2"
+			                        value="시설"
+			                        id="cat3"
 			                        />
-		                        	<label class="form-check-label" for="defaultRadio2"> 시설 </label>
+		                        	<label class="form-check-label" for="cat3"> 시설 </label>
 	                        	</span>
 	                        	<span class="radio1">
 			                        <input
-			                        name="default-radio-1"
+			                        name="category"
 			                        class="form-check-input"
 			                        type="radio"
-			                        value=""
-			                        id="defaultRadio2"
+			                        value="기타"
+			                        id="cat4"
 			                        />
-		                        	<label class="form-check-label" for="defaultRadio2"> 기타 </label>
+		                        	<label class="form-check-label" for="cat4"> 기타 </label>
 	                        	</span>
 	                        </div>
                         </div>
                         <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-name">제목</label>
+                          <label class="col-sm-2 col-form-label" for="title">제목</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="basic-default-name" placeholder="제목" />
+                            <input type="text" class="form-control" id="title" name="title" placeholder="제목" />
                           </div>
                         </div>
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="basic-default-name">내용</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="basic-default-name" placeholder="내용" />
+                            <textarea rows="" cols="" id="summernote" name="contents" class="form-control"></textarea>
                           </div>
                         </div>
                         <div class="row justify-content-end">
                           <div class="col-sm-10">
-                          	<button type="submit" class="btn btn-primary">이전</button>
+                          	<a class="btn btn-primary">이전</a>
                             <button type="submit" class="btn btn-primary">등록</button>
                           </div>
                         </div>
@@ -167,7 +175,22 @@
     </div>
     <!-- / Layout wrapper -->
   
-
+	<script>
+      $('#summernote').summernote({
+        placeholder: '공지사항 내용을 입력해주세요.',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    </script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>
