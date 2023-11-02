@@ -13,6 +13,6 @@ import lombok.ToString;
 public class CertificationVO {
 	private Long certificationNum;
 	private String employeeNum;
-	private String title;
+	private String cerTitle;
 	private Date passDate;
 }

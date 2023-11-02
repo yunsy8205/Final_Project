@@ -66,6 +66,12 @@ public class EmployeeVO implements UserDetails {
 	// attendance
 	private List<AttendanceVO> list;
 	
+	// career
+	private List<CareerVO> careers;
+	
+	// certification
+	private List<CertificationVO> certifications;
+	
 	
 	
     // UserDetails의 override	

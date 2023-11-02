@@ -126,12 +126,8 @@ public class EmployeeService implements UserDetailsService{
 	public List<EmployeeVO> getEmpList(EmployeeVO employeeVO, Pager pager)throws Exception{
 		Map<String, Object> map = new HashMap<>();
 		pager.makeRowNum();
-		System.out.println("1 :" +pager);
 		Long total = employeeDAO.getEmpTotal(pager);
-		System.out.println("total : "+total);
-		System.out.println("2 :" +pager);
 		pager.makePageNum(total);
-		System.out.println("3 :" +pager);
 		
 		map.put("pager", pager);
 		map.put("emp", employeeVO);

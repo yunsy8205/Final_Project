@@ -41,15 +41,16 @@ public class EmployeeController {
 	
 	
 	@GetMapping("info")
-	public void getInfo(Principal principal, EmployeeVO employeeVO, Model model)throws Exception{
-		
-		log.info(">>>>>>>> employeenum : {}", principal.getName());
-		
+	public void getInfo(Principal principal, EmployeeVO employeeVO, Model model)throws Exception{	
 		employeeVO.setEmployeeNum(principal.getName());
 		
-		log.info(">>>>>>>> employeenum : {}", employeeVO.getEmployeeNum());
-		
 		employeeVO = employeeService.getInfo(employeeVO);
+		for(CareerVO a : employeeVO.getCareers()) {			
+			log.info("career : {}", a.getTitle());
+		}
+		for(CertificationVO b : employeeVO.getCertifications()) {			
+			log.info("cer : {}", b.getCerTitle());
+		}
 		model.addAttribute("employeeVO", employeeVO);
 	}
 	

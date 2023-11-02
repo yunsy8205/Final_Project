@@ -94,19 +94,23 @@
                           <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">경력</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.state}" readonly/>
+                              <c:forEach items="${employeeVO.careers}" var="career">
+                                <input type="text" class="form-control" id="basic-default-name" value="${career.title}" readonly/>
+                              </c:forEach>
                             </div>
                           </div>
                           <div class="row mb-3">
                               <label class="col-sm-2 col-form-label" for="basic-default-name">자격증</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.position}" readonly/>
+                                <c:forEach items="${employeeVO.certifications}" var="cer">
+                                  <input type="text" class="form-control" id="basic-default-name" value="${cer.cerTitle}" readonly/>
+                                </c:forEach>
                               </div>
                           </div>
                           <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">서명이미지</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.leaveDate}" readonly/>
+                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.signFile}" readonly/>
                             </div>
                           </div>
                         </div>
@@ -114,7 +118,6 @@
                           <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
                         </form>
                         <div class="proBtn">
-                          <button type="button" id="backBtn">이전</button>
                           <button type="button" id="upBtn" class="actionBtn" data-url="/employee/update">수정</button>
                         </div>
                       </div>
