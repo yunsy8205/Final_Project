@@ -63,6 +63,13 @@
 					<button id="exBtn">지출신청</button>
 					<button id="abBtn">휴직신청</button>
 				</div>
+				<div>
+					<form action="./approverList" id="progressForm" method="get">
+						<input type="hidden" value="" id="progress" name="progress">
+					</form>
+					<button id="before">결재전</button>
+					<button id="after">결재완료</button>
+				</div>
 
 				<div>
 					<table class="table table-bordered" id="dataTable" width="100%"

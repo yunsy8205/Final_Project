@@ -144,5 +144,20 @@ public class ApprovalController {
 		
 		return "redirect:./mySign";
 	}
+	@PostMapping("middleApproval")
+	public String setMiddleApproval(ApprovalVO approvalVO) throws Exception{
+		int result=approvalService.setMiddleApproval(approvalVO);
+		
+		return "redirect:./approverList";
+	}
+	
+	@PostMapping("finalApproval")
+	public String setFinalApproval(ApprovalVO approvalVO) throws Exception{
+		int result=approvalService.setFinalApproval(approvalVO);
+		
+		return "redirect:./approverList";
+	}
+	
+	
 
 }

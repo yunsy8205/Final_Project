@@ -107,4 +107,11 @@ public class ApprovalService {
 		return approvalDAO.getMySignImage(employeeVO);
 	}
 	
+	public int setMiddleApproval(ApprovalVO approvaVO) throws Exception{
+		return approvalDAO.setMiddleApproval(approvaVO);
+	}
+	public int setFinalApproval(ApprovalVO approvalVO) throws Exception{
+		return approvalDAO.setFinalApproval(approvalVO);
+	}
+	
 }

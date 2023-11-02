@@ -43,5 +43,8 @@ public interface ApprovalDAO {
 	
 	public EmployeeVO getMySignImage(EmployeeVO employeeVO) throws Exception;
 	
+	public int setMiddleApproval(ApprovalVO approvalVO) throws Exception;
+	
+	public int setFinalApproval(ApprovalVO approvalVO) throws Exception;
 	
 }

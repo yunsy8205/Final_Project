@@ -22,6 +22,20 @@
 		<if test="pager.division=='휴직신청'">AND CATEGORY='휴직신청서'</if>
 	</sql>
 	
+	<sql id="progress">
+		<choose>
+			<when test="pager.progress=='결재전'">
+				(MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL)
+			</when>
+			<when test="pager.progress=='결재완료'">
+				(MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NOT NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NOT NULL)
+			</when>
+			<otherwise>
+				(MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL)
+			</otherwise>
+		</choose>
+	</sql>
+	
 	<!-- 개인count  -->
 	<select id="getMyCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
@@ -72,9 +86,8 @@
 	<!-- 결재자결재문서 리스트 -->
 	<select id="getApproverList" resultType="ApprovalVO" parameterType="Map">
 		SELECT APPROVALNUM,REGDATE,NAME,CATEGORY,TITLE,STATE FROM APPROVAL
-		WHERE MIDDLE=#{id.employeeNum}
+		WHERE <include refid="progress"></include>
 		<include refid="category"></include>
-		OR LAST=#{id.employeeNum}
 		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
@@ -117,4 +130,14 @@
 	<select id="getMySignImage" parameterType="EmployeeVO" resultType="EmployeeVO">
 		SELECT SIGNFILE,SIGNORIGINAL FROM EMPLOYEE WHERE EMPLOYEENUM=#{employeeNum}
 	</select>
+	
+	<!-- 중간결재 -->
+	<update id="setMiddleApproval" parameterType="ApprovalVO">
+		UPDATE APPROVAL SET MIDDLEDATE=CURDATE(),STATE="진행중" WHERE APPROVALNUM=${approvalNum}
+	</update>
+	
+	<!-- 최종결재 -->
+	<update id="setFinalApproval" parameterType="ApprovalVO">
+		UPDATE APPROVAL SET FINALDATE=CURDATE(),STATE="완료" WHERE APPROVALNUM=${approvalNum}
+	</update>
 </mapper>

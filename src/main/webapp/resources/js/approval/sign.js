@@ -83,6 +83,7 @@ function handleSaveClick() {
   link.href = image;
   link.download = "sign"+count;
   link.click();
+  count++;
 }
 
 if (canvas) {
