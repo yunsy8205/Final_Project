@@ -12,7 +12,7 @@ public class FileManager {
 	
 		
 	// file 저장 후, 파일명 리턴
-	public String save (String path,MultipartFile multipartFile)throws Exception{
+	public String save (String path, MultipartFile multipartFile)throws Exception{
 		// 어떤 파일을 어디에 저장할지 설정!
 		
 		// 1. 파일 객체생성

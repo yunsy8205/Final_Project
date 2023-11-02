@@ -23,24 +23,11 @@
 	    	margin-top: 40px !important;
 	    	text-align: center;
 	    }
-	   	.radio1{
-	   		margin-right: 1rem;
-	   	}
-	   	.form-label, .col-form-label {
-		    font-size: 0.9rem;
-		    text-transform: uppercase;
-		    letter-spacing: inherit;
-		}
+
 		.a1{
 			color: white;
 		}
-		.justify-content-end {
-			padding-left: 31%;
-			margin-top: 50px;
-		}
-		#radioBox{
-			padding-top: 1%;
-		}
+
 	</style>
 </head>
 <body>
@@ -59,7 +46,7 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-				<h3>공지사항 등록</h3>
+				<h3>공지사항</h3>
 
               <div class="row">
                 <div class="mb-4">
