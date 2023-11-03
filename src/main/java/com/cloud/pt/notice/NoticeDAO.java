@@ -8,5 +8,7 @@ public interface NoticeDAO {
 	public int setNoticeAdd(NoticeVO noticeVO)throws Exception;
 	
 	public int fileAdd(NoticeFileVO noticefileVO)throws Exception;
+	
+	public NoticeVO getNoticeDetail(NoticeVO noticeVO)throws Exception;
 
 }

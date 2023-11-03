@@ -27,6 +27,17 @@
 		.a1{
 			color: white;
 		}
+		
+		#btn{
+			
+		}
+		table{
+			table-layout: fixed;
+		}
+		#title1{
+			font-size: 18px;
+			
+		}
 
 	</style>
 </head>
@@ -51,78 +62,42 @@
               <div class="row">
                 <div class="mb-4">
                     <div class="card-body">
-                      <form action="./add" method="post" enctype="multipart/form-data">
-                        <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="basic-default-name">카테고리</label>
-	                        <div id="radioBox" class="col-md">
-		                        <span class="radio1">
-			                        <input
-			                        name="category"
-			                        class="form-check-input"
-			                        type="radio"
-			                        value="인사"
-			                        id="cat1"
-			                        checked
-			                        />
-		                        	<label class="form-check-label" for="cat1"> 인사 </label>
-		                        </span>
-		                        <span class="radio1">
-			                        <input
-			                        name="category"
-			                        class="form-check-input"
-			                        type="radio"
-			                        value="휴무"
-			                        id="cat2"
-			                        />
-		                        	<label class="form-check-label" for="cat2"> 휴무 </label>
-	                        	</span>
-	                        	<span class="radio1">
-			                        <input
-			                        name="category"
-			                        class="form-check-input"
-			                        type="radio"
-			                        value="시설"
-			                        id="cat3"
-			                        />
-		                        	<label class="form-check-label" for="cat3"> 시설 </label>
-	                        	</span>
-	                        	<span class="radio1">
-			                        <input
-			                        name="category"
-			                        class="form-check-input"
-			                        type="radio"
-			                        value="기타"
-			                        id="cat4"
-			                        />
-		                        	<label class="form-check-label" for="cat4"> 기타 </label>
-	                        	</span>
-	                        </div>
-                        </div>
-                        <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="title">제목</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요" />
-                          </div>
-                        </div>
-                        <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-name">내용</label>
-                          <div class="col-sm-10">
-                            <textarea rows="" cols="" id="summernote" name="contents" class="form-control"></textarea>
-                          </div>
-                        </div>
-                        <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="files">첨부파일</label>
-                          <div class="col-sm-10">
-                            <input type="file" class="form-control" id="files" name="files"/>
-                          </div>
-                        </div>
-                        <div class="row justify-content-end">
-                          <div class="col-sm-10">
+                      <div>
+                      	<table class="table">
+                      		<tr >
+                      			<th>제목</th>
+                      			<td id="title1" colspan="5"><strong>${notice.category}</strong> ${notice.title}</td>
+                      		</tr>
+                      		<tr>
+                      			<th>작성자</th>
+                      			<td colspan="2">${notice.employeeNum}</td>
+                      			<td></td>
+                      			<td></td>
+                      			<td></td>
+                      		</tr>
+                      		<tr>
+                      			<th>작성일</th>
+                      			<td>${notice.modDate}</td>
+                      			<th>조회</th>
+                      			<td>${notice.hit}</td>
+                      			<td></td>
+                      			<td></td>
+                      		</tr>
+                      	</table>
+                      </div>
+                      <div>
+                      		${notice.contents}<br>
+                      		<hr>
+                      		<c:forEach items="${notice.files}" var="f">
+                      			${f.oriName}
+                      		</c:forEach>
+                      </div>
+                      <hr>
+                      <div id="btn" class="col-sm-10">
                           	<a class="a1 btn btn-primary" href="./list">이전</a>
-                            <button type="submit" class="btn btn-primary">등록</button>
-                          </div>
-                        </div>
-                      </form>
+                            <a class="a1 btn btn-primary" href="./update">수정</a>
+                            <a class="a1 btn btn-primary" href="./delete">삭제</a>
+                      </div>
                     </div>
                   </div>
                     <!-- /Account -->
@@ -178,22 +153,6 @@
     </div>
     <!-- / Layout wrapper -->
   
-	<script>
-      $('#summernote').summernote({
-        placeholder: '공지사항 내용을 입력해주세요.',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-      });
-    </script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>

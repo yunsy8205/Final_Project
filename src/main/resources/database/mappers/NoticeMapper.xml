@@ -6,12 +6,36 @@
 <mapper namespace="com.cloud.pt.notice.NoticeDAO">
 	
 	<insert id="setNoticeAdd" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="noticeNum">
-		INSERT INTO NOTICE (NOTICENUM, EMPLOYEENUM, TITLE, CONTENTS, REGDATE, CATEGORY, HIT)
-		VALUES (NULL, #{employeeNum}, #{title}, #{contents}, NOW(), #{category}, 0)
+		INSERT INTO NOTICE (NOTICENUM, EMPLOYEENUM, TITLE, CONTENTS, REGDATE, MODDATE,CATEGORY, HIT)
+		VALUES (NULL, #{employeeNum}, #{title}, #{contents}, NOW(), NOW(),#{category}, 0)
 	</insert>
 	
 	<insert id="fileAdd" parameterType="NoticeFileVO">
 		INSERT INTO NOTICEFILE
 		VALUES (NULL, #{noticeNum}, #{fileName}, #{oriName})
 	</insert>
+	
+	<select id="getNoticeDetail" parameterType="NoticeVO" resultMap="NoticeResult">
+		SELECT * FROM NOTICE N
+		LEFT JOIN NOTICEFILE NF
+		ON (N.NOTICENUM=NF.NOTICENUM)
+		WHERE N.NOTICENUM=#{noticeNum}
+	</select>
+	
+	<resultMap type="NoticeVO" id="NoticeResult">
+		<id column="NOTICENUM" property="noticeNum"/>
+  		<result column="EMPLOYEENUM" property="employeeNum"/>
+  		<result column="TITLE" property="title"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="MODDATE" property="modDate"/>
+  		<result column="CATEGORY" property="category"/>
+  		<result column="HIT" property="hit"/>
+  		
+  		<collection property="files" javaType="List" ofType="NoticeFileVO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+	</resultMap>
 </mapper>

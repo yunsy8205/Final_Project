@@ -47,5 +47,9 @@ public class NoticeService {
 		}
 		return result;
 	}
+	
+	public NoticeVO getNoticeDetail(NoticeVO noticeVO)throws Exception{
+		return noticeDAO.getNoticeDetail(noticeVO);
+	}
 
 }
