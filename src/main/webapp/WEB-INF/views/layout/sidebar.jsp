@@ -237,7 +237,7 @@
                 </ul>
                 
               <li class="menu-item">
-              <a href="/notice/add" class="menu-link">
+              <a href="/notice/list" class="menu-link">
                 <i class='menu-icon fa-solid bx bxs-megaphone'></i>
                 <div data-i18n="Boxicons">공지사항</div>
               </a>
