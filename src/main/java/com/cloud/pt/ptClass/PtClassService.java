@@ -12,12 +12,18 @@ public class PtClassService {
 	@Autowired
 	private PtClassDAO ptClassDAO;
 	
-	public ArrayList<PtClassVO> ptClassList(HttpSession session) throws Exception{
-		return ptClassDAO.getList();
-	}
-	
-	
 	public ArrayList<PtClassVO> getMyList(Long employeeNum) throws Exception{
 		return ptClassDAO.getMyList(employeeNum);
 	}
+	
+	public int addClass(PtClassVO ptClassVO) throws Exception{
+		return ptClassDAO.addClass(ptClassVO);
+		
+	}
+	
+	public int delClass(PtClassVO ptClassVO) throws Exception{
+		return ptClassDAO.delClass(ptClassVO);
+	}
+	
+	
 }
