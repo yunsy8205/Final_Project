@@ -21,4 +21,6 @@ public interface ChatDAO {
 	
 	public List<ChatMessageVO> chatMessageList(RoomVO roomVO)throws Exception;
 	
+	public EmployeeVO getSomeone(EmployeeVO employeeVO)throws Exception;
+	
 }

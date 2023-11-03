@@ -29,7 +29,8 @@
 		}
 		
 		#btn{
-			
+			padding-left: 40%;
+			margin-top: 50px;
 		}
 		table{
 			table-layout: fixed;
@@ -70,7 +71,7 @@
                       		</tr>
                       		<tr>
                       			<th>작성자</th>
-                      			<td colspan="2">${notice.employeeNum}</td>
+                      			<td colspan="2">${notice.name}</td>
                       			<td></td>
                       			<td></td>
                       			<td></td>

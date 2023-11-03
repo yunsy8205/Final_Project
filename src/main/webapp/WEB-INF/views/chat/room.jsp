@@ -73,7 +73,7 @@
                 <div class="col-xl1">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">이름 직급</h5>
+                      <h5 class="mb-0">내 이름 직급</h5>
                     </div>
                     <div class="card-body">
                     	<div class="input-group mb-4">
@@ -88,7 +88,7 @@
                       	</div>
                     	<div id="listBox">
 	                    	<c:forEach items="${list}" var="li">
-	                        	<a href="#" class="chatList" data-empNum="${li.employeeNum}">${li.name} ${li.position}</a><br>                   		
+	                        	<a href="#" class="chatList" data-empNum="${li.employeeNum}" data-name="${li.name}" data-pos="${li.position}">${li.name} ${li.position}</a><br>                   		
 	                    	</c:forEach>
                     	</div>
                     </div>
@@ -97,7 +97,7 @@
                 <div class="col-xl">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">채팅하려는 대상을 선택해 주세요</h5>
+                      <h5 id="someone" class="mb-0">채팅하려는 대상을 선택해 주세요</h5>
                
                     </div>
                     <div class="card-body">

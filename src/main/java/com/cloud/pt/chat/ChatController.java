@@ -103,4 +103,16 @@ public class ChatController {
 
 		return listMap;
 	}
+	
+	@GetMapping("getsomeone")
+	@ResponseBody
+	public Object getSomeone(EmployeeVO employeeVO) throws Exception{
+		log.info("someone");
+		employeeVO = chatService.getSomeone(employeeVO);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("one", employeeVO);
+
+		return map;
+	}
 }

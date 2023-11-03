@@ -76,6 +76,9 @@
 	
 	function enterRoom(socket, num, roomNum){
 		$('#msgArea').empty();
+		//대상의 사진, 이름, 직책을 가져옴
+		getSomeone(num);
+		
 		let chatDate = getTodayDate();
 	    let enterMsg={"type" : "ENTER","roomNum":roomNum,"receiver":num,"message":"","chatDate":chatDate};
 	    socket.send(JSON.stringify(enterMsg));
@@ -142,16 +145,49 @@
 				"name":name
 			},
 			success:function(response){
+				
+				if (response.list != null) {
+				console.log("list 가져옴");
+												
 				searchList = response.list;
 				
 				$.each(searchList, function( index, value ) {
                 	let a = '<a href="#" class="chatList" data-empNum="'+value.employeeNum+'">'+value.name+' '+value.position+'</a><br>'
                     $('#listBox').append(a);
                 });
+				} else {
+				console.log("list 가져오기 실패");
+				}
 				
 			},
 			error:function(){
 				console.log("ajax 실패");
 			}
 			})	
+	}
+	
+	function getSomeone(num){
+		$.ajax({
+			type:"get",
+			url:"./getsomeone",
+			data:{
+				"employeeNum":num
+			},
+			success:function(response){
+				
+				if (response != null) {
+				console.log("대상정보 가져옴");
+												
+				$('#someone').text(response.one.name+" "+response.one.position);
+				
+				} else {
+				console.log("list 가져오기 실패");
+				}
+				
+			},
+			error:function(){
+				console.log("ajax 실패");
+			}
+			})	
+		
 	}
