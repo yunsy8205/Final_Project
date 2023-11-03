@@ -116,7 +116,7 @@
                     <div class="tab-content">
                       <div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
               
-              <div class="input-group">
+              <!-- <div class="input-group">
                         <button
                           class="btn btn-outline-primary dropdown-toggle"
                           type="button"
@@ -152,7 +152,7 @@
                           </li>
                           <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
                         </ul>
-                      </div>
+                      </div> -->
                       
                       <div>
                       	<a class="a1 btn btn-primary" href="./add">등록</a>
@@ -172,13 +172,15 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td></td>
-                        <td><span class="badge bg-label-primary me-1">카테고리</span></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+	                    <c:forEach items="${list}" var="li">
+	                      <tr>
+	                        <td>${li.noticeNum}</td>
+	                        <td><span class="badge bg-label-primary me-1">${li.category}</span>${li.title}</td>
+	                        <td>${li.name}</td>
+	                        <td>${li.modDate}</td>
+	                        <td>${li.hit}</td>
+	                      </tr>
+	                    </c:forEach>
                     </tbody>
                   </table>
                 </div>

@@ -1,5 +1,7 @@
 package com.cloud.pt.notice;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,10 @@ public class NoticeService {
 	
 	public NoticeVO getNoticeDetail(NoticeVO noticeVO)throws Exception{
 		return noticeDAO.getNoticeDetail(noticeVO);
+	}
+	
+	public List<NoticeVO> getNoticeList()throws Exception{
+		return noticeDAO.getNoticeList();
 	}
 
 }

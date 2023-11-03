@@ -19,6 +19,8 @@
 		SELECT * FROM NOTICE N
 		LEFT JOIN NOTICEFILE NF
 		ON (N.NOTICENUM=NF.NOTICENUM)
+		JOIN EMPLOYEE E
+		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
 		WHERE N.NOTICENUM=#{noticeNum}
 	</select>
 	
@@ -31,6 +33,7 @@
   		<result column="MODDATE" property="modDate"/>
   		<result column="CATEGORY" property="category"/>
   		<result column="HIT" property="hit"/>
+  		<result column="NAME" property="name"/>
   		
   		<collection property="files" javaType="List" ofType="NoticeFileVO">
   			<id column="FILENUM" property="fileNum"/>
@@ -38,4 +41,10 @@
   			<result column="ORINAME" property="oriName"/>
   		</collection>
 	</resultMap>
+	
+	<select id="getNoticeList" resultType="NoticeVO">
+		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT
+		FROM NOTICE N JOIN EMPLOYEE E
+		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+	</select>
 </mapper>

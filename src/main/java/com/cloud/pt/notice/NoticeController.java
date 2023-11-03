@@ -1,5 +1,7 @@
 package com.cloud.pt.notice;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,7 +39,10 @@ public class NoticeController {
 	}
 	
 	@GetMapping("list")
-	public String getNoticeList()throws Exception{
+	public String getNoticeList(Model model)throws Exception{
+		List<NoticeVO> list =noticeService.getNoticeList();
+		model.addAttribute("list", list);
+		
 		return "notice/list";
 	}
 	
