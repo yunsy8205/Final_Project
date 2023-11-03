@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface PtClassDAO {
 	
-	public ArrayList<PtClassVO> getList() throws Exception;
-	
 	public ArrayList<PtClassVO> getMyList(Long employeeNum) throws Exception;
+	
+	public int addClass(PtClassVO ptClassVO) throws Exception;
+	
+	public int delClass(PtClassVO ptClassVO) throws Exception;
 	
 }

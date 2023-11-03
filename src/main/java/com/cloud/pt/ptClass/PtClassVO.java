@@ -11,8 +11,9 @@ public class PtClassVO {
 	
 	private Long ptNum;
 	private Long memberNum;
-	private Long employeeNum;
+	private String employeeNum;
 	private String startTime;
 	private String finishTime;
 	private String name;
+	
 }
