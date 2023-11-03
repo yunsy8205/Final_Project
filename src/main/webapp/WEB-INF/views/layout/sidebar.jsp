@@ -225,7 +225,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="ui-alerts.html" class="menu-link">
+                  <a href="/trainer/ptLog" class="menu-link">
                     <div data-i18n="Alerts">PT일지</div>
                   </a>
                 </li>

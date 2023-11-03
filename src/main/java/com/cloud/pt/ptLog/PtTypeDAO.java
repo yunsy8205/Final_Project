@@ -1,6 +1,7 @@
 package com.cloud.pt.ptLog;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface PtTypeDAO {
 
-	public List<PtTypeVO> getTypeList() throws Exception;
+	public List<PtTypeVO> getTypeList(Map<String, Object> map,String employeeNum) throws Exception;
 
-	
+	public int addType() throws Exception;
 }
