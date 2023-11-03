@@ -82,8 +82,8 @@ function handleSaveClick() {
   const link = document.createElement("a");
   link.href = image;
   link.download = "sign"+count;
-  count++;
   link.click();
+  count++;
 }
 
 if (canvas) {
