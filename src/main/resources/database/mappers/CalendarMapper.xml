@@ -9,4 +9,12 @@
 		ON P.MEMBERNUM = M.MEMBERNUM 
 		WHERE P.EMPLOYEENUM = #{employeeNum};
   	</select>
+  	
+  	<insert id="addClass" parameterType="PtClassVO">
+  		INSERT INTO PT (MEMBERNUM,EMPLOYEENUM,STARTTIME,FINISHTIME) VALUES (#{memberNum} , #{employeeNum}, #{startTime},#{finishTime})
+  	</insert>
+  	
+  	<delete id="delClass" parameterType="PtClassVO">
+  		DELETE FROM PT WHERE PTNUM = #{ptNum}
+  	</delete>
   </mapper>
