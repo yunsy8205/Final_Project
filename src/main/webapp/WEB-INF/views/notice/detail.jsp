@@ -89,7 +89,7 @@
                       <div>
                       		${notice.contents}<br>
                       		<hr>
-                      		<c:forEach items="${notice.files}" var="f">
+                      		<c:forEach items="${notice.list}" var="f">
                       			${f.oriName}
                       		</c:forEach>
                       </div>

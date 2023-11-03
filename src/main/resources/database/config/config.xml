@@ -32,5 +32,6 @@
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="com.cloud.pt.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.cloud.pt.notice.NoticeFileVO" alias="NoticeFileVO"/>
+		<typeAlias type="java.util.List" alias="List"/>
 	</typeAliases>
 </configuration>

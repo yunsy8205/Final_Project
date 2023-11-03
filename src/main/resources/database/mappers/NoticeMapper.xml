@@ -35,7 +35,7 @@
   		<result column="HIT" property="hit"/>
   		<result column="NAME" property="name"/>
   		
-  		<collection property="files" javaType="List" ofType="NoticeFileVO">
+  		<collection property="list" javaType="List" ofType="NoticeFileVO">
   			<id column="FILENUM" property="fileNum"/>
   			<result column="FILENAME" property="fileName"/>
   			<result column="ORINAME" property="oriName"/>
