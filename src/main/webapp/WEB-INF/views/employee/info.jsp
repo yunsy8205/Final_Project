@@ -3,6 +3,7 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <!-- beautify ignore:start -->
 <html
@@ -33,95 +34,154 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-                <div class="col-xxl">
-                  <div class="card mb-4">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                      <h1 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 정보</h1>
-                    </div>
-                    <div class="card-body">
-                      <div id="detailCon">
-                        <div id="detail_left">
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">사번</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.employeeNum}" readonly/>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">이름</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.name}" readonly/>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">전화번호</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.phone}" readonly/>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">주소</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.address}" readonly/>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">생년월일</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.birth}" readonly/>
-                            </div>
-                          </div>
-                        </div>
-                        <div id="detail_right">
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">입사일</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.joinDate}" readonly/>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">퇴사일</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.quitDate}" readonly/>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">성별</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.gender}" readonly/>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">경력</label>
-                            <div class="col-sm-10">
-                              <c:forEach items="${employeeVO.careers}" var="career">
-                                <input type="text" class="form-control" id="basic-default-name" value="${career.title}" readonly/>
-                              </c:forEach>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                              <label class="col-sm-2 col-form-label" for="basic-default-name">자격증</label>
-                              <div class="col-sm-10">
-                                <c:forEach items="${employeeVO.certifications}" var="cer">
-                                  <input type="text" class="form-control" id="basic-default-name" value="${cer.cerTitle}" readonly/>
-                                </c:forEach>
+                <div class="nav-align-top mb-4">
+                  <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item">
+                      <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-info" aria-controls="navs-justified-home" aria-selected="true">
+                        내 정보
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-updatePw" aria-controls="navs-justified-profile" aria-selected="false">
+                        비밀번호 변경
+                      </button>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane fade show active" id="navs-justified-info" role="tabpanel">
+                      <p class="mb-0">
+                          <div class="col-xxl">
+                              <div class="card mb-4">
+                                <div class="card-header d-flex align-items-center justify-content-between">
+                                  <h1 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 정보</h1>
+                                </div>
+                                <div class="card-body">
+                                  <div id="detailCon">
+                                    <div id="detail_left">
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">사번</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.employeeNum}" readonly/>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">이름</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.name}" readonly/>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">전화번호</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.phone}" readonly/>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">주소</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.address}" readonly/>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">생년월일</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.birth}" readonly/>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div id="detail_right">
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">입사일</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.joinDate}" readonly/>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">퇴사일</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.quitDate}" readonly/>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">성별</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.gender}" readonly/>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">경력</label>
+                                        <div class="col-sm-10">
+                                          <c:forEach items="${employeeVO.careers}" var="career">
+                                            <input type="text" class="form-control" id="basic-default-name" value="${career.title}" readonly/>
+                                          </c:forEach>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                          <label class="col-sm-2 col-form-label" for="basic-default-name">자격증</label>
+                                          <div class="col-sm-10">
+                                            <c:forEach items="${employeeVO.certifications}" var="cer">
+                                              <input type="text" class="form-control" id="basic-default-name" value="${cer.cerTitle}" readonly/>
+                                            </c:forEach>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">서명이미지</label>
+                                        <div class="col-sm-10">
+                                          <!-- <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.signFile}" readonly/> -->
+                                          <img src="../file/employee/${employeeVO.signFile}" id="basic-default-name sign" alt="개인 싸인">
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <form action="" id="upfrm">
+                                      <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
+                                    </form>
+                                    <div class="proBtn">
+                                      <button type="button" id="upBtn" data-url="/employee/infoUpdate">수정</button>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">서명이미지</label>
-                            <div class="col-sm-10">
-                              <!-- <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.signFile}" readonly/> -->
-                              <img src="../file/employee/${employeeVO.signFile}" id="basic-default-name sign" alt="개인 싸인">
-                            </div>
-                          </div>
-                        </div>
-                        <form action="" id="upfrm">
-                          <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
-                        </form>
-                        <div class="proBtn">
-                          <button type="button" id="upBtn" data-url="/employee/infoUpdate">수정</button>
-                        </div>
-                      </div>
+                      </p>
+                    </div>
+                    <div class="tab-pane fade" id="navs-justified-updatePw" role="tabpanel">
+                      <p class="mb-0">
+                          <form:form modelAttribute="employeeVO" action="/employee/updatePw" method="post" id="pwFrm">
+                              <input type="text" name="employeeNum" value="${employeeVO.employeeNum}"/>
+                              <input type="text" name="password" value="${employeeVO.password}"/>
+                              <input type="hidden" name="gender" value="${employeeVO.gender}"/>
+                              <input type="hidden" name="address" value="${employeeVO.address}"/>
+                              <input type="hidden" name="phone" value="${employeeVO.phone}"/>
+                              <input type="hidden" name="state" value="${employeeVO.state}"/>
+                              <input type="hidden" name="position" value="${employeeVO.position}"/>
+                              <input type="hidden" name="name" value="${employeeVO.name}"/>
+
+                              <div class="row mb-3">
+                                <form:label path="inputPw" class="col-sm-2 col-form-label" for="basic-default-name">기존 비밀번호</form:label>
+                                <div class="col-sm-10">
+                                  <form:password path="inputPw" cssClass="form-control" id="basic-default-name"/>
+                                	<form:errors path="inputPw"></form:errors>
+                                </div>
+                              </div>
+                              <div class="row mb-3">
+                                <form:label path="newPw" class="col-sm-2 col-form-label" for="basic-default-name">새 비밀번호</form:label>
+                                <div class="col-sm-10">
+                                  <form:password path="newPw" cssClass="form-control" id="basic-default-name"/>
+                                	<form:errors path="newPw"></form:errors>
+                                </div>
+                              </div>
+                              <div class="row mb-3">
+                                <form:label path="pwCheck" class="col-sm-2 col-form-label" for="basic-default-name">비밀번호 확인</form:label>
+                                <div class="col-sm-10">
+                                	<form:password path="pwCheck"  cssClass="form-control" id="basic-default-name"/>
+                                 	<form:errors path="pwCheck"></form:errors>
+                                </div>
+                              </div>
+                              <div class="proBtn">
+                                <button type="submit" id="upBtn">비밀번호 변경</button>
+                              </div>
+                          </form:form>
+                      </p>
                     </div>
                   </div>
                 </div>

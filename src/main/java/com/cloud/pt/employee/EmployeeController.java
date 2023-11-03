@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +35,8 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	
 	
@@ -60,19 +64,28 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("infoUpdate")
-	public String setInfoUpdate(@Valid EmployeeVO employeeVO,BindingResult bindingResult, RedirectAttributes attributes, MultipartFile multipartFile)throws Exception{
+	public String setInfoUpdate(@Valid EmployeeVO employeeVO,BindingResult bindingResult, RedirectAttributes attributes, MultipartFile empfile)throws Exception{
 		// update 후 검증 진행
+		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
+		if(check) {
+			log.info("==========================검증 에러 ===================");
+			return "employee/join";
+		}
+		
 		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		EmployeeVO emp = (EmployeeVO)obj;
 		employeeVO.setEmployeeNum(emp.getEmployeeNum());
-
-		int result = employeeService.setInfoUpdate(employeeVO);
+		
+		log.info("NUM:{}",employeeVO.getEmployeeNum());
+		log.info("profile :{}", empfile.getOriginalFilename());
+		
+		int result = employeeService.setInfoUpdate(employeeVO, empfile);
 
 		attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
 		return "redirect:/employee/info";
 	}
 	
-	@GetMapping("infoFileDelete")
+	@GetMapping("infoFileUpdate")
 	public String setInfoFileDelete(@AuthenticationPrincipal EmployeeVO employeeVO, Model model)throws Exception{
 		employeeVO.setEmployeeNum(employeeVO.getEmployeeNum());
 		
@@ -81,6 +94,30 @@ public class EmployeeController {
 		model.addAttribute("result", result);
 		
 		return "commons/ajaxResult";
+	}
+
+	
+	@PostMapping("updatePw")
+	public String setPwUpdate(@Valid EmployeeVO employeeVO, BindingResult bindingResult, Principal principal)throws Exception{
+
+		log.info(">>>>>>>>>>>>>>> EMP : {}", employeeVO);
+		log.info(">>>>>>>>>>>>>>> NUM : {}", employeeVO.getEmployeeNum());
+		log.info(">>>>>>>>>>>>>>> 기존 비번: {}", employeeVO.getInputPw());
+		log.info(">>>>>>>>>>>>> 새 비번 : {}", employeeVO.getNewPw());
+		log.info(">>>>>>>>>>>>>>> 확인 비번 :{}", employeeVO.getPwCheck());
+		
+		String inputPw = employeeVO.getInputPw(); //JSP로부터 넘겨받은 입력한 기존비밀번호
+			
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();				
+		if(encoder.matches(inputPw, employeeVO.getPassword())) {//넘겨받은 비밀번호와 EMP의 암호화된 비밀번호와 비교
+			boolean check = employeeService.getNewPwCheck(employeeVO, bindingResult);
+			if(bindingResult.hasErrors() || check) {
+				return "/employee/info";
+			}
+			employeeVO.setPassword(employeeVO.getNewPw());
+			int result = employeeService.setPwUpdate(employeeVO);
+		}
+		return	"redirect:./info";
 	}
 	
 	

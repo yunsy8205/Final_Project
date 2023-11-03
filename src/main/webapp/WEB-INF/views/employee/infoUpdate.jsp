@@ -45,7 +45,6 @@
                           <div class="proFile_con">
                             <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
                             <p>${employeeVO.proOriginal}</p>
-                            <span id="delFile" data-delete-file="${employeeVO.employeeNum}">X</span>
                             <input type="file" name="empfile" id="proFile"/>
                           </div>
                           <div class="proContent">

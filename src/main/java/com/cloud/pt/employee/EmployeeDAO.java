@@ -20,6 +20,8 @@ public interface EmployeeDAO {
 	
 	public int setInfoFileDelete(EmployeeVO employeeVO)throws Exception;
 	
+	public int setPwUpdate(EmployeeVO employeeVO)throws Exception; 
+	
 	public int setJoin(EmployeeVO employeeVO)throws Exception;
 	
 	public Long getEmpTotal(Pager pager)throws Exception;

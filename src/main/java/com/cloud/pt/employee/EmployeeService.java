@@ -77,8 +77,7 @@ public class EmployeeService implements UserDetailsService{
 	
 	public boolean getEmpError(EmployeeVO employeeVO, BindingResult bindingResult)throws Exception{
 		// false(오류없음) | true(오류있음)
-		//boolean check = false;
-		
+
 		// annotation 검증
 		boolean check = bindingResult.hasErrors();
 
@@ -102,8 +101,20 @@ public class EmployeeService implements UserDetailsService{
 		return employeeDAO.getInfo(employeeVO);
 	}
 	
-	public int setInfoUpdate(EmployeeVO employeeVO)throws Exception{
-		return employeeDAO.setInfoUpdate(employeeVO);
+	public int setInfoUpdate(EmployeeVO employeeVO, MultipartFile proFile)throws Exception{
+		employeeVO = employeeDAO.getInfoFileDetail(employeeVO);
+		boolean check = fileManager.fileDelete(this.uploadPath+this.empFileName, employeeVO);
+		
+		if(check) {
+			String fileName = fileManager.save(this.uploadPath+this.empFileName, proFile);
+			
+			employeeVO.setProFile(fileName);
+			employeeVO.setProOriginal(proFile.getOriginalFilename());
+			
+			return employeeDAO.setInfoUpdate(employeeVO);
+		}
+		return 0;
+		
 	}
 	
 	public int setInfoFileDelete(EmployeeVO employeeVO)throws Exception{
@@ -114,6 +125,29 @@ public class EmployeeService implements UserDetailsService{
 			return employeeDAO.setInfoFileDelete(employeeVO);
 		}
 		return 0;
+	}
+	
+	
+	public int setPwUpdate(EmployeeVO employeeVO)throws Exception{
+		// 비밀번호 암호화
+		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
+				
+		return employeeDAO.setPwUpdate(employeeVO);
+	}
+	
+	public boolean getNewPwCheck(EmployeeVO employeeVO, BindingResult bindingResult)throws Exception{
+		// false(오류없음) | true(오류있음)
+		boolean check = false;
+		
+		// 1. password 일치 검증
+		if(!employeeVO.getNewPw().equals(employeeVO.getPwCheck())) {
+			check = true;  //check=!check;
+			
+			// reject ("VO명", "properties에 적힐 키이름")
+			bindingResult.rejectValue("pwCheck", "employeeVO.password.equalCheck");
+		}
+		
+		return check;
 	}
 	
 	
