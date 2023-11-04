@@ -4,18 +4,16 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.attendance.AttendanceDAO">
-	<sql id="searchSql">
-		WHERE 
-		<choose>
-			<when test="kind=='name'">
-				E.NAME LIKE '%'||#{search}||'%'
-			</when>
-			<otherwise>
-				AM.STATUS LIKE '%'||#{search}||'%'
-			</otherwise>
-		</choose>
+	<sql id="searchSql"> 
+		<if test="kind=='name'">WHERE E.NAME LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='status'">WHERE AM.STATUS LIKE CONCAT('%',#{search},'%')</if>
 	</sql>
 	
+	<sql id="searchSqlA">
+		<if test="pager.kind=='name'">AND E.NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+		<if test="pager.kind=='state'">AND A.STATE LIKE CONCAT('%',#{pager.search},'%')</if>
+	</sql>
+
 	<sql id="joinSql">
 		FROM ATTENDANCEMODIFY AM
 			JOIN ATTENDANCE A
@@ -84,6 +82,73 @@
 		</association>
 	</resultMap>	
 	
+	<!-- 월별 근태 total -->
+	<select id="getMonthTotal" resultType="Long" parameterType="Map">
+		SELECT COUNT(A.ATTENDANCENUM)
+		FROM ATTENDANCE A 
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		WHERE DATE_FORMAT(A.WORKDATE, '%Y-%m')=DATE_FORMAT(#{attendance.workDate}, '%Y-%m')
+		<include refid="searchSqlA"></include>
+	</select>
+	
+	<!-- 월별 근태 -->
+	<select id="getMonthList" resultMap="getMonthResult" parameterType="Map">
+		SELECT A.*, E.NAME
+		FROM ATTENDANCE A
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM 
+		WHERE DATE_FORMAT(A.WORKDATE, '%Y-%m')=DATE_FORMAT(#{attendance.workDate}, '%Y-%m')
+		<include refid="searchSqlA"></include>	
+		LIMIT #{pager.startRow}, #{pager.lastRow}
+	</select>
+	
+	<resultMap type="AttendanceVO" id="getMonthResult">
+		<id column="ATTENDANCENUM" property="attendanceNum"/>
+		<result column="EMPLOYEENUM" property="employeeNum"/>
+		<result column="WORKDATE" property="workDate"/>
+		<result column="ONTIME" property="onTime"/>
+		<result column="OFFTIME" property="offTime"/>
+		<result column="STATE" property="state"/>
+		<association property="employeeVO" javaType="EmployeeVO">			
+			<id column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="NAME" property="name"/>
+		</association>
+	</resultMap>
+	
+	<!-- 당일 근태 total -->
+	<select id="getDayTotal" resultType="Long" parameterType="Map">
+		SELECT COUNT(A.ATTENDANCENUM)
+		FROM ATTENDANCE A
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM 
+		WHERE A.WORKDATE=#{attendance.workDate}
+		<include refid="searchSqlA"></include>	
+	</select>
+	
+	<!-- 당일 근태 -->
+	<select id="getDayList" resultMap="getDayResult" parameterType="Map">
+		SELECT A.*, E.NAME
+		FROM ATTENDANCE A
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM 
+		WHERE WORKDATE=#{attendance.workDate}
+		<include refid="searchSqlA"></include>	
+		LIMIT #{pager.startRow}, #{pager.lastRow}
+	</select>
+	
+	<resultMap type="AttendanceVO" id="getDayResult">
+		<id column="ATTENDANCENUM" property="attendanceNum"/>
+		<result column="EMPLOYEENUM" property="employeeNum"/>
+		<result column="WORKDATE" property="workDate"/>
+		<result column="ONTIME" property="onTime"/>
+		<result column="OFFTIME" property="offTime"/>
+		<result column="STATE" property="state"/>
+		<association property="employeeVO" javaType="EmployeeVO">			
+			<id column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="NAME" property="name"/>
+		</association>
+	</resultMap>
 	
 	<update id="setUpdateA" parameterType="Map">
 		UPDATE ATTENDANCE
@@ -127,8 +192,8 @@
 		</association>
 	</resultMap>	
 	
-	<select id="getRequestTotal" resultType="Long" parameterType="Pager">
-		SELECT COUNT(ATTENDANCEMODIFYNUM)
+	<select id="getRequestTotal" resultType="java.lang.Long" parameterType="Pager">
+		SELECT COUNT(AM.ATTENDANCEMODIFYNUM)
 		<include refid="joinSql"></include>
 		<include refid="searchSql"></include>
 	</select>

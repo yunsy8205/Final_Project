@@ -19,6 +19,10 @@ public interface AttendanceDAO {
 	public int setOff(EmployeeVO employeeVO) throws Exception;
 	public int setState(Map<String, Object> map) throws Exception;
 	
+	public Long getMonthTotal(Map<String, Object> map) throws Exception; 
+	public List<AttendanceVO> getMonthList(Map<String, Object> map) throws Exception; 
+	public Long getDayTotal(Map<String, Object> map) throws Exception; 
+	public List<AttendanceVO> getDayList(Map<String, Object> map) throws Exception; 
 	//----------------------------------------
 	public Long getRequestTotal(Pager pager) throws Exception;
 	

@@ -1,6 +1,8 @@
 package com.cloud.pt.attendance;
 
+import java.sql.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,6 +100,30 @@ public class AttendanceService {
 		map.put("off", standardOff);
 		
 		return attendanceDAO.setState(map);
+	}
+	
+	public List<AttendanceVO> getMonthList(AttendanceVO attendanceVO, Pager pager) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("attendance", attendanceVO);
+		map.put("pager", pager);
+		
+		pager.makeRowNum();
+		Long total = attendanceDAO.getMonthTotal(map);
+		pager.makePageNum(total);
+		
+		return attendanceDAO.getMonthList(map);
+	}
+	
+	public List<AttendanceVO> getDayList(AttendanceVO attendanceVO, Pager pager) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("attendance", attendanceVO);
+		map.put("pager", pager);
+		
+		pager.makeRowNum();
+		Long total = attendanceDAO.getDayTotal(map);
+		pager.makePageNum(total);
+		
+		return attendanceDAO.getDayList(map);
 	}
 	
 	//---------------------------------------------------

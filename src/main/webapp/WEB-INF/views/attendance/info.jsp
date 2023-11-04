@@ -59,7 +59,7 @@
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 
-  	<!-- moment lib -->
+  <!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 	<!-- fullcalendar bundle -->
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>
@@ -91,26 +91,38 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="workDate"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <div class="row">
                           <div class="col mb-3">
-                            <p>
-                              출근
+                            <p id="date">
+                              
+                            </p>
+                          </div>
+                          <div class="col mb-3">
+                            <p id="state">
+                              
                             </p>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col mb-3">
-                            <p>
-                              퇴근 
+                            <p id="on">
+                              
+                            </p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col mb-3">
+                            <p id="off">
+                               
                             </p>
                           </div>
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-target="#smallModal" data-bs-toggle="modal">
+                        <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">
                           확인
                         </button>
                       </div>
@@ -184,12 +196,20 @@
                   height: '90%',
                 // contentHeight: 'auto',
                   fixedWeekCount: false,
-                  events: data,
+                  events: data, //json 데이터 사용 
+                 
                   //이벤트 클릭 시 
-                  eventClick: function(data) {
-                      $('#smallModal').addClass('show');
-                      $('#smallModal').css('display', 'block');
-                      $('#smallModal').attr('role', 'dialog');
+                  eventClick: function(info) {
+                      console.log(info)
+                      const date = moment(info.event.start).format('M월 DD일'); //날짜
+                      const state = info.event.title; //상태
+                      const on = info.event.extendedProps.onTime; //출근시간
+                      const off = info.event.extendedProps.offTime; //퇴근시간
+                      $('#date').text(date);
+                      $('#state').text(state);
+                      $('#on').text('출근 - '+on);
+                      $('#off').text('퇴근 - '+off);
+                      $('#smallModal').modal('show');
                    }
                 });
                 //캘린더 그리기
@@ -202,7 +222,6 @@
               alert("Request failed: " + textStatus);
             });
       });
-
     </script>
   </body>
 </html>

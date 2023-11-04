@@ -181,7 +181,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/admin/attendance/month" class="menu-link">
+                  <a id="attendance" href="/admin/attendance" class="menu-link">
                     <div data-i18n="Alerts">전체 근태 조회</div>
                   </a>
                 </li>

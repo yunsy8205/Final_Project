@@ -14,3 +14,4 @@ $('.pagination').on('click', '.move', function(){
     $('#page').val(num);
     $('#frm').submit();
 })
+

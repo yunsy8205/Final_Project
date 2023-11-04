@@ -1,6 +1,8 @@
 package com.cloud.pt.attendance;
 
 import java.security.Principal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
@@ -119,14 +120,50 @@ public class AttendanceController {
 		return "redirect:./list";
 	}
 	
+	@GetMapping("/admin/attendance")
+	public String getAdminHome(Model model, Pager pager) throws Exception {
+		//현재 년도와 월을 가져오기
+		LocalDate currentDate = LocalDate.now();
+		int year = currentDate.getYear();
+		int month = currentDate.getMonthValue();
+		String yearMonthDate = year+"-"+month;
+		
+		long currentTimeMillis = System.currentTimeMillis();
+        Date currentSqlDate = new Date(currentTimeMillis);
+		
+		AttendanceVO attendanceVO = new AttendanceVO();
+		attendanceVO.setWorkDate(currentSqlDate);
+		
+		List<AttendanceVO> ar = attendanceService.getMonthList(attendanceVO, pager);
+        
+        model.addAttribute("date", yearMonthDate);
+		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
+		
+		return "attendance/adminHome";
+	}
+	
 	@GetMapping("/admin/attendance/month")
-	public String getAdminMonth() {
+	public String getAdminMonth(AttendanceVO attendanceVO, Model model, Pager pager) throws Exception {
+		List<AttendanceVO> ar = attendanceService.getMonthList(attendanceVO, pager);
+       
+		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
 		
 		return "attendance/adminMonth";
 	}
 	
 	@GetMapping("/admin/attendance/day")
-	public String getAdminDay() {
+	public String getAdminDay(AttendanceVO attendanceVO, Model model, Pager pager) throws Exception {
+		log.info("vo: {}", attendanceVO);
+		List<AttendanceVO> ar = attendanceService.getDayList(attendanceVO, pager);
+		long currentTimeMillis = System.currentTimeMillis();
+        Date currentSqlDate = new Date(currentTimeMillis);
+        System.out.println(currentSqlDate);
+        
+        model.addAttribute("date", currentSqlDate);
+		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
 		
 		return "attendance/adminDay";
 	}
