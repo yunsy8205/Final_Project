@@ -133,7 +133,14 @@ public class AttendanceService {
 //	}
 	
 	public AttendanceVO getInfo(EmployeeVO employeeVO) throws Exception {
-		return attendanceDAO.getInfo(employeeVO);
+		long currentTimeMillis = System.currentTimeMillis();
+        Date currentSqlDate = new Date(currentTimeMillis); //헌재 날짜 
+        
+        Map<String, Object> map = new HashMap<>();
+        map.put("vo", employeeVO);
+        map.put("date", currentSqlDate);
+		
+		return attendanceDAO.getInfo(map);
 	}
 	
 	public int setOn(EmployeeVO employeeVO) throws Exception {
@@ -151,7 +158,7 @@ public class AttendanceService {
 	}
 	
 	public int setState(EmployeeVO employeeVO) throws Exception {
-		AttendanceVO attendanceVO = attendanceDAO.getInfo(employeeVO);
+		AttendanceVO attendanceVO = getInfo(employeeVO);
 		String on = "09:01:00";
 		String off = "18:00:00";
 		Time standardOn = Time.valueOf(on); //출근시간 기준

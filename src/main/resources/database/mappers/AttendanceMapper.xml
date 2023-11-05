@@ -41,7 +41,17 @@
 			WHERE EMPLOYEENUM=#{employeeNum}
 			AND WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</update>
-
+	
+	<select id="getEmployeeList" resultType="EmployeeVO">
+		SELECT EMPLOYEENUM
+		FROM EMPLOYEE 
+	</select>
+	
+	<insert id="setEnd" parameterType="Map">
+		INSERT INTO ATTENDANCE
+		(EMPLOYEENUM, WORKDATE, STATE)
+		VALUES (#{vo.employeeNum}, #{date}, '결근')
+	</insert>
 
 	<update id="setState" parameterType="Map">
 		UPDATE ATTENDANCE
@@ -53,7 +63,7 @@
 		</set>
 			WHERE ATTENDANCENUM=#{vo.attendanceNum}
 	</update>
-
+ 
 	<select id="getList" resultType="Map" parameterType="EmployeeVO">
 		SELECT *
 		FROM ATTENDANCE
@@ -72,13 +82,13 @@
 		FROM EMPLOYEE
 	</select>
 	
-	<select id="getInfo" resultMap="getInfoResult" parameterType="EmployeeVO">
+	<select id="getInfo" resultMap="getInfoResult" parameterType="Map">
 		SELECT A.*, E.*
 		FROM ATTENDANCE A 
 			JOIN EMPLOYEE E
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM
-		WHERE E.EMPLOYEENUM=#{employeeNum}
-		AND A.WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
+		WHERE E.EMPLOYEENUM=#{vo.employeeNum}
+		AND A.WORKDATE=#{date}
 	</select>
 	
 	<resultMap type="AttendanceVO" id="getInfoResult">

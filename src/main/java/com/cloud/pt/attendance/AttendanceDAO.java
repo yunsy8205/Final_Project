@@ -16,11 +16,14 @@ public interface AttendanceDAO {
 	public List<Map<String, Object>> getResources() throws Exception;
 
 	//	public List<AttendanceVO> getList(EmployeeVO employeeVO) throws Exception;
-	public AttendanceVO getInfo(EmployeeVO employeeVO) throws Exception;
+	public AttendanceVO getInfo(Map<String, Object> map) throws Exception;
 	
 	public int setOn(EmployeeVO employeeVO) throws Exception;
 	public int setOff(EmployeeVO employeeVO) throws Exception;
 	public int setState(Map<String, Object> map) throws Exception;
+	public int setEnd(Map<String, Object> map) throws Exception;
+	
+	public List<EmployeeVO> getEmployeeList() throws Exception;
 	
 	public Long getDayTotal(Map<String, Object> map) throws Exception; 
 	public List<AttendanceVO> getDayList(Map<String, Object> map) throws Exception; 
