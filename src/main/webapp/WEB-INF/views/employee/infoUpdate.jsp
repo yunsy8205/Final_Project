@@ -37,75 +37,79 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="col-xxl">
                   <div class="card mb-4">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                      <h1 class="emp_title">${employeeVO.name} <span class="position_inner"></span> 수정사항</h1>
-                      <div class="card mb-4">
-                        <h1 class="emp_title">직원 인적사항</h1>
-                        <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" id="frm" action="./infoUpdate">
-                          <div class="proFile_con">
-                            <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
-                            <p>${employeeVO.proOriginal}</p>
-                            <input type="file" name="empfile" id="proFile"/>
-                          </div>
-                          <div class="proContent">
-                            <div class="proLeft">
-                              <div class="prodiv">
-                                <form:label path="name">이름</form:label>
-                                <form:input path="name" id="name" cssClass="input_con" required="true"></form:input>
-                                <form:errors path="name"></form:errors>
-                              </div>
-                              <div class="prodiv">
-                                <form:label path="phone">전화번호</form:label>
-                                <form:input path="phone" id="phone" cssClass="input_con" required="true"></form:input>
-                                <form:errors path="phone"></form:errors>
-                              </div>
-                              <div class="prodiv">
-                                <form:label path="address">주소</form:label>
-                                <form:input path="address" id="adr_postNum" cssClass="input_con" placeholder="우편번호" value=""></form:input>
-                                <button type="button" id="addressBtn">우편번호 찾기</button>
-                                <form:input path="address" id="adr_address" placeholder="주소" required="true"></form:input>
-                                <form:input path="address" id="adr_detail" placeholder="상세주소" value ="" required="true"></form:input>
-                                <form:errors path="address"></form:errors>
-                              </div>
-                              <div class="prodiv">
-                                <form:label path="birth">생년월일</form:label>
-                                <form:input type="date" path="birth" id="birth" cssClass="input_con" required="true"></form:input>
-                                <form:errors path="birth"></form:errors>
+                    <div class="card-header">
+                      <h1 class="emp_title">${employeeVO.name} <span class="position_inner"></span> 정보수정</h1>
+                      <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" id="frm" action="./infoUpdate">
+                        <div class="proFile_con">
+                          <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
+                          <p>${employeeVO.proOriginal}</p>
+                          <input type="file"  name="empfile" id="proFile"/>
+                        </div>
+                        <input type="text" class="form-control" name="employeeNum" value="${employeeVO.employeeNum}">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5rem;">
+                          <div  class="empLeft" style="width: 47%;">
+                            <div class="row mb-3">
+                              <form:label path="name" class="col-md-2 col-form-label">이름</form:label>
+                              <form:input path="name" id="name" class="form-control" value="${employeeVO.name}"></form:input>
+                              <form:errors path="name"></form:errors>
+                            </div>
+                            <div class="row mb-3">
+                              <form:label path="phone" class="col-md-2 col-form-label">전화번호</form:label>
+                              <form:input path="phone" id="phone"  class="form-control" ></form:input>
+                              <form:errors path="phone"></form:errors>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="html5-text-input" class="col-md-2 col-form-label">주소</label>
+                              <div class="col-md-10">
+                                <form:input path="address" class="form-control address input" type="text" id="html5-text-input"  value="" placeholder="우편번호"/>
+                                <button type="button" id="addressBtn" class="btn btn-primary">우편번호 찾기</button>
+                                <input class="form-control" type="hidden" id="html5-text-input"  placeholder="주소" />
+                                <input class="form-control" type="hidden" id="html5-text-input"  placeholder="상세주소" value="" />
+                                <div id="addressMsg"></div>
                               </div>
                             </div>
-                            <div class="proRight">
-                              <div class="prodiv">
-                                <form:label path="joinDate">입사일</form:label>
-                                <form:input path="joinDate" id="joinDate" cssClass="input_con" value="" readonly="true"></form:input>
-                                <form:errors path="joinDate"></form:errors>
-                              </div>
-                              <div class="prodiv">
-                                <label for="gender">성별</label>
-                                <input type="radio" id="gender_M" name="gender" value="M" checked>남
-                                <input type="radio" id="gender_W" name="gender" value="W">여
-                              </div>
-                              <div class="prodiv">
-                                <label for="state">직원상태</label>
-                                <input type="radio" name="state" id="state" cssClass="input_con" value="재직" checked>재직</input>
-                              </div>
-                              <div class="prodiv">
-                                <select name="position" id="position">직급
-                                  <option value="ROLE_CEO">대표</option>
-                                  <option value="ROLE_GENERAL">총괄 매니저</option>
-                                  <option value="ROLE_CUSTOMER">고객관리 매니저</option>
-                                  <option value="ROLE_RESOURCES">인사 매니저</option>
-                                  <option value="ROLE_FACILITY">시설 매니저</option>
-                                  <option value="ROLE_TRAINER">트레이너</option>
-                                  <option value="ROLE_EX">가발령</option>
-                                </select>
-                              </div>
+                            <div class="row mb-3" >
+                              <form:label path="birth" class="col-md-2 col-form-label">생년월일</form:label>
+                              <form:input type="date" path="birth" id="birth"  class="form-control" ></form:input>
+                              <form:errors path="birth"></form:errors>
                             </div>
                           </div>
-                          <div class="upBtn">
-                            <button type="submit" id="upBtn">수정 완료</button>
+                          <div class="empRight" style="width: calc(100% - 53%);">
+                            <div class="row mb-3">
+                              <form:label path="joinDate" class="col-md-2 col-form-label">입사일</form:label>
+                              <form:input path="joinDate" id="joinDate"  class="form-control" value="" readonly="true"></form:input>
+                              <form:errors path="joinDate"></form:errors>
+                            </div>
+                            <div class="row mb-3">
+                              <label for="html5-text-input" class="col-md-2 col-form-label">성별</label>
+                              <input type="hidden" id="genderVal" cssClass="input_con" readonly="ture" value="${employeeVO.gender}"></input>
+                              <div class="col-md-10" style="display: flex;">
+                                <div class="form-check mt-3" style="margin-top:0 !important; margin-right: 2rem;">
+                                  <label class="form-check-label" for="gender_M"> 남 </label>
+                                  <input class="form-check-input" name="gender" type="radio" value="M" id="gender_M" />
+                                </div>
+                                <div class="form-check">
+                                  <label class="form-check-label" for="gender_W"> 여 </label>
+                                  <input  class="form-check-input" name="gender" type="radio" value="W" id="gender_W"/>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mb-3">
+                              <label for="state"class="col-md-2 col-form-label">직원상태</label>
+                              <input type="radio" name="state" id="state" class="form-check-input state_input" style="padding-right: 0;
+                              margin-right: calc(var(--bs-gutter-x) * 0.5);" value="재직" checked>재직</input>
+                            </div>
+                            <div class="row mb-3">
+                              <label for="position"class="col-md-2 col-form-label">직급</label>
+                              <input style="display: none;" name="position" id="position"  class="form-check-input" value="${employeeVO.position}" >${employeeVO.position}</input>
+                            </div>
                           </div>
-                        </form:form>
-                    </div>
+                        </div>
+                        <div class="upBtn">
+                          <button type="submit" id="upBtn">수정 완료</button>
+                        </div>
+                      </form:form>
+                    
                   </div>
                 </div>
               </div>

@@ -102,31 +102,19 @@ public class EmployeeService implements UserDetailsService{
 	}
 	
 	public int setInfoUpdate(EmployeeVO employeeVO, MultipartFile proFile)throws Exception{
-		employeeVO = employeeDAO.getInfoFileDetail(employeeVO);
-		boolean check = fileManager.fileDelete(this.uploadPath+this.empFileName, employeeVO);
 		
-		if(check) {
-			String fileName = fileManager.save(this.uploadPath+this.empFileName, proFile);
-			
-			employeeVO.setProFile(fileName);
-			employeeVO.setProOriginal(proFile.getOriginalFilename());
-			
-			return employeeDAO.setInfoUpdate(employeeVO);
-		}
-		return 0;
+		String fileName = fileManager.save(this.uploadPath+this.empFileName, proFile);
+		
+		employeeVO.setProFile(fileName);
+		employeeVO.setProOriginal(proFile.getOriginalFilename());
+		
+		return employeeDAO.setInfoUpdate(employeeVO);
 		
 	}
 	
-	public int setInfoFileDelete(EmployeeVO employeeVO)throws Exception{
-		employeeVO = employeeDAO.getInfoFileDetail(employeeVO);
-		boolean check = fileManager.fileDelete(this.uploadPath+this.empFileName, employeeVO);
-		
-		if(check) {
-			return employeeDAO.setInfoFileDelete(employeeVO);
-		}
-		return 0;
-	}
 	
+	
+	// -------------------------------------------------
 	
 	public int setPwUpdate(EmployeeVO employeeVO)throws Exception{
 		// 비밀번호 암호화
@@ -149,6 +137,9 @@ public class EmployeeService implements UserDetailsService{
 		
 		return check;
 	}
+	
+	
+	
 	
 	
 	@Transactional(rollbackFor = Exception.class)

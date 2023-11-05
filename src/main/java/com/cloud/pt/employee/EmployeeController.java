@@ -69,15 +69,13 @@ public class EmployeeController {
 		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
 		if(check) {
 			log.info("==========================검증 에러 ===================");
-			return "employee/join";
-		}
-		
+			attributes.addFlashAttribute("employeeNum", employeeVO.getEmployeeNum());
+			return "/employee/infoUpdate";
+		}	
+
 		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		EmployeeVO emp = (EmployeeVO)obj;
 		employeeVO.setEmployeeNum(emp.getEmployeeNum());
-		
-		log.info("NUM:{}",employeeVO.getEmployeeNum());
-		log.info("profile :{}", empfile.getOriginalFilename());
 		
 		int result = employeeService.setInfoUpdate(employeeVO, empfile);
 
@@ -85,16 +83,6 @@ public class EmployeeController {
 		return "redirect:/employee/info";
 	}
 	
-	@GetMapping("infoFileUpdate")
-	public String setInfoFileDelete(@AuthenticationPrincipal EmployeeVO employeeVO, Model model)throws Exception{
-		employeeVO.setEmployeeNum(employeeVO.getEmployeeNum());
-		
-		log.info(">>>> fileDelete : {} ", employeeVO.getEmployeeNum());
-		int result = employeeService.setInfoFileDelete(employeeVO);
-		model.addAttribute("result", result);
-		
-		return "commons/ajaxResult";
-	}
 
 	
 	@PostMapping("updatePw")

@@ -106,16 +106,6 @@
 		WHERE EMPLOYEENUM = #{employeeNum}
 	</update>
 	
-	<select id="getInfoFileDetail" parameterType="EmployeeVO" resultType="EmployeeVO">
-		SELECT PROFILE, PROORIGINAL FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum}
-	</select>
-	
-	<update id="setInfoFileDelete" parameterType="EmployeeVO">
-		UPDATE EMPLOYEE 
-		SET PROFILE = NULL, PROORIGINAL = NULL 
-		WHERE EMPLOYEENUM = #{employeeNum}
-	</update>
-	
 	<update id="setPwUpdate" parameterType="EmployeeVO">
 		UPDATE EMPLOYEE SET PASSWORD = #{password} WHERE EMPLOYEENUM = #{employeeNum}
 	</update>

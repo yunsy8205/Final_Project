@@ -52,8 +52,11 @@
                       <p class="mb-0">
                           <div class="col-xxl">
                               <div class="card mb-4">
-                                <div class="card-header d-flex align-items-center justify-content-between">
+                                <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;">
                                   <h1 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 정보</h1>
+                                  <div class="proFile_con">
+                                    <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
+                                  </div>
                                 </div>
                                 <div class="card-body">
                                   <div id="detailCon">
@@ -136,7 +139,7 @@
                                       <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
                                     </form>
                                     <div class="proBtn">
-                                      <button type="button" id="upBtn" data-url="/employee/infoUpdate">수정</button>
+                                      <button type="button" class="btn btn-primary" id="upBtn" data-url="/employee/infoUpdate">수정</button>
                                     </div>
                                   </div>
                                 </div>
