@@ -68,5 +68,18 @@ public class NoticeController {
 		
 		return "fileManager";// 이것도 꼭 해줘야함
 	}
+	
+	@PostMapping("noticedelete")
+	public String setNoticeDelete(NoticeVO noticeVO)throws Exception{
+		int result = noticeService.setNoticeDelete(noticeVO);
+		
+		if(result>0){
+			log.info("삭제 성공");
+		}else {
+			log.info("삭제 실패");
+		}
+		
+		return "redirect:./list";
+	}
 
 }

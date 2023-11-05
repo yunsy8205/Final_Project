@@ -175,7 +175,8 @@
 	                    <c:forEach items="${list}" var="li">
 	                      <tr>
 	                        <td>${li.noticeNum}</td>
-	                        <td><span class="badge bg-label-primary me-1">${li.category}</span>${li.title}</td>
+	                        <td><span class="badge bg-label-primary me-1">${li.category}</span>
+	                        <a href="./detail?noticeNum=${li.noticeNum}">${li.title}</a></td>
 	                        <td>${li.name}</td>
 	                        <td>${li.modDate}</td>
 	                        <td>${li.hit}</td>

@@ -124,12 +124,9 @@
                           </div>
                         </div>
                         <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="files">첨부파일</label>
-                          <div class="col-sm-10">
-                            <input type="file" class="form-control" id="files" name="files"/>
-                          </div>
-                          <div class="col-sm-10">
-                            <input type="file" class="form-control" id="files" name="files"/>
+                          <label class="col-sm-2 col-form-label" for="files">첨부파일 <button type="button" class="btn btn-primary">+</button></label>
+                          <div class="col-sm-10" id="fileBox">
+                            <input type="file" class="form-control" id="files" name="files"/><button class="btn btn-primary">-</button>
                           </div>
                         </div>
                         <div class="row justify-content-end">

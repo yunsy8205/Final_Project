@@ -67,7 +67,7 @@
                       	<table class="table">
                       		<tr >
                       			<th>제목</th>
-                      			<td id="title1" colspan="5"><strong>${notice.category}</strong> ${notice.title}</td>
+                      			<td id="title1" data-num="${notice.noticeNum}" colspan="5"><strong>${notice.category}</strong> ${notice.title}</td>
                       		</tr>
                       		<tr>
                       			<th>작성자</th>
@@ -97,7 +97,8 @@
                       <div id="btn" class="col-sm-10">
                           	<a class="a1 btn btn-primary" href="./list">이전</a>
                             <a class="a1 btn btn-primary" href="./update">수정</a>
-                            <a class="a1 btn btn-primary" href="./delete">삭제</a>
+                            <button type="button" class="delete btn btn-primary">삭제</button>
+                            
                       </div>
                     </div>
                   </div>
@@ -155,6 +156,16 @@
     <!-- / Layout wrapper -->
   
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-
+	<script>
+		$('.delete').click(function(){
+			let num = $('#title1').attr("data-num");
+			
+			let deletePost = '<form style="display:none;" id="delete2" action="./noticedelete" method="post"><input name=noticeNum value="'
+								+num+'"/></form>';
+			$('#btn').append(deletePost);
+			$('#delete2').submit();
+			
+		})
+	</script>
 </body>
 </html>

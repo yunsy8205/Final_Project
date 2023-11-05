@@ -30,7 +30,7 @@ public class NoticeService {
 	
 	
 	public int setNoticeAdd(NoticeVO noticeVO, MultipartFile[] files)throws Exception{
-		log.info("============uploadPath:{}============",uploadPath);
+		log.info("<============uploadPath:{}============>",uploadPath);
 		int result = noticeDAO.setNoticeAdd(noticeVO);
 		for(MultipartFile multipartFile : files) {
 			
@@ -44,7 +44,7 @@ public class NoticeService {
 			fileVO.setFileName(fileName);
 			fileVO.setOriName(multipartFile.getOriginalFilename());
 			
-			log.info("============oriName:{}============",fileVO.getOriName());
+			log.info("<============oriName:{}============>",fileVO.getOriName());
 			result = noticeDAO.fileAdd(fileVO);
 		}
 		return result;
@@ -61,5 +61,22 @@ public class NoticeService {
 	public NoticeFileVO getFileDown(NoticeFileVO noticeFileVO)throws Exception{
 		return noticeDAO.getFile(noticeFileVO);
 	}
-
+	
+	public int setNoticeDelete(NoticeVO noticeVO)throws Exception{
+		//파일 먼저 삭제
+		List<NoticeFileVO> files = noticeDAO.getFileDelete(noticeVO);
+		
+		for(NoticeFileVO noticeFileVO:files) {
+			if(noticeFileVO == null) {
+				continue;
+			}
+				
+			fileManager.fileDelete(noticeFileVO, this.uploadPath+this.noticeName);
+			
+		}
+		//db 삭제
+		int result = noticeDAO.setNoticeDelete(noticeVO);
+		
+		return result;
+	}
 }

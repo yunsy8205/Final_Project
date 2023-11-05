@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
@@ -47,7 +48,7 @@ public class FileManager extends AbstractView{
 		return fileName;
 	}
 
-	@Override // file down
+	@Override // notice file down
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
@@ -83,6 +84,20 @@ public class FileManager extends AbstractView{
 		 fi.close();
 		
 	}
+	
+	//notice 파일 삭제
+	public boolean fileDelete(NoticeFileVO noticeFileVO, String path) {
+	    // 1. 삭제할 폴더의 실제 경로
+	    //path = session.getServletContext().getRealPath(path);
+
+	    File file = new File(path, noticeFileVO.getFileName());
+
+	    // 로그 추가 File에 입력된 절대 경로 리턴
+	    log.info("Deleting file:{} ",file.getAbsolutePath());
+
+	    return file.delete();
+	}
+
 	
 }
 

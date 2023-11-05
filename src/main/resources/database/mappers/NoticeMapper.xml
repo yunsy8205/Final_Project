@@ -52,4 +52,15 @@
 		SELECT * FROM NOTICEFILE
 		WHERE FILENUM = #{fileNum}
 	</select>
+	
+	<delete id="setNoticeDelete" parameterType="NoticeVO">
+		DELETE FROM NOTICE
+		WHERE NOTICENUM = #{noticeNum}
+	</delete>
+	
+	<select id="getFileDelete" parameterType="NoticeVO" resultType="NoticeFileVO">
+		SELECT * FROM NOTICEFILE
+		WHERE NOTICENUM = #{noticeNum}
+	</select>
+	
 </mapper>
