@@ -130,7 +130,7 @@ public class EmployeeService implements UserDetailsService{
 	
 	public int setPwUpdate(EmployeeVO employeeVO)throws Exception{
 		// 비밀번호 암호화
-		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
+		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getNewPw()));
 				
 		return employeeDAO.setPwUpdate(employeeVO);
 	}

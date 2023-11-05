@@ -104,8 +104,8 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="pages-account-settings-account.html" class="menu-link">
-                    <div data-i18n="Account">전체 회원 관리</div>
+                  <a href="/member/list" class="menu-link">
+                    <div data-i18n="Account">전체 회원 목록</div>
                   </a>
                 </li>
               </ul>

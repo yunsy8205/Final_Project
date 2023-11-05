@@ -114,7 +114,7 @@ public class EmployeeController {
 			if(bindingResult.hasErrors() || check) {
 				return "/employee/info";
 			}
-			employeeVO.setPassword(employeeVO.getNewPw());
+
 			int result = employeeService.setPwUpdate(employeeVO);
 		}
 		return	"redirect:./info";

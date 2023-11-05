@@ -23,7 +23,7 @@ public class MemberService {
 	private HttpSession httpSession;
 	
 	/*
-	 * public List<MemberVO> getPtList(MemberVO memberVO) throws Exception{ Long
+	 * public List<MemVO> getPtList(MemVO memberVO) throws Exception{ Long
 	 * employee = (Long) httpSession.getAttribute("employee");
 	 * 
 	 * memberVO.setEmployeeNum(employee.getEmployeeNum()); return

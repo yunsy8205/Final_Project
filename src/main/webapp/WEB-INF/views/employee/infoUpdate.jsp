@@ -157,6 +157,7 @@
     </div>
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="/js/employee/infoUpdate.js"></script>
   </body>
 </html>
