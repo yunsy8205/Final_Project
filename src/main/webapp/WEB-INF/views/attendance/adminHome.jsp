@@ -23,13 +23,18 @@
       padding: 10px 20px;
       cursor: pointer;
     }
+    
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
     
-  <!-- moment lib -->
-  <script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
-  
+   <!-- moment lib -->
+	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+	<!-- fullcalendar bundle -->
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>
+	<!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
+	<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@6.1.9/index.global.min.js'></script>
+
 </head>
 <body>
     <!-- Layout wrapper -->
@@ -63,79 +68,13 @@
                   </ul>
                   <div class="tab-content">
                     <div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
-                      <h3>
-                        <button class="icon_btn" id="pre_month"><i class="fa-solid fa-chevron-left fa-xs"></i></button>
-                          <span id="work" data-date="${date}-01">${date}</span>
-                        <button class="icon_btn" id="next_month"><i class="fa-solid fa-chevron-right fa-xs"></i></button>
-                      </h3>
                       
-                      <div>
-                        <form id="frm" method="get" action="./month">
-                            <input type="hidden" value="1" name="page" id="page">
-                            <select name="kind" class="form-select" id="k" data-kind="${pager.kind}" aria-label="Default select example">
-                                <option class="kind" value="name">이름</option>
-                                <option class="kind" value="state">상태</option>
-                            </select>
-                            <input type="text" name="search" value="${pager.search}" placeholder="검색어를 입력하세요" class="form-control" aria-label="Search">
-                            <button type="button" id="submit_btn" class="btn btn-primary">조회</button>
-                        </form>
-                      </div>
-        
-                      <button id="day_btn" class="btn btn-primary">당일 근태 확인</button>
-                      
-                      <c:if test="${not empty list}">   
-                      <div class="card">
-                        <div id="attendance_day" class="table-responsive text-nowrap">
-                          <table class="table table-hover">
-                            <thead>
-                              <tr>
-                                <th>번호</th>
-                                <th>이름</th>
-                                <th>출근시간</th>
-                                <th>퇴근시간</th>
-                                <th>상태</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <c:forEach items="${list}" var="vo" varStatus="i">
-                                <tr>
-                                  <td>${i.index+1}</a></td>
-                                  <td>${vo.employeeVO.name}</td>
-                                  <td>${vo.onTime}</td>
-                                  <td>${vo.offTime}</td>
-                                  <td>${vo.state}</td>
-                                </tr>
-                              </c:forEach>
-                            </tbody>
-                          </table>
-                        </div>
+                      <div id="calendar">
                       </div>
                       
-                      <ul class="pagination justify-content-center">
-                        <li class="page-item prev ${pager.pre?'':'disabled'}">
-                          <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
-                        </li>
-                        <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-                          <li class="page-item">
-                            <a class="page-link move" data-num="${i}" href="#">${i}</a>
-                          </li>
-                        </c:forEach>
-                        <li class="page-item next ${pager.next?'':'disabled'}">
-                          <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
-                        </li>
-                      </ul>
-                      </c:if>
                     </div>
                     <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
-                      <p>
-                        Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
-                        cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
-                        cheesecake fruitcake.
-                      </p>
-                      <p class="mb-0">
-                        Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah
-                        cotton candy liquorice caramels.
-                      </p>
+                      
                     </div>
                    
                   </div>
@@ -158,8 +97,7 @@
   
   <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   
-  <script src="/js/list.js"></script>
-  <script src="/js/attendance/date.js"></script>
-
+  <script src="/js/attendance/calendar.js"></script>
+  <script src="/js/attendance/list.js"></script>
 </body>
 </html>

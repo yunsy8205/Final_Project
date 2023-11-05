@@ -63,6 +63,71 @@ public class AttendanceService {
 		return jsonArr;
 	}
 	
+	public List<Map<String, Object>> getAdminList() throws Exception {
+		List<Map<String, Object>> list = attendanceDAO.getAdminList();
+		System.out.println(list);
+		
+		JSONObject jsonObj; 
+		JSONArray jsonArr = new JSONArray(); //대괄호
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).get("STATE")==null) {
+				continue;
+			}
+			JSONArray resourceIds1 = new JSONArray();
+			resourceIds1.add(list.get(i).get("EMPLOYEENUM"));
+			map.put("title", list.get(i).get("STATE"));
+			map.put("resourceIds", resourceIds1);
+			map.put("start", list.get(i).get("WORKDATE"));
+			map.put("onTime", list.get(i).get("ONTIME"));
+			map.put("offTime", list.get(i).get("OFFTIME"));
+			map.put("name", list.get(i).get("NAME"));
+			
+			if(list.get(i).get("STATE").equals("조퇴")) {
+				map.put("color", "#F5D0A9");
+			}else if(list.get(i).get("STATE").equals("정상")) {
+				map.put("color", "#BCF5A9");
+			}else if(list.get(i).get("STATE").equals("결근")) {
+				map.put("color", "#F6CECE");
+			}else if(list.get(i).get("STATE").equals("지각")) {
+				map.put("color", "#F3F781");
+			}else {
+				map.put("color", "#CEE3F6");
+			}
+			
+			map.put("textColor", "#000000");
+			
+			jsonObj = new JSONObject(map); //중괄호 {key:value, key:value}
+			jsonArr.add(jsonObj); //대괄호 안에 넣어주기[{key:value, key:value},{key:value, key:value}]
+		}
+		
+		log.info("jsonArr: {}", jsonArr);
+		
+		return jsonArr;
+	}
+	
+	public List<Map<String, Object>> getResources() throws Exception {
+		List<Map<String, Object>> list = attendanceDAO.getResources();
+		System.out.println(list);
+		
+		JSONObject jsonObj; 
+		JSONArray jsonArr = new JSONArray(); //대괄호
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		for(int i=0; i<list.size(); i++) {
+			map.put("id", list.get(i).get("EMPLOYEENUM"));
+			map.put("title", list.get(i).get("NAME"));
+			
+			jsonObj = new JSONObject(map); //중괄호 {key:value, key:value}
+			jsonArr.add(jsonObj); //대괄호 안에 넣어주기[{key:value, key:value},{key:value, key:value}]
+		}
+		
+		log.info("jsonArr: {}", jsonArr);
+		
+		return jsonArr;
+	}
+	
 //	public List<AttendanceVO> getList(EmployeeVO employeeVO) throws Exception {
 //		return attendanceDAO.getList(employeeVO);
 //	}
@@ -89,8 +154,8 @@ public class AttendanceService {
 		AttendanceVO attendanceVO = attendanceDAO.getInfo(employeeVO);
 		String on = "09:01:00";
 		String off = "18:00:00";
-		Time standardOn = Time.valueOf(on);
-		Time standardOff = Time.valueOf(off);
+		Time standardOn = Time.valueOf(on); //출근시간 기준
+		Time standardOff = Time.valueOf(off); //퇴근시간 기준 
 		
 		Map<String, Object> map = new HashMap<>();
 //		map.put("onTime", attendanceVO.getOnTime());
@@ -100,18 +165,6 @@ public class AttendanceService {
 		map.put("off", standardOff);
 		
 		return attendanceDAO.setState(map);
-	}
-	
-	public List<AttendanceVO> getMonthList(AttendanceVO attendanceVO, Pager pager) throws Exception {
-		Map<String, Object> map = new HashMap<>();
-		map.put("attendance", attendanceVO);
-		map.put("pager", pager);
-		
-		pager.makeRowNum();
-		Long total = attendanceDAO.getMonthTotal(map);
-		pager.makePageNum(total);
-		
-		return attendanceDAO.getMonthList(map);
 	}
 	
 	public List<AttendanceVO> getDayList(AttendanceVO attendanceVO, Pager pager) throws Exception {

@@ -41,7 +41,8 @@
 			WHERE EMPLOYEENUM=#{employeeNum}
 			AND WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</update>
-	
+
+
 	<update id="setState" parameterType="Map">
 		UPDATE ATTENDANCE
 		<set>
@@ -52,11 +53,23 @@
 		</set>
 			WHERE ATTENDANCENUM=#{vo.attendanceNum}
 	</update>
-	
+
 	<select id="getList" resultType="Map" parameterType="EmployeeVO">
 		SELECT *
 		FROM ATTENDANCE
 		WHERE EMPLOYEENUM=#{employeeNum}
+	</select>
+	
+	<select id="getAdminList" resultType="Map">
+		SELECT A.*, E.NAME, E.EMPLOYEENUM
+		FROM ATTENDANCE A
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+	</select>
+	
+	<select id="getResources" resultType="Map">
+		SELECT *
+		FROM EMPLOYEE
 	</select>
 	
 	<select id="getInfo" resultMap="getInfoResult" parameterType="EmployeeVO">
@@ -82,40 +95,6 @@
 		</association>
 	</resultMap>	
 	
-	<!-- 월별 근태 total -->
-	<select id="getMonthTotal" resultType="Long" parameterType="Map">
-		SELECT COUNT(A.ATTENDANCENUM)
-		FROM ATTENDANCE A 
-			JOIN EMPLOYEE E
-			ON A.EMPLOYEENUM=E.EMPLOYEENUM
-		WHERE DATE_FORMAT(A.WORKDATE, '%Y-%m')=DATE_FORMAT(#{attendance.workDate}, '%Y-%m')
-		<include refid="searchSqlA"></include>
-	</select>
-	
-	<!-- 월별 근태 -->
-	<select id="getMonthList" resultMap="getMonthResult" parameterType="Map">
-		SELECT A.*, E.NAME
-		FROM ATTENDANCE A
-			JOIN EMPLOYEE E
-			ON A.EMPLOYEENUM=E.EMPLOYEENUM 
-		WHERE DATE_FORMAT(A.WORKDATE, '%Y-%m')=DATE_FORMAT(#{attendance.workDate}, '%Y-%m')
-		<include refid="searchSqlA"></include>	
-		LIMIT #{pager.startRow}, #{pager.lastRow}
-	</select>
-	
-	<resultMap type="AttendanceVO" id="getMonthResult">
-		<id column="ATTENDANCENUM" property="attendanceNum"/>
-		<result column="EMPLOYEENUM" property="employeeNum"/>
-		<result column="WORKDATE" property="workDate"/>
-		<result column="ONTIME" property="onTime"/>
-		<result column="OFFTIME" property="offTime"/>
-		<result column="STATE" property="state"/>
-		<association property="employeeVO" javaType="EmployeeVO">			
-			<id column="EMPLOYEENUM" property="employeeNum"/>
-			<result column="NAME" property="name"/>
-		</association>
-	</resultMap>
-	
 	<!-- 당일 근태 total -->
 	<select id="getDayTotal" resultType="Long" parameterType="Map">
 		SELECT COUNT(A.ATTENDANCENUM)
@@ -132,8 +111,9 @@
 		FROM ATTENDANCE A
 			JOIN EMPLOYEE E
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM 
-		WHERE WORKDATE=#{attendance.workDate}
-		<include refid="searchSqlA"></include>	
+		WHERE A.WORKDATE=#{attendance.workDate}
+		<include refid="searchSqlA"></include>
+		ORDER BY A.ONTIME DESC	
 		LIMIT #{pager.startRow}, #{pager.lastRow}
 	</select>
 	

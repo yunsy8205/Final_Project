@@ -3,6 +3,7 @@ package com.cloud.pt.attendance;
 import java.security.Principal;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,19 @@ public class AttendanceController {
 		//List<Map<String, Object>>의 자료형으로 보낼시 자동으로 JSON으로 변경됨
 		return attendanceService.getList(employeeVO);
 	}
+	
+	@ResponseBody
+	@GetMapping("/admin/attendance/month")
+	public List<Map<String, Object>> monthAttendance() throws Exception {
+		return attendanceService.getAdminList();
+	}
+	
+	@ResponseBody
+	@GetMapping("/resources")
+	public List<Map<String, Object>> resources() throws Exception {
+		return attendanceService.getResources();
+	}
+	
 	
 	@GetMapping("/attendance/info")
 	public String getInfo(@AuthenticationPrincipal EmployeeVO employeeVO, Model model) throws Exception {
@@ -103,7 +117,7 @@ public class AttendanceController {
 	@GetMapping("/admin/attendanceModify/list")
 	public String getList(Model model, Pager pager) throws Exception {
 		List<AttendanceVO> ar = attendanceService.getRequestList(pager);
-	//	log.info("pager: {}", pager);
+
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		
@@ -121,36 +135,9 @@ public class AttendanceController {
 	}
 	
 	@GetMapping("/admin/attendance")
-	public String getAdminHome(Model model, Pager pager) throws Exception {
-		//현재 년도와 월을 가져오기
-		LocalDate currentDate = LocalDate.now();
-		int year = currentDate.getYear();
-		int month = currentDate.getMonthValue();
-		String yearMonthDate = year+"-"+month;
-		
-		long currentTimeMillis = System.currentTimeMillis();
-        Date currentSqlDate = new Date(currentTimeMillis);
-		
-		AttendanceVO attendanceVO = new AttendanceVO();
-		attendanceVO.setWorkDate(currentSqlDate);
-		
-		List<AttendanceVO> ar = attendanceService.getMonthList(attendanceVO, pager);
-        
-        model.addAttribute("date", yearMonthDate);
-		model.addAttribute("list", ar);
-		model.addAttribute("pager", pager);
-		
+	public String getAdminHome(Model model) throws Exception {
+
 		return "attendance/adminHome";
-	}
-	
-	@GetMapping("/admin/attendance/month")
-	public String getAdminMonth(AttendanceVO attendanceVO, Model model, Pager pager) throws Exception {
-		List<AttendanceVO> ar = attendanceService.getMonthList(attendanceVO, pager);
-       
-		model.addAttribute("list", ar);
-		model.addAttribute("pager", pager);
-		
-		return "attendance/adminMonth";
 	}
 	
 	@GetMapping("/admin/attendance/day")
@@ -158,7 +145,7 @@ public class AttendanceController {
 		log.info("vo: {}", attendanceVO);
 		List<AttendanceVO> ar = attendanceService.getDayList(attendanceVO, pager);
 		long currentTimeMillis = System.currentTimeMillis();
-        Date currentSqlDate = new Date(currentTimeMillis);
+        Date currentSqlDate = new Date(currentTimeMillis); //헌재 날짜 
         System.out.println(currentSqlDate);
         
         model.addAttribute("date", currentSqlDate);

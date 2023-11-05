@@ -12,15 +12,16 @@ import com.cloud.pt.employee.EmployeeVO;
 public interface AttendanceDAO {
 	
 	public List<Map<String, Object>> getList(EmployeeVO employeeVO) throws Exception;
-//	public List<AttendanceVO> getList(EmployeeVO employeeVO) throws Exception;
+	public List<Map<String, Object>> getAdminList() throws Exception;
+	public List<Map<String, Object>> getResources() throws Exception;
+
+	//	public List<AttendanceVO> getList(EmployeeVO employeeVO) throws Exception;
 	public AttendanceVO getInfo(EmployeeVO employeeVO) throws Exception;
 	
 	public int setOn(EmployeeVO employeeVO) throws Exception;
 	public int setOff(EmployeeVO employeeVO) throws Exception;
 	public int setState(Map<String, Object> map) throws Exception;
 	
-	public Long getMonthTotal(Map<String, Object> map) throws Exception; 
-	public List<AttendanceVO> getMonthList(Map<String, Object> map) throws Exception; 
 	public Long getDayTotal(Map<String, Object> map) throws Exception; 
 	public List<AttendanceVO> getDayList(Map<String, Object> map) throws Exception; 
 	//----------------------------------------
