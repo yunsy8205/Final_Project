@@ -41,6 +41,22 @@
 		#radioBox{
 			padding-top: 1%;
 		}
+		.files{
+			height: 39.15px;
+		}
+		.x{
+			padding-top: 6px;
+			cursor: pointer;
+		}
+		.note-editor .note-editing-area {
+		    position: relative;
+		    height: 300px;
+		}
+		.file1{
+			display: flex;
+			padding-top: 6px;
+			
+		}
 	</style>
 </head>
 <body>
@@ -123,11 +139,13 @@
                             <textarea rows="" cols="" id="summernote" name="contents" class="form-control"></textarea>
                           </div>
                         </div>
-                        <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="files">첨부파일 <button type="button" class="btn btn-primary">+</button></label>
-                          <div class="col-sm-10" id="fileBox">
-                            <input type="file" class="form-control" id="files" name="files"/><button class="btn btn-primary">-</button>
-                          </div>
+                        <div class="row mb-3" >
+                        	<label id="label" class="col-sm-2 col-form-label" for="files">첨부파일 <button type="button" id="fileAdd" class="btn btn-primary">+</button></label>
+                        	<div class="col-sm-10" id="fileBox">
+                        		<div class="file1">
+                            		<input type="file" class="files form-control" id="files" name="files"/><span class="x">x</span>
+                        		</div>
+                          	</div>
                         </div>
                         <div class="row justify-content-end">
                           <div class="col-sm-10">
@@ -143,41 +161,7 @@
                 </div>
               </div>
               </div>
-              <!-- / Content --> 
-              
-              
-              <!-- Footer -->
-                <!-- <footer class="content-footer footer bg-footer-theme">
-                  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">
-                      ©
-                      <script>
-                        document.write(new Date().getFullYear());
-                      </script>
-                      , made with ❤️ by
-                      <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                    </div>
-                    <div>
-                      <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                      <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                      <a
-                        href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Documentation</a
-                      >
-
-                      <a
-                        href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Support</a
-                      >
-                    </div>
-                  </div>
-                </footer> -->
-                <!-- / Footer -->       
+              <!-- / Content -->       
 
               <div class="content-backdrop fade"></div>
             </div>
@@ -206,6 +190,28 @@
           ['view', ['fullscreen', 'codeview', 'help']]
         ]
       });
+    </script>
+    <script>
+    
+    	let count = 0;	
+    
+	    $('#fileAdd').click(function(){
+	    	
+		    let fileTag = '<div class="file1"><input type="file" class="files form-control" id="files" name="files"/><span class="x">x</span></div>';
+	    	console.log('클릭');
+	   	    
+	    	$('#fileBox').append(fileTag);
+	        
+	    	count ++;
+	     });
+	     
+	    $('#fileBox').on("click",'.x',function(){
+	    	
+	    	$(this).parent().remove();
+	    	
+	    	count --;
+	    	
+	    })
     </script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
