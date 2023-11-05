@@ -15,6 +15,8 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+  <script src='/fullcalendar-6.1.9/fullcalendar-6.1.9/dist/index.global.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 </head>
 
 <body>
@@ -32,12 +34,7 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <div class="container-xxl flex-grow-1 container-p-y">
-                <h1>전자서명관리</h1>
-                <a class="btn btn-primary" href="./sign">서명생성</a>
-                <a class="btn btn-primary" href="./mySign">서명관리</a>
-
-              </div>
+              <div id="calendar"></div>
               <!-- / Content --> 
               
               
@@ -86,7 +83,7 @@
     </div>
     <!-- / Layout wrapper -->
   
-
+	<script src="/resources/js/leave/list.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>

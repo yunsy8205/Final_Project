@@ -25,13 +25,13 @@
 	<sql id="progress">
 		<choose>
 			<when test="pager.progress=='결재전'">
-				(MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL)
+				((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL))
 			</when>
 			<when test="pager.progress=='결재완료'">
-				(MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NOT NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NOT NULL)
+				((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NOT NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NOT NULL))
 			</when>
 			<otherwise>
-				(MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL)
+				((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL))
 			</otherwise>
 		</choose>
 	</sql>
@@ -48,7 +48,7 @@
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
 		WHERE MIDDLE=#{id.employeeNum}
 		<include refid="category"></include>
-		OR LAST=${id.employeeNum}
+		OR LAST=#{id.employeeNum}
 		<include refid="forPager"></include>
 	</select>
 	
@@ -133,11 +133,23 @@
 	
 	<!-- 중간결재 -->
 	<update id="setMiddleApproval" parameterType="ApprovalVO">
-		UPDATE APPROVAL SET MIDDLEDATE=CURDATE(),STATE="진행중" WHERE APPROVALNUM=${approvalNum}
+		UPDATE APPROVAL SET MIDDLEDATE=CURDATE(),STATE=#{state},REASON=#{reason} WHERE APPROVALNUM=#{approvalNum}
 	</update>
 	
 	<!-- 최종결재 -->
 	<update id="setFinalApproval" parameterType="ApprovalVO">
-		UPDATE APPROVAL SET FINALDATE=CURDATE(),STATE="완료" WHERE APPROVALNUM=${approvalNum}
+		UPDATE APPROVAL SET FINALDATE=CURDATE(),STATE=#{state},REASON=#{reason} WHERE APPROVALNUM=#{approvalNum}
+	</update>
+	
+	<select id="getFileCheck" parameterType="EmployeeVO" resultType="EmployeeVO">
+		SELECT SIGNFILE FROM EMPLOYEE WHERE EMPLOYEENUM=#{employeeNum}
+	</select>
+	
+	<!-- 휴가add -->
+	<insert id="setLeave" parameterType="ApprovalVO" >
+		INSERT INTO LEAVE_(EMPLOYEENUM,LEAVEKIND,USEDATE,STARTDATE,ENDDATE) VALUES (#{employeeNum},#{leaveKind},#{useDate},#{startDate},#{endDate})
+	</insert>
+	<update id="setLeaveDate" parameterType="ApprovalVO">
+		UPDATE EMPLOYEE SET LEAVEDATE=LEAVEDATE-#{useDate} WHERE EMPLOYEENUM=#{employeeNum}
 	</update>
 </mapper>

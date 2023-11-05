@@ -345,7 +345,8 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-  
+	
+	
 	<script src="/resources/js/approval/add.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>

@@ -58,11 +58,11 @@
 					<form action="./list" id="divisionForm" method="get">
 						<input type="hidden" value="" id="division" name="division">
 					</form>
-					<button id="allBtn">전체</button>
-					<button id="proceedingBtn">진행</button>
-					<button id="rejectBtn">반려</button>
-					<button id="completeBtn">완료</button>
-					<button id="temporaryBtn">임시저장</button>
+					<button id="allBtn" class="btn btn-primary">전체</button>
+					<button id="proceedingBtn" class="btn btn-primary">진행</button>
+					<button id="rejectBtn"class="btn btn-primary">반려</button>
+					<button id="completeBtn"class="btn btn-primary">완료</button>
+					<button id="temporaryBtn"class="btn btn-primary">임시저장</button>
 				</div>
 
 				<div>
@@ -120,9 +120,9 @@
 						</ul>
 					</div>
 				</div>
-				<button>
-					<a href="/approval/add">새결재작성</a>
-				</button>
+				
+					<a class="btn btn-primary" href="/approval/add">새결재작성</a>
+				
 				</div>
 
               </div>

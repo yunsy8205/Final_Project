@@ -97,6 +97,10 @@ public class ApprovalService {
 		String fileName=fileManager.save(this.uploadPath+this.emp, file);
 		employeeVO.setSignFile(fileName);
 		employeeVO.setSignOriginal(file.getOriginalFilename());
+		EmployeeVO fileCheck=approvalDAO.getFileCheck(employeeVO);
+//		if(fileCheck.getSignFile()==null) {
+//			approvalDAO.
+//		}
 		int result = approvalDAO.setSignUpload(employeeVO);
 		
 		return result;
@@ -110,8 +114,16 @@ public class ApprovalService {
 	public int setMiddleApproval(ApprovalVO approvaVO) throws Exception{
 		return approvalDAO.setMiddleApproval(approvaVO);
 	}
+	@Transactional
 	public int setFinalApproval(ApprovalVO approvalVO) throws Exception{
-		return approvalDAO.setFinalApproval(approvalVO);
+		int result=approvalDAO.setFinalApproval(approvalVO);
+		if(result==1) {
+			result=approvalDAO.setLeave(approvalVO);
+			if(result==1) {
+				result=approvalDAO.setLeaveDate(approvalVO);
+			}
+		}
+		return result;
 	}
 	
 }

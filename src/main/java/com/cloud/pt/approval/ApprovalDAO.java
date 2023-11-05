@@ -47,4 +47,8 @@ public interface ApprovalDAO {
 	
 	public int setFinalApproval(ApprovalVO approvalVO) throws Exception;
 	
+	public EmployeeVO getFileCheck(EmployeeVO employeeVO) throws Exception;
+	
+	public int setLeave(ApprovalVO approvalVO) throws Exception;
+	public int setLeaveDate(ApprovalVO approvalVO) throws Exception;
 }
