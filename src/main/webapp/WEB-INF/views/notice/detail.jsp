@@ -90,7 +90,7 @@
                       		${notice.contents}<br>
                       		<hr>
                       		<c:forEach items="${notice.list}" var="f">
-                      			${f.oriName}
+                      			<a href="./noticefiledown?fileNum=${f.fileNum}">${f.oriName}</a><br>
                       		</c:forEach>
                       </div>
                       <hr>
@@ -155,5 +155,6 @@
     <!-- / Layout wrapper -->
   
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-  </body>
+
+</body>
 </html>

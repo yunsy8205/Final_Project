@@ -128,6 +128,9 @@
                           <div class="col-sm-10">
                             <input type="file" class="form-control" id="files" name="files"/>
                           </div>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" id="files" name="files"/>
+                          </div>
                         </div>
                         <div class="row justify-content-end">
                           <div class="col-sm-10">

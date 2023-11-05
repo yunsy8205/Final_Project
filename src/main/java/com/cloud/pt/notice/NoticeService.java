@@ -57,5 +57,9 @@ public class NoticeService {
 	public List<NoticeVO> getNoticeList()throws Exception{
 		return noticeDAO.getNoticeList();
 	}
+	
+	public NoticeFileVO getFileDown(NoticeFileVO noticeFileVO)throws Exception{
+		return noticeDAO.getFile(noticeFileVO);
+	}
 
 }

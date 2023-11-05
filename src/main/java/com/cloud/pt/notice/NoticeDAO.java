@@ -14,6 +14,7 @@ public interface NoticeDAO {
 	public NoticeVO getNoticeDetail(NoticeVO noticeVO)throws Exception;
 	
 	public List<NoticeVO> getNoticeList()throws Exception;
-
+	
+	public NoticeFileVO getFile(NoticeFileVO noticeFileVO)throws Exception;
 
 }
