@@ -97,7 +97,7 @@
   
   <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   
-  <script src="/js/attendance/calendar.js"></script>
+  <script src="/js/attendance/adminCalendar.js"></script>
   <script src="/js/attendance/list.js"></script>
 </body>
 </html>

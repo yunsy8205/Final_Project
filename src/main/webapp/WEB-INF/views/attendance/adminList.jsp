@@ -2,45 +2,55 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   
-  <h3>근태 수정 요청 목록</h3>
-  
-  <div>
-    <form>
-        <input type="hidden" value="1" name="page" id="page">
-        <select name="kind" class="form-select" id="k" data-kind="${pager.kind}" aria-label="Default select example">
-            <option class="kind" value="name">이름</option>
-            <option class="kind" value="status">상태</option>
-        </select>
-        <input type="text" name="search" value="${pager.search}" placeholder="검색어를 입력하세요" class="form-control" aria-label="Search">
-        <button type="button" id="search_btn" class="btn btn-primary">조회</button>
-    </form>
-  </div>
-  
-  <div class="card">
-    <div id="req_list" class="table-responsive text-nowrap">
-      <table class="table table-hover">
-        <thead>
+<h3>근태 수정 요청 목록</h3>
+
+<div>
+  <form>
+      <input type="hidden" value="1" name="page" id="page">
+      <select name="kind" class="form-select" id="k" data-kind="${pager.kind}" aria-label="Default select example">
+          <option class="kind" value="name">이름</option>
+          <option class="kind" value="status">상태</option>
+      </select>
+      <input type="text" name="search" value="${pager.search}" placeholder="검색어를 입력하세요" class="form-control" aria-label="Search">
+      <button type="button" id="search_btn" class="btn btn-primary">조회</button>
+  </form>
+</div>
+
+<div class="card">
+  <div id="req_list" class="table-responsive text-nowrap">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>작성자</th>
+          <th>작성일</th>
+          <th>근태수정요청일</th>
+          <th>상태</th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach items="${list}" var="vo" varStatus="i">
           <tr>
-            <th>번호</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>근태수정요청일</th>
-            <th>상태</th>
+            <td>${i.index+1}</td>
+            <td>${vo.employeeVO.name}</td>
+            <td>${vo.attendanceModifyVO.regDate}</td>
+            <td>${vo.attendanceModifyVO.modifyDate}</td>
+            <td>
+              <c:choose>
+                <c:when test="${vo.attendanceModifyVO.status eq '요청'}">
+                          <a href="/admin/attendanceModify/detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">
+                            ${vo.attendanceModifyVO.status}
+                          </a>				
+                </c:when>
+                <c:otherwise>
+                  ${vo.attendanceModifyVO.status}
+                </c:otherwise>
+              </c:choose>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <c:forEach items="${list}" var="vo" varStatus="i">
-            <tr>
-              <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">${i.index+1}</a></td>
-              <td>${vo.employeeVO.name}</td>
-              <td>${vo.attendanceModifyVO.regDate}</td>
-              <td>${vo.attendanceModifyVO.modifyDate}</td>
-              <td>${vo.attendanceModifyVO.status}</td>
-            </tr>
-          </c:forEach>
-        </tbody>
-      </table>
-    </div>
+        </c:forEach>
+      </tbody>
+    </table>
   </div>
 </div>
 

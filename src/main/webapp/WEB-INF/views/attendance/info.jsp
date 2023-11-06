@@ -172,56 +172,6 @@
 
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 
-    <script>
-      $(document).ready(function(){
-            var request = $.ajax({
-              url: "/attendance/month",
-              method: "get",
-              dataType: "json"
-            });
-            
-            request.done(function(data) {
-                console.log(data);
-                
-                var calendarEl = document.getElementById('calendar');
-              
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                  initialView: 'dayGridMonth',
-                  headerToolbar: {
-                    start: '',
-                    center: 'title',
-                    end: 'today prev,next'
-                  },
-                  titleFormat: 'YYYY년 M월',
-                  height: '90%',
-                // contentHeight: 'auto',
-                  fixedWeekCount: false,
-                  events: data, //json 데이터 사용 
-                 
-                  //이벤트 클릭 시 
-                  eventClick: function(info) {
-                      console.log(info)
-                      const date = moment(info.event.start).format('M월 DD일'); //날짜
-                      const state = info.event.title; //상태
-                      const on = info.event.extendedProps.onTime; //출근시간
-                      const off = info.event.extendedProps.offTime; //퇴근시간
-                      $('#date').text(date);
-                      $('#state').text(state);
-                      $('#on').text('출근 - '+on);
-                      $('#off').text('퇴근 - '+off);
-                      $('#smallModal').modal('show');
-                   }
-                });
-                //캘린더 그리기
-                calendar.render();
-                
-                
-            });
-            
-            request.fail(function(jqXHR, textStatus) {
-              alert("Request failed: " + textStatus);
-            });
-      });
-    </script>
+    <script src="/js/attendance/calendar.js"></script>
   </body>
 </html>

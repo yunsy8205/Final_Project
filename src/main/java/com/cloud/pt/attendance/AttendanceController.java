@@ -131,13 +131,13 @@ public class AttendanceController {
 		
 		int result = attendanceService.setUpdate(attendanceVO, attendanceModifyVO);
 		
-		return "redirect:./list";
+		return "redirect:/admin/attendance";
 	}
 	
 	@GetMapping("/admin/attendance")
 	public String getAdminHome(Model model) throws Exception {
 
-		return "attendance/adminHome";
+		return "attendance/adminInfo";
 	}
 	
 	@GetMapping("/admin/attendance/day")

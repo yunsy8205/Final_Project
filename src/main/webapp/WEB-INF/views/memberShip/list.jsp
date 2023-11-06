@@ -36,24 +36,25 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-                <h3>근태 수정 요청 목록</h3>
+                <h3>이용권 목록</h3>
 
-                <div id="req_btn">
-                  <button id="btn" class="btn btn-primary">근태 수정 요청</button>
+                <div id="memberShip">
+                  <button id="add_btn" class="btn btn-primary">이용권 등록</button>
+                  <button id="del_btn" class="btn btn-primary">이용권 삭제</button>
                 </div>
 				        <div class="card">
-                  <div id="req_list" class="table-responsive text-nowrap">
+                  <div id="list" class="table-responsive text-nowrap">
                     <table class="table table-hover">
                       <thead>
                         <tr>
-                          <th>번호</th>
-                          <th>작성자</th>
-                          <th>작성일</th>
-                          <th>근태수정요청일</th>
-                          <th>상태</th>
+                          <th></th>
+                          <th>이용권명</th>
+                          <th>종류</th>
+                          <th>피티횟수/이용개월</th>
+                          <th>가격</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <!-- <tbody>
                         <c:forEach items="${list}" var="vo" varStatus="i">
                           <tr>
                             <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">${i.index+1}</a></td>
@@ -63,7 +64,7 @@
                             <td>${vo.attendanceModifyVO.status}</td>
                           </tr>
                         </c:forEach>
-                      </tbody>
+                      </tbody> -->
                     </table>
                   </div>
                 </div>
@@ -83,8 +84,8 @@
 	                  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
 	                </li>
 	              </ul>
-			         </c:if>
-               
+			        </c:if>
+              
               <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->

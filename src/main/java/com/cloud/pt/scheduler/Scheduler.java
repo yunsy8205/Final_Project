@@ -28,11 +28,11 @@ public class Scheduler {
 		for(int i=0; i<ar.size(); i++) {
 			EmployeeVO employeeVO = ar.get(i);
 			
-			// 현재 날짜 가져오기
+			//현재 날짜 가져오기
 	        LocalDate currentDate = LocalDate.now();
-	        // 어제 날짜 계산
+	        //어제 날짜 계산
 	        LocalDate yesterday = currentDate.minusDays(1);
-	        // LocalDate를 java.sql.Date로 변환
+	        //LocalDate를 java.sql.Date로 변환
 	        Date sqlDate = Date.valueOf(yesterday);
 	        
 	        Map<String, Object> map = new HashMap<>();

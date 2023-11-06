@@ -24,6 +24,7 @@ public class AttendanceService {
 	@Autowired
 	private AttendanceDAO attendanceDAO;
 	
+	//해당 직원의 근태정보 리스트(json)
 	public List<Map<String, Object>> getList(EmployeeVO employeeVO) throws Exception {
 		List<Map<String, Object>> list = attendanceDAO.getList(employeeVO);
 		
@@ -128,10 +129,6 @@ public class AttendanceService {
 		return jsonArr;
 	}
 	
-//	public List<AttendanceVO> getList(EmployeeVO employeeVO) throws Exception {
-//		return attendanceDAO.getList(employeeVO);
-//	}
-	
 	public AttendanceVO getInfo(EmployeeVO employeeVO) throws Exception {
 		long currentTimeMillis = System.currentTimeMillis();
         Date currentSqlDate = new Date(currentTimeMillis); //헌재 날짜 
@@ -187,10 +184,12 @@ public class AttendanceService {
 	}
 	
 	//---------------------------------------------------
+	
+	//근태 수정 
 	@Transactional(rollbackFor = Exception.class)
 	public int setUpdate(AttendanceVO attendanceVO, AttendanceModifyVO attendanceModifyVO) throws Exception {
-		String status = attendanceModifyVO.getStatus();
-		System.out.println(status);
+		String status = attendanceModifyVO.getStatus(); //해당 근태수정요청안의 상태
+//		System.out.println(status);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("attendance", attendanceVO);
@@ -198,29 +197,31 @@ public class AttendanceService {
 		
 		int result = 0;
 		
-		if(status.equals("승인")) {
-			result = attendanceDAO.setUpdateA(map);
+		if(status.equals("승인")) { //승인일 때
+			result = attendanceDAO.setUpdateA(map); //attendance 수정
 			
 			if(result>0) {
-				result = attendanceDAO.setUpdateAM(attendanceModifyVO);
+				result = attendanceDAO.setUpdateAM(attendanceModifyVO); //attendanceModify 수정
 			}
 		}else { //반려일 때 
-			attendanceDAO.setUpdateAM(attendanceModifyVO);
+			attendanceDAO.setUpdateAM(attendanceModifyVO); //attendanceModify 수정
 		}
 		
 		return result;
 	}
 	
+	//근태 수정 요청안
 	public AttendanceVO getRequestDetail(AttendanceModifyVO attendanceModifyVO) throws Exception {
 		return attendanceDAO.getRequestDetail(attendanceModifyVO);
 	}
 	
+	//근태 수정 요청 목록(관리자)
 	public List<AttendanceVO> getRequestList(Pager pager) throws Exception {
 		pager.makeRowNum();
 		Long total = attendanceDAO.getRequestTotal(pager);
 		pager.makePageNum(total);
 		
-		log.info("pager: {}", pager);
+//		log.info("pager: {}", pager);
 		
 		return attendanceDAO.getRequestList(pager);
 	}
