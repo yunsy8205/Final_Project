@@ -20,9 +20,9 @@ import com.cloud.pt.notice.NoticeFileVO;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 import com.cloud.pt.employee.EmployeeVO;
 
+@Slf4j
 @Component
 public class FileManager extends AbstractView{
 	

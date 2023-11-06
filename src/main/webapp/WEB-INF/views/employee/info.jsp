@@ -42,7 +42,7 @@
                       </button>
                     </li>
                     <li class="nav-item">
-                      <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-updatePw" aria-controls="navs-justified-profile" aria-selected="false">
+                      <button type="button" id="toTab" class="nav-link" role="tab" data-bs-toggle="tab"  data-bs-target="#navs-justified-updatePw" aria-controls="navs-justified-profile" aria-selected="false">
                         비밀번호 변경
                       </button>
                     </li>
@@ -140,6 +140,7 @@
                                     </form>
                                     <div class="proBtn">
                                       <button type="button" class="btn btn-primary" id="upBtn" data-url="/employee/infoUpdate">수정</button>
+                                      <button type="button" class="btn btn-primary" id="toBtn" >수정</button>
                                     </div>
                                   </div>
                                 </div>
@@ -149,15 +150,12 @@
                     </div>
                     <div class="tab-pane fade" id="navs-justified-updatePw" role="tabpanel">
                       <p class="mb-0">
-                          <form:form modelAttribute="employeeVO" action="/employee/updatePw" method="post" id="pwFrm">
-                              <input type="text" name="employeeNum" value="${employeeVO.employeeNum}"/>
-                              <input type="text" name="password" value="${employeeVO.password}"/>
-                              <input type="hidden" name="gender" value="${employeeVO.gender}"/>
-                              <input type="hidden" name="address" value="${employeeVO.address}"/>
-                              <input type="hidden" name="phone" value="${employeeVO.phone}"/>
-                              <input type="hidden" name="state" value="${employeeVO.state}"/>
-                              <input type="hidden" name="position" value="${employeeVO.position}"/>
-                              <input type="hidden" name="name" value="${employeeVO.name}"/>
+                          
+                          
+                        <form:form modelAttribute="passwordVO" action="/employee/updatePw" method="post" id="pwFrm">
+                              <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}"/>
+                              <input type="hidden" name="password" value="${employeeVO.password}"/>
+                              
 
                               <div class="row mb-3">
                                 <form:label path="inputPw" class="col-sm-2 col-form-label" for="basic-default-name">기존 비밀번호</form:label>
@@ -180,8 +178,8 @@
                                  	<form:errors path="pwCheck"></form:errors>
                                 </div>
                               </div>
-                              <div class="proBtn">
-                                <button type="submit" id="upBtn">비밀번호 변경</button>
+                              <div class="proBtn" style="text-align: center;">
+                                <button type="submit" id="upBtn" class="btn btn-primary">비밀번호 변경</button>
                               </div>
                           </form:form>
                       </p>
@@ -238,5 +236,14 @@
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
     <script type="text/javascript" src="/js/employee/info.js"></script>
+    <script>
+  
+      let error = '${error}';
+      
+      if (error != '' && error == 'true') {
+        //location.href = url;
+        $("#toTab").click();
+      }
+    </script>
   </body>
 </html>

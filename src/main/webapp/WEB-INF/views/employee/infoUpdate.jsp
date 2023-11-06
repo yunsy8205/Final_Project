@@ -43,14 +43,14 @@
                         <div class="proFile_con">
                           <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
                           <p>${employeeVO.proOriginal}</p>
-                          <input type="file"  name="empfile" id="proFile"/>
+                          <input type="file"  name="empfile" id="proFile" required/>
                         </div>
                         <input type="text" class="form-control" name="employeeNum" value="${employeeVO.employeeNum}">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 5rem;">
                           <div  class="empLeft" style="width: 47%;">
                             <div class="row mb-3">
                               <form:label path="name" class="col-md-2 col-form-label">이름</form:label>
-                              <form:input path="name" id="name" class="form-control" value="${employeeVO.name}"></form:input>
+                              <form:input path="name" id="name" class="form-control" value="${employeeVO.name}" readonly="true"></form:input>
                               <form:errors path="name"></form:errors>
                             </div>
                             <div class="row mb-3">

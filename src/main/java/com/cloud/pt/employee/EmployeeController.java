@@ -41,18 +41,20 @@ public class EmployeeController {
 	
 	
 	@GetMapping("login")
-	public String getEmpLogin(@ModelAttribute EmployeeVO employeeVO)throws Exception{		
+	public String getEmpLogin(@ModelAttribute EmployeeVO employeeVO)throws Exception{	
+		log.info("{}", passwordEncoder.encode("a00000000*"));
 		return "employee/login";
 	}
 	
 	
 	@GetMapping("info")
-	public void getInfo(Principal principal, EmployeeVO employeeVO, Model model)throws Exception{	
+	public void getInfo(Principal principal, EmployeeVO employeeVO,PasswordVO passwordVO, Model model)throws Exception{	
 		employeeVO.setEmployeeNum(principal.getName());
 		
 		employeeVO = employeeService.getInfo(employeeVO);
 		
 		model.addAttribute("employeeVO", employeeVO);
+		model.addAttribute("passwordVO", passwordVO);
 	}
 	
 	
@@ -69,7 +71,7 @@ public class EmployeeController {
 		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
 		if(check) {
 			log.info("==========================검증 에러 ===================");
-			attributes.addFlashAttribute("employeeNum", employeeVO.getEmployeeNum());
+			attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
 			return "/employee/infoUpdate";
 		}	
 
@@ -86,26 +88,39 @@ public class EmployeeController {
 
 	
 	@PostMapping("updatePw")
-	public String setPwUpdate(@Valid EmployeeVO employeeVO, BindingResult bindingResult, Principal principal)throws Exception{
+	public String setPwUpdate(@Valid PasswordVO passwordVO, BindingResult bindingResult, @AuthenticationPrincipal EmployeeVO employeeVO, Model model)throws Exception{
 
+		
 		log.info(">>>>>>>>>>>>>>> EMP : {}", employeeVO);
 		log.info(">>>>>>>>>>>>>>> NUM : {}", employeeVO.getEmployeeNum());
-		log.info(">>>>>>>>>>>>>>> 기존 비번: {}", employeeVO.getInputPw());
-		log.info(">>>>>>>>>>>>> 새 비번 : {}", employeeVO.getNewPw());
-		log.info(">>>>>>>>>>>>>>> 확인 비번 :{}", employeeVO.getPwCheck());
+		log.info(">>>>>>>>>>>>>>> 기존 비번: {}", passwordVO.getInputPw());
+		log.info(">>>>>>>>>>>>> 새 비번 : {}", passwordVO.getNewPw());
+		log.info(">>>>>>>>>>>>>>> 확인 비번 :{}", passwordVO.getPwCheck());
 		
-		String inputPw = employeeVO.getInputPw(); //JSP로부터 넘겨받은 입력한 기존비밀번호
+		String inputPw = passwordVO.getInputPw(); //JSP로부터 넘겨받은 입력한 기존비밀번호
 			
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();				
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
+		//inputPw = passwordEncoder.encode(inputPw);
+		log.info("기존 비밀번호 암호화 값 >>>>>>>>>>>>>>>>>>>>>>> :{}",inputPw);
 		if(encoder.matches(inputPw, employeeVO.getPassword())) {//넘겨받은 비밀번호와 EMP의 암호화된 비밀번호와 비교
-			boolean check = employeeService.getNewPwCheck(employeeVO, bindingResult);
+			log.info("기존 vs 암호화된 비번 비교 결과값 : {} ", encoder.matches(inputPw, employeeVO.getPassword()));
+			
+			boolean check = employeeService.getNewPwCheck(passwordVO, bindingResult);
 			if(bindingResult.hasErrors() || check) {
+				log.info("updatePw 실패!!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+				model.addAttribute("error", "true");
 				return "/employee/info";
 			}
 
-			int result = employeeService.setPwUpdate(employeeVO);
+			int result = employeeService.setPwUpdate(employeeVO, passwordVO);
+		}else {
+			bindingResult.rejectValue("inputPw", "employeeVO.password.inputPw");
+			
+			model.addAttribute("error", "true");
+			return "/employee/info";
 		}
-		return	"redirect:./info";
+		model.addAttribute("employeeVO", employeeVO);
+		return	"/employee/info"; //"redirect:./info";
 	}
 	
 	
@@ -117,7 +132,7 @@ public class EmployeeController {
 	
 	@PostMapping("join")
 	public String setJoin(@Valid EmployeeVO employeeVO,BindingResult bindingResult,Errors errors ,Model model, MultipartFile empfile)throws Exception{
-		employeeVO.setPassword("0000");
+		employeeVO.setPassword("a00000000*");
 		
 		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
 		if(check) {
