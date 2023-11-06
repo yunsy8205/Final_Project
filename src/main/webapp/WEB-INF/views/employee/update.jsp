@@ -164,6 +164,6 @@
     </div>
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-    <script src="/js/employee/update.js"></script>
+    <script type="text/javascript" src="/js/employee/update.js"></script>
   </body>
 </html>

@@ -42,6 +42,9 @@ border-color: rgba(0,0,0,0) !important;
 </style>
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+  <script type="text/javascript">
+  
+  </script>
 </head>
 
 <body>
@@ -72,18 +75,19 @@ border-color: rgba(0,0,0,0) !important;
                 				<th>전화번호</th>
                 				<th>성별</th>
                 				<th style="text-align: center;" id="btn" onclick="openModal()">수업예약</th>
-                				<th>사번</th>
+                				
                 			</tr>
                 			</thead>
                 			<tbody class="table-border-bottom-0">
                 				
                					<c:forEach items="${list}" var="vo">
 									<tr>
+										
 										<td>${vo.memberNum}</td>
 										<td>${vo.name}</td>
 										<td>${vo.phone}</td>
 										<td>${vo.gender}</td>
-										<td style="text-align: center;"><button class="btn rounded-pill btn-label-primary">수업예약</button></td>
+										<td style="text-align: center;"><button class="btn rounded-pill btn-label-primary" onclick="sendData('${vo.memberNum}', '${vo.employeeNum}', '${vo.name}')">수업예약</button></td>
 									 	
 									
                 					</tr>
@@ -105,5 +109,31 @@ border-color: rgba(0,0,0,0) !important;
   
 
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+    <script type="text/javascript">
+    /* function sendData(memberNum, employeeNum, name) {
+        $.ajax({
+          type: '	',
+          url: './addClass',
+          data: {
+            memberNum: memberNum,
+            employeeNum: employeeNum,
+            name: name
+          },
+          success: function() {
+            console.log("data 전송 성공");
+            window.location.href = './addClass';
+          },
+          error: function() {
+            console.log("데이터 전송 실패");
+          }
+        });
+      } */
+      
+      function sendData(memberNum, employeeNum, name) {
+    	    var url = './addClass?' + 'memberNum=' + memberNum + '&employeeNum=' + employeeNum + '&name=' + name;
+    	    history.replaceState({}, null, url); // URL에서 파라미터를 제거하고 숨깁니다.
+    	    window.location.href = url; // 페이지를 새 URL로 이동합니다.
+    	  }
+    </script>
   </body>
 </html>

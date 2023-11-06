@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,7 +40,11 @@ public class EmployeeService implements UserDetailsService{
 	@Autowired
 	private FileManager fileManager;
 	
+	// properties 값을 java 사용. (@Value("${properties 키}"))
+	@Value("${app.upload}")
 	private String uploadPath;
+	@Value("${app.upload.employee}")
+	private String empFileName;
 	
 	
 	
@@ -70,24 +77,9 @@ public class EmployeeService implements UserDetailsService{
 	
 	public boolean getEmpError(EmployeeVO employeeVO, BindingResult bindingResult)throws Exception{
 		// false(오류없음) | true(오류있음)
-		boolean check = false;
-		
-//		if(employeeVO.getName() == null) {
-//			check = true;
-//			bindingResult.rejectValue("name", "empJoin.name");
-//		}
-//		if(employeeVO.getPhone() == null) {
-//			check =true;
-//			bindingResult.rejectValue("phone", "empJoin.phone");
-//		}
-//		if(employeeVO.getAddress() == null) {
-//			check =true;
-//			bindingResult.rejectValue("address", "empJoin.address");
-//		}
-//		if(employeeVO.getBirth() == null) {
-//			check =true;
-//			bindingResult.rejectValue("birth", "empJoin.birth");
-//		}
+
+		// annotation 검증
+		boolean check = bindingResult.hasErrors();
 
 		return check;
 	}
@@ -105,32 +97,89 @@ public class EmployeeService implements UserDetailsService{
 	}
 	
 	
+	public EmployeeVO getInfo(EmployeeVO employeeVO)throws Exception{
+		return employeeDAO.getInfo(employeeVO);
+	}
+	
+	public int setInfoUpdate(EmployeeVO employeeVO, MultipartFile proFile)throws Exception{
+		
+		// file db오류 방지를 위해(null 값 넣기);
+		if(proFile.getSize() == 0) {
+			employeeVO.setProFile(employeeVO.getProFile());
+			employeeVO.setProOriginal(employeeVO.getProOriginal());
+			
+			return employeeDAO.setInfoUpdate(employeeVO);
+		}
+		String fileName = fileManager.save(this.uploadPath+this.empFileName, proFile);
+		
+		employeeVO.setProFile(fileName);
+		employeeVO.setProOriginal(proFile.getOriginalFilename());
+		
+		return employeeDAO.setInfoUpdate(employeeVO);
+		
+	}
+	
+	
+	
+	// -------------------------------------------------
+	
+	public int setPwUpdate(EmployeeVO employeeVO, PasswordVO passwordVO)throws Exception{
+		// 비밀번호 암호화
+		employeeVO.setPassword(passwordEncoder.encode(passwordVO.getNewPw()));
+				
+		return employeeDAO.setPwUpdate(employeeVO);
+	}
+	
+	public boolean getNewPwCheck(PasswordVO passwordVO, BindingResult bindingResult)throws Exception{
+		// false(오류없음) | true(오류있음)
+		boolean check = false;
+		// 1. password 일치 검증
+		if(!passwordVO.getNewPw().equals(passwordVO.getPwCheck())) {
+			log.info("비밀번호 일치하지 않음!! ");
+			check = true;  //check=!check;
+			
+			// reject ("VO명", "properties에 적힐 키이름")
+			bindingResult.rejectValue("pwCheck", "employeeVO.password.equalCheck");
+		}
+		
+		log.info("비밀번호 일치");
+		return check;
+	}
+	
+	
+	
+	
 	
 	@Transactional(rollbackFor = Exception.class)
-	public int setJoin(EmployeeVO employeeVO, MultipartFile[] files)throws Exception{
+	public int setJoin(EmployeeVO employeeVO, MultipartFile proFile)throws Exception{
 		// 비밀번호 암호화
 		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
 		
-		int result = employeeDAO.setJoin(employeeVO);
-		
-		
 		// file 등록
-//		for(MultipartFile file : files) {
-//			if(file.isEmpty()) {
-//				continue;
-//			}	
-//			
-////			String fileName = fileManager.save()
-//		}
+		String fileName = fileManager.save(this.uploadPath+this.empFileName, proFile);
 		
+		employeeVO.setProFile(fileName);
+		employeeVO.setProOriginal(proFile.getOriginalFilename());
 		
+		int result = employeeDAO.setJoin(employeeVO);
+
+			
+
 		return result;
 	}
 	
 	
 	
-	public List<EmployeeVO> getEmpList(Pager pager)throws Exception{
-		return employeeDAO.getEmpList(pager);
+	public List<EmployeeVO> getEmpList(EmployeeVO employeeVO, Pager pager)throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		pager.makeRowNum();
+		Long total = employeeDAO.getEmpTotal(pager);
+		pager.makePageNum(total);
+		
+		map.put("pager", pager);
+		map.put("emp", employeeVO);
+		
+		return employeeDAO.getEmpList(map);
 	}
 	
 	
@@ -139,7 +188,6 @@ public class EmployeeService implements UserDetailsService{
 	}
 	
 	public int setEmpUpdate (EmployeeVO employeeVO)throws Exception{
-		
 		return employeeDAO.setEmpUpdate(employeeVO);
 	}
 	
