@@ -1,6 +1,7 @@
 package com.cloud.pt.notice;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,4 +18,8 @@ public class NoticeVO {
 	private Date modDate;
 	private String category;
 	private Long hit;
+	private String name;
+	
+	private List<NoticeFileVO> list;
+	
 }

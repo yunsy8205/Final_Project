@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.cloud.pt.notice.NoticeDAO">
+	
+	<insert id="setNoticeAdd" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="noticeNum">
+		INSERT INTO NOTICE (NOTICENUM, EMPLOYEENUM, TITLE, CONTENTS, REGDATE, MODDATE,CATEGORY, HIT)
+		VALUES (NULL, #{employeeNum}, #{title}, #{contents}, NOW(), NOW(),#{category}, 0)
+	</insert>
+	
+	<insert id="fileAdd" parameterType="NoticeFileVO">
+		INSERT INTO NOTICEFILE
+		VALUES (NULL, #{noticeNum}, #{fileName}, #{oriName})
+	</insert>
+	
+	<select id="getNoticeDetail" parameterType="NoticeVO" resultMap="NoticeResult">
+		SELECT N.NOTICENUM, N.EMPLOYEENUM, N.CATEGORY, N.TITLE, E.NAME, N.MODDATE, N.HIT, N.CONTENTS, NF.ORINAME, NF.FILENUM
+		FROM NOTICE N LEFT JOIN NOTICEFILE NF
+		ON (N.NOTICENUM=NF.NOTICENUM)
+		JOIN EMPLOYEE E
+		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+		WHERE N.NOTICENUM=#{noticeNum}
+	</select>
+	
+	<resultMap type="NoticeVO" id="NoticeResult">
+		<id column="NOTICENUM" property="noticeNum"/>
+  		<result column="EMPLOYEENUM" property="employeeNum"/>
+  		<result column="TITLE" property="title"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="MODDATE" property="modDate"/>
+  		<result column="CATEGORY" property="category"/>
+  		<result column="HIT" property="hit"/>
+  		<result column="NAME" property="name"/>
+  		
+  		<collection property="list" javaType="List" ofType="NoticeFileVO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+	</resultMap>
+	
+	<select id="getNoticeList" resultType="NoticeVO">
+		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT
+		FROM NOTICE N JOIN EMPLOYEE E
+		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+	</select>
+	
+	<select id="getFile" parameterType="NoticeFileVO" resultType="NoticeFileVO">
+		SELECT * FROM NOTICEFILE
+		WHERE FILENUM = #{fileNum}
+	</select>
+	
+	<delete id="setNoticeDelete" parameterType="NoticeVO">
+		DELETE FROM NOTICE
+		WHERE NOTICENUM = #{noticeNum}
+	</delete>
+	
+	<select id="getFileDelete" parameterType="NoticeVO" resultType="NoticeFileVO">
+		SELECT * FROM NOTICEFILE
+		WHERE NOTICENUM = #{noticeNum}
+	</select>
+	
+</mapper>

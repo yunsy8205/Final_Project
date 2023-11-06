@@ -209,7 +209,7 @@
             <li class="menu-item">
               <a href="/chat/room" class="menu-link">
                 <i class="menu-icon fa-solid fa-comments"></i>
-                <div data-i18n="Boxicons">채팅</div>
+                <div data-i18n="Boxicons">메신저</div>
               </a>
             </li>
             
@@ -235,6 +235,13 @@
                   </a>
                 </li>
                 </ul>
+                
+              <li class="menu-item">
+              <a href="/notice/list" class="menu-link">
+                <i class='menu-icon fa-solid bx bxs-megaphone'></i>
+                <div data-i18n="Boxicons">공지사항</div>
+              </a>
+            </li>
                 
                 
 
