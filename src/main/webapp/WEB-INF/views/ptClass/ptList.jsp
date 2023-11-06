@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+pageEncoding="UTF-8"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%> <%@ taglib prefix="sec"
+uri="http://www.springframework.org/security/tags" %> <%@ taglib prefix="spring"
+uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 
 <!-- =========================================================
@@ -32,143 +32,149 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/4d61d0b940.js" crossorigin="anonymous"></script>
-	    <script src='/fullcalendar-6.1.9/fullcalendar-6.1.9/dist/index.global.js'></script>
-	    
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	    
-	     <!-- fullcalendar 언어 CDN -->
-  
+    <script
+      src="https://kit.fontawesome.com/4d61d0b940.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/fullcalendar-6.1.9/fullcalendar-6.1.9/dist/index.global.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- fullcalendar 언어 CDN -->
+
     <!-- bootstrap 4 -->
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	    <style type="text/css">
-	    	.fc-header-toolbar {
-    padding-top: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-	    </style>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+    <style type="text/css">
+      .fc-header-toolbar {
+        padding-top: 1em;
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-    	height: '700px', // calendar 높이 설정
-        expandRows: true, // 화면에 맞게 높이 재설정
-        slotMinTime: '08:00', // Day 캘린더에서 시작 시간
-        slotMaxTime: '20:00', // Day 캘린더에서 종료 시간
-        //커스텀 버튼
-        customButtons:{
-        	saveBtn:{
-        		text:"저장하기"
-        		/* click : async function () {
-        			if(confirm("저장하시겠습니까?")){
-        				//지금까지 생성된 이벤트 저장하기
-        				var allEvent = calendar.getEvents();
-        				//이벤트 저장하기
-        				const saveEvent = await axios({
-        					method: "post",
-        					url: "/ptClass/ptReservation",
-        					data: allEvent,
-        				})
-        			}
-        		} */
-        	},
-        	addBtn:{
-        		text:"예약추가하기",
-        		click : function(){
-        			//모달열기
-					$('#exampleModal').modal("show");
-        		}
-        	
-        	}
-        },
-    
-        // 해더에 표시할 툴바
-        headerToolbar: {
-          left: 'prev,next today saveBtn,addBtn',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-        },
-        initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
-        //initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
-        navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
-        editable: true, // 수정 가능?
-        selectable: true, // 달력 일자 드래그 설정가능
-        nowIndicator: true, // 현재 시간 마크
-        dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
-        locale: 'ko', // 한국어 설정
-        eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
-          console.log(obj);
-        },
-        eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
-          console.log(obj);
-        },
-        eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
-          console.log(obj);
-        },
-        select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
-          var title = prompt('Event Title:');
-          if (title) {
-            calendar.addEvent({
-              title: title,
-              start: arg.start,
-              end: arg.end,
-              allDay: arg.allDay
-            })
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          height: "700px", // calendar 높이 설정
+          expandRows: true, // 화면에 맞게 높이 재설정
+          slotMinTime: "08:00", // Day 캘린더에서 시작 시간
+          slotMaxTime: "20:00", // Day 캘린더에서 종료 시간
+          //커스텀 버튼
+
+          // 해더에 표시할 툴바
+          headerToolbar: {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+          },
+          initialView: "dayGridMonth", // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+          //initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
+          navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
+          editable: true, // 수정 가능?
+          selectable: true, // 달력 일자 드래그 설정가능
+          nowIndicator: true, // 현재 시간 마크
+          dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+          locale: "ko", // 한국어 설정
+          eventAdd: function (obj) {
+            // 이벤트가 추가되면 발생하는 이벤트
+            console.log(obj);
+          },
+          eventChange: function (obj) {
+            // 이벤트가 수정되면 발생하는 이벤트
+            console.log(obj);
+          },
+          eventRemove: function (obj) {
+            // 이벤트가 삭제되면 발생하는 이벤트
+            console.log(obj);
+          },
+          select: function (arg) {
+            // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
+            var title = prompt("Event Title:");
+            if (title) {
+              calendar.addEvent({
+                title: title,
+                start: arg.start,
+                end: arg.end,
+                allDay: arg.allDay,
+              });
+            }
+            calendar.unselect();
+          },
+          // 이벤트
+          events: "/ptClass/myClassList",
+          eventClick: function (info) {
+            if (confirm("정말 일정을 삭제하시겠습니까?")) {
+              $.ajax({
+                type: "POST",
+                url: "./delClass",
+                data: {
+                  ptNum: info.event.id,
+                },
+                success: function () {
+                  console.log("이벤트 삭제 성공");
+                  info.event.remove();
+                },
+                error: function () {
+                  console.log("이벤트 삭제 실패");
+                },
+              });
+            }
+          },
+        });
+        // 캘린더 랜더링
+        calendar.render();
+        //모달창 이벤트
+        $("#saveChanges").on("click", function () {
+          var eventData = {
+            title: $("#title").val(),
+            start: $("#start").val(),
+            end: $("#end").val(),
+            color: $("#color").val(),
+          };
+          // 빈 값 입력 시 오류
+          if (
+            eventData.title == "" ||
+            eventData.start == "" ||
+            eventData.end == ""
+          ) {
+            alert("입력하지 않은 값이 있습니다.");
           }
-          calendar.unselect()
-        },
-        // 이벤트 
-        events: "/ptClass/myClassList"
-        	
-          
+          // 끝나는 날짜가 시작하는 날짜보다 값이 크면 안 됨
+          else if ($("#start").val() > $("#end").val()) {
+            alert("시간을 잘못 입력하셨습니다.");
+          } else {
+            // 이벤트 소스 추가
+            calendar.addEvent(eventData);
+            $("#exampleModal").modal("hide");
+            $("#title").val("");
+            $("#start").val("");
+            /* $("#end").val(""); */
+            /* $("#color").val(""); */
+          }
+        });
       });
-      // 캘린더 랜더링
-      calendar.render();
-    //모달창 이벤트
-      $("#saveChanges").on("click", function () {
-    	    var eventData = {
-    	        title: $("#title").val(),
-    	        start: $("#start").val(),
-    	        end: $("#end").val(),
-    	        color: $("#color").val(),
-    	    };
-    	    // 빈 값 입력 시 오류
-    	    if (eventData.title == "" || eventData.start == "" || eventData.end == "") {
-    	        alert("입력하지 않은 값이 있습니다.");
-    	    }
-    	    // 끝나는 날짜가 시작하는 날짜보다 값이 크면 안 됨
-    	    else if ($("#start").val() > $("#end").val()) {
-    	        alert("시간을 잘못 입력하셨습니다.");
-    	    } else {
-    	        // 이벤트 소스 추가
-    	        calendar.addEvent(eventData);
-    	        $("#exampleModal").modal("hide");
-    	        $("#title").val("");
-    	        $("#start").val("");
-    	        /* $("#end").val(""); */
-    	        /* $("#color").val(""); */
-    	    }
-    	});
-    });
-  
+    </script>
 
-
-
-
-  </script>
-  
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>
+      Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro
+    </title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/img/favicon/favicon.ico"
+    />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -182,14 +188,28 @@ document.addEventListener('DOMContentLoaded', function() {
     <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/css/core.css"
+      class="template-customizer-core-css"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/css/theme-default.css"
+      class="template-customizer-theme-css"
+    />
     <link rel="stylesheet" href="../assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
+    />
 
-    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/libs/apex-charts/apex-charts.css"
+    />
 
     <!-- Page CSS -->
 
@@ -206,9 +226,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-		<!-- sidebar -->
+        <!-- sidebar -->
         <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
-		<!-- /sidebar -->
+        <!-- /sidebar -->
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
@@ -220,53 +240,76 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-             
               <div id="calendar"></div>
-              
+
               <!-- 부트스트랩 modal 부분 -->
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">수업예약</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-          
-           <input type="text"  name="employeeNum" value="${employee.employeeNum}" style="display: none;"/><br />
-           <input type="text" name="memberNum" value="${member.memberNum }" style="display: none;"><br/>
-           회원이름 : <input type="text" id="title" ><br>
-           시작시간 : <input type="datetime-local" name="startTime" id="start"/><br />
-            <!-- 종료시간 : <input type="datetime-local" name="finishTime" /><br /> -->
-            
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              취소
-            </button>
-            <button type="button" class="btn btn-primary" id="saveChanges">
-              추가
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        수업예약
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <input
+                        type="text"
+                        name="employeeNum"
+                        id="employeeNum"
+                        style="display: none"
+                      /><br />
+                      <input
+                        type="text"
+                        name="memberNum"
+                        id="memberNum"
+                        style="display: none"
+                      /><br />
+                      회원이름 : <input type="text" id="title" /><br />
+                      시작시간 :
+                      <input
+                        type="datetime-local"
+                        name="startTime"
+                        id="start"
+                      /><br />
+                      종료시간 :
+                      <input
+                        type="datetime-local"
+                        name="finishTime"
+                        id="finish"
+                      /><br />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        취소
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="saveChanges"
+                      >
+                        추가
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- / Content -->
 
@@ -315,8 +358,28 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <!-- / Layout wrapper -->
 
-    
-    
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#saveChanges").on("click", function () {
+          $.ajax({
+            type: "POST",
+            url: "/ptClass/addClass",
+            data: {
+              employeeNum: $("#employeeNum").val(),
+              memberNum: $("#memberNum").val(),
+              startTime: $("#startTime").val(),
+              finishTime: $("#finishTime").val(),
+            },
+            success: function (response) {
+              window.location.replace(response);
+            },
+            error: function (error) {
+              console.log("error");
+            },
+          });
+        });
+      });
+    </script>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
@@ -338,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    
+
     <!-- icon js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </body>

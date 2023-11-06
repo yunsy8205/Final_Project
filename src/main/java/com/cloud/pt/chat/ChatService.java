@@ -79,5 +79,9 @@ public class ChatService {
     public List<ChatMessageVO> chatMessageList(RoomVO roomVO)throws Exception{
     	return chatDAO.chatMessageList(roomVO);
     }
+    
+    public EmployeeVO getSomeone(EmployeeVO employeeVO)throws Exception{
+    	return chatDAO.getSomeone(employeeVO);
+    }
 
 }
