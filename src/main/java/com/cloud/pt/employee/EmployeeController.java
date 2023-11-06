@@ -89,25 +89,16 @@ public class EmployeeController {
 	
 	@PostMapping("updatePw")
 	public String setPwUpdate(@Valid PasswordVO passwordVO, BindingResult bindingResult, @AuthenticationPrincipal EmployeeVO employeeVO, Model model)throws Exception{
-
-		
-		log.info(">>>>>>>>>>>>>>> EMP : {}", employeeVO);
-		log.info(">>>>>>>>>>>>>>> NUM : {}", employeeVO.getEmployeeNum());
-		log.info(">>>>>>>>>>>>>>> 기존 비번: {}", passwordVO.getInputPw());
-		log.info(">>>>>>>>>>>>> 새 비번 : {}", passwordVO.getNewPw());
-		log.info(">>>>>>>>>>>>>>> 확인 비번 :{}", passwordVO.getPwCheck());
 		
 		String inputPw = passwordVO.getInputPw(); //JSP로부터 넘겨받은 입력한 기존비밀번호
 			
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
-		//inputPw = passwordEncoder.encode(inputPw);
-		log.info("기존 비밀번호 암호화 값 >>>>>>>>>>>>>>>>>>>>>>> :{}",inputPw);
+		
 		if(encoder.matches(inputPw, employeeVO.getPassword())) {//넘겨받은 비밀번호와 EMP의 암호화된 비밀번호와 비교
-			log.info("기존 vs 암호화된 비번 비교 결과값 : {} ", encoder.matches(inputPw, employeeVO.getPassword()));
 			
 			boolean check = employeeService.getNewPwCheck(passwordVO, bindingResult);
 			if(bindingResult.hasErrors() || check) {
-				log.info("updatePw 실패!!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
 				model.addAttribute("error", "true");
 				return "/employee/info";
 			}
@@ -120,7 +111,7 @@ public class EmployeeController {
 			return "/employee/info";
 		}
 		model.addAttribute("employeeVO", employeeVO);
-		return	"/employee/info"; //"redirect:./info";
+		return	"/employee/info"; 
 	}
 	
 	
@@ -132,7 +123,7 @@ public class EmployeeController {
 	
 	@PostMapping("join")
 	public String setJoin(@Valid EmployeeVO employeeVO,BindingResult bindingResult,Errors errors ,Model model, MultipartFile empfile)throws Exception{
-		employeeVO.setPassword("a00000000*");
+		employeeVO.setPassword("a12345678*");
 		
 		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
 		if(check) {
