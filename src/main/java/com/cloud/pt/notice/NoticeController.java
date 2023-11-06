@@ -132,14 +132,23 @@ public class NoticeController {
 	}
 	
 	@GetMapping("totallist")
-	@ResponseBody
-	public Object getTotalList(Pager pager)throws Exception{
+	public String getTotalList(Model model,Pager pager)throws Exception{
 		List<NoticeVO> list =noticeService.getNoticeList(pager);
-		Map<String, Object> map = new HashMap<>();
-		map.put("list", list);
-		map.put("pager", pager);
 		
-		return map;
+		model.addAttribute("list", list);
+		model.addAttribute("pager", pager);
+		
+		return "notice/listResult";
+	}
+	
+	@GetMapping("categorylist")
+	public String getCatList(Model model,Pager pager, NoticeVO noticeVO)throws Exception{
+		List<NoticeVO> list =noticeService.getCatList(null, pager);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pager", pager);
+		
+		return "notice/listResult";
 	}
 
 }

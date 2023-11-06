@@ -1,6 +1,7 @@
 package com.cloud.pt.notice;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -29,4 +30,7 @@ public interface NoticeDAO {
 	
 	public Long getTotal(Pager pager)throws Exception;
 	
+	public Long getCatTotal(NoticeVO noticeVO)throws Exception;
+	
+	public List<NoticeVO> getCatList(Map<String, Object> map)throws Exception;
 }

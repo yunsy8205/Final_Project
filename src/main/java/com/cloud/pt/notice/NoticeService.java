@@ -1,6 +1,8 @@
 package com.cloud.pt.notice;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -62,6 +64,20 @@ public class NoticeService {
 		Long total = noticeDAO.getTotal(pager);//전체 데이타
 		pager.makePageNum(total);//데이타수로 페이지 수		
 		return noticeDAO.getNoticeList(pager);
+	}
+	
+	//카테고리
+	public List<NoticeVO> getCatList(NoticeVO noticeVO, Pager pager)throws Exception{
+		pager.setPerPage(10L); //10개씩
+		pager.makeRowNum(); //출력할 row 처음
+		Long total = noticeDAO.getCatTotal(noticeVO);//전체 데이타
+		pager.makePageNum(total);//데이타수로 페이지 수
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pager", pager);
+		map.put("notice", noticeVO);
+		
+		return noticeDAO.getCatList(map);
 	}
 	
 	public NoticeFileVO getFileDown(NoticeFileVO noticeFileVO)throws Exception{

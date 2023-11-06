@@ -56,7 +56,7 @@ public class FileManager extends AbstractView{
 		 log.info("--------------------------------");
 		 log.info("FILEVO {} ", noticeFileVO);
 		 
-		 File file = new File("D:/GDJ68/upload/notice/", noticeFileVO.getFileName());
+		 File file = new File("C:/GDJ68/upload/notice/", noticeFileVO.getFileName());
 		 
 		 //한글 처리
 		 response.setCharacterEncoding("UTF-8");

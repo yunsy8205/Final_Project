@@ -4,6 +4,33 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.notice.NoticeDAO">
+<sql id="forPager">
+	<choose>
+		<when test="kind=='title'">
+		N.TITLE
+		</when>
+		<when test="kind=='contents'">
+		N.CONTENTS
+		</when>
+		<otherwise>
+		E.NAME
+		</otherwise>
+	</choose>
+</sql>
+
+<sql id="forCatPager">
+	<choose>
+		<when test="kind=='title'">
+		N.TITLE
+		</when>
+		<when test="kind=='contents'">
+		N.CONTENTS
+		</when>
+		<otherwise>
+		E.NAME
+		</otherwise>
+	</choose>
+</sql>
 	
 	<insert id="setNoticeAdd" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="noticeNum">
 		INSERT INTO NOTICE (NOTICENUM, EMPLOYEENUM, TITLE, CONTENTS, REGDATE, MODDATE,CATEGORY, HIT)
@@ -42,12 +69,26 @@
   		</collection>
 	</resultMap>
 	
-	<select id="getNoticeList" resultType="NoticeVO">
+	<select id="getNoticeList" parameterType="Pager" resultType="NoticeVO">
 		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT
 		FROM NOTICE N JOIN EMPLOYEE E
 		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+		WHERE
+			<include refid="forPager"></include>
+			LIKE CONCAT('%',#{search},'%')
 		ORDER BY N.NOTICENUM DESC
 		LIMIT #{startRow}, #{lastRow}
+	</select>
+	
+	<select id="getCatList" parameterType="Map" resultType="NoticeVO">
+		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT
+		FROM NOTICE N JOIN EMPLOYEE E
+		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+		WHERE CATEGORY = #{notice.category} AND
+			<include refid="forCatPager"></include>
+			LIKE CONCAT('%',#{pager.search},'%')
+		ORDER BY N.NOTICENUM DESC
+		LIMIT #{pager.startRow}, #{pager.lastRow}
 	</select>
 	
 	<select id="getFile" parameterType="NoticeFileVO" resultType="NoticeFileVO">
@@ -78,7 +119,18 @@
 		WHERE NOTICENUM=#{noticeNum}
 	</update>
 	
-	<select id="getTotal" parameterType="Pager" resultType="Long">
+	<select id="getTotal" resultType="Long" parameterType="Pager">
+		
+		SELECT COUNT(N.NOTICENUM)
+		FROM NOTICE N JOIN EMPLOYEE E
+		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+		WHERE
+			<include refid="forPager"></include>
+			LIKE CONCAT('%',#{search},'%')
+	</select>
+	
+	<select id="getCatTotal" parameterType="NoticeVO" resultType="Long">
 		SELECT COUNT(NOTICENUM) FROM NOTICE
+		WHERE CATEGORY = #{category}
 	</select>
 </mapper>
