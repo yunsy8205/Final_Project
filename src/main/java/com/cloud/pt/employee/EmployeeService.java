@@ -60,7 +60,7 @@ public class EmployeeService implements UserDetailsService{
 		log.info("num : {} ",employeeVO.getEmployeeNum());
 
 		// passwordEncoder.encode("비밀번호");
-		System.out.println(passwordEncoder.encode("0000"));
+		System.out.println(passwordEncoder.encode("a12345678*"));
 		
 		try {
 			
@@ -121,8 +121,6 @@ public class EmployeeService implements UserDetailsService{
 	
 	
 	
-	// -------------------------------------------------
-	
 	public int setPwUpdate(EmployeeVO employeeVO, PasswordVO passwordVO)throws Exception{
 		// 비밀번호 암호화
 		employeeVO.setPassword(passwordEncoder.encode(passwordVO.getNewPw()));
@@ -146,6 +144,13 @@ public class EmployeeService implements UserDetailsService{
 		return check;
 	}
 	
+	
+	
+	public void getFindPw(EmployeeVO employeeVO)throws Exception{
+		log.info("비번 찾기! : {}",employeeVO);
+		
+		//return //employeeDAO.getFindPw(employeeVO);
+	}
 	
 	
 	
