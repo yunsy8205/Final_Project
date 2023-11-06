@@ -55,16 +55,28 @@
 					</form>
 				</div>
 				<div>
-					<form action="./list" id="divisionForm" method="get">
-						<input type="hidden" value="" id="division" name="division">
-					</form>
-					<button id="allBtn" class="btn btn-primary">전체</button>
-					<button id="proceedingBtn" class="btn btn-primary">진행</button>
-					<button id="rejectBtn"class="btn btn-primary">반려</button>
-					<button id="completeBtn"class="btn btn-primary">완료</button>
-					<button id="temporaryBtn"class="btn btn-primary">임시저장</button>
+					
+					<div class="nav-align-top mb-4">
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="nav-item" role="presentation">
+								<a href="/approval/list?division=all" class="nav-link" id="allBtn">전체</a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="/approval/list?division=proceeding" class="nav-link">진행</a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="/approval/list?division=reject" class="nav-link" id="rejectBtn">반려</a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="/approval/list?division=complete" class="nav-link" id="completeBtn">완료</a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="/approval/temporaryList" class="nav-link" id="temporaryBtn">임시저장</a>
+							</li>
+						</ul>
+					</div>
 				</div>
-
+				
 				<div>
 					<table class="table table-bordered" id="dataTable" width="100%"
 						cellspacing="0">
@@ -173,8 +185,6 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-  
-	<script src="/resources/js/approval/list.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>
