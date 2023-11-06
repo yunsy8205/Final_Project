@@ -16,7 +16,7 @@
 	</insert>
 	
 	<select id="getNoticeDetail" parameterType="NoticeVO" resultMap="NoticeResult">
-		SELECT N.NOTICENUM, N.EMPLOYEENUM, N.CATEGORY, N.TITLE, E.NAME, N.MODDATE, N.HIT, N.CONTENTS, NF.ORINAME, NF.FILENUM
+		SELECT N.NOTICENUM, N.EMPLOYEENUM, N.CATEGORY, N.TITLE, E.NAME, N.MODDATE, N.HIT, N.CONTENTS, NF.ORINAME, NF.FILENUM, NF.FILENAME
 		FROM NOTICE N LEFT JOIN NOTICEFILE NF
 		ON (N.NOTICENUM=NF.NOTICENUM)
 		JOIN EMPLOYEE E
@@ -46,6 +46,8 @@
 		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT
 		FROM NOTICE N JOIN EMPLOYEE E
 		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+		ORDER BY N.NOTICENUM DESC
+		LIMIT #{startRow}, #{lastRow}
 	</select>
 	
 	<select id="getFile" parameterType="NoticeFileVO" resultType="NoticeFileVO">
@@ -63,4 +65,20 @@
 		WHERE NOTICENUM = #{noticeNum}
 	</select>
 	
+	<delete id="FileUpdateDelete" parameterType="NoticeFileVO">
+		DELETE FROM NOTICEFILE WHERE FILENUM = #{fileNum}
+	</delete>
+	
+	<update id="setNoticeUpdate" parameterType="NoticeVO">
+		UPDATE NOTICE SET
+		CATEGORY=#{category},
+		TITLE=#{title},
+		CONTENTS=#{contents},
+		MODDATE=NOW()
+		WHERE NOTICENUM=#{noticeNum}
+	</update>
+	
+	<select id="getTotal" parameterType="Pager" resultType="Long">
+		SELECT COUNT(NOTICENUM) FROM NOTICE
+	</select>
 </mapper>

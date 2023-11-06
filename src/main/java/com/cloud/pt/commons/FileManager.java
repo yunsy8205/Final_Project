@@ -56,7 +56,7 @@ public class FileManager extends AbstractView{
 		 log.info("--------------------------------");
 		 log.info("FILEVO {} ", noticeFileVO);
 		 
-		 File file = new File("C:/GDJ68/upload/notice/", noticeFileVO.getFileName());
+		 File file = new File("D:/GDJ68/upload/notice/", noticeFileVO.getFileName());
 		 
 		 //한글 처리
 		 response.setCharacterEncoding("UTF-8");
@@ -89,7 +89,9 @@ public class FileManager extends AbstractView{
 	public boolean fileDelete(NoticeFileVO noticeFileVO, String path) {
 	    // 1. 삭제할 폴더의 실제 경로
 	    //path = session.getServletContext().getRealPath(path);
-
+		
+		log.info(path);
+		log.info(noticeFileVO.getFileName());
 	    File file = new File(path, noticeFileVO.getFileName());
 
 	    // 로그 추가 File에 입력된 절대 경로 리턴
