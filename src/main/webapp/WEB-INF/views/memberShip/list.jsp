@@ -57,16 +57,27 @@
                       <tbody>
                         <c:forEach items="${list}" var="vo" varStatus="i">
                           <tr>
-                            <td></td>
-                            <td>${vo.name}</td>
-                            <td>${vo.type}</td>
                             <td>
-                            	<c:choose>
-                            		<c:when test="${vo.type eq 'h'}">
-                            			${vo.month}
+                              <input class="form-check-input" type="checkbox" name="membershipNum" value="${vo.membershipNum}">
+                            </td>
+                            <td>${vo.name}</td>
+                            <td>
+                              <c:choose>
+                            		<c:when test="${vo.type.toString() eq 'h'}">
+                            			헬스
                             		</c:when>
                             		<c:otherwise>
-                            			${vo.ptCount}
+                            			PT
+                            		</c:otherwise>
+                            	</c:choose>
+                            </td>
+                            <td>
+                            	<c:choose>
+                            		<c:when test="${vo.type.toString() eq 'h'}">
+                            			${vo.month}개월
+                            		</c:when>
+                            		<c:otherwise>
+                            			${vo.ptCount}회
                             		</c:otherwise>
                             	</c:choose>
                             </td>
@@ -77,7 +88,7 @@
                     </table>
                   </div>
                 </div>
-              
+              </div>
               
               <c:if test="${not empty list}">
 	              <ul class="pagination justify-content-center">
@@ -94,7 +105,7 @@
 	                </li>
 	              </ul>
 			        </c:if>
-</div>
+
               <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->
