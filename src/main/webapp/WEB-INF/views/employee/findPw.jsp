@@ -37,31 +37,31 @@
 </head>
 <body>
   <div id="wrap">
-    <div id="loginFrm">
-      <h1>logo</h1> 
+    <div id="findPwFrm">
+      <h3>비밀번호 찾기</h3> 
       <div class="errorMessage">
         <!-- login 실패시 message가 뜸. code=키이름 var=키값을 담는 곳 -->
         <spring:message code="${param.message}" var="message"></spring:message>
         <h3>${message}</h3>
       </div>
       <!-- action 생략가능, 현재 url = action -->
-      <form:form modelAttribute="employeeVO" action="/employee/login" method="post">
-        <div class="id_div">
-          <form:label path="employeeNum">직원 아이디</form:label>
+      <form:form modelAttribute="employeeVO" action="/employee/findPw" method="post">
+        <div class="row mb-3">
+          <form:label path="employeeNum">아이디</form:label>
           <form:input path="employeeNum"/>
+          <form:error path="employeeNum"></form:error>
         </div>
-        <div class="pw_div">  
-          <form:label path="password">비밀번호</form:label>
-          <form:password path="password"/>
+        <div class="row mb-3">  
+          <form:label path="name">이름</form:label>
+          <form:password path="name"/>
+          <form:error path="name"></form:error>
         </div>
-        <div class="idSave">
-          <input type="checkbox" id="rememberId" name="rememberId">
-          <label for="rememberId">아이디저장</label>
+        <div class="row mb-3">  
+          <form:label path="phone">전화번호</form:label>
+          <form:password path="phone"/>
+          <form:error path="phone"></form:error>
         </div>
-        <div class="findPw_div">
-          <a href="/employee/findPw" id="findPw">비밀번호 찾기</a>
-        </div>
-      	<button type="submit">로그인</button>
+      	<button type="submit">비밀번호 확인하기</button>
       </form:form>
     </div>
   </div>
