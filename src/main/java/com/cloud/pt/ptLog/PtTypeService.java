@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.cloud.pt.ptClass.PtClassVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -32,7 +34,13 @@ public class PtTypeService {
 		return ptTypeDAO.getTypeList(map,employeeNum);
 	}
 	
-	public int addType() throws Exception{
-		return ptTypeDAO.addType();
+	public int addType(PtTypeVO ptTypeVO) throws Exception{
+		
+		return ptTypeDAO.addType(ptTypeVO);
+	}
+	
+	public int delType(PtTypeVO ptTypeVO) throws Exception{
+		
+		return ptTypeDAO.delType(ptTypeVO);
 	}
 }

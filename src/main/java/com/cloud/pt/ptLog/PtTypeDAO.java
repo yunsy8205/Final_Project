@@ -12,5 +12,7 @@ public interface PtTypeDAO {
 
 	public List<PtTypeVO> getTypeList(Map<String, Object> map,String employeeNum) throws Exception;
 
-	public int addType() throws Exception;
+	public int addType(PtTypeVO ptTypeVO) throws Exception;
+	
+	public int delType(PtTypeVO ptTypeVO) throws Exception;
 }
