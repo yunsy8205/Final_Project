@@ -75,8 +75,8 @@
                 <a href="/employee/login">로그인</a>
               </sec:authorize>
               <sec:authorize access="isAuthenticated()">
+                <a href="/employee/info">마이페이지</a>
                 <a href="/employee/logout">로그아웃</a>
-                <a href="#">마이페이지</a>
               </sec:authorize>
             </div>
                 <!--/ User -->
