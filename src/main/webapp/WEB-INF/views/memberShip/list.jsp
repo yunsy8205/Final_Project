@@ -11,7 +11,7 @@
       margin-top: 40px !important;
       text-align: center;
     }
-    #req_btn {
+    #membership {
       text-align: right;
       margin: 30px;
     }
@@ -38,7 +38,7 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 <h3>이용권 목록</h3>
 
-                <div id="memberShip">
+                <div id="membership">
                   <button id="add_btn" class="btn btn-primary">이용권 등록</button>
                   <button id="del_btn" class="btn btn-primary">이용권 삭제</button>
                 </div>
@@ -48,27 +48,36 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th>이용권명</th>
+                          <th>이용권이름</th>
                           <th>종류</th>
                           <th>피티횟수/이용개월</th>
                           <th>가격</th>
                         </tr>
                       </thead>
-                      <!-- <tbody>
+                      <tbody>
                         <c:forEach items="${list}" var="vo" varStatus="i">
                           <tr>
-                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">${i.index+1}</a></td>
-                            <td>${vo.employeeVO.name}</td>
-                            <td>${vo.attendanceModifyVO.regDate}</td>
-                            <td>${vo.attendanceModifyVO.modifyDate}</td>
-                            <td>${vo.attendanceModifyVO.status}</td>
+                            <td></td>
+                            <td>${vo.name}</td>
+                            <td>${vo.type}</td>
+                            <td>
+                            	<c:choose>
+                            		<c:when test="${vo.type eq 'h'}">
+                            			${vo.month}
+                            		</c:when>
+                            		<c:otherwise>
+                            			${vo.ptCount}
+                            		</c:otherwise>
+                            	</c:choose>
+                            </td>
+                            <td>${vo.price}</td>
                           </tr>
                         </c:forEach>
-                      </tbody> -->
+                      </tbody>
                     </table>
                   </div>
                 </div>
-              </div>
+              
               
               <c:if test="${not empty list}">
 	              <ul class="pagination justify-content-center">
@@ -85,7 +94,7 @@
 	                </li>
 	              </ul>
 			        </c:if>
-              
+</div>
               <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->
@@ -102,8 +111,8 @@
   
   <script>
     
-    $('#btn').on('click', function(){
-      $(location).attr('href', '/attendanceModify/add');
+    $('#add_btn').on('click', function(){
+      $(location).attr('href', '/membership/add');
     })
     
     $('.pagination').on('click', '.move', function(){

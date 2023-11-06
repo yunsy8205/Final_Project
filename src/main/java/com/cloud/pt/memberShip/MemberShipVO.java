@@ -1,4 +1,4 @@
-package com.cloud.pt.memberShip;
+package com.cloud.pt.membership;
 
 import java.sql.Date;
 
@@ -9,15 +9,15 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MemberShipVO {
+public class MembershipVO {
 	//이용권번호
 	private Long memberShipNum; 
-	//이용권명
+	//이용권이름
 	private String name;
 	//이용권종류
 	private Character type;
 	//이용개월
-	private Date month;
+	private Integer month;
 	//피티횟수
 	private Integer ptCount;
 	//가격

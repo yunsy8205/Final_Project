@@ -67,7 +67,7 @@
                     </table>
                   </div>
                 </div>
-              </div>
+              
               
               <c:if test="${not empty list}">
 	              <ul class="pagination justify-content-center">
@@ -84,7 +84,7 @@
 	                </li>
 	              </ul>
 			         </c:if>
-               
+               </div>
               <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->
