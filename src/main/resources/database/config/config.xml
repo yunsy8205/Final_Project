@@ -12,7 +12,6 @@
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
 		<typeAlias type="com.cloud.pt.member.MemVO" alias="MemVO"/>
-		<typeAlias type="com.cloud.pt.membership.MembershipVO" alias="MembershipVO"/>
 		<typeAlias type="com.cloud.pt.registration.RegistrationVO" alias="RegistrationVO"/>
 		
 		<!-- 유빈 -->

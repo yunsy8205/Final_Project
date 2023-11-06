@@ -23,7 +23,10 @@
       padding: 10px 20px;
       cursor: pointer;
     }
-    
+    #calendar {
+      height: 650px; /* 원하는 높이(px)로 설정 */
+    }
+
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>

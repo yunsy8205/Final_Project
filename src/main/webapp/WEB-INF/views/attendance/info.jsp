@@ -18,7 +18,7 @@
     .attendance {display: flex;}
     .attendance #my {
       width:calc(100% - 75%);
-      background-color: rgb(189, 194, 255);
+      background-color: rgba(105, 108, 255, 0.16);
       margin-right: 50px;
     }
     .attendance #calendar {width:75%;}

@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     titleFormat: 'YYYY년 M월',
     resources: '/resources',
     resourceAreaHeaderContent: '이름', // 리소스 영역의 헤더 이름 변경
-    resourceAreaWidth: '8%',
+    resourceAreaWidth: '5%',
     events: '/admin/attendance/month'
     });
 

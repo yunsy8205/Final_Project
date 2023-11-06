@@ -21,7 +21,7 @@
 
 	<insert id="setMemberAdd" parameterType="MemVO">
 		INSERT INTO MEMBER
-		VAlUES (NULL, NULL, #{memberName}, #{phone}, #{gender}, #{birth}, #{joinDate}, #{expirationDate} , NULL);
+		VAlUES (NULL, NULL, #{memberName}, #{phone}, #{gender}, #{birth}, #{joinDate}, #{expirationDate} , NULL, #{address});
 	</insert>
 
 	<select id="getMemberDetail" parameterType="MemVO" resultMap="getMemberDetailResult">

@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
   
 <h3>근태 수정 요청 목록</h3>
 
-<div>
+<div class="m-5">
   <form>
       <input type="hidden" value="1" name="page" id="page">
       <select name="kind" class="form-select" id="k" data-kind="${pager.kind}" aria-label="Default select example">
@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
   </form>
 </div>
 
-<div class="card">
+<div class="card m-5">
   <div id="req_list" class="table-responsive text-nowrap">
     <table class="table table-hover">
       <thead>

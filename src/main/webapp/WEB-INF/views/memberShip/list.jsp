@@ -81,7 +81,7 @@
                             		</c:otherwise>
                             	</c:choose>
                             </td>
-                            <td>${vo.price}</td>
+                            <td>${vo.price}원</td>
                           </tr>
                         </c:forEach>
                       </tbody>

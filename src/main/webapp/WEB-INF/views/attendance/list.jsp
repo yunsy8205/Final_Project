@@ -15,7 +15,12 @@
       text-align: right;
       margin: 30px;
     }
-   
+    .card {
+      margin: 30px;
+    }
+    #pager {
+      margin-bottom: 50px;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -69,22 +74,24 @@
                 </div>
               </div>
               
-              <c:if test="${not empty list}">
-	              <ul class="pagination justify-content-center">
-	                <li class="page-item prev ${pager.pre?'':'disabled'}">
-	                  <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
-	                </li>
-	                <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-		                <li class="page-item">
-		                  <a class="page-link move" data-num="${i}" href="#">${i}</a>
-		                </li>
-	                </c:forEach>
-	                <li class="page-item next ${pager.next?'':'disabled'}">
-	                  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
-	                </li>
-	              </ul>
-			         </c:if>
-               
+              <div id="pager">
+                <c:if test="${not empty list}">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item prev ${pager.pre?'':'disabled'}">
+                      <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+                    </li>
+                    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+                      <li class="page-item">
+                        <a class="page-link move" data-num="${i}" href="#">${i}</a>
+                      </li>
+                    </c:forEach>
+                    <li class="page-item next ${pager.next?'':'disabled'}">
+                      <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+                    </li>
+                  </ul>
+                </c:if>
+              </div> 
+
               <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->

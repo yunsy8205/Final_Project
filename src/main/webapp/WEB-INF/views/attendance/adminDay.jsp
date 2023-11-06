@@ -8,8 +8,8 @@
   <button class="icon_btn" id="next_day"><i class="fa-solid fa-chevron-right fa-xs"></i></button>
 </h3>
 
-<div>
-  <form>
+<div class="input-group m-5">
+  <form class="d-flex w-50">
       <input type="hidden" value="1" name="page" id="page">
       <select name="kind" class="form-select" id="k" data-kind="${pager.kind}" aria-label="Default select example">
           <option class="kind" value="name">이름</option>
@@ -22,7 +22,7 @@
 <button id="month_btn" class="btn btn-primary">월별 근태 확인</button>
 
 <c:if test="${not empty list}"> 
-<div class="card">
+<div class="card m-5">
   <div id="attendance_day" class="table-responsive text-nowrap">
     <table class="table table-hover">
       <thead>

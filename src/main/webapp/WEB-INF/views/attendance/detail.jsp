@@ -19,6 +19,15 @@
       margin-top: 40px !important;
       text-align: center;
     }
+    #btn {
+      text-align: center;
+    }
+    .form-control:disabled {
+      background-color:#ffffff00 !important;
+    }
+    .form-check-input, .form-check-label{
+      opacity: 1 !important;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -40,41 +49,60 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-                <h3>근태 수정 요청서</h3>
-
-                <form>
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label for="requestDate" class="form-label">수정요청일</label>
-                      <input type="date" id="requestDate" name="modifyDate" class="form-control" value="${vo.modifyDate}" disabled>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="requestTime" class="form-label">수정요청시간</label>
-                      <input type="time" id="requestTime" name="modifyTime" class="form-control" value="${vo.modifyTime}" disabled>
+                <div class="col-xxl">
+                  <div class="card mb-4">
+                    <h3 class="card-header mb-4">근태 수정 요청서</h3>
+                    <div class="card-body">
+                      <form>
+                        <div class="row g-3 mb-3">
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label for="requestDate" class="col-md-2 col-form-label">수정요청일</label>
+                              <div class="col-md-10">  
+                                <input type="date" id="requestDate" name="modifyDate" class="form-control" value="${vo.modifyDate}" disabled>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label for="requestTime" class="col-md-2 col-form-label">수정요청시간</label>
+                              <div class="col-md-10">
+                                <input type="time" id="requestTime" name="modifyTime" class="form-control" value="${vo.modifyTime}" disabled>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label for="writer" class="col-md-2 col-form-label">작성자</label>
+                              <div class="col-md-10">
+                                <sec:authentication property="Principal" var="user"/>
+                                  <input type="text" id="writer" value="${user.name}" class="form-control" disabled>
+                                  <input type="hidden" id="num" name="employeeNum" value="${user.employeeNum}">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <c:set var="radioType" value="${vo.type}" />
+                              <input type="radio" id="on" name="type" value="출근" ${radioType eq '출근' ? 'checked' : ''} class="form-check-input" disabled>
+                              <label for="on" class="form-check-label">출근</label>
+            
+                              <input type="radio" id="off" name="type" value="퇴근" ${radioType eq '퇴근' ? 'checked' : ''} class="form-check-input" disabled>
+                              <label for="off" class="form-check-label">퇴근</label>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <label for="content" class="form-label">요청사유</label>
+                          <textarea name="requestContents" id="content" cols="30" rows="5" class="form-control" disabled>${vo.requestContents}</textarea>
+                        </div>
+                        <div id="btn" class="m-5">
+                          <button type="button" id="before_btn" class="btn btn-primary">이전</button>
+                        </div>
+                      </form>
                     </div>
                   </div>
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label for="writer" class="form-label">작성자</label>
-                      <sec:authentication property="Principal" var="user"/>
-                        <input type="text" id="writer" value="${user.name}" class="form-control" disabled>
-                        <input type="hidden" id="num" name="employeeNum" value="${user.employeeNum}">
-                    </div>
-                    <div class="col-md-6">
-                    <c:set var="radioType" value="${vo.type}" />
-                      <input type="radio" id="on" name="type" value="출근" ${radioType eq '출근' ? 'checked' : ''} class="form-check-input" disabled>
-                      <label for="on" class="form-check-label">출근</label>
-    
-                      <input type="radio" id="off" name="type" value="퇴근" ${radioType eq '퇴근' ? 'checked' : ''} class="form-check-input" disabled>
-                      <label for="off" class="form-check-label">퇴근</label>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <label for="content" class="form-label">요청사유</label>
-                    <textarea name="requestContents" id="content" cols="30" rows="5" class="form-control" disabled>${vo.requestContents}</textarea>
-                  </div>
-                  <button type="button" id="before_btn" class="btn btn-primary">이전</button>
-                </form>
+                </div>
               </div>
               <!-- / Content --> 
               
