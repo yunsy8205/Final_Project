@@ -51,4 +51,6 @@ public interface ApprovalDAO {
 	
 	public int setLeave(ApprovalVO approvalVO) throws Exception;
 	public int setLeaveDate(ApprovalVO approvalVO) throws Exception;
+	
+	public ApprovalVO getState(ApprovalVO approvalVO) throws Exception;
 }

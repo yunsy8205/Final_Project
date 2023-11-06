@@ -41,8 +41,11 @@
              min="0.1" max="5.0" value="2.5" step="0.1"/>
         </div>
         <div class="controls__btns">
-            <button id="jsMode">Fill</button>
-            <button id="jsSave">Save</button></div>
+            <button class="btn btn-primary" id="jsMode">Fill</button>
+            <button class="btn btn-primary" id="jsSave">저장</button>
+            <a href="/approval/signMain" class="btn btn-primary">이전</a>
+
+          </div>
         <div class="controls__colors" id="jsColors">
             <div class="controls__color jsColor" 
                  style="background-color: black;"></div>

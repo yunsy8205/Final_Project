@@ -152,4 +152,8 @@
 	<update id="setLeaveDate" parameterType="ApprovalVO">
 		UPDATE EMPLOYEE SET LEAVEDATE=LEAVEDATE-#{useDate} WHERE EMPLOYEENUM=#{employeeNum}
 	</update>
+	<!-- 문서상태조회 -->
+	<select id="getState" parameterType="ApprovalVO" resultType="ApprovalVO">
+		SELECT STATE FROM APPROVAL WHERE APPROVALNUM=#{approvalNum}
+	</select>
 </mapper>

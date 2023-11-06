@@ -121,7 +121,7 @@
 					</div>
 				</div>
 				
-					<a class="btn btn-primary" href="/approval/add">새결재작성</a>
+					<a class="btn btn-primary" href="/approval/add?division=휴가신청서">새결재작성</a>
 				
 				</div>
 

@@ -118,10 +118,15 @@ public class ApprovalService {
 	public int setFinalApproval(ApprovalVO approvalVO) throws Exception{
 		int result=approvalDAO.setFinalApproval(approvalVO);
 		if(result==1) {
-			result=approvalDAO.setLeave(approvalVO);
-			if(result==1) {
-				result=approvalDAO.setLeaveDate(approvalVO);
+			ApprovalVO st=approvalDAO.getState(approvalVO);
+			String state=st.getState();
+			if(state.equals("완료")) {
+				result=approvalDAO.setLeave(approvalVO);
+				if(result==1) {
+					result=approvalDAO.setLeaveDate(approvalVO);
+				}
 			}
+			
 		}
 		return result;
 	}

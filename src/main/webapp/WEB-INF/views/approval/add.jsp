@@ -37,13 +37,13 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 
 							<div>
-								<button id=leaveBtn>휴가신청</button>
-								<button>휴직신청서</button>
-								<button>지출신청서</button>
+								<a href="/approval/add?division=휴가신청서" class="btn btn-primary">휴가신청서</a>
+								<a href="/approval/add?division=휴직신청서" class="btn btn-primary">휴직신청서</a>
+								<a href="/approval/add?division=지출결의서" class="btn btn-primary">지출결의서</a>
 							</div>
 							<div>
-								<button id="approvalInfoBtn" onclick="click_add()">결재정보</button>
-								<button id="tempBtn">임시저장</button>
+								<button id="approvalInfoBtn" class="btn btn-primary" onclick="click_add()">결재정보</button>
+								<button id="tempBtn" class="btn btn-primary">임시저장</button>
 								
  
 								<form action="add" method="post" id="addForm">
@@ -61,11 +61,11 @@
 										</colgroup>
 										<tbody>
 											<tr>
-												<td style="background: white; padding: 0px !important; border: 0px currentColor; height: 90px; text-align: center; color: black; font-size: 36px; font-weight: bold; vertical-align: top;"
+												<td id="division" style="background: white; padding: 0px !important; border: 0px currentColor; height: 90px; text-align: center; color: black; font-size: 36px; font-weight: bold; vertical-align: top;"
 													colspan="2"
 													class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
 
-													휴가신청서</td>
+													${param.division}</td>
 											</tr>
 											<tr>
 												<td
@@ -126,8 +126,10 @@
 													style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 													<!-- User -->
 													<colgroup>
+														<col width="50">
 														<col width="100">
-														<col width="220">
+														<col width="50">
+														<col width="100">
 													</colgroup>
 													<tbody>
 														<tr>
@@ -140,44 +142,6 @@
 
 																
 															</td>
-														</tr>
-														<tr>
-															<td
-																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																결재자</td>
-															<td id="middleName"
-																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-															
-																
-															</td>
-														</tr>
-														<tr>
-															<td
-																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																결재일</td>
-															<td
-																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-															</td>
-														</tr>
-
-													</tbody>
-												</table>
-												</td>
-												<td
-													style="background: white; padding: 0px !important; border: currentColor; text-align: right; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
-													<table
-													style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
-													<!-- User -->
-													<colgroup>
-														<col width="100">
-														<col width="220">
-													</colgroup>
-													<tbody>
-														<tr>
 															<td
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
@@ -192,23 +156,39 @@
 															<td
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
-																결재자</td>
+																중간결재자</td>
+															<td id="middleName"
+																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+
+															
+																
+															</td>
+															<td
+																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+
+																최종결재자</td>
 															<td id="lastName"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																
 															
+																
 															</td>
 														</tr>
 														<tr>
-															<td 
+															<td
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재일</td>
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
-																
+															</td>
+															<td
+																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+
+																결재일</td>
+															<td
+																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
 															</td>
 														</tr>
@@ -216,9 +196,11 @@
 													</tbody>
 												</table>
 												</td>
+												
 											</tr>
 										</tbody>
 									</table>
+									<c:if test="${param.division=='휴가신청서'}">
 									<table
 										style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 10px; border-collapse: collapse;">
 										<!-- 품의서 -->
@@ -288,10 +270,76 @@
 											</tr>
 										</tbody>
 									</table>
+									</c:if>
+									<c:if test="${param.division=='휴직신청서'}">
+									<table
+										style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 10px; border-collapse: collapse;">
+										<!-- 품의서 -->
+										<colgroup>
+											<col width="200">
+											<col width="350">
+											<col width="200">
+											<col width="200">
+										</colgroup>
+										<tbody>
+										<tr>
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													제목</td>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3">
+													<input type="text" name="title">
+												</td>
+											</tr>
+											<tr>
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													휴직종류</td>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3">
+													<input type="text" name="title">
+												</td>
+											</tr>
+											<tr id="regDateRow">
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													휴가일자</td>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3">
+													<input type="date" id="startDate" name="startDate">
+													~ <input type="date" id="endDate" name="endDate">
+												</td>
+
+											</tr>
+
+											<tr id="leaveReasonRow">
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													휴가사유</td>
+												<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3" class="dext_table_border_t">
+													<textarea id="summernote" name="contents"></textarea>
+
+												</td>
+
+											</tr>
+											<tr>
+												<td style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 100px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle; background-color: rgb(255, 255, 255);"
+													colspan="4" class="dext_table_border_t"><span
+														style="font-weight: bold; font-family: &amp; amp; amp; quot; malgun gothic&amp;amp; amp; quot; , dotum , arial, tahoma; font-size: 11pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">휴가기준
+														제 13조에 의거 휴가를 신청하오니 허락하여 주시기 바랍니다.</span></td>
+											</tr>
+										</tbody>
+									</table>
+									</c:if>
 									<input type="hidden" id="middle" name="middle">
 									<input type="hidden" id="last" name="last">
-									<input type="hidden" name="category" value="휴가신청서">
-									<input type="submit" id="testBtn">
+									<input type="hidden" name="category" value="${param.division}">
+									<input type="submit" id="testBtn" class="btn btn-primary">
 								</form>
 
 
