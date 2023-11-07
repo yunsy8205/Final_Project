@@ -14,6 +14,6 @@ public class PtClassVO {
 	private String employeeNum;
 	private String startTime;
 	private String finishTime;
-	private String name;
+	private String memberName;
 	
 }

@@ -52,16 +52,16 @@ public class PtClassController {
 	  public ModelAndView addClass(
 			  @RequestParam("memberNum") String memberNum, 
               @RequestParam("employeeNum") String employeeNum, 
-              @RequestParam("name") String name, 
+              @RequestParam("memberName") String memberName, 
               HttpSession session) throws Exception{
 		  
 		  ModelAndView mv = new ModelAndView();
 		  log.info("사번 : {} >>>>>" , employeeNum);
 		  log.info("멤버번호 : {} >>>>", memberNum);
-		  log.info("멤버이름 : {} >>>" , name);
+		  log.info("멤버이름 : {} >>>" , memberName);
 		  mv.addObject("memberNum", memberNum);
 	      mv.addObject("employeeNum", employeeNum);
-	      mv.addObject("name", name);
+	      mv.addObject("name", memberName);
 		  mv.setViewName("ptClass/addClass");
 		  return mv;
 	  }
