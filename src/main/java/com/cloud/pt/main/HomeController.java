@@ -144,8 +144,13 @@ public class HomeController {
         String characters = "abcdefghijklmnopqrstuvwxyz0123456789*@#$%^&+=";
         StringBuilder randomString = new StringBuilder();
         SecureRandom random = new SecureRandom();
-
-        for (int i = 0; i < length; i++) {
+        
+        // 무작위 숫자, 특수문자, 소문자 각각 1자리씩 미리 추가
+        randomString.append(characters.charAt(random.nextInt(10))); // 무작위 숫자 10개
+        randomString.append(characters.charAt(26 + random.nextInt(10))); // 무작위 특수문자 10개
+        randomString.append(characters.charAt(36 + random.nextInt(26))); // 무작위 소문자 26개
+        
+        for (int i = 0; i < length - 3; i++) { // 특수+숫자+소문자 1자리씩 필수로 넣고 나머지 길이만큼 랜덤 선택.
             int randomIndex = random.nextInt(characters.length());
             char randomChar = characters.charAt(randomIndex);
             randomString.append(randomChar);

@@ -213,6 +213,31 @@ public class EmployeeService implements UserDetailsService{
 		return result;
 	}
 	
+	//직원 등록시 발송되는 SMS
+	public void sendJoin(String userPhoneNumber, String employeeNum, String password) {
+		String api_key = "NCS6Z2IHA0RLQUS1"; //쿨sms api
+	    String api_secret = "MK0T5L21VZO4FXLBLRMQJBYHJIRAVOZC"; //쿨 sms 시크릿api
+	    Message coolsms = new Message(api_key, api_secret);
+	    
+	    log.info("랜덤 번호 갈겨");
+
+	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    HashMap<String, String> params = new HashMap<String, String>();
+	    params.put("to", "01024895653");    // 수신전화번호//userPhoneNumber
+	    params.put("from", "01091957075");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+	    params.put("type", "SMS");
+	    params.put("text", "입사를 진심으로 축하드립니다!! 직원 아이디 : " + employeeNum + ", 비밀번호 : "+ password +" 입니다."); // 문자 내용 입력
+	    params.put("app_version", "test app 1.2"); // application name and version
+	    
+	    try {
+	        JSONObject obj = (JSONObject) coolsms.send(params);
+	        System.out.println(obj.toString());
+	      } catch (CoolsmsException e) {
+	        System.out.println(e.getMessage());
+	        System.out.println(e.getCode());
+	      }
+	}
+	
 	
 	
 	public List<EmployeeVO> getEmpList(EmployeeVO employeeVO, Pager pager)throws Exception{

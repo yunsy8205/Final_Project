@@ -148,6 +148,15 @@ public class EmployeeController {
 		
 		int result = employeeService.setJoin(employeeVO,empfile);
 		
+		String userPhoneNumber = employeeVO.getPassword();
+		String employeeNum = employeeVO.getEmployeeNum();
+		String password = "a12345678*";
+		employeeVO.setEmployeeNum(employeeVO.getEmployeeNum());
+		
+		log.info(">>>>>>>>>>>>> NUm : {}", employeeVO.getEmployeeNum());
+		log.info("EMP SEND >>>>>>> : {}", employeeVO);
+		//employeeService.sendJoin(userPhoneNumber, employeeNum, password);
+		
 		return "redirect:/employee/list";
 	}
 	
