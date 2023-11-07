@@ -20,7 +20,7 @@ public class Scheduler {
 	@Autowired
 	private AttendanceDAO attendanceDAO;
 	
-	//매일 자정마다 실행
+	//매일 12시 5분마다 실행
 	@Scheduled(cron = "0 5 0 * * *", zone = "Asia/Seoul") //timezone 설정 
 	public void setEnd() throws Exception {
 		List<EmployeeVO> ar = attendanceDAO.getEmployeeList();

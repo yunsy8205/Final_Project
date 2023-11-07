@@ -123,7 +123,7 @@
   <script>
     
     $('#add_btn').on('click', function(){
-      $(location).attr('href', '/membership/add');
+      $(location).attr('href', '/membership/form');
     })
     
     $('.pagination').on('click', '.move', function(){
