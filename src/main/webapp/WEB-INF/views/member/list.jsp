@@ -32,7 +32,7 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <h3>전체 직원 목록</h3>
+              <h3>전체 회원 목록</h3>
               <div class="container-xxl flex-grow-1 container-p-y">
                 <div>
                   <div>
@@ -41,39 +41,42 @@
                       <!-- 파라미터 이름 kind -->
                       <select name="kind" id="k" class="search" data-kind="${pager.kind}" >
                         <option class="kind" value="name">이름</option>
-                        <option class="kind" value="position">직급</option>
-                        <option class="kind" value="stateEmpIn">재직 직원</option>
-                        <option class="kind" value="stateOut">퇴직</option>
                       </select> 
                       <input type="text" name="search" value="${pager.search}" class="search" placeholder="검색어를 입력하세요.">
                       <button type="submit" class="btn btn-primary">검색</button>
                     </form>
                   </div>
                 </div>
-                <a href="/employee/join">직원등록</a>
+                <a href="/member/add">등록</a>
                 <div id="req_list" class="table-responsive text-nowrap">
                   <table class="table table-hover">
                     <thead>
                       <tr>
                         <th>번호</th>
-                        <th>사번</th>
                         <th>이름</th>
-                        <th>직급</th>
                         <th>전화번호</th>
-                        <th>직원상태</th>
-                        <th>상세</th>
+                        <th>헬스 가입일</th>
+                        <th>헬스 만료일</th>
+                        <th>피티 등록일</th>
+                        <th>피티횟수</th>
+                        <th>담당 트레이너</th>
+                        <th>등록여부</th>
                       </tr>
                     </thead>
                     <tbody>
                       <c:forEach items="${list}" var="vo" varStatus="i">
                         <tr>
                           <td>${i.index+1}</td>
-                          <td>${vo.employeeNum}</td>
-                          <td>${vo.name}</td>
-                          <td>${vo.position}</td>
+                          <td><a href="./detail?memberNum=${vo.memberNum}">${vo.memberName}</a></td>
                           <td>${vo.phone}</td>
-                          <td>${vo.state}</td>
-                          <td><a href="./detail?employeeNum=${vo.employeeNum}">보기</a></td>
+                          <td>${vo.joinDate}</td>
+                          <td>${vo.expirationDate}</td>
+                          <td>${vo.registrationVO.regDate}</td>
+                          <td class="ptCount" data-ptcount="${vo.ptCount}">${vo.ptCount}</td>
+                          <td>${member.employeeVO.name}</td>
+                          <td id="ptAdd" value="">
+                            <a href="#" class="membershipADDBtn" class="btn btn-primary" value=""></a>
+                          </td>
                         </tr>
                       </c:forEach>
                     </tbody>
@@ -167,5 +170,36 @@
 
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
     <script type="text/javascript" src="/js/employee/list.js"></script>
+    <script>
+      
+      document.addEventListener("DOMContentLoaded", function(){
+        const ptCount = document.getElementsByClassName("ptCount");
+        const membershipAdd = document.getElementsByClassName("membershipADDBtn");
+        
+        for(let i =0; i<ptCount.length; i++){
+          const ptCountValue = ptCount[i].getAttribute("data-ptcount");
+          console.log("Value: " + ptCountValue);
+
+          if(ptCountValue == ''){
+            membershipAdd[i].style.display='block';
+            membershipAdd[i].style.backgroud='blue';
+            membershipAdd[i].textContent="등록";
+          }else{
+            membershipAdd[i].textContent="등록완료";
+            membershipAdd[i].style.background='black';
+          }
+        }
+      })
+      // $(document).ready(function() {
+      //   if($("#ptCount").val() == ''){
+      //     $("#membershipADDBtn").css("display","block");
+      //     $("#membershipADDBtn").text('등록');
+      //   }else if(!$("#ptCount").val() == ''){
+      //     $("#membershipADDBtn").text('등록완료');
+      //     $("#membershipADDBtn").css("background-color","black");
+      //   }
+      // })
+      
+    </script>
   </body>
 </html>

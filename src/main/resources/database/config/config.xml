@@ -6,10 +6,14 @@
 	<typeAliases>
 		<!-- 채연 -->
 		<typeAlias type="com.cloud.pt.employee.EmployeeVO" alias="EmployeeVO"/>
-		
-		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
+		<typeAlias type="com.cloud.pt.employee.CareerVO" alias="CareerVO"/>
+		<typeAlias type="com.cloud.pt.employee.CertificationVO" alias="CertificationVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
-		<typeAlias type="com.cloud.pt.myPtMember.MemberVO" alias="MemberVO"/>
+		<typeAlias type="java.lang.Long" alias="Long"/>
+		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
+		<typeAlias type="com.cloud.pt.member.MemVO" alias="MemVO"/>
+		<typeAlias type="com.cloud.pt.membership.MembershipVO" alias="MembershipVO"/>
+		<typeAlias type="com.cloud.pt.registration.RegistrationVO" alias="RegistrationVO"/>
 		
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>

@@ -20,6 +20,8 @@ import com.cloud.pt.notice.NoticeFileVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+import com.cloud.pt.employee.EmployeeVO;
+
 @Slf4j
 @Component
 public class FileManager extends AbstractView{
@@ -46,6 +48,15 @@ public class FileManager extends AbstractView{
 		multipartFile.transferTo(file);
 		
 		return fileName;
+	}
+	
+	
+	// infoUpdate시 fileDelete
+	public boolean fileDelete(String path, EmployeeVO employeeVO)throws Exception{
+		// 1. file에 '삭제할 파일경로'(1)과 fileName 넣기
+		File file = new File(path, employeeVO.getProFile());
+				
+		return file.delete();
 	}
 
 	@Override // notice file down
