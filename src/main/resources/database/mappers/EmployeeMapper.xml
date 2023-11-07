@@ -21,6 +21,10 @@
 		SELECT * FROM EMPLOYEE 
 		WHERE EMPLOYEENUM = #{employeeNum} 
 	</select>
+	
+	<update id="setFindPwUpdate" parameterType="EmployeeVO">
+		UPDATE EMPLOYEE SET PASSWORD = #{password} WHERE EMPLOYEENUM = #{employeeNum}
+	</update>
 
 	
 	<insert id="setJoin" parameterType="EmployeeVO">
@@ -111,7 +115,9 @@
 	</update>
 	
 	<select id="getFindPw" parameterType="EmployeeVO" resultType="EmployeeVO">
-		SELECT PASSWORD FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum} AND NAME = #{name} AND PHONE = #{phone}
+		SELECT EMPLOYEENUM, NAME, PHONE FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum} AND NAME = #{name} AND PHONE = #{phone}
 	</select>
+	
+	
 	
 </mapper>

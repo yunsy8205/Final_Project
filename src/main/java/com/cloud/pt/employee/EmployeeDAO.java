@@ -12,6 +12,8 @@ public interface EmployeeDAO {
 
 	public EmployeeVO getEmpLogin(EmployeeVO employeeVO)throws Exception;
 	
+	public int setFindPwUpdate(EmployeeVO employeeVO)throws Exception;
+	
 	public EmployeeVO getInfo(EmployeeVO employeeVO)throws Exception;
 	
 	public int setInfoUpdate(EmployeeVO employeeVO)throws Exception;
