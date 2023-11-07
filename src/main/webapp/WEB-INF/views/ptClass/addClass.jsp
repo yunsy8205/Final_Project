@@ -47,7 +47,7 @@
            <input type="text" name="memberNum" id="memberNum" value="${memberNum}" style="display: none;"><br/>
            
            회원이름 : <input type="text" id="title" value="${name}" readonly="readonly"><br>
-           시작시간 : <input type="date" name="startTime" id="start"/> <select name="languages" name="startTime">
+           시작시간 : <input type="datetime-local" name="startTime" id="start"/> <!-- <select name="languages" name="startTime">
     <option value="javascript">10:00:00</option>
     <option value="php">11:00:00</option>
     <option value="java">12:00:00</option>
@@ -56,7 +56,7 @@
     <option value="c#">16:00:00</option>
     <option value="C++">17:00:00</option>
     
-  </select> <br />
+  </select> --> <br />
            종료시간 : <input type="datetime-local" name="finishTime" id="finish"/><br /> 
            
           </div>
