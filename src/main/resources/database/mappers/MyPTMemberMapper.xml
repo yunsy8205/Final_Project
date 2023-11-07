@@ -10,7 +10,7 @@
 	</select>  
 	
 	<select id="getPtList" parameterType="java.util.Map" resultType="MemberVO">
-		SELECT MEMBERNUM, NAME , GENDER, BIRTH, PHONE , PTCOUNT,employeeNum
+		SELECT MEMBERNUM, MEMBERNAME , GENDER, BIRTH, PHONE , PTCOUNT,EMPLOYEENUM
   			FROM MEMBER 
   			WHERE EMPLOYEENUM = #{employeeNum}
   			
