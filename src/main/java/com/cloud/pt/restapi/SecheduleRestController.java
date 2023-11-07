@@ -46,7 +46,7 @@ public class SecheduleRestController {
 			Map<String,Object> m = new HashMap<>();
 			
 			m.put("id",ptClassVO.getPtNum());
-			m.put("title", ptClassVO.getName());
+			m.put("title", ptClassVO.getMemberName());
 			m.put("start", ptClassVO.getStartTime());
 			m.put("end", ptClassVO.getFinishTime() );
 			

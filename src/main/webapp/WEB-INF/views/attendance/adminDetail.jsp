@@ -22,6 +22,12 @@
     .modify_Con {
       display:flex; justify-content: space-between;
     }
+    .form-control:disabled {
+      background-color:#ffffff00 !important;
+    }
+    .form-check-input, .form-check-label{
+      opacity: 1 !important;
+    }
     .card {width:40%;}
     #form {width:calc(100% - 40%);}
     .totalBtn {text-align:center;}

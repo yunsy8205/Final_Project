@@ -13,7 +13,7 @@ public class MemberVO {
 	
 	private Long memberNum;
 	private String employeeNum;
-	private String name;
+	private String memberName;
 	private String phone;
 	private String gender;
 	private Date birth;

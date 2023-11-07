@@ -46,7 +46,7 @@
            <input type="text"  name="employeeNum" id="employeeNum" value="${employeeNum}" style="display: none;"/><br />
            <input type="text" name="memberNum" id="memberNum" value="${memberNum}" style="display: none;"><br/>
            
-           회원이름 : <input type="text" id="title" value="${name}" readonly="readonly"><br>
+           회원이름 : <input type="text" id="title" value="${memberName}" readonly="readonly"><br>
            시작시간 : <input type="datetime-local" name="startTime" id="start"/> <!-- <select name="languages" name="startTime">
     <option value="javascript">10:00:00</option>
     <option value="php">11:00:00</option>
