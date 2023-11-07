@@ -5,7 +5,7 @@
   
   <mapper namespace="com.cloud.pt.ptClass.PtClassDAO">
   	<select id="getMyList" parameterType="Long" resultType="PtClassVO">
-  		SELECT P.*,M.NAME  FROM PT P INNER JOIN MEMBER M 
+  		SELECT P.*,M.MEMBERNAME  FROM PT P INNER JOIN MEMBER M 
 		ON P.MEMBERNUM = M.MEMBERNUM 
 		WHERE P.EMPLOYEENUM = #{employeeNum};
   	</select>
