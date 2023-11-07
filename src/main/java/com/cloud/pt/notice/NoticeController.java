@@ -34,12 +34,12 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public String setNoticeAdd(MultipartFile [] files, NoticeVO noticeVO)throws Exception{
+	public String setNoticeAdd(MultipartFile [] multipartFiles, NoticeVO noticeVO)throws Exception{
 		SecurityContext context = SecurityContextHolder.getContext();
 		org.springframework.security.core.Authentication b = context.getAuthentication();
 		noticeVO.setEmployeeNum(Long.valueOf(b.getName()));
 		
-		noticeService.setNoticeAdd(noticeVO, files);
+		noticeService.setNoticeAdd(noticeVO, multipartFiles);
 	
 		return "redirect:./list";
 	}

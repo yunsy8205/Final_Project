@@ -146,7 +146,7 @@
 									  </button>
 									</div>
 									
-									<div>
+									<div style="display: flex; justify-content: flex-end;">
 										<a class="a1 btn btn-primary" href="./add">등록</a>
 									</div>
 									<!-- Hoverable Table rows -->

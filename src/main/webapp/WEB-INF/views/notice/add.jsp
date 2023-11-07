@@ -198,7 +198,7 @@
     	if(count < max){
 	    	
 		    let fileTag = '<div class="file1"><input type="file" class="files form-control" '
-		    			  +'id="files" name="files"/><span class="x">x</span></div>';
+		    			  +'id="files" name="multipartFiles"/><span class="x">x</span></div>';
 	    	$('#fileBox').append(fileTag);
 	        
 	    	count ++;

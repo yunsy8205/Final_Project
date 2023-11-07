@@ -42,21 +42,20 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <sec:authentication property="principal" var="user"/>
-	              <div id="user" data-num="${user.employeeNum}">
-	                ${user.name} 
-	                ${user.position}
-	              </div>
-              <div id="btn_block">
-                <button type="button" id="on" class="btn btn-primary">출근하기</button>
-                <button type="button" id="off" class="btn btn-primary">퇴근하기</button>
-              </div>
+             
               <div class="row mb-5">
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="../assets/img/elements/2.jpg" alt="Card image cap">
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
+                      <sec:authentication property="principal" var="user"/>	
+                      <h5 class="card-title" id="user" data-num="${user.employeeNum}">
+	                      ${user.name} 
+		               	  ${user.position}
+	                  </h5>
+	                  <div id="btn_block">
+               		  <button type="button" id="on" class="btn btn-primary">출근하기</button>
+                	  <button type="button" id="off" class="btn btn-primary">퇴근하기</button>
+              		  </div>
                       <p class="card-text">
                         Some quick example text to build on the card title and make up the bulk of the card's content.
                       </p>
