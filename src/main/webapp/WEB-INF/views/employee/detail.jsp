@@ -36,7 +36,8 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                      <h1 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 인적사항</h1>
+                      <h3 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 인적사항</h3>
+                      <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
                     </div>
                     <div class="card-body">
                       <div id="detailCon">
@@ -171,6 +172,6 @@
     </div>
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-    <script src="/js/employee/detail.js"></script>
+    <script type="text/javascript" src="/js/employee/detail.js"></script>
   </body>
 </html>

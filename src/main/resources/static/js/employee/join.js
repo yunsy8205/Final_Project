@@ -1,3 +1,6 @@
+const proFile = document.getElementById("proFile");
+
+
 // 주소
 $('#addressBtn').click(function(){
     adr();
@@ -42,10 +45,9 @@ function adr() {
                 a = '';
             }
 
-            // console.log("참고항목 : "+a)
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('adr_postNum').value = data.zonecode;
-            document.getElementById("adr_address").value = addr + a;
+            document.getElementById('adr_postNum').value = data.zonecode + addr + a;
+            //document.getElementById("adr_address").value = addr + a;
             // 커서를 상세주소 필드로 이동한다.
             checks[2]=true;
             document.getElementById("adr_detail").focus();

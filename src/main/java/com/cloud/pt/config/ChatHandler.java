@@ -51,10 +51,10 @@ public class ChatHandler extends TextWebSocketHandler{
       Long name = Long.valueOf(session.getPrincipal().getName());//sender
       chatMessage.setSender(String.valueOf(name));
       
-      log.info("chatUser : {}",name);
+      log.info("sender1 : {}",chatMessage.getSender());
 
       if (chatMessage.getType().equals(ChatMessageVO.MessageType.ENTER)) {
-
+    	  // 방에 유저가 맞는지 확인
     	  if(room.getUser1().equals(name)) {
     		  
     		  log.info("user1 맵에 담음:"+room.getUser1());
@@ -71,7 +71,7 @@ public class ChatHandler extends TextWebSocketHandler{
     	  }
     	  
     	  chatMessage.setMessage(name + "님이 입장했습니다.");  //TALK일 경우 msg가 있을 거고, 실제 보이지는 않게함
-    	  sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room);
+    	  sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room, name);
     	  
     	  //이전 메세지들을 list에 넣음
     	  List<ChatMessageVO> list = new ArrayList<>();
@@ -80,45 +80,55 @@ public class ChatHandler extends TextWebSocketHandler{
     	  //반복문으로 이전 메세지 뿌려줌
     	  for(ChatMessageVO c : list) {
     		  c.setType(ChatMessageVO.MessageType.ENTER);
-    		  sendToEachSocket(c, new TextMessage(objectMapper.writeValueAsString(c)), room);
+    		  sendToEachSocket(c, new TextMessage(objectMapper.writeValueAsString(c)), room, name);
     	  }
     	  
       }else if (chatMessage.getType().equals(ChatMessageVO.MessageType.QUIT)) {
           sessions.remove(session.getPrincipal().getName());
 
           chatMessage.setMessage(chatMessage.getSender() + "님이 퇴장했습니다..");
-          sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room);
+          sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room, name);
       
       }else {
     	  
-          sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room); //입장,퇴장 아닐 때는 클라이언트로부터 온 메세지 그대로 전달.
+          sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room, name); //입장,퇴장 아닐 때는 클라이언트로부터 온 메세지 그대로 전달.
       }
       
   }
 
-	private void sendToEachSocket(ChatMessageVO chatMessageVO, TextMessage textMessage,RoomVO room) throws Exception {
-		
+	private void sendToEachSocket(ChatMessageVO chatMessageVO, TextMessage textMessage,RoomVO room, Long name) throws Exception {
+		//set에 넣어 주기 (enter 타입일 경우 자신한테만 보내줌)
 		Set<WebSocketSession> chatMember = new HashSet<>();
-		
-		if(sessions.get(room.getUser1())==null) {
-			
-		}else {
-			
-			chatMember.add(sessions.get(room.getUser1()));
-			log.info("User1:"+room.getUser1());
-		}
-		if(sessions.get(room.getUser2())==null) {
-			
-		}else {
-			
-			chatMember.add(sessions.get(room.getUser2()));
-			log.info("User2:"+room.getUser2());
-		}
 		
 		//보낼때 DB에 바로 저장
 		if(chatMessageVO.getType().equals(ChatMessageVO.MessageType.ENTER)){
-		//입장 메세지는 저장 안함
+			//자신만 set에 넣음 (sender이 자신)
+				log.info("sender2 : ",name);
+			if(room.getUser1().equals(name)){
+				chatMember.add(sessions.get(name));
+				log.info("set에 {}가 담김", room.getUser1());
+			}else {
+				chatMember.add(sessions.get(name));
+				log.info("set에 {}가 담김", room.getUser2());
+			}
+			
 		}else {
+			//맵에 세션이 있는지 확인 후 set에 넣음(없는데 넣으면 널포인트에러 발생)
+			if(sessions.get(room.getUser1())==null) {
+				
+			}else {
+				
+				chatMember.add(sessions.get(room.getUser1()));
+				log.info("User1:"+room.getUser1());
+			}
+			
+			if(sessions.get(room.getUser2())==null) {
+				
+			}else {
+				
+				chatMember.add(sessions.get(room.getUser2()));
+				log.info("User2:"+room.getUser2());
+			}
 			
 			int result = chatService.messageAdd(chatMessageVO);
 			
@@ -128,6 +138,8 @@ public class ChatHandler extends TextWebSocketHandler{
 				log.info("DB 저장 실패");
 			}
 		}
+		
+		
 		
         chatMember.parallelStream().forEach(a -> {
   		try {

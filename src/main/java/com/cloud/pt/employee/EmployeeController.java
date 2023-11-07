@@ -1,12 +1,17 @@
 
 package com.cloud.pt.employee;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,28 +35,83 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	
 	
 	@GetMapping("login")
-	public String getEmpLogin(@ModelAttribute EmployeeVO employeeVO)throws Exception{
-		
-		// 로그인 성공 시, 뒤로가기 처리. context(사용자정보)
-/*		SecurityContext context = SecurityContextHolder.getContext();
-		
-		context.getAuthentication().getName();
-		
-		log.info("===== CONTEXT : {}=====", context);
-		log.info("==== CONTEXT_NAME :{} =====", context.getAuthentication().getName());
-		
-		String check = context.getAuthentication().getPrincipal().toString();
-		
-		if(!check.equals("anonymousUser")) {
-			return "redirect:/";
-		}*/
-		
-		
+	public String getEmpLogin(@ModelAttribute EmployeeVO employeeVO)throws Exception{	
+		log.info("{}", passwordEncoder.encode("a00000000*"));
 		return "employee/login";
+	}
+	
+	
+	@GetMapping("info")
+	public void getInfo(Principal principal, EmployeeVO employeeVO,PasswordVO passwordVO, Model model)throws Exception{	
+		employeeVO.setEmployeeNum(principal.getName());
+		
+		employeeVO = employeeService.getInfo(employeeVO);
+		
+		model.addAttribute("employeeVO", employeeVO);
+		model.addAttribute("passwordVO", passwordVO);
+	}
+	
+	
+	@GetMapping("infoUpdate")
+	public void setInfoUpdate(@AuthenticationPrincipal EmployeeVO employeeVO, Model model)throws Exception{
+		// update 전 검증 정보
+		employeeVO = employeeService.getInfo(employeeVO);
+		model.addAttribute("employeeVO", employeeVO);
+	}
+	
+	@PostMapping("infoUpdate")
+	public String setInfoUpdate(@Valid EmployeeVO employeeVO,BindingResult bindingResult, RedirectAttributes attributes, MultipartFile empfile)throws Exception{
+		// update 후 검증 진행
+		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
+		if(check) {
+			log.info("==========================검증 에러 ===================");
+			attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
+			return "/employee/infoUpdate";
+		}	
+
+		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmployeeVO emp = (EmployeeVO)obj;
+		employeeVO.setEmployeeNum(emp.getEmployeeNum());
+		
+		int result = employeeService.setInfoUpdate(employeeVO, empfile);
+
+		attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
+		return "redirect:/employee/info";
+	}
+	
+
+	
+	@PostMapping("updatePw")
+	public String setPwUpdate(@Valid PasswordVO passwordVO, BindingResult bindingResult, @AuthenticationPrincipal EmployeeVO employeeVO, Model model)throws Exception{
+		
+		String inputPw = passwordVO.getInputPw(); //JSP로부터 넘겨받은 입력한 기존비밀번호
+			
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
+		
+		if(encoder.matches(inputPw, employeeVO.getPassword())) {//넘겨받은 비밀번호와 EMP의 암호화된 비밀번호와 비교
+			
+			boolean check = employeeService.getNewPwCheck(passwordVO, bindingResult);
+			if(bindingResult.hasErrors() || check) {
+
+				model.addAttribute("error", "true");
+				return "/employee/info";
+			}
+
+			int result = employeeService.setPwUpdate(employeeVO, passwordVO);
+		}else {
+			bindingResult.rejectValue("inputPw", "employeeVO.password.inputPw");
+			
+			model.addAttribute("error", "true");
+			return "/employee/info";
+		}
+		model.addAttribute("employeeVO", employeeVO);
+		return	"/employee/info"; 
 	}
 	
 	
@@ -58,43 +119,41 @@ public class EmployeeController {
 	@GetMapping("join")
 	public void setJoin(@ModelAttribute EmployeeVO employeeVO)throws Exception{
 		
-		
 	}
 	
-	
 	@PostMapping("join")
-	public String setJoin(@Valid EmployeeVO employeeVO,Errors errors, BindingResult bindingResult, Model model, MultipartFile[] photo)throws Exception{
-		employeeVO.setPassword("0000");
+	public String setJoin(@Valid EmployeeVO employeeVO,BindingResult bindingResult,Errors errors ,Model model, MultipartFile empfile)throws Exception{
+		employeeVO.setPassword("a12345678*");
 		
-//		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
-//		if(bindingResult.hasErrors() || check) {
-//		
-//			return "employee/join";
-//		}
-		if(errors.hasErrors()) {
-			model.addAttribute("employeeVO", employeeVO);
-			
-			Map<String,String> validatorResult = employeeService.validateHandling(errors);
-			for(String key : validatorResult.keySet()) {
-				model.addAttribute(key, validatorResult.get(key));
-			}
-			return "/employee/join";
+		boolean check = employeeService.getEmpError(employeeVO, bindingResult);
+		if(check) {
+			log.info("==========================검증 에러 ===================");
+			return "employee/join";
 		}
 		
-		int result = employeeService.setJoin(employeeVO,photo);
+		// 성공되는 검증
+//		if(errors.hasErrors()) {
+//			model.addAttribute("employeeVO", employeeVO);
+//			
+//			Map<String,String> validatorResult = employeeService.validateHandling(errors);
+//			for(String key : validatorResult.keySet()) {
+//				model.addAttribute(key, validatorResult.get(key));
+//			}
+//			return "/employee/join";
+//		}
 		
-		log.info("====>>>>>>>>>>>>>>>>>>> authorities :{} ", employeeVO.getAuthorities());
+		int result = employeeService.setJoin(employeeVO,empfile);
 		
 		return "redirect:/employee/list";
 	}
 	
 	
 	@GetMapping("list")
-	public String getEmpList(Pager pager, Model model)throws Exception{
-		List<EmployeeVO> ar = employeeService.getEmpList(pager);
+	public String getEmpList(EmployeeVO employeeVO, Pager pager, Model model)throws Exception{
+		List<EmployeeVO> ar = employeeService.getEmpList(employeeVO, pager);
 		model.addAttribute("list", ar);
-		
-		return "employee/list";
+		model.addAttribute("pager", pager);
+		return "/employee/list";
 	}
 	
 	

@@ -4,21 +4,40 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.employee.EmployeeDAO">
+	<sql id="search">
+		<if test="kind=='name'">WHERE NAME LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='position'">WHERE POSITION LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='stateEmpIn'">WHERE STATE='재직' AND NAME LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='stateOut'">WHERE STATE = '퇴직'</if>
+	</sql>
+	
+	
+	<select id="getEmpTotal" parameterType="Pager" resultType="Long">
+		SELECT COUNT(EMPLOYEENUM) FROM EMPLOYEE 
+		<include refid="search"></include>
+	</select>
 	
 	<select id="getEmpLogin" parameterType="EmployeeVO" resultType="EmployeeVO">
 		SELECT * FROM EMPLOYEE 
 		WHERE EMPLOYEENUM = #{employeeNum} 
 	</select>
+
 	
 	<insert id="setJoin" parameterType="EmployeeVO">
 		INSERT INTO EMPLOYEE
 		VALUES (DEFAULT, #{name}, #{password}, #{phone}, #{address}, #{gender}, #{birth}, now(), #{quitDate}, #{state}, #{position}, 12, null, null, #{proFile}, #{proOriginal})
 	</insert>
 	
-	<select id="getEmpList" parameterType="Pager" resultType="EmployeeVO">
+	<select id="getEmpList" parameterType="Map" resultType="EmployeeVO">
 		SELECT EMPLOYEENUM,NAME,POSITION,PHONE,STATE FROM EMPLOYEE
+		
+			<if test="pager.kind=='name'">WHERE NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+			<if test="pager.kind=='position'">WHERE POSITION LIKE CONCAT('%',#{pager.search},'%')</if>
+			<if test="pager.kind=='stateEmpIn'">WHERE STATE='재직' AND NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+			<if test="pager.kind=='stateOut'">WHERE STATE = '퇴직'</if>
+		
 		ORDER BY EMPLOYEENUM  DESC
-		LIMIT #{startRow},#{lastRow}
+		LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
 	
 	<select id="getEmpDetail" parameterType="EmployeeVO" resultType="EmployeeVO" >
@@ -39,5 +58,60 @@
 		WHERE EMPLOYEENUM = #{employeeNum}
 	</update>
 	
+	
+	<!-- Employee 개인 -->
+	<select id="getInfo" parameterType="EmployeeVO" resultMap="getEmpResult">
+		SELECT * FROM EMPLOYEE E
+		LEFT OUTER JOIN CAREER CA
+		ON E.EMPLOYEENUM = CA.EMPLOYEENUM
+		LEFT OUTER JOIN CERTIFICATION CE
+		ON E.EMPLOYEENUM = CE.EMPLOYEENUM
+		WHERE E.EMPLOYEENUM = #{employeeNum}
+	</select>
+	<resultMap type="EmployeeVO" id="getEmpResult">
+		<id column="EMPLOYEENUM" property="employeeNum"/>
+		<result column="NAME" property="name"/>
+		<result column="PASSWORD" property="password"/>
+		<result column="PHONE" property="phone"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="GENDER" property="gender"/>
+		<result column="BIRTH" property="birth"/>
+		<result column="JOINDATE" property="joinDate"/>
+		<result column="QUITDATE" property="quitDate"/>
+		<result column="STATE" property="state"/>
+		<result column="POSITION" property="position"/>
+		<result column="LEAVEDATE" property="leaveDate"/>
+		<result column="SIGNFILE" property="signFile"/>
+		<result column="SIGNORIGINAL" property="signOriginal"/>
+		<result column="PROFILE" property="proFile"/>
+		<result column="PROORIGINAL" property="proOriginal"/>
+		<collection property="careers" javaType="List" ofType="CareerVO">
+			<id column="CAREERNUM" property="careerNum"/>
+			<result column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="TITLE" property="title"/>
+			<result column="PASSDATE" property="passDate"/>
+		</collection>
+		<collection property="certifications" javaType="List" ofType="CertificationVO">
+			<id column="CERTIFICATIONNUM" property="certificationNum"/>
+			<result column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="CERTITLE" property="cerTitle"/>
+			<result column="PASSDATE" property="passDate"/>
+		</collection>
+	</resultMap>
+	
+	<update id="setInfoUpdate" parameterType="EmployeeVO">
+		UPDATE EMPLOYEE
+		SET 
+		NAME=#{name},PHONE=#{phone},ADDRESS=#{address},GENDER=#{gender},BIRTH=#{birth},QUITDATE=#{quitDate},STATE=#{state},POSITION=#{position},PROFILE=#{proFile},PROORIGINAL=#{proOriginal}
+		WHERE EMPLOYEENUM = #{employeeNum}
+	</update>
+	
+	<update id="setPwUpdate" parameterType="EmployeeVO">
+		UPDATE EMPLOYEE SET PASSWORD = #{password} WHERE EMPLOYEENUM = #{employeeNum}
+	</update>
+	
+	<select id="getFindPw" parameterType="EmployeeVO" resultType="EmployeeVO">
+		SELECT PASSWORD FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum} AND NAME = #{name} AND PHONE = #{phone}
+	</select>
 	
 </mapper>
