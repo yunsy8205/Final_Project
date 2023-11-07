@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,12 @@ import com.cloud.pt.employee.EmployeeVO;
 @Slf4j
 @Component
 public class FileManager extends AbstractView{
+	
+	@Value("${app.upload}")
+	private String uploadPath;
+	
+	@Value("${app.upload.notice}")
+	private String noticeName;
 	
 		
 	// file 저장 후, 파일명 리턴
@@ -67,7 +74,7 @@ public class FileManager extends AbstractView{
 		 log.info("--------------------------------");
 		 log.info("FILEVO {} ", noticeFileVO);
 		 
-		 File file = new File("C:/GDJ68/upload/notice/", noticeFileVO.getFileName());
+		 File file = new File(this.uploadPath+this.noticeName, noticeFileVO.getFileName());
 		 
 		 //한글 처리
 		 response.setCharacterEncoding("UTF-8");
@@ -100,7 +107,9 @@ public class FileManager extends AbstractView{
 	public boolean fileDelete(NoticeFileVO noticeFileVO, String path) {
 	    // 1. 삭제할 폴더의 실제 경로
 	    //path = session.getServletContext().getRealPath(path);
-
+		
+		log.info(path);
+		log.info(noticeFileVO.getFileName());
 	    File file = new File(path, noticeFileVO.getFileName());
 
 	    // 로그 추가 File에 입력된 절대 경로 리턴

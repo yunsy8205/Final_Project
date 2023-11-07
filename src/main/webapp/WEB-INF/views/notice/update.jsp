@@ -44,7 +44,7 @@
 		.files{
 			height: 39.15px;
 		}
-		.x{
+		.x,.x2{
 			padding-top: 6px;
 			cursor: pointer;
 		}
@@ -75,12 +75,12 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-				<h3>공지사항 등록</h3>
+				<h3>공지사항 수정</h3>
 
               <div class="row">
                 <div class="mb-4">
                     <div class="card-body">
-                      <form action="./add" method="post" enctype="multipart/form-data">
+                      <form action="./update" method="post" enctype="multipart/form-data">
                         <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-name">카테고리</label>
 	                        <div id="radioBox" class="col-md">
@@ -91,7 +91,7 @@
 			                        type="radio"
 			                        value="인사"
 			                        id="cat1"
-			                        checked
+			                        <c:if test="${notice.category eq '인사'}">checked</c:if>
 			                        />
 		                        	<label class="form-check-label" for="cat1"> 인사 </label>
 		                        </span>
@@ -102,6 +102,7 @@
 			                        type="radio"
 			                        value="휴무"
 			                        id="cat2"
+			                        <c:if test="${notice.category eq '휴무'}">checked</c:if>
 			                        />
 		                        	<label class="form-check-label" for="cat2"> 휴무 </label>
 	                        	</span>
@@ -112,6 +113,7 @@
 			                        type="radio"
 			                        value="시설"
 			                        id="cat3"
+			                        <c:if test="${notice.category eq '시설'}">checked</c:if>
 			                        />
 		                        	<label class="form-check-label" for="cat3"> 시설 </label>
 	                        	</span>
@@ -122,6 +124,7 @@
 			                        type="radio"
 			                        value="기타"
 			                        id="cat4"
+			                        <c:if test="${notice.category eq '기타'}">checked</c:if>
 			                        />
 		                        	<label class="form-check-label" for="cat4"> 기타 </label>
 	                        	</span>
@@ -130,25 +133,30 @@
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="title">제목</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요" />
+                            <input type="text" class="form-control" id="title" name="title" value="${notice.title}" />
+                            <input type="hidden" class="form-control" id="employeeNum" name="employeeNum" value="${notice.employeeNum}" />
+                          	<input type="hidden" class="form-control" id="noticeNum" name="noticeNum" value="${notice.noticeNum}" />
                           </div>
                         </div>
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="basic-default-name">내용</label>
                           <div class="col-sm-10">
-                            <textarea rows="" cols="" id="summernote" name="contents" class="form-control"></textarea>
+                            <textarea rows="" cols="" id="summernote" name="contents" class="form-control">${notice.contents}</textarea>
                           </div>
                         </div>
                         <div class="row mb-3" >
-                        	<label id="label" class="col-sm-2 col-form-label" for="files">첨부파일 <button type="button" id="fileAdd" class="btn btn-primary">+</button></label>
+                        	<label id="label" data-list="${size}" class="col-sm-2 col-form-label" for="files">첨부파일 <button type="button" id="fileAdd" class="btn btn-primary">+</button></label>
                         	<div class="col-sm-10" id="fileBox">
-                        	
+                        		<c:forEach items="${notice.list}" var="f">
+                        			<div class="file1"><div class="files alert alert-primary alert-dismissible">${f.oriName}</div>
+								 	<span class="x2" data-file="${f.fileName}" data-num="${f.fileNum}">x</span></div>
+                        		</c:forEach>
                           	</div>
                         </div>
                         <div class="row justify-content-end">
                           <div class="col-sm-10">
-                          	<a class="a1 btn btn-primary" href="./list">이전</a>
-                            <button type="submit" class="btn btn-primary">등록</button>
+                          	<a class="a1 btn btn-primary" href="./detail?noticeNum=${notice.noticeNum}">이전</a>
+                            <button type="submit" class="btn btn-primary">수정</button>
                           </div>
                         </div>
                       </form>
@@ -190,9 +198,10 @@
       });
     </script>
     <script>
+    	let size = $('#label').attr("data-list");
+    	console.log(size);
     	let max = 5;
-    	let count = 0;	
-    	
+    	let count = 0+size;
     		
 	    $('#fileAdd').click(function(){
     	if(count < max){
@@ -208,10 +217,47 @@
 	     });
 	     
 	    $('#fileBox').on("click",'.x',function(){
-	    	
 	    	$(this).parent().remove();
 	    	count --;
+	    	
 	    })
+	    
+	     $('#fileBox').on("click",'.x2',function(){
+	    	if(confirm("삭제시 복원이 불가능 합니다.")){
+		    	let num = $(this).attr("data-num");
+		    	let name = $(this).attr("data-file");
+		    	
+	    		fileDelete(num, name);
+	    		
+	    		$(this).parent().remove();
+		    	count --;
+		    	
+	    	}
+	    })
+	    
+	    function fileDelete(fileNum, fileName){
+	    	$.ajax({
+				type:"post",
+				url:"./filedelete",
+				data:{
+					"fileNum":fileNum,
+					"fileName":fileName
+				},
+				success:function(response){
+					r=response.trim();
+					console.log(r);
+					if(r>0){
+						alert("삭제 성공");
+					}else{
+						alert("삭제 실패");
+					}
+					
+				},
+				error:function(){
+					console.log("ajax 실패");
+				}
+			})
+	    }
     </script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
