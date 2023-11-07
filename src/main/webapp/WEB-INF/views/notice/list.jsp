@@ -138,7 +138,7 @@
 									  </select>
 									  <input type="text" class="form-control" id="search"/>
 									  <button
-									    class="btn btn-outline-primary"
+									    class="btn btn-outline-primary btnChange"
 									    id="searchBtn"
 									    type="button"
 									    >
@@ -241,6 +241,18 @@
     		console.log(search);
     		console.log(page);
     		pager(page, search, kind);
+    		$('#search').val("");
+    	});
+    	
+    	$('#searchBtn2').click(function(){
+    		let page = 1;
+    		let kind = $('#kind').val();
+    		console.log(kind);
+    		let search = $('#search').val();
+    		console.log(search);
+    		console.log(page);
+    		catPager(page, search, kind, category);
+    		$('#search').val("");
     	});
     	
     	$('.category').click(function(){
@@ -249,8 +261,17 @@
     		let search = $('#search').val();
     		let category = $(this).attr("data-cat");
     		console.log(category);
-    		
     		catPager(page, search, kind, category);
+    		$('.btnChange').attr("id","searchBtn2");
+    	});
+    	
+    	$('#total').click(function(){
+    		let page = 1;
+    		let kind = $('#kind').val();
+    		let search = $('#search').val();
+    		console.log(page);
+    		pager(page, search, kind);
+    		$('.btnChange').attr("id","searchBtn");
     	});
     	
     	function pager(page, search, kind){

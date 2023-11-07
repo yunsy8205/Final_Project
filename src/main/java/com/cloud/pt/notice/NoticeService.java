@@ -63,6 +63,8 @@ public class NoticeService {
 		pager.makeRowNum(); //출력할 row 처음
 		Long total = noticeDAO.getTotal(pager);//전체 데이타
 		pager.makePageNum(total);//데이타수로 페이지 수		
+		log.info("시작로: {}",pager.getStartRow());
+		log.info("마지막로: {}",pager.getLastRow());
 		return noticeDAO.getNoticeList(pager);
 	}
 	

@@ -143,7 +143,7 @@ public class NoticeController {
 	
 	@GetMapping("categorylist")
 	public String getCatList(Model model,Pager pager, NoticeVO noticeVO)throws Exception{
-		List<NoticeVO> list =noticeService.getCatList(null, pager);
+		List<NoticeVO> list =noticeService.getCatList(noticeVO, pager);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);

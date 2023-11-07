@@ -20,10 +20,10 @@
 
 <sql id="forCatPager">
 	<choose>
-		<when test="kind=='title'">
+		<when test="pager.kind=='title'">
 		N.TITLE
 		</when>
-		<when test="kind=='contents'">
+		<when test="pager.kind=='contents'">
 		N.CONTENTS
 		</when>
 		<otherwise>
