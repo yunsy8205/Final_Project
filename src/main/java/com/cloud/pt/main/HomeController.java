@@ -110,7 +110,7 @@ public class HomeController {
 	
 	//비밀번호 변경시 랜덤비밀번호 문자전송
 	@GetMapping("phonePw")
-	public String phoneFw(@RequestParam("phone") String userPhoneNumber,String employeeNum,@RequestParam("name")String name,EmployeeVO employeeVO,Model model) throws Exception { // 휴대폰 문자보내기
+	public String phoneFw(@RequestParam("phone") String userPhoneNumber,String employeeNum,@RequestParam("name") String name, EmployeeVO employeeVO,Model model) throws Exception { // 휴대폰 문자보내기
 		log.info("phonePw get 들어옴");
 		Random random = new Random();
 //		StringBuffer randomBuf = new StringBuffer(); // 문자열 생성할 빈 문자열
@@ -130,11 +130,11 @@ public class HomeController {
 		int length = 8;
 		String randomStr = generateRandomString(length);
 		
-		employeeVO.setEmployeeNum(employeeNum);
+		employeeVO.setEmployeeNum(employeeVO.getEmployeeNum());
 		employeeVO.setPassword(randomStr);
-		employeeVO.setName(name);
+		employeeVO.setName(employeeVO.getName());
 		//System.out.println(randomStr);
-		employeeService.certifiedPhoneNumber(userPhoneNumber, randomStr);
+		employeeVO.setPassword(randomStr); employeeService.certifiedPhoneNumber(employeeVO.getPhone(), randomStr);
 		int result = employeeService.setFindPwUpdate(employeeVO);
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";

@@ -28,7 +28,9 @@ import com.cloud.pt.commons.Pager;
 
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
+//import net.nurigo.sdk.message.model.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 
 
 @Service
@@ -43,13 +45,14 @@ public class EmployeeService implements UserDetailsService{
 	@Autowired
 	private FileManager fileManager;
 	
+	
+	
+	
 	// properties 값을 java 사용. (@Value("${properties 키}"))
 	@Value("${app.upload}")
 	private String uploadPath;
 	@Value("${app.upload.employee}")
 	private String empFileName;
-	
-	
 	
 	
 	
@@ -160,6 +163,8 @@ public class EmployeeService implements UserDetailsService{
 		String api_key = "NCS6Z2IHA0RLQUS1"; //쿨sms api
 	    String api_secret = "MK0T5L21VZO4FXLBLRMQJBYHJIRAVOZC"; //쿨 sms 시크릿api
 	    Message coolsms = new Message(api_key, api_secret);
+	    
+	    log.info("랜덤 번호 갈겨");
 
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
@@ -168,11 +173,13 @@ public class EmployeeService implements UserDetailsService{
 	    params.put("type", "SMS");
 	    params.put("text", "임시비밀번호는" + "["+randomStr+"]" + "입니다."); // 문자 내용 입력
 	    params.put("app_version", "test app 1.2"); // application name and version
-
+	    
 	    try {
 	        JSONObject obj = (JSONObject) coolsms.send(params);
+	        log.info("try????????????");
 	        System.out.println(obj.toString());
 	      } catch (CoolsmsException e) {
+	    	log.info("catch????????????");
 	        System.out.println(e.getMessage());
 	        System.out.println(e.getCode());
 	      }
