@@ -1,4 +1,8 @@
+	
 	const socket = new WebSocket("ws://localhost:82/ws/chat");
+	
+	let user = $('#my').attr("data-user");
+	let name = $('#my').attr("data-name");
 	
 	socket.onopen = function (e) {
 		console.log('open server!');
@@ -13,6 +17,9 @@
 	$("#listBox").on("click", ".chatList", function(){
 		//회원번호
 		let employeeNum=$(this).attr("data-empNum");
+		let name=$(this).attr("data-name");
+		
+		$('#someone').attr("data-name", name);
 		//db에서 방있는지 확인!
 		roomCheck(employeeNum);	
 	});
@@ -29,10 +36,18 @@
 	
 	socket.onmessage=function(msg){
 		let jsonObj = JSON.parse(msg.data);
+		let one = $('#someone').attr("data-name");
 		// sender, message, chatdate
-		let msgTag = '<div class="alert alert-primary msg" role="alert"><div>'
-					 +jsonObj.sender+'</div><div>'
+		let msgTag = "";
+		if(user==jsonObj.sender){
+			msgTag = '<div class="alert alert-primary msg" role="alert"><div>'
+					 +name+'</div><div>'
 					 +jsonObj.message+'</div></div><div id="chatDate">'+jsonObj.chatDate+'</div>';
+		}else{
+			msgTag = '<div style="background-color:white;" class="alert msg" role="alert"><div>'
+						 +one+'</div><div>'
+						 +jsonObj.message+'</div></div><div id="chatDate">'+jsonObj.chatDate+'</div>';
+		}
 		
 		$('#msgArea').append(msgTag);
 

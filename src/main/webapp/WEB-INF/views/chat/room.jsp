@@ -46,6 +46,19 @@
 			padding-left: 83%;
 			font-size: 11px;
 		}
+		#msgArea::-webkit-scrollbar {
+		    width: 10px;
+		}
+		#msgArea::-webkit-scrollbar-thumb {
+		    background-color: #696CFF;
+		    border-radius: 10px;
+		}
+		#msgArea::-webkit-scrollbar-track {
+		    background-color: white;
+		    border-radius: 10px;
+		    box-shadow: inset 0px 0px 5px white;
+		 }
+
 	</style>
 </head>
   <body>
@@ -74,7 +87,10 @@
                 <div class="col-xl1">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">내 이름 직급</h5>
+                    	<sec:authorize access="isAuthenticated()">
+                    	<sec:authentication property="principal" var="user"/>
+                        	<h5 class="mb-0" id="my" data-user="${user.username}" data-name="${user.name}">${user.name} ${user.position}</h5>
+						</sec:authorize>
                     </div>
                     <div class="card-body">
                     	<div class="input-group mb-4">
@@ -98,11 +114,12 @@
                 <div class="col-xl">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 id="someone" class="mb-0">채팅하려는 대상을 선택해 주세요</h5>
+                      <h5 id="someone" class="mb-0" data-name="">채팅하려는 대상을 선택해 주세요</h5>
                
                     </div>
                     <div class="card-body">
-                    	<div id="msgArea" class="card mb-4"></div>  
+                    	<div id="msgArea" class="card mb-4" style="overflow-y: scroll"></div>
+                    	  
                     	<div class="input-group">
 	                        <input
 	                          id="msg"
@@ -122,40 +139,10 @@
                   </div>
                 </div>
               </div>
+              
             </div>
             <!-- / Content -->
-
             <!-- Footer -->
-            <!-- <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                <div>
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer> -->
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
