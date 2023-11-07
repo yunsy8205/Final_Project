@@ -129,8 +129,8 @@ border-color: rgba(0,0,0,0) !important;
         });
       } */
       
-      function sendData(memberNum, employeeNum, name) {
-    	    var url = './addClass?' + 'memberNum=' + memberNum + '&employeeNum=' + employeeNum + '&name=' + name;
+      function sendData(memberNum, employeeNum, memberName) {
+    	    var url = './addClass?' + 'memberNum=' + memberNum + '&employeeNum=' + employeeNum + '&memberName=' + memberName;
     	    history.replaceState({}, null, url); // URL에서 파라미터를 제거하고 숨깁니다.
     	    window.location.href = url; // 페이지를 새 URL로 이동합니다.
     	  }
