@@ -5,8 +5,16 @@
   
 <mapper namespace="com.cloud.pt.ptLog.PtTypeDAO">
 	
-	<select id="getPtList" parameterType="Long" resultType="PtTypeVO">
+	<select id="getTypeList" parameterType="Map" resultType="PtTypeVO">
 		SELECT * FROM PTTYPE
 		WHERE EMPLOYEENUM = #{employeeNum};
 	</select>
+	
+	<insert id="addType" parameterType="PtTypeVO">
+		INSERT INTO PTTYPE (EMPLOYEENUM,NAME,WEIGHT,EXCOUNT,PTSET) VALUES (#{employeeNum},#{name},#{weight},#{exCount},#{ptSet})
+	</insert>
+	
+	<delete id="delType">
+		DELETE FROM PTTYPE WHERE PTTYPENUM = #{ptTypeNum}
+	</delete>
 </mapper>
