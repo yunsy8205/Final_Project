@@ -61,7 +61,7 @@ public class PtClassController {
 		  log.info("멤버이름 : {} >>>" , memberName);
 		  mv.addObject("memberNum", memberNum);
 	      mv.addObject("employeeNum", employeeNum);
-	      mv.addObject("name", memberName);
+	      mv.addObject("memberName", memberName);
 		  mv.setViewName("ptClass/addClass");
 		  return mv;
 	  }
