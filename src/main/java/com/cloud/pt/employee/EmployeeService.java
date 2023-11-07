@@ -169,17 +169,15 @@ public class EmployeeService implements UserDetailsService{
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", "01024895653");    // 수신전화번호//userPhoneNumber
-	    params.put("from", "01024895653");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+	    params.put("from", "01091957075");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
 	    params.put("type", "SMS");
 	    params.put("text", "임시비밀번호는" + "["+randomStr+"]" + "입니다."); // 문자 내용 입력
 	    params.put("app_version", "test app 1.2"); // application name and version
 	    
 	    try {
 	        JSONObject obj = (JSONObject) coolsms.send(params);
-	        log.info("try????????????");
 	        System.out.println(obj.toString());
 	      } catch (CoolsmsException e) {
-	    	log.info("catch????????????");
 	        System.out.println(e.getMessage());
 	        System.out.println(e.getCode());
 	      }
@@ -192,7 +190,7 @@ public class EmployeeService implements UserDetailsService{
 		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
 		
 		log.info("비밀번호 찾기 암호화 된 비밀번호!!!!!!!!!!! >>>>>>>> : {}", employeeVO.getPassword());
-		return 0;//employeeDAO.setFindPwUpdate(employeeVO);
+		return employeeDAO.setFindPwUpdate(employeeVO);
 	}
 	
 	

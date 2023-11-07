@@ -134,7 +134,7 @@ public class HomeController {
 		employeeVO.setPassword(randomStr);
 		employeeVO.setName(employeeVO.getName());
 		//System.out.println(randomStr);
-		employeeVO.setPassword(randomStr); employeeService.certifiedPhoneNumber(employeeVO.getPhone(), randomStr);
+		employeeVO.setPassword(randomStr); employeeService.certifiedPhoneNumber(userPhoneNumber, randomStr);
 		int result = employeeService.setFindPwUpdate(employeeVO);
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";
