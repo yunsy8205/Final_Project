@@ -13,6 +13,7 @@
 		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
 		<typeAlias type="com.cloud.pt.member.MemVO" alias="MemVO"/>
 		<typeAlias type="com.cloud.pt.registration.RegistrationVO" alias="RegistrationVO"/>
+		<typeAlias type="com.cloud.pt.employee.PasswordVO" alias="PasswordVO"/>
 		
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
@@ -23,7 +24,7 @@
 		<!-- 재혁 -->
 		<typeAlias type="com.cloud.pt.myPtMember.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
-		<typeAlias type="com.cloud.pt.commons.Pager" alias="Pager"/>
+		
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
 		<typeAlias type="com.cloud.pt.ptLog.PtTypeVO" alias="PtTypeVO"/>
 		

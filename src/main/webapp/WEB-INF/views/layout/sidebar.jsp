@@ -193,10 +193,27 @@
                 </ul>
                 
             <li class="menu-item">
-              <a href="icons-boxicons.html" class="menu-link">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon fa-solid fa-file"></i>
-                <div data-i18n="Boxicons">결재</div>
+                <div data-i18n="Boxicons">결재관리</div>
               </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="/approval/list" class="menu-link">
+                    <div data-i18n="Accordion">기안문서함</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/approval/approverList" class="menu-link">
+                    <div data-i18n="Alerts">결재문서함</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/approval/signMain" class="menu-link">
+                    <div data-i18n="Badges">서명관리</div>
+                  </a>
+                </li>
+                </ul>
             </li>
             
             <li class="menu-item">
@@ -225,7 +242,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="ui-alerts.html" class="menu-link">
+                  <a href="/trainer/ptLog" class="menu-link">
                     <div data-i18n="Alerts">PT일지</div>
                   </a>
                 </li>

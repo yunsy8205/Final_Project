@@ -38,7 +38,9 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("add")
-	public void getAdd() throws Exception{
+	public void getAdd(Model model) throws Exception{
+		List<EmployeeVO> el = approvalService.getAnnualLine();
+		model.addAttribute("employeeVO", el);
 		
 	}
 	@PostMapping("add")

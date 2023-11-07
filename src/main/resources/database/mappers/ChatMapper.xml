@@ -32,7 +32,7 @@
 	</insert>
 	
 	<select id="chatMessageList" parameterType="RoomVO" resultType="ChatMessageVO">
-		SELECT * FROM CHAT
+		SELECT CHATNUM, ROOMNUM, SENDER, RECEIVER, MESSAGE, left(CHATDATE,16) AS CHATDATE FROM CHAT
 		WHERE ROOMNUM = #{roomNum}
 	</select>
 	

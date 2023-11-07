@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -26,6 +27,8 @@ import com.cloud.pt.commons.FileManager;
 import com.cloud.pt.commons.Pager;
 
 import lombok.extern.slf4j.Slf4j;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 
 @Service
@@ -146,12 +149,44 @@ public class EmployeeService implements UserDetailsService{
 	
 	
 	
-	public void getFindPw(EmployeeVO employeeVO)throws Exception{
+	public EmployeeVO getFindPw(EmployeeVO employeeVO)throws Exception{
 		log.info("비번 찾기! : {}",employeeVO);
 		
-		//return //employeeDAO.getFindPw(employeeVO);
+		return employeeDAO.getFindPw(employeeVO);
 	}
 	
+	//임시비밀번호
+	public void certifiedPhoneNumber(String userPhoneNumber, String randomStr) {
+		String api_key = "NCS6Z2IHA0RLQUS1"; //쿨sms api
+	    String api_secret = "MK0T5L21VZO4FXLBLRMQJBYHJIRAVOZC"; //쿨 sms 시크릿api
+	    Message coolsms = new Message(api_key, api_secret);
+
+	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    HashMap<String, String> params = new HashMap<String, String>();
+	    params.put("to", "01024895653");    // 수신전화번호//userPhoneNumber
+	    params.put("from", "01024895653");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+	    params.put("type", "SMS");
+	    params.put("text", "임시비밀번호는" + "["+randomStr+"]" + "입니다."); // 문자 내용 입력
+	    params.put("app_version", "test app 1.2"); // application name and version
+
+	    try {
+	        JSONObject obj = (JSONObject) coolsms.send(params);
+	        System.out.println(obj.toString());
+	      } catch (CoolsmsException e) {
+	        System.out.println(e.getMessage());
+	        System.out.println(e.getCode());
+	      }
+	}
+	
+	public int setFindPwUpdate(EmployeeVO employeeVO)throws Exception{
+		log.info("비밀번호 찾기 랜덤 비밀번호!!!!!!!!!!! >>>>>>>> : {}", employeeVO.getPassword());
+		
+		// 비밀번호 암호화
+		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
+		
+		log.info("비밀번호 찾기 암호화 된 비밀번호!!!!!!!!!!! >>>>>>>> : {}", employeeVO.getPassword());
+		return 0;//employeeDAO.setFindPwUpdate(employeeVO);
+	}
 	
 	
 	

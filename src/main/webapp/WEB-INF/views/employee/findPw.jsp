@@ -30,10 +30,8 @@
   #wrap > #loginFrm > form > div > label {width:7rem;display: inline-block;font-size: 1.3rem;text-align: center;font-weight:700;}
   #wrap > #loginFrm > form > div > input#employeeNum, #wrap > #loginFrm > form > div > input#password {width:15rem;border:none;background-color:rgb(209, 209, 209);}
 </style>
-<c:import url="/WEB-INF/views/layout/css.jsp"></c:import>
-<c:import url="/WEB-INF/views/layout/topScript.jsp"></c:import>
-<link rel="stylesheet" href="/css/main.css" />
-
+<c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+<c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 </head>
 <body>
   <div id="wrap">
@@ -45,32 +43,59 @@
         <h3>${message}</h3>
       </div>
       <!-- action 생략가능, 현재 url = action -->
-      <form:form modelAttribute="employeeVO" action="/employee/findPw" method="post">
+      <form:form modelAttribute="employeeVO" action="/employee/findPw" method="post" id="findPw">
         <div class="row mb-3">
           <form:label path="employeeNum">아이디</form:label>
           <form:input path="employeeNum"/>
-          <form:error path="employeeNum"></form:error>
+          
         </div>
         <div class="row mb-3">  
           <form:label path="name">이름</form:label>
-          <form:password path="name"/>
-          <form:error path="name"></form:error>
+          <form:input path="name"/>
+         
         </div>
         <div class="row mb-3">  
           <form:label path="phone">전화번호</form:label>
-          <form:password path="phone"/>
-          <form:error path="phone"></form:error>
+          <form:input path="phone"/>
+          
         </div>
-      	<button type="submit">비밀번호 확인하기</button>
+      	<button type="button" id="btn1" value="check" data-check="${check}">비밀번호 발급받기</button>
       </form:form>
     </div>
   </div>
+      <div id="block1" style="display: none;" >
+					
+					<label>일치하는 정보가 존재하지 않습니다.</label>
+      </div>
+      <div id="block2" style="display: none;">
+				<div class="form-label-group">
+					<input class="btn btn-lg btn-secondary btn-block text-uppercase" id="btn2" type="button" data-phone="${phone}" data-num="${employeeNum}" data-name="${name}" value="임시비밀번호 전송">
+				</div>
+				
+      </div>
   <script type="text/javascript">
     // redirect 로 보냈을 때, URL 경로나타내는 것을 삭제.
-    history.replaceState({}, null, location.pathname);
+    //history.replaceState({}, null, location.pathname);
+    //alert($("#btn1").val())
  </script>
 </body>
 <c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
+<script>
+  let dataCheck = document.getElementById("btn1").getAttribute("data-check");
+  
+  if (dataCheck === "1") {
+        // data-check가 1인 경우, 해당 블록을 숨깁니다.
+        // 예: "c:if" 블록을 숨김 처리
+        document.getElementById("block1").style.display = "block";
+    } else if (dataCheck === "0") {
+        // data-check가 0인 경우, 해당 블록을 표시합니다.
+        // 예: "c:if" 블록을 표시 처리
+        document.getElementById("block2").style.display = "block";
+    }
+</script>
+<script type="text/javascript" src="/js/employee/findPw.js"></script>
+
+
 </html>
 
 
