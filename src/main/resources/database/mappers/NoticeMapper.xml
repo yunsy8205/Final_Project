@@ -4,6 +4,33 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.notice.NoticeDAO">
+<sql id="forPager">
+	<choose>
+		<when test="kind=='title'">
+		N.TITLE
+		</when>
+		<when test="kind=='contents'">
+		N.CONTENTS
+		</when>
+		<otherwise>
+		E.NAME
+		</otherwise>
+	</choose>
+</sql>
+
+<sql id="forCatPager">
+	<choose>
+		<when test="pager.kind=='title'">
+		N.TITLE
+		</when>
+		<when test="pager.kind=='contents'">
+		N.CONTENTS
+		</when>
+		<otherwise>
+		E.NAME
+		</otherwise>
+	</choose>
+</sql>
 	
 	<insert id="setNoticeAdd" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="noticeNum">
 		INSERT INTO NOTICE (NOTICENUM, EMPLOYEENUM, TITLE, CONTENTS, REGDATE, MODDATE,CATEGORY, HIT)
@@ -16,7 +43,7 @@
 	</insert>
 	
 	<select id="getNoticeDetail" parameterType="NoticeVO" resultMap="NoticeResult">
-		SELECT N.NOTICENUM, N.EMPLOYEENUM, N.CATEGORY, N.TITLE, E.NAME, N.MODDATE, N.HIT, N.CONTENTS, NF.ORINAME, NF.FILENUM
+		SELECT N.NOTICENUM, N.EMPLOYEENUM, N.CATEGORY, N.TITLE, E.NAME, N.MODDATE, N.HIT, N.CONTENTS, NF.ORINAME, NF.FILENUM, NF.FILENAME
 		FROM NOTICE N LEFT JOIN NOTICEFILE NF
 		ON (N.NOTICENUM=NF.NOTICENUM)
 		JOIN EMPLOYEE E
@@ -42,10 +69,26 @@
   		</collection>
 	</resultMap>
 	
-	<select id="getNoticeList" resultType="NoticeVO">
+	<select id="getNoticeList" parameterType="Pager" resultType="NoticeVO">
 		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT
 		FROM NOTICE N JOIN EMPLOYEE E
 		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+		WHERE
+			<include refid="forPager"></include>
+			LIKE CONCAT('%',#{search},'%')
+		ORDER BY N.NOTICENUM DESC
+		LIMIT #{startRow}, #{lastRow}
+	</select>
+	
+	<select id="getCatList" parameterType="Map" resultType="NoticeVO">
+		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT
+		FROM NOTICE N JOIN EMPLOYEE E
+		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+		WHERE CATEGORY = #{notice.category} AND
+			<include refid="forCatPager"></include>
+			LIKE CONCAT('%',#{pager.search},'%')
+		ORDER BY N.NOTICENUM DESC
+		LIMIT #{pager.startRow}, #{pager.lastRow}
 	</select>
 	
 	<select id="getFile" parameterType="NoticeFileVO" resultType="NoticeFileVO">
@@ -63,4 +106,31 @@
 		WHERE NOTICENUM = #{noticeNum}
 	</select>
 	
+	<delete id="FileUpdateDelete" parameterType="NoticeFileVO">
+		DELETE FROM NOTICEFILE WHERE FILENUM = #{fileNum}
+	</delete>
+	
+	<update id="setNoticeUpdate" parameterType="NoticeVO">
+		UPDATE NOTICE SET
+		CATEGORY=#{category},
+		TITLE=#{title},
+		CONTENTS=#{contents},
+		MODDATE=NOW()
+		WHERE NOTICENUM=#{noticeNum}
+	</update>
+	
+	<select id="getTotal" resultType="Long" parameterType="Pager">
+		
+		SELECT COUNT(N.NOTICENUM)
+		FROM NOTICE N JOIN EMPLOYEE E
+		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+		WHERE
+			<include refid="forPager"></include>
+			LIKE CONCAT('%',#{search},'%')
+	</select>
+	
+	<select id="getCatTotal" parameterType="NoticeVO" resultType="Long">
+		SELECT COUNT(NOTICENUM) FROM NOTICE
+		WHERE CATEGORY = #{category}
+	</select>
 </mapper>

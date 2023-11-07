@@ -55,20 +55,37 @@
 					</form>
 				</div>
 				<div>
-					<form action="./approverList" id="divisionForm" method="get">
-						<input type="hidden" value="" id="division" name="division">
-					</form>
-					<button id="allBtn">전체</button>
-					<button id="lvBtn">휴가신청</button>
-					<button id="exBtn">지출신청</button>
-					<button id="abBtn">휴직신청</button>
+					
+					<div class="nav-align-top mb-1">
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="nav-item" role="presentation">
+								<a href="/approval/approverList?division=all" class="nav-link" id="allBtn">전체</a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="/approval/approverList?division=휴가신청" class="nav-link">휴가신청</a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="/approval/approverList?division=휴직신청" class="nav-link" id="rejectBtn">휴직신청</a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="/approval/approverList?division=지출신청" class="nav-link" id="completeBtn">지출신청</a>
+							</li>
+						</ul>
+					</div>
+					
 				</div>
 				<div>
-					<form action="./approverList" id="progressForm" method="get">
-						<input type="hidden" value="" id="progress" name="progress">
-					</form>
-					<button id="before">결재전</button>
-					<button id="after">결재완료</button>
+					<div class="nav-align-top mb-4">
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="nav-item" role="presentation">
+								<a href="/approval/approverList?division=${param.division}&progress=결재전" class="nav-link" id="allBtn">결재전</a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="/approval/approverList?division=${param.division}&progress=결재완료" class="nav-link">결재완료</a>
+							</li>
+							
+						</ul>
+					</div>
 				</div>
 
 				<div>
