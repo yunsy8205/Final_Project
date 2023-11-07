@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html>
-<!-- beautify ignore:start -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+			<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+				<!DOCTYPE html>
+				<!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
 	data-theme="theme-default" data-assets-path="../assets/"
 	data-template="vertical-menu-template-free">
@@ -45,12 +43,23 @@
 									</colgroup>
 									<tbody>
 										<tr>
-											<td
+											<c:if test="${approvalVO.state!='중간반려' && approvalVO.state!='최종반려'}">
+											<td 
 												style="background: white; padding: 0px !important; border: 0px currentColor; height: 90px; text-align: center; color: black; font-size: 36px; font-weight: bold; vertical-align: top;"
 												colspan="2"
 												class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
 
-												휴가신청서</td>
+												${approvalVO.category}</td>
+											</c:if>
+											<c:if test="${approvalVO.state=='중간반려' || approvalVO.state=='최종반려'}">
+												<td 
+												style="background: white; padding: 0px !important; border: 0px currentColor; height: 90px; text-align: center; color: red; font-size: 36px; font-weight: bold; vertical-align: top;"
+												colspan="2"
+												class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+
+												${approvalVO.category}-${approvalVO.state}</td>
+											</c:if>
+												
 										</tr>
 										<tr>
 											<td
@@ -102,6 +111,10 @@
 													<!-- User -->
 													<colgroup>
 														<col width="50">
+														<col width="80">
+														<col width="50">
+														<col width="50">
+														<col width="80">
 														<col width="50">
 													</colgroup>
 													<tbody>
@@ -110,11 +123,30 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																직급</td>
-															<td colspan="2"
+															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																${middle.position}
 															</td>
-															
+															<td rowspan="3"
+																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																<c:if test="${approvalVO.middleDate!=null}">
+																	<img style="width: 5rem;height: 3rem" alt="" <c:if test="${approvalVO.state=='진행중' || approvalVO.state=='최종반려' || approvalVO.state=='완료'}">src="../file/employee/${middle.signFile}"</c:if><c:if test="${approvalVO.state=='중간반려'}">src="../file/employee/reject.png"</c:if>>
+																</c:if>
+																</td>
+																<td
+																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+
+																직급</td>
+															<td
+																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+
+																${last.position}</td>
+																<td rowspan="3"
+																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																<c:if test="${approvalVO.finalDate!=null}">
+																	<img style="width: 5rem;height: 3rem" alt="" <c:if test="${approvalVO.state=='완료'}">src="../file/employee/${last.signFile}"</c:if><c:if test="${approvalVO.state=='최종반려'}">src="../file/employee/reject.png"</c:if>">
+																</c:if>
+																</td>
 														</tr>
 														<tr>
 															<td
@@ -126,12 +158,14 @@
 																${middle.name}
 												
 															</td>
-															<c:if test="${approvalVO.middleDate!=null}">
-																<td>
-																	<img style="width: 5rem;height: 3rem" alt="" src="../file/employee/${middle.signFile}">
-																</td>
-															</c:if>
-																
+															<td
+															style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+
+															결재자</td>
+														<td 
+															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+
+															${last.name}</td>
 																
 														</tr>
 														<tr>
@@ -139,9 +173,17 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재일</td>
-															<td colspan="2" 
+															<td 
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																${approvalVO.middleDate}
+															</td>
+															<td
+																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+
+																결재일</td>
+															<td 
+																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																${approvalVO.finalDate}
 															</td>
 															
 														</tr>
@@ -149,56 +191,7 @@
 													</tbody>
 												</table>
 											</td>
-											<td
-												style="background: white; padding: 0px !important; border: currentColor; text-align: right; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
-												<table
-													style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
-													<!-- User -->
-													<colgroup>
-														<col width="50">
-														<col width="50">
-													</colgroup>
-													<tbody>
-														<tr>
-															<td
-																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																직급</td>
-															<td colspan="2"
-																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-																${last.position}</td>
-														</tr>
-														<tr>
-															<td
-																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																결재자</td>
-															<td 
-																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-																${last.name}</td>
-																<c:if test="${approvalVO.finalDate!=null}">
-																	<td>
-																		<img style="width: 5rem;height: 3rem" alt="" src="../file/employee/${last.signFile}">
-																	</td>
-																</c:if>
-																
-														</tr>
-														<tr>
-															<td
-																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																결재일</td>
-															<td  colspan="2"
-																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																${approvalVO.finalDate}
-															</td>
-														</tr>
-
-													</tbody>
-												</table>
-											</td>
+											
 										</tr>
 									</tbody>
 								</table>
@@ -274,12 +267,23 @@
 												style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
 
 												휴가사유</td>
-											<td
+											<td 
 												style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
-												colspan="3" class="dext_table_border_t"><textarea
-													id="summernote" name="contents">${approvalVO.contents}</textarea></td>
+												colspan="3"class="dext_table_border_t">${approvalVO.contents}</td>
 
 										</tr>
+										<c:if test="${approvalVO.state=='중간반려'||approvalVO.state=='최종반려'}">
+											<tr id="rejectReasonRow">
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+												반려사유</td>
+												<td 
+													style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3" class="dext_table_border_t">${approvalVO.reason}</td>
+
+											</tr>
+										</c:if>
 										<tr>
 											<td
 												style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 100px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle; background-color: rgb(255, 255, 255);"
@@ -289,25 +293,72 @@
 										</tr>
 									</tbody>
 								</table>
-								<c:if test="${approvalVO.middleDate==null}">
-								<form action="middleApproval" method="post">
+								<div>
+								<c:if test="${approvalVO.state=='대기중'}">
+								<form action="middleApproval" method="post" id="approvalForm">
 									<input type="hidden" name="approvalNum" value="${approvalVO.approvalNum}">
-									<button>결재</button>
+									<input type="hidden" id="state" name="state" value="진행중">
+									<input type="hidden" id="reason" name="reason">
+									<button id="approvalBtn">결재</button>
 								</form>
-								</c:if>
-								<c:if test="${approvalVO.middleDate!=null}">
-								<form action="finalApproval" method="post">
-									<input type="hidden" name="approvalNum" value="${approvalVO.approvalNum}">
-									<button>결재</button>
-								</form>
-								</c:if>
 								
-								<button>반려</button>
+								</c:if>
+								<c:if test="${approvalVO.state=='진행중'}">
+								<form action="finalApproval" method="post" id="approvalForm">
+									<input type="hidden" name="approvalNum" value="${approvalVO.approvalNum}">
+									<input type="hidden" id="state" name="state" value="완료">
+									<input type="hidden" id="reason" name="reason">
+									<input type="hidden" id="employeeNum" name="employeeNum" value="${approvalVO.employeeNum}">
+									<input type="hidden" id="startDate" name="startDate" value="${approvalVO.startDate}">
+									<input type="hidden" id="endDate" name="endDate" value="${approvalVO.endDate}">
+									<input type="hidden" id="useDate" name="useDate" value="${approvalVO.useDate}">
+									<input type="hidden" id="leaveKind" name="leaveKind" value="${approvalVO.leaveKind}">
+
+									
+									<button>결재</button>
+								</form>
+				
+								
+								</c:if>
+								<c:if test="${approvalVO.state=='대기중'||approvalVO.state=='진행중'}">
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+									반려
+								</button>
+								</c:if>
+								</div>
+								
 
 							</div>
-
+							<input type="hidden" id="nowState" value="${approvalVO.state}">
 						</div>
+							<!-- Button trigger modal -->
 
+  
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h1 class="modal-title fs-5" id="exampleModalLabel">반려하기
+		  </h1>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		  결재문서명:${approvalVO.category}<br>
+
+		  <label for="rejectContent">반려의견</label><br>
+
+		  <textarea  id="rejectContent" cols="50" rows="5"></textarea>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="rejectBtn">반려</button>
+		  <button type="button" class="btn btn-primary" id="cancle">취소</button>
+		</div>
+	  </div>
+	</div>
+  </div>
 					</div>
 					<!-- / Content -->
 
@@ -359,5 +410,6 @@
 
 
 			<c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+			<script src="/resources/js/approval/approverDetail.js"></script>
 </body>
 </html>
