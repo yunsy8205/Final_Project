@@ -40,13 +40,6 @@ public class EmployeeController {
 	
 	
 	
-	@GetMapping("login")
-	public String getEmpLogin(@ModelAttribute EmployeeVO employeeVO)throws Exception{	
-		log.info("{}", passwordEncoder.encode("a00000000*"));
-		return "employee/login";
-	}
-	
-	
 	@GetMapping("info")
 	public void getInfo(Principal principal, EmployeeVO employeeVO,PasswordVO passwordVO, Model model)throws Exception{	
 		employeeVO.setEmployeeNum(principal.getName());
