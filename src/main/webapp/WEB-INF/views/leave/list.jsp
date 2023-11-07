@@ -15,33 +15,10 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-	<style>
-    	h3 {
-	    	margin-top: 40px !important;
-	    	text-align: center;
-	    }
-
-		.a1{
-			color: white;
-		}
-		
-		#btn{
-			padding-left: 40%;
-			margin-top: 50px;
-		}
-		table{
-			table-layout: fixed;
-		}
-		#title1{
-			font-size: 18px;
-			
-		}
-
-	</style>
+  <script src='/fullcalendar-6.1.9/fullcalendar-6.1.9/dist/index.global.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 </head>
+
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -57,56 +34,7 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <div class="container-xxl flex-grow-1 container-p-y">
-				<h3>공지사항</h3>
-
-              <div class="row">
-                <div class="mb-4">
-                    <div class="card-body">
-                      <div>
-                      	<table class="table">
-                      		<tr >
-                      			<th>제목</th>
-                      			<td id="title1" data-num="${notice.noticeNum}" colspan="5"><strong>${notice.category}</strong> ${notice.title}</td>
-                      		</tr>
-                      		<tr>
-                      			<th>작성자</th>
-                      			<td colspan="2">${notice.name}</td>
-                      			<td></td>
-                      			<td></td>
-                      			<td></td>
-                      		</tr>
-                      		<tr>
-                      			<th>작성일</th>
-                      			<td>${notice.modDate}</td>
-                      			<th>조회</th>
-                      			<td>${notice.hit}</td>
-                      			<td></td>
-                      			<td></td>
-                      		</tr>
-                      	</table>
-                      </div>
-                      <div>
-                      		${notice.contents}<br>
-                      		<hr>
-                      		<c:forEach items="${notice.list}" var="f">
-                      			<a href="./noticefiledown?fileNum=${f.fileNum}">${f.oriName}</a><br>
-                      		</c:forEach>
-                      </div>
-                      <hr>
-                      <div id="btn" class="col-sm-10">
-                          	<a class="a1 btn btn-primary" href="./list">이전</a>
-                            <a class="a1 btn btn-primary" href="./update?noticeNum=${notice.noticeNum}">수정</a>
-                            <button type="button" class="delete btn btn-primary">삭제</button>
-                            
-                      </div>
-                    </div>
-                  </div>
-                    <!-- /Account -->
-                  </div>
-                </div>
-              </div>
-              </div>
+              <div id="calendar"></div>
               <!-- / Content --> 
               
               
@@ -155,17 +83,7 @@
     </div>
     <!-- / Layout wrapper -->
   
+	<script src="/resources/js/leave/list.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-	<script>
-		$('.delete').click(function(){
-			let num = $('#title1').attr("data-num");
-			
-			let deletePost = '<form style="display:none;" id="delete2" action="./delete" method="post"><input name=noticeNum value="'
-								+num+'"/></form>';
-			$('#btn').append(deletePost);
-			$('#delete2').submit();
-			
-		})
-	</script>
-</body>
+  </body>
 </html>

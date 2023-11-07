@@ -1,6 +1,8 @@
 package com.cloud.pt.notice;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
@@ -11,7 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.cloud.pt.commons.Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,9 +45,10 @@ public class NoticeController {
 	}
 	
 	@GetMapping("list")
-	public String getNoticeList(Model model)throws Exception{
-		List<NoticeVO> list =noticeService.getNoticeList();
+	public String getNoticeList(Model model, Pager pager)throws Exception{
+		List<NoticeVO> list =noticeService.getNoticeList(pager);
 		model.addAttribute("list", list);
+		model.addAttribute("pager", pager);
 		
 		return "notice/list";
 	}
@@ -69,7 +75,7 @@ public class NoticeController {
 		return "fileManager";// 이것도 꼭 해줘야함
 	}
 	
-	@PostMapping("noticedelete")
+	@PostMapping("delete")
 	public String setNoticeDelete(NoticeVO noticeVO)throws Exception{
 		int result = noticeService.setNoticeDelete(noticeVO);
 		
@@ -80,6 +86,69 @@ public class NoticeController {
 		}
 		
 		return "redirect:./list";
+	}
+	
+	@GetMapping("update")
+	public String setNoticeUpdate(Model model, NoticeVO noticeVO)throws Exception{
+		//db 정보를 가져옴
+		noticeVO = noticeService.getNoticeDetail(noticeVO);
+		
+		model.addAttribute("notice", noticeVO);
+		model.addAttribute("size", noticeVO.getList().size());
+		
+		return "notice/update";
+	}
+	
+	@PostMapping("update")
+	public String setNoticeUpdate(NoticeVO noticeVO, MultipartFile [] files)throws Exception{
+		SecurityContext context = SecurityContextHolder.getContext();
+		org.springframework.security.core.Authentication b = context.getAuthentication();
+		if(noticeVO.getEmployeeNum()==Long.parseLong(b.getName())) {//작성자와 같을때
+			
+			int result = noticeService.setNoticeUpdate(noticeVO, files);
+			
+			if(result>0){
+				log.info("업데이트 성공");
+			}else {
+				log.info("업데이트 실패");
+			}
+		}
+		return "redirect:./detail?noticeNum="+noticeVO.getNoticeNum();
+	}
+	
+	@PostMapping("filedelete")
+	public String fileUpdateDelete(Model model, NoticeFileVO noticeFileVO)throws Exception{
+		
+		int result = noticeService.FileUpdateDelete(noticeFileVO);
+		
+		if(result>0){
+			log.info("파일삭제 성공");
+		}else {
+			log.info("파일삭제 실패");
+		}
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
+	}
+	
+	@GetMapping("totallist")
+	public String getTotalList(Model model,Pager pager)throws Exception{
+		List<NoticeVO> list =noticeService.getNoticeList(pager);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pager", pager);
+		
+		return "notice/listResult";
+	}
+	
+	@GetMapping("categorylist")
+	public String getCatList(Model model,Pager pager, NoticeVO noticeVO)throws Exception{
+		List<NoticeVO> list =noticeService.getCatList(noticeVO, pager);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pager", pager);
+		
+		return "notice/listResult";
 	}
 
 }

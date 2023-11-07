@@ -7,6 +7,17 @@
 	<sql id="forPager">
 		<if test="pager.kind=='title'">AND TITLE LIKE CONCAT('%',#{pager.search},'%')</if>
 		<if test="pager.kind=='contents'">AND CONTENTS LIKE CONCAT('%',#{pager.search},'%')</if>
+		<choose>
+			<when test="pager.kind=='title'">
+				AND TITLE LIKE CONCAT('%',#{pager.search},'%')
+			</when>
+			<when test="pager.kind=='contents'">
+				AND CONTENTS LIKE CONCAT('%',#{pager.search},'%')
+			</when>
+			<otherwise>
+				AND TITLE LIKE CONCAT('%','','%')
+			</otherwise>
+		</choose>
 	</sql>
 	
 	<sql id="state">
@@ -14,24 +25,36 @@
 		<if test="pager.division=='complete'">AND STATE='완료'</if>
 		<if test="pager.division=='wating'">AND STATE='대기중'</if>
 		<if test="pager.division=='reject'">AND STATE='반려'</if>
+		
 	</sql>
 	
 	<sql id="category">
-		<if test="pager.division=='휴가신청'">AND CATEGORY='휴가신청서'</if>
-		<if test="pager.division=='지출신청'">AND CATEGORY='지출결의서'</if>
-		<if test="pager.division=='휴직신청'">AND CATEGORY='휴직신청서'</if>
+		<choose>
+			<when test="pager.division=='휴가신청'">
+				AND CATEGORY='휴가신청서'
+			</when>
+			<when test="pager.division=='지출신청'">
+				AND CATEGORY='지출결의서'
+			</when>
+			<when test="pager.division=='휴직신청'">
+				AND CATEGORY='휴직신청서'
+			</when>
+			<otherwise>
+				AND CATEGORY LIKE CONCAT('%','서','%')
+			</otherwise>
+		</choose>
 	</sql>
 	
 	<sql id="progress">
 		<choose>
 			<when test="pager.progress=='결재전'">
-				(MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL)
+				((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL))
 			</when>
 			<when test="pager.progress=='결재완료'">
-				(MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NOT NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NOT NULL)
+				((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NOT NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NOT NULL))
 			</when>
 			<otherwise>
-				(MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL)
+				((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR (LAST=#{id.employeeNum} AND FINALDATE IS NULL))
 			</otherwise>
 		</choose>
 	</sql>
@@ -46,9 +69,8 @@
 	<!-- 결재자count  -->
 	<select id="getAllCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
-		WHERE MIDDLE=#{id.employeeNum}
+		WHERE <include refid="progress"></include>
 		<include refid="category"></include>
-		OR LAST=${id.employeeNum}
 		<include refid="forPager"></include>
 	</select>
 	
@@ -133,11 +155,27 @@
 	
 	<!-- 중간결재 -->
 	<update id="setMiddleApproval" parameterType="ApprovalVO">
-		UPDATE APPROVAL SET MIDDLEDATE=CURDATE(),STATE="진행중" WHERE APPROVALNUM=${approvalNum}
+		UPDATE APPROVAL SET MIDDLEDATE=CURDATE(),STATE=#{state},REASON=#{reason} WHERE APPROVALNUM=#{approvalNum}
 	</update>
 	
 	<!-- 최종결재 -->
 	<update id="setFinalApproval" parameterType="ApprovalVO">
-		UPDATE APPROVAL SET FINALDATE=CURDATE(),STATE="완료" WHERE APPROVALNUM=${approvalNum}
+		UPDATE APPROVAL SET FINALDATE=CURDATE(),STATE=#{state},REASON=#{reason} WHERE APPROVALNUM=#{approvalNum}
 	</update>
+	
+	<select id="getFileCheck" parameterType="EmployeeVO" resultType="EmployeeVO">
+		SELECT SIGNFILE FROM EMPLOYEE WHERE EMPLOYEENUM=#{employeeNum}
+	</select>
+	
+	<!-- 휴가add -->
+	<insert id="setLeave" parameterType="ApprovalVO" >
+		INSERT INTO LEAVE_(EMPLOYEENUM,LEAVEKIND,USEDATE,STARTDATE,ENDDATE) VALUES (#{employeeNum},#{leaveKind},#{useDate},#{startDate},#{endDate})
+	</insert>
+	<update id="setLeaveDate" parameterType="ApprovalVO">
+		UPDATE EMPLOYEE SET LEAVEDATE=LEAVEDATE-#{useDate} WHERE EMPLOYEENUM=#{employeeNum}
+	</update>
+	<!-- 문서상태조회 -->
+	<select id="getState" parameterType="ApprovalVO" resultType="ApprovalVO">
+		SELECT STATE FROM APPROVAL WHERE APPROVALNUM=#{approvalNum}
+	</select>
 </mapper>
