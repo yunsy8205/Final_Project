@@ -31,4 +31,6 @@ public interface EmployeeDAO {
 	public int setEmpUpdate(EmployeeVO employeeVO)throws Exception;
 	
 	public int setEmpDelete(EmployeeVO employeeVO)throws Exception;
+	
+	public EmployeeVO getFindPw(EmployeeVO employeeVO)throws Exception;
 }
