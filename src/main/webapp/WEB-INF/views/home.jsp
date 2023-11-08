@@ -18,6 +18,25 @@
       #off {
         display: none;
       }
+      .row {
+	    height: 400px;
+	  }
+	  #notice{
+	  	display: flex;
+	  }
+	  #plus {
+	    flex: 0 0 auto;
+	    width: 3%;
+	    font-size: 25px;
+	  }
+	  #ntitle {
+	    flex: 0 0 auto;
+	    width: 94%;
+	  	margin: auto;
+	  }
+	  #hr1{
+	  	background-color: #696cff;
+	  }
     </style>
 
     <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -44,7 +63,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
              
               <div class="row mb-5">
-                <div class="col-md-6 col-lg-4 mb-3">
+                <div class="col-md-6 col-lg-4 mb-3" style="width: 25%;">
                   <div class="card h-100">
                     <div class="card-body">
                       <sec:authentication property="principal" var="user"/>	
@@ -63,26 +82,34 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-3">
+                <div class="col-md-6 col-lg-4 mb-3" style="width: 45%;">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                    </div>
-                    
-                    <div class="card-body">
-                      <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
-                      <a href="javascript:void(0);" class="card-link">Card link</a>
-                      <a href="javascript:void(0);" class="card-link">Another link</a>
+                      <div id="notice"><h5 id="ntitle" class="card-title">최근 공지</h5><a id="plus" href="/notice/list">+</a></div>
+	                  <hr id="hr1">
+	                  <div class="table-responsive text-nowrap">
+											<table class="table table-hover">
+												<tbody class="table-border-bottom-0">
+													<c:forEach items="${list}" var="n">
+														<tr>
+															<td><span class="badge bg-label-primary me-1">${n.category}</span>
+																<a href="./notice/detail?noticeNum=${n.noticeNum}">${n.title}</a></td>
+															<td>${n.name}</td>
+															<td>${n.modDate}</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-3">
+                <div class="col-md-6 col-lg-4 mb-3" style="width: 30%;">
                   <div class="card h-100">
                     <div class="card-body">
                       <h5 class="card-title">Card title</h5>
                       <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                      <img class="img-fluid d-flex mx-auto my-4" src="../assets/img/elements/4.jpg" alt="Card image cap">
+                      
                       <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
                       <a href="javascript:void(0);" class="card-link">Card link</a>
                       <a href="javascript:void(0);" class="card-link">Another link</a>

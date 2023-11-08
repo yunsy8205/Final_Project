@@ -1,6 +1,8 @@
 package com.cloud.pt.main;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cloud.pt.employee.EmployeeService;
 import com.cloud.pt.employee.EmployeeVO;
 import com.cloud.pt.employee.PasswordVO;
+import com.cloud.pt.notice.NoticeVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,13 +38,14 @@ public class HomeController {
 	private EmployeeService employeeService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private HomeService homeService;
 	
 	
 	@GetMapping("home")
 	public String getIndex(Model model) throws Exception {
 		
 		SecurityContext context = SecurityContextHolder.getContext();
-		
 		Authentication a = context.getAuthentication();
 		
 		log.info("==>>> GetName :{}", a.getName());       // id
@@ -58,6 +62,10 @@ public class HomeController {
 			model.addAttribute("url", "/");
 			return "/commons/result";
 		}
+		
+		//공지
+		List<NoticeVO> list = homeService.getNoticeList();
+		model.addAttribute("list", list);
 		
 		return "home";
 	}

@@ -13,20 +13,10 @@
 						</tr>
 					</thead>
 					<tbody class="table-border-bottom-0">
-						<c:forEach items="${pinList}" var="p">
-							<tr class="table-primary pinFont">
-								<td>${p.noticeNum}</td>
-								<td><span class="badge bg-label-primary me-1">${p.category}</span>
-									<a class="a3" href="./detail?noticeNum=${p.noticeNum}">${p.title}</a></td>
-								<td>${p.name}</td>
-								<td>${p.modDate}</td>
-								<td>${p.hit}</td>
-							</tr>
-						</c:forEach>
 						<c:forEach items="${list}" var="li">
 							<tr>
 								<td>${li.noticeNum}</td>
-								<td><span class="badge bg-label-primary me-1">${li.category}</span>
+								<td><span class="catCheck badge bg-label-primary me-1" data-cat="${li.category}">${li.category}</span>
 									<a class="a2" href="./detail?noticeNum=${li.noticeNum}">${li.title}</a></td>
 								<td>${li.name}</td>
 								<td>${li.modDate}</td>
@@ -39,17 +29,17 @@
 			<nav aria-label="Page navigation" style="background-color: white;">
 				<ul id="pageBox" class="pagination justify-content-center">
 					<li class="page-item prev ${pager.pre?'':'disabled'}">
-						<button class="pageBtn page-link" data-p="${pager.startNum-1}">
+						<button class="pageBtn2 page-link" data-p="${pager.startNum-1}">
 							<i class="tf-icon bx bx-chevrons-left"></i>
 						</button>
 					</li>
 					<c:forEach  begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						<li class="page-item">
-							<button class="pageBtn page-link" data-p="${i}">${i}</button>
+							<button class="pageBtn2 page-link" data-p="${i}">${i}</button>
 						</li>
 					</c:forEach>
 					<li class="page-item next ${pager.next?'':'disabled'}">
-						<button class="pageBtn page-link" data-p="${pager.lastNum+1}">
+						<button class="pageBtn2 page-link" data-p="${pager.lastNum+1}">
 							<i class="tf-icon bx bx-chevrons-right"></i>
 						</button>
 					</li>

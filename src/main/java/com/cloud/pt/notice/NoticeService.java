@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,29 +33,35 @@ public class NoticeService {
 	private String noticeName;
 	
 	
-	public int setNoticeAdd(NoticeVO noticeVO, MultipartFile[] files)throws Exception{
+	public int setNoticeAdd(NoticeVO noticeVO, MultipartFile[] multipartFiles)throws Exception{
 		log.info("<============uploadPath:{}============>",uploadPath);
 		int result = noticeDAO.setNoticeAdd(noticeVO);
-		for(MultipartFile multipartFile : files) {
-			
-			if(multipartFile.isEmpty()) {
-				continue;
+		
+		if(multipartFiles != null) {//파일을 추가 안 했을 때
+			for(MultipartFile multipartFile : multipartFiles) {
+				
+				if(multipartFile.isEmpty()) {
+					continue;
+				}
+				
+				NoticeFileVO fileVO = new NoticeFileVO();
+				String fileName = fileManager.save(this.uploadPath+this.noticeName, multipartFile);
+				fileVO.setNoticeNum(noticeVO.getNoticeNum());
+				fileVO.setFileName(fileName);
+				fileVO.setOriName(multipartFile.getOriginalFilename());
+				
+				log.info("<============oriName:{}============>",fileVO.getOriName());
+				result = noticeDAO.fileAdd(fileVO);
 			}
-			
-			NoticeFileVO fileVO = new NoticeFileVO();
-			String fileName = fileManager.save(this.uploadPath+this.noticeName, multipartFile);
-			fileVO.setNoticeNum(noticeVO.getNoticeNum());
-			fileVO.setFileName(fileName);
-			fileVO.setOriName(multipartFile.getOriginalFilename());
-			
-			log.info("<============oriName:{}============>",fileVO.getOriName());
-			result = noticeDAO.fileAdd(fileVO);
 		}
 		return result;
 	}
 	
 	public NoticeVO getNoticeDetail(NoticeVO noticeVO)throws Exception{
-		return noticeDAO.getNoticeDetail(noticeVO);
+		int result = noticeDAO.setHitUpdate(noticeVO);
+		noticeVO = noticeDAO.getNoticeDetail(noticeVO);
+	
+		return noticeVO;
 	}
 	
 	//전체
@@ -62,9 +69,7 @@ public class NoticeService {
 		pager.setPerPage(10L); //10개씩
 		pager.makeRowNum(); //출력할 row 처음
 		Long total = noticeDAO.getTotal(pager);//전체 데이타
-		pager.makePageNum(total);//데이타수로 페이지 수		
-		log.info("시작로: {}",pager.getStartRow());
-		log.info("마지막로: {}",pager.getLastRow());
+		pager.makePageNum(total);//데이타수로 페이지 수	
 		return noticeDAO.getNoticeList(pager);
 	}
 	
@@ -145,5 +150,9 @@ public class NoticeService {
 		}
 		
 		return result;
+	}
+	
+	public List<NoticeVO> getPinList()throws Exception{
+		return noticeDAO.getPinList();
 	}
 }

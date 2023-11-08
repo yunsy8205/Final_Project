@@ -29,9 +29,17 @@
 		}
 		.input-group{
 			width: 50%;
-			
 		}
-		
+		.pinFont{
+			font-weight: bold;
+			color: black;
+		}
+		.a2{
+			color: #435971;
+		}
+		.a3{
+			color:black;
+		}
 	</style>
 	
 </head>
@@ -147,7 +155,7 @@
 									</div>
 									
 									<div style="display: flex; justify-content: flex-end;">
-										<a class="a1 btn btn-primary" href="./add">등록</a>
+										<a class="a1 btn btn-primary" href="./add">글쓰기</a>
 									</div>
 									<!-- Hoverable Table rows -->
 									<div id="box">
@@ -163,11 +171,21 @@
 													</tr>
 												</thead>
 												<tbody class="table-border-bottom-0">
+													<c:forEach items="${pinList}" var="p">
+														<tr class="table-primary pinFont">
+															<td>${p.noticeNum}</td>
+															<td><span class="badge bg-label-primary me-1">${p.category}</span>
+																<a class="a3" href="./detail?noticeNum=${p.noticeNum}">${p.title}</a></td>
+															<td>${p.name}</td>
+															<td>${p.modDate}</td>
+															<td>${p.hit}</td>
+														</tr>
+													</c:forEach>
 													<c:forEach items="${list}" var="li">
 														<tr>
 															<td>${li.noticeNum}</td>
 															<td><span class="badge bg-label-primary me-1">${li.category}</span>
-																<a href="./detail?noticeNum=${li.noticeNum}">${li.title}</a></td>
+																<a class="a2" href="./detail?noticeNum=${li.noticeNum}">${li.title}</a></td>
 															<td>${li.name}</td>
 															<td>${li.modDate}</td>
 															<td>${li.hit}</td>
@@ -223,114 +241,7 @@
 		<div class="layout-overlay layout-menu-toggle"></div>
 	</div>
     <!-- / Layout wrapper -->
-    <script>
-    	$('#box').on("click",".pageBtn",function(){
-    		console.log(this);
-    		let page = $(this).attr("data-p");
-    		let kind = $('#kind').val();
-    		let search = $('#search').val();
-    		
-    		pager(page, search, kind);
-    	});
-    	
-    	$('#searchBtn').click(function(){
-    		let page = 1;
-    		let kind = $('#kind').val();
-    		console.log(kind);
-    		let search = $('#search').val();
-    		console.log(search);
-    		console.log(page);
-    		pager(page, search, kind);
-    		$('#search').val("");
-    	});
-    	
-    	$('#searchBtn2').click(function(){
-    		let page = 1;
-    		let kind = $('#kind').val();
-    		console.log(kind);
-    		let search = $('#search').val();
-    		console.log(search);
-    		console.log(page);
-    		catPager(page, search, kind, category);
-    		$('#search').val("");
-    	});
-    	
-    	$('.category').click(function(){
-    		let page = 1;
-    		let kind = $('#kind').val();
-    		let search = $('#search').val();
-    		let category = $(this).attr("data-cat");
-    		console.log(category);
-    		catPager(page, search, kind, category);
-    		$('.btnChange').attr("id","searchBtn2");
-    	});
-    	
-    	$('#total').click(function(){
-    		let page = 1;
-    		let kind = $('#kind').val();
-    		let search = $('#search').val();
-    		console.log(page);
-    		pager(page, search, kind);
-    		$('.btnChange').attr("id","searchBtn");
-    	});
-    	
-    	function pager(page, search, kind){
-    		$.ajax({
-    			type:"get",
-    			url:"./totallist",
-    			data:{
-    				"page":page,
-    				"search":search,
-    				"kind":kind
-    					
-    			},
-    			success:function(response){
-    				// result 페이지를 하나 만들어 준다.
-    				
-    				if (response != null) {
-	    				console.log(response);
-	    				$('#box').empty();
-	    				$('#box').append(response);
-
-    					} else {
-    					console.log("list 가져오기 실패");
-    					}
-    			},
-    			error:function(){
-    				console.log("ajax 실패");
-    			}
-    			})
-    	}
-    	
-    	function catPager(page, search, kind, category){
-    		$.ajax({
-    			type:"get",
-    			url:"./categorylist",
-    			data:{
-    				"page":page,
-    				"search":search,
-    				"kind":kind,
-    				"category":category
-    					
-    			},
-    			success:function(response){
-    				// result 페이지를 하나 만들어 준다.
-    				
-    				if (response != null) {
-	    				console.log(response);
-	    				$('#box').empty();
-	    				$('#box').append(response);
-
-    					} else {
-    					console.log("list 가져오기 실패");
-    					}
-    			},
-    			error:function(){
-    				console.log("ajax 실패");
-    			}
-    			})
-    	}
-    </script>
+    <script src="../js/notice/noticeList.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>
