@@ -58,6 +58,9 @@
           <input type="checkbox" id="rememberId" name="rememberId">
           <label for="rememberId">아이디저장</label>
         </div>
+        <div class="findPw_div">
+          <a href="/findPw" id="findPw">비밀번호 찾기</a>
+        </div>
       	<button type="submit">로그인</button>
       </form:form>
     </div>

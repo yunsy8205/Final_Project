@@ -35,5 +35,11 @@
 		SELECT * FROM CHAT
 		WHERE ROOMNUM = #{roomNum}
 	</select>
+	
+	<select id="getSomeone" parameterType="EmployeeVO" resultType="EmployeeVO">
+	 	SELECT EMPLOYEENUM, NAME, POSITION
+	 	FROM EMPLOYEE
+	 	WHERE EMPLOYEENUM=#{employeeNum}
+	</select>
 
 </mapper>

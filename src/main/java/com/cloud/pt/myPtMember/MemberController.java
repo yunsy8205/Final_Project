@@ -28,10 +28,10 @@ public class MemberController {
 	
 	
 	/*
-	 * @GetMapping("myPtList") public void getPtList(Model model,MemberVO memberVO)
+	 * @GetMapping("myPtList") public void getPtList(Model model,MemVO memberVO)
 	 * throws Exception{
 	 * 
-	 * List<MemberVO> ar = memberService.getPtList(memberVO);
+	 * List<MemVO> ar = memberService.getPtList(memberVO);
 	 * model.addAttribute("list", ar);
 	 * 
 	 * }
@@ -44,9 +44,8 @@ public class MemberController {
 		log.info("사번 : {} >>>>>>>>>>>>>>>>." ,b.getName());
 		
 		
-		 EmployeeVO employeeVO = (EmployeeVO)session.getAttribute("employee");
-		if(employeeVO == null) {
-			employeeVO = new EmployeeVO();
+
+			EmployeeVO employeeVO = new EmployeeVO();
 			employeeVO.setEmployeeNum(b.getName());
 			List<MemberVO> ar = memberService.getPtList(employeeVO, pager);
 			
@@ -56,11 +55,7 @@ public class MemberController {
 			
 			mv.setViewName("ptClass/myPtList");
 			
-		
-		
-		
-		
-		}
+
 		
 		return mv;
 	    
