@@ -464,26 +464,44 @@
 							<li><span class="caret">대표</span>
 								<ul class="nested">
 									<c:forEach items="${employeeVO}" var="vo">
-										<c:if test="${vo.position=='대표'}">
+										<c:if test="${vo.position=='ROLE_CEO'}">
 											<li id="ceo" class="ceo" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
 										</c:if>
 									</c:forEach>
 								</ul>
 							</li>
-							<li><span class="caret">총괄매니저</span>
+							<li><span class="caret">총괄</span>
 								<ul class="nested">
 									<c:forEach items="${employeeVO}" var="vo">
-										<c:if test="${vo.position=='총괄매니저'}">
+										<c:if test="${vo.position=='ROLE_GENERAL'}">
 											<li id="general" class="general" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
 										</c:if>
 									</c:forEach>
 								</ul>
 							</li>
-							<li><span class="caret">인사매니저</span>
+							<li><span class="caret">고객관리</span>
 								<ul class="nested">
 									<c:forEach items="${employeeVO}" var="vo">
-										<c:if test="${vo.position=='인사매니저'}">
-											<li id="personnel"class="personnel" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+										<c:if test="${vo.position=='ROLE_CUSTOMER'}">
+											<li id="customer"class="customer" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</li>
+							<li><span class="caret">인사관리</span>
+								<ul class="nested">
+									<c:forEach items="${employeeVO}" var="vo">
+										<c:if test="${vo.position=='ROLE_RESOURCES'}">
+											<li id="resources"class="resources" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</li>
+							<li><span class="caret">시설관리</span>
+								<ul class="nested">
+									<c:forEach items="${employeeVO}" var="vo">
+										<c:if test="${vo.position=='ROLE_FACILITY'}">
+											<li id="facility"class="facility" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
 										</c:if>
 									</c:forEach>
 								</ul>
@@ -491,8 +509,8 @@
 							<li><span class="caret">트레이너</span>
 								<ul class="nested">
 									<c:forEach items="${employeeVO}" var="vo" varStatus="i">
-										<c:if test="${vo.position=='트레이너'}">
-											<li id="trainer${i.index}" class="trainer">${vo.name}</li>
+										<c:if test="${vo.position=='ROLE_TRAINER'}">
+											<li id="trainer" class="trainer">${vo.name}</li>
 										</c:if>
 									</c:forEach>
 								</ul>

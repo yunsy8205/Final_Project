@@ -130,7 +130,12 @@
 																직급</td>
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																${middle.position}
+																<c:if test="${middle.position=='ROLE_CEO'}">대표</c:if>
+																<c:if test="${middle.position=='ROLE_GENERAL'}">총괄매니저</c:if>
+																<c:if test="${middle.position=='ROLE_CUSTOMER'}">고객관리</c:if>
+																<c:if test="${middle.position=='ROLE_RESOURCES'}">인사관리</c:if>
+																<c:if test="${middle.position=='ROLE_FACILITY'}">시설관리</c:if>
+																<c:if test="${middle.position=='ROLE_TRAINER'}">트레이너</c:if>
 															</td>
 															<td rowspan="3"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
@@ -144,8 +149,13 @@
 																직급</td>
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-																${last.position}</td>
+																<c:if test="${last.position=='ROLE_CEO'}">대표</c:if>
+																<c:if test="${last.position=='ROLE_GENERAL'}">총괄매니저</c:if>
+																<c:if test="${last.position=='ROLE_CUSTOMER'}">고객관리</c:if>
+																<c:if test="${last.position=='ROLE_RESOURCES'}">인사관리</c:if>
+																<c:if test="${last.position=='ROLE_FACILITY'}">시설관리</c:if>
+																<c:if test="${last.position=='ROLE_TRAINER'}">트레이너</c:if>
+															</td>
 																<td rowspan="3"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																<c:if test="${approvalVO.finalDate!=null}">
