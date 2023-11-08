@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cloud.pt.commons.Pager;
+import com.cloud.pt.membership.MembershipService;
+import com.cloud.pt.membership.MembershipVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,14 +23,16 @@ public class MemController {
 
 	@Autowired
 	private MemService memService;
-	
-	
+	@Autowired
+	private MembershipService membershipService;
 	
 	@GetMapping("list")
 	public String getMemberList(MemVO memVO,Pager pager , Model model)throws Exception{
 		List<MemVO> ar = memService.getMemberList(memVO, pager);
+		List<MembershipVO> li = membershipService.getList();
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
+		model.addAttribute("membership", li);
 		
 		return "/member/list";
 	}

@@ -125,7 +125,34 @@
     $('#add_btn').on('click', function(){
       $(location).attr('href', '/membership/form');
     })
+
+    $('#del_btn').on('click', function(){
+      //선택된 모든 체크박스
+      const checkboxes = $('input[type="checkbox"]:checked');
+      let checkValues = [];
+      console.log(checkboxes.length);
+      
+      checkboxes.each(function(){
+        checkValues.push($(this).val());
+      });
+      console.log(checkValues);
+      let query = 'membershipNum='+checkValues.join('&membershipNum=');
+
+      setDel(query);
+    })
     
+    function setDel(query){
+      $.ajax({
+        type: 'get',
+        url: '/membership/delete?'+query,
+        success: function(result){
+          if(result.trim()>0){
+
+          }
+        }
+      })  
+    }
+
     $('.pagination').on('click', '.move', function(){
       const num = $(this).attr('data-num');
       $(location).attr('href', '?page='+num)
