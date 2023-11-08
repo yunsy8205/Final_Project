@@ -14,5 +14,5 @@ public class CertificationVO {
 	private Long certificationNum;
 	private String employeeNum;
 	private String cerTitle;
-	private Date passDate;
+	private Date cerPassDate;
 }

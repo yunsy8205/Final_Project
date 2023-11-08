@@ -128,8 +128,9 @@ public class HomeController {
 		
 		//String randomStr = randomBuf.toString();
 		int length = 8;
+		log.info("random 찍으러 간다?");
 		String randomStr = generateRandomString(length);
-		
+		log.info("random 찍고 나옴!!!");
 		employeeVO.setEmployeeNum(employeeVO.getEmployeeNum());
 		employeeVO.setPassword(randomStr);
 		employeeVO.setName(employeeVO.getName());
@@ -141,6 +142,7 @@ public class HomeController {
 	}
 	
 	public static String generateRandomString(int length) {
+		log.info("random 찍으러 들어왔댱~~~~");
         String characters = "abcdefghijklmnopqrstuvwxyz0123456789*@#$%^&+=";
         StringBuilder randomString = new StringBuilder();
         SecureRandom random = new SecureRandom();

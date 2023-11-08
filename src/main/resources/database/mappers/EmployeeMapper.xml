@@ -64,7 +64,7 @@
 	
 	
 	<!-- Employee 개인 -->
-	<select id="getInfo" parameterType="EmployeeVO" resultMap="getEmpResult">
+	<select id="getInfo" parameterType="Map" resultMap="getEmpResult">
 		SELECT * FROM EMPLOYEE E
 		LEFT OUTER JOIN CAREER CA
 		ON E.EMPLOYEENUM = CA.EMPLOYEENUM
@@ -92,14 +92,14 @@
 		<collection property="careers" javaType="List" ofType="CareerVO">
 			<id column="CAREERNUM" property="careerNum"/>
 			<result column="EMPLOYEENUM" property="employeeNum"/>
-			<result column="TITLE" property="title"/>
-			<result column="PASSDATE" property="passDate"/>
+			<result column="CATITLE" property="caTitle"/>
+			<result column="CAPASSDATE" property="caPassDate"/>
 		</collection>
 		<collection property="certifications" javaType="List" ofType="CertificationVO">
 			<id column="CERTIFICATIONNUM" property="certificationNum"/>
 			<result column="EMPLOYEENUM" property="employeeNum"/>
 			<result column="CERTITLE" property="cerTitle"/>
-			<result column="PASSDATE" property="passDate"/>
+			<result column="CERPASSDATE" property="cerPassDate"/>
 		</collection>
 	</resultMap>
 	
@@ -109,6 +109,24 @@
 		NAME=#{name},PHONE=#{phone},ADDRESS=#{address},GENDER=#{gender},BIRTH=#{birth},QUITDATE=#{quitDate},STATE=#{state},POSITION=#{position},PROFILE=#{proFile},PROORIGINAL=#{proOriginal}
 		WHERE EMPLOYEENUM = #{employeeNum}
 	</update>
+	
+	<insert id="setInfoCareerUpdate" parameterType="CareerVO">
+		INSERT INTO CAREER
+		VALUES (NULL ,#{employeeNum}, #{caTitle}, #{caPassDate})
+	</insert>
+	
+	<select id="getInfoCareer" parameterType="CareerVO" resultType="CareerVO">
+		SELECT CATITLE, CAPASSDATE FROM CAREER WHERE EMPLOYEENUM =#{employeeNum}
+	</select>
+	
+	<insert id="setInfoCertificationUpdate" parameterType="CertificationVO">
+		INSERT INTO CERTIFICATION
+		VALUES(NULL, #{employeeNum}, #{cerTitle}, #{cerPassDate})
+	</insert>
+	
+	<select id="getInfoCertification" parameterType="CertificationVO" resultType="CertificationVO">
+		SELECT CERTITLE, CERPASSDATE FROM CERTIFICATION WHERE EMPLOYEENUM =#{employeeNum}
+	</select>
 	
 	<update id="setPwUpdate" parameterType="EmployeeVO">
 		UPDATE EMPLOYEE SET PASSWORD = #{password} WHERE EMPLOYEENUM = #{employeeNum}
