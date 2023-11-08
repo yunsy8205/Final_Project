@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -41,7 +42,6 @@ public class ApprovalController {
 	public void getAdd(Model model) throws Exception{
 		List<EmployeeVO> el = approvalService.getAnnualLine();
 		model.addAttribute("employeeVO", el);
-		
 	}
 	@PostMapping("add")
 	public String setAdd(ApprovalVO approvalVO) throws Exception{
@@ -65,7 +65,7 @@ public class ApprovalController {
 		
 	}
 	
-	@GetMapping("temporaryList")
+	@GetMapping("tempList")
 	public void getTemporaryList(Pager pager,ApprovalVO approvalVO,Principal principal,Model model) throws Exception{
 		approvalVO.setEmployeeNum(principal.getName());
 		List<ApprovalVO> al = approvalService.getTemporaryList(pager,approvalVO);
@@ -101,10 +101,14 @@ public class ApprovalController {
 	@PostMapping("tempAdd")
 	public String setTempAdd(ApprovalVO approvalVO,Model model)throws Exception{
 		int result=approvalService.setTempAdd(approvalVO);
-		
-		model.addAttribute("message", "임시저장 되었습니다.");
-		model.addAttribute("url", "./temporaryList");
-		return "ajax/ajaxResult";
+		if(result==1) {
+			model.addAttribute("message", "임시저장 되었습니다.");
+			model.addAttribute("url", "./list");
+		}else {
+			model.addAttribute("message", "임시저장 실패");
+			model.addAttribute("url", "./list");
+		}
+		return "commons/result";
 		
 	}
 	@GetMapping("tempDetail")
@@ -123,6 +127,14 @@ public class ApprovalController {
 		approvalService.setDelete(approvalVO);
 		
 		return "redirect:./list";
+	}
+	@GetMapping("tempDelete")
+	public void setTempDelete(@RequestParam(value="results[]")List<String> results,ApprovalVO approvalVO,Model model) throws Exception{
+		for(int i=0;i<results.size();i++) {
+			approvalVO.setApprovalNum(Long.parseLong(results.get(i)));
+			approvalService.setDelete(approvalVO);
+		}
+	
 	}
 	
 	@GetMapping("signMain")

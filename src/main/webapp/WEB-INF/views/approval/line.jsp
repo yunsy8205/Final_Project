@@ -100,7 +100,7 @@ ul, #myUL {
     <div id="middle" data-empnum=""  data-name="" data-position=""></div>
     <div id="last" data-empnum="" data-name="" data-position=""></div>
     <button type="button" id="okBtn">확인</button>
-	<script src="/resources/js/approval/line.js"></script>
+	<script src="/js/approval/line.js"></script>
 </body>
 
 </html>

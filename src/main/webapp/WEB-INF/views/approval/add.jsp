@@ -169,21 +169,12 @@
 
 																중간결재자</td>
 															<td id="middleName"
-																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-															
-																
-															</td>
+																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
 															<td
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
 																최종결재자</td>
 															<td id="lastName"
-																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-															
-																
-															</td>
+																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
 														</tr>
 														<tr>
 															<td
@@ -229,7 +220,7 @@
 													제목</td>
 												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
 													colspan="3">
-													<input type="text" name="title">
+													<input type="text" name="title" id="title">
 												</td>
 											</tr>
 											<tr>
@@ -268,7 +259,7 @@
 													휴가사유</td>
 												<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
 													colspan="3" class="dext_table_border_t">
-													<textarea id="summernote" name="contents"></textarea>
+													<textarea id="contents" name="contents"></textarea>
 
 												</td>
 
@@ -350,7 +341,7 @@
 									<input type="hidden" id="middle" name="middle">
 									<input type="hidden" id="last" name="last">
 									<input type="hidden" name="category" value="${param.division}">
-									<input type="submit" id="testBtn" class="btn btn-primary">
+									<button type="button" id="approvalBtn" class="btn btn-primary">제출</button>
 									<button type="button" id="approvalInfoBtn" class="btn btn-primary" onclick="click_add()">결재정보</button>
 									<button type="button" id="tempBtn" class="btn btn-primary">임시저장</button>
 								</form>
@@ -408,7 +399,7 @@
     <!-- / Layout wrapper -->
 	
 	
-	<script src="/resources/js/approval/add.js"></script>
+	<script src="/js/approval/add.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>

@@ -81,6 +81,7 @@
 						cellspacing="0">
 						<thead>
 							<tr>
+								<th width="5%"></th>
 								<th>임시저장일</th>
 								<th>결재양식</th>
 								<th>제목</th>
@@ -88,8 +89,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${list}" var="vo">
+							<c:forEach items="${list}" var="vo" varStatus="i">
 								<tr>
+									<td><input type="checkbox" class="checkBoxs" id="checkBox${i.index}" data-approvalNum="${vo.approvalNum}"></td>
 									<td>${vo.regDate}</td>	
 									<td><a href="./tempDetail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
 									<td>${vo.title}</td>
@@ -122,15 +124,16 @@
 							<li
 								class="paginate_button page-item next ${pager.next?'':'disabled'}"
 								id="dataTable_next"><a
-								href="./temporaryList?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}}"
+								href="./temporaryList?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}"
 								aria-controls="dataTable" data-dt-idx="7" tabindex="0"
 								class="page-link">Next</a></li>
 						</ul>
 					</div>
 				</div>
 				</div>
-
+				<button class="btn btn-primary" id="BTN">삭제</button>
               </div>
+			  
               <!-- / Content --> 
               
               
@@ -178,7 +181,7 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-  
+	<script src="/js/approval/tempList.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>

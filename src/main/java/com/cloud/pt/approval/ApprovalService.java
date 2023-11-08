@@ -86,6 +86,7 @@ public class ApprovalService {
 	public int setTempUpdate(ApprovalVO approvalVO) throws Exception{
 		return approvalDAO.setTempUpdate(approvalVO);
 	}
+
 	@Transactional
 	public int setDelete(ApprovalVO approvalVO) throws Exception{
 		return approvalDAO.setDelete(approvalVO);

@@ -1,6 +1,24 @@
 
+let check=false;
+let lineCheck=false;
 
 
+$("#approvalBtn").click(function(){
+	if($("#title").val().length!=0&&$("#leaveSelect").val().length!=0&&$("#startDate").val().length!=0&&
+	$("#endDate").val().length!=0&&$("#contents").val().length!=0){
+		check=true;
+	}else{
+		alert("빈칸을 채워주세요.")
+	}
+	if($("#middleName").text().length!=0&&$("#lastName").text().length!=0){
+		lineCheck=true;
+	}else{
+		alert("결재선을 선택해주세요.")
+	}
+	if(check==true&&lineCheck==true){
+		$("#addForm").submit()
+	}
+})
 
 
 function click_add(){
@@ -8,7 +26,6 @@ function click_add(){
 	let name = "line";
 	let option="width = 600, height = 600, left = 100, top=50,location=no";
 	window.open(url,name,option)
-	
 }
 function formatDate(date) {
     var d = new Date(date),
@@ -79,3 +96,4 @@ $("#leaveSelect").change(function(){
 	
 	
 })
+

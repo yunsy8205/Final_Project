@@ -71,7 +71,7 @@
 								<a href="/approval/list?division=complete" class="nav-link" id="completeBtn">완료</a>
 							</li>
 							<li class="nav-item" role="presentation">
-								<a href="/approval/temporaryList" class="nav-link" id="temporaryBtn">임시저장</a>
+								<a href="/approval/tempList" class="nav-link" id="temporaryBtn">임시저장</a>
 							</li>
 						</ul>
 					</div>

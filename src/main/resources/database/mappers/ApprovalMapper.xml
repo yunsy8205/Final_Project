@@ -5,8 +5,6 @@
   
 <mapper namespace="com.cloud.pt.approval.ApprovalDAO">
 	<sql id="forPager">
-		<if test="pager.kind=='title'">AND TITLE LIKE CONCAT('%',#{pager.search},'%')</if>
-		<if test="pager.kind=='contents'">AND CONTENTS LIKE CONCAT('%',#{pager.search},'%')</if>
 		<choose>
 			<when test="pager.kind=='title'">
 				AND TITLE LIKE CONCAT('%',#{pager.search},'%')
@@ -24,7 +22,7 @@
 		<if test="pager.division=='proceeding'">AND STATE='진행중'</if>
 		<if test="pager.division=='complete'">AND STATE='완료'</if>
 		<if test="pager.division=='wating'">AND STATE='대기중'</if>
-		<if test="pager.division=='reject'">AND STATE='반려'</if>
+		<if test="pager.division=='reject'">AND STATE='중간반려' OR STATE='최종반려'</if>
 		
 	</sql>
 	
@@ -120,6 +118,7 @@
 		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
+	
 	
 	<!-- 내 문서 디테일 -->
 	<select id="getMyDetail" resultType="ApprovalVO" parameterType="ApprovalVO">

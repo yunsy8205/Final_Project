@@ -410,6 +410,6 @@
 
 
 			<c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-			<script src="/resources/js/approval/approverDetail.js"></script>
+			<script src="/js/approval/approverDetail.js"></script>
 </body>
 </html>
