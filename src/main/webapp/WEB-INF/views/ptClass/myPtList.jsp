@@ -84,7 +84,7 @@ border-color: rgba(0,0,0,0) !important;
 									<tr>
 										
 										<td>${vo.memberNum}</td>
-										<td>${vo.memberName}</td>
+										<td><a href="/trainer/ptLog">${vo.memberName}</a></td>
 										<td>${vo.phone}</td>
 										<td>${vo.gender}</td>
 										<td style="text-align: center;"><button class="btn rounded-pill btn-label-primary" onclick="sendData('${vo.memberNum}', '${vo.employeeNum}', '${vo.memberName}')">수업예약</button></td>

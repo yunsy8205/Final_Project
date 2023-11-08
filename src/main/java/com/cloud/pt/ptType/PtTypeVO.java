@@ -1,4 +1,4 @@
-package com.cloud.pt.ptLog;
+package com.cloud.pt.ptType;
 
 import lombok.Getter;
 import lombok.Setter;

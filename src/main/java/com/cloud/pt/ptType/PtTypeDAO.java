@@ -1,4 +1,4 @@
-package com.cloud.pt.ptLog;
+package com.cloud.pt.ptType;
 
 import java.util.List;
 import java.util.Map;

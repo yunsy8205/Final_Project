@@ -1,4 +1,4 @@
-package com.cloud.pt.ptLog;
+package com.cloud.pt.ptType;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class PtTypeController {
 	
 	@Autowired
 	private PtTypeService ptTypeService;
-	@GetMapping("ptLog")
+	@GetMapping("ptType")
 	public ModelAndView getTypeList() throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
