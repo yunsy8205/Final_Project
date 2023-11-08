@@ -1,8 +1,71 @@
 
 let check=false;
 let lineCheck=false;
+var toggler = document.getElementsByClassName("caret");
 
-
+$("#okBtn").click(function(){
+    $("#middleName").text($("#mLine").attr("data-name"))
+    $("#lastName").text($("#lLine").attr("data-name"))
+    $("#middlePosition").text($("#mLine").attr("data-position"))
+    $("#lastPosition").text($("#lLine").attr("data-position"))
+    $("#middle").val($("#mLine").attr("data-empnum"))
+    $("#last").val($("#lLine").attr("data-empnum"))
+	$('#exampleModal').modal("hide");
+})
+$(".ceo").click(function(){
+	let empnum=$(this).attr("data-empnum")
+	$("#selectEmp").empty()
+	$("#selectEmp").attr("data-empnum",$(this).attr("data-empnum"))
+	$("#selectEmp").attr("data-name",$(this).attr("data-name"))
+	$("#selectEmp").attr("data-position",$(this).attr("data-position"))
+	$("#selectEmp").html($(this).attr("data-position")+':'+$(this).attr("data-name"))
+})
+$(".general").click(function(){
+	let empnum=$(this).attr("data-empnum")
+	$("#selectEmp").empty()
+	$("#selectEmp").attr("data-empnum",$(this).attr("data-empnum"))
+	$("#selectEmp").attr("data-name",$(this).attr("data-name"))
+	$("#selectEmp").attr("data-position",$(this).attr("data-position"))
+	$("#selectEmp").html($(this).attr("data-position")+':'+$(this).attr("data-name"))
+})
+$(".personnel").click(function(){
+	let empnum=$(this).attr("data-empnum")
+	$("#selectEmp").empty()
+	$("#selectEmp").attr("data-empnum",$(this).attr("data-empnum"))
+	$("#selectEmp").attr("data-name",$(this).attr("data-name"))
+	$("#selectEmp").attr("data-position",$(this).attr("data-position"))
+	$("#selectEmp").html($(this).attr("data-position")+':'+$(this).attr("data-name"))
+})
+$(".trainer").click(function(){
+	let empnum=$(this).attr("data-empnum")
+	$("#selectEmp").empty()
+	$("#selectEmp").attr("data-empnum",$(this).attr("data-empnum"))
+	$("#selectEmp").attr("data-name",$(this).attr("data-name"))
+	$("#selectEmp").attr("data-position",$(this).attr("data-position"))
+	$("#selectEmp").html($(this).attr("data-position")+':'+$(this).attr("data-name"))
+})
+$("#middleBtn").click(function(){
+	$("#mLine").empty()
+	$("#mLine").attr("data-empnum",$("#selectEmp").attr("data-empnum"))
+	$("#mLine").attr("data-name",$("#selectEmp").attr("data-name"))
+	$("#mLine").attr("data-position",$("#selectEmp").attr("data-position"))
+	$("#mLine").html($("#selectEmp").html())
+	$("#selectEmp").empty();
+})
+$("#lastBtn").click(function(){
+	$("#lLine").empty()
+	$("#lLine").attr("data-empnum",$("#selectEmp").attr("data-empnum"))
+	$("#lLine").attr("data-name",$("#selectEmp").attr("data-name"))
+	$("#lLine").attr("data-position",$("#selectEmp").attr("data-position"))
+	$("#lLine").html($("#selectEmp").html())
+	$("#selectEmp").empty();
+})
+for (let i = 0; i < toggler.length; i++) {
+	toggler[i].addEventListener("click", function() {
+	  this.parentElement.querySelector(".nested").classList.toggle("active");
+	  this.classList.toggle("caret-down");
+	});
+}
 $("#approvalBtn").click(function(){
 	if($("#title").val().length!=0&&$("#leaveSelect").val().length!=0&&$("#startDate").val().length!=0&&
 	$("#endDate").val().length!=0&&$("#contents").val().length!=0){

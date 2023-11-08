@@ -22,7 +22,7 @@
 		<if test="pager.division=='proceeding'">AND STATE='진행중'</if>
 		<if test="pager.division=='complete'">AND STATE='완료'</if>
 		<if test="pager.division=='wating'">AND STATE='대기중'</if>
-		<if test="pager.division=='reject'">AND STATE='중간반려' OR STATE='최종반려'</if>
+		<if test="pager.division=='reject'">AND (STATE='중간반려' OR STATE='최종반려')</if>
 		
 	</sql>
 	

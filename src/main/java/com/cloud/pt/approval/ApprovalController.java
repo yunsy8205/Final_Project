@@ -49,12 +49,6 @@ public class ApprovalController {
 		return "redirect:./list";
 	}
 	
-	@GetMapping("line")
-	public void getAnnualLine(Model model) throws Exception{
-		List<EmployeeVO> el = approvalService.getAnnualLine();
-		model.addAttribute("employeeVO", el);
-		
-	}
 	
 	@GetMapping("approverList")
 	public void getApproverList(Model model,Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
@@ -152,11 +146,13 @@ public class ApprovalController {
 		model.addAttribute("file", empVO);
 	}
 	@PostMapping("signUpload")
-	public String setSignUpload(MultipartFile signImage,Principal principal) throws Exception{
+	public String setSignUpload(MultipartFile signImage,Principal principal,Model model) throws Exception{
 		String empNum=principal.getName();
 		int result=approvalService.setSignUpload(signImage,empNum);
 		
-		return "redirect:./mySign";
+		model.addAttribute("url", "./mySign");
+		model.addAttribute("message", "사인등록완료");
+		return "commons/result";
 	}
 	@PostMapping("middleApproval")
 	public String setMiddleApproval(ApprovalVO approvalVO) throws Exception{

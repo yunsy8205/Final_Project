@@ -13,8 +13,49 @@
   data-assets-path="../assets/"
   data-template="vertical-menu-template-free"
 >
+
 <head>
+	<style>
+		/* Remove default bullets */
+	ul, #myUL {
+	  list-style-type: none;
+	}
 	
+	/* Remove margins and padding from the parent ul */
+	#myUL {
+	  margin: 0;
+	  padding: 0;
+	}
+	
+	/* Style the caret/arrow */
+	.caret {
+	  cursor: pointer;
+	  user-select: none; /* Prevent text selection */
+	}
+	
+	/* Create the caret/arrow with a unicode, and style it */
+	.caret::before {
+	  content: "\25B6";
+	  color: black;
+	  display: inline-block;
+	  margin-right: 6px;
+	}
+	
+	/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+	.caret-down::before {
+	  transform: rotate(90deg);
+	}
+	
+	/* Hide the nested list */
+	.nested {
+	  display: none;
+	}
+	
+	/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+	.active {
+	  display: block;
+	}
+	</style>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 </head>
@@ -342,8 +383,12 @@
 									<input type="hidden" id="last" name="last">
 									<input type="hidden" name="category" value="${param.division}">
 									<button type="button" id="approvalBtn" class="btn btn-primary">제출</button>
-									<button type="button" id="approvalInfoBtn" class="btn btn-primary" onclick="click_add()">결재정보</button>
+									
 									<button type="button" id="tempBtn" class="btn btn-primary">임시저장</button>
+										<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+	결재선
+  </button>
 								</form>
 
 
@@ -398,7 +443,118 @@
     </div>
     <!-- / Layout wrapper -->
 	
-	
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h1 class="modal-title fs-5" id="exampleModalLabel">결재선선택</h1>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<div class=row>
+				<div class="col-sm-3">
+			
+				<div>조직도</div>
+				<div class="card border scrollable-card">
+					<div class="overflow-auto " id="readyMem">
+						<ul id="myUL">
+							<li><span class="caret">대표</span>
+								<ul class="nested">
+									<c:forEach items="${employeeVO}" var="vo">
+										<c:if test="${vo.position=='대표'}">
+											<li id="ceo" class="ceo" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</li>
+							<li><span class="caret">총괄매니저</span>
+								<ul class="nested">
+									<c:forEach items="${employeeVO}" var="vo">
+										<c:if test="${vo.position=='총괄매니저'}">
+											<li id="general" class="general" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</li>
+							<li><span class="caret">인사매니저</span>
+								<ul class="nested">
+									<c:forEach items="${employeeVO}" var="vo">
+										<c:if test="${vo.position=='인사매니저'}">
+											<li id="personnel"class="personnel" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</li>
+							<li><span class="caret">트레이너</span>
+								<ul class="nested">
+									<c:forEach items="${employeeVO}" var="vo" varStatus="i">
+										<c:if test="${vo.position=='트레이너'}">
+											<li id="trainer${i.index}" class="trainer">${vo.name}</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				</div>
+				
+				<div class="col-sm-4">
+				
+				<div>선택사원</div>
+				<div class="card border scrollable-card" style="height:5rem">
+					<div class="overflow-auto" id="selectEmp" data-empnum="" data-name="" data-position="">
+						
+				
+						
+					</div>
+				
+				</div>
+				
+				</div>
+				
+				<div class="col-sm-1 ">
+					<div class="scrollable-card1 text-center d-flex flex-column justify-content-center align-items-center">
+						
+					</div>
+					
+					<div class="scrollable-card1 text-center d-flex flex-column justify-content-center align-items-center mt-5">
+						
+					</div>
+					
+
+			
+					</div>
+						
+					
+					<div class="col-sm-4 scrollable-card">
+					<div id="middleBtn">중간 승인자</div>
+					<div class="card border scrollable-card1 overflow-auto" id="mLine" data-empnum="" data-name="" data-position="" style="height:2rem">
+						
+					</div>
+					
+					<div id="lastBtn">최종 승인자</div>
+					<div class="card border scrollable-card1 overflow-auto" id="lLine" data-empnum="" data-name="" data-position="" style="height:2rem">
+						
+					</div>
+					
+					
+					</div>
+				
+				</div>
+					</div>
+					<button type="button" class="btn btn-primary" id="okBtn">확인</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		  
+		</div>
+		
+	  </div>
+	</div>
+  </div>
 	<script src="/js/approval/add.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>

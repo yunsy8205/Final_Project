@@ -33,7 +33,7 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="container-xxl flex-grow-1 container-p-y" style="text-align:center">
                 <h1>서명생성</h1>
                 <canvas id="jsCanvas" class="canvas"></canvas>
     <div class="controls">
