@@ -158,6 +158,9 @@ $("#leaveSelect").change(function(){
 	}
 	if($("#leaveSelect").val()=='반차'){
 		$("#useDate").val("0.5")
+		$("#endDate").change(function(){
+			$("#useDate").val("0.5")
+		})
 		if($("#annualRow").length==0){
 			$("#leaveReasonRow").before('<tr id="annualRow"> <td style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;"> 연차일수</td> <td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;" colspan="3"><input type="text" id="useDate" name="useDate" readonly></td> </tr>')
 		}

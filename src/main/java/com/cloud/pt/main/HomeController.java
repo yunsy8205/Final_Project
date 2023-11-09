@@ -1,5 +1,8 @@
 package com.cloud.pt.main;
 
+import java.security.Principal;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cloud.pt.approval.ApprovalService;
 import com.cloud.pt.employee.EmployeeService;
 import com.cloud.pt.employee.EmployeeVO;
 
@@ -25,6 +29,7 @@ public class HomeController {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	
 	
 	@GetMapping("home")
 	public String getIndex(Model model) throws Exception {

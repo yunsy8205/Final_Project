@@ -73,6 +73,8 @@
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 
     <script>
+     
+
       //문서의 로딩을 시작할 때 
       //출근기록이 있는 경우  
       $(document).ready(function(){
