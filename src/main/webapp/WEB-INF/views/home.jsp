@@ -65,7 +65,9 @@
 	  .chartBox{
 	  	display: flex;
 	  }
-	 
+	  #myChart{
+	  	margin-left: 5%;
+	  }
     </style>
 	<!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
@@ -193,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   <div class="card h-100">
                     <div class="card-body chartBox">
                     	<div class="border chart1">
-                    		<canvas id="myChart"></canvas>
+                    		<canvas id="myChart" width="200vw" height="384vh"></canvas>
                     	</div>
                     	<div class="border chart1"></div>
                     </div>
@@ -224,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <script src="/js/attendance/work.js"></script>
     <script>
  // 요소 선택
-    const todayDiv = document.getElementById('today');
+    
     const timeDiv = document.getElementById('time');
 
     // getTime 함수
@@ -293,7 +295,31 @@ document.addEventListener('DOMContentLoaded', function() {
     	    return dateString;
     	}
     	
-    	
+    	const ctx = document.getElementById('myChart');
+
+   	    new Chart(ctx, {
+   	    	type: 'bar',
+   	    	data: {
+  	   	      labels: ['남성', '여성',],
+  	   	      datasets: [{
+  	   	        label: '회원 남녀 비율',
+  	   	        data: [250, 150, 300],
+  	   	        borderWidth: 0,
+  	   	     	backgroundColor: [
+  	   	     		'rgba(255, 99, 132, 0.2)',
+  	   	     		'rgba(54, 162, 235, 0.2)'
+  	   	     		]
+  	   	      }]
+   	     },
+   	     options: {
+   	       responsive: false,
+   	       scales: {
+   	         y: {
+   	           beginAtZero: true
+   	         }
+   	       }
+   	     }
+   	   });
     </script>
   </body>
 </html>
