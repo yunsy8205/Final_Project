@@ -31,6 +31,7 @@
 		<!-- 동찬 -->
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
 		
+				
 		<!-- 소영 -->
 		<typeAlias type="com.cloud.pt.chat.RoomVO" alias="RoomVO"/>
 		<typeAlias type="com.cloud.pt.chat.ChatMessageVO" alias="ChatMessageVO"/>
