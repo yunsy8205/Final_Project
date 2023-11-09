@@ -34,12 +34,12 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public String setNoticeAdd(MultipartFile [] files, NoticeVO noticeVO)throws Exception{
+	public String setNoticeAdd(MultipartFile [] multipartFiles, NoticeVO noticeVO)throws Exception{
 		SecurityContext context = SecurityContextHolder.getContext();
 		org.springframework.security.core.Authentication b = context.getAuthentication();
 		noticeVO.setEmployeeNum(Long.valueOf(b.getName()));
 		
-		noticeService.setNoticeAdd(noticeVO, files);
+		noticeService.setNoticeAdd(noticeVO, multipartFiles);
 	
 		return "redirect:./list";
 	}
@@ -47,8 +47,10 @@ public class NoticeController {
 	@GetMapping("list")
 	public String getNoticeList(Model model, Pager pager)throws Exception{
 		List<NoticeVO> list =noticeService.getNoticeList(pager);
+		List<NoticeVO> pinList=noticeService.getPinList();
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
+		model.addAttribute("pinList", pinList);
 		
 		return "notice/list";
 	}
@@ -134,9 +136,10 @@ public class NoticeController {
 	@GetMapping("totallist")
 	public String getTotalList(Model model,Pager pager)throws Exception{
 		List<NoticeVO> list =noticeService.getNoticeList(pager);
-		
+		List<NoticeVO> pinList=noticeService.getPinList();
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
+		model.addAttribute("pinList", pinList);
 		
 		return "notice/listResult";
 	}
@@ -148,7 +151,7 @@ public class NoticeController {
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
 		
-		return "notice/listResult";
+		return "notice/listResult2";
 	}
 
 }

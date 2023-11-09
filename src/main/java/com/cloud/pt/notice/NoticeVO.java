@@ -19,6 +19,7 @@ public class NoticeVO {
 	private String category;
 	private Long hit;
 	private String name;
+	private int pin;
 	
 	private List<NoticeFileVO> list;
 	

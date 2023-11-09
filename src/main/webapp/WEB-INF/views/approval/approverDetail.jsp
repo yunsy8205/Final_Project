@@ -125,7 +125,12 @@
 																직급</td>
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																${middle.position}
+																<c:if test="${middle.position=='ROLE_CEO'}">대표</c:if>
+																<c:if test="${middle.position=='ROLE_GENERAL'}">총괄매니저</c:if>
+																<c:if test="${middle.position=='ROLE_CUSTOMER'}">고객관리</c:if>
+																<c:if test="${middle.position=='ROLE_RESOURCES'}">인사관리</c:if>
+																<c:if test="${middle.position=='ROLE_FACILITY'}">시설관리</c:if>
+																<c:if test="${middle.position=='ROLE_TRAINER'}">트레이너</c:if>
 															</td>
 															<td rowspan="3"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
@@ -139,8 +144,13 @@
 																직급</td>
 															<td
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-
-																${last.position}</td>
+																<c:if test="${last.position=='ROLE_CEO'}">대표</c:if>
+																<c:if test="${last.position=='ROLE_GENERAL'}">총괄매니저</c:if>
+																<c:if test="${last.position=='ROLE_CUSTOMER'}">고객관리</c:if>
+																<c:if test="${last.position=='ROLE_RESOURCES'}">인사관리</c:if>
+																<c:if test="${last.position=='ROLE_FACILITY'}">시설관리</c:if>
+																<c:if test="${last.position=='ROLE_TRAINER'}">트레이너</c:if>
+															</td>
 																<td rowspan="3"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																<c:if test="${approvalVO.finalDate!=null}">
@@ -299,7 +309,7 @@
 									<input type="hidden" name="approvalNum" value="${approvalVO.approvalNum}">
 									<input type="hidden" id="state" name="state" value="진행중">
 									<input type="hidden" id="reason" name="reason">
-									<button id="approvalBtn">결재</button>
+									<button class="btn btn-primary" id="approvalBtn">결재</button>
 								</form>
 								
 								</c:if>
@@ -315,7 +325,7 @@
 									<input type="hidden" id="leaveKind" name="leaveKind" value="${approvalVO.leaveKind}">
 
 									
-									<button>결재</button>
+									<button class="btn btn-primary">결재</button>
 								</form>
 				
 								
@@ -410,6 +420,6 @@
 
 
 			<c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-			<script src="/resources/js/approval/approverDetail.js"></script>
+			<script src="/js/approval/approverDetail.js"></script>
 </body>
 </html>

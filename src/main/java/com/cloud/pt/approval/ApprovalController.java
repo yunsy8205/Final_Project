@@ -13,12 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -28,6 +30,7 @@ public class ApprovalController {
 
 	@Autowired
 	private ApprovalService approvalService;
+
 	
 	@GetMapping("list")
 	public void getApprovalList(Model model,Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
@@ -41,7 +44,6 @@ public class ApprovalController {
 	public void getAdd(Model model) throws Exception{
 		List<EmployeeVO> el = approvalService.getAnnualLine();
 		model.addAttribute("employeeVO", el);
-		
 	}
 	@PostMapping("add")
 	public String setAdd(ApprovalVO approvalVO) throws Exception{
@@ -49,12 +51,6 @@ public class ApprovalController {
 		return "redirect:./list";
 	}
 	
-	@GetMapping("line")
-	public void getAnnualLine(Model model) throws Exception{
-		List<EmployeeVO> el = approvalService.getAnnualLine();
-		model.addAttribute("employeeVO", el);
-		
-	}
 	
 	@GetMapping("approverList")
 	public void getApproverList(Model model,Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
@@ -65,7 +61,7 @@ public class ApprovalController {
 		
 	}
 	
-	@GetMapping("temporaryList")
+	@GetMapping("tempList")
 	public void getTemporaryList(Pager pager,ApprovalVO approvalVO,Principal principal,Model model) throws Exception{
 		approvalVO.setEmployeeNum(principal.getName());
 		List<ApprovalVO> al = approvalService.getTemporaryList(pager,approvalVO);
@@ -101,14 +97,20 @@ public class ApprovalController {
 	@PostMapping("tempAdd")
 	public String setTempAdd(ApprovalVO approvalVO,Model model)throws Exception{
 		int result=approvalService.setTempAdd(approvalVO);
-		
-		model.addAttribute("message", "임시저장 되었습니다.");
-		model.addAttribute("url", "./temporaryList");
-		return "ajax/ajaxResult";
+		if(result==1) {
+			model.addAttribute("message", "임시저장 되었습니다.");
+			model.addAttribute("url", "./list");
+		}else {
+			model.addAttribute("message", "임시저장 실패");
+			model.addAttribute("url", "./list");
+		}
+		return "commons/result";
 		
 	}
 	@GetMapping("tempDetail")
 	public void getTempDetail(ApprovalVO approvalVO,Model model)throws Exception{
+		List<EmployeeVO> el = approvalService.getAnnualLine();
+		model.addAttribute("employeeVO", el);
 		approvalVO=approvalService.getMyDetail(approvalVO);
 		EmployeeVO empVO = new EmployeeVO();
 		empVO=approvalService.getMiddleEmployee(approvalVO);
@@ -123,6 +125,14 @@ public class ApprovalController {
 		approvalService.setDelete(approvalVO);
 		
 		return "redirect:./list";
+	}
+	@GetMapping("tempDelete")
+	public void setTempDelete(@RequestParam(value="results[]")List<String> results,ApprovalVO approvalVO,Model model) throws Exception{
+		for(int i=0;i<results.size();i++) {
+			approvalVO.setApprovalNum(Long.parseLong(results.get(i)));
+			approvalService.setDelete(approvalVO);
+		}
+	
 	}
 	
 	@GetMapping("signMain")
@@ -140,11 +150,13 @@ public class ApprovalController {
 		model.addAttribute("file", empVO);
 	}
 	@PostMapping("signUpload")
-	public String setSignUpload(MultipartFile signImage,Principal principal) throws Exception{
+	public String setSignUpload(MultipartFile signImage,Principal principal,Model model) throws Exception{
 		String empNum=principal.getName();
 		int result=approvalService.setSignUpload(signImage,empNum);
 		
-		return "redirect:./mySign";
+		model.addAttribute("url", "./mySign");
+		model.addAttribute("message", "사인등록완료");
+		return "commons/result";
 	}
 	@PostMapping("middleApproval")
 	public String setMiddleApproval(ApprovalVO approvalVO) throws Exception{

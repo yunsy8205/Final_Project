@@ -1,4 +1,4 @@
-package com.cloud.pt.ptLog;
+package com.cloud.pt.ptType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,15 +23,12 @@ public class PtTypeService {
 	
 	public List<PtTypeVO> getTypeList(PtTypeVO ptTypeVO) throws Exception{
 		
-		SecurityContext context = SecurityContextHolder.getContext();
-	    org.springframework.security.core.Authentication b = context.getAuthentication();
-	    
-	    String employeeNum = b.getName();
+		
 	    
 	    Map<String,Object> map = new HashMap<>();
-	    map.put("employeeNum",ptTypeVO.getEmployeeNum());
+	    map.put("ptLogNum",ptTypeVO.getPtLogNum());
 	    
-		return ptTypeDAO.getTypeList(map,employeeNum);
+		return ptTypeDAO.getTypeList(map);
 	}
 	
 	public int addType(PtTypeVO ptTypeVO) throws Exception{
@@ -42,5 +39,22 @@ public class PtTypeService {
 	public int delType(PtTypeVO ptTypeVO) throws Exception{
 		
 		return ptTypeDAO.delType(ptTypeVO);
+	}
+	
+	public int upType(PtTypeVO ptTypeVO) throws Exception{
+		
+		return ptTypeDAO.upType(ptTypeVO);
+	}
+	
+	public int finishAll(PtTypeVO ptTypeVO) throws Exception{
+		return ptTypeDAO.finishAll(ptTypeVO);
+	}
+	
+	public int finishOne(PtTypeVO ptTypeVO) throws Exception{
+		return ptTypeDAO.finishOne(ptTypeVO);
+	}
+	
+	public void upExerciseStatusOne(PtTypeVO ptTypeVO) throws Exception{
+		ptTypeDAO.upExerciseStatusOne(ptTypeVO);
 	}
 }

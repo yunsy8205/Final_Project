@@ -75,7 +75,7 @@
 			},
 			success:function(response){
 				r=response.trim();//방번호
-	
+				console.log(r);
 	
 				if(r>0){
 					enterRoom(socket, employeeNum, r);
@@ -122,9 +122,9 @@
 				console.log(r);
 				
 				if(r>0){
-					
+					//enterRoom(socket, employeeNum, r);
 				}else{
-					createRoom(employeeNum);
+					alert("방이 만들어지지 않았습니다.");
 				}
 				
 			},
@@ -203,6 +203,6 @@
 			error:function(){
 				console.log("ajax 실패");
 			}
-			})	
+			})
 		
 	}
