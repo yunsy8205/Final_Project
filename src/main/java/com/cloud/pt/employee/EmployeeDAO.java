@@ -34,6 +34,8 @@ public interface EmployeeDAO {
 	
 	public Long getEmpTotal(Pager pager)throws Exception;
 	
+	public List<EmployeeVO> getTrainerList() throws Exception;
+	
 	public List<EmployeeVO> getEmpList(Map<String, Object> map)throws Exception;
 	
 	public EmployeeVO getEmpDetail(EmployeeVO employeeVO)throws Exception;

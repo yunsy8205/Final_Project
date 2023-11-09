@@ -35,6 +35,7 @@
 	<select id="getListForPager" resultType="MembershipVO" parameterType="Pager">
 		SELECT *
 		FROM MEMBERSHIP
+		ORDER BY NAME
 		LIMIT #{startRow}, #{lastRow}
 	</select>
 	
@@ -42,5 +43,6 @@
 	<select id="getList" resultType="MembershipVO">
 		SELECT *
 		FROM MEMBERSHIP
+		ORDER BY NAME
 	</select>
 </mapper>

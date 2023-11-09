@@ -13,22 +13,23 @@
  	</insert>
  	
  	<!-- 회원정보 업데이트 -->
- 	<update id="setUpdate" parameterType="RegistrationVO">
+ 	<update id="setUpdate" parameterType="Map">
  		UPDATE MEMBER
 		<set>
-			<if test="ptCount != null">
-				PTCOUNT=IFNULL(PTCOUNT, 0) + #{ptCount}
+			<if test="registration.ptCount != null">
+				PTCOUNT=IFNULL(PTCOUNT, 0) + #{registration.ptCount},
+				EMPLOYEENUM=#{employee.employeeNum}
 			</if>
-			<if test="month == 1">
+			<if test="registration.month == 1">
 				EXPIRATIONDATE=DATE_ADD(EXPIRATIONDATE, INTERVAL 1 MONTH)
 			</if>
-			<if test="month == 2">
+			<if test="registration.month == 2">
 				EXPIRATIONDATE=DATE_ADD(EXPIRATIONDATE, INTERVAL 2 MONTH)
 			</if>
-			<if test="month == 3">
+			<if test="registration.month == 3">
 				EXPIRATIONDATE=DATE_ADD(EXPIRATIONDATE, INTERVAL 3 MONTH)
 			</if>
 		</set>
-			WHERE MEMBERNUM=#{memberNum}
+			WHERE MEMBERNUM=#{registration.memberNum}
  	</update>
  </mapper>

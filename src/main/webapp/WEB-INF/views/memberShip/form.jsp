@@ -86,7 +86,7 @@
                       </div>
                       <div id="btn" class="m-5">
                         <button type="button" id="before_btn" class="btn btn-primary">이전</button>
-                        <button type="button" id="submit_btn" class="btn btn-primary">제출</button>
+                        <button type="button" id="submit_btn" class="btn btn-primary">등록</button>
                       </div>
                     </form>
                   </div>

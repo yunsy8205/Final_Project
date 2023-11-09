@@ -35,7 +35,7 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 <h3>전체 회원 목록</h3>
 
-                <!-- Modal -->
+                <!-- 이용권등록 Modal -->
                 <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -68,12 +68,24 @@
                             </select>
                           </div>
                         </div>
+                        <div class="row mb-3" id="employee_add">
+                          <label for="num" class="col-sm-2 col-form-label">담당 트레이너</label>
+                          <div class="col-sm-10">
+                            <select id="employee" name="employeeNum" class="form-select">
+                              <c:forEach items="${employee}" var="li">
+	                              <option value="${li.employeeNum}">
+                                  ${li.name}
+                                </option>                              
+                              </c:forEach>
+                            </select>
+                          </div>
+                        </div>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">
                           이전
                         </button>
-                        <button type="button" id="addBtn" class="btn btn-primary close">
+                        <button type="button" id="addRegistrationBtn" class="btn btn-primary close">
                           등록
                         </button>
                       </div>
@@ -119,15 +131,15 @@
                           <td>${vo.joinDate}</td>
                           <td>${vo.expirationDate}</td>
                           <c:forEach items="${vo.registrationVO}" var="re" begin="0" end="0">
-                            <td id="123">${re.regDate}</td>
+                            <td>${re.regDate}</td>
                           </c:forEach>
                           <td class="ptCount" data-ptcount="${vo.ptCount}">${vo.ptCount}</td>
-                          <td>${member.employeeVO.name}</td>
-                          <td id="ptAdd" value="">
-                            <a href="#" class="membershipADDBtn btn btn-primary"
+                          <td>${vo.employeeVO.name}</td>
+                          <td id="ptAdd">
+                            <button class="membershipAddBtn btn btn-primary"
                             data-num="${vo.memberNum}"
                             data-name="${vo.memberName}"
-                            ></a>
+                            ></button>
                           </td>
                         </tr>
                       </c:forEach>
@@ -168,41 +180,24 @@
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
     <script type="text/javascript" src="/js/employee/list.js"></script>
     <script>
-      
-      document.addEventListener("DOMContentLoaded", function(){
-        const ptCount = document.getElementsByClassName("ptCount");
-        const membershipAdd = document.getElementsByClassName("membershipADDBtn");
+      $(document).ready(function(){
+          const ptCount = $('.ptCount');
+          const membershipAdd = $('.membershipAddBtn');
+          
+          ptCount.each(function(i) {
+              const ptCountValue = $(this).data('ptcount');
 
-        console.log($('#123').val());
-        
-        for(let i =0; i<ptCount.length; i++){
-          const ptCountValue = ptCount[i].getAttribute("data-ptcount");
-          console.log("Value: " + ptCountValue);
+              if(ptCountValue === ''){
+                  membershipAdd.eq(i).text('등록');
+              } else {
+                  membershipAdd.eq(i).text('완료');
+                  membershipAdd.eq(i).prop('disabled', true);
+              }
+          });
+      });
 
-          if(ptCountValue == ''){
-            membershipAdd[i].style.display='block';
-            membershipAdd[i].style.backgroud='blue';
-            membershipAdd[i].textContent="등록";
-          }else{
-            membershipAdd[i].textContent="등록완료";
-            // membershipAdd[i].style.background='black';
-            membershipAdd[i].disabled = true;
-          }
-        }
-      })
-
-      // $(document).ready(function() {
-      //   if($("#ptCount").val() == ''){
-      //     $("#membershipADDBtn").css("display","block");
-      //     $("#membershipADDBtn").text('등록');
-      //   }else if(!$("#ptCount").val() == ''){
-      //     $("#membershipADDBtn").text('등록완료');
-      //     $("#membershipADDBtn").css("background-color","black");
-      //   }
-      // })
-      
       //등록버튼 클릭 시 
-      $('a.membershipADDBtn').on('click', function(){
+      $('.membershipAddBtn').on('click', function(){
         const num = $(this).attr('data-num'); //회원번호
         const name = $(this).attr('data-name'); //회원이름
 
@@ -215,22 +210,35 @@
       let count = $('#membership').find("option:selected").data("count");
       let month = $('#membership').find("option:selected").data("month");
 
+      let employeeNum = $('#employee').val();
+
       //option이 바뀔 때마다 
       $('#membership').on('change', function(){
         membershipNum = $('#membership').val();
-        count =  $(this).find("option:selected").data("count");
-        month =  $(this).find("option:selected").data("month");
+        count = $(this).find("option:selected").data("count");
+        month = $(this).find("option:selected").data("month");
+
+        if(count == ''){
+          $('#employee_add').css('display', 'none');
+        }else {
+          $('#employee_add').css('display', 'flex');
+        }
       })
       
-      //모달창의 들록버튼 클릭 시 
-      $('#addBtn').on('click', function(){
+      //option이 바뀔 때마다 
+      $('#employee').on('change', function(){
+        employeeNum = $('#employee').val();
+      })
+
+      //모달창의 등록버튼 클릭 시 
+      $('#addRegistrationBtn').on('click', function(){
         const memberNum = $('#memberNum').val();
         // console.log('m - '+memberNum, 'ms-' +membershipNum, 'c'+count, 'm'+month)
-        setAdd(memberNum, membershipNum, count, month);
+        setAdd(memberNum, membershipNum, count, month, employeeNum);
       })
 
       //이용권 등록
-      function setAdd(memberNum, membershipNum, count, month){
+      function setAdd(memberNum, membershipNum, count, month, employeeNum){
         $.ajax({
           type: 'post',
           url: '/registration/form',
@@ -238,12 +246,14 @@
             memberNum: memberNum,
             membershipNum: membershipNum,
             ptCount: count,
-            month: month
+            month: month,
+            employeeNum: employeeNum
           },
           success: function(result){
             if(result.trim()>0){
               alert('이용권이 등록되었습니다');
               $('#smallModal').modal('hide'); //모달 비활성화
+              location.reload();
             }else {
               alert('이용권 등록에 실패하였습니다.');
             }

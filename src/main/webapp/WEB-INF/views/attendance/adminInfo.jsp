@@ -26,7 +26,15 @@
     #calendar {
       height: 650px; /* 원하는 높이(px)로 설정 */
     }
-
+    form {
+      display: flex;
+    }
+    #k {
+      width: 10%;
+    }
+    #search {
+      width: 30%;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>

@@ -15,7 +15,11 @@
 	</select>
 
 	<select id="getMemberList" parameterType="Map" resultMap="getMemberDetailResult">
-		SELECT * FROM MEMBER
+		SELECT * FROM MEMBER M
+		LEFT OUTER JOIN REGISTRATION R
+		ON M.MEMBERNUM=R.MEMBERNUM
+		LEFT OUTER JOIN EMPLOYEE E
+		ON M.EMPLOYEENUM=E.EMPLOYEENUM
 		<if test="pager.kind=='name'">WHERE NAME LIKE CONCAT('%',#{pager.search},'%')</if>
 	</select>
 
@@ -44,6 +48,10 @@
 		<result column="PTCOUNT" property="ptCount"/>
 		<result column="EXPIRATIONDATE" property="expirationDate"/>
 		<result column="ADDRESS" property="address"/>
+		<association property="employeeVO" javaType="EmployeeVO">
+			<id column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="NAME" property="name"/>
+		</association>
 		<collection property="membershipVO" javaType="List" ofType="MembershipVO">
 			<id column="MEMBERSHIPNUM" property="membershipNum"/>
 			<result column="NAME" property="name"/>			
@@ -58,10 +66,7 @@
 			<result column="MEMBERSHIPNUM" property="membershipNum"/>
 			<result column="REGDATE" property="regDate"/>			
 		</collection>
-		<collection property="employeeVO" javaType="EmployeeVO" ofType="EmployeeVO">
-			<id column="EMPLOYEENUM" property="employeeNum"/>
-			<result column="NAME" property="name"/>
-		</collection>
+		
 	</resultMap>
 	
 	<update id="setMemberUpdate" parameterType="MemVO">

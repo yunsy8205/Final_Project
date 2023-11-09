@@ -55,6 +55,10 @@ public class EmployeeService implements UserDetailsService{
 	
 	
 	
+	public List<EmployeeVO> getTrainerList() throws Exception {
+		return employeeDAO.getTrainerList();
+	}
+	
 	
 	// Login POST 처리 (SecurityConfig -> Service의 loadUserByUsername 메서드 실행)
 	@Override
@@ -253,9 +257,7 @@ public class EmployeeService implements UserDetailsService{
 	        System.out.println(e.getCode());
 	      }
 	}
-	
-	
-	
+
 	public List<EmployeeVO> getEmpList(EmployeeVO employeeVO, Pager pager)throws Exception{
 		Map<String, Object> map = new HashMap<>();
 		pager.makeRowNum();

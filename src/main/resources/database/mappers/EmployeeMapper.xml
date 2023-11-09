@@ -35,6 +35,12 @@
 		VALUES (DEFAULT, #{name}, #{password}, #{phone}, #{address}, #{gender}, #{birth}, now(), #{quitDate}, #{state}, #{position}, 12, null, null, #{proFile}, #{proOriginal})
 	</insert>
 	
+	<select id="getTrainerList" resultType="EmployeeVO">
+		SELECT EMPLOYEENUM, NAME
+		FROM EMPLOYEE
+		WHERE POSITION='ROLE_TRAINER'
+	</select>
+	
 	<select id="getEmpList" parameterType="Map" resultType="EmployeeVO">
 		SELECT EMPLOYEENUM,NAME,POSITION,PHONE,STATE FROM EMPLOYEE
 		
