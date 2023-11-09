@@ -14,7 +14,7 @@
   data-template="vertical-menu-template-free"
 >
 <head>
-  <link rel="stylesheet" href="/resources/css/approval/style.css">
+  <link rel="stylesheet" href="/css/approval/style.css">
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 </head>
 
@@ -33,7 +33,7 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="container-xxl flex-grow-1 container-p-y" style="text-align:center">
                 <h1>서명생성</h1>
                 <canvas id="jsCanvas" class="canvas"></canvas>
     <div class="controls">
@@ -117,7 +117,7 @@
     </div>
     <!-- / Layout wrapper -->
   
-    <script src="/resources/js/approval/sign.js"></script>
+    <script src="/js/approval/sign.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>
