@@ -100,6 +100,7 @@ public class HomeController {
 		Random random = new Random();
 		
 		int length = 8;
+		log.info("random 찍으러 간다?");
 		String randomStr = generateRandomString(length);
 		log.info("랜덤 배정!");
 		employeeVO.setEmployeeNum(employeeVO.getEmployeeNum());

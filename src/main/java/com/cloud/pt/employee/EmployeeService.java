@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -79,7 +80,15 @@ public class EmployeeService implements UserDetailsService{
 	 
 	
 	
-	public boolean getEmpError(EmployeeVO employeeVO, BindingResult bindingResult)throws Exception{
+	public boolean getEmpError(EmployeeVO employeeVO,BindingResult bindingResult)throws Exception{
+		// false(오류없음) | true(오류있음)
+
+		// annotation 검증
+		boolean check = bindingResult.hasErrors();
+
+		return check;
+	}
+	public boolean getEmpCaCerError(EmployeeVO employeeVO,CareerVO careerVO, CertificationVO certificationVO, BindingResult bindingResult)throws Exception{
 		// false(오류없음) | true(오류있음)
 
 		// annotation 검증
@@ -121,6 +130,22 @@ public class EmployeeService implements UserDetailsService{
 		
 		return employeeDAO.setInfoUpdate(employeeVO);
 		
+	}
+	
+	public int setInfoCareerUpdate(CareerVO careerVO)throws Exception{
+		return employeeDAO.setInfoCareerUpdate(careerVO);
+	}
+	
+	public List<CareerVO> getInfoCareer(CareerVO careerVO)throws Exception{
+		return employeeDAO.getInfoCareer(careerVO);
+	}
+	
+	public int setInfoCertificationUpdate(CertificationVO certificationVO)throws Exception{
+		return employeeDAO.setInfoCertificationUpdate(certificationVO);
+	}
+	
+	public List<CertificationVO> getInfoCertification(CertificationVO certificationVO)throws Exception{
+		return employeeDAO.getInfoCertification(certificationVO);
 	}
 	
 	
