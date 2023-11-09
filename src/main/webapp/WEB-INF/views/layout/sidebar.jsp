@@ -117,7 +117,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="auth-login-basic.html" class="menu-link" target="_blank">
+                  <a href="/membership/list" class="menu-link">
                     <div data-i18n="Basic">이용권 목록</div>
                   </a>
                 </li>
@@ -181,7 +181,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="ui-alerts.html" class="menu-link">
+                  <a id="attendance" href="/admin/attendance" class="menu-link">
                     <div data-i18n="Alerts">전체 근태 조회</div>
                   </a>
                 </li>
@@ -242,7 +242,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="ui-alerts.html" class="menu-link">
+                  <a href="/trainer/ptLog" class="menu-link">
                     <div data-i18n="Alerts">PT일지</div>
                   </a>
                 </li>
