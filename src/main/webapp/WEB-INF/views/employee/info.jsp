@@ -111,22 +111,26 @@
                                           <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.gender}" readonly/>
                                         </div>
                                       </div>
-                                      <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="basic-default-name">경력</label>
-                                        <div class="col-sm-10">
-                                          <c:forEach items="${employeeVO.careers}" var="career">
-                                            <input type="text" class="form-control" id="basic-default-name" value="${career.title}" readonly/>
-                                          </c:forEach>
-                                        </div>
-                                      </div>
-                                      <div class="row mb-3">
-                                          <label class="col-sm-2 col-form-label" for="basic-default-name">자격증</label>
+                                      <c:if test="${employeeVO.position eq 'ROLE_TRAINER'}">
+                                        <div class="row mb-3">
+                                          <label class="col-sm-2 col-form-label" for="basic-default-name">경력</label>
                                           <div class="col-sm-10">
-                                            <c:forEach items="${employeeVO.certifications}" var="cer">
-                                              <input type="text" class="form-control" id="basic-default-name" value="${cer.cerTitle}" readonly/>
+                                            <c:forEach items="${employeeVO.careers}" var="career">
+                                              <input type="text" class="form-control" id="basic-default-name" value="${career.caTitle}" readonly/>
+                                              <input type="text" class="form-control" id="basic-default-name" value="${career.caPassDate}" readonly/>
                                             </c:forEach>
                                           </div>
-                                      </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label" for="basic-default-name">자격증</label>
+                                            <div class="col-sm-10">
+                                              <c:forEach items="${employeeVO.certifications}" var="cer">
+                                                <input type="text" class="form-control" id="basic-default-name" value="${cer.cerTitle}" readonly/>
+                                                <input type="text" class="form-control" id="basic-default-name" value="${cer.cerPassDate}" readonly/>
+                                              </c:forEach>
+                                            </div>
+                                        </div>
+                                      </c:if>
                                       <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">서명이미지</label>
                                         <div class="col-sm-10">
@@ -140,7 +144,7 @@
                                     </form>
                                     <div class="proBtn">
                                       <button type="button" class="btn btn-primary" id="upBtn" data-url="/employee/infoUpdate">수정</button>
-                                      <button type="button" class="btn btn-primary" id="toBtn" >수정</button>
+                                      <!-- <button type="button" class="btn btn-primary" id="toBtn" >수정</button> -->
                                     </div>
                                   </div>
                                 </div>
@@ -241,7 +245,7 @@
       let error = '${error}';
       
       if (error != '' && error == 'true') {
-        //location.href = url;
+        //location.href = "/employee/info";
         $("#toTab").click();
       }
     </script>
