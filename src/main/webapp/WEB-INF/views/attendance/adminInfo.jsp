@@ -24,7 +24,7 @@
       cursor: pointer;
     }
     #calendar {
-      height: 650px; /* 원하는 높이(px)로 설정 */
+      height: 700px; /* 원하는 높이(px)로 설정 */
     }
     form {
       display: flex;
