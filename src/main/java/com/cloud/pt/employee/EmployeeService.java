@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +29,9 @@ import com.cloud.pt.commons.Pager;
 
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
+//import net.nurigo.sdk.message.model.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 
 
 @Service
@@ -43,6 +46,7 @@ public class EmployeeService implements UserDetailsService{
 	@Autowired
 	private FileManager fileManager;
 	
+
 	// properties 값을 java 사용. (@Value("${properties 키}"))
 	@Value("${app.upload}")
 	private String uploadPath;
@@ -52,13 +56,11 @@ public class EmployeeService implements UserDetailsService{
 	
 	
 	
-	
 	// Login POST 처리 (SecurityConfig -> Service의 loadUserByUsername 메서드 실행)
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		EmployeeVO employeeVO = new EmployeeVO();
 		log.info(">> 로그인 시도중 <<");
-		log.info("num : {} ", username);
 		employeeVO.setEmployeeNum(username);
 		log.info("num : {} ",employeeVO.getEmployeeNum());
 
@@ -78,7 +80,15 @@ public class EmployeeService implements UserDetailsService{
 	 
 	
 	
-	public boolean getEmpError(EmployeeVO employeeVO, BindingResult bindingResult)throws Exception{
+	public boolean getEmpError(EmployeeVO employeeVO,BindingResult bindingResult)throws Exception{
+		// false(오류없음) | true(오류있음)
+
+		// annotation 검증
+		boolean check = bindingResult.hasErrors();
+
+		return check;
+	}
+	public boolean getEmpCaCerError(EmployeeVO employeeVO,CareerVO careerVO, CertificationVO certificationVO, BindingResult bindingResult)throws Exception{
 		// false(오류없음) | true(오류있음)
 
 		// annotation 검증
@@ -88,16 +98,16 @@ public class EmployeeService implements UserDetailsService{
 	}
 	
 	
-	@Transactional(readOnly=true)
-	public Map<String,String> validateHandling(Errors errors)throws Exception{
-		Map<String, String> validatorResult = new HashMap<>();
-		
-		for(FieldError error : errors.getFieldErrors()) {
-			String validKeyName = String.format("valid_%s", error.getField());
-			validatorResult.put(validKeyName, error.getDefaultMessage());
-		}
-		return validatorResult;
-	}
+//	@Transactional(readOnly=true)
+//	public Map<String,String> validateHandling(Errors errors)throws Exception{
+//		Map<String, String> validatorResult = new HashMap<>();
+//		
+//		for(FieldError error : errors.getFieldErrors()) {
+//			String validKeyName = String.format("valid_%s", error.getField());
+//			validatorResult.put(validKeyName, error.getDefaultMessage());
+//		}
+//		return validatorResult;
+//	}
 	
 	
 	public EmployeeVO getInfo(EmployeeVO employeeVO)throws Exception{
@@ -122,6 +132,22 @@ public class EmployeeService implements UserDetailsService{
 		
 	}
 	
+	public int setInfoCareerUpdate(CareerVO careerVO)throws Exception{
+		return employeeDAO.setInfoCareerUpdate(careerVO);
+	}
+	
+	public List<CareerVO> getInfoCareer(CareerVO careerVO)throws Exception{
+		return employeeDAO.getInfoCareer(careerVO);
+	}
+	
+	public int setInfoCertificationUpdate(CertificationVO certificationVO)throws Exception{
+		return employeeDAO.setInfoCertificationUpdate(certificationVO);
+	}
+	
+	public List<CertificationVO> getInfoCertification(CertificationVO certificationVO)throws Exception{
+		return employeeDAO.getInfoCertification(certificationVO);
+	}
+	
 	
 	
 	public int setPwUpdate(EmployeeVO employeeVO, PasswordVO passwordVO)throws Exception{
@@ -136,14 +162,12 @@ public class EmployeeService implements UserDetailsService{
 		boolean check = false;
 		// 1. password 일치 검증
 		if(!passwordVO.getNewPw().equals(passwordVO.getPwCheck())) {
-			log.info("비밀번호 일치하지 않음!! ");
 			check = true;  //check=!check;
 			
 			// reject ("VO명", "properties에 적힐 키이름")
 			bindingResult.rejectValue("pwCheck", "employeeVO.password.equalCheck");
 		}
 		
-		log.info("비밀번호 일치");
 		return check;
 	}
 	
@@ -163,12 +187,12 @@ public class EmployeeService implements UserDetailsService{
 
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
-	    params.put("to", "01024895653");    // 수신전화번호//userPhoneNumber
-	    params.put("from", "01024895653");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+	    params.put("to", userPhoneNumber);    // 수신전화번호//userPhoneNumber
+	    params.put("from", "01091957075");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
 	    params.put("type", "SMS");
 	    params.put("text", "임시비밀번호는" + "["+randomStr+"]" + "입니다."); // 문자 내용 입력
 	    params.put("app_version", "test app 1.2"); // application name and version
-
+	    
 	    try {
 	        JSONObject obj = (JSONObject) coolsms.send(params);
 	        System.out.println(obj.toString());
@@ -179,13 +203,10 @@ public class EmployeeService implements UserDetailsService{
 	}
 	
 	public int setFindPwUpdate(EmployeeVO employeeVO)throws Exception{
-		log.info("비밀번호 찾기 랜덤 비밀번호!!!!!!!!!!! >>>>>>>> : {}", employeeVO.getPassword());
-		
 		// 비밀번호 암호화
 		employeeVO.setPassword(passwordEncoder.encode(employeeVO.getPassword()));
 		
-		log.info("비밀번호 찾기 암호화 된 비밀번호!!!!!!!!!!! >>>>>>>> : {}", employeeVO.getPassword());
-		return 0;//employeeDAO.setFindPwUpdate(employeeVO);
+		return employeeDAO.setFindPwUpdate(employeeVO);
 	}
 	
 	
@@ -206,6 +227,31 @@ public class EmployeeService implements UserDetailsService{
 			
 
 		return result;
+	}
+	
+	//직원 등록시 발송되는 SMS
+	public void sendJoin(String userPhoneNumber, String employeeNum, String password) {
+		String api_key = "NCS6Z2IHA0RLQUS1"; //쿨sms api
+	    String api_secret = "MK0T5L21VZO4FXLBLRMQJBYHJIRAVOZC"; //쿨 sms 시크릿api
+	    Message coolsms = new Message(api_key, api_secret);
+	    
+	    log.info("랜덤 번호 갈겨");
+
+	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    HashMap<String, String> params = new HashMap<String, String>();
+	    params.put("to", userPhoneNumber);    // 수신전화번호//userPhoneNumber
+	    params.put("from", "01091957075");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+	    params.put("type", "SMS");
+	    params.put("text", "입사를 진심으로 축하드립니다!! 직원 아이디 : " + employeeNum + ", 비밀번호 : "+ password +" 입니다."); // 문자 내용 입력
+	    params.put("app_version", "test app 1.2"); // application name and version
+	    
+	    try {
+	        JSONObject obj = (JSONObject) coolsms.send(params);
+	        System.out.println(obj.toString());
+	      } catch (CoolsmsException e) {
+	        System.out.println(e.getMessage());
+	        System.out.println(e.getCode());
+	      }
 	}
 	
 	
