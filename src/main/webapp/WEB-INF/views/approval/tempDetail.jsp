@@ -14,7 +14,47 @@
   data-template="vertical-menu-template-free"
 >
 <head>
+	<style>
+		/* Remove default bullets */
+	ul, #myUL {
+	  list-style-type: none;
+	}
 	
+	/* Remove margins and padding from the parent ul */
+	#myUL {
+	  margin: 0;
+	  padding: 0;
+	}
+	
+	/* Style the caret/arrow */
+	.caret {
+	  cursor: pointer;
+	  user-select: none; /* Prevent text selection */
+	}
+	
+	/* Create the caret/arrow with a unicode, and style it */
+	.caret::before {
+	  content: "\25B6";
+	  color: black;
+	  display: inline-block;
+	  margin-right: 6px;
+	}
+	
+	/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+	.caret-down::before {
+	  transform: rotate(90deg);
+	}
+	
+	/* Hide the nested list */
+	.nested {
+	  display: none;
+	}
+	
+	/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+	.active {
+	  display: block;
+	}
+	</style>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 </head>
@@ -37,8 +77,10 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 
 							<div>
-								<button id="approvalInfoBtn" onclick="click_add()">결재정보</button>
-								<button id="tempBtn">임시저장</button>
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+									결재선
+								  </button>
+								<button class="btn btn-primary" id="tempBtn">임시저장</button>
 								<form action="tempUpdate" method="post" id="updateForm">
 									
 									<table
@@ -128,7 +170,7 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																직급</td>
-															<td
+															<td id="middlePosition"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																<c:if test="${middle.position=='ROLE_CEO'}">대표</c:if>
 																<c:if test="${middle.position=='ROLE_GENERAL'}">총괄매니저</c:if>
@@ -143,11 +185,11 @@
 																	<img style="width: 5rem;height: 3rem" alt="" <c:if test="${approvalVO.state=='진행중' || approvalVO.state=='최종반려' || approvalVO.state=='완료'}">src="../file/employee/${middle.signFile}"</c:if><c:if test="${approvalVO.state=='중간반려'}">src="../file/employee/reject.png"</c:if>>
 																</c:if>
 																</td>
-																<td
+																<td 
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																직급</td>
-															<td
+															<td id="lastPosition"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																<c:if test="${last.position=='ROLE_CEO'}">대표</c:if>
 																<c:if test="${last.position=='ROLE_GENERAL'}">총괄매니저</c:if>
@@ -168,7 +210,7 @@
 																style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																결재자</td>
-															<td 
+															<td id="middleName"
 																style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																${middle.name}
 												
@@ -177,7 +219,7 @@
 															style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 															결재자</td>
-														<td 
+														<td id="lastName"
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 
 															${last.name}</td>
@@ -325,7 +367,7 @@
 									<input type="hidden" id="middle" name="middle" value="${approvalVO.middle}">
 									<input type="hidden" id="last" name="last" value="${approvalVO.last}">
 									<input type="hidden" name="category" value="휴가신청서">
-									<input type="submit" id="testBtn">
+									<input type="submit" class="btn btn-primary" id="testBtn">
 								</form>
 
 
@@ -380,7 +422,135 @@
     </div>
     <!-- / Layout wrapper -->
   
-  
+	 <!-- Modal -->
+	 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h1 class="modal-title fs-5" id="exampleModalLabel">결재선선택</h1>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class=row>
+					<div class="col-sm-3">
+				
+					<div>조직도</div>
+					<div class="card border scrollable-card">
+						<div class="overflow-auto " id="readyMem">
+							<ul id="myUL">
+								<li><span class="caret">대표</span>
+									<ul class="nested">
+										<c:forEach items="${employeeVO}" var="vo">
+											<c:if test="${vo.position=='ROLE_CEO'}">
+												<li id="ceo" class="ceo" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+											</c:if>
+										</c:forEach>
+									</ul>
+								</li>
+								<li><span class="caret">총괄</span>
+									<ul class="nested">
+										<c:forEach items="${employeeVO}" var="vo">
+											<c:if test="${vo.position=='ROLE_GENERAL'}">
+												<li id="general" class="general" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+											</c:if>
+										</c:forEach>
+									</ul>
+								</li>
+								<li><span class="caret">고객관리</span>
+									<ul class="nested">
+										<c:forEach items="${employeeVO}" var="vo">
+											<c:if test="${vo.position=='ROLE_CUSTOMER'}">
+												<li id="customer"class="customer" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+											</c:if>
+										</c:forEach>
+									</ul>
+								</li>
+								<li><span class="caret">인사관리</span>
+									<ul class="nested">
+										<c:forEach items="${employeeVO}" var="vo">
+											<c:if test="${vo.position=='ROLE_RESOURCES'}">
+												<li id="resources"class="resources" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+											</c:if>
+										</c:forEach>
+									</ul>
+								</li>
+								<li><span class="caret">시설관리</span>
+									<ul class="nested">
+										<c:forEach items="${employeeVO}" var="vo">
+											<c:if test="${vo.position=='ROLE_FACILITY'}">
+												<li id="facility"class="facility" data-empnum="${vo.employeeNum}" data-name="${vo.name}" data-position="${vo.position}">${vo.name}</li>
+											</c:if>
+										</c:forEach>
+									</ul>
+								</li>
+								<li><span class="caret">트레이너</span>
+									<ul class="nested">
+										<c:forEach items="${employeeVO}" var="vo" varStatus="i">
+											<c:if test="${vo.position=='ROLE_TRAINER'}">
+												<li id="trainer" class="trainer">${vo.name}</li>
+											</c:if>
+										</c:forEach>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					</div>
+					
+					<div class="col-sm-4">
+					
+					<div>선택사원</div>
+					<div class="card border scrollable-card" style="height:5rem">
+						<div class="overflow-auto" id="selectEmp" data-empnum="" data-name="" data-position="">
+							
+					
+							
+						</div>
+					
+					</div>
+					
+					</div>
+					
+					<div class="col-sm-1 ">
+						<div class="scrollable-card1 text-center d-flex flex-column justify-content-center align-items-center">
+							
+						</div>
+						
+						<div class="scrollable-card1 text-center d-flex flex-column justify-content-center align-items-center mt-5">
+							
+						</div>
+						
+	
+				
+						</div>
+							
+						
+						<div class="col-sm-4 scrollable-card">
+						<div id="middleBtn">중간 승인자</div>
+						<div class="card border scrollable-card1 overflow-auto" id="mLine" data-empnum="" data-name="" data-position="" style="height:2rem">
+							
+						</div>
+						
+						<div id="lastBtn">최종 승인자</div>
+						<div class="card border scrollable-card1 overflow-auto" id="lLine" data-empnum="" data-name="" data-position="" style="height:2rem">
+							
+						</div>
+						
+						
+						</div>
+					
+					</div>
+						</div>
+						<button type="button" class="btn btn-primary" id="okBtn">확인</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			  
+			</div>
+			
+		  </div>
+		</div>
+	  </div>
+	  <script src="/js/approval/add.js"></script>
 	<script src="/js/approval/tempDetail.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>

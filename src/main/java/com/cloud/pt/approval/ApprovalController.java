@@ -109,6 +109,8 @@ public class ApprovalController {
 	}
 	@GetMapping("tempDetail")
 	public void getTempDetail(ApprovalVO approvalVO,Model model)throws Exception{
+		List<EmployeeVO> el = approvalService.getAnnualLine();
+		model.addAttribute("employeeVO", el);
 		approvalVO=approvalService.getMyDetail(approvalVO);
 		EmployeeVO empVO = new EmployeeVO();
 		empVO=approvalService.getMiddleEmployee(approvalVO);
