@@ -73,7 +73,7 @@ uri="http://www.springframework.org/tags" %>
           headerToolbar: {
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+            right: "dayGridMonth,listWeek",
           },
           initialView: "dayGridMonth", // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
           //initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
@@ -117,6 +117,7 @@ uri="http://www.springframework.org/tags" %>
                 url: "./delClass",
                 data: {
                   ptNum: info.event.id,
+                  
                 },
                 success: function () {
                   console.log("이벤트 삭제 성공");
