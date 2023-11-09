@@ -17,6 +17,7 @@
 	<select id="getMemberList" parameterType="Map" resultMap="getMemberDetailResult">
 		SELECT * FROM MEMBER
 		<if test="pager.kind=='name'">WHERE NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+		ORDER BY MEMBERNUM DESC
 	</select>
 
 	<insert id="setMemberAdd" parameterType="MemVO">

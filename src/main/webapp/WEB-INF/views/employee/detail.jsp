@@ -35,9 +35,9 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="col-xxl">
                   <div class="card mb-4">
-                    <div class="card-header d-flex align-items-center justify-content-between">
+                    <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;">
                       <h3 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 인적사항</h3>
-                      <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
+                      <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" onerror="this.style.display='none'">
                     </div>
                     <div class="card-body">
                       <div id="detailCon">
@@ -95,7 +95,7 @@
                           <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">직원상태</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.state}" readonly/>
+                              <input type="text" class="form-control state" id="basic-default-name" value="${employeeVO.state}" readonly/>
                             </div>
                           </div>
                           <div class="row mb-3">
@@ -115,9 +115,9 @@
                           <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
                         </form>
                         <div class="proBtn">
-                          <button type="button" id="backBtn">이전</button>
-                          <button type="button" id="upBtn" class="actionBtn" data-url="/employee/update">수정</button>
-                          <button type="button" id="delBtn" class="actionBtn" data-url="/employee/delete">삭제</button>
+                          <button type="button" id="backBtn" class="btn btn-primary">이전</button>
+                          <button type="button" id="upBtn" class="actionBtn btn btn-primary" data-url="/employee/update">수정</button>
+                          <button type="button" id="delBtn" class="actionBtn btn btn-primary" data-url="/employee/delete">퇴직자 개인정보 삭제처리</button>
                         </div>
                       </div>
                     </div>
@@ -173,5 +173,17 @@
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
     <script type="text/javascript" src="/js/employee/detail.js"></script>
+    <script>
+      const state = document.getElementsByClassName("state");
+      const delBtn = document.getElementById("delBtn");
+
+      console.log(state[0].value)
+
+      if(state[0].value == '퇴직'){
+        delBtn.style.display = 'inline-block';
+      }else{
+        delBtn.style.display = 'none';
+      }
+    </script>
   </body>
 </html>
