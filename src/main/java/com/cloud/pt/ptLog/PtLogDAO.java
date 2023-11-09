@@ -10,5 +10,9 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface PtLogDAO {
 
-	public ArrayList<PtLogVO> getTypeLog() throws Exception;
+	public ArrayList<PtLogVO> getTypeLog(Long employeeNum,Long memberNum) throws Exception;
+	
+	public int addLog(PtLogVO ptLogVO) throws Exception;
+	
+	public int delLog(PtLogVO ptLogVO) throws Exception;
 }

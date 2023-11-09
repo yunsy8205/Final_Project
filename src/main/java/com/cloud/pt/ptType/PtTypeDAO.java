@@ -10,9 +10,19 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface PtTypeDAO {
 
-	public List<PtTypeVO> getTypeList(Map<String, Object> map,String employeeNum) throws Exception;
+	public List<PtTypeVO> getTypeList(Map<String, Object> map) throws Exception;
 
 	public int addType(PtTypeVO ptTypeVO) throws Exception;
 	
 	public int delType(PtTypeVO ptTypeVO) throws Exception;
+	
+	public int upType(PtTypeVO ptTypeVO) throws Exception;
+	
+	public int finishAll(PtTypeVO ptTypeVO) throws Exception;
+	
+	public int finishOne(PtTypeVO ptTypeVO) throws Exception;
+	
+	public void upExerciseStatusOne(PtTypeVO ptTypeVO) throws Exception;
+
+	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,29 +25,30 @@ public class PtTypeController {
 	@Autowired
 	private PtTypeService ptTypeService;
 	@GetMapping("ptType")
-	public ModelAndView getTypeList() throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public String getTypeList(@RequestParam(required = false) Long eventId,Model model) throws Exception{
 		
-		SecurityContext context = SecurityContextHolder.getContext();
-		org.springframework.security.core.Authentication b = context.getAuthentication();
+		  
+		 
+		  
+		  PtTypeVO ptTypeVO = new PtTypeVO(); 
+		  ptTypeVO.setPtLogNum(eventId);
+		  List<PtTypeVO> ar = ptTypeService.getTypeList(ptTypeVO);
+		  log.info("로그번호 : {}>>>",ptTypeVO.getPtLogNum() );
+		  model.addAttribute("list", ar); 
+		  model.addAttribute("ptLogNum",eventId);
+		  
+		  
+		  return "trainer/ptType";
+		 
 		
-		PtTypeVO ptTypeVO = new PtTypeVO();
-		ptTypeVO.setEmployeeNum(b.getName());
-		List<PtTypeVO> ar = ptTypeService.getTypeList(ptTypeVO);
-		
-		mv.addObject("list",ar);
-		mv.addObject("employeeNum", b.getName());
-		mv.setViewName("trainer/ptLog");
-		
-		return mv;
 	}
 	
 	@PostMapping("addType")
-	public String addType(PtTypeVO ptTypeVO) throws Exception{
+	public String addType(PtTypeVO ptTypeVO,Model model) throws Exception{
 		
 		
 		int result = ptTypeService.addType(ptTypeVO);
-		
+		model.addAttribute("ptTypeVO", ptTypeVO);
 		return "redirect:./ptLog";
 	}
 	
@@ -56,4 +58,16 @@ public class PtTypeController {
 		int result = ptTypeService.delType(ptTypeVO);
 		return "redirect:./ptLog";
 	}
-}
+	
+	@PostMapping("upType")
+	public String upType(PtTypeVO ptTypeVO) throws Exception{
+		log.info("upType에서 받은 값",ptTypeVO);
+		int result = ptTypeService.upType(ptTypeVO);
+		return "";
+	}
+	
+	
+	
+	
+
+	}

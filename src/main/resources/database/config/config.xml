@@ -25,8 +25,9 @@
 		<typeAlias type="com.cloud.pt.myPtMember.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
 		<typeAlias type="com.cloud.pt.ptLog.PtLogVO" alias="PtLogVO"/>
+		<typeAlias type="com.cloud.pt.ptType.PtTypeVO" alias="PtTypeVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
-		
+		<typeAlias type="com.cloud.pt.locker.LockerVO" alias="Locker"/>
 		
 		<!-- 동찬 -->
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
@@ -39,4 +40,8 @@
 		<typeAlias type="com.cloud.pt.notice.NoticeFileVO" alias="NoticeFileVO"/>
 		<typeAlias type="java.util.List" alias="List"/>
 	</typeAliases>
+	
+	 <!-- <mappers>
+		<mapper resource="/mappers/LockerMapper.xml"/>
+	</mappers>  -->
 </configuration>

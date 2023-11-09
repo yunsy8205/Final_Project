@@ -49,7 +49,7 @@ public class SecheduleRestController {
 			m.put("title", ptClassVO.getMemberName());
 			m.put("start", ptClassVO.getStartTime());
 			m.put("end", ptClassVO.getFinishTime() );
-			
+			log.info("멤버번호 : {} >>>>",ptClassVO.getMemberNum());
 			classMap.add(m);
 		}
 		
