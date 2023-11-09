@@ -35,10 +35,9 @@ public class MembershipController {
 	
 	//이용권 삭제 
 	@GetMapping("delete")
-	public String setDelete(@RequestParam List<String> membershipNum, Model model) throws Exception {
-		log.info("list: {}", membershipNum);
-		
-		int result = membershipService.setDelete(membershipNum);
+	public String setDelete(MembershipVO membershipVO, Model model) throws Exception {
+		int result = membershipService.setDelete(membershipVO);
+		System.out.println(result);
 		model.addAttribute("result", result);
 		
 		return "commons/ajaxResult";

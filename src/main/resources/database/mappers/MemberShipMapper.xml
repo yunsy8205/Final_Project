@@ -12,6 +12,7 @@
 		VALUES (#{name},#{type},#{month},#{ptCount},#{price})
 	</insert>
 	
+	<!-- 사용자 등록 여부 확인 -->
 	<select id="getReg" resultType="Long" parameterType="MembershipVO">
 		SELECT REGISTRATIONNUM
 		FROM REGISTRATION
@@ -19,12 +20,9 @@
 	</select>
 	
 	<!-- 이용권 삭제 -->
-	<delete id="setDelete" parameterType="List">
+	<delete id="setDelete" parameterType="MembershipVO">
 		DELETE FROM MEMBERSHIP
-		WHERE MEMBERSHIPNUM IN
-		<foreach collection="list" item="item" open="(" close=")" separator=",">
-			#{item}
-		</foreach>
+		WHERE MEMBERSHIPNUM =#{membershipNum}
 	</delete>
 	
 	<!-- 전체 이용권 개수 -->

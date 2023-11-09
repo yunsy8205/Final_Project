@@ -9,8 +9,8 @@ import com.cloud.pt.commons.Pager;
 @Mapper
 public interface MembershipDAO {
 	public int setAdd(MembershipVO membershipVO) throws Exception;
-	public Long getReg(MembershipVO membershipVO) throws Exception;
- 	public int setDelete(List<String> list) throws Exception;
+	public List<Long> getReg(MembershipVO membershipVO) throws Exception;
+ 	public int setDelete(MembershipVO membershipVO) throws Exception;
 	public Long getTotal() throws Exception;
 	public List<MembershipVO> getListForPager(Pager pager) throws Exception;
 	public List<MembershipVO> getList() throws Exception;	

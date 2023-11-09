@@ -118,7 +118,9 @@
                           <td>${vo.phone}</td>
                           <td>${vo.joinDate}</td>
                           <td>${vo.expirationDate}</td>
-                          <td>${vo.registrationVO.regDate}</td>
+                          <c:forEach items="${vo.registrationVO}" var="re" begin="0" end="0">
+                            <td id="123">${re.regDate}</td>
+                          </c:forEach>
                           <td class="ptCount" data-ptcount="${vo.ptCount}">${vo.ptCount}</td>
                           <td>${member.employeeVO.name}</td>
                           <td id="ptAdd" value="">
@@ -170,6 +172,8 @@
       document.addEventListener("DOMContentLoaded", function(){
         const ptCount = document.getElementsByClassName("ptCount");
         const membershipAdd = document.getElementsByClassName("membershipADDBtn");
+
+        console.log($('#123').val());
         
         for(let i =0; i<ptCount.length; i++){
           const ptCountValue = ptCount[i].getAttribute("data-ptcount");
@@ -181,11 +185,12 @@
             membershipAdd[i].textContent="등록";
           }else{
             membershipAdd[i].textContent="등록완료";
-            membershipAdd[i].style.background='black';
+            // membershipAdd[i].style.background='black';
+            membershipAdd[i].disabled = true;
           }
         }
       })
-      
+
       // $(document).ready(function() {
       //   if($("#ptCount").val() == ''){
       //     $("#membershipADDBtn").css("display","block");

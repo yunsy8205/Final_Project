@@ -40,26 +40,24 @@
 
                 <div id="membership">
                   <button id="add_btn" class="btn btn-primary">이용권 등록</button>
-                  <button id="del_btn" class="btn btn-primary">이용권 삭제</button>
                 </div>
 				        <div class="card">
                   <div id="list" class="table-responsive text-nowrap">
                     <table class="table table-hover">
                       <thead>
                         <tr>
-                          <th></th>
+                          <th>번호</th>
                           <th>이용권이름</th>
                           <th>종류</th>
                           <th>피티횟수/이용개월</th>
                           <th>가격</th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
                         <c:forEach items="${list}" var="vo" varStatus="i">
                           <tr>
-                            <td>
-                              <input class="form-check-input" type="checkbox" name="membershipNum" value="${vo.membershipNum}">
-                            </td>
+                            <td>${i.index+1}</td>
                             <td>${vo.name}</td>
                             <td>
                               <c:choose>
@@ -82,6 +80,9 @@
                             	</c:choose>
                             </td>
                             <td>${vo.price}원</td>
+                            <td>
+                              <button class="btn btn-primary del_btn" data-num="${vo.membershipNum}">삭제</button>
+                            </td>
                           </tr>
                         </c:forEach>
                       </tbody>
@@ -126,28 +127,28 @@
       $(location).attr('href', '/membership/form');
     })
 
-    $('#del_btn').on('click', function(){
-      //선택된 모든 체크박스
-      const checkboxes = $('input[type="checkbox"]:checked');
-      let checkValues = [];
-      console.log(checkboxes.length);
+    $('.del_btn').on('click', function(){
+      const result = confirm('정말 삭제하시겠습니까?');
+      if(result==true){
+        // console.log($(this).data('num'))
+        setDel($(this).data('num'));
+      }
       
-      checkboxes.each(function(){
-        checkValues.push($(this).val());
-      });
-      console.log(checkValues);
-      let query = 'membershipNum='+checkValues.join('&membershipNum=');
-
-      setDel(query);
     })
     
-    function setDel(query){
+    function setDel(membershipNum){
       $.ajax({
         type: 'get',
-        url: '/membership/delete?'+query,
+        url: '/membership/delete',
+        data: {
+          membershipNum: membershipNum
+        },
         success: function(result){
           if(result.trim()>0){
-
+            alert('이용권이 삭제되었습니다');
+            location.reload();
+          }else {
+            alert('등록된 사용자가 있어 삭제가 불가합니다');
           }
         }
       })  

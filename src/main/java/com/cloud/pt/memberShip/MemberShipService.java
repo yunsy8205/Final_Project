@@ -18,9 +18,16 @@ public class MembershipService {
 	}
 	
 	//이용권 삭제
-	public int setDelete(List<String> list) throws Exception {
-		return membershipDAO.setDelete(list);
-	
+	public int setDelete(MembershipVO membershipVO) throws Exception {
+		List<Long> nums = membershipDAO.getReg(membershipVO); //사용자 등록 여부 확인 
+		System.out.println(nums.size());
+		int result = 0;
+		
+		if(nums.size() == 0) { //등록된 사용자가 없을 때 
+			result = membershipDAO.setDelete(membershipVO);
+		}
+		
+		return result;
 	}
 	
 	//이용권 목록(페이저O)

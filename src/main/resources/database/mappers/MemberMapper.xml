@@ -41,9 +41,10 @@
 		<result column="GENDER" property="gender"/>
 		<result column="BIRTH" property="birth"/>
 		<result column="JOINDATE" property="joinDate"/>
+		<result column="PTCOUNT" property="ptCount"/>
 		<result column="EXPIRATIONDATE" property="expirationDate"/>
 		<result column="ADDRESS" property="address"/>
-		<collection property="membershipVO" javaType="MembershipVO" ofType="MembershipVO">
+		<collection property="membershipVO" javaType="List" ofType="MembershipVO">
 			<id column="MEMBERSHIPNUM" property="membershipNum"/>
 			<result column="NAME" property="name"/>			
 			<result column="TYPE" property="type"/>
@@ -51,7 +52,7 @@
 			<result column="PTCOUNT" property="ptCount"/>
 			<result column="PRICE" property="price"/>
 		</collection>
-		<collection property="registrationVO" javaType="RegistrationVO" ofType="RegistrationVO">
+		<collection property="registrationVO" javaType="List" ofType="RegistrationVO">
 			<id column="REGISTRATIONNUM" property="registrationNum"/>
 			<result column="MEMBERNUM" property="memberNum"/>
 			<result column="MEMBERSHIPNUM" property="membershipNum"/>
