@@ -14,9 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("/membership/*")
-public class MembershipController {
+public class MemberShipController {
 	@Autowired
-	private MembershipService membershipService;
+	private MemberShipService membershipService;
 	
 	//등록 폼으로 이동
 	@GetMapping("add")
@@ -24,7 +24,7 @@ public class MembershipController {
 	}
 	//이용권 등록
 	@PostMapping("add")
-	public String setAdd(MembershipVO membershipVO) throws Exception {
+	public String setAdd(MemberShipVO membershipVO) throws Exception {
 		int result = membershipService.setAdd(membershipVO);
 		
 		return "redirect:./list";
@@ -33,7 +33,7 @@ public class MembershipController {
 	//이용권 목록
 	@GetMapping("list")
 	public String getList(Model model) throws Exception {
-		List<MembershipVO> ar = membershipService.getList();
+		List<MemberShipVO> ar = membershipService.getList();
 		model.addAttribute("list", ar);
 		
 		return "membership/list";

@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MembershipVO {
+public class MemberShipVO {
    //이용권번호
    private Long membershipNum;
    //이용권이름
