@@ -4,7 +4,25 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.attendance.AttendanceDAO">
-	<select id="getNum" resultType="java.lang.Long" parameterType="java.util.Map">
+	<sql id="searchSql"> 
+		<if test="kind=='name'">WHERE E.NAME LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='status'">WHERE AM.STATUS LIKE CONCAT('%',#{search},'%')</if>
+	</sql>
+	
+	<sql id="searchSqlA">
+		<if test="pager.kind=='name'">AND E.NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+		<if test="pager.kind=='state'">AND A.STATE LIKE CONCAT('%',#{pager.search},'%')</if>
+	</sql>
+
+	<sql id="joinSql">
+		FROM ATTENDANCEMODIFY AM
+			JOIN ATTENDANCE A
+			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+	</sql>
+
+	<select id="getNum" resultType="java.lang.Long" parameterType="Map">
 		SELECT ATTENDANCENUM
 		FROM ATTENDANCE
 		WHERE WORKDATE=#{modify.modifyDate}
@@ -24,6 +42,17 @@
 			AND WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</update>
 	
+	<select id="getEmployeeList" resultType="EmployeeVO">
+		SELECT EMPLOYEENUM
+		FROM EMPLOYEE 
+	</select>
+	
+	<insert id="setEnd" parameterType="Map">
+		INSERT INTO ATTENDANCE
+		(EMPLOYEENUM, WORKDATE, STATE)
+		VALUES (#{vo.employeeNum}, #{date}, '결근')
+	</insert>
+
 	<update id="setState" parameterType="Map">
 		UPDATE ATTENDANCE
 		<set>
@@ -34,20 +63,32 @@
 		</set>
 			WHERE ATTENDANCENUM=#{vo.attendanceNum}
 	</update>
-	
+ 
 	<select id="getList" resultType="Map" parameterType="EmployeeVO">
 		SELECT *
 		FROM ATTENDANCE
 		WHERE EMPLOYEENUM=#{employeeNum}
 	</select>
 	
-	<select id="getInfo" resultMap="getInfoResult" parameterType="EmployeeVO">
+	<select id="getAdminList" resultType="Map">
+		SELECT A.*, E.NAME, E.EMPLOYEENUM
+		FROM ATTENDANCE A
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+	</select>
+	
+	<select id="getResources" resultType="Map">
+		SELECT *
+		FROM EMPLOYEE
+	</select>
+	
+	<select id="getInfo" resultMap="getInfoResult" parameterType="Map">
 		SELECT A.*, E.*
 		FROM ATTENDANCE A 
 			JOIN EMPLOYEE E
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM
-		WHERE E.EMPLOYEENUM=#{employeeNum}
-		AND A.WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
+		WHERE E.EMPLOYEENUM=#{vo.employeeNum}
+		AND A.WORKDATE=#{date}
 	</select>
 	
 	<resultMap type="AttendanceVO" id="getInfoResult">
@@ -64,6 +105,40 @@
 		</association>
 	</resultMap>	
 	
+	<!-- 당일 근태 total -->
+	<select id="getDayTotal" resultType="Long" parameterType="Map">
+		SELECT COUNT(A.ATTENDANCENUM)
+		FROM ATTENDANCE A
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM 
+		WHERE A.WORKDATE=#{attendance.workDate}
+		<include refid="searchSqlA"></include>	
+	</select>
+	
+	<!-- 당일 근태 -->
+	<select id="getDayList" resultMap="getDayResult" parameterType="Map">
+		SELECT A.*, E.NAME
+		FROM ATTENDANCE A
+			JOIN EMPLOYEE E
+			ON A.EMPLOYEENUM=E.EMPLOYEENUM 
+		WHERE A.WORKDATE=#{attendance.workDate}
+		<include refid="searchSqlA"></include>
+		ORDER BY A.ONTIME DESC	
+		LIMIT #{pager.startRow}, #{pager.lastRow}
+	</select>
+	
+	<resultMap type="AttendanceVO" id="getDayResult">
+		<id column="ATTENDANCENUM" property="attendanceNum"/>
+		<result column="EMPLOYEENUM" property="employeeNum"/>
+		<result column="WORKDATE" property="workDate"/>
+		<result column="ONTIME" property="onTime"/>
+		<result column="OFFTIME" property="offTime"/>
+		<result column="STATE" property="state"/>
+		<association property="employeeVO" javaType="EmployeeVO">			
+			<id column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="NAME" property="name"/>
+		</association>
+	</resultMap>
 	
 	<update id="setUpdateA" parameterType="Map">
 		UPDATE ATTENDANCE
@@ -83,11 +158,7 @@
 	
 	<select id="getRequestDetail" resultMap="getDetailResult" parameterType="AttendanceModifyVO">
 		SELECT AM.*, A.*, E.NAME, E.EMPLOYEENUM
-		FROM ATTENDANCEMODIFY AM
-			JOIN ATTENDANCE A
-			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
-			JOIN EMPLOYEE E
-			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		<include refid="joinSql"></include>
 		WHERE AM.ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
 	</select>
 	
@@ -110,15 +181,19 @@
 			<result column="NAME" property="name"/>
 		</association>
 	</resultMap>	
+	
+	<select id="getRequestTotal" resultType="java.lang.Long" parameterType="Pager">
+		SELECT COUNT(AM.ATTENDANCEMODIFYNUM)
+		<include refid="joinSql"></include>
+		<include refid="searchSql"></include>
+	</select>
 
-	<select id="getRequestList" resultMap="getRequestResult" parameterType="AttendanceModifyVO">
+	<select id="getRequestList" resultMap="getRequestResult" parameterType="Pager">
 		SELECT AM.*, E.NAME 
-		FROM ATTENDANCEMODIFY AM 
-			JOIN ATTENDANCE A
-			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
-			JOIN EMPLOYEE E
-			ON A.EMPLOYEENUM=E.EMPLOYEENUM
+		<include refid="joinSql"></include>
+		<include refid="searchSql"></include>
 		ORDER BY AM.ATTENDANCEMODIFYNUM DESC
+		LIMIT #{startRow}, #{lastRow}
 	</select>
 	
 	<resultMap type="AttendanceVO" id="getRequestResult">
@@ -137,7 +212,12 @@
 		</association>
 	</resultMap> 
 	
-
+	
+	<select id="getModifyTotal" parameterType="EmployeeVO" resultType="Long">
+		SELECT COUNT(ATTENDANCEMODIFYNUM)
+		<include refid="joinSql"></include>
+		WHERE E.EMPLOYEENUM=#{employeeNum}
+	</select>
 	
 	<select id="getModifyDetail" resultType="AttendanceModifyVO" parameterType="AttendanceModifyVO">
 		SELECT * 
@@ -145,15 +225,12 @@
 		WHERE ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
 	</select>
 	
-	<select id="getModifyList" resultMap="getListResult" parameterType="EmployeeVO">
+	<select id="getModifyList" resultMap="getListResult" parameterType="Map">
 		SELECT AM.*, E.NAME 
-		FROM ATTENDANCEMODIFY AM 
-			JOIN ATTENDANCE A
-			ON AM.ATTENDANCENUM=A.ATTENDANCENUM
-			JOIN EMPLOYEE E
-			ON A.EMPLOYEENUM=E.EMPLOYEENUM
-		WHERE E.EMPLOYEENUM=#{employeeNum}
+		<include refid="joinSql"></include>
+		WHERE E.EMPLOYEENUM=#{vo.employeeNum}
 		ORDER BY AM.ATTENDANCEMODIFYNUM DESC
+		LIMIT #{pager.startRow}, #{pager.lastRow}
 	</select>
 	
 	<resultMap type="AttendanceVO" id="getListResult">

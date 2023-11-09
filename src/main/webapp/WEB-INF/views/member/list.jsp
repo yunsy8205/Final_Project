@@ -32,8 +32,52 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <h3>전체 회원 목록</h3>
               <div class="container-xxl flex-grow-1 container-p-y">
+                <h3>전체 회원 목록</h3>
+
+                <!-- Modal -->
+                <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">이용권</h5>
+                        <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row mb-3">
+                          <label for="num" class="col-sm-2 col-form-label">회원번호</label>
+                          <div class="col-sm-10">
+                            <input type="text" id="num" name="memberNum" class="form-control" readonly>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="name" class="col-sm-2 col-form-label">회원이름</label>
+                          <div class="col-sm-10">
+                            <input type="text" id="name" name="memberName" class="form-control" readonly>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="num" class="col-sm-2 col-form-label">이용권</label>
+                          <div class="col-sm-10">
+                            <select id="inputState" class="form-select">
+                              <option>Choose...</option>
+                              <option>...</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">
+                          이전
+                        </button>
+                        <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">
+                          등록
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <div>
                     <form action="./list" method="get" id="frm">
@@ -75,7 +119,10 @@
                           <td class="ptCount" data-ptcount="${vo.ptCount}">${vo.ptCount}</td>
                           <td>${member.employeeVO.name}</td>
                           <td id="ptAdd" value="">
-                            <a href="#" class="membershipADDBtn" class="btn btn-primary" value=""></a>
+                            <a href="#" class="membershipADDBtn btn btn-primary"
+                            data-num="${vo.memberNum}"
+                            data-name="${vo.memberName}"
+                            ></a>
                           </td>
                         </tr>
                       </c:forEach>
@@ -98,62 +145,7 @@
                 </li>
               </ul>
               <!-- 페이징 -->
-							<!-- <nav aria-label="Page navigation example">
-								<ul class="pagination justify-content-center">
-									<c:if test="${pager.pre}">
-									<li class="page-item ${pager.pre?'':'disabled'}"><a class="page-link"
-										href="./list?page=${pager.startNum - 1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous"> 
-                      <span aria-hidden="true">&laquo;</span>
-									</a></li>
-									</c:if>
-									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-										var="i">
-										<li class="page-item"><a class="page-link"
-											href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
-									</c:forEach>
-									<c:if test="${pager.next}">
-										<li class="page-item"><a class="page-link"
-											href="./list?page=${pager.lastNum + 1}&kind=${pager.kind}&search=${pager.search}"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										</a></li>
-									</c:if>
-								</ul>
-							</nav> -->
-              <!-- / Content --> 
-              
-              
-              <!-- Footer -->
-                <!-- <footer class="content-footer footer bg-footer-theme">
-                  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">
-                      ©
-                      <script>
-                        document.write(new Date().getFullYear());
-                      </script>
-                      , made with ❤️ by
-                      <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                    </div>
-                    <div>
-                      <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                      <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                      <a
-                        href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Documentation</a
-                      >
-
-                      <a
-                        href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Support</a
-                      >
-                    </div>
-                  </div>
-                </footer> -->
-                <!-- / Footer -->       
+							      
 
               <div class="content-backdrop fade"></div>
             </div>
@@ -200,6 +192,15 @@
       //   }
       // })
       
+      $('a.membershipADDBtn').on('click', function(){
+        const num = $('a.membershipADDBtn').attr('data-num');
+        const name = $('a.membershipADDBtn').attr('data-name');
+
+        $('#num').val(num);
+        $('#name').val(name);
+        $('#smallModal').modal('show'); //모달 활성화
+      })
+
     </script>
   </body>
 </html>
