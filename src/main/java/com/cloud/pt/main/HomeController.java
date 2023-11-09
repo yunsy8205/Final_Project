@@ -1,6 +1,10 @@
 package com.cloud.pt.main;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -20,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cloud.pt.attendance.AttendanceVO;
 import com.cloud.pt.employee.EmployeeService;
 import com.cloud.pt.employee.EmployeeVO;
 import com.cloud.pt.employee.PasswordVO;
+import com.cloud.pt.notice.NoticeVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,13 +41,14 @@ public class HomeController {
 	private EmployeeService employeeService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private HomeService homeService;
 	
 	
 	@GetMapping("home")
 	public String getIndex(Model model) throws Exception {
 		
 		SecurityContext context = SecurityContextHolder.getContext();
-		
 		Authentication a = context.getAuthentication();
 		
 		boolean check = a.getPrincipal().toString().contains("재직");
@@ -50,6 +57,10 @@ public class HomeController {
 			model.addAttribute("url", "/");
 			return "/commons/result";
 		}
+		
+		//공지
+		List<NoticeVO> list = homeService.getNoticeList();
+		model.addAttribute("list", list);
 		
 		return "home";
 	}
@@ -113,6 +124,17 @@ public class HomeController {
 		return "commons/ajaxResult";
 	}
 	
+	
+	@GetMapping("attendanceTime")
+	@ResponseBody
+	public Object getOnOffTime(AttendanceVO attendanceVO)throws Exception{
+		attendanceVO = homeService.getOnOffTime(attendanceVO);
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("time", attendanceVO);
+		
+		return map;
+	}
 	
 	// 임시비밀번호 랜덤생성
 	public static String generateRandomString(int length) {
