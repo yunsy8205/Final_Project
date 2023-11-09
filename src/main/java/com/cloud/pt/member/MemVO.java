@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.cloud.pt.employee.EmployeeVO;
-import com.cloud.pt.membership.MemberShipVO;
+import com.cloud.pt.membership.MembershipVO;
 import com.cloud.pt.registration.RegistrationVO;
 
 import lombok.Getter;
@@ -40,7 +40,7 @@ public class MemVO implements UserDetails {
 	private String address;
 	
 	private EmployeeVO employeeVO;
-	private MemberShipVO membershipVO;
+	private MembershipVO membershipVO;
 	private RegistrationVO registrationVO;
 	
 	
