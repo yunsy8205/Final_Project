@@ -309,7 +309,7 @@
 									<input type="hidden" name="approvalNum" value="${approvalVO.approvalNum}">
 									<input type="hidden" id="state" name="state" value="진행중">
 									<input type="hidden" id="reason" name="reason">
-									<button id="approvalBtn">결재</button>
+									<button class="btn btn-primary" id="approvalBtn">결재</button>
 								</form>
 								
 								</c:if>
@@ -325,7 +325,7 @@
 									<input type="hidden" id="leaveKind" name="leaveKind" value="${approvalVO.leaveKind}">
 
 									
-									<button>결재</button>
+									<button class="btn btn-primary">결재</button>
 								</form>
 				
 								
