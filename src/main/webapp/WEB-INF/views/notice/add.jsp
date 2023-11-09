@@ -38,8 +38,8 @@
 			padding-left: 31%;
 			margin-top: 50px;
 		}
-		#radioBox{
-			padding-top: 1%;
+		.radioBox{
+    		padding-top: 0.5%;
 		}
 		.files{
 			height: 39.15px;
@@ -50,7 +50,7 @@
 		}
 		.note-editor .note-editing-area {
 		    position: relative;
-		    height: 300px;
+		    height: 500px;
 		}
 		.file1{
 			display: flex;
@@ -82,8 +82,36 @@
                     <div class="card-body">
                       <form action="./add" method="post" enctype="multipart/form-data">
                         <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="check">상단고정</label>
+                          <div class="radioBox col-md">
+                          <span class="radio1">
+			                        <input
+			                        name="pin"
+			                        class="form-check-input"
+			                        type="radio"
+			                        value="1"
+			                        id="pin1"
+			                        
+			                        />
+		                        	<label class="form-check-label" for="pin1"> 고정 </label>
+		                        </span>
+		                        <span class="radio1">
+			                        <input
+			                        name="pin"
+			                        class="form-check-input"
+			                        type="radio"
+			                        value="0"
+			                        id="pin2"
+			                        checked
+			                        />
+		                        	<label class="form-check-label" for="pin2"> 안함 </label>
+	                        	</span>
+                          
+                        </div>
+                        </div>
+                        <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-name">카테고리</label>
-	                        <div id="radioBox" class="col-md">
+	                        <div class="radioBox col-md">
 		                        <span class="radio1">
 			                        <input
 			                        name="category"
@@ -177,7 +205,7 @@
       $('#summernote').summernote({
         placeholder: '공지사항 내용을 입력해주세요.',
         tabsize: 2,
-        height: 120,
+        height: 500,
         toolbar: [
           ['style', ['style']],
           ['font', ['bold', 'underline', 'clear']],
@@ -198,7 +226,7 @@
     	if(count < max){
 	    	
 		    let fileTag = '<div class="file1"><input type="file" class="files form-control" '
-		    			  +'id="files" name="files"/><span class="x">x</span></div>';
+		    			  +'id="files" name="multipartFiles"/><span class="x">x</span></div>';
 	    	$('#fileBox').append(fileTag);
 	        
 	    	count ++;

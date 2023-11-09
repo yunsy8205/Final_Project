@@ -33,4 +33,8 @@ public interface NoticeDAO {
 	public Long getCatTotal(NoticeVO noticeVO)throws Exception;
 	
 	public List<NoticeVO> getCatList(Map<String, Object> map)throws Exception;
+	
+	public int setHitUpdate(NoticeVO noticeVO)throws Exception;
+	
+	public List<NoticeVO> getPinList()throws Exception;
 }

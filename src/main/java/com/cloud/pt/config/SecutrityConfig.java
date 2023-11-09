@@ -53,6 +53,9 @@ public class SecutrityConfig {
 			.authorizeHttpRequests()
 				.antMatchers("/employee/join").hasRole("GENERAL")	
 				.antMatchers("/admin/attendance").hasRole("RESOURCES")
+				.antMatchers("/notice/add").hasAnyRole("CEO", "GENERAL")
+				.antMatchers("/notice/update").hasAnyRole("CEO", "GENERAL")
+				.antMatchers("/notice/delete").hasAnyRole("CEO", "GENERAL")
 				.antMatchers("/").permitAll()
 				.and()
 				
