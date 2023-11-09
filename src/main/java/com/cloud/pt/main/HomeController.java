@@ -44,14 +44,6 @@ public class HomeController {
 		
 		Authentication a = context.getAuthentication();
 		
-		log.info("==>>> GetName :{}", a.getName());       // id
-		log.info("==>>> GetPrincipal :{}", a.getPrincipal());  // 사용자 정보
-		log.info("==>>> GetRole :{}", a.getAuthorities());// 사용자 권한s 
-		log.info("==>>> STATE :{}", a.getPrincipal().toString());
-		//int findIndex = a.getPrincipal().toString().indexOf("재직");
-		
-		
-		log.info("==>>> index(재직) : {}", a.getPrincipal().toString().contains("재직"));
 		boolean check = a.getPrincipal().toString().contains("재직");
 		if(!check) {
 			model.addAttribute("message", "퇴직처리 되었습니다. 그동안 수고 많으셨습니다!");
@@ -74,16 +66,11 @@ public class HomeController {
 	public String getFindPw(@ModelAttribute EmployeeVO employeeVO)throws Exception{
 		Authentication con = SecurityContextHolder.getContext().getAuthentication();
 		
-		log.info("user >>>>>>>>>>>>>>>>> : {}", con.getPrincipal());
-		
 		return "/employee/findPw";
 	}
 	
 	@PostMapping("/employee/findPw")
 	public String getFindPw(EmployeeVO employeeVO,PasswordVO passwordVO, Model model)throws Exception{
-		log.info("phone >>>> :{}", employeeVO.getPhone());
-		log.info("name >>>> :{}", employeeVO.getName());
-		log.info("num >>>> :{}", employeeVO.getEmployeeNum());
 		model.addAttribute("phone", employeeVO.getPhone());
 		model.addAttribute("employeeNum", employeeVO.getEmployeeNum());
 		model.addAttribute("name", employeeVO.getName());
@@ -92,7 +79,7 @@ public class HomeController {
 		
 		if(employeeVO == null) {
 			model.addAttribute("check", 1);
-			log.info("check null  : {}", model.getAttribute("check"));
+			
 			return "/employee/findPw";
 		} else {
 			model.addAttribute("check", 0);
@@ -100,58 +87,53 @@ public class HomeController {
 			model.addAttribute("phone", employeeVO.getPhone());
 			model.addAttribute("employeeNum", employeeVO.getEmployeeNum());
 			model.addAttribute("name", employeeVO.getName());
-			log.info("check 0 : {}", model.getAttribute("check"));
 		}
 		
-		log.info(">>>>>>>>>>>>>>>>>>>>> EMP findPw : {}", employeeVO.getPassword());
 		
 		return "/employee/findPw";
 	}
 	
 	//비밀번호 변경시 랜덤비밀번호 문자전송
 	@GetMapping("phonePw")
-	public String phoneFw(@RequestParam("phone") String userPhoneNumber,String employeeNum,@RequestParam("name")String name,EmployeeVO employeeVO,Model model) throws Exception { // 휴대폰 문자보내기
+	public String phoneFw(@RequestParam("phone") String userPhoneNumber,String employeeNum,@RequestParam("name") String name, EmployeeVO employeeVO,Model model) throws Exception { // 휴대폰 문자보내기
 		log.info("phonePw get 들어옴");
 		Random random = new Random();
-//		StringBuffer randomBuf = new StringBuffer(); // 문자열 생성할 빈 문자열
-//		for (int i = 0; i < 8; i++) {
-//			// Random.nextBoolean() : 랜덤으로 true, false 리턴(8자리) (true : 랜덤 소문자 영어, false : 랜덤 숫자)
-//			if (random.nextBoolean()) {
-//				// 26 : a-z 알파벳 개수
-//				// 97 : letter 'a' 아스키코드
-//				// (int)(random.nextInt(26)) + 97 : 랜덤 소문자 아스키코드
-//				randomBuf.append((char)((int)(random.nextInt(26)) + 97));
-//			} else {
-//				randomBuf.append(random.nextInt(10));
-//			}
-//		}
 		
-		//String randomStr = randomBuf.toString();
 		int length = 8;
+		log.info("random 찍으러 간다?");
 		String randomStr = generateRandomString(length);
-		
-		employeeVO.setEmployeeNum(employeeNum);
+		log.info("랜덤 배정!");
+		employeeVO.setEmployeeNum(employeeVO.getEmployeeNum());
 		employeeVO.setPassword(randomStr);
-		employeeVO.setName(name);
+		employeeVO.setName(employeeVO.getName());
 		//System.out.println(randomStr);
-		employeeService.certifiedPhoneNumber(userPhoneNumber, randomStr);
+		employeeVO.setPassword(randomStr); employeeService.certifiedPhoneNumber(userPhoneNumber, randomStr);
 		int result = employeeService.setFindPwUpdate(employeeVO);
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";
 	}
 	
-	public static String generateRandomString(int length) {
-        String characters = "abcdefghijklmnopqrstuvwxyz0123456789*@#$%^&+=";
-        StringBuilder randomString = new StringBuilder();
-        SecureRandom random = new SecureRandom();
-
-        for (int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(characters.length());
-            char randomChar = characters.charAt(randomIndex);
-            randomString.append(randomChar);
-        }
-
-        return randomString.toString();
-    }
 	
+	// 임시비밀번호 랜덤생성
+	public static String generateRandomString(int length) {
+	    String lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+	    String digitChars = "0123456789";
+	    String specialChars = "*@#$%^&+=";
+	    
+	    SecureRandom random = new SecureRandom(); 
+	    StringBuilder randomString = new StringBuilder();
+	    
+	    // 각각 하나씩 무작위로 추가
+	    randomString.append(lowercaseChars.charAt(random.nextInt(lowercaseChars.length())));
+	    randomString.append(digitChars.charAt(random.nextInt(digitChars.length())));
+	    randomString.append(specialChars.charAt(random.nextInt(specialChars.length())));
+	    
+	    // 나머지 길이만큼 남은 문자들을 추가
+	    for (int i = 3; i < length; i++) {
+	        String allChars = lowercaseChars + digitChars + specialChars;
+	        randomString.append(allChars.charAt(random.nextInt(allChars.length())));
+	    }
+	    
+	    return randomString.toString();
+	}
 }

@@ -84,12 +84,8 @@
   let dataCheck = document.getElementById("btn1").getAttribute("data-check");
   
   if (dataCheck === "1") {
-        // data-check가 1인 경우, 해당 블록을 숨깁니다.
-        // 예: "c:if" 블록을 숨김 처리
         document.getElementById("block1").style.display = "block";
     } else if (dataCheck === "0") {
-        // data-check가 0인 경우, 해당 블록을 표시합니다.
-        // 예: "c:if" 블록을 표시 처리
         document.getElementById("block2").style.display = "block";
     }
 </script>
