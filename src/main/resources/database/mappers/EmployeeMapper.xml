@@ -28,6 +28,9 @@
 
 	
 	<insert id="setJoin" parameterType="EmployeeVO">
+	<selectKey keyProperty="employeeNum" order="AFTER" resultType="java.lang.String"> 
+		SELECT MAX(EMPLOYEENUM) FROM EMPLOYEE 
+	</selectKey>
 		INSERT INTO EMPLOYEE
 		VALUES (DEFAULT, #{name}, #{password}, #{phone}, #{address}, #{gender}, #{birth}, now(), #{quitDate}, #{state}, #{position}, 12, null, null, #{proFile}, #{proOriginal})
 	</insert>

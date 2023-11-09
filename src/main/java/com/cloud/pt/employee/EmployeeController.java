@@ -41,15 +41,6 @@ public class EmployeeController {
 	private PasswordEncoder passwordEncoder;
 	
 	
-//	public EmployeeController() {
-//		// TODO Auto-generated constructor stub
-//		// sms api
-//		String api_key = "NCS6Z2IHA0RLQUS1"; //쿨sms api
-//	    String api_secret = "MK0T5L21VZO4FXLBLRMQJBYHJIRAVOZC"; //쿨 sms 시크릿api
-//		DefaultMessageService employeeService = NurigoApp.INSTANCE.initialize("NCS6Z2IHA0RLQUS1", "MK0T5L21VZO4FXLBLRMQJBYHJIRAVOZC", "https://api.coolsms.co.kr");
-//	}
-	
-	
 	
 	@GetMapping("info")
 	public void getInfo(Principal principal, EmployeeVO employeeVO,PasswordVO passwordVO, Model model)throws Exception{	
@@ -148,14 +139,16 @@ public class EmployeeController {
 		
 		int result = employeeService.setJoin(employeeVO,empfile);
 		
-		String userPhoneNumber = employeeVO.getPassword();
-		String employeeNum = employeeVO.getEmployeeNum();
-		String password = "a12345678*";
 		employeeVO.setEmployeeNum(employeeVO.getEmployeeNum());
 		
-		log.info(">>>>>>>>>>>>> NUm : {}", employeeVO.getEmployeeNum());
-		log.info("EMP SEND >>>>>>> : {}", employeeVO);
-		//employeeService.sendJoin(userPhoneNumber, employeeNum, password);
+		String userPhoneNumber = employeeVO.getPhone();
+		String employeeNum = employeeVO.getEmployeeNum();
+		String password = "a12345678*";
+		
+		log.info(userPhoneNumber);
+		log.info(employeeNum);
+		
+		employeeService.sendJoin(userPhoneNumber, employeeNum, password);
 		
 		return "redirect:/employee/list";
 	}
