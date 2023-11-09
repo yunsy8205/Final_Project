@@ -55,7 +55,7 @@
                                 <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;">
                                   <h1 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 정보</h1>
                                   <div class="proFile_con">
-                                    <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
+                                    <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" style="width:10rem; height:10rem;" onerror="this.style.display='none'">
                                   </div>
                                 </div>
                                 <div class="card-body">
@@ -135,7 +135,7 @@
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">서명이미지</label>
                                         <div class="col-sm-10">
                                           <!-- <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.signFile}" readonly/> -->
-                                          <img src="../file/employee/${employeeVO.signFile}" id="basic-default-name sign" alt="개인 싸인">
+                                          <img src="../file/employee/${employeeVO.signFile}" id="basic-default-name sign" alt="개인싸인" onerror="this.style.display='none'">
                                         </div>
                                       </div>
                                     </div>

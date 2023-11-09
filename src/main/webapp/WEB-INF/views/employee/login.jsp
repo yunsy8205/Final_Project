@@ -72,8 +72,3 @@
 </body>
 <c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
 </html>
-
-
-
-
-

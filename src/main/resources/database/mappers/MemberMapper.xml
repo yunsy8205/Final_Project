@@ -21,6 +21,7 @@
 		LEFT OUTER JOIN EMPLOYEE E
 		ON M.EMPLOYEENUM=E.EMPLOYEENUM
 		<if test="pager.kind=='name'">WHERE NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+		ORDER BY MEMBERNUM DESC
 	</select>
 
 	<insert id="setMemberAdd" parameterType="MemVO">
