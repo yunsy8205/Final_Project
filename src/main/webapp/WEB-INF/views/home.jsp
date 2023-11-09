@@ -65,6 +65,8 @@
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>
 	<!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@6.1.9/index.global.min.js'></script>
+	<!-- chart.js -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
   </head>
   <script type="text/javascript">
@@ -279,6 +281,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     	    return dateString;
     	}
+    	
+    	var ctx = document.getElementById("canvas").getContext("2d");
+
 	
     	
     </script>
