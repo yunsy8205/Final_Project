@@ -35,7 +35,7 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 <h3 style="text-align: center;">전체 회원 목록</h3>
 
-                <!-- Modal -->
+                <!-- 이용권등록 Modal -->
                 <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -45,9 +45,9 @@
                       </div>
                       <div class="modal-body">
                         <div class="row mb-3">
-                          <label for="num" class="col-sm-2 col-form-label">회원번호</label>
+                          <label for="memberNum" class="col-sm-2 col-form-label">회원번호</label>
                           <div class="col-sm-10">
-                            <input type="text" id="num" name="memberNum" class="form-control" readonly>
+                            <input type="text" id="memberNum" name="memberNum" class="form-control" readonly>
                           </div>
                         </div>
                         <div class="row mb-3">
@@ -59,9 +59,24 @@
                         <div class="row mb-3">
                           <label for="num" class="col-sm-2 col-form-label">이용권</label>
                           <div class="col-sm-10">
-                            <select id="inputState" class="form-select">
-                              <option>Choose...</option>
-                              <option>...</option>
+                            <select id="membership" name="membershipNum" class="form-select">
+                              <c:forEach items="${membership}" var="li">
+	                              <option value="${li.membershipNum}" data-count="${li.ptCount}" data-month="${li.month}">
+                                  ${li.name}
+                                </option>                              
+                              </c:forEach>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row mb-3" id="employee_add">
+                          <label for="num" class="col-sm-2 col-form-label">담당 트레이너</label>
+                          <div class="col-sm-10">
+                            <select id="employee" name="employeeNum" class="form-select">
+                              <c:forEach items="${employee}" var="li">
+	                              <option value="${li.employeeNum}">
+                                  ${li.name}
+                                </option>                              
+                              </c:forEach>
                             </select>
                           </div>
                         </div>
@@ -70,7 +85,7 @@
                         <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">
                           이전
                         </button>
-                        <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">
+                        <button type="button" id="addRegistrationBtn" class="btn btn-primary close">
                           등록
                         </button>
                       </div>
@@ -116,14 +131,16 @@
                           <td>${vo.phone}</td>
                           <td>${vo.joinDate}</td>
                           <td>${vo.expirationDate}</td>
-                          <td>${vo.registrationVO.regDate}</td>
+                          <c:forEach items="${vo.registrationVO}" var="re" begin="0" end="0">
+                            <td>${re.regDate}</td>
+                          </c:forEach>
                           <td class="ptCount" data-ptcount="${vo.ptCount}">${vo.ptCount}</td>
-                          <td>${member.employeeVO.name}</td>
-                          <td id="ptAdd" value="">
-                            <a href="#" class="membershipADDBtn btn btn-primary"
+                          <td>${vo.employeeVO.name}</td>
+                          <td id="ptAdd">
+                            <button class="membershipAddBtn btn btn-primary"
                             data-num="${vo.memberNum}"
                             data-name="${vo.memberName}"
-                            ></a>
+                            ></button>
                           </td>
                         </tr>
                       </c:forEach>
@@ -164,43 +181,87 @@
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
     <script type="text/javascript" src="/js/employee/list.js"></script>
     <script>
-      
-      document.addEventListener("DOMContentLoaded", function(){
-        const ptCount = document.getElementsByClassName("ptCount");
-        const membershipAdd = document.getElementsByClassName("membershipADDBtn");
-        
-        for(let i =0; i<ptCount.length; i++){
-          const ptCountValue = ptCount[i].getAttribute("data-ptcount");
-          console.log("Value: " + ptCountValue);
+      $(document).ready(function(){
+          const ptCount = $('.ptCount');
+          const membershipAdd = $('.membershipAddBtn');
+          
+          ptCount.each(function(i) {
+              const ptCountValue = $(this).data('ptcount');
 
-          if(ptCountValue == ''){
-            membershipAdd[i].style.display='block';
-            membershipAdd[i].style.backgroud='blue';
-            membershipAdd[i].textContent="등록";
-          }else{
-            membershipAdd[i].textContent="등록완료";
-            membershipAdd[i].style.background='black';
-          }
-        }
-      })
-      // $(document).ready(function() {
-      //   if($("#ptCount").val() == ''){
-      //     $("#membershipADDBtn").css("display","block");
-      //     $("#membershipADDBtn").text('등록');
-      //   }else if(!$("#ptCount").val() == ''){
-      //     $("#membershipADDBtn").text('등록완료');
-      //     $("#membershipADDBtn").css("background-color","black");
-      //   }
-      // })
-      
-      $('a.membershipADDBtn').on('click', function(){
-        const num = $('a.membershipADDBtn').attr('data-num');
-        const name = $('a.membershipADDBtn').attr('data-name');
+              if(ptCountValue === ''){
+                  membershipAdd.eq(i).text('등록');
+              } else {
+                  membershipAdd.eq(i).text('완료');
+                  membershipAdd.eq(i).prop('disabled', true);
+              }
+          });
+      });
 
-        $('#num').val(num);
+      //등록버튼 클릭 시 
+      $('.membershipAddBtn').on('click', function(){
+        const num = $(this).attr('data-num'); //회원번호
+        const name = $(this).attr('data-name'); //회원이름
+
+        $('#memberNum').val(num);
         $('#name').val(name);
         $('#smallModal').modal('show'); //모달 활성화
       })
+
+      let membershipNum = $('#membership').val();
+      let count = $('#membership').find("option:selected").data("count");
+      let month = $('#membership').find("option:selected").data("month");
+
+      let employeeNum = $('#employee').val();
+
+      //option이 바뀔 때마다 
+      $('#membership').on('change', function(){
+        membershipNum = $('#membership').val();
+        count = $(this).find("option:selected").data("count");
+        month = $(this).find("option:selected").data("month");
+
+        if(count == ''){
+          $('#employee_add').css('display', 'none');
+        }else {
+          $('#employee_add').css('display', 'flex');
+        }
+      })
+      
+      //option이 바뀔 때마다 
+      $('#employee').on('change', function(){
+        employeeNum = $('#employee').val();
+      })
+
+      //모달창의 등록버튼 클릭 시 
+      $('#addRegistrationBtn').on('click', function(){
+        const memberNum = $('#memberNum').val();
+        // console.log('m - '+memberNum, 'ms-' +membershipNum, 'c'+count, 'm'+month)
+        setAdd(memberNum, membershipNum, count, month, employeeNum);
+      })
+
+      //이용권 등록
+      function setAdd(memberNum, membershipNum, count, month, employeeNum){
+        $.ajax({
+          type: 'post',
+          url: '/registration/form',
+          data: {
+            memberNum: memberNum,
+            membershipNum: membershipNum,
+            ptCount: count,
+            month: month,
+            employeeNum: employeeNum
+          },
+          success: function(result){
+            if(result.trim()>0){
+              alert('이용권이 등록되었습니다');
+              $('#smallModal').modal('hide'); //모달 비활성화
+              location.reload();
+            }else {
+              alert('이용권 등록에 실패하였습니다.');
+            }
+          }
+        })
+      }
+    
 
     </script>
   </body>

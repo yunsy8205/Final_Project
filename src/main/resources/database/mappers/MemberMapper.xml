@@ -15,7 +15,11 @@
 	</select>
 
 	<select id="getMemberList" parameterType="Map" resultMap="getMemberDetailResult">
-		SELECT * FROM MEMBER
+		SELECT * FROM MEMBER M
+		LEFT OUTER JOIN REGISTRATION R
+		ON M.MEMBERNUM=R.MEMBERNUM
+		LEFT OUTER JOIN EMPLOYEE E
+		ON M.EMPLOYEENUM=E.EMPLOYEENUM
 		<if test="pager.kind=='name'">WHERE NAME LIKE CONCAT('%',#{pager.search},'%')</if>
 		ORDER BY MEMBERNUM DESC
 	</select>
@@ -42,9 +46,14 @@
 		<result column="GENDER" property="gender"/>
 		<result column="BIRTH" property="birth"/>
 		<result column="JOINDATE" property="joinDate"/>
+		<result column="PTCOUNT" property="ptCount"/>
 		<result column="EXPIRATIONDATE" property="expirationDate"/>
 		<result column="ADDRESS" property="address"/>
-		<collection property="membershipVO" javaType="MembershipVO" ofType="MembershipVO">
+		<association property="employeeVO" javaType="EmployeeVO">
+			<id column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="NAME" property="name"/>
+		</association>
+		<collection property="membershipVO" javaType="List" ofType="MembershipVO">
 			<id column="MEMBERSHIPNUM" property="membershipNum"/>
 			<result column="NAME" property="name"/>			
 			<result column="TYPE" property="type"/>
@@ -52,16 +61,13 @@
 			<result column="PTCOUNT" property="ptCount"/>
 			<result column="PRICE" property="price"/>
 		</collection>
-		<collection property="registrationVO" javaType="RegistrationVO" ofType="RegistrationVO">
+		<collection property="registrationVO" javaType="List" ofType="RegistrationVO">
 			<id column="REGISTRATIONNUM" property="registrationNum"/>
 			<result column="MEMBERNUM" property="memberNum"/>
 			<result column="MEMBERSHIPNUM" property="membershipNum"/>
 			<result column="REGDATE" property="regDate"/>			
 		</collection>
-		<collection property="employeeVO" javaType="EmployeeVO" ofType="EmployeeVO">
-			<id column="EMPLOYEENUM" property="employeeNum"/>
-			<result column="NAME" property="name"/>
-		</collection>
+		
 	</resultMap>
 	
 	<update id="setMemberUpdate" parameterType="MemVO">

@@ -102,6 +102,7 @@
 			<id column="EMPLOYEENUM" property="employeeNum"/>
 			<result column="NAME" property="name"/>
 			<result column="LEAVEDATE" property="leaveDate"/>
+			<result column="PROFILE" property="proFile"/>
 		</association>
 	</resultMap>	
 	
@@ -140,6 +141,7 @@
 		</association>
 	</resultMap>
 	
+	<!-- 근태 수정 -->
 	<update id="setUpdateA" parameterType="Map">
 		UPDATE ATTENDANCE
 			<set> STATE=#{attendance.state},
@@ -149,6 +151,7 @@
 			WHERE ATTENDANCENUM=#{attendance.attendanceNum}
 	</update>
 	
+	<!-- 근태요청 수정 -->
 	<update id="setUpdateAM" parameterType="AttendanceModifyVO">
 		UPDATE ATTENDANCEMODIFY
 			SET MODIFYCONTENTS=#{modifyContents},

@@ -8,19 +8,21 @@
   <button class="icon_btn" id="next_day"><i class="fa-solid fa-chevron-right fa-xs"></i></button>
 </h3>
 
-<div class="input-group m-5">
-  <form class="d-flex w-50">
+
+<div class="m-5">
+  <form>
       <input type="hidden" value="1" name="page" id="page">
       <select name="kind" class="form-select" id="k" data-kind="${pager.kind}" aria-label="Default select example">
           <option class="kind" value="name">이름</option>
           <option class="kind" value="state">상태</option>
       </select>
-      <input type="text" name="search" value="${pager.search}" placeholder="검색어를 입력하세요" class="form-control" aria-label="Search">
+      <input type="text" name="search" id="search" value="${pager.search}" placeholder="검색어를 입력하세요" class="form-control" aria-label="Search">
       <button type="button" id="submit_btn" class="btn btn-primary">조회</button>
   </form>
 </div>
-<button id="month_btn" class="btn btn-primary">월별 근태 확인</button>
-
+<div class="mx-5">
+  <button id="month_btn" class="btn btn-primary">월별 근태 확인</button>
+</div>
 <c:if test="${not empty list}"> 
 <div class="card m-5">
   <div id="attendance_day" class="table-responsive text-nowrap">

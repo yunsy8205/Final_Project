@@ -33,8 +33,8 @@
 </sql>
 	
 	<insert id="setNoticeAdd" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="noticeNum">
-		INSERT INTO NOTICE (NOTICENUM, EMPLOYEENUM, TITLE, CONTENTS, REGDATE, MODDATE,CATEGORY, HIT)
-		VALUES (NULL, #{employeeNum}, #{title}, #{contents}, NOW(), NOW(),#{category}, 0)
+		INSERT INTO NOTICE (NOTICENUM, EMPLOYEENUM, TITLE, CONTENTS, REGDATE, MODDATE,CATEGORY, HIT, PIN)
+		VALUES (NULL, #{employeeNum}, #{title}, #{contents}, NOW(), NOW(),#{category}, 0, #{pin})
 	</insert>
 	
 	<insert id="fileAdd" parameterType="NoticeFileVO">
@@ -69,8 +69,15 @@
   		</collection>
 	</resultMap>
 	
+	<select id="getPinList" resultType="NoticeVO">
+		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT, N.PIN
+		FROM NOTICE N JOIN EMPLOYEE E
+		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
+		WHERE PIN=1
+	</select>
+	
 	<select id="getNoticeList" parameterType="Pager" resultType="NoticeVO">
-		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT
+		SELECT N.NOTICENUM, N.CATEGORY, N.TITLE, E.NAME, N.EMPLOYEENUM, N.MODDATE, N.HIT, N.PIN
 		FROM NOTICE N JOIN EMPLOYEE E
 		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
 		WHERE
@@ -133,4 +140,9 @@
 		SELECT COUNT(NOTICENUM) FROM NOTICE
 		WHERE CATEGORY = #{category}
 	</select>
+	
+	<!-- 조회수 update -->
+	<update id="setHitUpdate" parameterType="noticeVO">
+		UPDATE NOTICE SET HIT=HIT+1 WHERE NOTICENUM=#{noticeNum}
+	</update>
 </mapper>

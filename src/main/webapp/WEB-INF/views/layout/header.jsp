@@ -32,6 +32,43 @@
     margin: 0 1.5rem;
     line-height: 5rem;
   }
+  HTML CSSResult Skip Results Iframe
+EDIT ON
+
+.dropdown{
+  position : relative;
+  display : inline-block;
+}
+
+.dropbtn{
+ 
+  cursor : pointer;
+  
+}
+.dropdown-content{
+  display : none;
+  position : absolute;
+  z-index : 1; /*다른 요소들보다 앞에 배치*/
+  font-weight: 400;
+  background-color: #f9f9f9;
+  min-width : 200px;
+}
+
+.dropdown-content a{
+  display : block;
+  text-decoration : none;
+  color : rgb(37, 37, 37);
+  font-size: 12px;
+  padding : 12px 20px;
+}
+
+.dropdown-content a:hover{
+  background-color : #ececec
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 </style>
 
 <nav
@@ -69,7 +106,8 @@
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end"> -->
-                    <div class="header_navi">
+                    <div class="header_navi" style="display: flex;
+                    align-items: center;">
               <a href="#">조직도</a>
               <sec:authorize access="!isAuthenticated()">
                 <a href="/employee/login">로그인</a>
@@ -77,9 +115,20 @@
               <sec:authorize access="isAuthenticated()">
                 <a href="/employee/info">마이페이지</a>
                 <a href="/employee/logout">로그아웃</a>
+                <div class="dropdown">
+                    <i class='far fa-bell dropbtn' style='font-size:24px'></i>
+                  <div class="dropdown-content">
+                    
+                   
+                  
+                    
+                  </div>
+                </div>
               </sec:authorize>
             </div>
                 <!--/ User -->
               </ul>
             </div>
           </nav>
+         
+         

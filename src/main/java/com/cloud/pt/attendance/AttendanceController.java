@@ -126,8 +126,8 @@ public class AttendanceController {
 	
 	@PostMapping("/admin/attendanceModify/update")
 	public String setUpdate(AttendanceVO attendanceVO, AttendanceModifyVO attendanceModifyVO) throws Exception {
-		log.info("attendanceVO: {}", attendanceVO);
-		log.info("attendanceModifyVO: {}", attendanceModifyVO);
+//		log.info("attendanceVO: {}", attendanceVO);
+//		log.info("attendanceModifyVO: {}", attendanceModifyVO);
 		
 		int result = attendanceService.setUpdate(attendanceVO, attendanceModifyVO);
 		

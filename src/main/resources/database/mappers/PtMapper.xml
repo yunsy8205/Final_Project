@@ -3,18 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.cloud.pt.ptLog.PtTypeDAO">
+<mapper namespace="com.cloud.pt.ptLog.PtLogDAO">
 	
-	<select id="getTypeList" parameterType="Map" resultType="PtTypeVO">
-		SELECT * FROM PTTYPE
-		WHERE EMPLOYEENUM = #{employeeNum};
+	<select id="getTypeLog" parameterType="Long" resultType="PtLogVO">
+		SELECT * FROM PTLOG
+		WHERE EMPLOYEENUM = #{employeeNum}
+		AND MEMBERNUM = #{memberNum}
 	</select>
 	
-	<insert id="addType" parameterType="PtTypeVO">
-		INSERT INTO PTTYPE (EMPLOYEENUM,NAME,WEIGHT,EXCOUNT,PTSET) VALUES (#{employeeNum},#{name},#{weight},#{exCount},#{ptSet})
+	<insert id="addLog" parameterType="PtLogVO">
+		INSERT INTO PTLOG(MEMBERNUM,EMPLOYEENUM,PTDATE) VALUES (#{memberNum},#{employeeNum},#{ptDate})
 	</insert>
 	
-	<delete id="delType">
-		DELETE FROM PTTYPE WHERE PTTYPENUM = #{ptTypeNum}
+	<delete id="delLog" parameterType="PtLogVO">
+		DELETE FROM PTLOG WHERE PTDATE = #{ptDate}
 	</delete>
 </mapper>

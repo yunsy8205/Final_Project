@@ -11,7 +11,7 @@ pageEncoding="UTF-8"%>
           <option class="kind" value="name">이름</option>
           <option class="kind" value="status">상태</option>
       </select>
-      <input type="text" name="search" value="${pager.search}" placeholder="검색어를 입력하세요" class="form-control" aria-label="Search">
+      <input type="text" id="search" name="search" value="${pager.search}" placeholder="검색어를 입력하세요" class="form-control" aria-label="Search">
       <button type="button" id="search_btn" class="btn btn-primary">조회</button>
   </form>
 </div>

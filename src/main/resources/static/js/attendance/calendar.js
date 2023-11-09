@@ -26,6 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#state').text(state);
         $('#on').text('출근 - '+on);
         $('#off').text('퇴근 - '+off);
+
+        if(state == '결근'){ //결근일 때 출퇴근 시간 숨기기
+            $('#on').css('display', 'none');
+            $('#off').css('display', 'none');
+        }
+
         $('#smallModal').modal('show'); //모달 활성화
      }
     });
