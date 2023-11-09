@@ -58,6 +58,14 @@
 	  #fc-dom-1{
 	  	font-size: 17px;
 	  }
+	  .chart1{
+	  	width: 50%;
+	  	height: 100%;
+	  }
+	  .chartBox{
+	  	display: flex;
+	  }
+	 
     </style>
 	<!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
@@ -66,7 +74,7 @@
 	<!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@6.1.9/index.global.min.js'></script>
 	<!-- chart.js -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
   </head>
   <script type="text/javascript">
@@ -183,8 +191,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3" style="width: 50%;">
                   <div class="card h-100">
-                    <div class="card-body">
-                      
+                    <div class="card-body chartBox">
+                    	<div class="border chart1">
+                    		<canvas id="myChart"></canvas>
+                    	</div>
+                    	<div class="border chart1"></div>
                     </div>
                   </div>
                 </div>
@@ -282,9 +293,6 @@ document.addEventListener('DOMContentLoaded', function() {
     	    return dateString;
     	}
     	
-    	var ctx = document.getElementById("canvas").getContext("2d");
-
-	
     	
     </script>
   </body>
