@@ -78,7 +78,7 @@ public class SecutrityConfig {
 				
 			// 403 예외처리 (권한에 따른 페이지 처리)
 			.exceptionHandling()
-				.accessDeniedPage("/error/denied")
+				.accessDeniedPage("/error")
 			
 				;
 		

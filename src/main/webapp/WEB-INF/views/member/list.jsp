@@ -33,7 +33,7 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-                <h3>전체 회원 목록</h3>
+                <h3 style="text-align: center;">전체 회원 목록</h3>
 
                 <!-- Modal -->
                 <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
@@ -77,21 +77,22 @@
                     </div>
                   </div>
                 </div>
-
                 <div>
-                  <div>
-                    <form action="./list" method="get" id="frm">
+                  <div class="m-5">
+                    <form action="./list" method="get" id="frm" style="display: flex;">
                       <input type="hidden" value="${pager.page}" id="page" name="page">
                       <!-- 파라미터 이름 kind -->
-                      <select name="kind" id="k" class="search" data-kind="${pager.kind}" >
+                      <select name="kind" id="k" class="search form-select" aria-label="Default select example" style="width: 10%;" data-kind="${pager.kind}" >
                         <option class="kind" value="name">이름</option>
                       </select> 
-                      <input type="text" name="search" value="${pager.search}" class="search" placeholder="검색어를 입력하세요.">
+                      <input type="text" name="search" value="${pager.search}" class="search form-control" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
                       <button type="submit" class="btn btn-primary">검색</button>
                     </form>
                   </div>
                 </div>
-                <a href="/member/add">등록</a>
+                <div style="text-align: right; margin-bottom: 3rem; margin-right: 1rem;">
+                  <a href="/member/add" class="btn btn-primary">회원등록</a>
+                </div>
                 <div id="req_list" class="table-responsive text-nowrap">
                   <table class="table table-hover">
                     <thead>

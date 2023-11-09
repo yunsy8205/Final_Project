@@ -38,24 +38,33 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header">
-                      <h1 class="emp_title">${employeeVO.name} <span class="position_inner"></span> 정보수정</h1>
+                      <h3 class="emp_title" style="text-align: center;">${employeeVO.name} <span class="position_inner"></span> 정보수정</h3>
                       <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" id="frm" action="./infoUpdate">
-                        <div class="proFile_con">
-                          <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필">
+                        <div class="proFile_con" style="text-align: center;">
+                          <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" style="width:10rem; height:10rem;"  onerror="this.style.display='none'">
                           <p>${employeeVO.proOriginal}</p>
-                          <input type="file"  name="empfile" id="proFile" required/>
+                          <input type="file"  name="empfile" id="proFile" style="width: 13rem;" required/>
                         </div>
-                        <input type="text" class="form-control" name="employeeNum" id="employeeNum" value="${employeeVO.employeeNum}" data-num="${emploiyeNum}" >
                         <div style="display: flex; justify-content: space-between; margin-bottom: 5rem;">
                           <div  class="empLeft" style="width: 47%;">
                             <div class="row mb-3">
+                              <label for="emploiyeNum" class="col-sm-2 col-form-label">사번</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" name="employeeNum" id="employeeNum" value="${employeeVO.employeeNum}" data-num="${emploiyeNum}" >
+                              </div>
+                            </div>
+                            <div class="row mb-3">
                               <form:label path="name" class="col-md-2 col-form-label">이름</form:label>
-                              <form:input path="name" id="name" class="form-control" value="${employeeVO.name}" readonly="true"></form:input>
+                              <div class="col-sm-10">
+                                <form:input path="name" id="name" class="form-control" value="${employeeVO.name}" readonly="true"></form:input>
+                              </div> 
                               <form:errors path="name"></form:errors>
                             </div>
                             <div class="row mb-3">
                               <form:label path="phone" class="col-md-2 col-form-label">전화번호</form:label>
-                              <form:input path="phone" id="phone"  class="form-control" ></form:input>
+                              <div class="col-sm-10">
+                                <form:input path="phone" id="phone"  class="form-control" ></form:input>
+                              </div>
                               <form:errors path="phone"></form:errors>
                             </div>
                             <div class="mb-3 row">
@@ -68,16 +77,20 @@
                                 <div id="addressMsg"></div>
                               </div>
                             </div>
-                            <div class="row mb-3" >
-                              <form:label path="birth" class="col-md-2 col-form-label">생년월일</form:label>
-                              <form:input type="date" path="birth" id="birth"  class="form-control" ></form:input>
-                              <form:errors path="birth"></form:errors>
-                            </div>
                           </div>
                           <div class="empRight" style="width: calc(100% - 53%);">
+                            <div class="row mb-3" >
+                              <form:label path="birth" class="col-md-2 col-form-label">생년월일</form:label>
+                              <div class="col-md-10">
+                                <form:input type="date" path="birth" id="birth"  class="form-control" ></form:input>
+                              </div>
+                              <form:errors path="birth"></form:errors>
+                            </div>
                             <div class="row mb-3">
                               <form:label path="joinDate" class="col-md-2 col-form-label">입사일</form:label>
-                              <form:input path="joinDate" id="joinDate"  class="form-control" value="" readonly="true"></form:input>
+                              <div class="col-md-10">
+                                <form:input path="joinDate" id="joinDate"  class="form-control" value="" readonly="true"></form:input>
+                              </div>
                               <form:errors path="joinDate"></form:errors>
                             </div>
                             <div class="row mb-3">
@@ -109,47 +122,61 @@
                             </c:if>
                           </div>
                         </div>
-                        <div class="upBtn">
-                          <button type="submit" id="upBtn">수정 완료</button>
+                        <div class="upBtn" style="text-align: center;">
+                          <button type="button" id="backBtn" class="btn btn-primary">이전</button>
+                          <button type="submit" id="upBtn" class="btn btn-primary">수정 완료</button>
                         </div>
                       </form:form>
-                      <form id="careerFrm">
-                        <div class="row mb-3">
-                          <p>경력</p>
-                          <div id="careerCon">
-                            <c:forEach items="${employeeVO.careers}" var="career">
-                              <input type="text" class="form-control" id="basic-default-name" value="${career.caTitle}" readonly/>
-                              <input type="text" class="form-control" id="basic-default-name" value="${career.caPassDate}" readonly/>
-                            </c:forEach>
-                            <div id="careerInputCon"></div>
+                      <div id="carcer" style="width:25rem;">
+                        <form id="careerFrm">
+                          <div class="row mb-3">
+                            <p>경력</p>
+                            <div id="careerCon">
+                              <c:forEach items="${employeeVO.careers}" var="career" >
+                                <div id="infoCareerText">
+                                  <input type="text" class="form-control career" id="basic-default-name" value="${career.caTitle}" readonly/>
+                                  <input type="text" class="form-control career" id="basic-default-name" value="${career.caPassDate}" readonly/>
+                                </div>
+                              </c:forEach>
+                              <div id="careerInputCon"></div>
+                            </div>
+
+                            <label for="caTitle" class="col-md-2 col-form-label">경력 명</label>
+                            <div class="col-sm-10"> 
+                              <input name="caTitle" id="caTitle" class="form-control" ></input>
+                            </div>
+                            <label for="caPassDate" class="col-md-2 col-form-label" >날짜</label>
+                            <div class="col-sm-10"> 
+                              <input type="date" name="caPassDate" id="caPassDate" class="form-control"></input>
+                            </div>
+                            <button id="carBtn" type="button" class="btn btn-primary">추가</button>
                           </div>
+                        </form>
 
-                          <label for="caTitle" class="col-md-2 col-form-label">경력 명</label>
-                          <input name="caTitle" id="caTitle" class="form-control" ></input>
-                          <label for="caPassDate" class="col-md-2 col-form-label" >날짜</label>
-                          <input type="date" name="caPassDate" id="caPassDate" class="form-control"></input>
-                          <button id="carBtn" type="button" >추가</button>
-                        </div>
-                      </form>
-
-                      <form id="certificationFrm">
-                        <div class="row mb-3">
-                          <p>자격증</p>
-                          <div id="certificationCon">
-                            <c:forEach items="${employeeVO.certifications}" var="certification">
-                              <input type="text" class="form-control" id="basic-default-name" value="${certification.cerTitle}" readonly/>
-                              <input type="text" class="form-control" id="basic-default-name" value="${certification.cerPassDate}" readonly/>
-                            </c:forEach>
-                            <div id="certificationInputCon"></div>
+                        <form id="certificationFrm">
+                          <div class="row mb-3">
+                            <p>자격증</p>
+                            <div id="certificationCon">
+                              <c:forEach items="${employeeVO.certifications}" var="certification">
+                                <div id="certification">
+                                  <input type="text" class="form-control certification" id="basic-default-name" value="${certification.cerTitle}" readonly/>
+                                  <input type="text" class="form-control certification" id="basic-default-name" value="${certification.cerPassDate}" readonly/>
+                                </div>
+                              </c:forEach>
+                              <div id="certificationInputCon"></div>
+                            </div>  
+                            <label for="cerTitle" class="col-md-2 col-form-label">자격증 명</label>
+                            <div class="col-sm-10"> 
+                              <input name="cerTitle" id="cerTitle" class="form-control"></input>
+                            </div>
+                            <label for="cerPassDate" class="col-md-2 col-form-label">날짜</label>
+                            <div class="col-sm-10"> 
+                              <input type="date" name="cerPassDate" id="cerPassDate" class="form-control"></input>
+                            </div>
+                            <button id="cerBtn" type="button" class="btn btn-primary">추가</button>
                           </div>  
-                          <label for="cerTitle" class="col-md-2 col-form-label">자격증 명</label>
-                          <input name="cerTitle" id="cerTitle" class="form-control"></input>
-                          <label for="cerPassDate" class="col-md-2 col-form-label">날짜</label>
-                          <input type="date" name="cerPassDate" id="cerPassDate" class="form-control"></input>
-                          <button id="cerBtn" type="button">추가</button>
-                        </div>  
-                      </form>
-                      
+                        </form>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -277,7 +304,25 @@ $("#cerBtn").click(function(){
       }
     })
   }
+
+  const caText = document.getElementById("infoCareerText");
+  const cerText = document.getElementById("infoCertificationText")
+  const ca = document.getElementsByClassName("career");
+  const cer = document.getElementsByClassName("certification");
+
   
+  for(ci of ca){
+    if(ci.value == ''){
+      ci.style="none";
+    }
+  }
+
+  for(ceri of ca){
+    if(ceri.value == ''){
+      ceri.style="none";
+    }
+  }
+
 </script>
 </body>
 </html>
