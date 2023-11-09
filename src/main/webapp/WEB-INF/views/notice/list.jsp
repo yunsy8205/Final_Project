@@ -137,7 +137,7 @@
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
-								
+									<div id="box">
 									<div class="input-group">
 									  <select id="kind" name="kind" class="select2 form-select">
 									  	<option selected value="title">Title</option>
@@ -146,7 +146,7 @@
 									  </select>
 									  <input type="text" class="form-control" id="search"/>
 									  <button
-									    class="btn btn-outline-primary btnChange"
+									    class="btn btn-outline-primary"
 									    id="searchBtn"
 									    type="button"
 									    >
@@ -158,7 +158,7 @@
 										<a class="a1 btn btn-primary" href="./add">글쓰기</a>
 									</div>
 									<!-- Hoverable Table rows -->
-									<div id="box">
+									
 										<div class="table-responsive text-nowrap">
 											<table class="table table-hover">
 												<thead>
@@ -201,6 +201,11 @@
 														<i class="tf-icon bx bx-chevrons-left"></i>
 													</button>
 												</li>
+												<c:if test="${pager.lastNum==0}">
+													<li class="page-item">
+														<button class="page-link" data-p="1">1</button>
+													</li>
+												</c:if>
 												<c:forEach  begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 													<li class="page-item">
 														<button class="pageBtn page-link" data-p="${i}">${i}</button>
@@ -215,12 +220,6 @@
 										</nav>
 									</div>
 									<!--/ Hoverable Table rows -->
-								</div>
-								<div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
-								  
-								</div>
-								<div class="tab-pane fade" id="navs-justified-messages" role="tabpanel">
-								  
 								</div>
 							</div>
 						</div>

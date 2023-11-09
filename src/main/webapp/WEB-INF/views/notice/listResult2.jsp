@@ -1,6 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<div class="input-group">
+									  <select id="kind" name="kind" class="select2 form-select">
+									  	<option selected value="title">Title</option>
+									  	<option value="contents">Contents</option>
+									  	<option value="name">Name</option>
+									  </select>
+									  <input type="text" class="form-control" id="search"/>
+									  <button
+									    class="btn btn-outline-primary"
+									    id="searchBtn2"
+									    type="button"
+									    >
+									    조회
+									  </button>
+									</div>
+									
+									<div style="display: flex; justify-content: flex-end;">
+										<a class="a1 btn btn-primary" href="./add">글쓰기</a>
+									</div>
+									<!-- Hoverable Table rows -->
 <div class="table-responsive text-nowrap">
 				<table class="table table-hover">
 					<thead>
@@ -33,6 +53,11 @@
 							<i class="tf-icon bx bx-chevrons-left"></i>
 						</button>
 					</li>
+					<c:if test="${pager.lastNum==0}">
+						<li class="page-item">
+							<button class="page-link" data-p="1">1</button>
+						</li>
+					</c:if>
 					<c:forEach  begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						<li class="page-item">
 							<button class="pageBtn2 page-link" data-p="${i}">${i}</button>

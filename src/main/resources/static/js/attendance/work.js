@@ -1,5 +1,6 @@
 //문서의 로딩을 시작할 때 
 //당일 출근기록 확인  
+
 $(document).ready(function(){
     $.ajax({
         type: 'get',
@@ -43,6 +44,7 @@ function setOn(){
           alert('출근하였습니다');
           $('#on').css('display', 'none');
           $('#off').css('display', 'block');
+          attendanceTime(employeeNum, workDate);
         }
       },
       error: function(){
@@ -60,6 +62,7 @@ function setOn(){
         if(result.trim()>0){
           alert('퇴근하였습니다');
           $('#off').attr('disabled', true);
+          attendanceTime(employeeNum, workDate);
         }
       },
       error: function(){
@@ -71,9 +74,12 @@ function setOn(){
   //출근버튼 클릭 시 
   $('#on').on('click', function(){
     setOn();
+    
   })
 
   //퇴근버튼 클릭 시
   $('#btn_block').on('click', '#off', function(){
     setOff();
+    
   })
+  

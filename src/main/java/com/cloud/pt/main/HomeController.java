@@ -2,7 +2,9 @@ package com.cloud.pt.main;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cloud.pt.attendance.AttendanceVO;
 import com.cloud.pt.employee.EmployeeService;
 import com.cloud.pt.employee.EmployeeVO;
 import com.cloud.pt.employee.PasswordVO;
@@ -161,5 +164,16 @@ public class HomeController {
 
         return randomString.toString();
     }
+	
+	@GetMapping("attendanceTime")
+	@ResponseBody
+	public Object getOnOffTime(AttendanceVO attendanceVO)throws Exception{
+		attendanceVO = homeService.getOnOffTime(attendanceVO);
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("time", attendanceVO);
+		
+		return map;
+	}
 	
 }

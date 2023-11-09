@@ -31,7 +31,7 @@ public class ChatService {
 	
 	private final ObjectMapper objectMapper = new ObjectMapper();
     private Map<Long, RoomVO> chatRooms = new HashMap<>();//방저장
-    private Map<String, Set<String>> memers = new HashMap<>();
+    private Map<Long, Set<String>> memberCheck = new HashMap<>();//방에 들어오고 나가고를 체크
 
 //    @PostConstruct
 //    private void init() {

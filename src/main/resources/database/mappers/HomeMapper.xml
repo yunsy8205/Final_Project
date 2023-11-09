@@ -9,6 +9,13 @@
 		FROM NOTICE N JOIN EMPLOYEE E
 		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
 		ORDER BY N.NOTICENUM DESC
-		LIMIT 0, 6
+		LIMIT 0,7
 	</select>
+	
+	<select id="getOnOffTime" parameterType="AttendanceVO" resultType="AttendanceVO">
+		SELECT ONTIME, OFFTIME FROM ATTENDANCE
+		WHERE EMPLOYEENUM = #{employeeNum}
+		AND WORKDATE = #{workDate}
+	</select>
+	
 </mapper>

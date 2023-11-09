@@ -19,7 +19,8 @@
     		
     	});
     	
-    	$('#searchBtn').click(function(){
+    	$('#box').on("click","#searchBtn",function(){
+			console.log("버튼1");
     		let page = 1;
     		let kind = $('#kind').val();
     		let search = $('#search').val();
@@ -27,7 +28,8 @@
     		$('#search').val("");
     	});
     	
-    	$('#searchBtn2').click(function(){
+    	$('#box').on("click","#searchBtn2",function(){
+			console.log("버튼2");
     		let page = 1;
     		let kind = $('#kind').val();
     		let search = $('#search').val();
@@ -44,7 +46,7 @@
     		let category = $(this).attr("data-cat");
     		console.log(category);
     		catPager(page, search, kind, category);
-    		$('#searchBtn').attr("id","searchBtn2");
+    		//$('#btnChange').attr("class","btn btn-outline-primary searchBtn2");
     	});
     	
     	$('#total').click(function(){
@@ -53,10 +55,11 @@
     		let search = $('#search').val();
     		console.log(page);
     		pager(page, search, kind);
-    		$('.btnChange').attr("id","searchBtn");
+    		//$('#btnChange').attr("class","btn btn-outline-primary searchBtn");
     	});
     	
     	function pager(page, search, kind){
+			console.log("pager");
     		$.ajax({
     			type:"get",
     			url:"./totallist",
@@ -70,7 +73,7 @@
     				// result 페이지를 하나 만들어 준다.
     				
     				if (response != null) {
-	    				console.log(response);
+	    				
 	    				$('#box').empty();
 	    				$('#box').append(response);
 
@@ -85,6 +88,7 @@
     	}
     	
     	function catPager(page, search, kind, category){
+			console.log("catpager");
     		$.ajax({
     			type:"get",
     			url:"./categorylist",
@@ -99,7 +103,7 @@
     				// result 페이지를 하나 만들어 준다.
     				
     				if (response != null) {
-	    				console.log(response);
+	    				
 	    				$('#box').empty();
 	    				$('#box').append(response);
 
