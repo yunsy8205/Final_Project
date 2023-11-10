@@ -62,6 +62,9 @@
 								<a href="/approval/list?division=all" class="nav-link" id="allBtn">전체</a>
 							</li>
 							<li class="nav-item" role="presentation">
+								<a href="/approval/list?division=wating" class="nav-link">대기</a>
+							</li>
+							<li class="nav-item" role="presentation">
 								<a href="/approval/list?division=proceeding" class="nav-link">진행</a>
 							</li>
 							<li class="nav-item" role="presentation">
@@ -71,7 +74,7 @@
 								<a href="/approval/list?division=complete" class="nav-link" id="completeBtn">완료</a>
 							</li>
 							<li class="nav-item" role="presentation">
-								<a href="/approval/temporaryList" class="nav-link" id="temporaryBtn">임시저장</a>
+								<a href="/approval/tempList" class="nav-link" id="temporaryBtn">임시저장</a>
 							</li>
 						</ul>
 					</div>

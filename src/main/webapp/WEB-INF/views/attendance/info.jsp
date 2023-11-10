@@ -49,12 +49,23 @@
       width:100%;
       display: inline-block;
     }
+    ul {
+      list-style-type: none;
+    }
     .list {
       line-height: 2;
+      text-align: left;
     }
     #smallModal {
       display: none;
     }
+    .btn_block {
+      text-align: center;
+    }
+    .btn-primary {
+      width: 70%;
+    }
+    
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -132,24 +143,27 @@
 
                 <div id="my">
                   <div class="profile">
-                    <img class="rounded-circle" src="/img/1.jpg" alt="">
+                    <img class="rounded-circle" src="/file/employee/${vo.employeeVO.proFile}" alt="">
                   </div>
                   <div class="name">
                     ${vo.employeeVO.name}
                   </div>
                   <div class="time">
-                    <ul>
+                   <ul>
                       <li class="list">
-                        출근시간 - ${vo.onTime}
+                        출근시간 <c:if test="${not empty vo.onTime}"> - ${vo.onTime} </c:if>
                       </li>
-                      <li class="list">퇴근시간 - ${vo.offTime}
+                      <li class="list">
+                      	퇴근시간 <c:if test="${not empty vo.offTime}"> - ${vo.offTime} </c:if>
                       </li>
                       <br>
                       <li class="list">연차개수 - ${vo.employeeVO.leaveDate}개</li>
                     </ul>
                   </div>
-                  <button class="btn btn-primary">내 정보 수정</button>
-                  <button class="btn btn-primary" id="req_btn">근태 수정 요청</button>
+                  <div class="btn_block">
+                    <button class="btn btn-primary">내 정보 수정</button>
+                    <button class="btn btn-primary" id="req_btn">근태 수정 요청</button>
+                  </div>
                 </div>
                 <div id="calendar">
                 </div>

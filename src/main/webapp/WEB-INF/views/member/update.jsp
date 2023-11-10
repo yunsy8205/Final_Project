@@ -36,7 +36,7 @@
           <div class="container-xxl flex-grow-1 container-p-y">
             <div class="col-xxl">
               <div class="card mb-4">
-                  <h5 class="card-header" style="text-align: center; margin: 3rem 0;">${member.memberName} 회원 정보수정</h5>
+                  <h3 class="card-header" style="text-align: center; margin: 3rem 0;">${member.memberName} 회원 정보수정</h3>
                   <form class="card-body" action="./update" method="post" enctype="multipart/form-data" id="frm">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5rem;" >
                       <div class="memLeft" style="width: 47%;">

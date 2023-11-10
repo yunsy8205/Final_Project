@@ -2,8 +2,8 @@ package com.cloud.pt.member;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -40,8 +40,8 @@ public class MemVO implements UserDetails {
 	private String address;
 	
 	private EmployeeVO employeeVO;
-	private MembershipVO membershipVO;
-	private RegistrationVO registrationVO;
+	private List<MembershipVO> membershipVO;
+	private List<RegistrationVO> registrationVO;
 	
 	
 	

@@ -195,7 +195,7 @@
     </div>
     <!-- / Layout wrapper -->
   
-	<script src="/resources/js/approval/approverList.js"></script>
+	<script src="/js/approval/approverList.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>
 </html>

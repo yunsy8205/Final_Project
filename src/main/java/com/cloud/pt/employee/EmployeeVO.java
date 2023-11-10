@@ -47,7 +47,7 @@ public class EmployeeVO implements UserDetails {
 	private String address;
 	@NotNull
 	private Character gender;
-	@Past
+	@Past(message="생일을 입력해주세요.")
 	private Date birth;
 	private Date joinDate;
 	@Null
