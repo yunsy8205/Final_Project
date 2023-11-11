@@ -111,6 +111,12 @@
                                           <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.gender}" readonly/>
                                         </div>
                                       </div>
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="basic-default-name">총 연차 개수</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.leaveDate}" readonly/>
+                                        </div>
+                                      </div>
                                       <c:if test="${employeeVO.position eq 'ROLE_TRAINER'}">
                                         <div class="row mb-3">
                                           <label class="col-sm-2 col-form-label" for="basic-default-name">경력</label>

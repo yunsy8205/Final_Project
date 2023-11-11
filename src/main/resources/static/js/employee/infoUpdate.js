@@ -174,6 +174,6 @@ const backBtn = document.getElementById("backBtn")
 const r = document.referrer; // 이전 url 확인
 
 backBtn.addEventListener("click", function() {
-    window.location.href="/employee/list";
+    window.location.href="/employee/info";
 });
 
