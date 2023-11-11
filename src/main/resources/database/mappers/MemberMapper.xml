@@ -30,7 +30,7 @@
 	</insert>
 
 	<select id="getMemberDetail" parameterType="MemVO" resultMap="getMemberDetailResult">
-		SELECT * FROM MEMBER MEM
+		SELECT MEM.*, MS.*, R.* FROM MEMBER MEM
 		LEFT OUTER JOIN MEMBERSHIP MS 
 		ON MEM.MEMBERNUM = MS.MEMBERSHIPNUM 
 		LEFT OUTER JOIN REGISTRATION R 

@@ -35,13 +35,15 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="col-xxl">
                   <div class="card mb-4">
-                    <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;">
-                      <h3 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 인적사항</h3>
-                      <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" onerror="this.style.display='none'">
+                    <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;padding-bottom:0;">
+                      <h3 class="mb-0" style="margin-top: 1rem;"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span></span> 인적사항</h3>
+                      <div style="width: 10rem; height:10rem; margin: 2rem;">
+                        <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" onerror="this.style.display='none'" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;">
+                      </div>
                     </div>
                     <div class="card-body">
-                      <div id="detailCon">
-                        <div id="detail_left">
+                      <div id="detailCon" style="display: flex; justify-content: space-around;">
+                        <div id="detail_left" style="width: 47%;">
                           <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">사번</label>
                             <div class="col-sm-10">
@@ -72,8 +74,14 @@
                               <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.birth}" readonly/>
                             </div>
                           </div>
+                          <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-name">성별</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.gender}" readonly/>
+                            </div>
+                          </div>
                         </div>
-                        <div id="detail_right">
+                        <div id="detail_right" style="width: calc(100% - 53%);">
                           <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">입사일</label>
                             <div class="col-sm-10">
@@ -84,12 +92,6 @@
                             <label class="col-sm-2 col-form-label" for="basic-default-name">퇴사일</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.quitDate}" readonly/>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">성별</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.gender}" readonly/>
                             </div>
                           </div>
                           <div class="row mb-3">
@@ -114,11 +116,11 @@
                         <form action="" id="upfrm">
                           <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
                         </form>
-                        <div class="proBtn">
-                          <button type="button" id="backBtn" class="btn btn-primary">이전</button>
-                          <button type="button" id="upBtn" class="actionBtn btn btn-primary" data-url="/employee/update">수정</button>
-                          <button type="button" id="delBtn" class="actionBtn btn btn-primary" data-url="/employee/delete">퇴직자 개인정보 삭제처리</button>
-                        </div>
+                      </div>
+                      <div class="proBtn" style="text-align: center; margin: 2rem;">
+                        <button type="button" id="backBtn" class="btn btn-primary">이전</button>
+                        <button type="button" id="upBtn" class="actionBtn btn btn-primary" data-url="/employee/update">수정</button>
+                        <button type="button" id="delBtn" class="actionBtn btn btn-primary" data-url="/employee/delete">퇴직자 개인정보 삭제처리</button>
                       </div>
                     </div>
                   </div>
@@ -126,40 +128,6 @@
               </div>
               <!-- / Content --> 
               
-              
-              <!-- Footer -->
-                <!-- <footer class="content-footer footer bg-footer-theme">
-                  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">
-                      ©
-                      <script>
-                        document.write(new Date().getFullYear());
-                      </script>
-                      , made with ❤️ by
-                      <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                    </div>
-                    <div>
-                      <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                      <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                      <a
-                        href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Documentation</a
-                      >
-
-                      <a
-                        href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Support</a
-                      >
-                    </div>
-                  </div>
-                </footer> -->
-                <!-- / Footer -->       
-
               <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->

@@ -32,11 +32,11 @@
             <!-- Content wrapper -->
             <div class="content-wrapper container-xxl flex-grow-1 container-p-y">
               <!-- Content 내용 여기로 -->
-              <h3 style="text-align: center;">전체 직원 목록</h3>
-              <div class="container-xxl flex-grow-1 container-p-y">
+              <h3 style="text-align: center; margin:2rem 0 1rem;">전체 직원 목록</h3>
+              <div class="container-xxl flex-grow-1 container-p-y" style="padding-top: 0 !important;">
                 <div>
-                  <div class="m-5">
-                    <form action="./list" method="get" id="frm" style="display: flex;">
+                  <div class="m-5" style="margin:1.5rem auto !important;">
+                    <form action="./list" method="get" id="frm" style="display: flex;justify-content: center;">
                       <input type="hidden" value="${pager.page}" id="page" name="page">
                       <!-- 파라미터 이름 kind -->
                       <select name="kind" id="k" class="search form-select" aria-label="Default select example" style="width: 10%;" data-kind="${pager.kind}" >
@@ -54,7 +54,7 @@
                   <a href="/employee/join" class="btn btn-primary">직원등록</a>
                 </div>
                 <div id="req_list" class="table-responsive text-nowrap">
-                  <table class="table table-hover">
+                  <table class="table table-hover" style="text-align: center;">
                     <thead>
                       <tr>
                         <th>번호</th>

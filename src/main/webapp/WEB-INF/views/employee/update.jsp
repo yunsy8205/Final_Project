@@ -38,15 +38,15 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;">
-                      <h3 class="emp_title card-header" style="text-align: center; margin: 3rem 0;">${employeeVO.name} <span class="position_inner"></span> 수정사항</h3>
-                        <form method="post" class="card-body" enctype="multipart/form-data" id="frm" action="./update" style="width: 100%;">
-                          <div class="upFile" style="text-align: center;display: flex;flex-direction: column;align-items: center;">
-                            <img src="../file/employee/${employeeVO.proFile}" style="width:10rem; height:10rem;" alt="직원 프로필" onerror="this.style.display='none'">
+                      <h3 class="emp_title card-header" style="text-align: center; margin: 1rem 0 0; padding:0;"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span> 수정사항</h3>
+                        <form method="post" class="card-body" enctype="multipart/form-data" id="frm" action="./update" style="width: 100%;display:flex; flex-direction:column; align-items: center;">
+                          <div class="upFile"style="width: 10rem; height:10rem; margin: 2rem;">
+                            <img src="../file/employee/${employeeVO.proFile}" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;" alt="직원 프로필" onerror="this.style.display='none'">
                           </div>
-                          <div class="upContent" style="display: flex; justify-content: space-between; margin-bottom: 5rem;">
+                          <div class="upContent" style="display: flex; justify-content: space-between; width:100%;">
                             <div class="upLeft" style="width: 47%;">
                               <div id="hidden">
-                                <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}" class="col-sm-2 col-form-label">
+                                <input type="hidden" name="employeeNum" id="num" data-num="${employeeVO.employeeNum}" value="${employeeVO.employeeNum}" class="col-sm-2 col-form-label">
                                 <input type="hidden" name="quitDate" id="quitDate" value="${employeeVO.quitDate}">  
                               </div>
                               <div class="updiv mb-3 row">
@@ -124,17 +124,18 @@
                               </div>
                               <div class="updiv mb-3 row">
                                 <label for="position" class="col-md-2 col-form-label">직급</label>
-                                <input type="hidden" id="position" class="input_con" value="${employeeVO.position}"></input>
-                                <p class="position_inner"></p>
-                                <select name="position">
-                                  <option value="ROLE_CEO">대표</option>
-                                  <option value="ROLE_GENERAL">총괄 매니저</option>
-                                  <option value="ROLE_CUSTOMER">고객관리 매니저</option>
-                                  <option value="ROLE_RESOURCES">인사 매니저</option>
-                                  <option value="ROLE_FACILITY">시설 매니저</option>
-                                  <option value="ROLE_TRAINER">트레이너</option>
-                                  <option value="ROLE_EX">가발령</option>
-                                </select>
+                                <input type="hidden" id="position" class="input_con" value="${employeeVO.position}" data-position="${employeeVO.position}"></input>
+                                <div class="col-sm-10">
+                                  <select name="position" id="selectTypeOpt" class="form-select color-dropdown">
+                                    <option value="ROLE_CEO" class="pname">대표</option>
+                                    <option value="ROLE_GENERAL" class="pname">총괄 매니저</option>
+                                    <option value="ROLE_CUSTOMER" class="pname">고객관리 매니저</option>
+                                    <option value="ROLE_RESOURCES" class="pname">인사 매니저</option>
+                                    <option value="ROLE_FACILITY" class="pname">시설 매니저</option>
+                                    <option value="ROLE_TRAINER" class="pname">트레이너</option>
+                                    <option value="ROLE_EX" class="pname">가발령</option>
+                                  </select>
+                                </div>
                               </div>
                               <div class="updiv mb-3 row">
                                 <label for="leaveDate" class="col-md-2 col-form-label">연차갯수</label>
@@ -144,49 +145,16 @@
                               </div>
                             </div>
                           </div>
-                          <div class="upBtn" style="text-align: center;">
-                            <button type="button" id="upBtn" class="btn btn-primary" >수정 사항 등록</button>
-                          </div>
                         </form>
+                        <div class="upBtn" style="text-align: center; margin: 2rem;">
+                          <button type="button" id="backBtn" class="btn btn-primary">이전</button>
+                          <button type="button" id="upBtn" class="btn btn-primary" >수정 사항 등록</button>
+                        </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- / Content --> 
-              
-              
-              <!-- Footer -->
-                <!-- <footer class="content-footer footer bg-footer-theme">
-                  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">
-                      ©
-                      <script>
-                        document.write(new Date().getFullYear());
-                      </script>
-                      , made with ❤️ by
-                      <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                    </div>
-                    <div>
-                      <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                      <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                      <a
-                        href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Documentation</a
-                      >
-
-                      <a
-                        href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Support</a
-                      >
-                    </div>
-                  </div>
-                </footer> -->
-                <!-- / Footer -->       
+              <!-- / Content -->      
 
               <div class="content-backdrop fade"></div>
             </div>

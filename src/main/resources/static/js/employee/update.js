@@ -79,27 +79,55 @@ sIn.addEventListener("change",function(){
 
 
 // 직급 
-const position = document.getElementById("position").value;
-const pInner = document.getElementsByClassName("position_inner");
+// const po= document.getElementById("position").getAttribute("data-position");
+// const selectElement = document.querySelector('select[name="position"]');
+// const pn = document.getElementsByClassName("pname");
 
+// for(o of pn){
+//     console.log(o.value);
+// }
+// console.log(pn[2].value);
 
-for(let i=0;i<pInner.length;i++){
-    if(position == 'ROLE_CEO'){
-        pInner[i].innerHTML = '대표';
-    }else if(position == 'ROLE_GENERAL'){
-        pInner[i].innerHTML = '총괄 매니저'
-    }else if(position == 'ROLE_CUSTOMER'){
-        pInner[i].innerHTML = '고객관리 매니저'
-    }else if(position == 'ROLE_RESOURCES'){
-        pInner[i].innerHTML = '인사 매니저'
-    }else if(position == 'ROLE_FACILITY'){
-        pInner[i].innerHTML = '시설 매니저'
-    }else if(position == 'ROLE_TRAINER'){
-        pInner[i].innerHTML = '트레이너 매니저'
+// for (let i = 0; i < pn.length; i++) {
+//     if (pn[i].value == po) {
+//         pn[i].selected = true;
+//         break;
+//     }
+// }
+
+document.addEventListener('DOMContentLoaded', function() {
+    let po = document.getElementById("position").getAttribute("data-position");
+    const selectElement = document.querySelector('select[name="position"]');
+    const pn = document.getElementsByClassName("pname");
+
+    console.log("Position data attribute value:", po);
+
+    if(po == '대표'){
+        po = 'ROLE_CEO';
+    }else if(po == '총괄 매니저'){
+        po = 'ROLE_GENERAL';
+    }else if(po == '고객관리 매니저'){
+        po = 'ROLE_CUSTOMER';
+    }else if(po == '인사 매니저'){
+        po = 'ROLE_RESOURCES';
+    }else if(po == '시설 매니저'){
+        po = 'ROLE_FACILITY';
+    }else if(po == '트레이너'){
+        po = 'ROLE_TRAINER';
     }else{
-        pInner[i].innerHTML = '가발령 매니저'
+        po = 'ROLE_EX';
     }
-}
+
+    for (let i = 0; i < pn.length; i++) {
+        if (pn[i].value == po) {
+            pn[i].selected = true;
+            console.log("Selected option:", pn[i].value);
+            break;
+        }
+    }
+})    
+
+
 
 // form 전체 입력
 const frm = document.getElementById("frm");
@@ -247,3 +275,13 @@ $("#upBtn").click(function () {
         }
     }
 })
+
+
+// 이전 페이지
+const backBtn = document.getElementById("backBtn")
+const r = document.referrer; // 이전 url 확인
+const num = document.getElementById("num").getAttribute("data-num")
+
+backBtn.addEventListener("click", function() {
+    window.location.href="/employee/detail?employeeNum="+num;
+});
