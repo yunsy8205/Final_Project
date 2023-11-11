@@ -188,13 +188,13 @@
 									  <option value="name">Name</option>
 								  </select>
 								  <input type="text" class="form-control" id="search"/>
-								  <button
+								  <a href="./list?kind="
 									class="btn btn-outline-primary"
 									id="searchBtn"
 									type="button"
 									>
 									조회
-								  </button>
+								</a>
 								</div>
 								<!-- Hoverable Table rows -->
 								

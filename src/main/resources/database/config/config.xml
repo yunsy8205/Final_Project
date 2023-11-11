@@ -31,6 +31,7 @@
 		
 		<!-- 동찬 -->
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
+		<typeAlias type="com.cloud.pt.leave.LeaveVO" alias="LeaveVO"/>
 		
 				
 		<!-- 소영 -->
