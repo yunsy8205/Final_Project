@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.cloud.pt.machine.MachineDAO">
+	
+	<select id="getList" parameterType="MachineVO" resultType="MachineVO">
+		SELECT * FROM MACHINE
+		ORDER BY MACHINENUM DESC
+	</select>
+	
+	<insert id="setMachineAdd" parameterType="MachineVO">
+		INSERT INTO MACHINE
+		VALUES (NULL, #{name}, #{buyDate}, #{fileName}, #{originalName})
+	</insert>
+	
+	<delete id="setMachineDelete" parameterType="MachineVO">
+		DELECT FROM MACHINE WHERE MACHINENUM = #{machineNum}
+	</delete>
+	
+	
+</mapper>

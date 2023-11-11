@@ -14,6 +14,7 @@
 		<typeAlias type="com.cloud.pt.member.MemVO" alias="MemVO"/>
 		<typeAlias type="com.cloud.pt.registration.RegistrationVO" alias="RegistrationVO"/>
 		<typeAlias type="com.cloud.pt.employee.PasswordVO" alias="PasswordVO"/>
+		<typeAlias type="com.cloud.pt.machine.MachineVO" alias="MachineVO"/>
 		
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>

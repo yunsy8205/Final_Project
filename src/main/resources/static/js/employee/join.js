@@ -157,6 +157,7 @@ function emptyCheck(element) {
 $("#addBtn").click(function () {
     if(proFile.value == ''){
         alert("직원 사진은 필수입니다. 다시 작성해주세요.")
+        checks[0]=false;
     }else{
         checks[0]=true;
 

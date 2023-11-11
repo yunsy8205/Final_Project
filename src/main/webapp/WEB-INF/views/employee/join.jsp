@@ -38,8 +38,11 @@
               <div class="card mb-4">
                 <h3 class="emp_title card-header" style="text-align:center; margin:3rem 0;">직원 인적사항</h3>
                 <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" class="card-body" id="frm" action="./join">
-                  <div class="proFile_con">
-                    <input type="file" name="empfile" id="proFile" class="form-control proFile input"/>
+                  <div class="proFile_con row mb-3">
+                    <label for="empfile" class="col-md-2 col-form-label">사진 등록</label>
+                    <div class="col-md-10">
+                      <input type="file" name="empfile" id="proFile" class="form-control proFile input"/>
+                    </div>
                     <div id="pictureMsg"></div>
                   </div>
                   <div class="proContent" style="display:flex;justify-content: space-between;margin-bottom: 5rem;">

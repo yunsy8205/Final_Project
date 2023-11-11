@@ -59,9 +59,11 @@ public class MemController {
 	
 	
 	@GetMapping("detail")
-	public void getMemberDetail(MemVO memVO, Model model)throws Exception{
+	public String getMemberDetail(MemVO memVO, Model model)throws Exception{
 		memVO = memService.getMemberDetail(memVO);
 		model.addAttribute("member", memVO);
+		
+		return "/member/detail";
 	}
 	
 	
