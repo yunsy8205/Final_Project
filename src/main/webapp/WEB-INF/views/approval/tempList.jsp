@@ -34,27 +34,7 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-                <div>
-				<!-- 검색창 -->
-				<div>
-					<form action="/list" method="get"
-						style="width: 20%; float: right; margin-right: 180px;">
-						<div id="frm" style="width: 300px;">
-							<input type="hidden" value="${pager.page}" id="page" name="page">
-							<input type="hidden" value="${pager.division}" name="division">
-							<!-- 파라미터 이름 kind -->
-							<select name="kind" id="k" class="search">
-								<option class="kind" value="title">제목</option>
-								<option class="kind" value="contents">내용</option>
-							</select> <input type="text" name="search" value="${pager.search}"
-								class="search" placeholder="검색어를 입력하세요."
-								style="text-align: center;">
-							<button type="submit">검색</button>
-						</div>
-
-					</form>
-				</div>
-				<div>
+               
 					<div class="nav-align-top mb-4">
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item" role="presentation">
@@ -73,26 +53,43 @@
 								<a href="/approval/list?division=complete" class="nav-link" id="completeBtn">완료</a>
 							</li>
 							<li class="nav-item" role="presentation">
-								<a href="/approval/temporaryList" class="nav-link" id="temporaryBtn">임시저장</a>
+								<li class="nav-item" role="presentation">
+									<button type="button" id="allBtn" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-temp" aria-controls="navs-justified-temp" aria-selected="true">임시저장</button>
 							</li>
 						</ul>
-					</div>
-				</div>
-
-				<div>
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
-						<thead>
-							<tr>
-								<th width="5%"></th>
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="navs-justified-all" role="tabpanel">
+								<div id="box">
+								<div class="input-group">
+								  <select id="kind" name="kind" class="select2 form-select">
+									  <option selected value="title">Title</option>
+									  <option value="contents">Contents</option>
+									  <option value="name">Name</option>
+								  </select>
+								  <input type="text" class="form-control" id="search"/>
+								  <button
+									class="btn btn-outline-primary"
+									id="searchBtn"
+									type="button"
+									>
+									조회
+								  </button>
+								</div>
+								<!-- Hoverable Table rows -->
+								
+									<div class="table-responsive text-nowrap">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th width="5%"></th>
 								<th>임시저장일</th>
 								<th>결재양식</th>
 								<th>제목</th>
 								<th>상태</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list}" var="vo" varStatus="i">
+												</tr>
+											</thead>
+											<tbody class="table-border-bottom-0">
+												<c:forEach items="${list}" var="vo" varStatus="i">
 								<tr>
 									<td><input type="checkbox" class="checkBoxs" id="checkBox${i.index}" data-approvalNum="${vo.approvalNum}"></td>
 									<td>${vo.regDate}</td>	
@@ -101,40 +98,31 @@
 									<td>${vo.state}</td>
 								</tr>
 							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<div class="col-sm-12 col-md-7">
-					<div class="dataTables_paginate paging_simple_numbers"
-						id="dataTable_paginate">
-						<ul class="pagination">
-							<li
-								class="paginate_button page-item previous ${pager.pre?'':'disabled'}"
-								id="dataTable_previous"><a
-								href="./temporaryList?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"
-								aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-								class="page-link">Previous</a></li>
-							<c:forEach begin="${pager.startNum }" end="${pager.lastNum}"
-								var="i">
-								<li class="paginate_button page-item active" id="dataTable">
-									<a
-									href="./temporaryList?page=${i}&kind=${pager.kind}&search=${pager.search}"
-									aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-									class="page-link">${i}</a>
-								</li>
-							</c:forEach>
-
-							<li
-								class="paginate_button page-item next ${pager.next?'':'disabled'}"
-								id="dataTable_next"><a
-								href="./temporaryList?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}"
-								aria-controls="dataTable" data-dt-idx="7" tabindex="0"
-								class="page-link">Next</a></li>
-						</ul>
+											</tbody>
+										</table>
+									</div>
+									
+										<ul class="pagination justify-content-center">
+											<li class="page-item prev ${pager.pre?'':'disabled'}">
+											  <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+											</li>
+											<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+											   <li class="page-item">
+												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+											   </li>
+											</c:forEach>
+											<li class="page-item next ${pager.next?'':'disabled'}">
+											  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+											</li>
+										  </ul>
+									
+								</div>
+								<!--/ Hoverable Table rows -->
+							</div>
+							<button class="btn btn-primary" id="BTN">삭제</button>
 					</div>
-				</div>
-				</div>
-				<button class="btn btn-primary" id="BTN">삭제</button>
+
+				
               </div>
 			  
               <!-- / Content --> 
