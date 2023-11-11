@@ -35,10 +35,22 @@ public class ApprovalController {
 	@GetMapping("list")
 	public void getApprovalList(Model model,Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
 		approvalVO.setEmployeeNum(principal.getName());
-		List<ApprovalVO> al = approvalService.getApprovalList(pager,approvalVO);
+		List<ApprovalVO> al = approvalService.getApprovalAllList(pager,approvalVO);
 		model.addAttribute("list", al);
 		model.addAttribute("pager", pager);
-	}
+		List<ApprovalVO> wl = approvalService.getApprovalWatingList(pager,approvalVO);
+		model.addAttribute("wl",wl);
+		model.addAttribute("wp",pager);
+		List<ApprovalVO> pl = approvalService.getApprovalProceedingList(pager,approvalVO);
+		model.addAttribute("pl",pl);
+		model.addAttribute("pp",pager);
+		List<ApprovalVO> rl = approvalService.getApprovalRejectList(pager,approvalVO);
+		model.addAttribute("rl",rl);
+		model.addAttribute("rp",pager);
+		List<ApprovalVO> cl = approvalService.getApprovalCompleteList(pager,approvalVO);
+		model.addAttribute("cl",cl);
+		model.addAttribute("cp",pager);
+;	}
 	
 	@GetMapping("add")
 	public void getAdd(Model model) throws Exception{
@@ -55,9 +67,13 @@ public class ApprovalController {
 	@GetMapping("approverList")
 	public void getApproverList(Model model,Pager pager,ApprovalVO approvalVO,Principal principal) throws Exception{
 		approvalVO.setEmployeeNum(principal.getName());
-		List<ApprovalVO> al = approvalService.getApproverList(pager,approvalVO);
-		model.addAttribute("list", al);
-		model.addAttribute("pager", pager);
+		List<ApprovalVO> abl = approvalService.getApproverAllBeforeList(pager,approvalVO);
+		model.addAttribute("abl", abl);
+		model.addAttribute("abpager", pager);
+		List<ApprovalVO> aal = approvalService.getApproverAllAfterList(pager,approvalVO);
+		model.addAttribute("aal", aal);
+		model.addAttribute("aapager", pager);
+		
 		
 	}
 	

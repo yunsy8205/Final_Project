@@ -97,7 +97,11 @@
 							<div>
 								
 								
- 
+								<button type="button" id="tempBtn" class="btn btn-primary">임시저장</button>
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+									결재선
+								</button>
 								<form action="add" method="post" id="addForm">
 									<sec:authorize access="isAuthenticated()">
 										<sec:authentication property="principal.username" var="username" />
@@ -123,7 +127,7 @@
 												<td
 													style="background: white; padding: 0px !important; border: currentColor; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
 
-													<table
+													<table 
 														style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 														<!-- User -->
 														<colgroup>
@@ -172,8 +176,8 @@
 														</tbody>
 													</table>
 												</td>
-												<td
-													style="background: white; padding: 0px !important; border: currentColor; text-align: right; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
+												<td 
+													style="background: white; padding-left: 190px !important; border: currentColor; text-align: right; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
 													<table
 													style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 													<!-- User -->
@@ -384,11 +388,7 @@
 									<input type="hidden" name="category" value="${param.division}">
 									<button type="button" id="approvalBtn" class="btn btn-primary">제출</button>
 									
-									<button type="button" id="tempBtn" class="btn btn-primary">임시저장</button>
-										<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-	결재선
-  </button>
+								
 								</form>
 
 
