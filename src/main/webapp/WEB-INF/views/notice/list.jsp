@@ -62,7 +62,7 @@
 					<h3>공지사항</h3>
 					
 					<div class="row">
-						<div style="display: flex;">
+						<div id="searchBox" style="display: flex;">
 						  <select id="kind" name="kind" class="select2 search form-select" style="width: 10%;" >
 						  	<option class="kind" selected value="title">제목</option>
 						  	<option class="kind" value="contents">내용</option>
@@ -156,7 +156,7 @@
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
-									<div id="box">
+									<div id="box" class="catCheck"  data-cat="">
 									<!-- Hoverable Table rows -->
 									
 										<div class="table-responsive text-nowrap">

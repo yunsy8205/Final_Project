@@ -54,7 +54,8 @@
 					</c:if>
 					<c:forEach  begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						<li class="page-item">
-							<button class="pageBtn page-link" data-p="${i}">${i}</button>
+							<button class="pageBtn page-link" data-p="${i}" <c:if test="${i eq pager.page}">style="background-color: #696cff; color: white;"</c:if>
+							>${i}</button>
 						</li>
 					</c:forEach>
 					<li class="page-item next ${pager.next?'':'disabled'}">

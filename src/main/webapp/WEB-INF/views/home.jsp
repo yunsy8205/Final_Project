@@ -251,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											<td><span class="badge bg-label-primary me-1">${a.category}</span>
 												<a class="a1" href="./approval/detail?approvalNum=${a.approvalNum}">${a.title}</a></td>
 											<td>${a.state}</td>
+											<td>${a.regDate}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
