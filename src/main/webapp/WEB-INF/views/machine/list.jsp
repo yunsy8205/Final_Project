@@ -3,6 +3,7 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <!-- beautify ignore:start -->
 <html
@@ -30,64 +31,66 @@
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
             <!-- Content wrapper -->
-            <div class="content-wrapper container-xxl flex-grow-1 container-p-y">
+            <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <h3 style="text-align: center; margin:2rem 0 1rem;">전체 직원 목록</h3>
-              <div class="row mb-5">
-                <div class="col-md-6 col-lg-4 mb-3">
-                  <c:forEach items="${list}" var="vo" varStatus="i">
-                    <div class="card h-100">
-                      <div class="card-body">
-                        <div style="width: 10rem; height:10rem; margin: 2rem;"> 
-                          <img alt="직원 프로필" onerror="this.style.display='none'" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;"
-                            class="img-fluid d-flex mx-auto my-4"
-                            src="../file/machine/${vo.fileName}"
-                          />
-                        </div>
-                        <p class="card-text">${vo.name}</p>
-                        <p class="card-text">${vo.buyDate}</p>
-                        <a href="javascript:void(0);" class="card-link">Card link</a>
+              <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="nav-align-top mb-4">
+                  <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item">
+                      <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-info" aria-controls="navs-justified-home" aria-selected="true">
+                        전체 기구
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button type="button" id="toTab" class="nav-link" role="tab" data-bs-toggle="tab"  data-bs-target="#navs-justified-updatePw" aria-controls="navs-justified-profile" aria-selected="false">
+                        기구 점검
+                      </button>
+                    </li>
+                  </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="navs-justified-info" role="tabpanel">
+                        <p class="mb-0">
+                          <div class="content-wrapper container-xxl flex-grow-1 container-p-y">
+                            <!-- Content 내용 여기로 -->
+                            <h3 style="text-align: center; margin:2rem 0 1rem;">전체 기구</h3>
+                            <div style="text-align: right; margin-bottom: 3rem; margin-right: 1rem;">
+                              <a href="/machine/add" class="btn btn-primary">기구 등록</a>
+                              <button type="button" id="maDel" data-url="/machine/delete" class="btn btn-primary">기구 삭제</button>
+                            </div>
+                            <div class="row mb-5" style="margin-bottom: 5rem !important;">
+                              <c:forEach items="${list}" var="vo" varStatus="i">
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                  <div class="card h-100">
+                                    <div class="card-body" style="text-align: center;">
+                                      <input type="checkbox" value="${i.index+1}" data-machineNum="${vo.machineNum}" onclick="deleteSelected()">${i.index+1}
+                                      <div style="width: 13rem; height:13rem; margin: 2rem auto;"> 
+                                        <img alt="직원 프로필" onerror="this.style.display='none'" style="width:100%; height: 100%; object-fit: cover;"
+                                          class="img-fluid d-flex mx-auto my-4"
+                                          src="../file/machine/${vo.fileName}"
+                                        />
+                                      </div>
+                                      <p class="card-text">${vo.name}</p>
+                                      <p class="card-text">${vo.buyDate}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </c:forEach>
+                              <form action="" id="delFrm">
+                                <input type="hidden" name="machineNum" value="${vo.machineNum}">
+                              </form>
+                            </div>
+                          </div>
+                        </p>
                       </div>
-                    </div>
-                  </c:forEach>
+                      <div class="tab-pane fade" id="navs-justified-updatePw" role="tabpanel">
+                        <p class="mb-0">
+                          
+                        </p>
+                      </div>
+                    </div> <!-- tab-content -->
+                  </div>
                 </div>
               </div>
-              </div>
-              <ul class="pagination justify-content-center">
-                <li class="page-item prev ${pager.pre?'':'disabled'}">
-                  <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
-                </li>
-                <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-                   <li class="page-item">
-                     <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
-                   </li>
-                </c:forEach>
-                <li class="page-item next ${pager.next?'':'disabled'}">
-                  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
-                </li>
-              </ul>
-              <!-- 페이징 -->
-							<!-- <nav aria-label="Page navigation example">
-								<ul class="pagination justify-content-center">
-									<c:if test="${pager.pre}">
-									<li class="page-item ${pager.pre?'':'disabled'}"><a class="page-link"
-										href="./list?page=${pager.startNum - 1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous"> 
-                      <span aria-hidden="true">&laquo;</span>
-									</a></li>
-									</c:if>
-									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-										var="i">
-										<li class="page-item"><a class="page-link"
-											href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
-									</c:forEach>
-									<c:if test="${pager.next}">
-										<li class="page-item"><a class="page-link"
-											href="./list?page=${pager.lastNum + 1}&kind=${pager.kind}&search=${pager.search}"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										</a></li>
-									</c:if>
-								</ul>
-							</nav> -->
               <!-- / Content --> 
               
               
@@ -135,9 +138,98 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-  
-
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-    <script type="text/javascript" src="/js/employee/list.js"></script>
+    <!-- <script type="text/javascript" src="/js/employee/info.js"></script> -->
+    <script>
+  
+      // let error = '${error}';
+      
+      // if (error != '' && error == 'true') {
+      //   //location.href = "/employee/info";
+      //   $("#toTab").click();
+      // }
+
+      // deleteSelected();
+      
+      // let machineNums = [];
+      // function deleteSelected() {
+      //   let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      //   //checkboxes.forEach(function(checkbox) {
+      //     for(checkbox of checkboxes){  
+      //       let machineNum = checkbox.getAttribute('data-machineNum');
+      //       console.log('Delete machine with machineNum:', machineNum);
+      //       console.log("==============================")
+      //       machineNums.push(machineNum);
+      //       let newNums = machineNums.filter((element, index) => machineNums.indexOf(element) === index);
+      //       //console.log(machineNums);
+      //       console.log(newNums);
+
+      //       console.log(newNums.)
+      //     };
+      //   }
+        
+      //   const url = document.getElementById("maDel").getAttribute("data-url");
+      //   $("#maDel").click(function(){
+
+    
+        // if(url == "/machine/delete"){
+        //   if(confirm("해당 기구를 정말로 삭제하시겠습니까?")){
+        //       $.ajax({
+        //         type:"post",
+        //         url:"/machine/delete",
+        //         data : JSON.stringify(machineNums),
+        //         success: function (result) {
+        //             if(result.trim()==1){
+        //                 alert("삭제되었습니다.")
+        //                 window.location.reload(true);
+        //             }
+        //         }
+        //       })
+        //   }else{
+        //     return;
+        //   }
+        // }
+     //
+
+      //-------------------------------------------------------
+
+      let selectedMachineNums = [];
+
+      function deleteSelected() {
+          let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+          selectedMachineNums = [];
+          checkboxes.forEach(function(checkbox) {
+              let machineNum = checkbox.getAttribute('data-machineNum');
+              selectedMachineNums.push(machineNum);
+          });
+      }
+
+      // 삭제 버튼 클릭 시 선택한 항목을 서버로 전송
+      $("#maDel").click(function() {
+          const url = "/machine/delete";
+          if (selectedMachineNums.length == 0) {
+            alert("선택한 기구가 없습니다.");
+          }else{
+            confirm("선택한 기구를 정말로 삭제하시겠습니까?")
+            $.ajax({
+              type: "post",
+              url: url,
+              contentType : "application/json",
+              data: JSON.stringify(selectedMachineNums),
+              success: function(response) {
+                if (response.result > 0) {
+                    alert(response.message);
+                    window.location.reload(true);
+                } else {
+                    // 실패 또는 에러 처리
+                    alert("삭제에 실패했습니다. ");
+                }
+              }
+            });
+          }
+      });
+
+  </script>
   </body>
-</html>
+  </html>

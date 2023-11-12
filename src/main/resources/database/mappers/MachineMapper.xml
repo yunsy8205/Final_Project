@@ -15,8 +15,11 @@
 		VALUES (NULL, #{name}, #{buyDate}, #{fileName}, #{originalName})
 	</insert>
 	
-	<delete id="setMachineDelete" parameterType="MachineVO">
-		DELECT FROM MACHINE WHERE MACHINENUM = #{machineNum}
+	<delete id="setMachineDelete" parameterType="List">
+		DELETE FROM MACHINE WHERE MACHINENUM IN
+		<foreach collection="list" item="machineNum" open="(" separator="," close=")">
+	        #{machineNum}
+	    </foreach>
 	</delete>
 	
 	

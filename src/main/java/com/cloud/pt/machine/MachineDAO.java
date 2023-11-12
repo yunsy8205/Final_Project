@@ -13,5 +13,5 @@ public interface MachineDAO {
 	
 	public int setMachineAdd(MachineVO machineVO)throws Exception;
 	
-	public int setMachineDelete(MachineVO machineVO)throws Exception;
+	public int setMachineDelete(List<Integer> machineNumInts)throws Exception;
 }

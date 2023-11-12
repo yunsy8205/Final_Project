@@ -131,7 +131,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="pages-misc-error.html" class="menu-link">
+                  <a href="/machine/list" class="menu-link">
                     <div data-i18n="Error">전체 기구 목록</div>
                   </a>
                 </li>

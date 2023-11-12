@@ -36,14 +36,12 @@ public class MachineService {
 		machineVO.setFileName(file);
 		machineVO.setOriginalName(fileName.getOriginalFilename());
 		
-		int result = machineDAO.setMachineAdd(machineVO);
-		
 		return machineDAO.setMachineAdd(machineVO);
 
 	}
 	
-	public int setMachineDelete(MachineVO machine)throws Exception {
-		return machineDAO.setMachineDelete(machine);
+	public int setMachineDelete(List<Integer> machineNumInts)throws Exception {
+		return machineDAO.setMachineDelete(machineNumInts);
 	}
 
 }
