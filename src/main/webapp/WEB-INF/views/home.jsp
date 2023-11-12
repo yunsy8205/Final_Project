@@ -39,19 +39,34 @@
 	  	background-color: #696cff;
 	  }
 	  .b1{
-		  height: 40%;
+		  height: 55%;
 		  text-align: center;
 	  }
 	  .b2{
-	  	height: 25%;
+	  	height: 15%;
 	  	text-align: center;
+	  	margin-top: 3px;
+	  	padding-top: 5px;
 	  }
 	  .b3{
-	  	height: 20%;
+	  	height: 15%;
 	  	text-align: center;
+	  	margin-top: 3px;
+	  	padding-top: 5px;
 	  }
-	  .b4{text-align: center;}
-	  .tTitle{padding-right: 10px;}
+	  .b4{
+	  	height: 12%;
+	  	text-align: center;
+	  	margin-top: 3px;
+	  	padding-top: 5px;
+	  	}
+	  .tTitle{
+	  	width: 40%;
+	  }
+	  .tTime{
+	  	width: 40%;
+	  	font-size: 16px;
+	  }	
 	  .a1{
 	  	color: #697a8d;
 	  }
@@ -66,7 +81,29 @@
 	  	width: 100%;
 	  	height: 90%;
 	  }
-	  
+	  #userProfile{
+	  	width: 100%;
+	    height: 100%;
+	    object-fit: cover;	
+	  }
+	  .timeBox{
+	  	display: flex;
+	  	margin-left: 17%;
+	  }
+	  .card-body{
+	  	height: 434px;
+	  }
+	  .user{
+	  	font-size: 17px;
+	  	font-weight: bold;
+	  }
+	  #proBox{
+	  	width: 150px;
+	    height: 150px; 
+	    border-radius: 70%;
+	    overflow: hidden;
+	    margin: auto;
+	   }
     </style>
 	<!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
@@ -126,26 +163,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="col-md-6 col-lg-4 mb-3" style="width: 22%;">
                   <div class="card h-100">
                     <div class="card-body box1">
-                      <div class="border b1">
+                      <div class="b1">
                       <!-- 이미지 이름 직책 -->
                       <sec:authentication property="principal" var="user"/>	
-                      <h5 class="card-title" id="user" data-num="${user.employeeNum}">
-	                      ${user.name}
-	                      ${user.position}
-	                  </h5>
+                      <div id="proBox">
+                      	<img id="userProfile" alt="" src="../file/employee/${user.proFile}">
                       </div>
-                      <div class="border b2">
+                      <div class="user mt-2" id="user" data-num="${user.employeeNum}">${user.name}</div>
+	                  <div class="user">${user.position}</div>
+                      </div>
+                      <div class="b2">
                       <!-- 출근시간 퇴근시간 -->
-                      <div><strong class="tTitle">출근시간 </strong><span id="onTime"></span></div>
-                      <div><strong class="tTitle">퇴근시간 </strong><span id="offTime"></span></div>
+                      <div class="timeBox"><div class="tTitle">출근시간 </div><div class="tTime" id="onTime">-</div></div>
+                      <div class="timeBox"><div class="tTitle">퇴근시간 </div><div class="tTime" id="offTime">-</div></div>
                       </div>
-                      <div class="border b3">
+                      <div class="b3">
                       <!-- 디지털 시계 -->
                       <div class="clock">
 					    <h1 id="time" class="time"></h1>
 					  </div>
                       </div>
-	                  <div id="btn_block" class="border b4">
+	                  <div id="btn_block" class="b4">
                		  <button type="button" id="on" class="btn btn-primary">출근하기</button>
                 	  <button type="button" id="off" class="btn btn-primary">퇴근하기</button>
               		  </div>
@@ -190,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     		<h5>총 회원 현황</h5>
                     	</div>
                     	<div class="chart1">
-	                    	<canvas id="myChart" width="582.5vw" height="330vh"></canvas>
+	                    	<canvas id="myChart" width="582.5" height="330"></canvas>
                     	</div>
                     	<div>
                     		<c:forEach items="${chart}" var="c">
@@ -203,17 +241,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="col-md-6 col-lg-4 mb-3" style="width: 50%;">
                   <div class="card h-100">
                     <div class="card-body">
-                      <div id="notice"><h5 id="ntitle" class="card-title">결재</h5><a id="plus" href="#">+</a></div>
+                      <div id="notice"><h5 id="ntitle" class="card-title">기안결재관리</h5><a id="plus" href="./approval/list">+</a></div>
 	                  <hr id="hr1">
 	                  <div class="table-responsive text-nowrap">
 							<table class="table table-hover">
 								<tbody class="table-border-bottom-0">
-									<c:forEach items="" var="n">
+									<c:forEach items="${app}" var="a">
 										<tr>
-											<td><span class="badge bg-label-primary me-1">${n.category}</span>
-												<a class="a1" href="./notice/detail?noticeNum=${n.noticeNum}">${n.title}</a></td>
-											<td>${n.name}</td>
-											<td>${n.modDate}</td>
+											<td><span class="badge bg-label-primary me-1">${a.category}</span>
+												<a class="a1" href="./approval/detail?approvalNum=${a.approvalNum}">${a.title}</a></td>
+											<td>${a.state}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -289,10 +326,12 @@ document.addEventListener('DOMContentLoaded', function() {
     				if(response.time != null){
 	    				if(response.time.offTime != null) {							
 		    				$('#offTime').text(response.time.offTime);
+		    				
 	    				
 	    				}
 	    				if(response.time.onTime != null) {					
 	        				$('#onTime').text(response.time.onTime);
+	        				
 	        			}
     				}
     			},

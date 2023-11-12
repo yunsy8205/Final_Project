@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cloud.pt.approval.ApprovalVO;
 import com.cloud.pt.attendance.AttendanceVO;
 import com.cloud.pt.notice.NoticeVO;
 
@@ -35,5 +36,8 @@ public class HomeService {
 	public List<HomeVO> getMember()throws Exception{
 		return homeDAO.getMember();
 	}
-
+	
+	public List<ApprovalVO> getApprovalList(String employeeNum)throws Exception{
+		return homeDAO.getApprovalList(employeeNum);
+	}
 }

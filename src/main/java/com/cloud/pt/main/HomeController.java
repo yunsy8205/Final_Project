@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cloud.pt.approval.ApprovalVO;
 import com.cloud.pt.attendance.AttendanceVO;
 import com.cloud.pt.employee.EmployeeService;
 import com.cloud.pt.employee.EmployeeVO;
@@ -66,10 +67,11 @@ public class HomeController {
 		
 		//차트
 		List<HomeVO> chartList = homeService.getMember();
-		//추가 회원이 없는 경우에는 0을 넣어준다.
-		
-		
 		model.addAttribute("chart", chartList);
+		
+		//결재관리
+		List<ApprovalVO> appList = homeService.getApprovalList(a.getName());
+		model.addAttribute("app", appList);
 		
 		return "home";
 	}
