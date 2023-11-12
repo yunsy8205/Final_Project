@@ -31,5 +31,9 @@ public class HomeService {
 		log.info("사번{}",attendanceVO.getEmployeeNum());
 		return homeDAO.getOnOffTime(attendanceVO);
 	}
+	
+	public List<HomeVO> getMember()throws Exception{
+		return homeDAO.getMember();
+	}
 
 }

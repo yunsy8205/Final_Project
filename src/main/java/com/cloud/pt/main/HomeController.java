@@ -28,6 +28,7 @@ import com.cloud.pt.attendance.AttendanceVO;
 import com.cloud.pt.employee.EmployeeService;
 import com.cloud.pt.employee.EmployeeVO;
 import com.cloud.pt.employee.PasswordVO;
+import com.cloud.pt.member.MemVO;
 import com.cloud.pt.notice.NoticeVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +63,13 @@ public class HomeController {
 		//공지
 		List<NoticeVO> list = homeService.getNoticeList();
 		model.addAttribute("list", list);
+		
+		//차트
+		List<HomeVO> chartList = homeService.getMember();
+		//추가 회원이 없는 경우에는 0을 넣어준다.
+		
+		
+		model.addAttribute("chart", chartList);
 		
 		return "home";
 	}
@@ -159,4 +167,5 @@ public class HomeController {
 	    
 	    return randomString.toString();
 	}
+	
 }

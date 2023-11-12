@@ -13,5 +13,7 @@ public interface HomeDAO {
 	public List<NoticeVO> getNoticeList()throws Exception;
 	
 	public AttendanceVO getOnOffTime(AttendanceVO attendanceVO)throws Exception;
+	
+	public List<HomeVO> getMember()throws Exception;
 
 }
