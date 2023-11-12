@@ -11,7 +11,7 @@ public interface ChatDAO {
 	
 	public List<EmployeeVO> getChatList(String employeeNum)throws Exception;
 	
-	public List<EmployeeVO> getSearch(String name)throws Exception;
+	public List<EmployeeVO> getSearch(EmployeeVO employeeVO)throws Exception;
 	
 	public RoomVO roomCheck(RoomVO roomVO)throws Exception;
 	

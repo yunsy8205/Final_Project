@@ -58,7 +58,23 @@
 		    border-radius: 10px;
 		    box-shadow: inset 0px 0px 5px white;
 		 }
-
+		 #listBox{
+		 	height: 85%;
+		 	width: 100%;
+		 	overflow-y: scroll
+		 }
+		 #listBox::-webkit-scrollbar {
+		    width: 10px;
+		}
+		#listBox::-webkit-scrollbar-thumb {
+		    background-color: #696CFF;
+		    border-radius: 10px;
+		}
+		#msgArea::-webkit-scrollbar-track {
+		    background-color: white;
+		    border-radius: 10px;
+		    box-shadow: inset 0px 0px 5px white;
+		 }
 	</style>
 </head>
   <body>
@@ -86,7 +102,7 @@
               <div class="row">
                 <div class="col-xl1">
                   <div class="card mb-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
+                    <div style="display: block !important; text-align: center;"  class="card-header d-flex justify-content-between align-items-center">
                     	<sec:authorize access="isAuthenticated()">
                     	<sec:authentication property="principal" var="user"/>
                         	<h5 class="mb-0" id="my" data-user="${user.username}" data-name="${user.name}">${user.name} ${user.position}</h5>
@@ -113,9 +129,8 @@
                 </div>
                 <div class="col-xl">
                   <div class="card mb-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
+                    <div style="display: block !important; text-align: center;" class="card-header d-flex justify-content-between align-items-center">
                       <h5 id="someone" class="mb-0" data-name="">채팅하려는 대상을 선택해 주세요</h5>
-               
                     </div>
                     <div class="card-body">
                     	<div id="msgArea" class="card mb-4" style="overflow-y: scroll"></div>

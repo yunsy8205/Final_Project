@@ -59,8 +59,8 @@ public class ChatService {
     	return chatDAO.getChatList(employeeNum);
     }
     
-    public List<EmployeeVO> getSearch(String name)throws Exception{
-    	return chatDAO.getSearch(name);
+    public List<EmployeeVO> getSearch(EmployeeVO employeeVO)throws Exception{
+    	return chatDAO.getSearch(employeeVO);
     }
     
     public RoomVO roomCheck(RoomVO roomVO)throws Exception{
