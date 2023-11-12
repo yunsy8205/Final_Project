@@ -43,7 +43,7 @@
 	</insert>
 	
 	<select id="getNoticeDetail" parameterType="NoticeVO" resultMap="NoticeResult">
-		SELECT N.NOTICENUM, N.EMPLOYEENUM, N.CATEGORY, N.TITLE, E.NAME, N.MODDATE, N.HIT, N.CONTENTS, NF.ORINAME, NF.FILENUM, NF.FILENAME
+		SELECT N.NOTICENUM, N.PIN, N.EMPLOYEENUM, N.CATEGORY, N.TITLE, E.NAME, N.MODDATE, N.HIT, N.CONTENTS, NF.ORINAME, NF.FILENUM, NF.FILENAME
 		FROM NOTICE N LEFT JOIN NOTICEFILE NF
 		ON (N.NOTICENUM=NF.NOTICENUM)
 		JOIN EMPLOYEE E
@@ -61,6 +61,7 @@
   		<result column="CATEGORY" property="category"/>
   		<result column="HIT" property="hit"/>
   		<result column="NAME" property="name"/>
+  		<result column="PIN" property="pin"/>
   		
   		<collection property="list" javaType="List" ofType="NoticeFileVO">
   			<id column="FILENUM" property="fileNum"/>
@@ -74,6 +75,7 @@
 		FROM NOTICE N JOIN EMPLOYEE E
 		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
 		WHERE PIN=1
+		ORDER BY N.NOTICENUM DESC
 	</select>
 	
 	<select id="getNoticeList" parameterType="Pager" resultType="NoticeVO">
@@ -122,7 +124,8 @@
 		CATEGORY=#{category},
 		TITLE=#{title},
 		CONTENTS=#{contents},
-		MODDATE=NOW()
+		MODDATE=NOW(),
+		PIN=#{pin}
 		WHERE NOTICENUM=#{noticeNum}
 	</update>
 	

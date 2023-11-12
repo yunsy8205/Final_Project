@@ -101,7 +101,7 @@
 	                          aria-label="Recipient's username"
 	                          aria-describedby="button-addon2"
 	                        />
-	                        <button class="btn btn-outline-primary" type="button" id="search">조회</button>
+	                        <button class="btn btn-outline-primary" type="button" id="search">검색</button>
                       	</div>
                     	<div id="listBox">
 	                    	<c:forEach items="${list}" var="li">

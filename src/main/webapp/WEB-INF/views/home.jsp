@@ -58,16 +58,15 @@
 	  #fc-dom-1{
 	  	font-size: 17px;
 	  }
-	  .chart1{
-	  	width: 50%;
+	  .chartBox{
+	  	width: 100%;
 	  	height: 100%;
 	  }
-	  .chartBox{
-	  	display: flex;
+	  .chart1{
+	  	width: 100%;
+	  	height: 90%;
 	  }
-	  #myChart{
-	  	margin-left: 5%;
-	  }
+	  
     </style>
 	<!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
@@ -124,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="container-xxl flex-grow-1 container-p-y">
              
               <div class="row mb-3 r1">
-                <div class="col-md-6 col-lg-4 mb-3" style="width: 25%;">
+                <div class="col-md-6 col-lg-4 mb-3" style="width: 22%;">
                   <div class="card h-100">
                     <div class="card-body box1">
                       <div class="border b1">
@@ -153,29 +152,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-3" style="width: 45%;">
+                <div class="col-md-6 col-lg-4 mb-3" style="width: 50%;">
                   <div class="card h-100">
                     <div class="card-body">
                       <div id="notice"><h5 id="ntitle" class="card-title">최근 공지</h5><a id="plus" href="/notice/list">+</a></div>
 	                  <hr id="hr1">
 	                  <div class="table-responsive text-nowrap">
-											<table class="table table-hover">
-												<tbody class="table-border-bottom-0">
-													<c:forEach items="${list}" var="n">
-														<tr>
-															<td><span class="badge bg-label-primary me-1">${n.category}</span>
-																<a class="a1" href="./notice/detail?noticeNum=${n.noticeNum}">${n.title}</a></td>
-															<td>${n.name}</td>
-															<td>${n.modDate}</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
-										</div>
+							<table class="table table-hover">
+								<tbody class="table-border-bottom-0">
+									<c:forEach items="${list}" var="n">
+										<tr>
+											<td><span class="badge bg-label-primary me-1">${n.category}</span>
+												<a class="a1" href="./notice/detail?noticeNum=${n.noticeNum}">${n.title}</a></td>
+											<td>${n.name}</td>
+											<td>${n.modDate}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+					   </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-3" style="width: 30%;">
+                <div class="col-md-6 col-lg-4 mb-3" style="width: 28%;">
                   <div class="card h-100">
                     <div class="card-body calendarBox">
                       <div id="calendar"></div>
@@ -186,18 +185,40 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="row mb-5 r2">
                 <div class="col-md-6 col-lg-4 mb-3" style="width: 50%;">
                   <div class="card h-100">
-                    <div class="card-body">
-                    	<div id="incomeChart"></div>
+                    <div class="card-body chartBox" >
+                    	<div style="width: 100%; height: 10%;">
+                    		<h5>총 회원 현황</h5>
+                    	</div>
+                    	<div class="chart1">
+	                    	<canvas id="myChart" width="582.5vw" height="330vh"></canvas>
+                    	</div>
+                    	<div>
+                    		<c:forEach items="${chart}" var="c">
+                    		<div id="${c.month}" data-member="${c.member}"></div>
+                    		</c:forEach>
+                    	</div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-3" style="width: 50%;">
                   <div class="card h-100">
-                    <div class="card-body chartBox">
-                    	<div class="border chart1">
-                    		<canvas id="myChart" width="200vw" height="384vh"></canvas>
-                    	</div>
-                    	<div class="border chart1"></div>
+                    <div class="card-body">
+                      <div id="notice"><h5 id="ntitle" class="card-title">결재</h5><a id="plus" href="#">+</a></div>
+	                  <hr id="hr1">
+	                  <div class="table-responsive text-nowrap">
+							<table class="table table-hover">
+								<tbody class="table-border-bottom-0">
+									<c:forEach items="" var="n">
+										<tr>
+											<td><span class="badge bg-label-primary me-1">${n.category}</span>
+												<a class="a1" href="./notice/detail?noticeNum=${n.noticeNum}">${n.title}</a></td>
+											<td>${n.name}</td>
+											<td>${n.modDate}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+					   </div>
                     </div>
                   </div>
                 </div>
@@ -225,8 +246,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <script src="/js/attendance/work.js"></script>
     <script>
- // 요소 선택
     
+    // 요소 선택
     const timeDiv = document.getElementById('time');
 
     // getTime 함수
@@ -295,31 +316,52 @@ document.addEventListener('DOMContentLoaded', function() {
     	    return dateString;
     	}
     	
-    	const ctx = document.getElementById('myChart');
-
-   	    new Chart(ctx, {
-   	    	type: 'bar',
-   	    	data: {
-  	   	      labels: ['남성', '여성',],
-  	   	      datasets: [{
-  	   	        label: '회원 남녀 비율',
-  	   	        data: [250, 150, 300],
-  	   	        borderWidth: 0,
-  	   	     	backgroundColor: [
-  	   	     		'rgba(54, 162, 235, 0.2)',
-  	   	     		'rgba(255, 99, 132, 0.2)'
-  	   	     		]
-  	   	      }]
-   	     },
-   	     options: {
-   	       responsive: false,
-   	       scales: {
-   	         y: {
-   	           beginAtZero: true
-   	         }
-   	       }
-   	     }
-   	   });
+    	// 차트
+    	let jan = Number($('#01').attr("data-member"));
+    	let feb = Number($('#02').attr("data-member"))+jan;
+    	let mar = Number($('#03').attr("data-member"))+feb;
+    	let apr = Number($('#04').attr("data-member"))+mar;    		
+    	console.log(mar);
+    	console.log(apr);
+    	let may = Number($('#05').attr("data-member"))+apr;
+    	let jun = Number($('#06').attr("data-member"))+may;
+    	let jul = Number($('#07').attr("data-member"))+jun;
+    	let aug = Number($('#08').attr("data-member"))+jul;
+    	let sep = Number($('#09').attr("data-member"))+aug;
+    	let oct = Number($('#10').attr("data-member"))+sep;
+    	let nov = Number($('#11').attr("data-member"))+oct;
+    	let dec = Number($('#12').attr("data-member"))+nov;
+    	
+    	let chartData =  [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+    	//let chartLabels = "[""+  +"]";
+    	const ctx = document.getElementById('myChart').getContext('2d');
+    	new Chart(ctx, {
+    	    type: 'line',
+    	    data: {
+    	      labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    	      datasets: [{
+    	        label: '회원수',
+    	        data: chartData,
+    	        borderWidth: 2,
+    	        borderColor: '#696CFF',
+    	        backgroundColor: '#F0F0FF',
+    	       	fill: true
+    	      }]
+    	    },
+    	    options: {
+    	      scales: {
+    	        y: {
+    	          beginAtZero: true
+    	        }
+    	      },
+    	      elements:{
+    	    	  line:{
+    	    		  tension: 0.4
+    	    	  }
+    	      }
+    	    }
+    	  });
+    	
     </script>
   </body>
 </html>
