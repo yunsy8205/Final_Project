@@ -36,24 +36,26 @@
 	
 	socket.onmessage=function(msg){
 		let jsonObj = JSON.parse(msg.data);
-		let one = $('#someone').attr("data-name");
+		let roomNum = $('#button-send').attr("data-room");
+		console.log(roomNum);
+		console.log(jsonObj.roomNum);
+		console.log(msg.data);
 		// sender, message, chatdate
 		let msgTag = "";
-		if(user==jsonObj.sender){
-			msgTag = '<div class="alert alert-primary msg" role="alert"><div>'
-					 +name+'</div><div>'
-					 +jsonObj.message+'</div></div><div id="chatDate">'+jsonObj.chatDate+'</div>';
-		}else{
-			msgTag = '<div style="background-color:white;" class="alert msg" role="alert"><div>'
-						 +one+'</div><div>'
+		if(roomNum == jsonObj.roomNum){
+			
+			if(user==jsonObj.sender){
+				msgTag = '<div class="alert alert-primary msg" role="alert"><div>'
+						 +name+'</div><div>'
 						 +jsonObj.message+'</div></div><div id="chatDate">'+jsonObj.chatDate+'</div>';
+			}else{
+				msgTag = '<div style="background-color:white;" class="alert msg" role="alert"><div>'
+							 +jsonObj.name+'</div><div>'
+							 +jsonObj.message+'</div></div><div id="chatDate">'+jsonObj.chatDate+'</div>';
+			}
 		}
 		
 		$('#msgArea').append(msgTag);
-
-		// 보내온 값에서 방번호를 보내기 버튼의 속성에 저장해줌
-		$('#button-send').attr("data-room",jsonObj.roomNum);
-		$('#button-send').attr("data-receiver",jsonObj.receiver);
 	};
 	
 	$('#search').click(function(){
@@ -92,17 +94,20 @@
 	function enterRoom(socket, num, roomNum){
 		$('#msgArea').empty();
 		//대상의 사진, 이름, 직책을 가져옴
+		// 방에 들어갈때 보내기 버튼의 속성에 저장해줌
+		$('#button-send').attr("data-room",roomNum);
+		$('#button-send').attr("data-receiver",num);
 		getSomeone(num);
 		
 		let chatDate = getTodayDate();
-	    let enterMsg={"type" : "ENTER","roomNum":roomNum,"receiver":num,"message":"","chatDate":chatDate};
+	    let enterMsg={"type" : "ENTER","roomNum":roomNum,"name":name,"receiver":num,"message":"","chatDate":chatDate};
 	    socket.send(JSON.stringify(enterMsg));
 	}
 	
 	function send(roomNum, num){
 	    let content=document.querySelector('#msg').value;
         let chatDate = getTodayDate();
-        let talkMsg={"type" : "TALK","roomNum":roomNum, "receiver":num,"message":content,"chatDate":chatDate};
+        let talkMsg={"type" : "TALK","roomNum":roomNum,"name":name,"receiver":num,"message":content,"chatDate":chatDate};
         socket.send(JSON.stringify(talkMsg));
 	    msg.value = '';
 	   

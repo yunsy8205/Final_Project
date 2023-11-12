@@ -321,8 +321,6 @@ document.addEventListener('DOMContentLoaded', function() {
     	let feb = Number($('#02').attr("data-member"))+jan;
     	let mar = Number($('#03').attr("data-member"))+feb;
     	let apr = Number($('#04').attr("data-member"))+mar;    		
-    	console.log(mar);
-    	console.log(apr);
     	let may = Number($('#05').attr("data-member"))+apr;
     	let jun = Number($('#06').attr("data-member"))+may;
     	let jul = Number($('#07').attr("data-member"))+jun;
@@ -333,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
     	let dec = Number($('#12').attr("data-member"))+nov;
     	
     	let chartData =  [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
-    	//let chartLabels = "[""+  +"]";
+    	
     	const ctx = document.getElementById('myChart').getContext('2d');
     	new Chart(ctx, {
     	    type: 'line',
