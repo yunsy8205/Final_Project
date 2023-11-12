@@ -27,7 +27,7 @@ public class ApprovalService {
 	@Value("${app.upload.employee}")
 	private String emp;
 	
-	public List<ApprovalVO> getApprovalList(Pager pager,ApprovalVO approvalVO) throws Exception{
+	public List<ApprovalVO> getApprovalAllList(Pager pager,ApprovalVO approvalVO) throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();
 		pager.makeRowNum();
 		map.put("id", approvalVO);
@@ -35,7 +35,47 @@ public class ApprovalService {
 		Long total = approvalDAO.getMyCount(map);
 		pager.makePageNum(total);
 		map.put("pager", pager);
-		return approvalDAO.getApprovalList(map);
+		return approvalDAO.getApprovalAllList(map);
+	}
+	public List<ApprovalVO> getApprovalWatingList(Pager pager,ApprovalVO approvalVO) throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
+		pager.makeRowNum();
+		map.put("id", approvalVO);
+		map.put("pager", pager);
+		Long total = approvalDAO.getMyWatingCount(map);
+		pager.makePageNum(total);
+		map.put("pager",pager);
+		return approvalDAO.getApprovalWatingList(map);
+	}
+	public List<ApprovalVO> getApprovalProceedingList(Pager pager,ApprovalVO approvalVO) throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
+		pager.makeRowNum();
+		map.put("id", approvalVO);
+		map.put("pager", pager);
+		Long total = approvalDAO.getMyProceedingCount(map);
+		pager.makePageNum(total);
+		map.put("pager",pager);
+		return approvalDAO.getApprovalProceedingList(map);
+	}
+	public List<ApprovalVO> getApprovalRejectList(Pager pager,ApprovalVO approvalVO) throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
+		pager.makeRowNum();
+		map.put("id", approvalVO);
+		map.put("pager", pager);
+		Long total = approvalDAO.getMyRejectCount(map);
+		pager.makePageNum(total);
+		map.put("pager",pager);
+		return approvalDAO.getApprovalRejectList(map);
+	}
+	public List<ApprovalVO> getApprovalCompleteList(Pager pager,ApprovalVO approvalVO) throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
+		pager.makeRowNum();
+		map.put("id", approvalVO);
+		map.put("pager", pager);
+		Long total = approvalDAO.getMyCompleteCount(map);
+		pager.makePageNum(total);
+		map.put("pager",pager);
+		return approvalDAO.getApprovalCompleteList(map);
 	}
 	
 	public List<EmployeeVO> getAnnualLine() throws Exception{
@@ -49,15 +89,25 @@ public class ApprovalService {
 		
 	}
 	
-	public List<ApprovalVO> getApproverList(Pager pager,ApprovalVO approvalVO) throws Exception{
+	public List<ApprovalVO> getApproverAllBeforeList(Pager pager,ApprovalVO approvalVO) throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();
 		pager.makeRowNum();
 		map.put("id", approvalVO);
 		map.put("pager", pager);
-		Long total = approvalDAO.getAllCount(map);
+		Long total = approvalDAO.getAllBeforeCount(map);
 		pager.makePageNum(total);
 		map.put("pager", pager);
-		return approvalDAO.getApproverList(map);
+		return approvalDAO.getApproverAllBeforeList(map);
+	}
+	public List<ApprovalVO> getApproverAllAfterList(Pager pager,ApprovalVO approvalVO) throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
+		pager.makeRowNum();
+		map.put("id", approvalVO);
+		map.put("pager", pager);
+		Long total = approvalDAO.getAllAfterCount(map);
+		pager.makePageNum(total);
+		map.put("pager", pager);
+		return approvalDAO.getApproverAllAfterList(map);
 	}
 	
 	public ApprovalVO getMyDetail(ApprovalVO approvalVO)throws Exception{

@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html>
-<!-- beautify ignore:start -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+			<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+				<!DOCTYPE html>
+				<!-- beautify ignore:start -->
 <html
   lang="en"
   class="light-style layout-menu-fixed"
@@ -34,109 +33,342 @@
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-                <div>
-				<!-- 검색창 -->
-				<div>
-					<form action="/list" method="get"
-						style="width: 20%; float: right; margin-right: 180px;">
-						<div id="frm" style="width: 300px;">
-							<input type="hidden" value="${pager.page}" id="page" name="page">
-							<input type="hidden" value="${pager.division}" name="division">
-							<!-- 파라미터 이름 kind -->
-							<select name="kind" id="k" class="search">
-								<option class="kind" value="title">제목</option>
-								<option class="kind" value="contents">내용</option>
-							</select> <input type="text" name="search" value="${pager.search}"
-								class="search" placeholder="검색어를 입력하세요."
-								style="text-align: center;">
-							<button type="submit">검색</button>
-						</div>
-
-					</form>
-				</div>
-				<div>
-					
 					<div class="nav-align-top mb-4">
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item" role="presentation">
-								<a href="/approval/list?division=all" class="nav-link" id="allBtn">전체</a>
+								<button type="button" id="allBtn" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-all" aria-controls="navs-justified-all" aria-selected="true">전체</button>
 							</li>
 							<li class="nav-item" role="presentation">
-								<a href="/approval/list?division=wating" class="nav-link">대기</a>
+								<button type="button" id="watingBtn" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-wating" aria-controls="navs-justified-wating" aria-selected="true">대기</button>
 							</li>
 							<li class="nav-item" role="presentation">
-								<a href="/approval/list?division=proceeding" class="nav-link">진행</a>
+								<button type="button" id="watingBtn" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-proceeding" aria-controls="navs-justified-proceeding" aria-selected="true">진행</button>
 							</li>
 							<li class="nav-item" role="presentation">
-								<a href="/approval/list?division=reject" class="nav-link" id="rejectBtn">반려</a>
+								<button type="button" id="watingBtn" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-reject" aria-controls="navs-justified-reject" aria-selected="true">반려</button>
 							</li>
 							<li class="nav-item" role="presentation">
-								<a href="/approval/list?division=complete" class="nav-link" id="completeBtn">완료</a>
+								<button type="button" id="watingBtn" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-complete" aria-controls="navs-justified-complete" aria-selected="true">완료</button>
 							</li>
 							<li class="nav-item" role="presentation">
 								<a href="/approval/tempList" class="nav-link" id="temporaryBtn">임시저장</a>
 							</li>
 						</ul>
-					</div>
-				</div>
-				
-				<div>
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
-						<thead>
-							<tr>
-								<th>기안일</th>
-								<th>결재양식</th>
-								<th>제목</th>
-								<th>문서번호</th>
-								<th>결재상태</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list}" var="vo">
-								<tr>
-									<td>${vo.regDate}</td>
-									<td><a href="./detail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
-									<td>${vo.title}</td>
-									<td>${vo.approvalNum}</td>
-									<td>${vo.state}</td>
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="navs-justified-all" role="tabpanel">
+								<div id="box">
+								<div class="input-group">
+								  <select id="kind" name="kind" class="select2 form-select">
+									  <option selected value="title">Title</option>
+									  <option value="contents">Contents</option>
+									  <option value="name">Name</option>
+								  </select>
+								  <input type="text" class="form-control" id="search"/>
+								  <button
+									class="btn btn-outline-primary"
+									id="searchBtn"
+									type="button"
+									>
+									조회
+								  </button>
+								</div>
+								<!-- Hoverable Table rows -->
+								
+									<div class="table-responsive text-nowrap">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>기안일</th>
+													<th>결재양식</th>
+													<th>제목</th>
+													<th>문서번호</th>
+													<th>결재상태</th>
+												</tr>
+											</thead>
+											<tbody class="table-border-bottom-0">
+												<c:forEach items="${list}" var="vo">
+													<tr>
+														<td>${vo.regDate}</td>
+														<td><a href="./detail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
+														<td>${vo.title}</td>
+														<td>${vo.approvalNum}</td>
+														<td>${vo.state}</td>
+														
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
 									
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<div class="col-sm-12 col-md-7">
-					<div class="dataTables_paginate paging_simple_numbers"
-						id="dataTable_paginate">
-						<ul class="pagination">
-							<li
-								class="paginate_button page-item previous ${pager.pre?'':'disabled'}"
-								id="dataTable_previous"><a
-								href="./list?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}&division=${pager.division}"
-								aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-								class="page-link">Previous</a></li>
-							<c:forEach begin="${pager.startNum }" end="${pager.lastNum}"
-								var="i">
-								<li class="paginate_button page-item active" id="dataTable">
-									<a
-									href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}&division=${pager.division}"
-									aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-									class="page-link">${i}</a>
-								</li>
-							</c:forEach>
-
-							<li
-								class="paginate_button page-item next ${pager.next?'':'disabled'}"
-								id="dataTable_next"><a
-								href="./list?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}&division=${pager.division}"
-								aria-controls="dataTable" data-dt-idx="7" tabindex="0"
-								class="page-link">Next</a></li>
-						</ul>
+										<ul class="pagination justify-content-center">
+											<li class="page-item prev ${pager.pre?'':'disabled'}">
+											  <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+											</li>
+											<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+											   <li class="page-item">
+												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+											   </li>
+											</c:forEach>
+											<li class="page-item next ${pager.next?'':'disabled'}">
+											  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+											</li>
+										  </ul>
+									
+								</div>
+								<!--/ Hoverable Table rows -->
+							</div>
+							<div class="tab-pane fade show" id="navs-justified-wating" role="tabpanel">
+								<div id="box">
+								<div class="input-group">
+								  <select id="kind" name="kind" class="select2 form-select">
+									  <option selected value="title">Title</option>
+									  <option value="contents">Contents</option>
+									  <option value="name">Name</option>
+								  </select>
+								  <input type="text" class="form-control" id="search"/>
+								  <button
+									class="btn btn-outline-primary"
+									id="searchBtn"
+									type="button"
+									>
+									조회
+								  </button>
+								</div>
+								<!-- Hoverable Table rows -->
+								
+									<div class="table-responsive text-nowrap">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>기안일</th>
+													<th>결재양식</th>
+													<th>제목</th>
+													<th>문서번호</th>
+													<th>결재상태</th>
+												</tr>
+											</thead>
+											<tbody class="table-border-bottom-0">
+												<c:forEach items="${wl}" var="vo">
+													<tr>
+														<td>${vo.regDate}</td>
+														<td><a href="./detail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
+														<td>${vo.title}</td>
+														<td>${vo.approvalNum}</td>
+														<td>${vo.state}</td>
+														
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+									
+										<ul class="pagination justify-content-center">
+											<li class="page-item prev ${wp.pre?'':'disabled'}">
+											  <a class="page-link move" data-num="${wp.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+											</li>
+											<c:forEach begin="${wp.startNum}" end="${wp.lastNum}" var="i">
+											   <li class="page-item">
+												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+											   </li>
+											</c:forEach>
+											<li class="page-item next ${wp.next?'':'disabled'}">
+											  <a class="page-link move" data-num="${wp.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+											</li>
+										  </ul>
+									
+								</div>
+								<!--/ Hoverable Table rows -->
+							</div>
+							<div class="tab-pane fade show" id="navs-justified-proceeding" role="tabpanel">
+								<div id="box">
+								<div class="input-group">
+								  <select id="kind" name="kind" class="select2 form-select">
+									  <option selected value="title">Title</option>
+									  <option value="contents">Contents</option>
+									  <option value="name">Name</option>
+								  </select>
+								  <input type="text" class="form-control" id="search"/>
+								  <button
+									class="btn btn-outline-primary"
+									id="searchBtn"
+									type="button"
+									>
+									조회
+								  </button>
+								</div>
+								<!-- Hoverable Table rows -->
+								
+									<div class="table-responsive text-nowrap">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>기안일</th>
+													<th>결재양식</th>
+													<th>제목</th>
+													<th>문서번호</th>
+													<th>결재상태</th>
+												</tr>
+											</thead>
+											<tbody class="table-border-bottom-0">
+												<c:forEach items="${pl}" var="vo">
+													<tr>
+														<td>${vo.regDate}</td>
+														<td><a href="./detail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
+														<td>${vo.title}</td>
+														<td>${vo.approvalNum}</td>
+														<td>${vo.state}</td>
+														
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+									
+										<ul class="pagination justify-content-center">
+											<li class="page-item prev ${pp.pre?'':'disabled'}">
+											  <a class="page-link move" data-num="${pp.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+											</li>
+											<c:forEach begin="${pp.startNum}" end="${pp.lastNum}" var="i">
+											   <li class="page-item">
+												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+											   </li>
+											</c:forEach>
+											<li class="page-item next ${pp.next?'':'disabled'}">
+											  <a class="page-link move" data-num="${pp.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+											</li>
+										  </ul>
+									
+								</div>
+								<!--/ Hoverable Table rows -->
+							</div>
+							<div class="tab-pane fade show" id="navs-justified-reject" role="tabpanel">
+								<div id="box">
+								<div class="input-group">
+								  <select id="kind" name="kind" class="select2 form-select">
+									  <option selected value="title">Title</option>
+									  <option value="contents">Contents</option>
+									  <option value="name">Name</option>
+								  </select>
+								  <input type="text" class="form-control" id="search"/>
+								  <button
+									class="btn btn-outline-primary"
+									id="searchBtn"
+									type="button"
+									>
+									조회
+								  </button>
+								</div>
+								<!-- Hoverable Table rows -->
+								
+									<div class="table-responsive text-nowrap">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>기안일</th>
+													<th>결재양식</th>
+													<th>제목</th>
+													<th>문서번호</th>
+													<th>결재상태</th>
+												</tr>
+											</thead>
+											<tbody class="table-border-bottom-0">
+												<c:forEach items="${rl}" var="vo">
+													<tr>
+														<td>${vo.regDate}</td>
+														<td><a href="./detail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
+														<td>${vo.title}</td>
+														<td>${vo.approvalNum}</td>
+														<td>${vo.state}</td>
+														
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+									
+										<ul class="pagination justify-content-center">
+											<li class="page-item prev ${rp.pre?'':'disabled'}">
+											  <a class="page-link move" data-num="${rp.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+											</li>
+											<c:forEach begin="${rp.startNum}" end="${rp.lastNum}" var="i">
+											   <li class="page-item">
+												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+											   </li>
+											</c:forEach>
+											<li class="page-item next ${rp.next?'':'disabled'}">
+											  <a class="page-link move" data-num="${rp.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+											</li>
+										  </ul>
+									
+								</div>
+								<!--/ Hoverable Table rows -->
+							</div>
+							<div class="tab-pane fade show" id="navs-justified-complete" role="tabpanel">
+								<div id="box">
+								<div class="input-group">
+								  <select id="kind" name="kind" class="select2 form-select">
+									  <option selected value="title">Title</option>
+									  <option value="contents">Contents</option>
+									  <option value="name">Name</option>
+								  </select>
+								  <input type="text" class="form-control" id="search"/>
+								  <button
+									class="btn btn-outline-primary"
+									id="searchBtn"
+									type="button"
+									>
+									조회
+								  </button>
+								</div>
+								<!-- Hoverable Table rows -->
+								
+									<div class="table-responsive text-nowrap">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>기안일</th>
+													<th>결재양식</th>
+													<th>제목</th>
+													<th>문서번호</th>
+													<th>결재상태</th>
+												</tr>
+											</thead>
+											<tbody class="table-border-bottom-0">
+												<c:forEach items="${cl}" var="vo">
+													<tr>
+														<td>${vo.regDate}</td>
+														<td><a href="./detail?approvalNum=${vo.approvalNum}">${vo.category}</a></td>
+														<td>${vo.title}</td>
+														<td>${vo.approvalNum}</td>
+														<td>${vo.state}</td>
+														
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+									
+										<ul class="pagination justify-content-center">
+											<li class="page-item prev ${cp.pre?'':'disabled'}">
+											  <a class="page-link move" data-num="${cp.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+											</li>
+											<c:forEach begin="${cp.startNum}" end="${cp.lastNum}" var="i">
+											   <li class="page-item">
+												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+											   </li>
+											</c:forEach>
+											<li class="page-item next ${cp.next?'':'disabled'}">
+											  <a class="page-link move" data-num="${cp.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+											</li>
+										  </ul>
+									
+								</div>
+								<!--/ Hoverable Table rows -->
+							</div>
+							<a class="btn btn-primary" href="/approval/add?division=휴가신청서">새결재작성</a>
+						</div>
+						
 					</div>
-				</div>
-				
-					<a class="btn btn-primary" href="/approval/add?division=휴가신청서">새결재작성</a>
 				
 				</div>
 
@@ -184,7 +416,7 @@
         <!-- / Layout page -->
       <div>
 
-      <!-- Overlay -->
+	<!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->

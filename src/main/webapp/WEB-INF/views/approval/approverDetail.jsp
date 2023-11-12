@@ -104,8 +104,8 @@
 													</tbody>
 												</table>
 											</td>
-											<td
-												style="background: white; padding: 0px !important; border: currentColor; text-align: right; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
+											<td 
+												style="background: white; padding-left: 70px !important; border: currentColor; text-align: right; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
 												<table
 													style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 													<!-- User -->
@@ -304,12 +304,16 @@
 									</tbody>
 								</table>
 								<div>
+									
 								<c:if test="${approvalVO.state=='대기중'}">
 								<form action="middleApproval" method="post" id="approvalForm">
 									<input type="hidden" name="approvalNum" value="${approvalVO.approvalNum}">
 									<input type="hidden" id="state" name="state" value="진행중">
 									<input type="hidden" id="reason" name="reason">
 									<button class="btn btn-primary" id="approvalBtn">결재</button>
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+										반려
+									</button>
 								</form>
 								
 								</c:if>
@@ -326,15 +330,12 @@
 
 									
 									<button class="btn btn-primary">결재</button>
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+										반려
+									</button>
 								</form>
-				
+								</c:if>
 								
-								</c:if>
-								<c:if test="${approvalVO.state=='대기중'||approvalVO.state=='진행중'}">
-								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-									반려
-								</button>
-								</c:if>
 								</div>
 								
 
