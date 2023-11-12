@@ -61,7 +61,7 @@
                         <form:label path="address"  class="col-sm-2 col-form-label">주소</form:label>
                         <div class="col-md-10">
                           <form:input path="address" id="adr_postNum" cssClass="input_con form-control address input" placeholder="우편번호" value=""></form:input>
-                          <button type="button" id="addressBtn">우편번호 찾기</button>
+                          <button type="button" id="addressBtn" class="btn btn-primary">우편번호 찾기</button>
                           <input class="form-control" type="hidden" id="adr_address" placeholder="주소"></input>
                           <input class="form-control" type="hidden" id="adr_detail" placeholder="상세주소" value =""></input>
                           <form:errors path="address"></form:errors>
@@ -113,8 +113,8 @@
                     </div>
                   </div>
                   <div class="proBtn">
-                    <button type="button" id="backBtn">이전</button>
-                    <button type="submit" id="addBtn">등록</button>
+                    <button type="button" id="backBtn" class="btn btn-primary">이전</button>
+                    <button type="submit" id="addBtn" class="btn btn-primary">등록</button>
                   </div>
                 </form:form>
               </div>

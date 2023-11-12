@@ -30,6 +30,18 @@
 		END AS 'POSITION'	
 	</sql>
 	
+	<sql id="positionJoinName">
+		CASE E.POSITION
+			WHEN 'ROLE_CEO' THEN '대표'
+			WHEN 'ROLE_GENERAL' THEN '총괄 매니저'
+			WHEN 'ROLE_CUSTOMER' THEN '고객관리 매니저'
+			WHEN 'ROLE_RESOURCES' THEN '인사 매니저'
+			WHEN 'ROLE_FACILITY' THEN '시설 매니저'
+			WHEN 'ROLE_TRAINER' THEN '트레이너'
+			WHEN 'ROLE_EX' THEN '가발령'
+		END AS 'POSITION'
+	</sql>
+	
 	
 	<select id="getEmpTotal" parameterType="Pager" resultType="Long">
 		SELECT COUNT(EMPLOYEENUM) FROM EMPLOYEE 
@@ -92,7 +104,10 @@
 	
 	<!-- Employee 개인 -->
 	<select id="getInfo" parameterType="Map" resultMap="getEmpResult">
-		SELECT * FROM EMPLOYEE E
+		SELECT  
+			<include refid="positionJoinName"></include>
+			, E.*, CA.*, CE.*
+		FROM EMPLOYEE E
 		LEFT OUTER JOIN CAREER CA
 		ON E.EMPLOYEENUM = CA.EMPLOYEENUM
 		LEFT OUTER JOIN CERTIFICATION CE

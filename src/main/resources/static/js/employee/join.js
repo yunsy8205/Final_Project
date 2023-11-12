@@ -100,50 +100,45 @@ $(document).ready(function() {
 
 
 for(n of nameI){
-    n.addEventListener("blur", function () {
-        nMsg.innerHTML = '';
-        if (n.value == '') {
-            nMsg.innerHTML = "이름을 입력해주세요";
-        } else {
-            checks[1] = true;
-        }
-    });
+    nMsg.innerHTML = '';
+    if (n.value == '') {
+        nMsg.innerHTML = "이름을 입력해주세요";
+    } else {
+        checks[1] = true;
+    }
 }
 
 for(p of phone){
-    p.addEventListener("blur",function(){
-        pMsg.innerHTML="";
-        if(p.value == ''){
-            pMsg.innerHTML="전화번호를 입력해주세요.";
-        }else if(!phoneCheck.test(p.value)){
-            pMsg.innerHTML="'-'를 빼고 010으로 시작하는 8자리를 입력해주세요.";
-        }else{
-            checks[2]=true;
-        }
-    });
+    pMsg.innerHTML="";
+    if(p.value == ''){
+        pMsg.innerHTML="전화번호를 입력해주세요.";
+    }else if(!phoneCheck.test(p.value)){
+        pMsg.innerHTML="'-'를 빼고 010으로 시작하는 8자리를 입력해주세요.";
+    }else{
+        checks[2]=true;
+    }
+
 }
 
 for(addressInput of address){
-    addressInput.addEventListener("blur", function () {
-        aMsg.innerHTML = '';
-        if (addressInput.value == '') {
-            aMsg.innerHTML = "주소를 입력하세요.";
-        }
-    })
+    aMsg.innerHTML = '';
+    if (addressInput.value == '') {
+        aMsg.innerHTML = "주소를 입력하세요.";
+    }
+
 }
 
 for(b of birth){
-    b.addEventListener("change", function () {
-        bMsg.innerHTML="생일을 입력하세요."
-        let first = birthCheck.test(b.value);
-        let check = emptyCheck(b);
-        if(!first){
-            bMsg.innerHTML="과거일자만 입력 가능합니다."
-        }
-        else if (!check) {;
-            checks[4] = true;
-        }
-    })
+    bMsg.innerHTML="생일을 입력하세요."
+    let first = birthCheck.test(b.value);
+    let check = emptyCheck(b);
+    if(!first){
+        bMsg.innerHTML="과거일자만 입력 가능합니다."
+    }
+    else if (!check) {;
+        checks[4] = true;
+    }
+
 }
 
 function emptyCheck(element) {

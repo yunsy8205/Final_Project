@@ -38,10 +38,10 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header">
-                      <h3 class="emp_title" style="text-align: center;">${employeeVO.name} <span class="position_inner"></span> 정보수정</h3>
+                      <h3 class="emp_title" style="text-align: center;margin-top: 1rem;"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span> 정보수정</h3>
                       <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" id="frm" action="./infoUpdate">
-                        <div class="proFile_con" style="text-align: center;">
-                          <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" style="width:10rem; height:10rem;"  onerror="this.style.display='none'">
+                        <div class="proFile_con" style="text-align: center;margin: 2rem auto 3rem;">
+                          <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" style="width:10rem; height:10rem;border-radius: 50%;"  onerror="this.style.display='none'">
                           <p>${employeeVO.proOriginal}</p>
                           <input type="file"  name="empfile" id="proFile" style="width: 13rem;" required/>
                         </div>

@@ -53,9 +53,9 @@
                           <div class="col-xxl">
                               <div class="card mb-4">
                                 <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;">
-                                  <h1 class="mb-0">${employeeVO.name} <span class="position_inner"></span> 정보</h1>
-                                  <div class="proFile_con">
-                                    <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" style="width:10rem; height:10rem;" onerror="this.style.display='none'">
+                                  <h1 class="mb-0" style="font-size: calc(1.2875rem + 0.45vw);"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span> 정보</h1>
+                                  <div class="proFile_con" style="width: 10rem; height:10rem; margin: 2rem;">
+                                    <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" onerror="this.style.display='none'" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;">
                                   </div>
                                 </div>
                                 <div class="card-body">
@@ -148,7 +148,7 @@
                                     <form action="" id="upfrm">
                                       <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
                                     </form>
-                                    <div class="proBtn">
+                                    <div class="proBtn" style="text-align: center;">
                                       <button type="button" class="btn btn-primary" id="upBtn" data-url="/employee/infoUpdate">수정</button>
                                       <!-- <button type="button" class="btn btn-primary" id="toBtn" >수정</button> -->
                                     </div>
