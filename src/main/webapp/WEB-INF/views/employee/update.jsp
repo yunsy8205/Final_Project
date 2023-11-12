@@ -58,21 +58,21 @@
                               <div class="updiv mb-3 row">
                                 <label for="name"  class="col-md-2 col-form-label">이름</label>
                                 <div class="col-md-10">
-                                  <input name="name" class="input_con form-control name input" value="${employeeVO.name}"></input>
+                                  <input name="name" class="input_con form-control input" id="name" value="${employeeVO.name}"></input>
                                   <div id="nameMsg"></div>
                                 </div>
                               </div>
                               <div class="updiv mb-3 row">
                                 <label for="phone" class="col-md-2 col-form-label">전화번호</label>
                                 <div class="col-md-10">
-                                  <input name="phone" class="input_con form-control phone input" value="${employeeVO.phone}"></input>  
+                                  <input name="phone" class="input_con form-control input" id="phone" value="${employeeVO.phone}"></input>  
                                   <div id="phoneMsg"></div>
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="html5-text-input" class="col-md-2 col-form-label">주소</label>
+                                <label for="address" class="col-md-2 col-form-label">주소</label>
                                 <div class="col-md-10">
-                                  <input class="form-control address input" name="address" type="text" id="html5-text-input" value="${employeeVO.address}" placeholder="우편번호" />
+                                  <input class="form-control input" name="address" type="text" id="address" value="${employeeVO.address}" placeholder="우편번호" />
                                   <button type="button" id="addressBtn" class="btn btn-primary">우편번호 찾기</button>
                                   <input class="form-control" type="hidden" id="html5-text-input"  placeholder="주소" />
                                   <input class="form-control" type="hidden" id="html5-text-input"  placeholder="상세주소" value="" />
@@ -80,9 +80,9 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="html5-date-input" class="col-md-2 col-form-label">생년월일</label>
+                                <label for="birth" class="col-md-2 col-form-label">생년월일</label>
                                 <div class="col-md-10">
-                                  <input class="form-control birth input" name="birth" type="date" value="${employeeVO.birth}" placeholder="생년월일을 입력해주세요." id="html5-date-input" />
+                                  <input class="form-control input" name="birth" id="birth" type="date" value="${employeeVO.birth}" placeholder="생년월일을 입력해주세요."/>
                                   <div id="birthMsg"></div>
                                 </div>
                               </div>
@@ -100,11 +100,11 @@
                                 <div class="col-md-10" style="display: flex;">
                                   <div class="form-check mt-3" style="margin-top:0 !important; margin-right: 2rem;">
                                     <label class="form-check-label" for="gender_M"> 남 </label>
-                                    <input class="form-check-input" name="gender" type="radio" value="M" id="gender_M" />
+                                    <input class="form-check-input" name="gender" type="radio" value="남" id="gender_M" />
                                   </div>
                                   <div class="form-check">
                                     <label class="form-check-label" for="gender_W"> 여 </label>
-                                    <input  class="form-check-input" name="gender" type="radio" value="W" id="gender_W"/>
+                                    <input  class="form-check-input" name="gender" type="radio" value="여" id="gender_W"/>
                                   </div>
                                 </div>
                               </div>  

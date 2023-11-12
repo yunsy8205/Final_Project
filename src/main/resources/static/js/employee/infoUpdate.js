@@ -78,7 +78,7 @@ let gVal = document.getElementById("genderVal");
 const gM = document.getElementById("gender_M");
 const gW = document.getElementById("gender_W");
 
-if (gVal.value == "M") {
+if (gVal.value == "남") {
   gM.checked = true;
 } else {
   gW.checked = true;
@@ -94,6 +94,8 @@ gW.addEventListener("change", function () {
     gVal.value = gW.value;
   }
 });
+
+
 
 // 업데이트 유효성검사
 for (n of nameI) {

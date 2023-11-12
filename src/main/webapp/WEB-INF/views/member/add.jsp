@@ -90,11 +90,11 @@
                           <div class="col-md-10" style="display: flex;">
                             <div class="form-check mt-3" style="margin-top:0 !important; margin-right: 2rem;">
                               <label class="form-check-label" for="defaultRadio1"> 남 </label>
-                              <input class="form-check-input" name="gender" type="radio" value="M" id="defaultRadio1" checked />
+                              <input class="form-check-input" name="gender" type="radio" value="남" id="defaultRadio1" checked />
                             </div>
                             <div class="form-check">
                               <label class="form-check-label" for="defaultRadio2"> 여 </label>
-                              <input  class="form-check-input" name="gender" type="radio" value="W" id="defaultRadio2"/>
+                              <input  class="form-check-input" name="gender" type="radio" value="여" id="defaultRadio2"/>
                             </div>
                           </div>
                         </div>

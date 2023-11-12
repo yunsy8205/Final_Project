@@ -139,7 +139,7 @@ for(p of phone){
         if(p.value == ''){
             pMsg.innerHTML="전화번호를 입력해주세요.";
         }else if(!phoneCheck.test(p.value)){
-            pMsg.innerHTML="010으로 시작하는 8자리를 입력해주세요.";
+            pMsg.innerHTML="'-'를 빼고 010으로 시작하는 8자리를 입력해주세요.";
         }else{
             checks[1]=true;
         }
