@@ -13,8 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeService;
 import com.cloud.pt.employee.EmployeeVO;
-import com.cloud.pt.membership.MembershipService;
-import com.cloud.pt.membership.MembershipVO;
+import com.cloud.pt.memberShip.MembershipService;
+import com.cloud.pt.memberShip.MembershipVO;
 
 import lombok.extern.slf4j.Slf4j;
 
