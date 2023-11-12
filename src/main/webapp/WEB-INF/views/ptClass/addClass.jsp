@@ -58,7 +58,7 @@
     
   </select>  <br />
   <input type="text" name="startTime" id="combinedData" style="display: none;">
-           종료시간 : <input type="datetime-local" name="finishTime" id="finish"/><br /> 
+           <input type="datetime-local" name="finishTime" id="finish" style="display: none;"/><br /> 
            
           </div>
           <div class="modal-footer">
