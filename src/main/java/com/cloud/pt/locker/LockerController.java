@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LockerController {
 	
 	@GetMapping("lockerList")
-	public String getList() throws Exception{
+	public String getLockerList(LockerVO lockerVO) throws Exception{
+		
+		
 		return "locker/lockerList";
 	}
 }

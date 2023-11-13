@@ -47,7 +47,7 @@
            <input type="text" name="memberNum" id="memberNum" value="${memberNum}" style="display: none;"><br/>
            
            회원이름 : <input type="text" id="title" value="${memberName}" readonly="readonly"><br>
-           시작시간 : <input type="date"  id="date"/>  <select id="time">
+           시작시간 : <input type="date"  id="date" onchange="validateDate()"/>  <select id="time">
 			    <option value="10:00:00">10:00:00</option>
 			    <option value="11:00:00">11:00:00</option>
 			    <option value="12:00:00">12:00:00</option>
@@ -161,6 +161,17 @@
       }); */
   });
       
+  function validateDate() {
+      var inputDate = new Date(document.getElementById('date').value);
+      var today = new Date();
+	
+      // 비활성화할 조건: 선택한 날짜가 오늘 이전인 경우
+      if (inputDate < today) {
+    	  
+        alert("이 날짜는 오늘 이전입니다. 유효한 날짜를 선택하세요.");
+        document.getElementById('date').value = ''; // 값을 비워서 선택된 날짜를 제거
+      }
+    }
     </script>
   </body>
 </html>

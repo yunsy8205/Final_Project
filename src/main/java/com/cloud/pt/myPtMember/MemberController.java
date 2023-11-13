@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
+import com.cloud.pt.member.MemVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,7 +48,7 @@ public class MemberController {
 
 			EmployeeVO employeeVO = new EmployeeVO();
 			employeeVO.setEmployeeNum(b.getName());
-			List<MemberVO> ar = memberService.getPtList(employeeVO, pager);
+			List<MemVO> ar = memberService.getPtList(employeeVO, pager);
 			
 			
 			mv.addObject("list", ar);
