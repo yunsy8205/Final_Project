@@ -178,14 +178,14 @@
                                 <form:label path="newPw" class="col-sm-2 col-form-label" for="basic-default-name">새 비밀번호</form:label>
                                 <div class="col-sm-10">
                                   <form:password path="newPw" cssClass="form-control" id="basic-default-name"/>
-                                	<form:errors path="newPw"></form:errors>
+                                  <span style="color: rgb(83, 83, 83); font-size: 0.8rem;">비밀번호는 8자에서 12자 사이이며, 소문자+숫자+특수문자(*,@,#,$,%,^,&,+,=)를 포함해야 합니다.</span>
                                 </div>
                               </div>
                               <div class="row mb-3">
                                 <form:label path="pwCheck" class="col-sm-2 col-form-label" for="basic-default-name">비밀번호 확인</form:label>
                                 <div class="col-sm-10">
                                 	<form:password path="pwCheck"  cssClass="form-control" id="basic-default-name"/>
-                                 	<form:errors path="pwCheck"></form:errors>
+                                  <form:errors path="pwCheck"></form:errors>
                                 </div>
                               </div>
                               <div class="proBtn" style="text-align: center;">

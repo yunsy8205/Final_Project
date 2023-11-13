@@ -44,7 +44,7 @@
                           <option class="kind" value="name">이름</option>
                         </select> 
                         <input type="text" name="search" value="${pager.search}" class="search form-control" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
-                        <button type="submit" class="btn btn-primary">검색</button>
+                        <button type="submit" class="btn btn-primary">조회</button>
                       </form>
                     </div>
                   </div>
