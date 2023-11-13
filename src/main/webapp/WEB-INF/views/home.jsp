@@ -169,8 +169,8 @@ document.addEventListener('DOMContentLoaded', function() {
                       <div id="proBox">
                       	<img id="userProfile" alt="" src="../file/employee/${user.proFile}">
                       </div>
-                      <div class="user mt-2" id="user" data-num="${user.employeeNum}">${user.name}</div>
-	                  <div class="user">${user.position}</div>
+                      <div class="user mt-2" id="user" data-num="${user.employeeNum}" style="font-weight:500;">${user.name}</div>
+	                  <div class="user" id="position" data-position="${user.position}"><span id="pInner" style="font-size: 0.9rem;"></span></div>
                       </div>
                       <div class="b2">
                       <!-- 출근시간 퇴근시간 -->
@@ -260,33 +260,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+			</div>
+		</div>
             <!-- / Content -->
 
             <!-- Footer -->
             
             <!-- / Footer -->
-
+			
             <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
+		</div>
+		<!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
       </div>
-
+	  
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
 
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
-
     <script src="/js/attendance/work.js"></script>
-    <script>
-    
-    // 요소 선택
-    const timeDiv = document.getElementById('time');
+	<script src="/js/home.js"></script>
+	<script>
+		
+// 요소 선택
+const timeDiv = document.getElementById('time');
 
 // getTime 함수
 function getTime(){
@@ -320,13 +320,13 @@ $.ajax({
   type:"get",
   url:"./attendanceTime",
   data:{
-    "employeeNum":employeeNum,
-    "workDate":workDate
-  },
-  success:function(response){
+	  "employeeNum":employeeNum,
+	  "workDate":workDate
+	},
+	success:function(response){
     if(response.time != null){
       if(response.time.offTime != null) {							
-        $('#offTime').text(response.time.offTime);
+		  $('#offTime').text(response.time.offTime);
       
       }
       if(response.time.onTime != null) {					
@@ -341,7 +341,7 @@ $.ajax({
 }
 
 function getTodayDate() {
-  let today = new Date(); // Mon Dec 20 2021 22:04:03 GMT+0900 (한국 표준시)
+	let today = new Date(); // Mon Dec 20 2021 22:04:03 GMT+0900 (한국 표준시)
 
     	attendanceTime(employeeNum, workDate);
     	function attendanceTime(employeeNum, workDate){
@@ -360,7 +360,7 @@ function getTodayDate() {
 	    				
 	    				}
 	    				if(response.time.onTime != null) {					
-	        				$('#onTime').text(response.time.onTime);
+							$('#onTime').text(response.time.onTime);
 	        				
 	        			}
     				}
@@ -381,12 +381,10 @@ function getTodayDate() {
     	    let dateString = year + '-' + month + '-' + day; 
     		
     		console.log(dateString);
-
-  let dateString = year + '-' + month + '-' + day; 
-
-console.log(dateString);
-
-  return dateString;
+			
+			
+			return dateString;
+		}
 }
 
 
@@ -398,22 +396,22 @@ console.log(dateString);
 
 // for(let i=0;i<pInner.length;i++){
 //     if(position == 'ROLE_CEO'){
-//         pInner[i].innerHTML = '대표';
-//     }else if(position == 'ROLE_GENERAL'){
-//         pInner[i].innerHTML = '총괄 매니저'
-//     }else if(position == 'ROLE_CUSTOMER'){
-//         pInner[i].innerHTML = '고객관리 매니저'
+	//         pInner[i].innerHTML = '대표';
+	//     }else if(position == 'ROLE_GENERAL'){
+		//         pInner[i].innerHTML = '총괄 매니저'
+		//     }else if(position == 'ROLE_CUSTOMER'){
+			//         pInner[i].innerHTML = '고객관리 매니저'
 //     }else if(position == 'ROLE_RESOURCES'){
 //         pInner[i].innerHTML = '인사 매니저'
 //     }else if(position == 'ROLE_FACILITY'){
-//         pInner[i].innerHTML = '시설 매니저'
+	//         pInner[i].innerHTML = '시설 매니저'
 //     }else if(position == 'ROLE_TRAINER'){
-//         pInner[i].innerHTML = '트레이너 매니저'
+	//         pInner[i].innerHTML = '트레이너 매니저'
 //     }else{
-//         pInner[i].innerHTML = '가발령 매니저'
-//     }
-// }
-    	
+	//         pInner[i].innerHTML = '가발령 매니저'
+	//     }
+	// }
+	
     	// 차트
     	let jan = Number($('#01').attr("data-member"));
     	let feb = Number($('#02').attr("data-member"))+jan;
@@ -446,7 +444,7 @@ console.log(dateString);
     	    },
     	    options: {
     	      scales: {
-    	        y: {
+				  y: {
     	          beginAtZero: true
     	        }
     	      },
@@ -458,6 +456,6 @@ console.log(dateString);
     	    }
     	  });
     	
-    </script>
+		</script>
   </body>
 </html>
