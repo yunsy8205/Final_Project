@@ -41,7 +41,7 @@ public class EmployeeVO implements UserDetails {
 	@Length(min=8, max=12, message="최소 8자리에서 12자리이며, 소문자+숫자+특수문자를 포함해야 합니다.")
 	//@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*\\\\W)(?=\\\\S+$)")
 	private String password;
-	@Pattern(regexp="01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})", message="010으로 시작하는 번호 8자리를 입력해주세요.")
+	@Pattern(regexp="01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})", message="'-'를 빼고 010으로 시작하는 번호 8자리를 입력해주세요.")
 	private String phone;
 	@NotBlank(message="주소를 입력해주세요.")
 	private String address;

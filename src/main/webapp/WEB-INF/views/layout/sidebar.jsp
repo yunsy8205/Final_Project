@@ -131,13 +131,8 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="pages-misc-error.html" class="menu-link">
+                  <a href="/machine/list" class="menu-link">
                     <div data-i18n="Error">전체 기구 목록</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="pages-misc-under-maintenance.html" class="menu-link">
-                    <div data-i18n="Under Maintenance">기구 수리 요청 목록</div>
                   </a>
                 </li>
                 <li class="menu-item">
@@ -217,7 +212,7 @@
             </li>
             
             <li class="menu-item">
-              <a href="icons-boxicons.html" class="menu-link">
+              <a href="/leave/list" class="menu-link">
                 <i class="menu-icon fa-solid fa-plane"></i>
                 <div data-i18n="Boxicons">휴가</div>
               </a>

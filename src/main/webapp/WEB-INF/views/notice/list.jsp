@@ -62,6 +62,25 @@
 					<h3>공지사항</h3>
 					
 					<div class="row">
+						<div id="searchBox" style="display: flex;">
+						  <select id="kind" name="kind" class="select2 search form-select" style="width: 10%;" >
+						  	<option class="kind" selected value="title">제목</option>
+						  	<option class="kind" value="contents">내용</option>
+						  	<option class="kind" value="name">작성자</option>
+						  </select>
+						  <input type="text" class="search form-control" id="search" style="width: 30%;"/>
+						  <button
+						    class="btn btn-primary"
+						    id="searchBtn"
+						    type="button"
+						    >
+						    검색
+						  </button>
+						</div>
+						
+						<div style="display: flex; justify-content: flex-end;">
+							<a class="a1 btn btn-primary" href="./add">글쓰기</a>
+						</div>
 						<div class="nav-align-top mb-4">
 							<ul class="nav nav-tabs nav-fill" role="tablist">
 								<li class="nav-item">
@@ -137,26 +156,7 @@
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
-									<div id="box">
-									<div class="input-group">
-									  <select id="kind" name="kind" class="select2 form-select">
-									  	<option selected value="title">Title</option>
-									  	<option value="contents">Contents</option>
-									  	<option value="name">Name</option>
-									  </select>
-									  <input type="text" class="form-control" id="search"/>
-									  <button
-									    class="btn btn-outline-primary"
-									    id="searchBtn"
-									    type="button"
-									    >
-									    조회
-									  </button>
-									</div>
-									
-									<div style="display: flex; justify-content: flex-end;">
-										<a class="a1 btn btn-primary" href="./add">글쓰기</a>
-									</div>
+									<div id="box" class="catCheck"  data-cat="">
 									<!-- Hoverable Table rows -->
 									
 										<div class="table-responsive text-nowrap">
@@ -208,7 +208,8 @@
 												</c:if>
 												<c:forEach  begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 													<li class="page-item">
-														<button class="pageBtn page-link" data-p="${i}">${i}</button>
+														<button class="pageBtn page-link" data-p="${i}" <c:if test="${i eq pager.page}">style="background-color: #696cff; color: white;"</c:if>
+														>${i}</button>
 													</li>
 												</c:forEach>
 												<li class="page-item next ${pager.next?'':'disabled'}">

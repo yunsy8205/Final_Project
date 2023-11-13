@@ -42,7 +42,7 @@ const pt = document.getElementsByClassName("ptCount");
 
 for(p of pt){
     if(p.value == ''){
-        p.value = '헬스';
+        p.value = "헬스";
     }
 }
 

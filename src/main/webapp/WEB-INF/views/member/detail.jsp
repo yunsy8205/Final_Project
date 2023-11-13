@@ -99,13 +99,17 @@
                             <div class="row mb-3">
                               <label class="col-sm-2 col-form-label" for="basic-default-name">이용권</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control ptCount" id="basic-default-name" value="${member.membershipVO.type}" readonly/>
+                                  <c:forEach items="${member.membershipVO}" var="sh">
+                                  <input type="text" class="form-control ptCount" id="basic-default-name" value="${sh.type}" readonly/>
+                                </c:forEach>
                               </div>
                             </div>
                             <div class="row mb-3">
                               <label class="col-sm-2 col-form-label" for="basic-default-name">피티 등록일</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" id="basic-default-name" value="${member.registrationVO.regDate}" readonly/>
+                                  <c:forEach items="${member.registrationVO}" var="re">
+                                  <input type="text" class="form-control" id="basic-default-name" value="${re.regDate}" readonly/>
+                                </c:forEach>
                               </div>
                             </div>
                             <div class="row mb-3">
@@ -117,7 +121,9 @@
                             <div class="row mb-3">
                               <label class="col-sm-2 col-form-label" for="basic-default-name">피티 횟수</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" id="basic-default-name" value="${member.ptCount}" readonly/>
+                                  <c:forEach items="${member.membershipVO}" var="sh">
+                                  <input type="text" class="form-control" id="basic-default-name" value="${sh.ptCount}" readonly/>
+                                </c:forEach>
                               </div>
                             </div>
                           </div>

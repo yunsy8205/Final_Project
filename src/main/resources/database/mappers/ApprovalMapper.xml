@@ -61,28 +61,100 @@
 	<select id="getMyCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
 		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장')
-		<include refid="state"></include>
 		<include refid="forPager"></include>
 	</select>
-	<!-- 결재자count  -->
-	<select id="getAllCount" parameterType="Map" resultType="Long">
+	<select id="getMyWatingCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
-		WHERE <include refid="progress"></include>
-		<include refid="category"></include>
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장') AND STATE='대기중'
 		<include refid="forPager"></include>
 	</select>
-	
+	<select id="getMyProceedingCount" parameterType="Map" resultType="Long">
+		SELECT COUNT(APPROVALNUM) FROM APPROVAL
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장') AND STATE='진행중'
+		<include refid="forPager"></include>
+	</select>
+	<select id="getMyRejectCount" parameterType="Map" resultType="Long">
+		SELECT COUNT(APPROVALNUM) FROM APPROVAL
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장') AND (STATE='중간반려' OR STATE="최종반려")
+		<include refid="forPager"></include>
+	</select>
+	<select id="getMyCompleteCount" parameterType="Map" resultType="Long">
+		SELECT COUNT(APPROVALNUM) FROM APPROVAL
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장') AND STATE='완료'
+		<include refid="forPager"></include>
+	</select>
 	<select id="getTemporaryCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
 		WHERE EMPLOYEENUM= #{id.employeeNum} AND STATE='임시저장'
 		<include refid="forPager"></include>
 	</select>
 	
-	<!-- list -->
-	<select id="getApprovalList" resultType="ApprovalVO" parameterType="Map">
+	<!-- 결재자count  -->
+	<select id="getAllBeforeCount" parameterType="Map" resultType="Long">
+		SELECT COUNT(APPROVALNUM) FROM APPROVAL
+		WHERE STATE NOT IN('중간반려') AND STATE NOT IN('최종반려') AND STATE NOT IN('임시저장') AND ((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR
+		 (LAST=#{id.employeeNum} AND FINALDATE IS NULL))
+		<include refid="forPager"></include>
+	</select>
+	<select id="getAllAfterCount" parameterType="Map" resultType="Long">
+		SELECT COUNT(APPROVALNUM) FROM APPROVAL
+		WHERE STATE NOT IN('임시저장') AND ((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NOT NULL) OR
+		 (LAST=#{id.employeeNum} AND FINALDATE IS NOT NULL))
+		<include refid="forPager"></include>
+	</select>
+	
+	
+	<!-- 기안문서함 리스트-->
+	<!-- 전체 리스트 -->
+	<select id="getApprovalAllList" resultType="ApprovalVO" parameterType="Map">
 		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
 		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장')
-		<include refid="state"></include>
+		<include refid="forPager"></include>
+		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
+	</select>
+	<!--대기중 리스트 -->
+	<select id="getApprovalWatingList" resultType="ApprovalVO" parameterType="Map">
+		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장') AND STATE='대기중'
+		<include refid="forPager"></include>
+		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
+	</select>
+	<select id="getApprovalProceedingList" resultType="ApprovalVO" parameterType="Map">
+		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장') AND STATE='진행중'
+		<include refid="forPager"></include>
+		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
+	</select>
+	<select id="getApprovalRejectList" resultType="ApprovalVO" parameterType="Map">
+		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장') AND (STATE='중간반려' OR STATE='최종반려')
+		<include refid="forPager"></include>
+		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
+	</select>
+	<select id="getApprovalCompleteList" resultType="ApprovalVO" parameterType="Map">
+		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장') AND STATE='완료'
+		<include refid="forPager"></include>
+		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
+	</select>
+	<select id="getTemporaryList" resultType="ApprovalVO" parameterType="Map">
+		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE='임시저장'
+		<include refid="forPager"></include>
+		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
+	</select>
+	<!-- 결재문서함 리스트 -->
+	<select id="getApproverAllBeforeList" resultType="ApprovalVO" parameterType="Map">
+		SELECT APPROVALNUM,REGDATE,NAME,CATEGORY,TITLE,STATE,MIDDLE,LAST FROM APPROVAL
+		WHERE STATE NOT IN('중간반려') AND STATE NOT IN('최종반려') AND STATE NOT IN('임시저장') AND ((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NULL) OR
+		 (LAST=#{id.employeeNum} AND FINALDATE IS NULL))
+		<include refid="forPager"></include>
+		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
+	</select>
+	<select id="getApproverAllAfterList" resultType="ApprovalVO" parameterType="Map">
+		SELECT APPROVALNUM,REGDATE,NAME,CATEGORY,TITLE,STATE,MIDDLE,LAST FROM APPROVAL
+		WHERE STATE NOT IN('임시저장') AND ((MIDDLE=#{id.employeeNum} AND MIDDLEDATE IS NOT NULL) OR
+		 (LAST=#{id.employeeNum} AND FINALDATE IS NOT NULL))
 		<include refid="forPager"></include>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
@@ -103,21 +175,7 @@
 		VALUES(#{employeeNum},#{category},#{middle},#{last},#{name},#{contents},#{title},'임시저장',#{leaveKind},#{useDate},#{startDate},#{endDate},#{halfKind})
 	</insert>
 	
-	<!-- 결재자결재문서 리스트 -->
-	<select id="getApproverList" resultType="ApprovalVO" parameterType="Map">
-		SELECT APPROVALNUM,REGDATE,NAME,CATEGORY,TITLE,STATE FROM APPROVAL
-		WHERE <include refid="progress"></include>AND STATE NOT IN('임시저장')
-		<include refid="category"></include>
-		<include refid="forPager"></include>
-		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
-	</select>
-	<!-- 내 임시저장 리스트 -->
-	<select id="getTemporaryList" resultType="ApprovalVO" parameterType="Map">
-		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
-		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE='임시저장'
-		<include refid="forPager"></include>
-		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
-	</select>
+	
 	
 	
 	<!-- 내 문서 디테일 -->
