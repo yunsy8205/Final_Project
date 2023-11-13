@@ -94,9 +94,12 @@ public class ChatController {
 	
 	@GetMapping("search")
 	@ResponseBody
-	public Object getString(String name) throws Exception{
+	public Object getString(EmployeeVO employeeVO) throws Exception{
 		log.info("search");
-		List<EmployeeVO> list = chatService.getSearch(name);
+		SecurityContext context = SecurityContextHolder.getContext();
+		org.springframework.security.core.Authentication b = context.getAuthentication();
+		employeeVO.setEmployeeNum(b.getName());
+		List<EmployeeVO> list = chatService.getSearch(employeeVO);
 		
 		Map<String, Object> listMap = new HashMap<>();
 		listMap.put("list", list);

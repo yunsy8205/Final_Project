@@ -18,5 +18,6 @@ public class ChatMessageVO {
     private String receiver; // 메시지 받는사람
     private String message; // 메시지
     private String chatDate; //보낸 날짜시간
+    private String name;
 
 }

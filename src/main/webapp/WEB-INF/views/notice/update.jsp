@@ -39,7 +39,7 @@
 			margin-top: 50px;
 		}
 		#radioBox{
-			padding-top: 1%;
+			padding-top: 0.5%;
 		}
 		.files{
 			height: 39.15px;
@@ -81,6 +81,33 @@
                 <div class="mb-4">
                     <div class="card-body">
                       <form action="./update" method="post" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="check">상단고정</label>
+                          <div class="radioBox col-md">
+                          <span class="radio1">
+		                        <input
+		                        name="pin"
+		                        class="form-check-input"
+		                        type="radio"
+		                        value="1"
+		                        id="pin1"
+		                        <c:if test="${notice.pin eq '1'}">checked</c:if>
+		                        />
+	                        	<label class="form-check-label" for="pin1"> 고정 </label>
+	                        </span>
+	                        <span class="radio1">
+		                        <input
+		                        name="pin"
+		                        class="form-check-input"
+		                        type="radio"
+		                        value="0"
+		                        id="pin2"
+		                        <c:if test="${notice.pin eq '0'}">checked</c:if>
+		                        />
+	                        	<label class="form-check-label" for="pin2"> 안함 </label>
+                        	</span>
+                        	</div>
+                        </div>
                         <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-name">카테고리</label>
 	                        <div id="radioBox" class="col-md">
