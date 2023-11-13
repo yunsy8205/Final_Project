@@ -47,14 +47,14 @@
 			font-size: 11px;
 		}
 		#msgArea::-webkit-scrollbar {
-		    width: 10px;
+		    width: 8px;
 		}
 		#msgArea::-webkit-scrollbar-thumb {
 		    background-color: #696CFF;
 		    border-radius: 10px;
 		}
 		#msgArea::-webkit-scrollbar-track {
-		    background-color: white;
+		    background-color: #E7E7FF;
 		    border-radius: 10px;
 		    box-shadow: inset 0px 0px 5px white;
 		 }
@@ -64,22 +64,42 @@
 		 	overflow-y: scroll;
 		 }
 		 #listBox::-webkit-scrollbar {
-		    width: 10px;
+		    width: 8px;
 		}
 		#listBox::-webkit-scrollbar-thumb {
 		    background-color: #696CFF;
 		    border-radius: 10px;
 		}
-		#msgArea::-webkit-scrollbar-track {
+		#listBox::-webkit-scrollbar-track {
 		    background-color: white;
 		    border-radius: 10px;
 		    box-shadow: inset 0px 0px 5px white;
 		 }
-		 #userBox{
+		 .userBox{
 		 	display: block !important;
     		text-align: center;
-    		height: 30%;
+    		height: 70px;
+    		margin: 0 auto;
 		 }
+		 .userBox2{
+		 	display: flex;
+		 }
+		 #userProfile{
+		  	width: 50px;
+		    height: 50px;
+		    object-fit: cover;	
+		  }
+		  #proBox{
+		  	width: 50px;
+		    height: 50px; 
+		    border-radius: 50%;
+		    overflow: hidden;
+		   }
+		   #my{
+		   	font-size: 17px;
+		   	line-height: 50px;
+		   	font-weight: bold;
+		   }
 	</style>
 </head>
   <body>
@@ -101,19 +121,24 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h3>MESSENGER</h3>
+              <h3 class="mb-5">MESSENGER</h3>
 
               <!-- Basic Layout -->
               <div class="row">
                 <div class="col-xl1">
                   <div class="card mb-4">
-                    <div id="userBox" class="card-header d-flex justify-content-between align-items-center">
-                    	<sec:authorize access="isAuthenticated()">
-                    	<sec:authentication property="principal" var="user"/>
-                        	<h5 class="mb-0" id="my" data-user="${user.username}" data-name="${user.name}">${user.name} ${user.position}</h5>
-						</sec:authorize>
+                    <div class="userBox card-header d-flex justify-content-between align-items-center">
+                    	<div class="userBox2">
+	                    	<sec:authorize access="isAuthenticated()">
+	                    	<sec:authentication property="principal" var="user"/>
+	                    		<div id="proBox">
+		                      		<img id="userProfile" alt="" src="../file/employee/${user.proFile}">
+		                        </div>
+	                        	<div class="ms-3" id="my" data-user="${user.username}" data-name="${user.name}">${user.name} 🏃‍♂️ ${user.position}</div>
+							</sec:authorize>
+                    	</div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="padding-top: 8%;">
                     	<div class="input-group mb-4">
 	                        <input
 	                          id="searchName"
@@ -122,9 +147,9 @@
 	                          aria-label="Recipient's username"
 	                          aria-describedby="button-addon2"
 	                        />
-	                        <button class="btn btn-outline-primary" type="button" id="search">검색</button>
+	                        <button class="btn btn-outline-primary" type="button" id="search">조회</button>
                       	</div>
-                    	<div id="listBox">
+                    	<div id="listBox" class="border">
 	                    	<c:forEach items="${list}" var="li">
 	                        	<a href="#" class="chatList" data-empNum="${li.employeeNum}" data-name="${li.name}" data-pos="${li.position}">${li.name} ${li.position}</a><br>                   		
 	                    	</c:forEach>
@@ -134,7 +159,7 @@
                 </div>
                 <div class="col-xl">
                   <div class="card mb-4">
-                    <div style="display: block !important; text-align: center;" class="card-header d-flex justify-content-between align-items-center">
+                    <div class="userBox card-header d-flex justify-content-between align-items-center">
                       <h5 id="someone" class="mb-0" data-name="">채팅하려는 대상을 선택해 주세요</h5>
                     </div>
                     <div class="card-body">
