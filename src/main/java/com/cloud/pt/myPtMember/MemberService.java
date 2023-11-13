@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.cloud.pt.commons.Pager;
 import com.cloud.pt.employee.EmployeeVO;
+import com.cloud.pt.member.MemVO;
 
 @Service
 public class MemberService {
@@ -34,7 +35,7 @@ public class MemberService {
 		return memberDAO.getTotal();
 	}
 	
-	public List<MemberVO> getPtList(EmployeeVO employeeVO , Pager pager) throws Exception{
+	public List<MemVO> getPtList(EmployeeVO employeeVO , Pager pager) throws Exception{
 		
 		pager.setStartRow(0L);
 		pager.setLastRow(10L);

@@ -74,6 +74,8 @@ border-color: rgba(0,0,0,0) !important;
                 				<th>이름</th>
                 				<th>전화번호</th>
                 				<th>성별</th>
+                				<th>가입일</th>
+                				<th>PT횟수</th>
                 				<th style="text-align: center;" id="btn" onclick="openModal()">수업예약</th>
                 				
                 			</tr>
@@ -87,6 +89,8 @@ border-color: rgba(0,0,0,0) !important;
 										<td><a href="#" onclick="sendData2('${vo.memberNum}', '${vo.employeeNum}', '${vo.memberName}')">${vo.memberName}</a></td>
 										<td>${vo.phone}</td>
 										<td>${vo.gender}</td>
+										<td>${vo.joinDate}</td>
+										<td>${vo.ptCount}</td>
 										<td style="text-align: center;"><button class="btn rounded-pill btn-label-primary" onclick="sendData('${vo.memberNum}', '${vo.employeeNum}', '${vo.memberName}')">수업예약</button></td>
 									 	
 									

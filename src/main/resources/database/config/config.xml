@@ -14,6 +14,7 @@
 		<typeAlias type="com.cloud.pt.member.MemVO" alias="MemVO"/>
 		<typeAlias type="com.cloud.pt.registration.RegistrationVO" alias="RegistrationVO"/>
 		<typeAlias type="com.cloud.pt.employee.PasswordVO" alias="PasswordVO"/>
+		<typeAlias type="com.cloud.pt.machine.MachineVO" alias="MachineVO"/>
 		
 		<!-- 유빈 -->
 		<typeAlias type="com.cloud.pt.attendance.AttendanceVO" alias="AttendanceVO"/>
@@ -27,7 +28,7 @@
 		<typeAlias type="com.cloud.pt.ptLog.PtLogVO" alias="PtLogVO"/>
 		<typeAlias type="com.cloud.pt.ptType.PtTypeVO" alias="PtTypeVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
-		<typeAlias type="com.cloud.pt.locker.LockerVO" alias="Locker"/>
+		<typeAlias type="com.cloud.pt.locker.LockerVO" alias="LockerVO"/>
 		
 		<!-- 동찬 -->
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>

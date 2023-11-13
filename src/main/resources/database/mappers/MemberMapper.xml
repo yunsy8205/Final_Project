@@ -21,12 +21,12 @@
 		LEFT OUTER JOIN EMPLOYEE E
 		ON M.EMPLOYEENUM=E.EMPLOYEENUM
 		<if test="pager.kind=='name'">WHERE NAME LIKE CONCAT('%',#{pager.search},'%')</if>
-		ORDER BY MEMBERNUM DESC
+		ORDER BY M.MEMBERNUM DESC
 	</select>
 
 	<insert id="setMemberAdd" parameterType="MemVO">
 		INSERT INTO MEMBER
-		VAlUES (NULL, NULL, #{memberName}, #{phone}, #{gender}, #{birth}, #{joinDate}, #{expirationDate} , NULL, #{address});
+		VAlUES (NULL, NULL, #{memberName}, #{phone},#{address},#{gender}, #{birth}, #{joinDate}, #{expirationDate} , NULL );
 	</insert>
 
 	<select id="getMemberDetail" parameterType="MemVO" resultMap="getMemberDetailResult">

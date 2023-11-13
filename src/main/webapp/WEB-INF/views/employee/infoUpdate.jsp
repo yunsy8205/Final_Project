@@ -38,10 +38,10 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header">
-                      <h3 class="emp_title" style="text-align: center;">${employeeVO.name} <span class="position_inner"></span> 정보수정</h3>
+                      <h3 class="emp_title" style="text-align: center;margin-top: 1rem;"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span> 정보수정</h3>
                       <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" id="frm" action="./infoUpdate">
-                        <div class="proFile_con" style="text-align: center;">
-                          <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" style="width:10rem; height:10rem;"  onerror="this.style.display='none'">
+                        <div class="proFile_con" style="text-align: center;margin: 2rem auto 3rem;">
+                          <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" style="width:10rem; height:10rem;border-radius: 50%;"  onerror="this.style.display='none'">
                           <p>${employeeVO.proOriginal}</p>
                           <input type="file"  name="empfile" id="proFile" style="width: 13rem;" required/>
                         </div>
@@ -50,13 +50,13 @@
                             <div class="row mb-3">
                               <label for="emploiyeNum" class="col-sm-2 col-form-label">사번</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" name="employeeNum" id="employeeNum" value="${employeeVO.employeeNum}" data-num="${emploiyeNum}" >
+                                <input type="text" class="form-control" name="employeeNum" id="employeeNum" value="${employeeVO.employeeNum}" data-num="${emploiyeNum}" readonly="true">
                               </div>
                             </div>
                             <div class="row mb-3">
                               <form:label path="name" class="col-md-2 col-form-label">이름</form:label>
                               <div class="col-sm-10">
-                                <form:input path="name" id="name" class="form-control" value="${employeeVO.name}" readonly="true"></form:input>
+                                <form:input path="name" id="name" class="form-control" value="${employeeVO.name}" ></form:input>
                               </div> 
                               <form:errors path="name"></form:errors>
                             </div>
@@ -99,11 +99,11 @@
                               <div class="col-md-10" style="display: flex;">
                                 <div class="form-check mt-3" style="margin-top:0 !important; margin-right: 2rem;">
                                   <label class="form-check-label" for="gender_M"> 남 </label>
-                                  <input class="form-check-input" name="gender" type="radio" value="M" id="gender_M" />
+                                  <input class="form-check-input" name="gender" type="radio" value="남" id="gender_M" />
                                 </div>
                                 <div class="form-check">
                                   <label class="form-check-label" for="gender_W"> 여 </label>
-                                  <input  class="form-check-input" name="gender" type="radio" value="W" id="gender_W"/>
+                                  <input  class="form-check-input" name="gender" type="radio" value="여" id="gender_W"/>
                                 </div>
                               </div>
                             </div>

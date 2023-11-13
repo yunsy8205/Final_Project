@@ -38,8 +38,11 @@
               <div class="card mb-4">
                 <h3 class="emp_title card-header" style="text-align:center; margin:3rem 0;">직원 인적사항</h3>
                 <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" class="card-body" id="frm" action="./join">
-                  <div class="proFile_con">
-                    <input type="file" name="empfile" id="proFile" class="form-control proFile input"/>
+                  <div class="proFile_con row mb-3">
+                    <label for="empfile" class="col-md-2 col-form-label">사진 등록</label>
+                    <div class="col-md-10">
+                      <input type="file" name="empfile" id="proFile" class="form-control proFile input"/>
+                    </div>
                     <div id="pictureMsg"></div>
                   </div>
                   <div class="proContent" style="display:flex;justify-content: space-between;margin-bottom: 5rem;">
@@ -58,7 +61,7 @@
                         <form:label path="address"  class="col-sm-2 col-form-label">주소</form:label>
                         <div class="col-md-10">
                           <form:input path="address" id="adr_postNum" cssClass="input_con form-control address input" placeholder="우편번호" value=""></form:input>
-                          <button type="button" id="addressBtn">우편번호 찾기</button>
+                          <button type="button" id="addressBtn" class="btn btn-primary">우편번호 찾기</button>
                           <input class="form-control" type="hidden" id="adr_address" placeholder="주소"></input>
                           <input class="form-control" type="hidden" id="adr_detail" placeholder="상세주소" value =""></input>
                           <form:errors path="address"></form:errors>
@@ -83,11 +86,11 @@
                         <div class="col-md-10" style="display: flex;">
                           <div class="form-check mt-3" style="margin-top:0 !important; margin-right: 2rem;">
                             <label class="form-check-label" for="gender_M"> 남 </label>
-                            <input class="form-check-input" name="gender" type="radio" value="M" id="gender_M" checked/>
+                            <input class="form-check-input" name="gender" type="radio" value="남" id="gender_M" checked/>
                           </div>
                           <div class="form-check">
                             <label class="form-check-label" for="gender_W"> 여 </label>
-                            <input  class="form-check-input" name="gender" type="radio" value="W" id="gender_W"/>
+                            <input  class="form-check-input" name="gender" type="radio" value="여" id="gender_W"/>
                           </div>
                         </div>
                       </div>
@@ -110,8 +113,8 @@
                     </div>
                   </div>
                   <div class="proBtn">
-                    <button type="button" id="backBtn">이전</button>
-                    <button type="submit" id="addBtn">등록</button>
+                    <button type="button" id="backBtn" class="btn btn-primary">이전</button>
+                    <button type="submit" id="addBtn" class="btn btn-primary">등록</button>
                   </div>
                 </form:form>
               </div>

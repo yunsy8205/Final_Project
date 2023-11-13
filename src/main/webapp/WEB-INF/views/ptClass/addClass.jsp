@@ -47,17 +47,18 @@
            <input type="text" name="memberNum" id="memberNum" value="${memberNum}" style="display: none;"><br/>
            
            회원이름 : <input type="text" id="title" value="${memberName}" readonly="readonly"><br>
-           시작시간 : <input type="datetime-local" name="startTime" id="start"/> <!-- <select name="languages" name="startTime">
-    <option value="javascript">10:00:00</option>
-    <option value="php">11:00:00</option>
-    <option value="java">12:00:00</option>
-    <option value="golang">14:00:00</option>
-    <option value="python">15:00:00</option>
-    <option value="c#">16:00:00</option>
-    <option value="C++">17:00:00</option>
+           시작시간 : <input type="date"  id="date" onchange="validateDate()"/>  <select id="time">
+			    <option value="10:00:00">10:00:00</option>
+			    <option value="11:00:00">11:00:00</option>
+			    <option value="12:00:00">12:00:00</option>
+			    <option value="14:00:00">14:00:00</option>
+			    <option value="15:00:00">15:00:00</option>
+			    <option value="16:00:00">16:00:00</option>
+			    <option value="17:00:00">17:00:00</option>
     
-  </select> --> <br />
-           종료시간 : <input type="datetime-local" name="finishTime" id="finish"/><br /> 
+  </select>  <br />
+  <input type="text" name="startTime" id="combinedData" style="display: none;">
+           <input type="datetime-local" name="finishTime" id="finish" style="display: none;"/><br /> 
            
           </div>
           <div class="modal-footer">
@@ -124,5 +125,53 @@
 
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
     
+    <script type="text/javascript">
+    document.getElementById('saveChanges').addEventListener('click', function() {
+    	function sendDataToServer() {
+            var date = document.getElementById('date').value;
+            var time = document.getElementById('time').value;
+
+            var combinedData = date + 'T' + time;
+
+            // 'combinedData' 값을 'startTime' 요소에 설정합니다.
+            document.getElementById('combinedData').value = combinedData;
+
+            // FinishTime을 설정합니다.
+            var startTime = new Date(combinedData);
+            var finishTime = new Date(startTime.getTime() + 50 * 60000);
+            var finishTimeString = finishTime.toISOString().slice(0, 16);
+            document.getElementById('finish').value = finishTimeString;
+            
+            console.log(finishTimeString);
+        }
+
+        sendDataToServer();
+        /* function sendDataToServer() {
+            var date = document.getElementById('date').value;
+            var time = document.getElementById('time').value;
+
+            var combinedData = date + 'T' + time;
+
+            // 'combinedData' 값을 'startTime' 요소에 설정합니다.
+            document.getElementById('combinedData').value = combinedData;
+            console.log(combinedData);
+        }
+
+        sendDataToServer();
+      }); */
+  });
+      
+  function validateDate() {
+      var inputDate = new Date(document.getElementById('date').value);
+      var today = new Date();
+	
+      // 비활성화할 조건: 선택한 날짜가 오늘 이전인 경우
+      if (inputDate < today) {
+    	  
+        alert("이 날짜는 오늘 이전입니다. 유효한 날짜를 선택하세요.");
+        document.getElementById('date').value = ''; // 값을 비워서 선택된 날짜를 제거
+      }
+    }
+    </script>
   </body>
 </html>
