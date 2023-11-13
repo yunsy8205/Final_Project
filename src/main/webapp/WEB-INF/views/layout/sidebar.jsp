@@ -141,7 +141,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/locker/list.lk" class="menu-link">
+                  <a href="/locker/lockerList" class="menu-link">
                     <div data-i18n="Under Maintenance">전체 락커 목록</div>
                   </a>
                 </li>

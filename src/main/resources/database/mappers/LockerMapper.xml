@@ -3,7 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.cloud.pt.locker.LockerDAO">
-  	<select id="getLockerList" resultType="Map" parameterType="LockerVO">
-  		SELECT * FROM LOCKER
+  	<!-- 전체 라커 조회 -->
+  	<select id="getLockerList" resultType="LockerVO" parameterType="LockerVO">
+SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,M.MEMBERNUM FROM LOCKER L INNER JOIN MEMBER M ON L.MEMBERNUM = M.MEMBERNUM;
+</select>
+  	
+  	<insert id="addLocker" parameterType="LockerVO">
+  		INSERT INTO LOCKER (ENROLLDATE) VALUES(NOW())
+  	</insert>
+  	<!-- 라커에 회원 적용 -->
+  	<update id="addUser" parameterType="LockerVO">
+  		UPDATE LOCKER SET MEMBERNUM = #{memberNum} , STARTDATE = #{startDate} ,FINISHDATE = DATE_ADD(NOW(), INTERVAL 1 MONTH) WHERE LOCKERNUM = #{lockerNum}
+  	</update>
+  	<!-- 라커 고장 등록 -->
+  	<update id="setRepair" parameterType="LockerVO">
+  		UPDATE LOCKER SET STATE = NULL,STARTDATE = NULL, FINISHDATE = NULL WHERE LOCKERNUM = #{lockerNum}
+  	</update>
+  	<!-- 전체 멤버 조회(모달창에 띄우기) -->
+  	<select id="getUser" resultType="MemVO" parameterType="MemVO">
+  		SELECT MEMBERNAME,MEMBERNUM FROM MEMBER
   	</select>
   </mapper>
