@@ -1,15 +1,19 @@
 // form 전체 입력
 const frm = document.getElementById("frm");
-const nameI = document.getElementsByClassName("name");
-const phone = document.getElementsByClassName("phone");
-const address = document.getElementsByClassName("address");
-const birth = document.getElementsByClassName("birth");
+// const nameI = document.getElementsByClassName("name");
+// const phone = document.getElementsByClassName("phone");
+// const address = document.getElementsByClassName("address");
+// const birth = document.getElementsByClassName("birth");
+const n = document.getElementById("name");
+const p = document.getElementById("phone");
+const ad = document.getElementById("address");
+const b = document.getElementById("birth");
 const nMsg = document.getElementById("nameMsg");
 const pMsg = document.getElementById("phoneMsg");
 const aMsg = document.getElementById("addressMsg");
 const bMsg = document.getElementById("birthMsg");
 const addBtn = document.getElementById("addBtn");
-const input = document.getElementsByClassName("input");
+let input = document.getElementsByClassName("input");
 const ptMonth = document.getElementsByClassName("ptMonth");
 let phoneCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 let birthCheck = /^(19[0-9][0-9]|20[0-2][0-2])-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
@@ -20,7 +24,7 @@ let gVal = document.getElementById("genderVal");
 const gM = document.getElementById("gender_M");
 const gW = document.getElementById("gender_W");
 
-if(gVal.value == 'M'){
+if(gVal.value == '남'){
     gM.checked = true;
 }else{
     gW.checked = true;
@@ -83,9 +87,10 @@ function adr() {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             a = data.zonecode + addr + a;
-            for(addressInput of address){
-                addressInput.value = a;
-            }
+            // for(addressInput of address){
+            //     addressInput.value = a;
+            // }
+            ad.value = a;
             // 커서를 상세주소 필드로 이동한다.
             checks[2] = true;
         }
@@ -141,54 +146,116 @@ for(pt of ptMonth){
 
 
 
+
+
+
 // ---------------------------------------------
 
-for(n of nameI){
-    n.addEventListener("blur", function () {
-        nMsg.innerHTML = '';
-        if (n.value == '') {
-            nMsg.innerHTML = "이름을 입력해주세요";
-        } else {
-            checks[0] = true;
-        }
-    });
+// for(n of nameI){
+//     n.addEventListener("blur", function () {
+//         console.log("name",n.value);
+//         nMsg.innerHTML = '';
+//         if (n.value == '') {
+//             nMsg.innerHTML = "이름을 입력해주세요";
+//         } else {
+//             checks[0] = true;
+//         }
+//     });
+// }
+
+// for(p of phone){
+//     p.addEventListener("blur",function(){
+//         console.log("phone",p.value);
+//         pMsg.innerHTML="";
+//         if(p.value == ''){
+//             pMsg.innerHTML="전화번호를 입력해주세요.";
+//         }else if(!phoneCheck.test(p.value)){
+//             pMsg.innerHTML="'-'를 빼고 010으로 시작하는 8자리를 입력해주세요.";
+//         }else{
+//             checks[1]=true;
+//         }
+//     });
+// }
+
+// for(addressInput of address){
+//     addressInput.addEventListener("blur", function () {
+//         console.log("address",addressInput.value);
+//         aMsg.innerHTML = '';
+//         if (addressInput.value == '') {
+//             aMsg.innerHTML = "주소를 입력하세요.";
+//         }
+//     })
+// }
+
+// for(b of birth){
+//     b.addEventListener("change", function () {
+//         console.log("birth",b.value);
+//         bMsg.innerHTML="생일을 입력하세요."
+//         let first = birthCheck.test(b.value);
+//         let check = emptyCheck(b);
+//         if(!first){
+//             bMsg.innerHTML="과거일자만 입력 가능합니다."
+//         }
+//         else if (!check) {;
+//             checks[3] = true;
+//         }
+//     })
+// }
+
+
+
+function namaCheck(){
+    console.log("name",n.value);
+    nMsg.innerHTML = '';
+    if (n.value == '') {
+        nMsg.innerHTML = "이름을 입력해주세요";
+    } else {
+        checks[0] = true;
+    }
 }
 
-for(p of phone){
-    p.addEventListener("blur",function(){
-        pMsg.innerHTML="";
-        if(p.value == ''){
-            pMsg.innerHTML="전화번호를 입력해주세요.";
-        }else if(!phoneCheck.test(p.value)){
-            pMsg.innerHTML="'-'를 빼고 010으로 시작하는 8자리를 입력해주세요.";
-        }else{
-            checks[1]=true;
-        }
-    });
+
+function pCheck(){
+    console.log("phone",p.value);
+    pMsg.innerHTML="";
+    if(p.value == ''){
+        pMsg.innerHTML="전화번호를 입력해주세요.";
+    }else if(!phoneCheck.test(p.value)){
+        pMsg.innerHTML="'-'를 빼고 010으로 시작하는 8자리를 입력해주세요.";
+    }else{
+        checks[1]=true;
+    }
 }
 
-for(addressInput of address){
-    addressInput.addEventListener("blur", function () {
-        aMsg.innerHTML = '';
-        if (addressInput.value == '') {
-            aMsg.innerHTML = "주소를 입력하세요.";
-        }
-    })
+
+function addressCheck(){
+    console.log("address",ad.value);
+    aMsg.innerHTML = '';
+    if (ad.value == '') {
+        aMsg.innerHTML = "주소를 입력하세요.";
+    }
 }
 
-for(b of birth){
-    b.addEventListener("change", function () {
-        bMsg.innerHTML="생일을 입력하세요."
-        let first = birthCheck.test(b.value);
-        let check = emptyCheck(b);
-        if(!first){
-            bMsg.innerHTML="과거일자만 입력 가능합니다."
-        }
-        else if (!check) {;
-            checks[3] = true;
-        }
-    })
+
+function bCheck(){
+    console.log("birth",b.value);
+    bMsg.innerHTML="";
+    let first = birthCheck.test(b.value);
+    let check = emptyCheck(b);
+    if(!first){
+        bMsg.innerHTML="과거일자만 입력 가능합니다."
+    }
+    else if (!check) {;
+        checks[3] = true;
+    }
 }
+
+namaCheck();
+pCheck();
+addressCheck();
+bCheck();
+
+
 
 function emptyCheck(element) {
     if (element.value == null || element.value.length == 0) {
@@ -200,12 +267,14 @@ function emptyCheck(element) {
 
 $("#addBtn").click(function () {
     let allCheck = checks.includes(false);
+
     if (!allCheck) {
         alert("등록하겠습니다!")
         frm.submit();
-    } else {
+    }else {
         for (let i = 0; i < checks.length; i++) {
             if (checks[i] == false) {
+                console.log("어디가 false야!!!",input[i]);
                 input[i].focus();
                 alert("모든 항목은 필수작성입니다. 빈칸을 채워주세요!")
                 return;

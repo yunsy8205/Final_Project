@@ -38,15 +38,15 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;">
-                      <h3 class="emp_title card-header" style="text-align: center; margin: 3rem 0;">${employeeVO.name} <span class="position_inner"></span> 수정사항</h3>
-                        <form method="post" class="card-body" enctype="multipart/form-data" id="frm" action="./update" style="width: 100%;">
-                          <div class="upFile" style="text-align: center;display: flex;flex-direction: column;align-items: center;">
-                            <img src="../file/employee/${employeeVO.proFile}" style="width:10rem; height:10rem;" alt="직원 프로필" onerror="this.style.display='none'">
+                      <h3 class="emp_title card-header" style="text-align: center; margin: 1rem 0 0; padding:0;"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span> 수정사항</h3>
+                        <form method="post" class="card-body" enctype="multipart/form-data" id="frm" action="./update" style="width: 100%;display:flex; flex-direction:column; align-items: center;">
+                          <div class="upFile"style="width: 10rem; height:10rem; margin: 2rem;">
+                            <img src="../file/employee/${employeeVO.proFile}" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;" alt="직원 프로필" onerror="this.style.display='none'">
                           </div>
-                          <div class="upContent" style="display: flex; justify-content: space-between; margin-bottom: 5rem;">
+                          <div class="upContent" style="display: flex; justify-content: space-between; width:100%;">
                             <div class="upLeft" style="width: 47%;">
                               <div id="hidden">
-                                <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}" class="col-sm-2 col-form-label">
+                                <input type="hidden" name="employeeNum" id="num" data-num="${employeeVO.employeeNum}" value="${employeeVO.employeeNum}" class="col-sm-2 col-form-label">
                                 <input type="hidden" name="quitDate" id="quitDate" value="${employeeVO.quitDate}">  
                               </div>
                               <div class="updiv mb-3 row">
@@ -58,21 +58,21 @@
                               <div class="updiv mb-3 row">
                                 <label for="name"  class="col-md-2 col-form-label">이름</label>
                                 <div class="col-md-10">
-                                  <input name="name" class="input_con form-control name input" value="${employeeVO.name}"></input>
+                                  <input name="name" class="input_con form-control input" id="name" value="${employeeVO.name}"></input>
                                   <div id="nameMsg"></div>
                                 </div>
                               </div>
                               <div class="updiv mb-3 row">
                                 <label for="phone" class="col-md-2 col-form-label">전화번호</label>
                                 <div class="col-md-10">
-                                  <input name="phone" class="input_con form-control phone input" value="${employeeVO.phone}"></input>  
+                                  <input name="phone" class="input_con form-control input" id="phone" value="${employeeVO.phone}"></input>  
                                   <div id="phoneMsg"></div>
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="html5-text-input" class="col-md-2 col-form-label">주소</label>
+                                <label for="address" class="col-md-2 col-form-label">주소</label>
                                 <div class="col-md-10">
-                                  <input class="form-control address input" name="address" type="text" id="html5-text-input" value="${employeeVO.address}" placeholder="우편번호" />
+                                  <input class="form-control input" name="address" type="text" id="address" value="${employeeVO.address}" placeholder="우편번호" />
                                   <button type="button" id="addressBtn" class="btn btn-primary">우편번호 찾기</button>
                                   <input class="form-control" type="hidden" id="html5-text-input"  placeholder="주소" />
                                   <input class="form-control" type="hidden" id="html5-text-input"  placeholder="상세주소" value="" />
@@ -80,9 +80,9 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="html5-date-input" class="col-md-2 col-form-label">생년월일</label>
+                                <label for="birth" class="col-md-2 col-form-label">생년월일</label>
                                 <div class="col-md-10">
-                                  <input class="form-control birth input" name="birth" type="date" value="${employeeVO.birth}" placeholder="생년월일을 입력해주세요." id="html5-date-input" />
+                                  <input class="form-control input" name="birth" id="birth" type="date" value="${employeeVO.birth}" placeholder="생년월일을 입력해주세요."/>
                                   <div id="birthMsg"></div>
                                 </div>
                               </div>
@@ -100,11 +100,11 @@
                                 <div class="col-md-10" style="display: flex;">
                                   <div class="form-check mt-3" style="margin-top:0 !important; margin-right: 2rem;">
                                     <label class="form-check-label" for="gender_M"> 남 </label>
-                                    <input class="form-check-input" name="gender" type="radio" value="M" id="gender_M" />
+                                    <input class="form-check-input" name="gender" type="radio" value="남" id="gender_M" />
                                   </div>
                                   <div class="form-check">
                                     <label class="form-check-label" for="gender_W"> 여 </label>
-                                    <input  class="form-check-input" name="gender" type="radio" value="W" id="gender_W"/>
+                                    <input  class="form-check-input" name="gender" type="radio" value="여" id="gender_W"/>
                                   </div>
                                 </div>
                               </div>  
@@ -124,17 +124,18 @@
                               </div>
                               <div class="updiv mb-3 row">
                                 <label for="position" class="col-md-2 col-form-label">직급</label>
-                                <input type="hidden" id="position" class="input_con" value="${employeeVO.position}"></input>
-                                <p class="position_inner"></p>
-                                <select name="position">
-                                  <option value="ROLE_CEO">대표</option>
-                                  <option value="ROLE_GENERAL">총괄 매니저</option>
-                                  <option value="ROLE_CUSTOMER">고객관리 매니저</option>
-                                  <option value="ROLE_RESOURCES">인사 매니저</option>
-                                  <option value="ROLE_FACILITY">시설 매니저</option>
-                                  <option value="ROLE_TRAINER">트레이너</option>
-                                  <option value="ROLE_EX">가발령</option>
-                                </select>
+                                <input type="hidden" id="position" class="input_con" value="${employeeVO.position}" data-position="${employeeVO.position}"></input>
+                                <div class="col-sm-10">
+                                  <select name="position" id="selectTypeOpt" class="form-select color-dropdown">
+                                    <option value="ROLE_CEO" class="pname">대표</option>
+                                    <option value="ROLE_GENERAL" class="pname">총괄 매니저</option>
+                                    <option value="ROLE_CUSTOMER" class="pname">고객관리 매니저</option>
+                                    <option value="ROLE_RESOURCES" class="pname">인사 매니저</option>
+                                    <option value="ROLE_FACILITY" class="pname">시설 매니저</option>
+                                    <option value="ROLE_TRAINER" class="pname">트레이너</option>
+                                    <option value="ROLE_EX" class="pname">가발령</option>
+                                  </select>
+                                </div>
                               </div>
                               <div class="updiv mb-3 row">
                                 <label for="leaveDate" class="col-md-2 col-form-label">연차갯수</label>
@@ -144,49 +145,16 @@
                               </div>
                             </div>
                           </div>
-                          <div class="upBtn" style="text-align: center;">
-                            <button type="button" id="upBtn" class="btn btn-primary" >수정 사항 등록</button>
-                          </div>
                         </form>
+                        <div class="upBtn" style="text-align: center; margin: 2rem;">
+                          <button type="button" id="backBtn" class="btn btn-primary">이전</button>
+                          <button type="button" id="upBtn" class="btn btn-primary" >수정 사항 등록</button>
+                        </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- / Content --> 
-              
-              
-              <!-- Footer -->
-                <!-- <footer class="content-footer footer bg-footer-theme">
-                  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">
-                      ©
-                      <script>
-                        document.write(new Date().getFullYear());
-                      </script>
-                      , made with ❤️ by
-                      <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                    </div>
-                    <div>
-                      <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                      <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                      <a
-                        href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Documentation</a
-                      >
-
-                      <a
-                        href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Support</a
-                      >
-                    </div>
-                  </div>
-                </footer> -->
-                <!-- / Footer -->       
+              <!-- / Content -->      
 
               <div class="content-backdrop fade"></div>
             </div>
@@ -203,5 +171,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="/js/employee/update.js"></script>
+
+
+    <script>
+
+      // select 직급 선택처리
+      const po = document.getElementById("position").getAttribute("data-position")
+      const pname = document.getElementsByClassName("pname");
+      console.log(po);
+
+      if(po != ''){
+        for(let i = 0; i < pname.length; i++){
+          if(po == '대표' && i == 0){
+            pname[i].selected = true;
+          }else if(po == '총괄 매니저' && i == 1){
+            pname[i].selected = true;
+          }else if(po == '고객관리 매니저' && i == 2){
+            pname[i].selected = true;
+          }else if(po == '인사 매니저' && i == 3){
+            pname[i].selected = true;
+          }else if(po == '시설 매니저' && i == 4){
+            pname[i].selected = true;
+          }else if(po == '트레이너' && i == 5){
+            pname[i].selected = true;
+          }else if(po == '가발령' && i == 6){
+            pname[i].selected = true;
+          }else{
+            pname[i].selected = false;
+          }
+          
+        }
+      }
+    </script>
   </body>
 </html>
