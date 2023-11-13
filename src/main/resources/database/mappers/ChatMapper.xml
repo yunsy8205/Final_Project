@@ -10,9 +10,10 @@
 		WHERE EMPLOYEENUM != #{employeeNum}
 	</select>
 	
-	<select id="getSearch" parameterType="String" resultType="EmployeeVO">
+	<select id="getSearch" parameterType="EmployeeVO" resultType="EmployeeVO">
 		SELECT * FROM EMPLOYEE
 		WHERE NAME LIKE CONCAT('%',#{name},'%')
+	    AND EMPLOYEENUM != #{employeeNum}
 	</select>
 	
 	<select id="roomCheck" parameterType="RoomVO" resultType="RoomVO">
@@ -32,8 +33,11 @@
 	</insert>
 	
 	<select id="chatMessageList" parameterType="RoomVO" resultType="ChatMessageVO">
-		SELECT CHATNUM, ROOMNUM, SENDER, RECEIVER, MESSAGE, left(CHATDATE,16) AS CHATDATE FROM CHAT
-		WHERE ROOMNUM = #{roomNum}
+		SELECT C.CHATNUM, C.ROOMNUM, C.SENDER, E.NAME, C.RECEIVER, C.MESSAGE, left(C.CHATDATE,16) AS CHATDATE
+		FROM CHAT C
+		JOIN EMPLOYEE E ON (C.SENDER = E.EMPLOYEENUM)
+		WHERE C.ROOMNUM = #{roomNum}
+		ORDER BY C.CHATNUM ASC
 	</select>
 	
 	<select id="getSomeone" parameterType="EmployeeVO" resultType="EmployeeVO">

@@ -105,6 +105,8 @@ public class NoticeController {
 	public String setNoticeUpdate(NoticeVO noticeVO, MultipartFile [] files)throws Exception{
 		SecurityContext context = SecurityContextHolder.getContext();
 		org.springframework.security.core.Authentication b = context.getAuthentication();
+		
+		log.info("수정내용: {}",noticeVO.getContents());
 		if(noticeVO.getEmployeeNum()==Long.parseLong(b.getName())) {//작성자와 같을때
 			
 			int result = noticeService.setNoticeUpdate(noticeVO, files);

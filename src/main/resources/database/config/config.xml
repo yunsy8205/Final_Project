@@ -31,6 +31,7 @@
 		
 		<!-- 동찬 -->
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
+		<typeAlias type="com.cloud.pt.leave.LeaveVO" alias="LeaveVO"/>
 		
 				
 		<!-- 소영 -->
@@ -40,6 +41,7 @@
 		<typeAlias type="com.cloud.pt.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.cloud.pt.notice.NoticeFileVO" alias="NoticeFileVO"/>
 		<typeAlias type="java.util.List" alias="List"/>
+		<typeAlias type="com.cloud.pt.main.HomeVO" alias="HomeVO"/>
 	</typeAliases>
 	
 	 <!-- <mappers>

@@ -24,10 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cloud.pt.approval.ApprovalVO;
 import com.cloud.pt.attendance.AttendanceVO;
 import com.cloud.pt.employee.EmployeeService;
 import com.cloud.pt.employee.EmployeeVO;
 import com.cloud.pt.employee.PasswordVO;
+import com.cloud.pt.member.MemVO;
 import com.cloud.pt.notice.NoticeVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +64,14 @@ public class HomeController {
 		//공지
 		List<NoticeVO> list = homeService.getNoticeList();
 		model.addAttribute("list", list);
+		
+		//차트
+		List<HomeVO> chartList = homeService.getMember();
+		model.addAttribute("chart", chartList);
+		
+		//결재관리
+		List<ApprovalVO> appList = homeService.getApprovalList(a.getName());
+		model.addAttribute("app", appList);
 		
 		return "home";
 	}
@@ -159,4 +169,5 @@ public class HomeController {
 	    
 	    return randomString.toString();
 	}
+	
 }

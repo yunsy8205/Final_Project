@@ -57,21 +57,24 @@
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="navs-justified-all" role="tabpanel">
 								<div id="box">
-								<div class="input-group">
-								  <select id="kind" name="kind" class="select2 form-select">
-									  <option selected value="title">Title</option>
-									  <option value="contents">Contents</option>
-									  <option value="name">Name</option>
-								  </select>
-								  <input type="text" class="form-control" id="search"/>
-								  <button
-									class="btn btn-outline-primary"
-									id="searchBtn"
-									type="button"
-									>
-									조회
-								  </button>
-								</div>
+									<form action="./list" method="get">
+										<div class="input-group">
+										  
+														  <select id="kind" name="kind" class="select2 form-select">
+															  <option selected value="title">제목</option>
+															  <option value="contents">내용</option>
+														  </select>
+														  <input type="text" class="form-control" id="search" name="search"/>
+														  <button
+															class="btn btn-outline-primary"
+															id="searchBtn"
+															type="submit"
+															>
+															조회
+														  </button>
+										
+														</div>
+									  </form>
 								<!-- Hoverable Table rows -->
 								
 									<div class="table-responsive text-nowrap">
@@ -119,21 +122,24 @@
 							</div>
 							<div class="tab-pane fade show" id="navs-justified-wating" role="tabpanel">
 								<div id="box">
-								<div class="input-group">
-								  <select id="kind" name="kind" class="select2 form-select">
-									  <option selected value="title">Title</option>
-									  <option value="contents">Contents</option>
-									  <option value="name">Name</option>
-								  </select>
-								  <input type="text" class="form-control" id="search"/>
-								  <button
-									class="btn btn-outline-primary"
-									id="searchBtn"
-									type="button"
-									>
-									조회
-								  </button>
-								</div>
+									<form action="./list" method="get">
+										<div class="input-group">
+										  
+														  <select id="kind" name="kind" class="select2 form-select">
+															  <option selected value="title">제목</option>
+															  <option value="contents">내용</option>
+														  </select>
+														  <input type="text" class="form-control" id="search" name="search"/>
+														  <button
+															class="btn btn-outline-primary"
+															id="searchBtn"
+															type="submit"
+															>
+															조회
+														  </button>
+										
+														</div>
+									  </form>
 								<!-- Hoverable Table rows -->
 								
 									<div class="table-responsive text-nowrap">
@@ -188,13 +194,13 @@
 									  <option value="name">Name</option>
 								  </select>
 								  <input type="text" class="form-control" id="search"/>
-								  <button
+								  <a href="./list?kind="
 									class="btn btn-outline-primary"
 									id="searchBtn"
 									type="button"
 									>
 									조회
-								  </button>
+								</a>
 								</div>
 								<!-- Hoverable Table rows -->
 								
@@ -243,21 +249,24 @@
 							</div>
 							<div class="tab-pane fade show" id="navs-justified-reject" role="tabpanel">
 								<div id="box">
-								<div class="input-group">
-								  <select id="kind" name="kind" class="select2 form-select">
-									  <option selected value="title">Title</option>
-									  <option value="contents">Contents</option>
-									  <option value="name">Name</option>
-								  </select>
-								  <input type="text" class="form-control" id="search"/>
-								  <button
-									class="btn btn-outline-primary"
-									id="searchBtn"
-									type="button"
-									>
-									조회
-								  </button>
-								</div>
+									<form action="./list" method="get">
+										<div class="input-group">
+										  
+														  <select id="kind" name="kind" class="select2 form-select">
+															  <option selected value="title">제목</option>
+															  <option value="contents">내용</option>
+														  </select>
+														  <input type="text" class="form-control" id="search" name="search"/>
+														  <button
+															class="btn btn-outline-primary"
+															id="searchBtn"
+															type="submit"
+															>
+															조회
+														  </button>
+										
+														</div>
+									  </form>
 								<!-- Hoverable Table rows -->
 								
 									<div class="table-responsive text-nowrap">
@@ -305,21 +314,24 @@
 							</div>
 							<div class="tab-pane fade show" id="navs-justified-complete" role="tabpanel">
 								<div id="box">
-								<div class="input-group">
-								  <select id="kind" name="kind" class="select2 form-select">
-									  <option selected value="title">Title</option>
-									  <option value="contents">Contents</option>
-									  <option value="name">Name</option>
-								  </select>
-								  <input type="text" class="form-control" id="search"/>
-								  <button
-									class="btn btn-outline-primary"
-									id="searchBtn"
-									type="button"
-									>
-									조회
-								  </button>
-								</div>
+									<form action="./list" method="get">
+										<div class="input-group">
+										  
+														  <select id="kind" name="kind" class="select2 form-select">
+															  <option selected value="title">제목</option>
+															  <option value="contents">내용</option>
+														  </select>
+														  <input type="text" class="form-control" id="search" name="search"/>
+														  <button
+															class="btn btn-outline-primary"
+															id="searchBtn"
+															type="submit"
+															>
+															조회
+														  </button>
+										
+														</div>
+									  </form>
 								<!-- Hoverable Table rows -->
 								
 									<div class="table-responsive text-nowrap">
