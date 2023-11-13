@@ -107,14 +107,15 @@
                                 </div>
                               </div>
                             </div>
+                            <div class="row mb-3"  style="display:flex; align-items: center;">
+                              <label for="leaveDate"class="col-md-2 col-form-label">총 연차 갯수</label>
+                              <input style="display: none;" name="leaveDate" id="leaveDate"  class="form-check-input" value="${employeeVO.leaveDate}">${employeeVO.leaveDate}</input>
+                              <input style="display: none;" name="position" id="position"  class="form-check-input" value="${employeeVO.position}" ></input>
+                            </div>
                             <div class="row mb-3">
                               <label for="state"class="col-md-2 col-form-label">직원상태</label>
                               <input type="radio" name="state" id="state" class="form-check-input state_input" style="padding-right: 0;
                               margin-right: calc(var(--bs-gutter-x) * 0.5);" value="재직" checked>재직</input>
-                            </div>
-                            <div class="row mb-3">
-                              <label for="position"class="col-md-2 col-form-label">직급</label>
-                              <input style="display: none;" name="position" id="position"  class="form-check-input" value="${employeeVO.position}" >${employeeVO.position}</input>
                             </div>
                             <c:if test = "${employeeVO.position eq 'ROLE_TRAINER'}" >
 

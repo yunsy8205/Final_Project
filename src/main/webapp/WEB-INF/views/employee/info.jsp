@@ -59,8 +59,8 @@
                                   </div>
                                 </div>
                                 <div class="card-body">
-                                  <div id="detailCon">
-                                    <div id="detail_left">
+                                  <div id="detailCon" style="display: flex; justify-content:space-around;">
+                                    <div id="detail_left" style="width: 47%;">
                                       <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">사번</label>
                                         <div class="col-sm-10">
@@ -92,7 +92,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <div id="detail_right">
+                                    <div id="detail_right" style="width: calc(100% - 53%);">
                                       <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">입사일</label>
                                         <div class="col-sm-10">
@@ -145,13 +145,13 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <form action="" id="upfrm">
+                                    <form action="" id="upfrm" style="width:0;">
                                       <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
                                     </form>
-                                    <div class="proBtn" style="text-align: center;">
-                                      <button type="button" class="btn btn-primary" id="upBtn" data-url="/employee/infoUpdate">수정</button>
-                                      <!-- <button type="button" class="btn btn-primary" id="toBtn" >수정</button> -->
-                                    </div>
+                                  </div>
+                                  <div class="proBtn" style="text-align: center;">
+                                    <button type="button" class="btn btn-primary" id="upBtn" data-url="/employee/infoUpdate">수정</button>
+                                    <!-- <button type="button" class="btn btn-primary" id="toBtn" >수정</button> -->
                                   </div>
                                 </div>
                               </div>
