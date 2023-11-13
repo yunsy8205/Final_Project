@@ -139,9 +139,9 @@
                                       </c:if>
                                       <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">서명이미지</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-10" style="width:5rem;height:5rem;margin:0 auto;">
                                           <!-- <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.signFile}" readonly/> -->
-                                          <img src="../file/employee/${employeeVO.signFile}" id="basic-default-name sign" alt="개인싸인" onerror="this.style.display='none'">
+                                          <img src="../file/employee/${employeeVO.signFile}" id="basic-default-name sign" alt="개인싸인" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;">
                                         </div>
                                       </div>
                                     </div>
