@@ -30,7 +30,7 @@ public class MembershipController {
 	public String setAdd(MembershipVO membershipVO) throws Exception {
 		int result = membershipService.setAdd(membershipVO);
 		
-		return "redirect:./list";
+		return "redirect:./list"; 
 	}
 	
 	//이용권 삭제 
