@@ -62,7 +62,7 @@
 					<h3>공지사항</h3>
 					
 					<div class="row">
-						<div id="searchBox" style="display: flex;">
+						<div id="searchBox" class="m-5" style="display: flex;">
 						  <select id="kind" name="kind" class="select2 search form-select" style="width: 10%;" >
 						  	<option class="kind" selected value="title">제목</option>
 						  	<option class="kind" value="contents">내용</option>
@@ -74,13 +74,15 @@
 						    id="searchBtn"
 						    type="button"
 						    >
-						    검색
+						    조회
 						  </button>
 						</div>
-						
-						<div style="display: flex; justify-content: flex-end;">
-							<a class="a1 btn btn-primary" href="./add">글쓰기</a>
-						</div>
+						<sec:authentication property="principal" var="user"/>
+						<c:if test="${user.position == 'ROLE_GENERAL'}">
+							<div style="display: flex; justify-content: flex-end;">
+								<a class="a1 btn btn-primary" href="./add">글쓰기</a>
+							</div>
+						</c:if>
 						<div class="nav-align-top mb-4">
 							<ul class="nav nav-tabs nav-fill" role="tablist">
 								<li class="nav-item">
