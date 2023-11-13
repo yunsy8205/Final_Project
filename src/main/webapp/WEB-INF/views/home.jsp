@@ -369,8 +369,8 @@ function getTodayDate() {
     				console.log("ajax 실패");
     			}
     			})
-    	}
-    	
+    	}	
+}
     	function getTodayDate() {
     	    let today = new Date(); // Mon Dec 20 2021 22:04:03 GMT+0900 (한국 표준시)
     	
@@ -385,7 +385,6 @@ function getTodayDate() {
 			
 			return dateString;
 		}
-}
 
 
 
