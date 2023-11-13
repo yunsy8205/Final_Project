@@ -117,7 +117,7 @@
                             <div class="row mb-3">
                               <label class="col-sm-2 col-form-label" for="basic-default-name">피티 횟수</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" id="basic-default-name" value="${member.membershipVO.ptCount}" readonly/>
+                                <input type="text" class="form-control" id="basic-default-name" value="${member.ptCount}" readonly/>
                               </div>
                             </div>
                           </div>

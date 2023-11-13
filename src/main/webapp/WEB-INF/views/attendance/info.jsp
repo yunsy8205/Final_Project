@@ -151,17 +151,20 @@
                   <div class="time">
                    <ul>
                       <li class="list">
-                        출근시간 <c:if test="${not empty vo.onTime}"> - ${vo.onTime} </c:if>
+                        출근시간 
+                        <c:if test="${empty vo.onTime}"> - </c:if>
+                        <c:if test="${not empty vo.onTime}"> ${vo.onTime} </c:if>
                       </li>
                       <li class="list">
-                      	퇴근시간 <c:if test="${not empty vo.offTime}"> - ${vo.offTime} </c:if>
+                      	퇴근시간 
+                      	<c:if test="${empty vo.offTime}"> - </c:if>
+                      	<c:if test="${not empty vo.offTime}"> ${vo.offTime} </c:if>
                       </li>
                       <br>
-                      <li class="list">연차개수 - ${vo.employeeVO.leaveDate}개</li>
+                      <li class="list">연차개수 ${vo.employeeVO.leaveDate}개</li>
                     </ul>
                   </div>
                   <div class="btn_block">
-                    <button class="btn btn-primary">내 정보 수정</button>
                     <button class="btn btn-primary" id="req_btn">근태 수정 요청</button>
                   </div>
                 </div>

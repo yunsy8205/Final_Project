@@ -105,13 +105,21 @@ public class AttendanceController {
 		return "commons/ajaxResult";
 	}
 	
-	//-----------------------------------------------------------
+	//관리자----------------------------------------------------------
 	@GetMapping("/admin/attendanceModify/detail")
 	public String getDetail(AttendanceModifyVO attendanceModifyVO, Model model) throws Exception {
-		AttendanceVO attendanceVO = attendanceService.getRequestDetail(attendanceModifyVO);
+		AttendanceVO attendanceVO = attendanceService.getRequest(attendanceModifyVO);
 		model.addAttribute("vo", attendanceVO);
 		
 		return "attendance/adminDetail";
+	}
+	
+	@GetMapping("/admin/attendanceModify/update")
+	public String setUpdate(AttendanceModifyVO attendanceModifyVO, Model model) throws Exception {
+		AttendanceVO attendanceVO = attendanceService.getRequest(attendanceModifyVO);
+		model.addAttribute("vo", attendanceVO);
+		
+		return "attendance/adminForm";
 	}
 	
 	@GetMapping("/admin/attendanceModify/list")
@@ -180,13 +188,20 @@ public class AttendanceController {
 	}
 	
 	@PostMapping("/attendanceModify/add")
-	public String setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO) throws Exception {
+	public String setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO, Model model) throws Exception {
 		int result = attendanceService.setModifyAdd(attendanceModifyVO, employeeVO);
+		String message = null;
+		if(result==0) {
+			message="해당 날짜의 근태수정요청이 이미 존재합니다";
+		}else if(result==-1){
+			message="당일 근태수정요청은 퇴근이후 가능합니다";
+		}else {
+			message="근태수정요청이 등록되었습니다";
+		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", "/attendanceModify/list");
 		
-		//파라미터 추가
-//		attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
-		
-		return "redirect:./list";
+		return "commons/result";
 	}
 	
 }

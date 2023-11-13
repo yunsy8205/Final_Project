@@ -31,5 +31,8 @@ public class AttendanceModifyVO {
 	private String status;
 	//수정의견
 	private String modifyContents;
-	
+	//수정 번 시간
+	private Time originalTime;
+	//수정 전 상태
+	private String originalState;
 }

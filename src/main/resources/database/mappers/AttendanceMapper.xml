@@ -21,7 +21,8 @@
 			JOIN EMPLOYEE E
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM
 	</sql>
-
+	
+	<!-- attendanceNum 찾기 -->
 	<select id="getNum" resultType="java.lang.Long" parameterType="Map">
 		SELECT ATTENDANCENUM
 		FROM ATTENDANCE
@@ -116,7 +117,7 @@
 		<include refid="searchSqlA"></include>	
 	</select>
 	
-	<!-- 당일 근태 -->
+	<!-- 당일 근태 리스트 -->
 	<select id="getDayList" resultMap="getDayResult" parameterType="Map">
 		SELECT A.*, E.NAME
 		FROM ATTENDANCE A
@@ -144,9 +145,9 @@
 	<!-- 근태 수정 -->
 	<update id="setUpdateA" parameterType="Map">
 		UPDATE ATTENDANCE
-			<set> STATE=#{attendance.state},
-				<if test="modify.type eq '출근'.toString()">ONTIME=#{modify.modifyTime}</if>
-				<if test="modify.type eq '퇴근'.toString()">OFFTIME=#{modify.modifyTime}</if>
+			<set> 
+				<if test="modify.type eq '출근'">ONTIME=#{modify.modifyTime}</if>
+				<if test="modify.type eq '퇴근'">OFFTIME=#{modify.modifyTime}</if>
 			</set>
 			WHERE ATTENDANCENUM=#{attendance.attendanceNum}
 	</update>
@@ -159,7 +160,7 @@
 			WHERE ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
 	</update>
 	
-	<select id="getRequestDetail" resultMap="getDetailResult" parameterType="AttendanceModifyVO">
+	<select id="getRequest" resultMap="getDetailResult" parameterType="AttendanceModifyVO">
 		SELECT AM.*, A.*, E.NAME, E.EMPLOYEENUM
 		<include refid="joinSql"></include>
 		WHERE AM.ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
@@ -174,10 +175,13 @@
 		<association property="attendanceModifyVO" javaType="AttendanceModifyVO">
 			<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
 			<result column="REGDATE" property="regDate"/>
+			<result column="ORIGINALTIME" property="originalTime"/>
+			<result column="ORIGINALSTATE" property="originalState"/>
 			<result column="MODIFYDATE" property="modifyDate"/>
 			<result column="MODIFYTIME" property="modifyTime"/>
 			<result column="REQUESTCONTENTS" property="requestContents"/>
-			<result column="TYPE" property="type"/>			
+			<result column="TYPE" property="type"/>		
+			<result column="MODIFYCONTENTS" property="modifyContents"/>	
 		</association>
 		<association property="employeeVO" javaType="EmployeeVO">
 			<id column="EMPLOYEENUM" property="employeeNum"/>
@@ -208,6 +212,7 @@
 			<result column="MODIFYDATE" property="modifyDate"/>
 			<result column="MODIFYTIME" property="modifyTime"/>
 			<result column="STATUS" property="status"/>
+			<result column="TYPE" property="type"/>
 		</association>
 		<association property="employeeVO" javaType="EmployeeVO">
 			<id column="EMPLOYEENUM" property="employeeNum"/>
@@ -245,16 +250,32 @@
 			<result column="MODIFYDATE" property="modifyDate"/>
 			<result column="MODIFYTIME" property="modifyTime"/>
 			<result column="STATUS" property="status"/>
+			<result column="TYPE" property="type"/>
 		</association>
 		<association property="employeeVO" javaType="EmployeeVO">
 			<id column="EMPLOYEENUM" property="employeeNum"/>
 				<result column="NAME" property="name"/>
 		</association>
 	</resultMap>
+	
+	<!-- 근태 상세 -->
+	<select id="getDetail" resultType="AttendanceVO" parameterType="Long">
+		SELECT * 
+		FROM ATTENDANCE
+		WHERE ATTENDANCENUM=#{num}
+	</select>
+	
+	<!-- 근태요청기록 조회 -->
+	<select id="getModify" resultType="AttendanceModifyVO" parameterType="Long">
+		SELECT *
+		FROM ATTENDANCEMODIFY
+		WHERE ATTENDANCENUM=#{num}
+	</select>
 
+	<!-- 근태수정요청서 등록 -->
 	<insert id="setModifyAdd" parameterType="AttendanceModifyVO">
 		INSERT INTO ATTENDANCEMODIFY
-		(ATTENDANCENUM,REGDATE,MODIFYDATE,MODIFYTIME,REQUESTCONTENTS,TYPE,STATUS)
-		VALUES (#{attendanceNum},NOW(),#{modifyDate},#{modifyTime},#{requestContents},#{type},'요청')
+		(ATTENDANCENUM,REGDATE,ORIGINALTIME,ORIGINALSTATE,MODIFYDATE,MODIFYTIME,REQUESTCONTENTS,TYPE,STATUS)
+		VALUES (#{attendanceNum},NOW(),#{originalTime},#{originalState},#{modifyDate},#{modifyTime},#{requestContents},#{type},'요청')
 	</insert>
 </mapper>

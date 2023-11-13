@@ -149,15 +149,24 @@
                           </div>
                         </div>
                         <div>
-                          <form>
+                          <form id="frm" method="post" action="/admin/attendanceModify/update">
                             <div class="col-12">
                               <label for="contents" class="form-label">수정의견</label>
-                              <textarea name="modifyContents" id="contents" cols="30" rows="5" class="form-control" disabled>${vo.attendanceModifyVO.modifyContents}</textarea>
+                              <textarea name="modifyContents" id="contents" cols="30" rows="5" class="form-control"></textarea>
                             </div>
+                            <input type="hidden" name="modifyTime" class="form-control" value="${vo.attendanceModifyVO.modifyTime}">
+                            <input type="hidden" name="attendanceNum" value="${vo.attendanceNum}">
+                            <input type="hidden" name="onTime" value="${vo.onTime}">
+                            <input type="hidden" name="offTime" value="${vo.offTime}">
+                            <input type="hidden" name="attendanceModifyNum" value="${vo.attendanceModifyVO.attendanceModifyNum}">
+                            <input type="hidden" id="status" name="status">
+                            <input type="hidden" name="type" value="${vo.attendanceModifyVO.type}">
                           </form>
                         </div>
                         <div class="totalBtn m-5">
                           <button type="button" id="before_btn" class="btn btn-primary">이전</button>
+                          <button type="button" id="approve_btn" class="btn btn-primary">승인</button>
+                          <button type="button" id="reject_btn" class="btn btn-primary">반려</button>
                         </div>
                       </div>
                   </div>
@@ -182,7 +191,25 @@
 
     <script>
       $('#before_btn').on('click', function(){
-        $(location).attr('href', '/admin/attendance');
+        $(location).attr('href', '/admin/attendanceModify/list');
+      })
+
+      $('#approve_btn').on('click', function(){
+        if($('#contents').val()==''){
+          alert('수정의견을 입력해주세요');
+        }else{
+          $('#status').val('승인');
+          $('#frm').submit();
+        }
+      })
+
+      $('#reject_btn').on('click', function(){
+        if($('#contents').val()==''){
+          alert('수정의견을 입력해주세요');
+        }else{
+          $('#status').val('반려');
+          $('#frm').submit();
+        }
       })
     </script>
   </body>
