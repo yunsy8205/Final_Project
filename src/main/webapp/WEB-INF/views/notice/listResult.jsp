@@ -2,26 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="input-group">
-									  <select id="kind" name="kind" class="select2 form-select" style="width: 15%;">
-									  	<option selected value="title">Title</option>
-									  	<option value="contents">Contents</option>
-									  	<option value="name">Name</option>
-									  </select>
-									  <input type="text" class="form-control" id="search" style="width: 15%;"/>
-									  <button
-									    class="btn btn-outline-primary"
-									    id="searchBtn"
-									    type="button"
-									    >
-									    조회
-									  </button>
-									</div>
+
 									
-									<div style="display: flex; justify-content: flex-end;">
-										<a class="a1 btn btn-primary" href="./add">글쓰기</a>
-									</div>
-									<!-- Hoverable Table rows -->
+									
 <div class="table-responsive text-nowrap">
 				<table class="table table-hover">
 					<thead>
@@ -71,7 +54,8 @@
 					</c:if>
 					<c:forEach  begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						<li class="page-item">
-							<button class="pageBtn page-link" data-p="${i}">${i}</button>
+							<button class="pageBtn page-link" data-p="${i}" <c:if test="${i eq pager.page}">style="background-color: #696cff; color: white;"</c:if>
+							>${i}</button>
 						</li>
 					</c:forEach>
 					<li class="page-item next ${pager.next?'':'disabled'}">

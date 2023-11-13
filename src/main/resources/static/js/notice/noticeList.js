@@ -19,7 +19,7 @@
     		
     	});
     	
-    	$('#box').on("click","#searchBtn",function(){
+    	$('#searchBox').on("click","#searchBtn",function(){
 			console.log("버튼1");
     		let page = 1;
     		let kind = $('#kind').val();
@@ -28,7 +28,7 @@
     		$('#search').val("");
     	});
     	
-    	$('#box').on("click","#searchBtn2",function(){
+    	$('#searchBox').on("click","#searchBtn2",function(){
 			console.log("버튼2");
     		let page = 1;
     		let kind = $('#kind').val();
@@ -46,7 +46,8 @@
     		let category = $(this).attr("data-cat");
     		console.log(category);
     		catPager(page, search, kind, category);
-    		//$('#btnChange').attr("class","btn btn-outline-primary searchBtn2");
+    		$('#searchBtn').attr("id", "searchBtn2");
+    		$('.catCheck').attr("data-cat", category);
     	});
     	
     	$('#total').click(function(){
@@ -55,7 +56,8 @@
     		let search = $('#search').val();
     		console.log(page);
     		pager(page, search, kind);
-    		//$('#btnChange').attr("class","btn btn-outline-primary searchBtn");
+    		$('#searchBtn2').attr("id", "searchBtn");
+    		$('.catCheck').attr("data-cat", "");
     	});
     	
     	function pager(page, search, kind){

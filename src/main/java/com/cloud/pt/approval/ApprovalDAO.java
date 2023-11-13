@@ -12,18 +12,32 @@ import com.cloud.pt.employee.EmployeeVO;
 public interface ApprovalDAO {
 	
 	public Long getMyCount(Map<String,Object> map)throws Exception;
+	public Long getMyWatingCount(Map<String,Object> map)throws Exception;
+	public Long getMyProceedingCount(Map<String,Object> map)throws Exception;
+	public Long getMyRejectCount(Map<String,Object> map)throws Exception;
+	public Long getMyCompleteCount(Map<String,Object> map)throws Exception;
 	
-	public Long getAllCount(Map<String,Object> map) throws Exception;
+	public Long getAllBeforeCount(Map<String,Object> map) throws Exception;
+	public Long getAllAfterCount(Map<String,Object> map) throws Exception;
+//	public Long getLeaveBeforeCount(Map<String,Object> map) throws Exception;
+//	public Long getLeaveAfterCount(Map<String,Object> map) throws Exception;
+//	public Long getStopBeforeCount(Map<String,Object> map) throws Exception;
+//	public Long getStopAfterCount(Map<String,Object> map) throws Exception;
 	
 	public Long getTemporaryCount(Map<String,Object> map) throws Exception;
 	
-	public List<ApprovalVO> getApprovalList(Map<String, Object> map) throws Exception;
+	public List<ApprovalVO> getApprovalAllList(Map<String, Object> map) throws Exception;
+	public List<ApprovalVO> getApprovalWatingList(Map<String, Object>map) throws Exception;
+	public List<ApprovalVO> getApprovalProceedingList(Map<String, Object>map) throws Exception;
+	public List<ApprovalVO> getApprovalRejectList(Map<String, Object>map) throws Exception;
+	public List<ApprovalVO> getApprovalCompleteList(Map<String, Object>map) throws Exception;
 	
 	public List<EmployeeVO> getAnnualLine() throws Exception;
 	
 	public int setAdd(ApprovalVO approvalVO)throws Exception;
 	
-	public List<ApprovalVO> getApproverList(Map<String,Object> map) throws Exception;
+	public List<ApprovalVO> getApproverAllBeforeList(Map<String,Object> map) throws Exception;
+	public List<ApprovalVO> getApproverAllAfterList(Map<String,Object> map) throws Exception;
 	
 	public ApprovalVO getMyDetail(ApprovalVO approvalVO) throws Exception;
 	
