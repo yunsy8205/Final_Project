@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.cloud.pt.employee.EmployeeVO;
-import com.cloud.pt.memberShip.MembershipVO;
+import com.cloud.pt.membership.MembershipVO;
 import com.cloud.pt.registration.RegistrationVO;
 
 import lombok.Getter;
