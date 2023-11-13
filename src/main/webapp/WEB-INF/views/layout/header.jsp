@@ -108,7 +108,6 @@ EDIT ON
                   <ul class="dropdown-menu dropdown-menu-end"> -->
                     <div class="header_navi" style="display: flex;
                     align-items: center;">
-              <a href="#">조직도</a>
               <sec:authorize access="!isAuthenticated()">
                 <a href="/employee/login">로그인</a>
               </sec:authorize>
