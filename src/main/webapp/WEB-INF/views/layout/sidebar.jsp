@@ -217,7 +217,7 @@
             </li>
             
             <li class="menu-item">
-              <a href="icons-boxicons.html" class="menu-link">
+              <a href="/leave/list" class="menu-link">
                 <i class="menu-icon fa-solid fa-plane"></i>
                 <div data-i18n="Boxicons">휴가</div>
               </a>

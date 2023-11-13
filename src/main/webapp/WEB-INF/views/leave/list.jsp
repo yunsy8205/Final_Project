@@ -34,7 +34,79 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <div id="calendar"></div>
+              
+              <div class="table-responsive text-nowrap">
+              <form action="./list" method="get">
+                <div class="input-group">
+                  
+								  <select id="kind" name="kind" class="select2 form-select">
+									  <option selected value="employeeNum">사원번호</option>
+									  <option value="name">이름</option>
+								  </select>
+								  <input type="text" class="form-control" id="search" name="search"/>
+								  <button
+									class="btn btn-outline-primary"
+									id="searchBtn"
+									type="submit"
+									>
+									조회
+								  </button>
+                
+								</div>
+              </form>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>사원번호</th>
+                      <th>이름</th>
+                      <th>직급</th>
+                      <th>휴가종류</th>
+                      <th>휴가시작일</th>
+                      <th>휴가종료일</th>
+                      <th>사용연차일수</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody class="table-border-bottom-0">
+                    <c:forEach items="${ll}" var="vo">
+                      <tr>
+                        <td>${vo.employeeNum}</td>
+                        <td>${vo.employeeVO.name}</td>
+                        <c:if test="${vo.employeeVO.position=='ROLE_CEO'}"><td>대표</td></c:if>
+												<c:if test="${vo.employeeVO.position=='ROLE_GENERAL'}"><td>총괄매니저</td></c:if>
+												<c:if test="${vo.employeeVO.position=='ROLE_CUSTOMER'}"><td>고객관리</td></c:if>
+												<c:if test="${vo.employeeVO.position=='ROLE_RESOURCES'}"><td>인사관리</td></c:if>
+                        <c:if test="${vo.employeeVO.position=='ROLE_FACILITY'}"><td>시설관리</td></c:if>
+												<c:if test="${vo.employeeVO.position=='ROLE_TRAINER'}"><td>트레이너</td></c:if>
+                        
+                        <td>${vo.leaveKind}</td>
+                        <td>${vo.startDate}</td>
+                        <td>${vo.endDate}</td>
+                        <td>${vo.useDate}</td>
+                        
+                      </tr>
+                    </c:forEach>
+                  </tbody>
+                </table>
+              </div>
+              
+                <ul class="pagination justify-content-center">
+                  <li class="page-item prev ${pager.pre?'':'disabled'}">
+                    <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+                  </li>
+                  <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+                     <li class="page-item">
+                     <a class="page-link move b1" value="1" data-num="${i}" href="./list?kind=${pager.kind}&search=${pager.search}&page=${i}">${i}</a>
+                     </li>
+                  </c:forEach>
+                  <li class="page-item next ${pager.next?'':'disabled'}">
+                    <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+                  </li>
+                  </ul>
+              
+            </div>
+          
+            <!--/ Hoverable Table rows -->
               <!-- / Content --> 
               
               
@@ -83,7 +155,9 @@
     </div>
     <!-- / Layout wrapper -->
   
-	<script src="/resources/js/leave/list.js"></script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+    <script>
+
+    </script>
   </body>
 </html>
