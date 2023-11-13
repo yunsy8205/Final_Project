@@ -231,9 +231,7 @@ public class AttendanceService {
 		pager.makeRowNum();
 		Long total = attendanceDAO.getRequestTotal(pager);
 		pager.makePageNum(total);
-		
-//		log.info("pager: {}", pager);
-		
+				
 		return attendanceDAO.getRequestList(pager);
 	}
 	

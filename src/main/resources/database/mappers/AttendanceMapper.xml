@@ -22,6 +22,18 @@
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM
 	</sql>
 	
+	<sql id="positionJoinName">
+		CASE E.POSITION
+			WHEN 'ROLE_CEO' THEN '대표'
+			WHEN 'ROLE_GENERAL' THEN '총괄 매니저'
+			WHEN 'ROLE_CUSTOMER' THEN '고객관리 매니저'
+			WHEN 'ROLE_RESOURCES' THEN '인사 매니저'
+			WHEN 'ROLE_FACILITY' THEN '시설 매니저'
+			WHEN 'ROLE_TRAINER' THEN '트레이너'
+			WHEN 'ROLE_EX' THEN '가발령'
+		END AS 'POSITION'
+	</sql>
+	
 	<!-- attendanceNum 찾기 -->
 	<select id="getNum" resultType="java.lang.Long" parameterType="Map">
 		SELECT ATTENDANCENUM
@@ -30,12 +42,14 @@
 		AND EMPLOYEENUM=#{emp.employeeNum}
 	</select>
 	
+	<!-- 출근시간 입력 -->
 	<insert id="setOn" parameterType="EmployeeVO">
 		INSERT INTO ATTENDANCE
 		(EMPLOYEENUM, WORKDATE, ONTIME)
 		VALUES (#{employeeNum}, NOW(), NOW())
 	</insert>
 	
+	<!-- 퇴근시간 입력 -->
 	<update id="setOff" parameterType="EmployeeVO">
 		UPDATE ATTENDANCE
 			SET OFFTIME=NOW()
@@ -84,7 +98,8 @@
 	</select>
 	
 	<select id="getInfo" resultMap="getInfoResult" parameterType="Map">
-		SELECT A.*, E.*
+		SELECT A.*,E.EMPLOYEENUM,E.NAME,E.LEAVEDATE,E.PROFILE,
+		<include refid="positionJoinName"></include>
 		FROM ATTENDANCE A 
 			JOIN EMPLOYEE E
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM
@@ -104,6 +119,7 @@
 			<result column="NAME" property="name"/>
 			<result column="LEAVEDATE" property="leaveDate"/>
 			<result column="PROFILE" property="proFile"/>
+			<result column="POSITION" property="position"/>
 		</association>
 	</resultMap>	
 	

@@ -29,7 +29,6 @@ public class AttendanceController {
 	@ResponseBody
 	@GetMapping("/attendance/month")
 	public List<Map<String, Object>> monthAttendance(@AuthenticationPrincipal EmployeeVO employeeVO) throws Exception {
-//		log.info("cal: {}", attendanceService.getList(employeeVO));
 		//List<Map<String, Object>>의 자료형으로 보낼시 자동으로 JSON으로 변경됨
 		return attendanceService.getList(employeeVO);
 	}
@@ -46,14 +45,10 @@ public class AttendanceController {
 		return attendanceService.getResources();
 	}
 	
-	
 	@GetMapping("/attendance/info")
 	public String getInfo(@AuthenticationPrincipal EmployeeVO employeeVO, Model model) throws Exception {
-//		log.info("vo: {}", employeeVO);
 		AttendanceVO attendanceVO = attendanceService.getInfo(employeeVO);
 		model.addAttribute("vo", attendanceVO);
-//		List<AttendanceVO> ar = attendanceService.getList(employeeVO);
-//		model.addAttribute("list", ar);
 		
 		return "attendance/info";
 	}

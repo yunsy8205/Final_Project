@@ -56,12 +56,14 @@
     }
     .btn_block {
       text-align: center;
+      margin-top: 5%;
     }
     .btn-primary {
       width: 70%;
     }
     .tTitle{
 	  	width: 40%;
+      margin-bottom: 3%;
 	  }
 	  .tTime{
 	  	width: 40%;
@@ -72,14 +74,15 @@
 	  	margin-left: 17%;
 	  }
     .b2{
-	  	height: 15%;
+	  	height: 10%;
 	  	text-align: center;
-	  	margin-top: 3px;
+	  	margin-top: 10%;
 	  	padding-top: 5px;
 	  }
     .b1{
-		  height: 55%;
+		  height: 35%;
 		  text-align: center;
+      margin-top: 20%;
 	  }
     #proBox{
 	  	width: 150px;
@@ -87,7 +90,19 @@
 	    border-radius: 70%;
 	    overflow: hidden;
 	    margin: auto;
-	   }
+	  }
+    .user{
+	  	font-size: 17px;
+	  	font-weight: bold;
+	  }
+    #user{
+      margin-top: 12%;
+    }
+    #userProfile{
+	  	width: 100%;
+	    height: 100%;
+	    object-fit: cover;	
+	  }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -169,15 +184,12 @@
                     <div id="proBox">
                       <img id="userProfile" alt="" src="/file/employee/${vo.employeeVO.proFile}">
                     </div>
-                    <div class="user mt-2" id="user" data-num="${user.employeeNum}" style="font-weight:500;">${user.name}</div>
-                    <div class="user" id="position" data-position="${user.position}"><span id="pInner" style="font-size: 0.9rem;"></span></div>
-                  </div>
-
-                  <div class="profile">
-                    <img class="rounded-circle" src="/file/employee/${vo.employeeVO.proFile}" alt="">
-                  </div>
-                  <div class="name">
-                    ${vo.employeeVO.name}
+                    <div class="user" id="user" style="font-weight:500;"> 
+                      ${vo.employeeVO.name}
+                    </div>
+                    <div class="user" id="position">
+                      <span id="pInner" style="font-size: 0.9rem;">${vo.employeeVO.position}</span>
+                    </div>
                   </div>
                   <div class="b2">
                     <!-- 출근시간 퇴근시간 -->
