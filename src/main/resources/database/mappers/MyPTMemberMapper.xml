@@ -9,8 +9,8 @@
 		SELECT COUNT(MEMBERNUM) FROM MEMBER
 	</select>  
 	
-	<select id="getPtList" parameterType="java.util.Map" resultType="MemberVO">
-		SELECT MEMBERNUM, MEMBERNAME , GENDER, BIRTH, PHONE , PTCOUNT,EMPLOYEENUM
+	<select id="getPtList" parameterType="java.util.Map" resultType="MemVO">
+		SELECT MEMBERNUM, MEMBERNAME , GENDER, BIRTH, PHONE , PTCOUNT,EMPLOYEENUM,JOINDATE
   			FROM MEMBER 
   			WHERE EMPLOYEENUM = #{employeeNum}
   			

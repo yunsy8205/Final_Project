@@ -27,7 +27,7 @@
 		<typeAlias type="com.cloud.pt.ptLog.PtLogVO" alias="PtLogVO"/>
 		<typeAlias type="com.cloud.pt.ptType.PtTypeVO" alias="PtTypeVO"/>
 		<typeAlias type="com.cloud.pt.ptClass.PtClassVO" alias="PtClassVO"/>
-		<typeAlias type="com.cloud.pt.locker.LockerVO" alias="Locker"/>
+		<typeAlias type="com.cloud.pt.locker.LockerVO" alias="LockerVO"/>
 		
 		<!-- 동찬 -->
 		<typeAlias type="com.cloud.pt.approval.ApprovalVO" alias="ApprovalVO"/>
