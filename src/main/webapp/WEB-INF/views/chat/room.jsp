@@ -61,7 +61,7 @@
 		 #listBox{
 		 	height: 85%;
 		 	width: 100%;
-		 	overflow-y: scroll
+		 	overflow-y: scroll;
 		 }
 		 #listBox::-webkit-scrollbar {
 		    width: 10px;
@@ -74,6 +74,11 @@
 		    background-color: white;
 		    border-radius: 10px;
 		    box-shadow: inset 0px 0px 5px white;
+		 }
+		 #userBox{
+		 	display: block !important;
+    		text-align: center;
+    		height: 30%;
 		 }
 	</style>
 </head>
@@ -102,7 +107,7 @@
               <div class="row">
                 <div class="col-xl1">
                   <div class="card mb-4">
-                    <div style="display: block !important; text-align: center;"  class="card-header d-flex justify-content-between align-items-center">
+                    <div id="userBox" class="card-header d-flex justify-content-between align-items-center">
                     	<sec:authorize access="isAuthenticated()">
                     	<sec:authentication property="principal" var="user"/>
                         	<h5 class="mb-0" id="my" data-user="${user.username}" data-name="${user.name}">${user.name} ${user.position}</h5>

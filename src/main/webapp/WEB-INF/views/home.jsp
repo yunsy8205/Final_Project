@@ -14,10 +14,10 @@
   data-template="vertical-menu-template-free"
 >
   <head>
-  	
     <style>
       #off {
         display: none;
+        margin: 0 auto;
       }
       .row {
 	    height: 450px;
