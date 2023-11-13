@@ -171,5 +171,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="/js/employee/update.js"></script>
+
+
+    <script>
+
+      // select 직급 선택처리
+      const po = document.getElementById("position").getAttribute("data-position")
+      const pname = document.getElementsByClassName("pname");
+      console.log(po);
+
+      if(po != ''){
+        for(let i = 0; i < pname.length; i++){
+          if(po == '대표' && i == 0){
+            pname[i].selected = true;
+          }else if(po == '총괄 매니저' && i == 1){
+            pname[i].selected = true;
+          }else if(po == '고객관리 매니저' && i == 2){
+            pname[i].selected = true;
+          }else if(po == '인사 매니저' && i == 3){
+            pname[i].selected = true;
+          }else if(po == '시설 매니저' && i == 4){
+            pname[i].selected = true;
+          }else if(po == '트레이너' && i == 5){
+            pname[i].selected = true;
+          }else if(po == '가발령' && i == 6){
+            pname[i].selected = true;
+          }else{
+            pname[i].selected = false;
+          }
+          
+        }
+      }
+    </script>
   </body>
 </html>
