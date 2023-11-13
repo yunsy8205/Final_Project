@@ -127,6 +127,7 @@
 				console.log(r);
 				
 				if(r>0){
+					//방번호
 					//enterRoom(socket, employeeNum, r);
 				}else{
 					alert("방이 만들어지지 않았습니다.");

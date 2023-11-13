@@ -96,9 +96,16 @@
 		    overflow: hidden;
 		   }
 		   #my{
-		   	font-size: 17px;
+		   	font-size: 18px;
 		   	line-height: 50px;
-		   	font-weight: bold;
+		   	font-weight: bolder;
+		   }
+		   .chatList{
+		   	color: #566A7F;
+		   	font-size: 16px;
+		   }
+		   #someone{
+		   	font-size: 18px;
 		   }
 	</style>
 </head>
@@ -134,11 +141,11 @@
 	                    		<div id="proBox">
 		                      		<img id="userProfile" alt="" src="../file/employee/${user.proFile}">
 		                        </div>
-	                        	<div class="ms-3" id="my" data-user="${user.username}" data-name="${user.name}">${user.name} 🏃‍♂️ ${user.position}</div>
+	                        	<div class="ms-3" id="my" data-user="${user.username}" data-name="${user.name}">${user.name} <i style="color: #F8C023" class="bx bx-crown"></i> ${user.position}</div>
 							</sec:authorize>
                     	</div>
                     </div>
-                    <div class="card-body" style="padding-top: 8%;">
+                    <div class="card-body" style="padding-top: 6%;">
                     	<div class="input-group mb-4">
 	                        <input
 	                          id="searchName"
@@ -151,7 +158,9 @@
                       	</div>
                     	<div id="listBox" class="border">
 	                    	<c:forEach items="${list}" var="li">
-	                        	<a href="#" class="chatList" data-empNum="${li.employeeNum}" data-name="${li.name}" data-pos="${li.position}">${li.name} ${li.position}</a><br>                   		
+	                        	<div>
+	                        		<i class='mx-1 bx bx-message-square'></i><a href="#" class="chatList" data-empNum="${li.employeeNum}" data-name="${li.name}" data-pos="${li.position}">${li.name} ${li.position}</a>
+	                        	</div>                   		
 	                    	</c:forEach>
                     	</div>
                     </div>
@@ -160,7 +169,7 @@
                 <div class="col-xl">
                   <div class="card mb-4">
                     <div class="userBox card-header d-flex justify-content-between align-items-center">
-                      <h5 id="someone" class="mb-0" data-name="">채팅하려는 대상을 선택해 주세요</h5>
+                      <h5 id="someone" class="mb-0" data-name=""><i class='bx bxs-quote-alt-left'></i> 채팅하려는 대상을 선택해 주세요 <i class='bx bxs-quote-alt-right' ></i></h5>
                     </div>
                     <div class="card-body">
                     	<div id="msgArea" class="card mb-4" style="overflow-y: scroll"></div>
