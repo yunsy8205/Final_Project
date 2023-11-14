@@ -176,13 +176,13 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a id="attendance" href="/admin/attendance" class="menu-link">
-                    <div data-i18n="Alerts">전체 근태 조회</div>
+                  <a href="/attendanceModify/list" class="menu-link">
+                    <div data-i18n="Badges">근태 수정 요청 목록</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/attendanceModify/list" class="menu-link">
-                    <div data-i18n="Badges">근태 수정 요청 목록</div>
+                  <a id="attendance" href="/admin/attendance" class="menu-link">
+                    <div data-i18n="Alerts">전체 근태 조회</div>
                   </a>
                 </li>
                 </ul>

@@ -25,7 +25,9 @@ pageEncoding="UTF-8"%>
           <th>작성자</th>
           <th>작성일</th>
           <th>근태수정요청일</th>
+          <th>출/퇴근</th>
           <th>상태</th>
+          <th>상세</th>
         </tr>
       </thead>
       <tbody>
@@ -35,10 +37,11 @@ pageEncoding="UTF-8"%>
             <td>${vo.employeeVO.name}</td>
             <td>${vo.attendanceModifyVO.regDate}</td>
             <td>${vo.attendanceModifyVO.modifyDate}</td>
+            <td>${vo.attendanceModifyVO.type}</td>
             <td>
               <c:choose>
                 <c:when test="${vo.attendanceModifyVO.status eq '요청'}">
-                          <a href="/admin/attendanceModify/detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">
+                          <a href="/admin/attendanceModify/update?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">
                             ${vo.attendanceModifyVO.status}
                           </a>				
                 </c:when>
@@ -46,6 +49,11 @@ pageEncoding="UTF-8"%>
                   ${vo.attendanceModifyVO.status}
                 </c:otherwise>
               </c:choose>
+            </td>
+            <td>
+              <a href="/admin/attendanceModify/detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">
+                보기
+              </a>
             </td>
           </tr>
         </c:forEach>
