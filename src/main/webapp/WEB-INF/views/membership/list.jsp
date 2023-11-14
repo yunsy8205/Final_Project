@@ -42,7 +42,7 @@
                   <button id="add_btn" class="btn btn-primary">이용권 등록</button>
                 </div>
 				        <div class="card">
-                  <div id="list" class="table-responsive text-nowrap">
+                  <div id="list">
                     <table class="table table-hover">
                       <thead>
                         <tr>

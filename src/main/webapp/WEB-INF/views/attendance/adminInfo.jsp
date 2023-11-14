@@ -28,7 +28,7 @@
       margin-bottom: 2em !important;
     }
     #calendar {
-      height: 600px; /* 원하는 높이(px)로 설정 */
+      height: 709px; /* 원하는 높이(px)로 설정 */
     }
     form {
       display: flex;
@@ -45,10 +45,16 @@
       margin: 0 8%;
     }
     .card{
-      margin: 3% 8%;
+      margin: 1% 8% 2%;
     }
     .s_box{
-      margin: 2rem auto 0 !important;
+      margin: 1.5rem auto 0 !important;
+    }
+    .pagination {
+      margin-bottom: 0.7rem;
+    }
+    .tab-content {
+      height: 780px;
     }
   </style>
 
@@ -79,7 +85,7 @@
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
 
-                <div class="nav-align-top mb-4">
+                <div class="nav-align-top">
                   <ul class="nav nav-tabs nav-fill" role="tablist">
                     <li class="nav-item">
                       <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-home" aria-controls="navs-justified-home" aria-selected="true">

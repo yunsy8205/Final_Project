@@ -17,7 +17,7 @@ pageEncoding="UTF-8"%>
 </div>
 
 <div class="card m-5">
-  <div id="req_list" class="table-responsive text-nowrap">
+  <div id="req_list">
     <table class="table table-hover">
       <thead>
         <tr>
