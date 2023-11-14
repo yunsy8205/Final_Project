@@ -16,6 +16,7 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+  
 </head>
 
 <body>
@@ -59,8 +60,8 @@
                                   </div>
                                 </div>
                                 <div class="card-body">
-                                  <div id="detailCon">
-                                    <div id="detail_left">
+                                  <div id="detailCon" style="display: flex; justify-content:space-around;">
+                                    <div id="detail_left" style="width: 47%;">
                                       <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">사번</label>
                                         <div class="col-sm-10">
@@ -92,7 +93,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <div id="detail_right">
+                                    <div id="detail_right" style="width: calc(100% - 53%);">
                                       <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">입사일</label>
                                         <div class="col-sm-10">
@@ -139,19 +140,19 @@
                                       </c:if>
                                       <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="basic-default-name">서명이미지</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-10" style="width:5rem;height:5rem;margin:0 auto;">
                                           <!-- <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.signFile}" readonly/> -->
-                                          <img src="../file/employee/${employeeVO.signFile}" id="basic-default-name sign" alt="개인싸인" onerror="this.style.display='none'">
+                                          <img src="../file/employee/${employeeVO.signFile}" id="basic-default-name sign" alt="개인싸인" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;">
                                         </div>
                                       </div>
                                     </div>
-                                    <form action="" id="upfrm">
+                                    <form action="" id="upfrm" style="width:0;">
                                       <input type="hidden" name="employeeNum" value="${employeeVO.employeeNum}">
                                     </form>
-                                    <div class="proBtn" style="text-align: center;">
-                                      <button type="button" class="btn btn-primary" id="upBtn" data-url="/employee/infoUpdate">수정</button>
-                                      <!-- <button type="button" class="btn btn-primary" id="toBtn" >수정</button> -->
-                                    </div>
+                                  </div>
+                                  <div class="proBtn" style="text-align: center;">
+                                    <button type="button" class="btn btn-primary" id="upBtn" data-url="/employee/infoUpdate">수정</button>
+                                    <!-- <button type="button" class="btn btn-primary" id="toBtn" >수정</button> -->
                                   </div>
                                 </div>
                               </div>
@@ -178,14 +179,14 @@
                                 <form:label path="newPw" class="col-sm-2 col-form-label" for="basic-default-name">새 비밀번호</form:label>
                                 <div class="col-sm-10">
                                   <form:password path="newPw" cssClass="form-control" id="basic-default-name"/>
-                                	<form:errors path="newPw"></form:errors>
+                                  <span style="color: rgb(83, 83, 83); font-size: 0.8rem;">비밀번호는 8자에서 12자 사이이며, 소문자+숫자+특수문자(*,@,#,$,%,^,&,+,=)를 포함해야 합니다.</span>
                                 </div>
                               </div>
                               <div class="row mb-3">
                                 <form:label path="pwCheck" class="col-sm-2 col-form-label" for="basic-default-name">비밀번호 확인</form:label>
                                 <div class="col-sm-10">
                                 	<form:password path="pwCheck"  cssClass="form-control" id="basic-default-name"/>
-                                 	<form:errors path="pwCheck"></form:errors>
+                                  <form:errors path="pwCheck"></form:errors>
                                 </div>
                               </div>
                               <div class="proBtn" style="text-align: center;">

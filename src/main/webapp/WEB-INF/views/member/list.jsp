@@ -14,6 +14,9 @@
   data-template="vertical-menu-template-free"
 >
 <head>
+  <style>
+    .table > :not(:first-child) {box-shadow: 0 2px 3px rgba(0,0,0,0.01), 0 2px 3px rgba(0,0,0,0.12);}
+  </style>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 </head>
 
@@ -32,9 +35,9 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="container-xxl flex-grow-1 container-p-y" style="padding: 1rem 0 !important;">
                 <h3 style="text-align: center; margin:2rem 0 1rem;">전체 회원 목록</h3>   
-                <div class="container-xxl flex-grow-1 container-p-y" style="padding-top: 0 !important;">
+                <div class="container-xxl flex-grow-1 container-p-y" style="padding-top: 0 !important; text-align: center;">
                   <div>
                     <div class="m-5" style="margin: 2.5rem auto 2rem !important;">
                       <form action="./list" method="get" id="frm" style="display: flex; justify-content: center;">
@@ -44,7 +47,7 @@
                           <option class="kind" value="name">이름</option>
                         </select> 
                         <input type="text" name="search" value="${pager.search}" class="search form-control" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
-                        <button type="submit" class="btn btn-primary">검색</button>
+                        <button type="submit" class="btn btn-primary">조회</button>
                       </form>
                     </div>
                   </div>
@@ -109,7 +112,7 @@
                     <a href="/member/add" class="btn btn-primary">회원등록</a>
                   </div>
                   <div id="req_list" class="table-responsive text-nowrap">
-                    <table class="table table-hover">
+                    <table class="table table-hover" style="text-align: center; background-color: white;">
                       <thead>
                         <tr>
                           <th>번호</th>

@@ -37,11 +37,6 @@
     .name {
       text-align: center;
     }
-    .time {
-      margin-top: 30px;
-      margin-bottom: 30px;
-      text-align: center;
-    }
     .btn-primary {
       margin-top: 30px;
       margin-bottom: 15px;
@@ -61,11 +56,53 @@
     }
     .btn_block {
       text-align: center;
+      margin-top: 5%;
     }
     .btn-primary {
       width: 70%;
     }
-    
+    .tTitle{
+	  	width: 40%;
+      margin-bottom: 3%;
+	  }
+	  .tTime{
+	  	width: 40%;
+	  	font-size: 16px;
+	  }	
+    .timeBox{
+	  	display: flex;
+	  	margin-left: 17%;
+	  }
+    .b2{
+	  	height: 10%;
+	  	text-align: center;
+	  	margin-top: 10%;
+	  	padding-top: 5px;
+	  }
+    .b1{
+		  height: 35%;
+		  text-align: center;
+      margin-top: 20%;
+	  }
+    #proBox{
+	  	width: 150px;
+	    height: 150px; 
+	    border-radius: 70%;
+	    overflow: hidden;
+	    margin: auto;
+	  }
+    .user{
+	  	font-size: 17px;
+	  	font-weight: bold;
+	  }
+    #user{
+      margin-top: 12%;
+    }
+    #userProfile{
+	  	width: 100%;
+	    height: 100%;
+	    object-fit: cover;	
+	  }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -142,26 +179,36 @@
                 </div>
 
                 <div id="my">
-                  <div class="profile">
-                    <img class="rounded-circle" src="/file/employee/${vo.employeeVO.proFile}" alt="">
+                  <div class="b1">
+                    <!-- 이미지 이름 직책 -->
+                    <div id="proBox">
+                      <img id="userProfile" alt="" src="/file/employee/${vo.employeeVO.proFile}">
+                    </div>
+                    <div class="user" id="user" style="font-weight:500;"> 
+                      ${vo.employeeVO.name}
+                    </div>
+                    <div class="user" id="position">
+                      <span id="pInner" style="font-size: 0.9rem;">${vo.employeeVO.position}</span>
+                    </div>
                   </div>
-                  <div class="name">
-                    ${vo.employeeVO.name}
-                  </div>
-                  <div class="time">
-                   <ul>
-                      <li class="list">
-                        출근시간 <c:if test="${not empty vo.onTime}"> - ${vo.onTime} </c:if>
-                      </li>
-                      <li class="list">
-                      	퇴근시간 <c:if test="${not empty vo.offTime}"> - ${vo.offTime} </c:if>
-                      </li>
-                      <br>
-                      <li class="list">연차개수 - ${vo.employeeVO.leaveDate}개</li>
-                    </ul>
+                  <div class="b2">
+                    <!-- 출근시간 퇴근시간 -->
+                    <div class="timeBox">
+                      <div class="tTitle">출근시간 </div>
+                      <div class="tTime" id="onTime">
+                        <c:if test="${empty vo.onTime}"> - </c:if>
+                        <c:if test="${not empty vo.onTime}"> ${vo.onTime} </c:if>
+                      </div>
+                    </div>
+                    <div class="timeBox">
+                      <div class="tTitle">퇴근시간 </div>
+                      <div class="tTime" id="offTime">
+                        <c:if test="${empty vo.offTime}"> - </c:if>
+                        <c:if test="${not empty vo.offTime}"> ${vo.offTime} </c:if>
+                      </div>
+                    </div>
                   </div>
                   <div class="btn_block">
-                    <button class="btn btn-primary">내 정보 수정</button>
                     <button class="btn btn-primary" id="req_btn">근태 수정 요청</button>
                   </div>
                 </div>

@@ -154,7 +154,7 @@ public class EmployeeController {
 			
 			boolean check = employeeService.getNewPwCheck(passwordVO, bindingResult);
 			if(bindingResult.hasErrors() || check) {
-
+				// 파라미터로 error 넣어 Front에서 tab 전환 js 사용
 				model.addAttribute("error", "true");
 				return "/employee/info";
 			}

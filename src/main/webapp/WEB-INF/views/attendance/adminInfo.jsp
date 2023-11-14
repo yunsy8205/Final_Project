@@ -8,7 +8,7 @@
   <title>Insert title here</title>
   <style>
     h3 {
-      margin-top: 40px !important;
+      margin-top: 1% !important;
       text-align: center;
     }
     #req_btn {
@@ -23,11 +23,16 @@
       padding: 10px 20px;
       cursor: pointer;
     }
+    .fc-header-toolbar{
+      margin-top: 1%;
+      margin-bottom: 2em !important;
+    }
     #calendar {
-      height: 700px; /* 원하는 높이(px)로 설정 */
+      height: 600px; /* 원하는 높이(px)로 설정 */
     }
     form {
       display: flex;
+      justify-content: center;
     }
     #k {
       width: 10%;
@@ -35,11 +40,21 @@
     #search {
       width: 30%;
     }
+    .b_box{
+      text-align: end;
+      margin: 0 8%;
+    }
+    .card{
+      margin: 3% 8%;
+    }
+    .s_box{
+      margin: 2rem auto 0 !important;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
     
-   <!-- moment lib -->
+  <!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 	<!-- fullcalendar bundle -->
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>

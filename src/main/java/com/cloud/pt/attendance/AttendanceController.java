@@ -29,7 +29,6 @@ public class AttendanceController {
 	@ResponseBody
 	@GetMapping("/attendance/month")
 	public List<Map<String, Object>> monthAttendance(@AuthenticationPrincipal EmployeeVO employeeVO) throws Exception {
-//		log.info("cal: {}", attendanceService.getList(employeeVO));
 		//List<Map<String, Object>>의 자료형으로 보낼시 자동으로 JSON으로 변경됨
 		return attendanceService.getList(employeeVO);
 	}
@@ -46,14 +45,10 @@ public class AttendanceController {
 		return attendanceService.getResources();
 	}
 	
-	
 	@GetMapping("/attendance/info")
 	public String getInfo(@AuthenticationPrincipal EmployeeVO employeeVO, Model model) throws Exception {
-//		log.info("vo: {}", employeeVO);
 		AttendanceVO attendanceVO = attendanceService.getInfo(employeeVO);
 		model.addAttribute("vo", attendanceVO);
-//		List<AttendanceVO> ar = attendanceService.getList(employeeVO);
-//		model.addAttribute("list", ar);
 		
 		return "attendance/info";
 	}
@@ -105,13 +100,21 @@ public class AttendanceController {
 		return "commons/ajaxResult";
 	}
 	
-	//-----------------------------------------------------------
+	//관리자----------------------------------------------------------
 	@GetMapping("/admin/attendanceModify/detail")
 	public String getDetail(AttendanceModifyVO attendanceModifyVO, Model model) throws Exception {
-		AttendanceVO attendanceVO = attendanceService.getRequestDetail(attendanceModifyVO);
+		AttendanceVO attendanceVO = attendanceService.getRequest(attendanceModifyVO);
 		model.addAttribute("vo", attendanceVO);
 		
 		return "attendance/adminDetail";
+	}
+	
+	@GetMapping("/admin/attendanceModify/update")
+	public String setUpdate(AttendanceModifyVO attendanceModifyVO, Model model) throws Exception {
+		AttendanceVO attendanceVO = attendanceService.getRequest(attendanceModifyVO);
+		model.addAttribute("vo", attendanceVO);
+		
+		return "attendance/adminForm";
 	}
 	
 	@GetMapping("/admin/attendanceModify/list")
@@ -144,11 +147,11 @@ public class AttendanceController {
 	public String getAdminDay(AttendanceVO attendanceVO, Model model, Pager pager) throws Exception {
 		log.info("vo: {}", attendanceVO);
 		List<AttendanceVO> ar = attendanceService.getDayList(attendanceVO, pager);
-		long currentTimeMillis = System.currentTimeMillis();
-        Date currentSqlDate = new Date(currentTimeMillis); //헌재 날짜 
-        System.out.println(currentSqlDate);
+	//	long currentTimeMillis = System.currentTimeMillis();
+    //  Date currentSqlDate = new Date(currentTimeMillis); //헌재 날짜 
         
-        model.addAttribute("date", currentSqlDate);
+    //    model.addAttribute("date", currentSqlDate);
+		model.addAttribute("attendance", attendanceVO);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		
@@ -180,13 +183,20 @@ public class AttendanceController {
 	}
 	
 	@PostMapping("/attendanceModify/add")
-	public String setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO) throws Exception {
+	public String setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO, Model model) throws Exception {
 		int result = attendanceService.setModifyAdd(attendanceModifyVO, employeeVO);
+		String message = null;
+		if(result==0) {
+			message="해당 날짜의 근태수정요청이 이미 존재합니다";
+		}else if(result==-1){
+			message="당일 근태수정요청은 퇴근이후 가능합니다";
+		}else {
+			message="근태수정요청이 등록되었습니다";
+		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", "/attendanceModify/list");
 		
-		//파라미터 추가
-//		attributes.addAttribute("employeeNum", employeeVO.getEmployeeNum());
-		
-		return "redirect:./list";
+		return "commons/result";
 	}
 	
 }

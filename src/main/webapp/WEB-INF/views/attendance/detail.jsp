@@ -57,24 +57,6 @@
                         <div class="row g-3 mb-3">
                           <div class="col-md-6">
                             <div class="mb-3 row">
-                              <label for="requestDate" class="col-md-2 col-form-label">수정요청일</label>
-                              <div class="col-md-10">  
-                                <input type="date" id="requestDate" name="modifyDate" class="form-control" value="${vo.modifyDate}" disabled>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="mb-3 row">
-                              <label for="requestTime" class="col-md-2 col-form-label">수정요청시간</label>
-                              <div class="col-md-10">
-                                <input type="time" id="requestTime" name="modifyTime" class="form-control" value="${vo.modifyTime}" disabled>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row g-3 mb-3">
-                          <div class="col-md-6">
-                            <div class="mb-3 row">
                               <label for="writer" class="col-md-2 col-form-label">작성자</label>
                               <div class="col-md-10">
                                 <sec:authentication property="Principal" var="user"/>
@@ -90,6 +72,24 @@
             
                               <input type="radio" id="off" name="type" value="퇴근" ${radioType eq '퇴근' ? 'checked' : ''} class="form-check-input" disabled>
                               <label for="off" class="form-check-label">퇴근</label>
+                          </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label for="requestDate" class="col-md-2 col-form-label">수정요청일</label>
+                              <div class="col-md-10">  
+                                <input type="date" id="requestDate" name="modifyDate" class="form-control" value="${vo.modifyDate}" disabled>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label for="requestTime" class="col-md-2 col-form-label">수정요청시간</label>
+                              <div class="col-md-10">
+                                <input type="time" id="requestTime" name="modifyTime" class="form-control" value="${vo.modifyTime}" disabled>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-12">
