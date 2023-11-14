@@ -282,7 +282,7 @@ uri="http://www.springframework.org/tags" %>
                     </div>
                     <div>
                       <c:forEach items="${chart}" var="c">
-                        <div id="${c.month}" data-member="${c.member}"></div>
+                        <div id="${c.monthNum}" data-member="${c.total}"></div>
                       </c:forEach>
                     </div>
                   </div>
