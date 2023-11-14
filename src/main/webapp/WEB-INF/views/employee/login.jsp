@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+pageEncoding="UTF-8"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%> <%@ taglib prefix="form"
+uri="http://www.springframework.org/tags/form"%> <%@ taglib prefix="spring"
+uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html
   lang="ko"
@@ -19,18 +19,28 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>
+      Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro
+    </title>
 
     <meta name="description" content="" />
 
     <!-- style -->
     <style>
-      .authentication-inner::before {right: -75px !important;}
-      .authentication-inner::after {left: -65px !important;}
+      .authentication-inner::before {
+        right: -75px !important;
+      }
+      .authentication-inner::after {
+        left: -65px !important;
+      }
     </style>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/img/favicon/favicon.ico"
+    />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,12 +54,23 @@
     <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/css/core.css"
+      class="template-customizer-core-css"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/css/theme-default.css"
+      class="template-customizer-theme-css"
+    />
     <link rel="stylesheet" href="../assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
+    />
 
     <!-- Page CSS -->
     <!-- Page -->
@@ -70,8 +91,8 @@
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
           <!-- Register -->
-          <div class="card" style="width:30rem; left:-2rem;">
-            <div class="card-body" style="padding:3rem 1rem;">
+          <div class="card" style="width: 30rem; left: -2rem">
+            <div class="card-body" style="padding: 3rem 1rem">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
                 <a href="index.html" class="app-brand-link gap-2">
@@ -101,21 +122,44 @@
                           id="path-5"
                         ></path>
                       </defs>
-                      <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
-                          <g id="Icon" transform="translate(27.000000, 15.000000)">
-                            <g id="Mask" transform="translate(0.000000, 8.000000)">
+                      <g
+                        id="g-app-brand"
+                        stroke="none"
+                        stroke-width="1"
+                        fill="none"
+                        fill-rule="evenodd"
+                      >
+                        <g
+                          id="Brand-Logo"
+                          transform="translate(-27.000000, -15.000000)"
+                        >
+                          <g
+                            id="Icon"
+                            transform="translate(27.000000, 15.000000)"
+                          >
+                            <g
+                              id="Mask"
+                              transform="translate(0.000000, 8.000000)"
+                            >
                               <mask id="mask-2" fill="white">
                                 <use xlink:href="#path-1"></use>
                               </mask>
                               <use fill="#696cff" xlink:href="#path-1"></use>
                               <g id="Path-3" mask="url(#mask-2)">
                                 <use fill="#696cff" xlink:href="#path-3"></use>
-                                <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                                <use
+                                  fill-opacity="0.2"
+                                  fill="#FFFFFF"
+                                  xlink:href="#path-3"
+                                ></use>
                               </g>
                               <g id="Path-4" mask="url(#mask-2)">
                                 <use fill="#696cff" xlink:href="#path-4"></use>
-                                <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
+                                <use
+                                  fill-opacity="0.2"
+                                  fill="#FFFFFF"
+                                  xlink:href="#path-4"
+                                ></use>
                               </g>
                             </g>
                             <g
@@ -123,47 +167,74 @@
                               transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) "
                             >
                               <use fill="#696cff" xlink:href="#path-5"></use>
-                              <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
+                              <use
+                                fill-opacity="0.2"
+                                fill="#FFFFFF"
+                                xlink:href="#path-5"
+                              ></use>
                             </g>
                           </g>
                         </g>
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                  <span class="app-brand-text demo text-body fw-bolder"
+                    >Sneat</span
+                  >
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2" style="text-align: center;">Welcome to Sneat! 👋</h4>
+              <h4 class="mb-2" style="text-align: center">
+                Welcome to Sneat! 👋
+              </h4>
               <div class="errorMessage">
                 <!-- login 실패시 message가 뜸. code=키이름 var=키값을 담는 곳 -->
-                <spring:message code="${param.message}" var="message"></spring:message>
-                <p class="mb-4">${message}</p>
+                <spring:message
+                  code="${param.message}"
+                  var="message"
+                ></spring:message>
+                <p class="mb-4" style="text-align: center">${message}</p>
               </div>
-              <form:form modelAttribute="employeeVO" action="/employee/login" method="post" id="formAuthentication" class="mb-3">
+              <form:form
+                modelAttribute="employeeVO"
+                action="/employee/login"
+                method="post"
+                id="formAuthentication"
+                class="mb-3"
+              >
                 <div class="mb-3">
-                  <form:label path="employeeNum" class="form-label">직원 아이디</form:label>
-                  <form:input path="employeeNum" 
-                  class="form-control" id="emploiyeNum" placeholder="직원 번호를 입력해주세요." 
-                  style="font-size: 0.8rem;" 
+                  <form:label path="employeeNum" class="form-label"
+                    >직원 아이디</form:label
+                  >
+                  <form:input
+                    path="employeeNum"
+                    class="form-control"
+                    id="emploiyeNum"
+                    placeholder="직원 번호를 입력해주세요."
+                    style="font-size: 0.8rem"
                   />
                 </div>
-                <div class=" passwordDiv mb-3 form-password-toggle">
+                <div class="passwordDiv mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                    <form:label path="password" class="form-label">비밀번호</form:label>
+                    <form:label path="password" class="form-label"
+                      >비밀번호</form:label
+                    >
                     <a href="/findPw" id="findPw">
                       <small>Forgot Password?</small>
                     </a>
                   </div>
                   <div class="input-group input-group-merge">
-                    <form:password path="password"
+                    <form:password
+                      path="password"
                       id="password"
                       class="form-control"
                       placeholder="8-12 자리의 소문자+숫자+특수기호(*,@,#,$,%,^,&,+,=)를 입력하세요."
                       aria-describedby="password"
-                      style="font-size: 0.8rem;"
+                      style="font-size: 0.8rem"
                     />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    <span class="input-group-text cursor-pointer"
+                      ><i class="bx bx-hide"></i
+                    ></span>
                   </div>
                 </div>
                 <!-- <div class="mb-3">
@@ -172,8 +243,10 @@
                     <label class="form-check-label" for="remember-me"> Remember Me </label>
                   </div>
                 </div> -->
-                <div class="mb-3" style="margin-top: 2rem;">
-                  <button class="btn btn-primary d-grid w-100" type="submit">로그인</button>
+                <div class="mb-3" style="margin-top: 2rem">
+                  <button class="btn btn-primary d-grid w-100" type="submit">
+                    로그인
+                  </button>
                 </div>
               </form:form>
 

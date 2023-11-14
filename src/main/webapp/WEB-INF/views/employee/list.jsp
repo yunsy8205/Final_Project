@@ -13,7 +13,11 @@
   data-assets-path="../assets/"
   data-template="vertical-menu-template-free"
 >
+
 <head>
+  <style>
+    .table > :not(:first-child) {box-shadow: 0 2px 3px rgba(0,0,0,0.01), 0 2px 3px rgba(0,0,0,0.12);}
+  </style>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 </head>
 
@@ -30,7 +34,7 @@
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
             <!-- Content wrapper -->
-            <div class="content-wrapper container-xxl flex-grow-1 container-p-y">
+            <div class="content-wrapper container-xxl flex-grow-1 container-p-y" style="padding: 1rem 0 !important;">
               <!-- Content 내용 여기로 -->
               <h3 style="text-align: center; margin:2rem 0 1rem;">전체 직원 목록</h3>
               <div class="container-xxl flex-grow-1 container-p-y" style="padding-top: 0 !important;">
@@ -46,7 +50,7 @@
                         <option class="kind" value="stateOut">퇴직 직원</option>
                       </select> 
                       <input type="text" name="search" value="${pager.search}" class="search form-control" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
-                      <button type="submit" class="btn btn-primary">검색</button>
+                      <button type="submit" class="btn btn-primary">조회</button>
                     </form>
                   </div>
                 </div>
@@ -54,7 +58,7 @@
                   <a href="/employee/join" class="btn btn-primary">직원등록</a>
                 </div>
                 <div id="req_list" class="table-responsive text-nowrap">
-                  <table class="table table-hover" style="text-align: center;">
+                  <table class="table table-hover" style="text-align: center; background-color: white;">
                     <thead>
                       <tr>
                         <th>번호</th>
