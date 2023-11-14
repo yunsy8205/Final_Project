@@ -25,6 +25,9 @@
     .form-control[readonly] {
       background-color:#ffffff00 !important;
     }
+    .card-body{
+      margin: 0 10%;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>

@@ -53,33 +53,33 @@ function setOn(){
     })
 }
 
-  //퇴근
-  function setOff(){
-    $.ajax({
-      type: 'post',
-      url: '/attendance/off',
-      success: function(result){
-        if(result.trim()>0){
-          alert('퇴근하였습니다');
-          $('#off').attr('disabled', true);
-          attendanceTime(employeeNum, workDate);
-        }
-      },
-      error: function(){
-        alert('관리자에게 문의하세요');
+//퇴근
+function setOff(){
+  $.ajax({
+    type: 'post',
+    url: '/attendance/off',
+    success: function(result){
+      if(result.trim()>0){
+        alert('퇴근하였습니다');
+        $('#off').attr('disabled', true);
+        attendanceTime(employeeNum, workDate);
       }
-    })
-  }
-
-  //출근버튼 클릭 시 
-  $('#on').on('click', function(){
-    setOn();
-    
+    },
+    error: function(){
+      alert('관리자에게 문의하세요');
+    }
   })
+}
 
-  //퇴근버튼 클릭 시
-  $('#btn_block').on('click', '#off', function(){
-    setOff();
-    
-  })
+//출근버튼 클릭 시 
+$('#on').on('click', function(){
+  setOn();
+  
+})
+
+//퇴근버튼 클릭 시
+$('#btn_block').on('click', '#off', function(){
+  setOff();
+  
+})
   
