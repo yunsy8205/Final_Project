@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cloud.pt.member.MemVO;
@@ -21,7 +23,7 @@ public class LockerController {
 	private LockerService lockerService;
 	
 	@GetMapping("lockerList2")
-	public ModelAndView getLockerList(LockerVO lockerVO,MemVO memVO) throws Exception{
+	public ModelAndView getLockerList(LockerVO lockerVO,MemVO memVO,Model model) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
 		List<LockerVO> ar = lockerService.getLockerList(lockerVO);
@@ -29,10 +31,11 @@ public class LockerController {
 		List<MemVO> memberList = lockerService.getUser(memVO);
 		mv.addObject("memberList", memberList);
 		
-		 lockerVO.setMemberNum(memVO.getMemberNum()); 
+		lockerVO.setMemberNum(memVO.getMemberNum()); 
 		
 		mv.addObject("ar", ar);
-		mv.addObject("memberNum", lockerVO.getMemberNum());
+		model.addAttribute("memberNum", lockerVO.getMemberNum());
+		log.info("번호 : {} >>>>",lockerVO.getMemberNum());
 		
 		mv.setViewName("locker/lockerList2");
 		
@@ -54,7 +57,9 @@ public class LockerController {
 	
 	@PostMapping("delUser")
 	public String delUser(LockerVO lockerVO) throws Exception{
+		
 		int result = lockerService.delUser(lockerVO);
-		return "redirect: ./lockerList2";
+		log.info("멤버번호 : {} >>>" ,lockerVO.getMemberNum());
+		return "redirect:./lockerList2";
 	}
 }

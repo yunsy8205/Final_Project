@@ -8,23 +8,23 @@
 SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,M.MEMBERNUM,L.STATE FROM LOCKER L INNER JOIN MEMBER M ON L.MEMBERNUM = M.MEMBERNUM;
 </select>
   	
-  	<insert id="addLocker" parameterType="LockerVO">
+  	<!-- <insert id="addLocker" parameterType="LockerVO">
   		INSERT INTO LOCKER (ENROLLDATE) VALUES(NOW())
-  	</insert>
+  	</insert> -->
   	<!-- 라커에 회원 적용 -->
   	<update id="addUser" parameterType="LockerVO">
   		UPDATE LOCKER SET MEMBERNUM = #{memberNum} , STARTDATE = #{startDate} ,FINISHDATE = DATE_ADD(NOW(), INTERVAL 1 MONTH) WHERE LOCKERNUM = #{lockerNum}
   	</update>
   	<!-- 라커 고장 등록 -->
   	<update id="setRepair" parameterType="LockerVO">
-  		UPDATE LOCKER SET STATE = NULL,STARTDATE = NULL, FINISHDATE = NULL WHERE LOCKERNUM = #{lockerNum}
+  		UPDATE LOCKER SET STATE = '고장',STARTDATE = NULL, FINISHDATE = NULL WHERE LOCKERNUM = #{lockerNum}
   	</update>
   	<!-- 전체 멤버 조회(모달창에 띄우기) -->
   	<select id="getUser" resultType="MemVO" parameterType="MemVO">
   		SELECT MEMBERNAME,MEMBERNUM FROM MEMBER
   	</select>
   	<!-- 라커 회원 삭제 -->
-  	<update id="delUser">
-  		UPDATE LOCKER SET MEMBERNUM = NULL ,STARTDATE = NULL , FINISHDATE = NULL WHERE LOCKERNUM = #{lockerNum}
+  	<update id="delUser" parameterType="LockerVO">
+  		UPDATE LOCKER SET STARTDATE = NULL ,MEMBERNUM = NULL , FINISHDATE = NULL WHERE LOCKERNUM = #{lockerNum}
   	</update>
   </mapper>

@@ -30,6 +30,6 @@ public class LockerService {
 	}
 	
 	public int delUser(LockerVO lockerVO) throws Exception{
-		return lockerDAO.setRepair(lockerVO);
+		return lockerDAO.delUser(lockerVO);
 	}
 }
