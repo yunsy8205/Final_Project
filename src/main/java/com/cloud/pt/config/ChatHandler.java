@@ -70,7 +70,7 @@ public class ChatHandler extends TextWebSocketHandler{
     		  }
     	  }
     	  
-    	  chatMessage.setMessage(name + "님이 입장했습니다.");  //TALK일 경우 msg가 있을 거고, 실제 보이지는 않게함
+    	  chatMessage.setMessage("채팅방에 입장했습니다.");  //TALK일 경우 msg가 있을 거고, 실제 보이지는 않게함
     	  sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room, name);
     	  
     	  //이전 메세지들을 list에 넣음
@@ -84,7 +84,7 @@ public class ChatHandler extends TextWebSocketHandler{
     	  }
     	  
       }else if (chatMessage.getType().equals(ChatMessageVO.MessageType.QUIT)) {
-          sessions.remove(session.getPrincipal().getName());
+          sessions.remove(name);
 
           chatMessage.setMessage(chatMessage.getSender() + "님이 퇴장했습니다..");
           sendToEachSocket(chatMessage, new TextMessage(objectMapper.writeValueAsString(chatMessage)), room, name);
