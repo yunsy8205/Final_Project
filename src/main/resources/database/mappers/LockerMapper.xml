@@ -5,7 +5,7 @@
   <mapper namespace="com.cloud.pt.locker.LockerDAO">
   	<!-- 전체 라커 조회 -->
   	<select id="getLockerList" resultType="LockerVO" parameterType="LockerVO">
-SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,M.MEMBERNUM FROM LOCKER L INNER JOIN MEMBER M ON L.MEMBERNUM = M.MEMBERNUM;
+SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,M.MEMBERNUM,L.STATE FROM LOCKER L INNER JOIN MEMBER M ON L.MEMBERNUM = M.MEMBERNUM;
 </select>
   	
   	<insert id="addLocker" parameterType="LockerVO">
@@ -23,4 +23,8 @@ SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,M.MEMBERNUM FROM LOCKE
   	<select id="getUser" resultType="MemVO" parameterType="MemVO">
   		SELECT MEMBERNAME,MEMBERNUM FROM MEMBER
   	</select>
+  	<!-- 라커 회원 삭제 -->
+  	<update id="delUser">
+  		UPDATE LOCKER SET MEMBERNUM = NULL ,STARTDATE = NULL , FINISHDATE = NULL WHERE LOCKERNUM = #{lockerNum}
+  	</update>
   </mapper>

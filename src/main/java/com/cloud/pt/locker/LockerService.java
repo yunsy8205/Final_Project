@@ -28,4 +28,8 @@ public class LockerService {
 	public int setRepair(LockerVO lockerVO) throws Exception{
 		return lockerDAO.setRepair(lockerVO);
 	}
+	
+	public int delUser(LockerVO lockerVO) throws Exception{
+		return lockerDAO.setRepair(lockerVO);
+	}
 }

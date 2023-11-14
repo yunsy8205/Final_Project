@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="com.cloud.pt.locker.LockerVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -99,23 +100,38 @@
         <%
         for (int col = 1; col <= 8; col++) {
             int lockerNumber = (row - 1) * 8 + col;
-            LockerVO lockerInfo = null;
+            LockerVO lockerVO = null;
 
             // ar에서 해당 lockerNumber에 대한 정보를 찾기
             for (LockerVO locker : ar) {
                 if (locker.getLockerNum() == lockerNumber) {
-                    lockerInfo = locker;
+                    lockerVO = locker;
                     break;
                 }
+            }
+            
+            // state 값이 null인 경우 "정상"으로 설정
+            if (lockerVO != null && lockerVO.getState() == null) {
+            	lockerVO.setState("정상");
             }
         %>
         <div class="locker" data-lockerNum="<%= lockerNumber %>">
             <!-- lockerInfo가 null이 아닌 경우에만 정보 출력 -->
-            <% if (lockerInfo != null) { %>
+            <% if (lockerVO != null) { %>
                 <div class="lockerInfo" style="font-size: 12px">
-                    <%= lockerInfo.getMemberName() %><br>
-                    <%= lockerInfo.getStartDate() %><br>
-                    <%= lockerInfo.getFinishDate() %>
+                    <% 
+                    // lockerInfo의 STATE 값이 "고장"이거나 null이 아닌 경우
+                    String state = lockerVO.getState();
+                    if (state != null && state.equals("고장")) {
+                    %>
+                        <div style="color: red;">고장</div><br>
+                    <% } else { %>
+                    	<%= lockerVO.getLockerNum() %> <br>
+                        <%= lockerVO.getMemberName() %><br>
+                        <%= lockerVO.getStartDate() %><br>
+                        <%= lockerVO.getFinishDate() %><br>
+                       
+                    <% } %>
                 </div>
             <% } else { %>
                 <%= lockerNumber %>
@@ -140,7 +156,7 @@
                     <form id="postForm2" action="" method="post" >
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel1">락커 No.<span id="sp-lkNo"></span></h5>
-                        <input type="hidden" id="sm-lkNo" name="lockerNum" value="">
+                        <input type="hidden" id="sm-lkNo" name="lockerNum" >
 						                        
 						<button
                           type="button"
@@ -180,8 +196,15 @@
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="postFormSubmit2('addUser',$('#modalMemberNum').val());">락커등록</button>
-                        <button type="button" class="btn btn-warning" onclick="postFormSubmit2('setRepair');">고장등록</button>
+                        
+					        <button type="button" class="btn btn-primary" onclick="postFormSubmit2('delUser'),;">라커회수</button>
+					    
+					    
+					    <!-- memberNum이 없을 경우에만 락커등록과 고장등록 버튼 표시 -->
+					   
+					        <button type="button" class="btn btn-primary" onclick="postFormSubmit2('addUser',$('#modalMemberNum').val());">락커등록</button>
+					        <button type="button" class="btn btn-warning" onclick="postFormSubmit2('setRepair');">고장등록</button>
+					    
                       </div>
                     </form>
                     

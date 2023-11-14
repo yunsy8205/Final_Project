@@ -51,4 +51,10 @@ public class LockerController {
 		int result = lockerService.setRepair(lockerVO);
 		return "redirect:./lockerList2";
 	}
+	
+	@PostMapping("delUser")
+	public String delUser(LockerVO lockerVO) throws Exception{
+		int result = lockerService.delUser(lockerVO);
+		return "redirect: ./lockerList2";
+	}
 }

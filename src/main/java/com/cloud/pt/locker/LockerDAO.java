@@ -18,4 +18,6 @@ public interface LockerDAO {
 	public List<MemVO> getUser(MemVO memVO) throws Exception;
 	
 	public int setRepair(LockerVO lockerVO) throws Exception;
+	
+	public int delUser(LockerVO lockerVO) throws Exception;
 }
