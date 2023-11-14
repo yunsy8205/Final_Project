@@ -121,27 +121,32 @@
         data-startDate="<%= lockerVO.getStartDate() %>"
     	data-finishDate="<%= lockerVO.getFinishDate() %>"
     	data-memberNum ="<%= lockerVO.getMemberNum() %>"
+    	data-state ="<%= lockerVO.getState() %>"
     	<% } %>
     	 >
             <!-- lockerInfo가 null이 아닌 경우에만 정보 출력 -->
             <% if (lockerVO != null) { %>
                 <div class="lockerInfo" style="font-size: 12px">
-                    <% 
-                    // lockerInfo의 STATE 값이 "고장"이거나 null이 아닌 경우
-                    String state = lockerVO.getState();
-                    if (state != null && state.equals("고장")) {
-                    %>
-                        <div style="color: red;">고장</div><br>
-                    <% } else { %>
-                    	
-                        <%= lockerVO.getMemberName() %><br>
-                        <%= lockerVO.getStartDate() %><br>
-                        <%= lockerVO.getFinishDate() %><br>
-                       	
-                    <% } %>
-                </div>
+            <%
+            // lockerInfo의 STATE 값이 "고장"이거나 null이 아닌 경우
+            String state = lockerVO.getState();
+            if (state != null && state.equals("고장")) {
+            %>
+                <div style="color: red;">고장</div><br>
+                <%= lockerVO.getState() %>
+            <% } else { %>
+                <%= lockerVO.getMemberName() %><br>
+                <%= lockerVO.getStartDate() %><br>
+                <%= lockerVO.getFinishDate() %><br>
+                <%-- 이 부분에서 상태가 "정상"이 아닌 경우에만 출력 --%>
+                <% if (!"정상".equals(state)) { %>
+                    <%= state %>
+                <% } %>
+            <% } %>
+        </div>
             <% } else { %>
                 <%= lockerNum %>
+                
             <% } %>
         </div>
         <%
@@ -157,7 +162,7 @@
 
     
      <!-- Modal -->
-     <c:if test=""></c:if>
+     
                 <div class="modal fade" id="enrollModal" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -178,12 +183,14 @@
                         <div class="row">
                           <div class="col mb-3">
                             <div class="mb-3">
+                            	<input type="hidden" id="getMemNum">
+                            	<input type="text" id="getState">
                               <label for="defaultSelect" class="form-label">회원 목록</label>
                               
                               
                               <select id="defaultSelect" class="form-select" name="memberNum">
                               
-                              	<option selected  id="getNum"></option>
+                              	<option selected  id="getNum">회원을 선택해주세요</option>
                                 <c:forEach var="member" items="${memberList}">
 							        <option value="${member.memberNum}"  > ${member.memberName}</option>
 							       
@@ -218,8 +225,30 @@
                     </form>
                     
                     
+                    
+                    
                     <script type="text/javascript">
                     function postFormSubmit2(url) {
+                    	if(url === 'setRepair'){
+                    		var lockerNumber = document.getElementById('getLockerNum').value;
+                    		
+                    		$.ajax({
+                    			type: 'POST',
+                    			url:'./setRepair',
+                    			data:{
+                    				lockerNum:lockerNumber
+                    			},
+                    			success:function(data){
+                    				console.log("고장등록 성공",data);
+                    				$('#enrollModal').modal('hide');
+                    				alert("고장 등록 완료");
+                    			},
+                    			error: function (error) {
+                                    // 에러 처리
+                                    console.error('고장 등록 실패', error);
+                                }
+                    		});
+                    	}
                         if (url === 'delUser') {
                             var lockerNumber = document.getElementById('getLockerNum').value;
                             var selectElement = document.getElementById('defaultSelect');
@@ -235,7 +264,7 @@
                                 type: 'POST',
                                 url: './delUser', // 실제 서버 엔드포인트로 변경
                                 data: {
-                                    lockerNum: lockerNumber,
+                                    lockerNum: lockerNumber
                                     
                                 },
                                 success: function (data) {
@@ -244,6 +273,7 @@
                                     // 모달 닫기
                                     $('#enrollModal').modal('hide');
                                     // 페이지 리로드 또는 필요한 처리 수행
+                                    alert("라커 회수 완료")
                                 },
                                 error: function (error) {
                                     // 에러 처리
@@ -285,6 +315,8 @@
                                     // 모달 닫기
                                     $('#enrollModal').modal('hide');
                                     // 페이지 리로드 또는 필요한 처리 수행
+                                    alert("라커 등록 완료")
+                                    
                                 },
                                 error: function (error) {
                                     // 에러 처리
@@ -361,6 +393,7 @@
             locker.addEventListener('click', function () {
                 // 락커 번호 가져오기
                 
+            
                /*  var memberNum = locker.dataset.memberNum; */
                 // 모달 타이틀 업데이트
                 
@@ -372,40 +405,61 @@
             var startDate = locker.getAttribute('data-startDate');
             var finishDate = locker.getAttribute('data-finishDate'); 
              var memberNum = locker.getAttribute('data-memberNum'); 
+             var state = locker.getAttribute('data-state');
+             document.getElementById('getMemNum').value=memberNum;
 			document.getElementById('getLockerNum').innerText = lockerNum;
 			document.getElementById('getNum').value=memberNum;
              document.getElementById('getNum').innerText = memberName;
             document.getElementById('startDate').value = startDate;
             document.getElementById('finishDate').value = finishDate; 
+            document.getElementById('getState').value = state;
+            var getMemNumValue = document.getElementById('getMemNum').value;
+            console.log('getMemNum Value:', getMemNumValue);
                 // 락커 번호를 모달 폼의 hidden 필드에 설정
                 document.getElementById('getLockerNum').value = lockerNum;
+                if (getMemNumValue === null || getMemNumValue === undefined || getMemNumValue === "") {
+                    // 만약 null이면 "delUserBtn" 버튼을 숨기고 다른 버튼들을 보이게 함
+                   
+                    document.getElementById("delUserBtn").style.display = "none";
+                    document.getElementById("addUserBtn").style.display = "inline-block";
+                    document.getElementById("setRepairBtn").style.display = "inline-block";
+                } else {
+                    // 만약 null이 아니면 다른 버튼들을 숨기고 "delUserBtn" 버튼을 보이게 함
+                   
+                    document.getElementById("delUserBtn").style.display = "inline-block";
+                    document.getElementById("addUserBtn").style.display = "none";
+                    document.getElementById("setRepairBtn").style.display = "none";
+                } 
 /*                 document.getElementById('modalMemberNum').value = memberNum;
  */                // 모달 열기
-                
+ 			
+ 
                 $('#enrollModal').modal('show');
+ 
             });
         });
         
     });
-    /* document.addEventListener("DOMContentLoaded", function() {
+      /* document.addEventListener("DOMContentLoaded", function() {
         // "getNum"이라는 ID를 가진 엘리먼트 가져오기
-        var getNumElement = document.getElementById("getNum");
-
+        var getNumElement = document.getElementById("getMemNum");
+		
+        
         // 값이 null 또는 undefined인지 확인
-        if (getNumElement.value === null || getNumElement.value === undefined || getNumElement.value === "") {
+         if (getNumElement.innerText === null || getNumElement.innerText === undefined || getNumElement.innerText === "") {
             // 만약 null이면 "delUserBtn" 버튼을 숨기고 다른 버튼들을 보이게 함
-            console.log("Value is null or undefined or empty:", getNumElement.value);
+            console.log("번호",getNumElement.innerText);
             document.getElementById("delUserBtn").style.display = "none";
             document.getElementById("addUserBtn").style.display = "inline-block";
             document.getElementById("setRepairBtn").style.display = "inline-block";
         } else {
             // 만약 null이 아니면 다른 버튼들을 숨기고 "delUserBtn" 버튼을 보이게 함
-            console.log("Value is not null:", getNumElement.value);
+            console.log("Value is not null:", getNumElement.innerText);
             document.getElementById("delUserBtn").style.display = "inline-block";
             document.getElementById("addUserBtn").style.display = "none";
             document.getElementById("setRepairBtn").style.display = "none";
-        }
-    }); */
+        } 
+    });  */
    
 </script>
 
