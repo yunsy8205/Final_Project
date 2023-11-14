@@ -12,6 +12,6 @@ public class LockerController {
 	public String getLockerList(LockerVO lockerVO) throws Exception{
 		
 		
-		return "locker/lockerList";
+		return "locker/lockerList2";
 	}
 }
