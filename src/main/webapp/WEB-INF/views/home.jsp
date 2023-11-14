@@ -282,7 +282,7 @@ uri="http://www.springframework.org/tags" %>
                     </div>
                     <div>
                       <c:forEach items="${chart}" var="c">
-                        <div id="${c.month}" data-member="${c.member}"></div>
+                        <div id="${c.monthNum}" data-member="${c.total}"></div>
                       </c:forEach>
                     </div>
                   </div>
@@ -319,7 +319,48 @@ uri="http://www.springframework.org/tags" %>
                   </div>
                 </div>
               </div>
-            </div>
+              <div class="row mb-5 r2">
+                <div class="col-md-6 col-lg-4 mb-3" style="width: 50%;">
+                  <div class="card h-100">
+                    <div class="card-body chartBox" >
+                    	<div style="width: 100%; height: 10%;">
+                    		<h5>총 회원 현황</h5>
+                    	</div>
+                    	<div class="chart1">
+	                    	<canvas id="myChart" width="582.5" height="330"></canvas>
+                    	</div>
+                    	<div>
+                    		<c:forEach items="${chart}" var="c">
+                    		<div id="${c.monthNum}" data-member="${c.total}"></div>
+                    		</c:forEach>
+                    	</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-3" style="width: 50%;">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div id="notice"><h5 id="ntitle" class="card-title">기안결재관리</h5><a id="plus" href="./approval/list">+</a></div>
+	                  <hr id="hr1">
+	                  <div class="table-responsive text-nowrap">
+							<table class="table table-hover">
+								<tbody class="table-border-bottom-0">
+									<c:forEach items="${app}" var="a">
+										<tr>
+											<td><span class="badge bg-label-primary me-1">${a.category}</span>
+												<a class="a1" href="./approval/detail?approvalNum=${a.approvalNum}">${a.title}</a></td>
+											<td>${a.state}</td>
+											<td>${a.regDate}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+					   </div>
+                    </div>
+                  </div>
+                </div>
+			</div>
+		</div>
             <!-- / Content -->
 
             <!-- Footer -->
