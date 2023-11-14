@@ -16,6 +16,8 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+   <!-- moment lib -->
+	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 </head>
 
 <body>
@@ -69,7 +71,7 @@
                       </div>
                       <div class="prodiv row mb-3">
                         <form:label path="birth" class="col-sm-2 col-form-label">생년월일</form:label>
-                        <form:input type="date" path="birth" cssClass="input_con form-control birth input" ></form:input>
+                        <form:input type="date" path="birth" cssClass="input_con form-control birth input" id="birthDate"></form:input>
                         <div id="birthError">
                           <form:errors path="birth" id="birthPastMsg" style="display: none;"></form:errors>
                         </div>
@@ -168,5 +170,14 @@
 <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script  type="text/javascript" src="/js/employee/join.js"></script>
+<script>
+//현재 날짜
+const today = new Date(); 
+//원하는 형식으로 포맷
+let formattedDay = moment(today).format("YYYY-MM-DD"); 
+//현재 날짜 이후의 날짜 선택 불가하게 설정 
+$('#birthDate').attr('max', formattedDay);
+
+</script>
 </body>
 </html>

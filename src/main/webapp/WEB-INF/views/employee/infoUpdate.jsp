@@ -17,6 +17,8 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+   <!-- moment lib -->
+	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 </head>
 
 <body>
@@ -323,6 +325,13 @@ $("#cerBtn").click(function(){
       ceri.style="none";
     }
   }
+
+  //현재 날짜
+  const today = new Date(); 
+  //원하는 형식으로 포맷
+  let formattedDay = moment(today).format("YYYY-MM-DD"); 
+  //현재 날짜 이후의 날짜 선택 불가하게 설정 
+  $('#birth').attr('max', formattedDay);
 
 </script>
 </body>

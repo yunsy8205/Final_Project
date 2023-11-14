@@ -16,6 +16,7 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+  
 </head>
 
 <body>

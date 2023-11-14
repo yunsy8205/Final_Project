@@ -20,7 +20,7 @@
 		ON M.MEMBERNUM=R.MEMBERNUM
 		LEFT OUTER JOIN EMPLOYEE E
 		ON M.EMPLOYEENUM=E.EMPLOYEENUM
-		<if test="pager.kind=='name'">WHERE NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+		<if test="pager.kind=='name'">WHERE MEMBERNAME LIKE CONCAT('%',#{pager.search},'%')</if>
 		ORDER BY M.MEMBERNUM DESC
 	</select>
 
