@@ -21,6 +21,11 @@
     #pager {
       margin-bottom: 50px;
     }
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+      padding: 0 !important;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>

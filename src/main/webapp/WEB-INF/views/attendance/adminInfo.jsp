@@ -99,7 +99,7 @@
 		      <!-- sidebar -->
           <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
           <!-- Layout container -->
-          <div class="layout-page">
+          <div class="layout-page" style="padding-left: 0 !important;">
             <!-- Navbar -->
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
