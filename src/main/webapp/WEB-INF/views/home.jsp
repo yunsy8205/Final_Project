@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     	</div>
                     	<div>
                     		<c:forEach items="${chart}" var="c">
-                    		<div id="${c.month}" data-member="${c.member}"></div>
+                    		<div id="${c.monthNum}" data-member="${c.total}"></div>
                     		</c:forEach>
                     	</div>
                     </div>
@@ -412,6 +412,7 @@ function getTodayDate() {
 	// }
 	
     	// 차트
+    
     	let jan = Number($('#01').attr("data-member"));
     	let feb = Number($('#02').attr("data-member"))+jan;
     	let mar = Number($('#03').attr("data-member"))+feb;
@@ -425,8 +426,12 @@ function getTodayDate() {
     	let nov = Number($('#11').attr("data-member"))+oct;
     	let dec = Number($('#12').attr("data-member"))+nov;
     	
-    	let chartData =  [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
-    	
+    	let chartData =  [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec];
+
+    	let label = [
+    		for()
+    	]
+    		
     	const ctx = document.getElementById('myChart').getContext('2d');
     	new Chart(ctx, {
     	    type: 'line',

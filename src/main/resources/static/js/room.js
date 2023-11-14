@@ -71,7 +71,16 @@
       $('#listBox').empty();
       getSearch(name);
 
-   })
+   });
+   
+   $('#searchName').keyup(function(){
+      if($("#searchName").val()==''){
+		  
+		  let name = $("#searchName").val();
+	      $('#listBox').empty();
+	      getSearch(name);
+	  }
+   });
    
    $("#msg").on("keyup", function(event) {
        if (event.key === "Enter") {
@@ -130,13 +139,15 @@
    }
    
    function send(roomNum, num){
-       let content=document.querySelector('#msg').value;
-       
-       
+       let content = document.querySelector('#msg').value.trim();
+       if (content !== '') {
+		   
            let chatDate = getTodayDate();
            let talkMsg={"type" : "TALK","roomNum":roomNum,"name":name,"receiver":num,"message":content,"chatDate":chatDate};
            socket.send(JSON.stringify(talkMsg));
           msg.value = '';
+	   }
+       
       
       
    }
@@ -200,7 +211,7 @@
             searchList = response.list;
             
             $.each(searchList, function( index, value ) {
-                   let a = '<a href="#" class="chatList" data-empNum="'+value.employeeNum+'">'+value.name+' '+value.position+'</a><br>'
+                   let a = '<i class="mx-1 bx bx-message-square"></i><a href="#" class="chatList" data-empNum="'+value.employeeNum+'">'+value.name+' '+value.position+'</a><br>'
                     $('#listBox').append(a);
                 });
             } else {
@@ -251,3 +262,23 @@
        // 채팅창의 맨 아래로 스크롤
        $('#msgArea').scrollTop($('#msgArea')[0].scrollHeight);
    }
+   
+   // 직급 한글 변환
+	const position = document.getElementById("my").getAttribute("data-position");
+	const p = document.getElementById("pInner");
+	
+	if(position == 'ROLE_CEO'){
+	    p.innerHTML ='대표';
+	}else if(position == 'ROLE_GENERAL'){
+	    p.innerHTML = '총괄 매니저';
+	}else if(position == 'ROLE_CUSTOMER'){
+	    p.innerHTML = '고객관리 매니저';
+	}else if(position == 'ROLE_RESOURCES'){
+	    p.innerHTML = '인사 매니저';
+	}else if(position == 'ROLE_FACILITY'){
+	    p.innerHTML = '시설 매니저';
+	}else if(position == 'ROLE_TRAINER'){
+	    p.innerHTML = '트레이너';
+	}else if(position == 'ROLE_EX'){
+	    p.innerHTML = '가발령';
+	}

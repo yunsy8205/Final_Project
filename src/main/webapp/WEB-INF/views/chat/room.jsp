@@ -165,9 +165,9 @@
                              <div id="proBox">
                                   <img id="userProfile" alt="" src="../file/employee/${user.proFile}">
                               </div>
-                              <div class="ms-3" id="my" data-user="${user.username}" data-name="${user.name}">${user.name}
+                              <div class="ms-3" id="my" data-position="${user.position}" data-user="${user.username}" data-name="${user.name}">${user.name}
                               <img width="25" height="25" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-exercise-lifestyles-flaticons-lineal-color-flat-icons-2.png" alt="external-exercise-lifestyles-flaticons-lineal-color-flat-icons-2"/>
-                              ${user.position}</div>
+                              <span id="pInner"></span></div>
                      </sec:authorize>
                        </div>
                     </div>
@@ -240,7 +240,6 @@
     
     <!-- room js -->
     <script src="../js/room.js"></script>
-    <script src="/js/home.js"></script>
     
   </body>
 </html>

@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class HomeVO {
 	
-	private String month;
-	private int member; // 회원수
+	private String monthNum;
+	private int total; // 회원수
 }
