@@ -27,8 +27,13 @@
       margin-top: 1%;
       margin-bottom: 2em !important;
     }
+    .tab-pane  {
+      height: 100%;
+    }
     #calendar {
-      height: 709px; /* 원하는 높이(px)로 설정 */
+      height: 100%;
+      width: 95%;
+      margin: auto;
     }
     form {
       display: flex;
@@ -54,7 +59,25 @@
       margin-bottom: 0.7rem;
     }
     .tab-content {
-      height: 780px;
+      height: 790px;
+    }
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+      padding: 0 !important;
+    }
+    .table th{
+      font-size: 0.8rem;
+    }
+    .fc-prev-button, .fc-next-button, .fc-myCustomButton-button{
+      color: #fff !important;
+      background-color: #5f61e6 !important; 
+      border-color: #5f61e6 !important;
+    }
+    .not {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 10%;
     }
   </style>
 
