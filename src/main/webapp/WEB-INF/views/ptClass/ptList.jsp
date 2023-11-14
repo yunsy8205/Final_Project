@@ -117,7 +117,6 @@ uri="http://www.springframework.org/tags" %>
                 url: "./delClass",
                 data: {
                   ptNum: info.event.id,
-                  
                 },
                 success: function () {
                   console.log("이벤트 삭제 성공");
@@ -220,6 +219,7 @@ uri="http://www.springframework.org/tags" %>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+    <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
   </head>
 
   <body>

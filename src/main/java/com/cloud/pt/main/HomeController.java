@@ -170,4 +170,12 @@ public class HomeController {
 	    return randomString.toString();
 	}
 	
+	
+	
+	// 권한처리 page 이동
+	@GetMapping("/accessDenied")
+	public String accessDenied()throws Exception{
+		return "accessDenied";
+	}
+	
 }
