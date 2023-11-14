@@ -81,11 +81,6 @@
 	  	width: 100%;
 	  	height: 90%;
 	  }
-	  #userProfile{
-	  	width: 100%;
-	    height: 100%;
-	    object-fit: cover;	
-	  }
 	  .timeBox{
 	  	display: flex;
 	  	margin-left: 17%;
@@ -97,10 +92,15 @@
 	  	font-size: 17px;
 	  	font-weight: bold;
 	  }
+	  #userProfile{
+	  	width: 100%;
+	    height: 100%;
+	    object-fit: cover;	
+	  }
 	  #proBox{
 	  	width: 150px;
 	    height: 150px; 
-	    border-radius: 70%;
+	    border-radius: 50%;
 	    overflow: hidden;
 	    margin: auto;
 	   }
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="card-body box1">
                       <div class="b1">
                       <!-- 이미지 이름 직책 -->
-                      <sec:authentication property="principal" var="user"/>	
+                      <sec:authentication property="principal" var="user"/>
                       <div id="proBox">
                       	<img id="userProfile" alt="" src="../file/employee/${user.proFile}">
                       </div>
@@ -369,8 +369,8 @@ function getTodayDate() {
     				console.log("ajax 실패");
     			}
     			})
-    	}
-    	
+    	}	
+}
     	function getTodayDate() {
     	    let today = new Date(); // Mon Dec 20 2021 22:04:03 GMT+0900 (한국 표준시)
     	
@@ -385,7 +385,6 @@ function getTodayDate() {
 			
 			return dateString;
 		}
-}
 
 
 

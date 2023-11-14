@@ -27,7 +27,7 @@ public class MembershipService {
 			result = membershipDAO.setDelete(membershipVO);
 		}
 		
-		return result;
+		return result; 
 	}
 	
 	//이용권 목록(페이저O)

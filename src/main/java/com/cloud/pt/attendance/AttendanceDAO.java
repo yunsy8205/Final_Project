@@ -32,11 +32,13 @@ public interface AttendanceDAO {
 	
 	public int setUpdateA(Map<String, Object> map) throws Exception;
 	public int setUpdateAM(AttendanceModifyVO attendanceModifyVO) throws Exception;
-	public AttendanceVO getRequestDetail(AttendanceModifyVO attendanceModifyVO) throws Exception;
+	public AttendanceVO getRequest(AttendanceModifyVO attendanceModifyVO) throws Exception;
 	public List<AttendanceVO> getRequestList(Pager pager) throws Exception;
 	
 	//----------------------------------------
 	public Long getNum(Map<String, Object> map) throws Exception;
+	public AttendanceVO getDetail(Long num) throws Exception;
+	public AttendanceModifyVO getModify(Long num) throws Exception;
 	
 	public Long getModifyTotal(EmployeeVO employeeVO) throws Exception;
 	

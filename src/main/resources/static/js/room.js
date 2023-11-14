@@ -45,9 +45,9 @@
 		if(roomNum == jsonObj.roomNum){
 			
 			if(user==jsonObj.sender){
-				msgTag = '<div class="alert alert-primary msg" role="alert"><div>'
+				msgTag = '<div class="alert alert-primary msg" role="alert" style="margin:auto; text-align: right; margin-right: 1%"><div>'
 						 +name+'</div><div>'
-						 +jsonObj.message+'</div></div><div id="chatDate">'+jsonObj.chatDate+'</div>';
+						 +jsonObj.message+'</div></div><div id="chatDate" style="margin-top:5px">'+jsonObj.chatDate+'</div>';
 			}else{
 				msgTag = '<div style="background-color:white;" class="alert msg" role="alert"><div>'
 							 +jsonObj.name+'</div><div>'
