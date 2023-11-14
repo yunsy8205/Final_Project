@@ -147,11 +147,11 @@ public class AttendanceController {
 	public String getAdminDay(AttendanceVO attendanceVO, Model model, Pager pager) throws Exception {
 		log.info("vo: {}", attendanceVO);
 		List<AttendanceVO> ar = attendanceService.getDayList(attendanceVO, pager);
-		long currentTimeMillis = System.currentTimeMillis();
-        Date currentSqlDate = new Date(currentTimeMillis); //헌재 날짜 
-        System.out.println(currentSqlDate);
+	//	long currentTimeMillis = System.currentTimeMillis();
+    //  Date currentSqlDate = new Date(currentTimeMillis); //헌재 날짜 
         
-        model.addAttribute("date", currentSqlDate);
+    //    model.addAttribute("date", currentSqlDate);
+		model.addAttribute("attendance", attendanceVO);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		

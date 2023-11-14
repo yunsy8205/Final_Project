@@ -52,6 +52,8 @@ function getDayList(day, page, kind, search){
       },
       success: function(result){
         $('#navs-justified-home').html(result);
+        // $('#work').attr('data-date', formattedDay);
+        // $('#work').text(formattedDay);
       }
   })
 }

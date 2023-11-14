@@ -4,12 +4,11 @@
 
 <h3>
   <button class="icon_btn" id="pre_day"><i class="fa-solid fa-chevron-left fa-xs"></i></button>
-    <span id="work" data-date="${date}">${date}</span>
+    <span id="work" data-date="${attendance.workDate}">${attendance.workDate}</span>
   <button class="icon_btn" id="next_day"><i class="fa-solid fa-chevron-right fa-xs"></i></button>
 </h3>
 
-
-<div class="m-5">
+<div class="s_box">
   <form>
       <input type="hidden" value="1" name="page" id="page">
       <select name="kind" class="form-select" id="k" data-kind="${pager.kind}" aria-label="Default select example">
@@ -20,11 +19,11 @@
       <button type="button" id="submit_btn" class="btn btn-primary">조회</button>
   </form>
 </div>
-<div class="mx-5">
+<div class="b_box">
   <button id="month_btn" class="btn btn-primary">월별 근태 확인</button>
 </div>
 <c:if test="${not empty list}"> 
-<div class="card m-5">
+<div class="card">
   <div id="attendance_day" class="table-responsive text-nowrap">
     <table class="table table-hover">
       <thead>
