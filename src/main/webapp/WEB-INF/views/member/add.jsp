@@ -16,6 +16,8 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+   <!-- moment lib -->
+	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 </head>
 
 <body>
@@ -59,15 +61,15 @@
                           <div class="col-md-10">
                             <input class="form-control address input" name="address" type="text" id="html5-text-input"  placeholder="우편번호" value=""/>
                             <button type="button" id="addressBtn" class="btn btn-primary">우편번호 찾기</button>
-                            <input class="form-control" type="text" id="html5-text-input"  placeholder="주소" />
-                            <input class="form-control" type="text" id="html5-text-input"  placeholder="상세주소" value="" />
+                            <input class="form-control" type="hidden" id="html5-text-input"  placeholder="주소" />
+                            <input class="form-control" type="hidden" id="html5-text-input"  placeholder="상세주소" value="" />
                             <div id="addressMsg"></div>
                           </div>
                         </div>
                         <div class="mb-3 row">
-                          <label for="html5-date-input" class="col-md-2 col-form-label">생년월일</label>
+                          <label for="birthDate" class="col-md-2 col-form-label">생년월일</label>
                           <div class="col-md-10">
-                            <input class="form-control birth input" name="birth" type="date" placeholder="생년월일을 입력해주세요." id="html5-date-input" />
+                            <input class="form-control birth input" name="birth" type="date" placeholder="생년월일을 입력해주세요." id="birthDate" />
                             <div id="birthMsg"></div>
                           </div>
                         </div>
@@ -90,18 +92,18 @@
                           <div class="col-md-10" style="display: flex;">
                             <div class="form-check mt-3" style="margin-top:0 !important; margin-right: 2rem;">
                               <label class="form-check-label" for="defaultRadio1"> 남 </label>
-                              <input class="form-check-input" name="gender" type="radio" value="M" id="defaultRadio1" checked />
+                              <input class="form-check-input" name="gender" type="radio" value="남" id="defaultRadio1" checked />
                             </div>
                             <div class="form-check">
                               <label class="form-check-label" for="defaultRadio2"> 여 </label>
-                              <input  class="form-check-input" name="gender" type="radio" value="W" id="defaultRadio2"/>
+                              <input  class="form-check-input" name="gender" type="radio" value="여" id="defaultRadio2"/>
                             </div>
                           </div>
                         </div>
                         <div class="mb-3 row">
-                          <div class="mb-3">
-                            <label for="exampleFormControlSelect1" class="form-label">이용 개월</label>
-                            <select class="form-select ptMonth" id="exampleFormControlSelect1" aria-label="Default select example">
+                          <label for="exampleFormControlSelect1" class="form-label col-md-2 col-form-label">이용 개월</label>
+                          <div class="col-sm-10">
+                            <select class="form-select ptMonth" id="selectTypeOpt" class="form-select color-dropdown">
                               <option selected value="30">1개월</option>
                               <option value="60">2개월</option>
                               <option value="90">3개월</option>

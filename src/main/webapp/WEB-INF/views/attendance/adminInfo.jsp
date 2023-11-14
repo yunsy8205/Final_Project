@@ -8,7 +8,7 @@
   <title>Insert title here</title>
   <style>
     h3 {
-      margin-top: 40px !important;
+      margin-top: 1% !important;
       text-align: center;
     }
     #req_btn {
@@ -23,11 +23,21 @@
       padding: 10px 20px;
       cursor: pointer;
     }
+    .fc-header-toolbar{
+      margin-top: 1%;
+      margin-bottom: 2em !important;
+    }
+    .tab-pane  {
+      height: 100%;
+    }
     #calendar {
-      height: 700px; /* 원하는 높이(px)로 설정 */
+      height: 100%;
+      width: 95%;
+      margin: auto;
     }
     form {
       display: flex;
+      justify-content: center;
     }
     #k {
       width: 10%;
@@ -35,11 +45,45 @@
     #search {
       width: 30%;
     }
+    .b_box{
+      text-align: end;
+      margin: 0 8%;
+    }
+    .card{
+      margin: 1% 8% 2%;
+    }
+    .s_box{
+      margin: 1.5rem auto 0 !important;
+    }
+    .pagination {
+      margin-bottom: 0.7rem;
+    }
+    .tab-content {
+      height: 790px;
+    }
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+      padding: 0 !important;
+    }
+    .table th{
+      font-size: 0.8rem;
+    }
+    .fc-prev-button, .fc-next-button, .fc-myCustomButton-button{
+      color: #fff !important;
+      background-color: #5f61e6 !important; 
+      border-color: #5f61e6 !important;
+    }
+    .not {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 10%;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
     
-   <!-- moment lib -->
+  <!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 	<!-- fullcalendar bundle -->
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>
@@ -55,7 +99,7 @@
 		      <!-- sidebar -->
           <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
           <!-- Layout container -->
-          <div class="layout-page">
+          <div class="layout-page" style="padding-left: 0 !important;">
             <!-- Navbar -->
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
@@ -64,7 +108,7 @@
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
 
-                <div class="nav-align-top mb-4">
+                <div class="nav-align-top">
                   <ul class="nav nav-tabs nav-fill" role="tablist">
                     <li class="nav-item">
                       <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-home" aria-controls="navs-justified-home" aria-selected="true">

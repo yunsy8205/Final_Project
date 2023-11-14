@@ -29,8 +29,6 @@ function getRequestList(page, kind, search){
 //검색
 $('#navs-justified-profile').on('click', '#search_btn', function(){
     getRequestList($('#page').val(),  $('#k').val(),  $("input[name='search']").val());
-   
-    // console.log($('#page').val(),  $('#k').val(),  $("input[name='search']").val());
 });
 
 //paging
@@ -38,8 +36,7 @@ $('#navs-justified-profile').on('click', '.move', function(){
     let num = $(this).attr('data-num');
     $('#page').val(num);
     getRequestList($('#page').val(),  $('#k').val(),  $("input[name='search']").val());
-    
-    // console.log($('#page').val(),  $('#k').val(),  $("input[name='search']").val());
 });
+
 
 

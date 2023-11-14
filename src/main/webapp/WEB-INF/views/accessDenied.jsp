@@ -72,9 +72,9 @@
     <!-- Error -->
     <div class="container-xxl container-p-y">
       <div class="misc-wrapper">
-        <h2 class="mb-2 mx-2">페이지를 찾을 수 없습니다</h2>
-        <p class="mb-4 mx-2">메인페이지로 돌아가 주세요!</p>
-        <a href="/home" class="btn btn-primary">이동하기</a>
+        <h2 class="mb-2 mx-2" style="font-size:1.5rem;">죄송합니다. 요청하신 페이지의 접근 권한이 없습니다.</h2>
+        <p class="mb-4 mx-2">ACCESS - DENIED</p>
+        <a href="/home" class="btn btn-primary">Home</a>
         <div class="mt-3">
           <img
             src="../assets/img/illustrations/page-misc-error-light.png"

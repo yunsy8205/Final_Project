@@ -59,8 +59,6 @@ uri="http://www.springframework.org/tags" %>
       }
     </style>
     <script>
-    
-    
       document.addEventListener("DOMContentLoaded", function () {
         var calendarEl = document.getElementById("calendar");
 
@@ -112,24 +110,22 @@ uri="http://www.springframework.org/tags" %>
           },
           // 이벤트
           events: "/trainer/myPtLog",
-            
+
           eventClick: function (info) {
-              var eventId = info.event.id;
-              
-              handleEventClick(eventId);
-            },
-            
-          
+            var eventId = info.event.id;
+
+            handleEventClick(eventId);
+          },
         });
-        
+
         function handleEventClick(eventId) {
-            // 이벤트 ID를 이용하여 URL 생성
-            console.log("eventId:", eventId);
-            var url = '/trainer/ptType?eventId='+eventId;
-            // 새로운 URL로 이동
-            console.log("url:", url);
-            window.location.href = url;
-          }
+          // 이벤트 ID를 이용하여 URL 생성
+          console.log("eventId:", eventId);
+          var url = "/trainer/ptType?eventId=" + eventId;
+          // 새로운 URL로 이동
+          console.log("url:", url);
+          window.location.href = url;
+        }
         // 캘린더 랜더링
         calendar.render();
         //모달창 이벤트
@@ -220,6 +216,7 @@ uri="http://www.springframework.org/tags" %>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+    <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
   </head>
 
   <body>

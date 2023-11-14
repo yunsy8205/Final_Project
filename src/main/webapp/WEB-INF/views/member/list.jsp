@@ -14,6 +14,9 @@
   data-template="vertical-menu-template-free"
 >
 <head>
+  <style>
+    .table > :not(:first-child) {box-shadow: 0 2px 3px rgba(0,0,0,0.01), 0 2px 3px rgba(0,0,0,0.12);}
+  </style>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 </head>
 
@@ -32,122 +35,122 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <div class="container-xxl flex-grow-1 container-p-y">
-                <h3 style="text-align: center;">전체 회원 목록</h3>
-
-                <!-- 이용권등록 Modal -->
-                <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">이용권</h5>
-                        <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="row mb-3">
-                          <label for="memberNum" class="col-sm-2 col-form-label">회원번호</label>
-                          <div class="col-sm-10">
-                            <input type="text" id="memberNum" name="memberNum" class="form-control" readonly>
+              <div class="container-xxl flex-grow-1 container-p-y" style="padding: 1rem 0 !important;">
+                <h3 style="text-align: center; margin:2rem 0 1rem;">전체 회원 목록</h3>   
+                <div class="container-xxl flex-grow-1 container-p-y" style="padding-top: 0 !important; text-align: center;">
+                  <div>
+                    <div class="m-5" style="margin: 2.5rem auto 2rem !important;">
+                      <form action="./list" method="get" id="frm" style="display: flex; justify-content: center;">
+                        <input type="hidden" value="${pager.page}" id="page" name="page">
+                        <!-- 파라미터 이름 kind -->
+                        <select name="kind" id="k" class="search form-select" aria-label="Default select example" style="width: 10%;" data-kind="${pager.kind}" >
+                          <option class="kind" value="name">이름</option>
+                        </select> 
+                        <input type="text" name="search" value="${pager.search}" class="search form-control" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
+                        <button type="submit" class="btn btn-primary">조회</button>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- 이용권등록 Modal -->
+                  <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">이용권</h5>
+                          <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row mb-3">
+                            <label for="memberNum" class="col-sm-2 col-form-label">회원번호</label>
+                            <div class="col-sm-10">
+                              <input type="text" id="memberNum" name="memberNum" class="form-control" readonly>
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label for="name" class="col-sm-2 col-form-label">회원이름</label>
+                            <div class="col-sm-10">
+                              <input type="text" id="name" name="memberName" class="form-control" readonly>
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label for="num" class="col-sm-2 col-form-label">이용권</label>
+                            <div class="col-sm-10">
+                              <select id="membership" name="membershipNum" class="form-select">
+                                <c:forEach items="${membership}" var="li">
+                                  <option value="${li.membershipNum}" data-count="${li.ptCount}" data-month="${li.month}">
+                                    ${li.name}
+                                  </option>                              
+                                </c:forEach>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="row mb-3" id="employee_add">
+                            <label for="num" class="col-sm-2 col-form-label">담당 트레이너</label>
+                            <div class="col-sm-10">
+                              <select id="employee" name="employeeNum" class="form-select">
+                                <c:forEach items="${employee}" var="li">
+                                  <option value="${li.employeeNum}">
+                                    ${li.name}
+                                  </option>                              
+                                </c:forEach>
+                              </select>
+                            </div>
                           </div>
                         </div>
-                        <div class="row mb-3">
-                          <label for="name" class="col-sm-2 col-form-label">회원이름</label>
-                          <div class="col-sm-10">
-                            <input type="text" id="name" name="memberName" class="form-control" readonly>
-                          </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">
+                            이전
+                          </button>
+                          <button type="button" id="addRegistrationBtn" class="btn btn-primary close">
+                            등록
+                          </button>
                         </div>
-                        <div class="row mb-3">
-                          <label for="num" class="col-sm-2 col-form-label">이용권</label>
-                          <div class="col-sm-10">
-                            <select id="membership" name="membershipNum" class="form-select">
-                              <c:forEach items="${membership}" var="li">
-	                              <option value="${li.membershipNum}" data-count="${li.ptCount}" data-month="${li.month}">
-                                  ${li.name}
-                                </option>                              
-                              </c:forEach>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="row mb-3" id="employee_add">
-                          <label for="num" class="col-sm-2 col-form-label">담당 트레이너</label>
-                          <div class="col-sm-10">
-                            <select id="employee" name="employeeNum" class="form-select">
-                              <c:forEach items="${employee}" var="li">
-	                              <option value="${li.employeeNum}">
-                                  ${li.name}
-                                </option>                              
-                              </c:forEach>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">
-                          이전
-                        </button>
-                        <button type="button" id="addRegistrationBtn" class="btn btn-primary close">
-                          등록
-                        </button>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div>
-                  <div class="m-5">
-                    <form action="./list" method="get" id="frm" style="display: flex;">
-                      <input type="hidden" value="${pager.page}" id="page" name="page">
-                      <!-- 파라미터 이름 kind -->
-                      <select name="kind" id="k" class="search form-select" aria-label="Default select example" style="width: 10%;" data-kind="${pager.kind}" >
-                        <option class="kind" value="name">이름</option>
-                      </select> 
-                      <input type="text" name="search" value="${pager.search}" class="search form-control" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
-                      <button type="submit" class="btn btn-primary">검색</button>
-                    </form>
+                  <div style="text-align: right; margin-bottom: 3rem; margin-right: 1rem;">
+                    <a href="/member/add" class="btn btn-primary">회원등록</a>
+                  </div>
+                  <div id="req_list" class="table-responsive text-nowrap">
+                    <table class="table table-hover" style="text-align: center; background-color: white;">
+                      <thead>
+                        <tr>
+                          <th>번호</th>
+                          <th>이름</th>
+                          <th>전화번호</th>
+                          <th>헬스 가입일</th>
+                          <th>헬스 만료일</th>
+                          <th>피티 등록일</th>
+                          <th>피티횟수</th>
+                          <th>담당 트레이너</th>
+                          <th>등록여부</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach items="${list}" var="vo" varStatus="i">
+                          <tr>
+                            <td>${i.index+1}</td>
+                            <td><a href="./detail?memberNum=${vo.memberNum}">${vo.memberName}</a></td>
+                            <td>${vo.phone}</td>
+                            <td>${vo.joinDate}</td>
+                            <td>${vo.expirationDate}</td>
+                            <c:forEach items="${vo.registrationVO}" var="re" begin="0" end="0">
+                              <td>${re.regDate}</td>
+                            </c:forEach>
+                            <td class="ptCount" data-ptcount="${vo.ptCount}">${vo.ptCount}</td>
+                            <td>${vo.employeeVO.name}</td>
+                            <td id="ptAdd">
+                              <button class="membershipAddBtn btn btn-primary"
+                              data-num="${vo.memberNum}"
+                              data-name="${vo.memberName}"
+                              ></button>
+                            </td>
+                          </tr>
+                        </c:forEach>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
-                <div style="text-align: right; margin-bottom: 3rem; margin-right: 1rem;">
-                  <a href="/member/add" class="btn btn-primary">회원등록</a>
-                </div>
-                <div id="req_list" class="table-responsive text-nowrap">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>번호</th>
-                        <th>이름</th>
-                        <th>전화번호</th>
-                        <th>헬스 가입일</th>
-                        <th>헬스 만료일</th>
-                        <th>피티 등록일</th>
-                        <th>피티횟수</th>
-                        <th>담당 트레이너</th>
-                        <th>등록여부</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <c:forEach items="${list}" var="vo" varStatus="i">
-                        <tr>
-                          <td>${i.index+1}</td>
-                          <td><a href="./detail?memberNum=${vo.memberNum}">${vo.memberName}</a></td>
-                          <td>${vo.phone}</td>
-                          <td>${vo.joinDate}</td>
-                          <td>${vo.expirationDate}</td>
-                          <c:forEach items="${vo.registrationVO}" var="re" begin="0" end="0">
-                            <td>${re.regDate}</td>
-                          </c:forEach>
-                          <td class="ptCount" data-ptcount="${vo.ptCount}">${vo.ptCount}</td>
-                          <td>${vo.employeeVO.name}</td>
-                          <td id="ptAdd">
-                            <button class="membershipAddBtn btn btn-primary"
-                            data-num="${vo.memberNum}"
-                            data-name="${vo.memberName}"
-                            ></button>
-                          </td>
-                        </tr>
-                      </c:forEach>
-                    </tbody>
-                  </table>
-                </div>
-                
               </div>
               <ul class="pagination justify-content-center">
                 <li class="page-item prev ${pager.pre?'':'disabled'}">

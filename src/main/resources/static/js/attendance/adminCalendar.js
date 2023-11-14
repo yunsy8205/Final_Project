@@ -52,6 +52,26 @@ function getDayList(day, page, kind, search){
       },
       success: function(result){
         $('#navs-justified-home').html(result);
+
+        $('#navs-justified-home').find('.kind').each(function(){
+            if($(this).val()==$('#k').attr('data-kind')){
+                $(this).prop('selected', true);
+                return false;
+            }
+        })
+
+        if(page==undefined){ //페이지 번호를 클릭 안 했을 때
+            //페이지 번호가 1인 요소 활성화
+            $('#navs-justified-home').find('.page-link[data-num="1"]').parent().addClass('active'); 
+        }else{ //페이지 번호를 클릭 시
+            //기존에 활성화되어있는 페이지 번호 비활성화
+            $('#navs-justified-home').find('.page-link.active').parent().removeClass('active');
+            //클릭한 페이지 번호의 요소 활성화
+            $('#navs-justified-home').find('.page-link[data-num="'+page+'"]').parent().addClass('active');
+        }
+        
+        // $('#work').attr('data-date', formattedDay);
+        // $('#work').text(formattedDay);
       }
   })
 }

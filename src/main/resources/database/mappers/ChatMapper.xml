@@ -4,16 +4,33 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.chat.ChatDAO">
+		<sql id="positionName">
+		CASE POSITION
+			WHEN 'ROLE_CEO' THEN '대표'
+			WHEN 'ROLE_GENERAL' THEN '총괄 매니저'
+			WHEN 'ROLE_CUSTOMER' THEN '고객관리 매니저'
+			WHEN 'ROLE_RESOURCES' THEN '인사 매니저'
+			WHEN 'ROLE_FACILITY' THEN '시설 매니저'
+			WHEN 'ROLE_TRAINER' THEN '트레이너'
+			WHEN 'ROLE_EX' THEN '가발령'
+		END AS 'POSITION'	
+	</sql>
 	
 	<select id="getChatList" parameterType="String" resultType="EmployeeVO">
-		SELECT * FROM EMPLOYEE 
+		SELECT EMPLOYEENUM, NAME,
+		<include refid="positionName"></include>
+		FROM EMPLOYEE 
 		WHERE EMPLOYEENUM != #{employeeNum}
+		AND STATE != '퇴직'
 	</select>
 	
 	<select id="getSearch" parameterType="EmployeeVO" resultType="EmployeeVO">
-		SELECT * FROM EMPLOYEE
+		SELECT EMPLOYEENUM, NAME, 
+		<include refid="positionName"></include>
+		FROM EMPLOYEE
 		WHERE NAME LIKE CONCAT('%',#{name},'%')
 	    AND EMPLOYEENUM != #{employeeNum}
+	    AND STATE != '퇴직'
 	</select>
 	
 	<select id="roomCheck" parameterType="RoomVO" resultType="RoomVO">
@@ -41,7 +58,8 @@
 	</select>
 	
 	<select id="getSomeone" parameterType="EmployeeVO" resultType="EmployeeVO">
-	 	SELECT EMPLOYEENUM, NAME, POSITION
+	 	SELECT EMPLOYEENUM, NAME, PROFILE,
+	 	<include refid="positionName"></include>
 	 	FROM EMPLOYEE
 	 	WHERE EMPLOYEENUM=#{employeeNum}
 	</select>

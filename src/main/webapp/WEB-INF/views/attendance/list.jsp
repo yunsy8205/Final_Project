@@ -21,6 +21,11 @@
     #pager {
       margin-bottom: 50px;
     }
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+      padding: 0 !important;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -33,7 +38,7 @@
 		      <!-- sidebar -->
           <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
           <!-- Layout container -->
-          <div class="layout-page">
+          <div class="layout-page" style="padding-left: 0 !important;">
             <!-- Navbar -->
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
@@ -47,7 +52,7 @@
                   <button id="btn" class="btn btn-primary">근태 수정 요청</button>
                 </div>
 				        <div class="card">
-                  <div id="req_list" class="table-responsive text-nowrap">
+                  <div id="req_list">
                     <table class="table table-hover">
                       <thead>
                         <tr>
@@ -55,16 +60,19 @@
                           <th>작성자</th>
                           <th>작성일</th>
                           <th>근태수정요청일</th>
+                          <th>출/퇴근</th>
                           <th>상태</th>
+                          <th>상세</th>
                         </tr>
                       </thead>
                       <tbody>
                         <c:forEach items="${list}" var="vo" varStatus="i">
                           <tr>
-                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">${i.index+1}</a></td>
+                            <td>${i.index+1}</td>
                             <td>${vo.employeeVO.name}</td>
                             <td>${vo.attendanceModifyVO.regDate}</td>
                             <td>${vo.attendanceModifyVO.modifyDate}</td>
+                            <td>${vo.attendanceModifyVO.type}</td>
                             <td>
                             	<c:if test="${vo.attendanceModifyVO.status eq '승인'}">
                             		<span class="badge bg-label-success me-1">${vo.attendanceModifyVO.status}</span>
@@ -76,6 +84,7 @@
                             		<span class="badge bg-label-warning me-1">${vo.attendanceModifyVO.status}</span>
                             	</c:if>			
                             </td>
+                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">보기</a></td>
                           </tr>
                         </c:forEach>
                       </tbody>
@@ -117,6 +126,8 @@
   <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   
   <script>
+    const page = $('.page-link[data-num="1"]');
+    page.parent().addClass('active');
     
     $('#btn').on('click', function(){
       $(location).attr('href', '/attendanceModify/add');

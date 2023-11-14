@@ -5,7 +5,7 @@
   
 <mapper namespace="com.cloud.pt.member.MemDAO">
 	<sql id="search">
-		<if test="kind=='name'">WHERE NAME LIKE CONCAT('%',#{search},'%')</if>
+		<if test="kind=='name'">WHERE MEMBERNAME LIKE CONCAT('%',#{search},'%')</if>
 	</sql>
 	
 	
@@ -20,13 +20,13 @@
 		ON M.MEMBERNUM=R.MEMBERNUM
 		LEFT OUTER JOIN EMPLOYEE E
 		ON M.EMPLOYEENUM=E.EMPLOYEENUM
-		<if test="pager.kind=='name'">WHERE NAME LIKE CONCAT('%',#{pager.search},'%')</if>
+		<if test="pager.kind=='name'">WHERE MEMBERNAME LIKE CONCAT('%',#{pager.search},'%')</if>
 		ORDER BY M.MEMBERNUM DESC
 	</select>
 
 	<insert id="setMemberAdd" parameterType="MemVO">
 		INSERT INTO MEMBER
-		VAlUES (NULL, NULL, #{memberName}, #{phone}, #{gender}, #{birth}, #{joinDate}, #{expirationDate} , NULL, #{address});
+		VAlUES (NULL, NULL, #{memberName}, #{phone},#{address},#{gender}, #{birth}, #{joinDate}, #{expirationDate} , NULL, MONTH(#{joinDate}) );
 	</insert>
 
 	<select id="getMemberDetail" parameterType="MemVO" resultMap="getMemberDetailResult">

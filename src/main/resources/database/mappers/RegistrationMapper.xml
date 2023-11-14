@@ -9,7 +9,9 @@
  	<insert id="setAdd" parameterType="RegistrationVO">
  		INSERT INTO REGISTRATION
  		(MEMBERNUM, MEMBERSHIPNUM, REGDATE, PTCOUNT, MONTH)
- 		VALUES (#{memberNum},#{membershipNum},NOW(),#{ptCount},#{month})
+ 		VALUES 
+ 		<if test="ptCount!=null">(#{memberNum},#{membershipNum},NOW(),#{ptCount},#{month})</if>
+ 		<if test="ptCount==null">(#{memberNum},#{membershipNum},NULL,#{ptCount},#{month})</if>
  	</insert>
  	
  	<!-- 회원정보 업데이트 -->

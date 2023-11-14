@@ -16,6 +16,8 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+   <!-- moment lib -->
+	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 </head>
 
 <body>
@@ -47,26 +49,26 @@
                           </div>
                         </div>
                         <div class="mb-3 row">
-                          <label for="html5-text-input" class="col-md-2 col-form-label">이름</label>
+                          <label for="name" class="col-md-2 col-form-label">이름</label>
                           <div class="col-md-10">
-                            <input class="form-control name input" name="memberName" type="text" value="${member.memberName}" placeholder="이름을 입력해주세요." id="html5-text-input" />
+                            <input class="form-control input" id="name" name="memberName" type="text" value="${member.memberName}" placeholder="이름을 입력해주세요." />
                             <div id="nameMsg"></div>
                           </div>
                         </div>
                         <div class="mb-3 row">
-                          <label for="html5-tel-input" class="col-md-2 col-form-label">전화번호</label>
+                          <label for="phone" class="col-md-2 col-form-label">전화번호</label>
                           <div class="col-md-10">
-                            <input class="form-control phone input" name="phone" type="tel" value="${member.phone}" placeholder="전화번호를 입력해주세요." id="html5-tel-input" />
+                            <input class="form-control input" name="phone" type="tel" value="${member.phone}" placeholder="전화번호를 입력해주세요." id="phone" />
                             <div id="phoneMsg"></div>
                           </div>
                         </div>
                         <div class="mb-3 row">
-                          <label for="html5-text-input" class="col-md-2 col-form-label">주소</label>
+                          <label for="address" class="col-md-2 col-form-label">주소</label>
                           <div class="col-md-10">
-                            <input class="form-control address input" name="address" type="text" id="html5-text-input" value="${member.address}" placeholder="우편번호" value=""/>
+                            <input class="form-control input" name="address" type="text" id="address" value="${member.address}" placeholder="우편번호" value=""/>
                             <button type="button" id="addressBtn" class="btn btn-primary">우편번호 찾기</button>
-                            <input class="form-control" type="text" id="html5-text-input"  placeholder="주소" />
-                            <input class="form-control" type="text" id="html5-text-input"  placeholder="상세주소" value="" />
+                            <input class="form-control" type="hidden" id="html5-text-input"  placeholder="주소" />
+                            <input class="form-control" type="hidden" id="html5-text-input"  placeholder="상세주소" value="" />
                             <div id="addressMsg"></div>
                           </div>
                         </div>
@@ -85,9 +87,9 @@
                       </div>
                       <div class="memRight" style="width: calc(100% - 53%);">
                         <div class="mb-3 row">
-                          <label for="html5-date-input" class="col-md-2 col-form-label">생년월일</label>
+                          <label for="birth" class="col-md-2 col-form-label">생년월일</label>
                           <div class="col-md-10">
-                            <input class="form-control birth input" name="birth" type="date" value="${member.birth}" placeholder="생년월일을 입력해주세요." id="html5-date-input" />
+                            <input class="form-control input" name="birth" type="date" value="${member.birth}" placeholder="생년월일을 입력해주세요." id="birth" />
                             <div id="birthMsg"></div>
                           </div>
                         </div>
@@ -97,24 +99,28 @@
                           <div class="col-md-10" style="display: flex;">
                             <div class="form-check mt-3" style="margin-top:0 !important; margin-right: 2rem;">
                               <label class="form-check-label" for="gender_M"> 남 </label>
-                              <input class="form-check-input" name="gender" type="radio" value="M" id="gender_M" />
+                              <input class="form-check-input" name="gender" type="radio" value="남" id="gender_M" />
                             </div>
                             <div class="form-check">
                               <label class="form-check-label" for="gender_W"> 여 </label>
-                              <input  class="form-check-input" name="gender" type="radio" value="W" id="gender_W"/>
+                              <input  class="form-check-input" name="gender" type="radio" value="여" id="gender_W"/>
                             </div>
                           </div>
                         </div>
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="basic-default-name">이용권</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control ptCount" id="basic-default-name" value="${member.membershipVO.type}" readonly/>
+                              <c:forEach items="${member.membershipVO}" var="sh">
+                              <input type="text" class="form-control ptCount" id="basic-default-name" value="${sh.type}" readonly/>
+                            </c:forEach>
                           </div>
                         </div>
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="basic-default-name">피티 등록일</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="basic-default-name" value="${member.registrationVO.regDate}" readonly/>
+                            <c:forEach items="${member.registrationVO}" var="re">
+                              <input type="text" class="form-control" id="basic-default-name" value="${re.regDate}" readonly/>
+                            </c:forEach>
                           </div>
                         </div>
                         <div class="row mb-3">
@@ -126,7 +132,9 @@
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="basic-default-name">피티 횟수</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="basic-default-name" value="${member.membershipVO.ptCount}" readonly/>
+                              <c:forEach items="${member.membershipVO}" var="sh">
+                              <input type="text" class="form-control" id="basic-default-name" value="${sh.ptCount}" readonly/>
+                            </c:forEach>
                           </div>
                         </div>
                       </div>
