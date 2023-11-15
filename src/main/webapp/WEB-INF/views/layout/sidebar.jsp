@@ -235,11 +235,17 @@ uri="http://www.springframework.org/security/tags" %>
             <div data-i18n="Accordion" class="subDiv">기안문서함</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="/approval/approverList" class="menu-link">
-            <div data-i18n="Alerts" class="subDiv">결재문서함</div>
-          </a>
-        </li>
+        <sec:authorize access="isAuthenticated()">
+				<sec:authorize access="!hasRole('ROLE_TRAINER')">
+          <li class="menu-item">
+            <a href="/approval/approverList" class="menu-link">
+              <div data-i18n="Alerts" class="subDiv">결재문서함</div>
+            </a>
+          </li>
+				</sec:authorize>
+						
+					
+			  </sec:authorize>
         <li class="menu-item">
           <a href="/approval/signMain" class="menu-link">
             <div data-i18n="Badges" class="subDiv">서명관리</div>

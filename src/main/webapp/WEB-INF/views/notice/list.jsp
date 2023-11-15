@@ -63,19 +63,19 @@
 					
 					<div class="row">
 						<div id="searchBox" class="m-5" style="display: flex;">
-						  <select id="kind" name="kind" class="select2 search form-select" style="width: 10%;" >
-						  	<option class="kind" selected value="title">제목</option>
-						  	<option class="kind" value="contents">내용</option>
-						  	<option class="kind" value="name">작성자</option>
-						  </select>
-						  <input type="text" class="search form-control" id="search" style="width: 30%;"/>
-						  <button
-						    class="btn btn-primary"
-						    id="searchBtn"
-						    type="button"
-						    >
-						    조회
-						  </button>
+							<select id="kind" name="kind" class="select2 search form-select" style="width: 10%;" >
+								<option class="kind" selected value="title">제목</option>
+								<option class="kind" value="contents">내용</option>
+								<option class="kind" value="name">작성자</option>
+							</select>
+							<input type="text" class="search form-control" id="search" style="width: 30%;"/>
+							<button
+							  class="btn btn-primary"
+							  id="searchBtn"
+							  type="button"
+							  >
+							  조회
+							</button>
 						</div>
 						<sec:authentication property="principal" var="user"/>
 						<c:if test="${user.position == 'ROLE_GENERAL'}">

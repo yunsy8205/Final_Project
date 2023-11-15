@@ -31,10 +31,24 @@
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
             <!-- Content wrapper -->
-            <div class="content-wrapper">
+			<div class="content-wrapper container-xxl flex-grow-1 container-p-y" style="padding: 1rem 0 !important;">
               <!-- Content 내용 여기로 -->
-              <div class="container-xxl flex-grow-1 container-p-y">
-               
+			  <h3 style="text-align: center; margin:2rem 0 1rem;">임시저장함</h3>
+              <div class="container-xxl flex-grow-1 container-p-y" style="padding: 1rem 0 !important;">
+				<div>
+					<div class="m-5" style="margin:1.5rem auto !important;">
+					  <form action="./tempList" method="get" id="frm" style="display: flex;justify-content: center;">
+						<input type="hidden" value="${pager.page}" id="page" name="page">
+						<!-- 파라미터 이름 kind -->
+						<select name="kind" id="k" class="search form-select" aria-label="Default select example" style="width: 10%;" data-kind="${pager.kind}" >
+						  <option class="kind" value="title">제목</option>
+						  <option class="kind" value="contents">내용</option>
+						</select> 
+						<input type="text" name="search" value="${pager.search}" class="search form-control" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
+						<button type="submit" class="btn btn-primary">조회</button>
+					  </form>
+					</div>
+				</div>
 					<div class="nav-align-top mb-4">
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item" role="presentation">
@@ -60,21 +74,7 @@
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="navs-justified-all" role="tabpanel">
 								<div id="box">
-								<div class="input-group">
-								  <select id="kind" name="kind" class="select2 form-select">
-									  <option selected value="title">Title</option>
-									  <option value="contents">Contents</option>
-									  <option value="name">Name</option>
-								  </select>
-								  <input type="text" class="form-control" id="search"/>
-								  <button
-									class="btn btn-outline-primary"
-									id="searchBtn"
-									type="button"
-									>
-									조회
-								  </button>
-								</div>
+								
 								<!-- Hoverable Table rows -->
 								
 									<div class="table-responsive text-nowrap">
