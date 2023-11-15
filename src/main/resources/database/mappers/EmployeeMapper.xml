@@ -4,6 +4,9 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cloud.pt.employee.EmployeeDAO">
+
+	
+	
 	<sql id="searchTotal">
 		<if test="kind=='name'">WHERE NAME LIKE CONCAT('%',#{search},'%')</if>
 		<if test="kind=='position'">WHERE POSITION LIKE CONCAT('%',#{search},'%')</if>
@@ -77,7 +80,7 @@
 			<include refid="positionName"></include>
 		FROM EMPLOYEE
 			<include refid="searchList"></include>
-		ORDER BY EMPLOYEENUM  DESC
+		ORDER BY EMPLOYEENUM DESC
 		LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
 	

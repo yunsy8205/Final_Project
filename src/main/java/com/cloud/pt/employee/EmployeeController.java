@@ -221,6 +221,22 @@ public class EmployeeController {
 	public String getEmpList(EmployeeVO employeeVO, Pager pager, Model model)throws Exception{
 		List<EmployeeVO> ar = employeeService.getEmpList(employeeVO, pager);
 		model.addAttribute("list", ar);
+		
+		if(pager.getSearch().equals("ROLE_CEO")) {
+			pager.setSearch("대표");
+		}else if(pager.getSearch().equals("ROLE_GENERAL")) {
+			pager.setSearch("총괄");
+		}else if(pager.getSearch().equals("ROLE_CUSTOMER")) {
+			pager.setSearch("고객");
+		}else if(pager.getSearch().equals("ROLE_RESOURCES")) {
+			pager.setSearch("인사");
+		}else if(pager.getSearch().equals("ROLE_FACILITY")) {
+			pager.setSearch("시설");
+		}else if(pager.getSearch().equals("ROLE_TRAINER")) {
+			pager.setSearch("트레이너");
+		}else if(pager.getSearch().equals("ROLE_EX")) {
+			pager.setSearch("가발령");
+		}
 		model.addAttribute("pager", pager);
 		return "/employee/list";
 	}
