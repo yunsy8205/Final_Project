@@ -14,124 +14,8 @@
   data-template="vertical-menu-template-free"
 >
 <head>
-   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
-   
-   <style>
-        h3 {
-          margin-top: 40px !important;
-          text-align: center;
-      }
-      .col-xl1 {
-          flex: 0.4 0 0%;
-       }
-       .card .card-header + .card-body, .card .card-header + .card-content > .card-body:first-of-type {
-          
-          height: 550px;
-      }
-      #msgArea{
-         width: 100%;
-          height: 90%;
-          background-color: #E7E7FF;
-          padding: 0.8rem 0 1.5rem;
-      }
-      .alert-primary{
-         background-color: #696CFF;
-         color: white;
-      }
-      .msg{
-         margin: 0.7rem 1.5rem 0 1.5rem;
-      }
-      .chatDate{
-         font-size: 11px;
-      }
-      #msgArea::-webkit-scrollbar {
-          width: 8px;
-      }
-      #msgArea::-webkit-scrollbar-thumb {
-          background-color: #696CFF;
-          border-radius: 10px;
-      }
-      #msgArea::-webkit-scrollbar-track {
-          background-color: #E7E7FF;
-          border-radius: 10px;
-          box-shadow: inset 0px 0px 5px white;
-       }
-       #listBox{
-          height: 85%;
-          width: 100%;
-          overflow-y: scroll;
-       }
-       #listBox::-webkit-scrollbar {
-          width: 8px;
-      }
-      #listBox::-webkit-scrollbar-thumb {
-          background-color: #696CFF;
-          border-radius: 10px;
-      }
-      #listBox::-webkit-scrollbar-track {
-          background-color: white;
-          border-radius: 10px;
-          box-shadow: inset 0px 0px 5px white;
-       }
-       .userBox{
-          display: block !important;
-          text-align: center;
-          height: 70px;
-          margin: 0 auto;
-       }
-       .userBox2{
-          display: flex;
-       }
-       #userProfile{
-           width: 50px;
-          height: 50px;
-          object-fit: cover;   
-        }
-        #proBox{
-           width: 50px;
-          height: 50px; 
-          border-radius: 50%;
-          overflow: hidden;
-         }
-         #my{
-            font-size: 18px;
-            line-height: 50px;
-            font-weight: bolder;
-         }
-         .chatList{
-            color: #566A7F;
-            font-size: 16px;
-         }
-         #someone{
-            font-size: 18px;
-         }
-         .myMsg{
-            margin-left: auto;
-          text-align: right;
-          margin-right: 2%;
-         }
-         .yourMsg{
-            background-color: white;
-             margin-right: auto;
-             text-align: left;
-             margin-left: 2%;
-         }
-         .chatDate{
-            margin-top:5px;
-         }
-         .box1{
-                height: 100%;
-         }
-         .box2{
-               padding-top: 15px !important;
-         }
-         .chatHome{
-               margin: auto;
-         }
-         .boxHome{
-               display: none;
-         }
-   </style>
+	<c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+	<link rel="stylesheet" href="../css/chat/room.css">  
 </head>
   <body>
     <!-- Layout wrapper -->
@@ -182,20 +66,39 @@
                            />
                            <button class="btn btn-outline-primary" type="button" id="search">조회</button>
                          </div>
-                       <div id="listBox" class="border">
-                          <c:forEach items="${list}" var="li">
-                              <div>
-                                 <i class='mx-1 bx bx-message-square'></i><a href="#" class="chatList" data-empNum="${li.employeeNum}" data-name="${li.name}" data-pos="${li.position}">${li.name} ${li.position}</a>
-                              </div>                         
-                          </c:forEach>
+                       <div id="listBox" class="">
+                              <ul class="ul">
+					           <li class="li">관리자
+		                          <c:forEach items="${list}" var="li">
+					               <ol>
+					                  <li class="ul">
+					                  	<c:if test="${li.position != '트레이너'}">
+					                  		<a href="#" class="chatList" data-empNum="${li.employeeNum}" data-name="${li.name}" data-pos="${li.position}"><i class='mx-1 bx bx-message-square'></i>${li.name} [${li.position}]</a>
+					                  	</c:if>
+					                  </li>                
+					               </ol>
+		                          </c:forEach>
+					           </li>
+					           <li class="li">트레이너
+		                          <c:forEach items="${list}" var="li">
+					               <ol>
+					                  <li class="ul">
+					                  	<c:if test="${li.position == '트레이너'}">
+					                  		<a href="#" class="chatList" data-empNum="${li.employeeNum}" data-name="${li.name}" data-pos="${li.position}"><i class='mx-1 bx bx-message-square'></i>${li.name} [${li.position}]</a>
+					                  	</c:if>
+					                  </li>                
+					               </ol>
+		                          </c:forEach>
+					           </li>
+					          </ul>              
                        </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-xl">
-                  <div class="box1 card mb-4">
+                  <div class="box1 box3 card mb-4" style="background-color: #E7E7FF;">
                     <div id="userBox" style="margin: auto;" class="userBox card-header d-flex justify-content-between align-items-center">
-                      <h5 id="someone" class="mb-0" data-name=""><i class='bx bxs-quote-alt-left'></i> 채팅하려는 대상을 선택해 주세요 <i class='bx bxs-quote-alt-right' ></i></h5>
+                      <h5 id="someone" class="mb-0" data-name="" style="color: #696CFF; font-weight: bold;"><i class='bx bxs-quote-alt-left'></i> 채팅하려는 대상을 선택해 주세요 <i class='bx bxs-quote-alt-right' ></i></h5>
                     </div>
                     <div id="box2" style="display: none;" class="box2 card-body">
                        <div id="msgArea" class="card mb-3" style="overflow-y: scroll"></div>

@@ -25,7 +25,9 @@
       
       //대상 채팅창 인풋 보이기
       $('#box2').attr("style", "");
+      $('.box3').attr("style", "");
       $('#userBox').attr("style", "");
+      $('#someone').attr("style", "");
       
    });
 
@@ -50,12 +52,12 @@
       if(roomNum == jsonObj.roomNum){
          
          if(user==jsonObj.sender){
-            msgTag = '<div class="myMsg alert alert-primary msg" role="alert"><div style="font-size: 16px; font-weigth:bold">'
-                   +name+'</div><hr style="background-color:white !important;"><div>'
+            msgTag = '<div class="myMsg alert alert-primary msg" role="alert"><div>'
+                   +name+'</div><hr style="background-color:white !important;"><div class="mes">'
                    +jsonObj.message+'</div><div class="chatDate">'+jsonObj.chatDate+'</div></div>';
          }else{
             msgTag = '<div class="yourMsg alert msg" role="alert"><div>'
-                      +jsonObj.name+'</div><hr><div>'
+                      +jsonObj.name+'</div><hr><div class="mes">'
                       +jsonObj.message+'</div><div class="chatDate">'+jsonObj.chatDate+'</div></div>';
          }
       }

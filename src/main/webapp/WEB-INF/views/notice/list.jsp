@@ -18,6 +18,14 @@
   <c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
 
 	<style>
+		.row > * {
+		    flex-shrink: 0;
+		    width: 100%;
+		    max-width: 100%;
+		    padding-right: 0;
+		    padding-left: 0;
+		    margin-top: var(--bs-gutter-y);
+		}
     	h3 {
 	    	margin-top: 40px !important;
 	    	text-align: center;
@@ -39,6 +47,12 @@
 		}
 		.a3{
 			color:black;
+		}
+		#searchBox{
+			display: flex;
+			margin: 2rem auto;
+		    justify-content: center;
+		    align-items: flex-end;
 		}
 	</style>
 	
@@ -62,7 +76,7 @@
 					<h3>공지사항</h3>
 					
 					<div class="row">
-						<div id="searchBox" class="m-5" style="display: flex;">
+						<div id="searchBox">
 						  <select id="kind" name="kind" class="select2 search form-select" style="width: 10%;" >
 						  	<option class="kind" selected value="title">제목</option>
 						  	<option class="kind" value="contents">내용</option>
@@ -175,7 +189,7 @@
 												<tbody class="table-border-bottom-0">
 													<c:forEach items="${pinList}" var="p">
 														<tr class="table-primary pinFont">
-															<td>${p.noticeNum}</td>
+															<td><i class='bx bx-pin'></i></td>
 															<td><span class="badge bg-label-primary me-1">${p.category}</span>
 																<a class="a3" href="./detail?noticeNum=${p.noticeNum}">${p.title}</a></td>
 															<td>${p.name}</td>
@@ -183,9 +197,9 @@
 															<td>${p.hit}</td>
 														</tr>
 													</c:forEach>
-													<c:forEach items="${list}" var="li">
+													<c:forEach items="${list}" var="li" varStatus="i">
 														<tr>
-															<td>${li.noticeNum}</td>
+															<td>${i.index+1}</td>
 															<td><span class="badge bg-label-primary me-1">${li.category}</span>
 																<a class="a2" href="./detail?noticeNum=${li.noticeNum}">${li.title}</a></td>
 															<td>${li.name}</td>
