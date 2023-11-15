@@ -32,4 +32,8 @@ public class LockerService {
 	public int delUser(LockerVO lockerVO) throws Exception{
 		return lockerDAO.delUser(lockerVO);
 	}
+	
+	public int recoverLocker(LockerVO lockerVO) throws Exception{
+		return lockerDAO.recoverLocker(lockerVO);
+	}
 }
