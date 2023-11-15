@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cloud.pt.member.MemVO;
+
 @Service
 public class PtLogService {
 	
@@ -22,6 +24,7 @@ public class PtLogService {
 	public int delLog(PtLogVO ptLogVO) throws Exception{
 		return ptLogDAO.delLog(ptLogVO);
 	}
+	
 }
 
 
