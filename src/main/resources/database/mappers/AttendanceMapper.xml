@@ -57,6 +57,7 @@
 			AND WORKDATE=DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</update>
 	
+	<!-- 직원 목록 -->
 	<select id="getEmployeeList" resultType="EmployeeVO">
 		SELECT EMPLOYEENUM
 		FROM EMPLOYEE 
@@ -100,6 +101,7 @@
 		FROM EMPLOYEE
 	</select>
 	
+	<!-- 내 근태정보 -->
 	<select id="getInfo" resultMap="getInfoResult" parameterType="Map">
 		SELECT A.*,E.EMPLOYEENUM,E.NAME,E.LEAVEDATE,E.PROFILE,
 		<include refid="positionJoinName"></include>
@@ -179,28 +181,29 @@
 			WHERE ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
 	</update>
 	
+	<!-- 근태수정요청안 상세 -->
 	<select id="getRequest" resultMap="getDetailResult" parameterType="AttendanceModifyVO">
 		SELECT AM.*, A.*, E.NAME, E.EMPLOYEENUM
 		<include refid="joinSql"></include>
 		WHERE AM.ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
 	</select>
 	
-	<resultMap type="AttendanceVO" id="getDetailResult">
-		<id column="ATTENDANCENUM" property="attendanceNum"/>
-		<result column="WORKDATE" property="workDate"/>
-		<result column="ONTIME" property="onTime"/>
-		<result column="OFFTIME" property="offTime"/>
-		<result column="STATE" property="state"/>
-		<association property="attendanceModifyVO" javaType="AttendanceModifyVO">
-			<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
-			<result column="REGDATE" property="regDate"/>
-			<result column="ORIGINALTIME" property="originalTime"/>
-			<result column="ORIGINALSTATE" property="originalState"/>
-			<result column="MODIFYDATE" property="modifyDate"/>
-			<result column="MODIFYTIME" property="modifyTime"/>
-			<result column="REQUESTCONTENTS" property="requestContents"/>
-			<result column="TYPE" property="type"/>		
-			<result column="MODIFYCONTENTS" property="modifyContents"/>	
+	<resultMap type="AttendanceModifyVO" id="getDetailResult">
+		<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
+		<result column="REGDATE" property="regDate"/>
+		<result column="ORIGINALTIME" property="originalTime"/>
+		<result column="ORIGINALSTATE" property="originalState"/>
+		<result column="MODIFYDATE" property="modifyDate"/>
+		<result column="MODIFYTIME" property="modifyTime"/>
+		<result column="REQUESTCONTENTS" property="requestContents"/>
+		<result column="TYPE" property="type"/>		
+		<result column="MODIFYCONTENTS" property="modifyContents"/>	
+		<association property="attendanceVO" javaType="AttendanceVO">
+			<id column="ATTENDANCENUM" property="attendanceNum"/>
+			<result column="WORKDATE" property="workDate"/>
+			<result column="ONTIME" property="onTime"/>
+			<result column="OFFTIME" property="offTime"/>
+			<result column="STATE" property="state"/>
 		</association>
 		<association property="employeeVO" javaType="EmployeeVO">
 			<id column="EMPLOYEENUM" property="employeeNum"/>
@@ -208,12 +211,14 @@
 		</association>
 	</resultMap>	
 	
+	<!-- 근태수정요청안 총 갯수(관리자) -->
 	<select id="getRequestTotal" resultType="java.lang.Long" parameterType="Pager">
 		SELECT COUNT(AM.ATTENDANCEMODIFYNUM)
 		<include refid="joinSql"></include>
 		<include refid="searchSql"></include>
 	</select>
 
+	<!-- 근태수정요청 목록(관리자) -->
 	<select id="getRequestList" resultMap="getRequestResult" parameterType="Pager">
 		SELECT AM.*, E.NAME 
 		<include refid="joinSql"></include>
@@ -222,20 +227,20 @@
 		LIMIT #{startRow}, #{lastRow}
 	</select>
 	
-	<resultMap type="AttendanceVO" id="getRequestResult">
-		<id column="ATTENDANCENUM" property="attendanceNum"/>
-		<association property="attendanceModifyVO" javaType="AttendanceModifyVO">
-			<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
+	<resultMap type="AttendanceModifyVO" id="getRequestResult">
+		<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
 			<result column="ATTENDANCENUM" property="attendanceNum"/>
 			<result column="REGDATE" property="regDate"/>
 			<result column="MODIFYDATE" property="modifyDate"/>
 			<result column="MODIFYTIME" property="modifyTime"/>
 			<result column="STATUS" property="status"/>
 			<result column="TYPE" property="type"/>
-		</association>
 		<association property="employeeVO" javaType="EmployeeVO">
 			<id column="EMPLOYEENUM" property="employeeNum"/>
 			<result column="NAME" property="name"/>
+		</association>
+		<association property="attendanceVO" javaType="AttendanceVO">
+			<id column="ATTENDANCENUM" property="attendanceNum"/>
 		</association>
 	</resultMap> 
 	
@@ -262,21 +267,21 @@
 		LIMIT #{pager.startRow}, #{pager.lastRow}
 	</select>
 	
-	<resultMap type="AttendanceVO" id="getListResult">
-		<id column="ATTENDANCENUM" property="attendanceNum"/>
+	<resultMap type="AttendanceModifyVO" id="getListResult">
+		<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
+		<result column="ATTENDANCENUM" property="attendanceNum"/>
+		<result column="REGDATE" property="regDate"/>
+		<result column="MODIFYDATE" property="modifyDate"/>
+		<result column="MODIFYTIME" property="modifyTime"/>
+		<result column="STATUS" property="status"/>
+		<result column="TYPE" property="type"/>
 		<association property="employeeVO" javaType="EmployeeVO">
 			<id column="EMPLOYEENUM" property="employeeNum"/>
 			<result column="NAME" property="name"/>
 		</association>
-		<collection property="attendanceModifys" javaType="List" ofType="AttendanceModifyVO">
-			<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
-			<result column="ATTENDANCENUM" property="attendanceNum"/>
-			<result column="REGDATE" property="regDate"/>
-			<result column="MODIFYDATE" property="modifyDate"/>
-			<result column="MODIFYTIME" property="modifyTime"/>
-			<result column="STATUS" property="status"/>
-			<result column="TYPE" property="type"/>
-		</collection>
+		<association property="attendanceVO" javaType="AttendanceVO">
+			<id column="ATTENDANCENUM" property="attendanceNum"/>
+		</association>
 	</resultMap>
 	
 	<!-- 근태 상세 -->

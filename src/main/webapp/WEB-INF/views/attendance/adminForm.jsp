@@ -23,7 +23,7 @@
       display:flex; justify-content: space-between;
     }
     .form-control:disabled {
-      background-color:#ffffff00 !important;
+      background-color:rgba(105, 108, 255, 0.16) !important;
     }
     .form-check-input, .form-check-label{
       opacity: 1 !important;
@@ -43,7 +43,16 @@
       max-width: calc(100% - 5.2rem) !important;
     }
     .card-body{
-      margin: 0 6rem;
+      margin: 2.2rem 8rem;
+    }
+    .form-label, .col-form-label {
+      font-size: 1rem !important;
+    }
+    .col-md-2 {
+      width: 23% !important;
+    }
+    .col-md-10 {
+      width: 75% !important;
     }
   </style>
 
@@ -87,7 +96,7 @@
                                   </div>
                                 </div>
                                 <div class="col-md-6">
-                                  <c:set var="radioType" value="${vo.attendanceModifyVO.type}" />
+                                  <c:set var="radioType" value="${vo.type}" />
                                     <input type="radio" id="on" name="type" value="출근" ${radioType eq '출근' ? 'checked' : ''} class="form-check-input" disabled>
                                     <label for="on" class="form-check-label">출근</label>
                   
@@ -98,24 +107,24 @@
                               <div class="row g-3 mb-3">
                                   <label for="regDate" class="col-md-2 col-form-label">작성일</label>
                                   <div class="col-md-10">                                    
-                                    <input type="date" id="regDate" name="regDate" class="form-control" value="${vo.attendanceModifyVO.regDate}" disabled>
+                                    <input type="date" id="regDate" name="regDate" class="form-control" value="${vo.regDate}" disabled>
                                   </div>
                               </div>
                               <div class="row g-3 mb-3">
                                   <label for="requestDate" class="col-md-2 col-form-label">수정요청일</label>
                                   <div class="col-md-10">                                    
-                                    <input type="date" id="requestDate" name="modifyDate" class="form-control" value="${vo.attendanceModifyVO.modifyDate}" disabled>
+                                    <input type="date" id="requestDate" name="modifyDate" class="form-control" value="${vo.modifyDate}" disabled>
                                   </div>
                               </div>
                               <div class="row g-3 mb-3">
                                   <label for="requestTime" class="col-md-2 col-form-label">수정요청시간</label>
                                   <div class="col-md-10">
-                                    <input type="time" id="requestTime" name="modifyTime" class="form-control" value="${vo.attendanceModifyVO.modifyTime}" disabled>
+                                    <input type="time" id="requestTime" name="modifyTime" class="form-control" value="${vo.modifyTime}" disabled>
                                   </div>
                               </div>
                               <div class="col-12">
                                 <label for="content" class="form-label">요청사유</label>
-                                <textarea name="requestContents" id="content" cols="30" rows="3" class="form-control" disabled>${vo.attendanceModifyVO.requestContents}</textarea>
+                                <textarea name="requestContents" id="content" cols="30" rows="3" class="form-control" disabled>${vo.requestContents}</textarea>
                               </div>
                             </form>
                           </div>
@@ -124,33 +133,33 @@
                             <table class="table table-bordered">
                               <tr>
                                 <th>출근일</th>
-                                <td>${vo.workDate}</td>
+                                <td>${vo.attendanceVO.workDate}</td>
                               </tr>
                               <tr>
                                 <th>출근시간</th>
                                 <td>
-                                	<c:if test="${vo.attendanceModifyVO.type eq '출근'}">
-                                		${vo.attendanceModifyVO.originalTime}
+                                	<c:if test="${vo.type eq '출근'}">
+                                		${vo.originalTime}
                                 	</c:if>
-                                	<c:if test="${vo.attendanceModifyVO.type eq '퇴근'}">
-                                		${vo.onTime}
+                                	<c:if test="${vo.type eq '퇴근'}">
+                                		${vo.attendanceVO.onTime}
                                 	</c:if>
                                 </td>
                               </tr>
                               <tr>
                                 <th>퇴근시간</th>
                                 <td>
-                                	<c:if test="${vo.attendanceModifyVO.type eq '출근'}">
-                                		${vo.offTime}
+                                	<c:if test="${vo.type eq '출근'}">
+                                		${vo.attendanceVO.offTime}
                                 	</c:if>
-                                	<c:if test="${vo.attendanceModifyVO.type eq '퇴근'}">
-                                		${vo.attendanceModifyVO.originalTime}
+                                	<c:if test="${vo.type eq '퇴근'}">
+                                		${vo.originalTime}
                                 	</c:if>
                                 </td>
                               </tr>
                               <tr>
                                 <th>상태</th>
-                                <td>${vo.attendanceModifyVO.originalState}</td>
+                                <td>${vo.originalState}</td>
                               </tr>
                             </table>
                           </div>
@@ -161,13 +170,13 @@
                               <label for="contents" class="form-label">수정의견</label>
                               <textarea name="modifyContents" id="contents" cols="30" rows="5" class="form-control"></textarea>
                             </div>
-                            <input type="hidden" name="modifyTime" class="form-control" value="${vo.attendanceModifyVO.modifyTime}">
+                            <input type="hidden" name="modifyTime" class="form-control" value="${vo.modifyTime}">
                             <input type="hidden" name="attendanceNum" value="${vo.attendanceNum}">
-                            <input type="hidden" name="onTime" value="${vo.onTime}">
-                            <input type="hidden" name="offTime" value="${vo.offTime}">
-                            <input type="hidden" name="attendanceModifyNum" value="${vo.attendanceModifyVO.attendanceModifyNum}">
+                            <input type="hidden" name="onTime" value="${vo.attendanceVO.onTime}">
+                            <input type="hidden" name="offTime" value="${vo.attendanceVO.offTime}">
+                            <input type="hidden" name="attendanceModifyNum" value="${vo.attendanceModifyNum}">
                             <input type="hidden" id="status" name="status">
-                            <input type="hidden" name="type" value="${vo.attendanceModifyVO.type}">
+                            <input type="hidden" name="type" value="${vo.type}">
                           </form>
                         </div>
                         <div class="totalBtn m-5">
@@ -198,7 +207,7 @@
 
     <script>
       $('#before_btn').on('click', function(){
-        $(location).attr('href', '/admin/attendanceModify/list');
+        $(location).attr('href', '/admin/attendance');
       })
 
       $('#approve_btn').on('click', function(){

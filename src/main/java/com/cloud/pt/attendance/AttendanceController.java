@@ -103,23 +103,23 @@ public class AttendanceController {
 	//관리자----------------------------------------------------------
 	@GetMapping("/admin/attendanceModify/detail")
 	public String getDetail(AttendanceModifyVO attendanceModifyVO, Model model) throws Exception {
-		AttendanceVO attendanceVO = attendanceService.getRequest(attendanceModifyVO);
-		model.addAttribute("vo", attendanceVO);
+		attendanceModifyVO = attendanceService.getRequest(attendanceModifyVO);
+		model.addAttribute("vo", attendanceModifyVO);
 		
 		return "attendance/adminDetail";
 	}
 	
 	@GetMapping("/admin/attendanceModify/update")
 	public String setUpdate(AttendanceModifyVO attendanceModifyVO, Model model) throws Exception {
-		AttendanceVO attendanceVO = attendanceService.getRequest(attendanceModifyVO);
-		model.addAttribute("vo", attendanceVO);
+		attendanceModifyVO = attendanceService.getRequest(attendanceModifyVO);
+		model.addAttribute("vo", attendanceModifyVO);
 		
 		return "attendance/adminForm";
 	}
 	
 	@GetMapping("/admin/attendanceModify/list")
 	public String getList(Model model, Pager pager) throws Exception {
-		List<AttendanceVO> ar = attendanceService.getRequestList(pager);
+		List<AttendanceModifyVO> ar = attendanceService.getRequestList(pager);
 
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
@@ -169,7 +169,7 @@ public class AttendanceController {
 	
 	@GetMapping("/attendanceModify/list")
 	public String getModifyList(@AuthenticationPrincipal EmployeeVO employeeVO, Model model, Pager pager) throws Exception {
-		List<AttendanceVO> ar = attendanceService.getModifyList(employeeVO, pager);
+		List<AttendanceModifyVO> ar = attendanceService.getModifyList(employeeVO, pager);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		

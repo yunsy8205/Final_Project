@@ -222,12 +222,12 @@ public class AttendanceService {
 	}
 	
 	//근태수정요청안
-	public AttendanceVO getRequest(AttendanceModifyVO attendanceModifyVO) throws Exception {
+	public AttendanceModifyVO getRequest(AttendanceModifyVO attendanceModifyVO) throws Exception {
 		return attendanceDAO.getRequest(attendanceModifyVO);
 	}
 	
 	//근태수정요청 목록(관리자)
-	public List<AttendanceVO> getRequestList(Pager pager) throws Exception {
+	public List<AttendanceModifyVO> getRequestList(Pager pager) throws Exception {
 		pager.makeRowNum();
 		Long total = attendanceDAO.getRequestTotal(pager);
 		pager.makePageNum(total);
@@ -242,8 +242,8 @@ public class AttendanceService {
 		return attendanceDAO.getModifyDetail(attendanceModifyVO);
 	}
 	
-	//근태수정요청 목록(직원)
-	public List<AttendanceVO> getModifyList(EmployeeVO employeeVO, Pager pager) throws Exception {
+	//내 근태수정요청 목록
+	public List<AttendanceModifyVO> getModifyList(EmployeeVO employeeVO, Pager pager) throws Exception {
 		pager.makeRowNum();
 		Long total = attendanceDAO.getModifyTotal(employeeVO);
 		pager.makePageNum(total);
@@ -258,14 +258,14 @@ public class AttendanceService {
 	//근태수정요청서 제출 
 	public int setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("modify", attendanceModifyVO); //날짜
+		map.put("modify", attendanceModifyVO); //수정요청일
 		map.put("emp", employeeVO); //직원번호
 		
 		//근태번호 찾기
 		Long num = attendanceDAO.getNum(map);
 		AttendanceVO attendanceVO = attendanceDAO.getDetail(num); //근태정보 가져오기
 		
-		if(attendanceVO.getState()==null) {
+		if(attendanceVO.getState()==null) { //당일 퇴근 전 요청 시 
 			return -1;
 		}
 		

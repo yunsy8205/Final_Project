@@ -23,6 +23,7 @@ public class Scheduler {
 	//매일 12시 5분마다 실행
 	@Scheduled(cron = "0 5 0 * * *", zone = "Asia/Seoul") //timezone 설정 
 	public void setEnd() throws Exception {
+		//전체 직원 목록
 		List<EmployeeVO> ar = attendanceDAO.getEmployeeList();
 		
 		for(int i=0; i<ar.size(); i++) {
@@ -39,11 +40,11 @@ public class Scheduler {
 	        map.put("vo", employeeVO);
 	        map.put("date", sqlDate);
 			
+	        //전날 직원의 근태정보
 			AttendanceVO attendanceVO = attendanceDAO.getInfo(map);
-			if(attendanceVO!=null) {
-				continue;
+			if(attendanceVO==null || attendanceVO.getOffTime()==null) {//근태정보가 없거나 퇴근기록이 없을 때
+				attendanceDAO.setEnd(map); //상태를 결근으로 처리
 			}
-			attendanceDAO.setEnd(map);
 		}
 	}
 }

@@ -5,6 +5,8 @@ import java.sql.Time;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.cloud.pt.employee.EmployeeVO;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -31,8 +33,11 @@ public class AttendanceModifyVO {
 	private String status;
 	//수정의견
 	private String modifyContents;
-	//수정 번 시간
+	//수정 전 시간
 	private Time originalTime;
 	//수정 전 상태
 	private String originalState;
+	
+	private AttendanceVO attendanceVO;
+	private EmployeeVO employeeVO;
 }

@@ -20,8 +20,29 @@
     }
     #btn {
       text-align: center;
+      margin: 3rem 0 0;
     }
-   
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+      padding: 0 !important;
+    }
+    .card-body{
+      margin: 2.2rem 8rem;
+    }
+    .form-label, .col-form-label {
+      font-size: 1rem !important;
+    }
+    #before_btn {
+      margin-right: 1rem;
+    }
+    .form-check-label {
+      padding-right: 1.7rem;
+      font-size: 1rem;
+    }
+    #frm > .row {
+      padding: 0 2rem;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -34,7 +55,7 @@
 		      <!-- sidebar -->
           <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
           <!-- Layout container -->
-          <div class="layout-page">
+          <div class="layout-page" style="padding-left: 0 !important;">
             <!-- Navbar -->
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
@@ -43,17 +64,17 @@
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="col-xxl">
-                  <div class="card mb-4">
-                  <h3 class="card-header mb-4">이용권 등록</h3>
+                  <div class="card">
+                  <h3 class="card-header">이용권 등록</h3>
                   <div class="card-body">
                     <form id="frm" method="post" action="/membership/form">
-                      <div class="row mb-3">
+                      <div class="row mb-4">
                         <label for="name" class="col-sm-2 col-form-label">이용권이름</label>
                         <div class="col-sm-10">
                           <input type="text" id="name" name="name" class="form-control" placeholder="이용권 이름을 입력하세요">
                         </div>
                       </div>
-                      <div class="row mb-3">
+                      <div class="row mb-4">
                           <label class="col-sm-2 col-form-label">종류</label>
                           <div class="col-sm-10">
                             <div class="form-check form-check-inline">
@@ -66,25 +87,25 @@
                             </div>
                           </div>
                       </div>
-                      <div class="row mb-3" id="month_block">
+                      <div class="row mb-4" id="month_block">
                         <label for="month" class="col-sm-2 col-form-label">이용개월</label>
                         <div class="col-sm-10">
                           <input type="text" id="month" name="month" class="form-control" placeholder="이용개월을 입력하세요">
                         </div>
                       </div>
-                      <div class="row mb-3" id="pt_block">
+                      <div class="row mb-4" id="pt_block">
                         <label for="ptCount" class="col-sm-2 col-form-label">피티횟수</label>
                         <div class="col-sm-10">
                           <input type="text" id="ptCount" name="ptCount" class="form-control" placeholder="피티횟수를 입력하세요">
                         </div>
                       </div>
-                      <div class="row mb-3">
+                      <div class="row mb-4">
                         <label for="price" class="col-sm-2 col-form-label">가격</label>
                         <div class="col-sm-10">
                           <input type="text" id="price" name="price" class="form-control" placeholder="가격을 입력하세요">
                         </div>
                       </div>
-                      <div id="btn" class="m-5">
+                      <div id="btn">
                         <button type="button" id="before_btn" class="btn btn-primary">이전</button>
                         <button type="button" id="submit_btn" class="btn btn-primary">등록</button>
                       </div>
