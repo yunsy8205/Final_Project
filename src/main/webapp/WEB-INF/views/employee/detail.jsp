@@ -38,7 +38,7 @@
                     <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;padding-bottom:0;">
                       <h3 class="mb-0" style="margin-top: 1rem;"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span> 인적사항</h3>
                       <div style="width: 10rem; height:10rem; margin: 2rem;">
-                        <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" onerror="this.style.display='none'" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;">
+                        <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" value="${employeeVO.proOriginal}" id="pro" onerror="this.style.display='none'" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;">
                       </div>
                     </div>
                     <div class="card-body">
@@ -152,6 +152,15 @@
       }else{
         delBtn.style.display = 'none';
       }
+
+
+
+      const pro = document.getElementById("pro").value;
+
+      if(pro == 'undefined'){
+        
+      }
+      console.log(pro);
     </script>
   </body>
 </html>
