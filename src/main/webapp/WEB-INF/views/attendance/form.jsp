@@ -26,7 +26,7 @@
       background-color:#ffffff00 !important;
     }
     .card-body{
-      margin: 0 10%;
+      margin: 0 7%;
     }
   </style>
 

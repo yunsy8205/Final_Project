@@ -21,6 +21,11 @@
     #pager {
       margin-bottom: 50px;
     }
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+      padding: 0 !important;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -47,7 +52,7 @@
                   <button id="btn" class="btn btn-primary">근태 수정 요청</button>
                 </div>
 				        <div class="card">
-                  <div id="req_list" class="table-responsive text-nowrap">
+                  <div id="req_list">
                     <table class="table table-hover">
                       <thead>
                         <tr>
@@ -121,6 +126,8 @@
   <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   
   <script>
+    const page = $('.page-link[data-num="1"]');
+    page.parent().addClass('active');
     
     $('#btn').on('click', function(){
       $(location).attr('href', '/attendanceModify/add');
