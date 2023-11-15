@@ -47,21 +47,31 @@
               
               
               		<!-- <button class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#exampleModal" ">운동추가</button> -->
-                	<div id="add-btn-div" style="margin-right:10px; ">
-		        <button type="button" class="btn btn-outline-primary add-btn" style='width:160px' data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="passValueToModal()">
+                	<div id="add-btn-div" style="text-align: center; ">
+		        <button type="button" class="btn btn-outline-primary add-btn" style='width:160px; margin-bottom: 2rem; text-align: center;'; data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="passValueToModal()">
 		            + 운동 추가
 		        </button>
 		    </div>
-		    
+		    <div style="text-align: right;">
+		    	<button type="button" id="yesClass" class="btn btn-outline-primary add-btn" style='width:160px; margin-bottom: 2rem; text-align: center;'; onclick="postFormSubmit2('attendPt');">
+		            완료
+		        </button>
+		        <!-- <button type="button" id="noClass" class="btn btn-outline-primary add-btn" style='width:160px; margin-bottom: 2rem; text-align: center;'; onclick="postFormSubmit2('absentPt');" >
+		            결석
+		        </button> -->
+		        </div>
 		    <i class='bx bx-layer-plus' style='font-size:26px'></i>&nbsp;<label style='font-size:16px; font-weight:500'> 운동목록</label>
 		    <div id="todo-list" style='width:100%; height:100%;'>
+		    <input type="hidden" id="getMemNum" value="${memberNum}">
 	        	<table class="table">
                 	
                 			<thead>
                 			<tr>
                 				<th style="display: none;">${ptLogNum}</th>
-                				
-                				<th></th>
+                				<th>운동명</th>
+                				<th>무게</th>
+                				<th>갯수</th>
+                				<th>세트 수</th>
                 				
                 			</tr>
                 			</thead>
@@ -70,10 +80,11 @@
                					
 									<tr>
 										<td style="display: none;">${employeeNum}</td>
-										<td>${vo.ptTypeNum}</td>
+										
 										<td>${vo.name}</td>
-										<td>${vo.weight}KG</td>
+										<td>${vo.weight}</td>
 										<td>${vo.exCount}</td>
+										
 										<td>${vo.ptSet}</td>
 										<!-- <td><i class="menu-icon tf-icons bx bx-dots-vertical-rounded"></i></td> -->
 										<td>
@@ -118,7 +129,7 @@
 		                    <div class="row g-2">
 			                    <div class="col mb-0">
 			                      <label for="emailBackdrop" class="form-label">무게 : </label>
-			                      <input type="text" class="form-control" id="weight2" name="weight" >
+			                      <input type="text" class="form-control" id="weight2" name="weight" value="KG">
 			                    </div>
 			                    <div class="col mb-0">
 			                      <label for="emailBackdrop" class="form-label">횟수 : </label>
@@ -275,6 +286,53 @@
     $(document).ready(function(){
     	progress();
     })
+   function postFormSubmit2(url) {
+           	if(url === 'absentPt'){
+           		var memberNum = document.getElementById('getMemNum').value;
+           		
+           		$.ajax({
+           			type: 'POST',
+           			url:'./absentPt',
+           			data:{
+           				memberNum:memberNum
+           			},
+           			success:function(data){
+           				alert("결석 처리 완료");
+						$('#yesClass').hide();           				
+           				$('#noClass').hide();
+           				location.href="/ptClass/myPtList"
+           			},
+           			error: function (error) {
+                           // 에러 처리
+                           console.error('고장 등록 실패', error);
+                       }
+           		});
+           	}
+           	if(url === 'attendPt'){
+           		var memberNum = document.getElementById('getMemNum').value;
+           		
+           		$.ajax({
+           			type: 'POST',
+           			url:'./attendPt',
+           			data:{
+           				memberNum:memberNum
+           			},
+           			success:function(data){
+           				alert("운동 완료");
+						$('#yesClass').hide();           				
+           				$('#noClass').hide();
+           				location.href="/ptClass/myPtList"
+           			},
+           			error: function (error) {
+                           // 에러 처리
+                           console.error('고장 등록 실패', error);
+                       }
+           		});
+           	}
+               
+
+               
+           }
     </script>
   </body>
 </html>

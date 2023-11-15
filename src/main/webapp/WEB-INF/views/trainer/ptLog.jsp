@@ -113,14 +113,15 @@ uri="http://www.springframework.org/tags" %>
 
           eventClick: function (info) {
             var eventId = info.event.id;
-
-            handleEventClick(eventId);
+			var memberNum = info.event.content;
+            handleEventClick(eventId,memberNum);
           },
         });
 
-        function handleEventClick(eventId) {
+        function handleEventClick(eventId,memberNum) {
           // 이벤트 ID를 이용하여 URL 생성
           console.log("eventId:", eventId);
+          console.log("memberNum",memberNum);
           var url = "/trainer/ptType?eventId=" + eventId;
           // 새로운 URL로 이동
           console.log("url:", url);
@@ -238,6 +239,7 @@ uri="http://www.springframework.org/tags" %>
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 style="margin-left: 1rem;">${memberName}님 스케줄입니다</h4>
               <div id="calendar"></div>
 
               <!-- 부트스트랩 modal 부분 -->
