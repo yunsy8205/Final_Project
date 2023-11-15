@@ -31,8 +31,8 @@
       height: 100%;
     }
     #calendar {
-      height: 100%;
-      width: 95%;
+      height: 96%;
+      width: 91%;
       margin: auto;
     }
     form {
@@ -50,7 +50,7 @@
       margin: 0 8%;
     }
     .card{
-      margin: 1% 8% 2%;
+      margin: 1.2rem 7rem 1.8rem;
     }
     .s_box{
       margin: 1.5rem auto 0 !important;
@@ -59,7 +59,7 @@
       margin-bottom: 0.7rem;
     }
     .tab-content {
-      height: 790px;
+      height: 95%;
     }
     .container-xxl {
       margin: 0rem 2.5rem 0 !important;
@@ -79,6 +79,9 @@
       font-size: 1.2rem;
       margin-top: 10%;
     }
+    .nav-align-top{
+      height: 100%;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -89,7 +92,7 @@
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>
 	<!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@6.1.9/index.global.min.js'></script>
-
+  
 </head>
 <body>
     <!-- Layout wrapper -->

@@ -38,6 +38,13 @@
       margin-right: 30px;
     }
     .totalBtn {text-align:center;}
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+    }
+    .card-body{
+      margin: 0 6rem;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -60,10 +67,10 @@
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="col-xxl">
-                  <div class="card mb-4">
-                    <h3 class="card-header mb-4">근태 수정 요청안</h3>
+                  <div class="card">
+                    <h3 class="card-header">근태 수정 요청안</h3>
                       <div class="card-body">
-                        <div class="modify_Con mb-5">
+                        <div class="modify_Con">
                           <!-- <div class="card"> -->
                             
                           <!-- </div> -->

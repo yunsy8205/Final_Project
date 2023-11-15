@@ -59,14 +59,14 @@ public class AttendanceService {
 			jsonArr.add(jsonObj); //대괄호 안에 넣어주기[{key:value, key:value},{key:value, key:value}]
 		}
 		
-		log.info("jsonArr: {}", jsonArr);
+//		log.info("jsonArr: {}", jsonArr);
 		
 		return jsonArr;
 	}
-	
+	//전체직원의 근태리스트(json)
 	public List<Map<String, Object>> getAdminList() throws Exception {
 		List<Map<String, Object>> list = attendanceDAO.getAdminList();
-		System.out.println(list);
+//		System.out.println(list);
 		
 		JSONObject jsonObj; 
 		JSONArray jsonArr = new JSONArray(); //대괄호
@@ -107,10 +107,10 @@ public class AttendanceService {
 		
 		return jsonArr;
 	}
-	
+	//전체직원리스트(json)
 	public List<Map<String, Object>> getResources() throws Exception {
 		List<Map<String, Object>> list = attendanceDAO.getResources();
-		System.out.println(list);
+//		System.out.println(list);
 		
 		JSONObject jsonObj; 
 		JSONArray jsonArr = new JSONArray(); //대괄호
@@ -124,12 +124,12 @@ public class AttendanceService {
 			jsonArr.add(jsonObj); //대괄호 안에 넣어주기[{key:value, key:value},{key:value, key:value}]
 		}
 		
-		log.info("jsonArr: {}", jsonArr);
+//		log.info("jsonArr: {}", jsonArr);
 		
 		return jsonArr;
 	}
 	
-	//당일근태조회
+	//해당 직원의 당일근태조회
 	public AttendanceVO getInfo(EmployeeVO employeeVO) throws Exception {
 		long currentTimeMillis = System.currentTimeMillis();
         Date currentSqlDate = new Date(currentTimeMillis); //헌재 날짜 
@@ -170,7 +170,7 @@ public class AttendanceService {
 		
 		return attendanceDAO.setState(map);
 	}
-	
+	//전체직원의 당일근태조회
 	public List<AttendanceVO> getDayList(AttendanceVO attendanceVO, Pager pager) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("attendance", attendanceVO);
@@ -221,12 +221,12 @@ public class AttendanceService {
 		return result;
 	}
 	
-	//근태 수정 요청안
+	//근태수정요청안
 	public AttendanceVO getRequest(AttendanceModifyVO attendanceModifyVO) throws Exception {
 		return attendanceDAO.getRequest(attendanceModifyVO);
 	}
 	
-	//근태 수정 요청 목록(관리자)
+	//근태수정요청 목록(관리자)
 	public List<AttendanceVO> getRequestList(Pager pager) throws Exception {
 		pager.makeRowNum();
 		Long total = attendanceDAO.getRequestTotal(pager);
@@ -236,10 +236,13 @@ public class AttendanceService {
 	}
 	
 	//---------------------------------------------------
+	
+	//근태수정요청서
 	public AttendanceModifyVO getModifyDetail(AttendanceModifyVO attendanceModifyVO) throws Exception {
 		return attendanceDAO.getModifyDetail(attendanceModifyVO);
 	}
 	
+	//근태수정요청 목록(직원)
 	public List<AttendanceVO> getModifyList(EmployeeVO employeeVO, Pager pager) throws Exception {
 		pager.makeRowNum();
 		Long total = attendanceDAO.getModifyTotal(employeeVO);
@@ -252,6 +255,7 @@ public class AttendanceService {
 		return attendanceDAO.getModifyList(map);
 	}
 	
+	//근태수정요청서 제출 
 	public int setModifyAdd(AttendanceModifyVO attendanceModifyVO, EmployeeVO employeeVO) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("modify", attendanceModifyVO); //날짜
