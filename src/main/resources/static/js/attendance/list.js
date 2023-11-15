@@ -21,7 +21,17 @@ function getRequestList(page, kind, search){
                     $(this).prop('selected', true);
                     return false;
                 }
-            })
+            });
+
+            if(page==undefined){ //페이지 번호를 클릭 안 했을 때
+                //페이지 번호가 1인 요소 활성화
+                $('#navs-justified-profile').find('.page-link[data-num="1"]').parent().addClass('active'); 
+            }else{ //페이지 번호를 클릭 시
+                //기존에 활성화되어있는 페이지 번호 비활성화
+                $('#navs-justified-profile').find('.page-link.active').parent().removeClass('active');
+                //클릭한 페이지 번호의 요소 활성화
+                $('#navs-justified-profile').find('.page-link[data-num="'+page+'"]').parent().addClass('active');
+            }
         }
     })
 }
