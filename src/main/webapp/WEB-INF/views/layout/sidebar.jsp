@@ -171,7 +171,7 @@ uri="http://www.springframework.org/security/tags" %>
           </a>
         </li>
         <li class="menu-item">
-          <a href="/locker/list.lk" class="menu-link">
+          <a href="/locker/lockerList2" class="menu-link">
             <div data-i18n="Under Maintenance" class="subDiv">
               전체 락커 목록
             </div>

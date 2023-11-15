@@ -41,24 +41,12 @@
             <%--   <h1>EmployeeNum : <%= employeeNum %></h1> --%>
             
             
-           <form action="./addClass" method="POST">   
+           <!-- <form action="./addClass" method="POST">   
            
-           <input type="text"  name="employeeNum" id="employeeNum" value="${employeeNum}" style="display: none;"/><br />
-           <input type="text" name="memberNum" id="memberNum" value="${memberNum}" style="display: none;"><br/>
            
-           회원이름 : <input type="text" id="title" value="${memberName}" readonly="readonly"><br>
-           시작시간 : <input type="date"  id="date" onchange="validateDate()"/>  <select id="time">
-			    <option value="10:00:00">10:00:00</option>
-			    <option value="11:00:00">11:00:00</option>
-			    <option value="12:00:00">12:00:00</option>
-			    <option value="14:00:00">14:00:00</option>
-			    <option value="15:00:00">15:00:00</option>
-			    <option value="16:00:00">16:00:00</option>
-			    <option value="17:00:00">17:00:00</option>
     
   </select>  <br />
-  <input type="text" name="startTime" id="combinedData" style="display: none;">
-           <input type="datetime-local" name="finishTime" id="finish" style="display: none;"/><br /> 
+  
            
           </div>
           <div class="modal-footer">
@@ -69,10 +57,50 @@
             >
               취소
             </button>
-            <button type="submit" class="btn btn-primary" id="saveChanges" >
+            <button type="submit" class="btn btn-primary"  >
               추가
             </button>
 			</form>
+              </div> -->
+              
+              <div class="card mb-4">
+                <h5 class="card-header" style="text-align: center; margin: 3rem 0;">PT 추가</h5>
+                <form class="card-body" action="./addClass" method="post"  >
+                  <div style="display: flex; justify-content: center; align-items: center; margin: 0 auto 5rem; width:80%;" >
+                    <input type="text"  name="employeeNum" id="employeeNum" value="${employeeNum}" style="display: none;"/><br />
+           			<input type="text" name="memberNum" id="memberNum" value="${memberNum}" style="display: none;"><br/>
+                    <input type="text" name="startTime" id="combinedData" style="display: none;">
+           			<input type="datetime-local" name="finishTime" id="finish" style="display: none;"/><br /> 
+                    <div class="memRight" style="width: calc(100% - 53%);">
+                      <div class="mb-3 row">
+                        
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="name" class="col-md-2 col-form-label">회원이름 :</label>
+                        <div class="col-md-10">
+                           <input class="form-control" type="text" id="title" value="${memberName}" readonly="readonly">
+                        </div>
+                      </div>
+                      <div class="mb-3 row" >
+                        <label for="buyDate" class="col-md-2 col-form-label">시작시간 :</label>
+                         <input type="date"  id="date" onchange="validateDate()" class="form-control"/>  <select id="time" class="form-control">
+						    <option value="10:00:00">10:00:00</option>
+						    <option value="11:00:00">11:00:00</option>
+						    <option value="12:00:00">12:00:00</option>
+						    <option value="14:00:00">14:00:00</option>
+						    <option value="15:00:00">15:00:00</option>
+						    <option value="16:00:00">16:00:00</option>
+						    <option value="17:00:00">17:00:00</option>
+  						</select>
+                      </div>
+                      </div>
+                    </div>
+                  
+                  <div class="proBtn" style="text-align: center;">
+                    <button type="button" id="backBtn" class="btn btn-primary">이전</button>
+                    <button type="submit" id="saveChanges" class="btn btn-primary" >등록</button>
+                  </div>
+                </form>
               </div>
               <!-- / Content --> 
               

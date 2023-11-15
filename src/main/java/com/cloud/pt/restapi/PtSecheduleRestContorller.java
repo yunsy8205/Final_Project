@@ -48,7 +48,7 @@ public class PtSecheduleRestContorller {
 		 
 		String employeeNum = b.getName();
 		Long memberNum = (Long)session.getAttribute("memberNum");
-		  log.info("멤버번호 : {} >>>>>",memberNum); log.info("멤버 : {} >>>>>",memberNum);
+		  log.info("멤버번호111111111111 : {} >>>>>",memberNum); log.info("멤버 : {} >>>>>",memberNum);
 		
 		List<PtLogVO> classList = ptLogService.getTypeLog(Long.parseLong(employeeNum),memberNum); 
 		List<Map<String, Object>> classMapList = new ArrayList<>();
@@ -60,7 +60,7 @@ public class PtSecheduleRestContorller {
 			classMap.put("title", "운동");
 			classMap.put("start", ptLogVO.getPtDate());
 			classMap.put("end", ptLogVO.getPtDate());
-			
+			classMap.put("content", memberNum);
 			classMapList.add(classMap);
 		}
 		
