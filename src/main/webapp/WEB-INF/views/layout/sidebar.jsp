@@ -179,141 +179,89 @@ uri="http://www.springframework.org/security/tags" %>
         </li>
       </ul>
     </li>
+    <!-- Cards -->
+    <li class="menu-item">
+      <a href="#" class="menu-link menu-toggle">
+        <i class="menu-icon fa-solid fa-list-check"></i>
+        <div data-i18n="Misc">수업 관리</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="/ptClass/ptList" class="menu-link">
+            <div data-i18n="Error">수업 조회</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/ptClass/myPtList" class="menu-link">
+            <div data-i18n="Under Maintenance">회원 조회</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- User interface -->
+    <li class="menu-item">
+      <a href="javascript:void(0)" class="menu-link menu-toggle">
+        <i class="menu-icon fa-solid fa-clipboard-user"></i>
+        <div data-i18n="User interface">근태 관리</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="/attendance/info" class="menu-link">
+            <div data-i18n="Accordion">내 근태 조회</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a id="attendance" href="/admin/attendance" class="menu-link">
+            <div data-i18n="Alerts">전체 근태 조회</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/attendanceModify/list" class="menu-link">
+            <div data-i18n="Badges">근태 수정 요청 목록</div>
+          </a>
+        </li>
+      </ul>
+    </li>
 
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-group"></i>
-                <div data-i18n="Account Settings">회원 관리</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="/member/list" class="menu-link">
-                    <div data-i18n="Account">전체 회원 목록</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-credit-card"></i>
-                <div data-i18n="Authentications">이용권 관리</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="/membership/list" class="menu-link">
-                    <div data-i18n="Basic">이용권 목록</div>
-                  </a>
-                </li>
-               
-              </ul>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon fa-solid fa-dumbbell"></i>
-                <div data-i18n="Misc">시설 관리</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="pages-misc-error.html" class="menu-link">
-                    <div data-i18n="Error">전체 기구 목록</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="pages-misc-under-maintenance.html" class="menu-link">
-                    <div data-i18n="Under Maintenance">기구 수리 요청 목록</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="/locker/lockerList2" class="menu-link">
-                    <div data-i18n="Under Maintenance">전체 락커 목록</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            
-            <!-- Cards -->
-            <li class="menu-item">
-              <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon fa-solid fa-list-check"></i>
-                <div data-i18n="Misc">수업 관리</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="/ptClass/ptList" class="menu-link">
-                    <div data-i18n="Error">수업 조회</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="/ptClass/myPtList" class="menu-link">
-                    <div data-i18n="Under Maintenance">회원 조회</div>
-                  </a>
-                </li>
-                
-              </ul>
-            </li>
-            <!-- User interface -->
-            <li class="menu-item">
-              <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon fa-solid fa-clipboard-user"></i>
-                <div data-i18n="User interface">근태 관리</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="/attendance/info" class="menu-link">
-                    <div data-i18n="Accordion">내 근태 조회</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a id="attendance" href="/admin/attendance" class="menu-link">
-                    <div data-i18n="Alerts">전체 근태 조회</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="/attendanceModify/list" class="menu-link">
-                    <div data-i18n="Badges">근태 수정 요청 목록</div>
-                  </a>
-                </li>
-                </ul>
-                
-            <li class="menu-item">
-              <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon fa-solid fa-file"></i>
-                <div data-i18n="Boxicons">결재관리</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="/approval/list" class="menu-link">
-                    <div data-i18n="Accordion">기안문서함</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="/approval/approverList" class="menu-link">
-                    <div data-i18n="Alerts">결재문서함</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="/approval/signMain" class="menu-link">
-                    <div data-i18n="Badges">서명관리</div>
-                  </a>
-                </li>
-                </ul>
-            </li>
-            
-            <li class="menu-item">
-              <a href="/leave/list" class="menu-link">
-                <i class="menu-icon fa-solid fa-plane"></i>
-                <div data-i18n="Boxicons">휴가</div>
-              </a>
-            </li>
-            
-            <li class="menu-item">
-              <a href="/chat/room" class="menu-link">
-                <i class="menu-icon fa-solid fa-comments"></i>
-                <div data-i18n="Boxicons">메신저</div>
-              </a>
-            </li>
-            
-           <!--  <li class="menu-item">
+    <li class="menu-item">
+      <a href="javascript:void(0)" class="menu-link menu-toggle">
+        <i class="menu-icon fa-solid fa-file"></i>
+        <div data-i18n="Boxicons">결재관리</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="/approval/list" class="menu-link">
+            <div data-i18n="Accordion">기안문서함</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/approval/approverList" class="menu-link">
+            <div data-i18n="Alerts">결재문서함</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/approval/signMain" class="menu-link">
+            <div data-i18n="Badges">서명관리</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="menu-item">
+      <a href="/leave/list" class="menu-link">
+        <i class="menu-icon fa-solid fa-plane"></i>
+        <div data-i18n="Boxicons">휴가</div>
+      </a>
+    </li>
+
+    <li class="menu-item">
+      <a href="/chat/room" class="menu-link">
+        <i class="menu-icon fa-solid fa-comments"></i>
+        <div data-i18n="Boxicons">메신저</div>
+      </a>
+    </li>
+
+    <!--  <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon fa-solid fa-circle-user"></i>
                 <div data-i18n="User interface">트레이너</div>
@@ -335,83 +283,6 @@ uri="http://www.springframework.org/security/tags" %>
                   </a>
                 </li>
                 </ul> -->
-                
-              <li class="menu-item">
-              <a href="/notice/list" class="menu-link">
-                <i class='menu-icon fa-solid bx bxs-megaphone'></i>
-                <div data-i18n="Boxicons">공지사항</div>
-              </a>
-            </li>
-                
-                
-
-    <li class="menu-item">
-      <a href="javascript:void(0)" class="menu-link menu-toggle">
-        <i class="menu-icon fa-solid fa-file"></i>
-        <div data-i18n="Boxicons">결재관리</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="/approval/list" class="menu-link">
-            <div data-i18n="Accordion" class="subDiv">기안문서함</div>
-          </a>
-        </li>
-        <sec:authorize access="isAuthenticated()">
-				<sec:authorize access="!hasRole('ROLE_TRAINER')">
-          <li class="menu-item">
-            <a href="/approval/approverList" class="menu-link">
-              <div data-i18n="Alerts" class="subDiv">결재문서함</div>
-            </a>
-          </li>
-				</sec:authorize>
-						
-					
-			  </sec:authorize>
-        <li class="menu-item">
-          <a href="/approval/signMain" class="menu-link">
-            <div data-i18n="Badges" class="subDiv">서명관리</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    <li class="menu-item">
-      <a href="/leave/list" class="menu-link">
-        <i class="menu-icon fa-solid fa-plane"></i>
-        <div data-i18n="Boxicons">휴가</div>
-      </a>
-    </li>
-
-    <li class="menu-item">
-      <a href="/chat/room" class="menu-link">
-        <i class="menu-icon fa-solid fa-comments"></i>
-        <div data-i18n="Boxicons">메신저</div>
-      </a>
-    </li>
-
-    <li class="menu-item">
-      <a href="javascript:void(0)" class="menu-link menu-toggle">
-        <i class="menu-icon fa-solid fa-circle-user"></i>
-        <div data-i18n="User interface">트레이너</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="#" class="menu-link">
-            <div data-i18n="Accordion" class="subDiv">운동 일지</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/trainer/ptLog" class="menu-link">
-            <div data-i18n="Alerts" class="subDiv">PT일지</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/trainer/diet" class="menu-link">
-            <div data-i18n="Badges" class="subDiv">식단 관리</div>
-          </a>
-        </li>
-      </ul>
-    </li>
 
     <li class="menu-item">
       <a href="/notice/list" class="menu-link">
