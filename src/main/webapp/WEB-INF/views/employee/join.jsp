@@ -44,7 +44,7 @@
                     <!-- 직원 사진 공간 -->
                     <p id="imgDiv" style="width: 10rem; height: 10rem; border-radius:50%; background-color: rgb(197, 197, 197); padding: 0;"></p>
                     <div class="col-md-10" style="width:20rem;">
-                      <input type="file" name="empfile" id="proFile" class="form-control proFile input"  onchange="setThumbnail(event);"/>
+                      <input type="file" name="empfile" id="proFile" class="form-control proFile input"  onchange="setThumbnail(event);" required/>
                     </div>
                     <div id="pictureMsg"></div>
                   </div>
@@ -192,7 +192,7 @@ let formattedDay = moment(today).format("YYYY-MM-DD");
 //현재 날짜 이후의 날짜 선택 불가하게 설정 
 $('#birthDate').attr('max', formattedDay);
 
-// 기구 선택 시, 이미지 띄우기
+// 사진 선택 시, 이미지 띄우기
 function setThumbnail(event) {
     for (let image of event.target.files) {
       let reader = new FileReader();
