@@ -100,7 +100,7 @@
         <%
         for (int col = 1; col <= 8; col++) {
             int lockerNum = (row - 1) * 8 + col;
-            LockerVO lockerVO = null;
+            LockerVO lockerVO = new LockerVO();
 
             // ar에서 해당 lockerNumber에 대한 정보를 찾기
             for (LockerVO locker : ar) {
@@ -112,41 +112,42 @@
             
             // state 값이 null인 경우 "정상"으로 설정
             if (lockerVO != null && lockerVO.getState() == null) {
-            	lockerVO.setState("정상");
+                lockerVO.setState("정상");
             }
         %>
         <div class="locker" data-lockerNum="<%= lockerNum %>"
-         <% if (lockerVO != null) { %>
-        data-memberName="<%= lockerVO.getMemberName() %>"
-        data-startDate="<%= lockerVO.getStartDate() %>"
-    	data-finishDate="<%= lockerVO.getFinishDate() %>"
-    	data-memberNum ="<%= lockerVO.getMemberNum() %>"
-    	data-state ="<%= lockerVO.getState() %>"
-    	<% } %>
-    	 >
+            <% if (lockerVO != null) { %>
+                data-memberName="<%= lockerVO.getMemberName() %>"
+                data-startDate="<%= lockerVO.getStartDate() %>"
+                data-finishDate="<%= lockerVO.getFinishDate() %>"
+                data-memberNum ="<%= lockerVO.getMemberNum() %>"
+                data-state ="<%= lockerVO.getState() %>"
+            <% } %>
+        >
             <!-- lockerInfo가 null이 아닌 경우에만 정보 출력 -->
             <% if (lockerVO != null) { %>
                 <div class="lockerInfo" style="font-size: 12px">
-            <%
-            // lockerInfo의 STATE 값이 "고장"이거나 null이 아닌 경우
-            String state = lockerVO.getState();
-            if (state != null && state.equals("고장")) {
-            %>
-                <div style="color: red;">고장</div><br>
-                <%= lockerVO.getState() %>
-            <% } else { %>
-                <%= lockerVO.getMemberName() %><br>
-                <%= lockerVO.getStartDate() %><br>
-                <%= lockerVO.getFinishDate() %><br>
-                <%-- 이 부분에서 상태가 "정상"이 아닌 경우에만 출력 --%>
-                <% if (!"정상".equals(state)) { %>
-                    <%= state %>
-                <% } %>
-            <% } %>
-        </div>
-            <% } else { %>
-                <%= lockerNum %>
-                
+                    <%-- memberNum이 null이고 state가 정상이면 lockerNum만 출력 --%>
+                    <% if (lockerVO.getMemberNum() == null && "정상".equals(lockerVO.getState())) { %>
+                        <%= lockerNum %>
+                    <%-- memberNum이 null이고 state가 고장이면 state만 출력 --%>
+                    <% } else if (lockerVO.getMemberNum() == null && "고장".equals(lockerVO.getState())) { %>
+                        <%= lockerVO.getState() %>
+                    <%-- meberberNum이 null이 아니고 state 가 정상이면 memberNum을 출력 --%>
+                    <% } else if (lockerVO.getMemberNum() != null && "정상".equals(lockerVO.getState())) { %>
+                       
+                        <%= lockerVO.getMemberName() %><br>
+                    <%= lockerVO.getStartDate() %><br>
+                    <%= lockerVO.getFinishDate() %><br> 
+                    <% } %>
+                    <%-- <%= lockerVO.getMemberName() %><br>
+                    <%= lockerVO.getStartDate() %><br>
+                    <%= lockerVO.getFinishDate() %><br> --%>
+                    <%-- 이 부분에서 상태가 "정상"이 아닌 경우에만 출력 --%>
+                    <%-- <% if (!"정상".equals(lockerVO.getState())) { %>
+                        <%= lockerVO.getState() %>
+                    <% } %> --%>
+                </div>
             <% } %>
         </div>
         <%
@@ -170,7 +171,7 @@
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel1">락커 No.<span id="getLockerNum"></span></h5>
                         <input type="hidden" id="getLockerNum" name="lockerNum" >
-						                        
+						        	                
 						<button
                           type="button"
                           class="btn-close"
@@ -178,8 +179,13 @@
                           aria-label="Close"
                         ></button>
                       </div>
-                      <div class="modal-body">
-                      
+                      <div class="modal-body" >
+                      <div id="recoverIcon" style="align-items: center; justify-content: center"> 
+                      <i class='bx bxs-shield-x' style="display:inline-block; font-size:8rem;" ></i>
+                      <p style="display: inline-block; font-size: 2rem">사용불가</p>
+                      </div>
+                      <div id="body-mo">
+                       
                         <div class="row">
                           <div class="col mb-3">
                             <div class="mb-3">
@@ -210,11 +216,12 @@
                             <input class="form-control" type="date" name="finishDate" value="${ today }" id="finishDate" />
                           </div>
                         </div>
+                        </div>
                       </div>
                       <div class="modal-footer">
                       
 					        <button type="button" class="btn btn-primary"id="delUserBtn" onclick="postFormSubmit2('delUser');">라커회수</button>
-					   
+					   		<button type="button" class="btn btn-primary" id="recoverBtn" onclick="postFormSubmit2('recoverLocker');">라커수리</button>
 					    
 					    <!-- memberNum이 없을 경우에만 락커등록과 고장등록 버튼 표시 -->
 					   	
@@ -242,11 +249,31 @@
                     				console.log("고장등록 성공",data);
                     				$('#enrollModal').modal('hide');
                     				alert("고장 등록 완료");
+                    				 location.reload();
                     			},
                     			error: function (error) {
                                     // 에러 처리
                                     console.error('고장 등록 실패', error);
                                 }
+                    		});
+                    	}
+                    	if (url === 'recoverLocker'){
+                    		var lockerNumber = document.getElementById('getLockerNum').value;
+                    		
+                    		$.ajax({
+                    			type:'POST',
+                    			url:'./recoverLocker',
+                    			data:{
+                    				lockerNum:lockerNumber
+                    			},
+                    			success:function(data){
+                    				$('#enrollModel').modal('hide');
+                    				alert("라커 수리 완료");
+                    				location.reload();
+                    			},
+                    			error:function (error){
+                    				console.log("수리실패");
+                    			}
                     		});
                     	}
                         if (url === 'delUser') {
@@ -274,6 +301,7 @@
                                     $('#enrollModal').modal('hide');
                                     // 페이지 리로드 또는 필요한 처리 수행
                                     alert("라커 회수 완료")
+                                    location.reload();
                                 },
                                 error: function (error) {
                                     // 에러 처리
@@ -316,7 +344,7 @@
                                     $('#enrollModal').modal('hide');
                                     // 페이지 리로드 또는 필요한 처리 수행
                                     alert("라커 등록 완료")
-                                    
+                                    location.reload();
                                 },
                                 error: function (error) {
                                     // 에러 처리
@@ -415,21 +443,39 @@
             document.getElementById('getState').value = state;
             var getMemNumValue = document.getElementById('getMemNum').value;
             console.log('getMemNum Value:', getMemNumValue);
+            console.log('state:',state);
                 // 락커 번호를 모달 폼의 hidden 필드에 설정
                 document.getElementById('getLockerNum').value = lockerNum;
-                if (getMemNumValue === null || getMemNumValue === undefined || getMemNumValue === "") {
+                if (getMemNumValue === "null" && state == "정상") {
                     // 만약 null이면 "delUserBtn" 버튼을 숨기고 다른 버튼들을 보이게 함
-                   
+                    console.log('멤버가 null');
+                   document.getElementById("recoverBtn").style.display = "none";
                     document.getElementById("delUserBtn").style.display = "none";
                     document.getElementById("addUserBtn").style.display = "inline-block";
                     document.getElementById("setRepairBtn").style.display = "inline-block";
-                } else {
-                    // 만약 null이 아니면 다른 버튼들을 숨기고 "delUserBtn" 버튼을 보이게 함
-                   
+                    document.getElementById("body-mo").style.display = "block";
+                    document.getElementById("recoverIcon").style.display = "none";
+                    document.getElementById("getNum").innerText = "회원을 선택하세요";
+                }
+                else if(state === "고장" && getMemNumValue === "null"){
+                	console.log('고장일떄');
+                	document.getElementById("recoverBtn").style.display = "inline-block";
+                    document.getElementById("delUserBtn").style.display = "none";
+                    document.getElementById("addUserBtn").style.display = "none";
+                    document.getElementById("setRepairBtn").style.display = "none";
+                    document.getElementById("body-mo").style.display = "none";
+                    document.getElementById("recoverIcon").style.display = "flex";
+                }
+                else if(getMemNumValue !== "null") {
+                	console.log('멤버가 있을때');
+                	document.getElementById("recoverBtn").style.display = "none";
                     document.getElementById("delUserBtn").style.display = "inline-block";
                     document.getElementById("addUserBtn").style.display = "none";
                     document.getElementById("setRepairBtn").style.display = "none";
-                } 
+                    document.getElementById("body-mo").style.display = "block";
+                    document.getElementById("recoverIcon").style.display = "none";
+                }
+                		
 /*                 document.getElementById('modalMemberNum').value = memberNum;
  */                // 모달 열기
  			

@@ -35,7 +35,7 @@ public class LockerController {
 		
 		mv.addObject("ar", ar);
 		model.addAttribute("memberNum", lockerVO.getMemberNum());
-		log.info("번호 : {} >>>>",lockerVO.getMemberNum());
+		log.info("리ㅡ스트 : {} >>>>",ar);
 		
 		mv.setViewName("locker/lockerList2");
 		
@@ -52,6 +52,12 @@ public class LockerController {
 	@PostMapping("setRepair")
 	public String setRepair(LockerVO lockerVO) throws Exception{
 		int result = lockerService.setRepair(lockerVO);
+		return "redirect:./lockerList2";
+	}
+	
+	@PostMapping("recoverLocker")
+	public String recoverLocker(LockerVO lockerVO) throws Exception{
+		int result = lockerService.recoverLocker(lockerVO);
 		return "redirect:./lockerList2";
 	}
 	

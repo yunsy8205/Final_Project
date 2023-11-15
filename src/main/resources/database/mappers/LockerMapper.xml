@@ -5,7 +5,7 @@
   <mapper namespace="com.cloud.pt.locker.LockerDAO">
   	<!-- 전체 라커 조회 -->
   	<select id="getLockerList" resultType="LockerVO" parameterType="LockerVO">
-SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,M.MEMBERNUM,STATE FROM LOCKER L INNER JOIN MEMBER M ON L.MEMBERNUM = M.MEMBERNUM;
+SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,L.MEMBERNUM ,L.STATE FROM LOCKER L LEFT OUTER JOIN MEMBER M ON L.MEMBERNUM = M.MEMBERNUM;
 </select>
   	
   	<!-- <insert id="addLocker" parameterType="LockerVO">
@@ -18,6 +18,10 @@ SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,M.MEMBERNUM,STATE FROM
   	<!-- 라커 고장 등록 -->
   	<update id="setRepair" parameterType="LockerVO">
   		UPDATE LOCKER SET STATE = '고장',STARTDATE = NULL, FINISHDATE = NULL WHERE LOCKERNUM = #{lockerNum}
+  	</update>
+  	<!-- 라커 수리 등록 -->
+  	<update id="recoverLocker" parameterType="LockerVO">
+  		UPDATE LOCKER SET STATE = '정상' WHERE LOCKERNUM = #{lockerNum}
   	</update>
   	<!-- 전체 멤버 조회(모달창에 띄우기) -->
   	<select id="getUser" resultType="MemVO" parameterType="MemVO">
