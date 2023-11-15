@@ -38,7 +38,7 @@ public interface AttendanceDAO {
 	//----------------------------------------
 	public Long getNum(Map<String, Object> map) throws Exception;
 	public AttendanceVO getDetail(Long num) throws Exception;
-	public AttendanceModifyVO getModify(Long num) throws Exception;
+	public AttendanceModifyVO getModify(AttendanceModifyVO attendanceModifyVO) throws Exception;
 	
 	public Long getModifyTotal(EmployeeVO employeeVO) throws Exception;
 	

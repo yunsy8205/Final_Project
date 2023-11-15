@@ -12,8 +12,8 @@
       text-align: center;
     }
     #req_btn {
-      text-align: right;
-      margin: 30px;
+      text-align: end;
+      margin: 2.2rem 7rem 1.8rem;
     }
     .card {
       margin: 30px;
@@ -25,6 +25,12 @@
       margin: 0rem 2.5rem 0 !important;
       max-width: calc(100% - 5.2rem) !important;
       padding: 0 !important;
+    }
+    .card {
+      margin: 1.2rem 7rem 1.8rem;
+    }
+    .table th {
+      font-size: 0.9rem !important;
     }
   </style>
 
@@ -67,25 +73,27 @@
                       </thead>
                       <tbody>
                         <c:forEach items="${list}" var="vo" varStatus="i">
-                          <tr>
-                            <td>${i.index+1}</td>
-                            <td>${vo.employeeVO.name}</td>
-                            <td>${vo.attendanceModifyVO.regDate}</td>
-                            <td>${vo.attendanceModifyVO.modifyDate}</td>
-                            <td>${vo.attendanceModifyVO.type}</td>
-                            <td>
-                            	<c:if test="${vo.attendanceModifyVO.status eq '승인'}">
-                            		<span class="badge bg-label-success me-1">${vo.attendanceModifyVO.status}</span>
-                            	</c:if>
-                            	<c:if test="${vo.attendanceModifyVO.status eq '요청'}">
-                            		<span class="badge bg-label-primary me-1">${vo.attendanceModifyVO.status}</span>
-                            	</c:if>	
-                            	<c:if test="${vo.attendanceModifyVO.status eq '반려'}">
-                            		<span class="badge bg-label-warning me-1">${vo.attendanceModifyVO.status}</span>
-                            	</c:if>			
-                            </td>
-                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">보기</a></td>
-                          </tr>
+                          <c:forEach items="${vo.attendanceModifys}" var="li" varStatus="j">  
+                            <tr>
+                              <td>${i.index+(j.index+1+i.index)}</td>
+                              <td>${vo.employeeVO.name}</td>
+                              <td>${li.regDate}</td>
+                              <td>${li.modifyDate}</td>
+                              <td>${li.type}</td>
+                              <td>
+                                <c:if test="${li.status eq '승인'}">
+                                  <span class="badge bg-label-success me-1">${li.status}</span>
+                                </c:if>
+                                <c:if test="${li.status eq '요청'}">
+                                  <span class="badge bg-label-primary me-1">${li.status}</span>
+                                </c:if>	
+                                <c:if test="${li.status eq '반려'}">
+                                  <span class="badge bg-label-warning me-1">${li.status}</span>
+                                </c:if>			
+                              </td>
+                              <td><a href="./detail?attendanceModifyNum=${li.attendanceModifyNum}">보기</a></td>
+                            </tr>
+                          </c:forEach>
                         </c:forEach>
                       </tbody>
                     </table>

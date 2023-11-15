@@ -187,7 +187,7 @@ public class AttendanceController {
 		int result = attendanceService.setModifyAdd(attendanceModifyVO, employeeVO);
 		String message = null;
 		if(result==0) {
-			message="해당 날짜의 근태수정요청이 이미 존재합니다";
+			message="근태수정요청이 이미 존재합니다";
 		}else if(result==-1){
 			message="당일 근태수정요청은 퇴근이후 가능합니다";
 		}else {

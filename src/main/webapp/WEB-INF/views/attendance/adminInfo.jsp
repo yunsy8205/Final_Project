@@ -67,7 +67,7 @@
       padding: 0 !important;
     }
     .table th{
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
     .fc-prev-button, .fc-next-button, .fc-myCustomButton-button{
       color: #fff !important;

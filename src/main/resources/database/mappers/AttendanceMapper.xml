@@ -239,19 +239,21 @@
 		</association>
 	</resultMap> 
 	
-	
+	<!-- 내 근태수정요청서 총 갯수 -->
 	<select id="getModifyTotal" parameterType="EmployeeVO" resultType="Long">
 		SELECT COUNT(ATTENDANCEMODIFYNUM)
 		<include refid="joinSql"></include>
 		WHERE E.EMPLOYEENUM=#{employeeNum}
 	</select>
 	
+	<!-- 내 근태수정요청서 상세 -->
 	<select id="getModifyDetail" resultType="AttendanceModifyVO" parameterType="AttendanceModifyVO">
 		SELECT * 
 		FROM ATTENDANCEMODIFY
 		WHERE ATTENDANCEMODIFYNUM=#{attendanceModifyNum}
 	</select>
 	
+	<!-- 내 근태수정요청 목록 -->
 	<select id="getModifyList" resultMap="getListResult" parameterType="Map">
 		SELECT AM.*, E.NAME 
 		<include refid="joinSql"></include>
@@ -262,7 +264,11 @@
 	
 	<resultMap type="AttendanceVO" id="getListResult">
 		<id column="ATTENDANCENUM" property="attendanceNum"/>
-		<association property="attendanceModifyVO" javaType="AttendanceModifyVO">
+		<association property="employeeVO" javaType="EmployeeVO">
+			<id column="EMPLOYEENUM" property="employeeNum"/>
+			<result column="NAME" property="name"/>
+		</association>
+		<collection property="attendanceModifys" javaType="List" ofType="AttendanceModifyVO">
 			<id column="ATTENDANCEMODIFYNUM" property="attendanceModifyNum"/>
 			<result column="ATTENDANCENUM" property="attendanceNum"/>
 			<result column="REGDATE" property="regDate"/>
@@ -270,11 +276,7 @@
 			<result column="MODIFYTIME" property="modifyTime"/>
 			<result column="STATUS" property="status"/>
 			<result column="TYPE" property="type"/>
-		</association>
-		<association property="employeeVO" javaType="EmployeeVO">
-			<id column="EMPLOYEENUM" property="employeeNum"/>
-				<result column="NAME" property="name"/>
-		</association>
+		</collection>
 	</resultMap>
 	
 	<!-- 근태 상세 -->
@@ -285,10 +287,11 @@
 	</select>
 	
 	<!-- 근태요청기록 조회 -->
-	<select id="getModify" resultType="AttendanceModifyVO" parameterType="Long">
+	<select id="getModify" resultType="AttendanceModifyVO" parameterType="AttendanceModifyVO">
 		SELECT *
 		FROM ATTENDANCEMODIFY
-		WHERE ATTENDANCENUM=#{num}
+		WHERE ATTENDANCENUM=#{attendanceNum}
+		AND TYPE=#{type}
 	</select>
 
 	<!-- 근태수정요청서 등록 -->
