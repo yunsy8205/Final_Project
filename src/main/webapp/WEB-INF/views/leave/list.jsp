@@ -32,28 +32,24 @@
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
             <!-- Content wrapper -->
-            <div class="content-wrapper">
+            <div class="content-wrapper container-xxl flex-grow-1 container-p-y" style="padding: 1rem 0 !important;">
               <!-- Content 내용 여기로 -->
-              
-              <div class="table-responsive text-nowrap">
-              <form action="./list" method="get">
-                <div class="input-group">
-                  
-								  <select id="kind" name="kind" class="select2 form-select">
-									  <option selected value="employeeNum">사원번호</option>
-									  <option value="name">이름</option>
-								  </select>
-								  <input type="text" class="form-control" id="search" name="search"/>
-								  <button
-									class="btn btn-outline-primary"
-									id="searchBtn"
-									type="submit"
-									>
-									조회
-								  </button>
-                
-								</div>
-              </form>
+			  <h3 style="text-align: center; margin:2rem 0 1rem;">휴가</h3>
+              <div class="container-xxl flex-grow-1 container-p-y" style="padding: 1rem 0 !important;">
+				<div>
+					<div class="m-5" style="margin:1.5rem auto !important;">
+					  <form action="./list" method="get" id="frm" style="display: flex;justify-content: center;">
+						<input type="hidden" value="${pager.page}" id="page" name="page">
+						<!-- 파라미터 이름 kind -->
+						<select name="kind" id="k" class="search form-select" aria-label="Default select example" style="width: 10%;" data-kind="${pager.kind}" >
+						  <option class="kind" value="employeeNum">사원번호</option>
+						  <option class="kind" value="name">이름</option>
+						</select> 
+						<input type="text" name="search" value="${pager.search}" class="search form-control" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
+						<button type="submit" class="btn btn-primary">조회</button>
+					  </form>
+					</div>
+				</div>
                 <table class="table table-hover">
                   <thead>
                     <tr>

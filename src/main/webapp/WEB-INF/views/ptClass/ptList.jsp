@@ -239,9 +239,11 @@ uri="http://www.springframework.org/tags" %>
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-
+            <h2></h2>
+			
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div id="calendar"></div>
+            <div id="calendar"></div>
+              
 
               <!-- 부트스트랩 modal 부분 -->
               <!-- Modal -->

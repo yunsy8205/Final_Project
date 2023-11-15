@@ -19,4 +19,6 @@ public class LockerVO {
 	private Date startDate;
 	private Date finishDate;
 	private String state;
+	private String memberName;
+	
 }

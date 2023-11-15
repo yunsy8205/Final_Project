@@ -78,13 +78,15 @@
 		</set>
 			WHERE ATTENDANCENUM=#{vo.attendanceNum}
 	</update>
- 
+ 	
+ 	<!-- 해당직원의 근태정보리스트 -->
 	<select id="getList" resultType="Map" parameterType="EmployeeVO">
 		SELECT *
 		FROM ATTENDANCE
 		WHERE EMPLOYEENUM=#{employeeNum}
 	</select>
 	
+	<!-- 전체직원의 근태정보리스트 -->
 	<select id="getAdminList" resultType="Map">
 		SELECT A.*, E.NAME, E.EMPLOYEENUM
 		FROM ATTENDANCE A
@@ -92,6 +94,7 @@
 			ON A.EMPLOYEENUM=E.EMPLOYEENUM
 	</select>
 	
+	<!-- 전체직원리스트 -->
 	<select id="getResources" resultType="Map">
 		SELECT *
 		FROM EMPLOYEE
