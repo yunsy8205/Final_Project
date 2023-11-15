@@ -66,7 +66,7 @@
                            />
                            <button class="btn btn-outline-primary" type="button" id="search">조회</button>
                          </div>
-                       <div id="listBox" class="">
+                       <div id="listBox" style="background-color: #ECEEF1">
                               <ul class="ul">
 					           <li class="li">관리자
 		                          <c:forEach items="${list}" var="li">
@@ -96,7 +96,7 @@
                   </div>
                 </div>
                 <div class="col-xl">
-                  <div class="box1 box3 card mb-4" style="background-color: #E7E7FF;">
+                  <div class="box1 box3 card mb-4" style="background-color: #E1E2FF;">
                     <div id="userBox" style="margin: auto;" class="userBox card-header d-flex justify-content-between align-items-center">
                       <h5 id="someone" class="mb-0" data-name="" style="color: #696CFF; font-weight: bold;"><i class='bx bxs-quote-alt-left'></i> 채팅하려는 대상을 선택해 주세요 <i class='bx bxs-quote-alt-right' ></i></h5>
                     </div>

@@ -55,7 +55,6 @@
 		.file1{
 			display: flex;
 			padding-top: 6px;
-			
 		}
 	</style>
 </head>
@@ -176,7 +175,7 @@
 	                        <div class="row justify-content-end">
 	                          <div class="col-sm-10">
 	                          	<a class="a1 btn btn-primary" href="./list">이전</a>
-	                            <button id="addBtn" type="button" class="btn btn-primary">등록</button>
+	                            <button id="addBtn" type="submit" class="btn btn-primary">등록</button>
 	                          </div>
 	                        </div>
 	                      </form>

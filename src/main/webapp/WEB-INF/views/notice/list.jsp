@@ -18,14 +18,6 @@
   <c:import url="/WEB-INF/views/layout/btmScript.jsp"></c:import>
 
 	<style>
-		.row > * {
-		    flex-shrink: 0;
-		    width: 100%;
-		    max-width: 100%;
-		    padding-right: 0;
-		    padding-left: 0;
-		    margin-top: var(--bs-gutter-y);
-		}
     	h3 {
 	    	margin: 2rem 0 1rem;
 	    	text-align: center;
@@ -41,6 +33,7 @@
 		.pinFont{
 			font-weight: bold;
 			color: black;
+	
 		}
 		.a2{
 			color: #435971;
@@ -50,10 +43,16 @@
 		}
 		#searchBox{
 			display: flex;
-			margin: 0 auto;
+			margin: 1rem auto;
 		    justify-content: center;
 		    align-items: flex-end;
 		}
+		.table th {
+	      font-size: 0.9rem !important;
+	    }
+	    .table thead {
+	      background: #e7e7ff;
+	    }
 	</style>
 	
 </head>
@@ -188,9 +187,14 @@
 												</thead>
 												<tbody class="table-border-bottom-0">
 													<c:forEach items="${pinList}" var="p">
-														<tr class="table-primary pinFont">
+														<tr class="pinFont">
 															<td><i class='bx bx-pin'></i></td>
-															<td><span class="badge bg-label-primary me-1">${p.category}</span>
+															<td><span class="
+																			<c:if test="${p.category == '인사'}">badge bg-label-primary me-1</c:if>
+																			<c:if test="${p.category == '시설'}">badge bg-label-success me-1</c:if>
+																			<c:if test="${p.category == '휴무'}">badge bg-label-info me-1</c:if>
+																			<c:if test="${p.category == '기타'}">badge bg-label-warning me-1</c:if>
+																">${p.category}</span>
 																<a class="a3" href="./detail?noticeNum=${p.noticeNum}">${p.title}</a></td>
 															<td>${p.name}</td>
 															<td>${p.modDate}</td>
@@ -200,7 +204,12 @@
 													<c:forEach items="${list}" var="li" varStatus="i">
 														<tr>
 															<td>${i.index+1}</td>
-															<td><span class="badge bg-label-primary me-1">${li.category}</span>
+															<td><span class="
+																			<c:if test="${li.category == '인사'}">badge bg-label-primary me-1</c:if>
+																			<c:if test="${li.category == '시설'}">badge bg-label-success me-1</c:if>
+																			<c:if test="${li.category == '휴무'}">badge bg-label-info me-1</c:if>
+																			<c:if test="${li.category == '기타'}">badge bg-label-warning me-1</c:if>
+																">${li.category}</span>
 																<a class="a2" href="./detail?noticeNum=${li.noticeNum}">${li.title}</a></td>
 															<td>${li.name}</td>
 															<td>${li.modDate}</td>

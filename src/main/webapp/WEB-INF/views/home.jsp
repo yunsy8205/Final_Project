@@ -46,16 +46,13 @@ uri="http://www.springframework.org/tags" %>
 					
 					<div
 					class="container-xxl flex-grow-1 container-p-y"
-					style="padding: 1rem 0 0 0 !important; height: 100%"
-					>
+					style="padding: 1rem 0 0 0 !important; height: 100%">
 						<div
 						class="row mb-3 r1"
 						style="
 						display: flex;
 						justify-content: space-between;
-						height: 45%;
-						"
-						>
+						height: 45%;">
 							<div class="card h-100" style="width: 20%">
 								<div class="card-body box1" style="height: 100%">
 									<div class="b1">
@@ -124,9 +121,12 @@ uri="http://www.springframework.org/tags" %>
 												<c:forEach items="${list}" var="n">
 													<tr>
 														<td>
-															<span class="badge bg-label-primary me-1"
-															>${n.category}</span
-															>
+															<span class="
+																		<c:if test="${n.category == '인사'}">badge bg-label-primary me-1</c:if>
+																		<c:if test="${n.category == '시설'}">badge bg-label-success me-1</c:if>
+																		<c:if test="${n.category == '휴무'}">badge bg-label-info me-1</c:if>
+																		<c:if test="${n.category == '기타'}">badge bg-label-warning me-1</c:if>
+															">${n.category}</span>
 															<a
 															class="a1"
 															href="./notice/detail?noticeNum=${n.noticeNum}"
