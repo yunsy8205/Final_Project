@@ -224,7 +224,7 @@ uri="http://www.springframework.org/security/tags" %>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/locker/lockerList" class="menu-link">
+                  <a href="/locker/lockerList2" class="menu-link">
                     <div data-i18n="Under Maintenance">전체 락커 목록</div>
                   </a>
                 </li>
@@ -313,7 +313,7 @@ uri="http://www.springframework.org/security/tags" %>
               </a>
             </li>
             
-            <li class="menu-item">
+           <!--  <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon fa-solid fa-circle-user"></i>
                 <div data-i18n="User interface">트레이너</div>
@@ -334,7 +334,7 @@ uri="http://www.springframework.org/security/tags" %>
                     <div data-i18n="Badges">식단 관리</div>
                   </a>
                 </li>
-                </ul>
+                </ul> -->
                 
               <li class="menu-item">
               <a href="/notice/list" class="menu-link">

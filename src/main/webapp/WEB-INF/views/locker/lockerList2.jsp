@@ -184,7 +184,7 @@
                           <div class="col mb-3">
                             <div class="mb-3">
                             	<input type="hidden" id="getMemNum">
-                            	<input type="text" id="getState">
+                            	<input type="hidden" id="getState">
                               <label for="defaultSelect" class="form-label">회원 목록</label>
                               
                               
