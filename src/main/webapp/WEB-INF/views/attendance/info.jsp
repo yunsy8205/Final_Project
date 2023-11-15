@@ -19,9 +19,11 @@
     .attendance #my {
       width:calc(100% - 75%);
       background-color: rgba(105, 108, 255, 0.16);
-      margin-right: 50px;
     }
-    .attendance #calendar {width:75%;}
+    .attendance #calendar {
+      width:75%;
+      margin-left: 3rem;
+    }   
     .fc .fc-toolbar.fc-header-toolbar {
     	margin-top: 2.5em;
     }
@@ -103,6 +105,11 @@
 	    height: 100%;
 	    object-fit: cover;	
 	  }
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+      padding: 0 !important;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -178,17 +185,19 @@
                   </div>
                 </div>
 
+                
                 <div id="my">
                   <div class="b1">
+                    <sec:authentication property="principal" var="user" />
                     <!-- 이미지 이름 직책 -->
                     <div id="proBox">
-                      <img id="userProfile" alt="" src="/file/employee/${vo.employeeVO.proFile}">
+                      <img id="userProfile" alt="" src="/file/employee/${user.proFile}">
                     </div>
                     <div class="user" id="user" style="font-weight:500;"> 
-                      ${vo.employeeVO.name}
+                      ${user.name}
                     </div>
-                    <div class="user" id="position">
-                      <span id="pInner" style="font-size: 0.9rem;">${vo.employeeVO.position}</span>
+                    <div class="user" id="position" data-position="${user.position}">
+                      <span id="pInner" style="font-size: 0.9rem;">${user.position}</span>
                     </div>
                   </div>
                   <div class="b2">
@@ -214,6 +223,7 @@
                 </div>
                 <div id="calendar">
                 </div>
+                
 
               </div>
               <!-- / Content -->  
@@ -234,5 +244,6 @@
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 
     <script src="/js/attendance/calendar.js"></script>
+    <script src="/js/home.js"></script>
   </body>
 </html>

@@ -30,4 +30,8 @@
 	<update id="upExerciseStatusOne" parameterType="PtTypeVO">
 		UPDATE PTTYPE SET FINISH = 1 WHERE PTTYPENUM =#{ptTypeNum}
 	</update>
+	
+	<update id="minusPt" parameterType="MemVO">
+		UPDATE MEMBER SET PTCOUNT = PTCOUNT -1 WHERE MEMBERNUM = #{memberNum}
+	</update>
   </mapper>
