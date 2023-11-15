@@ -2,9 +2,9 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   
-<h3>근태 수정 요청 목록</h3>
+<h3 style="padding: 10px;">근태 수정 요청 목록</h3>
 
-<div class="m-5">
+<div class="s_box">
   <form>
       <input type="hidden" value="1" name="page" id="page">
       <select name="kind" class="form-select" id="k" data-kind="${pager.kind}" aria-label="Default select example">
@@ -16,8 +16,8 @@ pageEncoding="UTF-8"%>
   </form>
 </div>
 
-<div class="card m-5">
-  <div id="req_list" class="table-responsive text-nowrap">
+<div class="card" style="margin-top: 3.6rem;">
+  <div id="req_list">
     <table class="table table-hover">
       <thead>
         <tr>

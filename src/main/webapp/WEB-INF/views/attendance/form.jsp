@@ -26,7 +26,11 @@
       background-color:#ffffff00 !important;
     }
     .card-body{
-      margin: 0 10%;
+      margin: 0 7%;
+    }
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
     }
   </style>
 
@@ -54,8 +58,8 @@
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="col-xxl">
-                  <div class="card mb-4">
-                    <h3 class="card-header mb-4">근태 수정 요청서</h3>
+                  <div class="card">
+                    <h3 class="card-header">근태 수정 요청서</h3>
                     <div class="card-body">
                       <form id="frm" method="post" action="/attendanceModify/add">
                         <div class="row g-3 mb-3">

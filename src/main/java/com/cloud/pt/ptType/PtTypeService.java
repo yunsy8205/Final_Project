@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.cloud.pt.member.MemVO;
 import com.cloud.pt.ptClass.PtClassVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -56,5 +57,8 @@ public class PtTypeService {
 	
 	public void upExerciseStatusOne(PtTypeVO ptTypeVO) throws Exception{
 		ptTypeDAO.upExerciseStatusOne(ptTypeVO);
+	}
+	public int minusPt(MemVO memVO) throws Exception{
+		return ptTypeDAO.minusPt(memVO);
 	}
 }

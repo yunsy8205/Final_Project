@@ -27,8 +27,13 @@
       margin-top: 1%;
       margin-bottom: 2em !important;
     }
+    .tab-pane  {
+      height: 100%;
+    }
     #calendar {
-      height: 600px; /* 원하는 높이(px)로 설정 */
+      height: 96%;
+      width: 91%;
+      margin: auto;
     }
     form {
       display: flex;
@@ -45,10 +50,37 @@
       margin: 0 8%;
     }
     .card{
-      margin: 3% 8%;
+      margin: 1.2rem 7rem 1.8rem;
     }
     .s_box{
-      margin: 2rem auto 0 !important;
+      margin: 1.5rem auto 0 !important;
+    }
+    .pagination {
+      margin-bottom: 0.7rem;
+    }
+    .tab-content {
+      height: 95%;
+    }
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+      padding: 0 !important;
+    }
+    .table th{
+      font-size: 0.8rem;
+    }
+    .fc-prev-button, .fc-next-button, .fc-myCustomButton-button{
+      color: #fff !important;
+      background-color: #5f61e6 !important; 
+      border-color: #5f61e6 !important;
+    }
+    .not {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 10%;
+    }
+    .nav-align-top{
+      height: 100%;
     }
   </style>
 
@@ -60,7 +92,7 @@
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.9/index.global.min.js'></script>
 	<!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@6.1.9/index.global.min.js'></script>
-
+  
 </head>
 <body>
     <!-- Layout wrapper -->
@@ -70,7 +102,7 @@
 		      <!-- sidebar -->
           <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
           <!-- Layout container -->
-          <div class="layout-page">
+          <div class="layout-page" style="padding-left: 0 !important;">
             <!-- Navbar -->
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
@@ -79,7 +111,7 @@
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
 
-                <div class="nav-align-top mb-4">
+                <div class="nav-align-top">
                   <ul class="nav nav-tabs nav-fill" role="tablist">
                     <li class="nav-item">
                       <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-home" aria-controls="navs-justified-home" aria-selected="true">

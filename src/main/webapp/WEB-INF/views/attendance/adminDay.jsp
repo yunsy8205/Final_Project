@@ -22,9 +22,14 @@
 <div class="b_box">
   <button id="month_btn" class="btn btn-primary">월별 근태 확인</button>
 </div>
+<c:if test="${empty list}">
+  <div class="not">
+    조회된 내용이 없습니다
+  </div>
+</c:if>
 <c:if test="${not empty list}"> 
 <div class="card">
-  <div id="attendance_day" class="table-responsive text-nowrap">
+  <div id="attendance_day">
     <table class="table table-hover">
       <thead>
         <tr>

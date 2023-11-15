@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.cloud.pt.member.MemVO;
+
 @Repository
 @Mapper
 public interface PtLogDAO {
@@ -15,4 +17,6 @@ public interface PtLogDAO {
 	public int addLog(PtLogVO ptLogVO) throws Exception;
 	
 	public int delLog(PtLogVO ptLogVO) throws Exception;
+	
+	
 }
