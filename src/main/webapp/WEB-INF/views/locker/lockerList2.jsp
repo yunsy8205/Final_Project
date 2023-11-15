@@ -180,7 +180,10 @@
                         ></button>
                       </div>
                       <div class="modal-body" >
-                      <i class='bx bxs-shield-x' style="display: none;" id="recoverIcon"></i>
+                      <div id="recoverIcon" style="align-items: center; justify-content: center"> 
+                      <i class='bx bxs-shield-x' style="display:inline-block; font-size:8rem;" ></i>
+                      <p style="display: inline-block; font-size: 2rem">사용불가</p>
+                      </div>
                       <div id="body-mo">
                        
                         <div class="row">
@@ -452,6 +455,7 @@
                     document.getElementById("setRepairBtn").style.display = "inline-block";
                     document.getElementById("body-mo").style.display = "block";
                     document.getElementById("recoverIcon").style.display = "none";
+                    document.getElementById("getNum").innerText = "회원을 선택하세요";
                 }
                 else if(state === "고장" && getMemNumValue === "null"){
                 	console.log('고장일떄');
@@ -460,7 +464,7 @@
                     document.getElementById("addUserBtn").style.display = "none";
                     document.getElementById("setRepairBtn").style.display = "none";
                     document.getElementById("body-mo").style.display = "none";
-                    document.getElementById("recoverIcon").style.display = "block";
+                    document.getElementById("recoverIcon").style.display = "flex";
                 }
                 else if(getMemNumValue !== "null") {
                 	console.log('멤버가 있을때');
