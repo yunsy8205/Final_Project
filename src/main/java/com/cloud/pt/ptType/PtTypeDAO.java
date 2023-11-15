@@ -6,6 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.cloud.pt.member.MemVO;
+
 @Repository
 @Mapper
 public interface PtTypeDAO {
@@ -24,5 +26,5 @@ public interface PtTypeDAO {
 	
 	public void upExerciseStatusOne(PtTypeVO ptTypeVO) throws Exception;
 
-	
+	public int minusPt(MemVO memVO) throws Exception;
 }

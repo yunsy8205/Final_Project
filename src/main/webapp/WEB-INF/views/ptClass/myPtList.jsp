@@ -77,6 +77,7 @@ border-color: rgba(0,0,0,0) !important;
                 				<th>가입일</th>
                 				<th>PT횟수</th>
                 				<th style="text-align: center;" id="btn" onclick="openModal()">수업예약</th>
+                				<th>운동일지</th>
                 				
                 			</tr>
                 			</thead>
@@ -86,13 +87,13 @@ border-color: rgba(0,0,0,0) !important;
 									<tr>
 										
 										<td>${vo.memberNum}</td>
-										<td><a href="#" onclick="sendData2('${vo.memberNum}', '${vo.employeeNum}', '${vo.memberName}')">${vo.memberName}</a></td>
+										<td>${vo.memberName}</td>
 										<td>${vo.phone}</td>
 										<td>${vo.gender}</td>
 										<td>${vo.joinDate}</td>
 										<td>${vo.ptCount}</td>
 										<td style="text-align: center;"><button class="btn rounded-pill btn-label-primary" onclick="sendData('${vo.memberNum}', '${vo.employeeNum}', '${vo.memberName}')">수업예약</button></td>
-									 	
+									 	<td><button class="btn btn-primary" onclick="sendData2('${vo.memberNum}', '${vo.employeeNum}', '${vo.memberName}')">운동관리</button></td>
 									
                 					</tr>
                 				</c:forEach>

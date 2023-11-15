@@ -35,10 +35,10 @@
 </head>
 <body>
   <div id="wrap" style="position: relative;">
-    <div class="authentication-wrapper authentication-basic container-p-y" style="width: 30%; position:absolute;left:50%;top:50%;transform: translate(-50%, -50%);">
+    <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner py-4">
         <!-- Forgot Password -->
-        <div class="card">
+        <div class="card" style="width: 25%; position:absolute;left:50%;top:50%;transform: translate(-50%, -50%);">
           <div class="card-body">
             <!-- Logo -->
             <div class="app-brand justify-content-center">
@@ -104,7 +104,7 @@
             <!-- /Logo -->
             <h4 class="mb-2" style="margin-top: 1.5rem; font-size: 1.2rem; text-align: center;">🔒비밀번호 찾기🔒</h4>
             <p class="mb-4">
-              <div id="block1" style="display: none;" >	
+              <div id="block1" style="display: none; text-align: center;" >	
                 <label>일치하는 정보가 존재하지 않습니다.</label>
               </div>
             </p>
