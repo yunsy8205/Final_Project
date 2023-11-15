@@ -27,7 +27,7 @@
 		    margin-top: var(--bs-gutter-y);
 		}
     	h3 {
-	    	margin-top: 40px !important;
+	    	margin: 2rem 0 1rem;
 	    	text-align: center;
 	    }
 	    .a1{
@@ -50,7 +50,7 @@
 		}
 		#searchBox{
 			display: flex;
-			margin: 2rem auto;
+			margin: 0 auto;
 		    justify-content: center;
 		    align-items: flex-end;
 		}
@@ -210,7 +210,7 @@
 												</tbody>
 											</table>
 										</div>
-										<nav aria-label="Page navigation" style="background-color: white;">
+										<nav aria-label="Page navigation" style="background-color: white; height: 2rem;">
 											<ul id="pageBox" class="pagination justify-content-center">
 												<li class="page-item prev ${pager.pre?'':'disabled'}">
 													<button class="pageBtn page-link" data-p="${pager.startNum-1}">

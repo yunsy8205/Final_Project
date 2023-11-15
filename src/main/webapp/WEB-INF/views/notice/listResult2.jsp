@@ -14,9 +14,9 @@
 						</tr>
 					</thead>
 					<tbody class="table-border-bottom-0">
-						<c:forEach items="${list}" var="li">
+						<c:forEach items="${list}" var="li"  varStatus="i">
 							<tr>
-								<td>${li.noticeNum}</td>
+								<td>${i.index+1}</td>
 								<td><span class="badge bg-label-primary me-1" data-cat="${li.category}">${li.category}</span>
 									<a class="a2" href="./detail?noticeNum=${li.noticeNum}">${li.title}</a></td>
 								<td>${li.name}</td>

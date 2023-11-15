@@ -57,92 +57,61 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <div class="container-xxl flex-grow-1 container-p-y">
-				<h3>공지사항</h3>
-
-              <div class="row">
-                <div class="mb-4">
-                    <div class="card-body">
-                      <div>
-                      	<table class="table">
-                      		<tr >
-                      			<th>제목</th>
-                      			<td id="title1" data-num="${notice.noticeNum}" colspan="5"><strong>${notice.category}</strong> ${notice.title}</td>
-                      		</tr>
-                      		<tr>
-                      			<th>작성자</th>
-                      			<td colspan="2">${notice.name}</td>
-                      			<td></td>
-                      			<td></td>
-                      			<td></td>
-                      		</tr>
-                      		<tr>
-                      			<th>작성일</th>
-                      			<td>${notice.modDate}</td>
-                      			<th>조회</th>
-                      			<td>${notice.hit}</td>
-                      			<td></td>
-                      			<td></td>
-                      		</tr>
-                      	</table>
-                      </div>
-                      <div>
-                      		${notice.contents}<br>
-                      		<hr>
-                      		<c:forEach items="${notice.list}" var="f">
-                      			<a href="./noticefiledown?fileNum=${f.fileNum}">${f.oriName}</a><br>
-                      		</c:forEach>
-                      </div>
-                      <hr>
-                      <div id="btn" class="col-sm-10">
-                          	<a class="a1 btn btn-primary" href="./list">이전</a>
-                            <a class="a1 btn btn-primary" href="./update?noticeNum=${notice.noticeNum}">수정</a>
-                            <button type="button" class="delete btn btn-primary">삭제</button>
-                            
-                      </div>
-                    </div>
-                  </div>
-                    <!-- /Account -->
-                  </div>
+              <div class="container-xxl flex-grow-1 container-p-y" style="max-width: 91rem !important;">
+				<div class="card">
+					<h3>공지사항</h3>
+	
+	              <div class="row">
+	                <div class="mb-4">
+	                    <div class="card-body">
+	                      <div>
+	                      	<table class="table">
+	                      		<tr >
+	                      			<th>제목</th>
+	                      			<td id="title1" data-num="${notice.noticeNum}" colspan="5"><strong>${notice.category}</strong> ${notice.title}</td>
+	                      		</tr>
+	                      		<tr>
+	                      			<th>작성자</th>
+	                      			<td colspan="2">${notice.name}</td>
+	                      			<td></td>
+	                      			<td></td>
+	                      			<td></td>
+	                      		</tr>
+	                      		<tr>
+	                      			<th>작성일</th>
+	                      			<td>${notice.modDate}</td>
+	                      			<th>조회</th>
+	                      			<td>${notice.hit}</td>
+	                      			<td></td>
+	                      			<td></td>
+	                      		</tr>
+	                      	</table>
+	                      </div>
+	                      <div>
+	                      		${notice.contents}<br>
+	                      		<hr>
+	                      		<c:forEach items="${notice.list}" var="f">
+	                      			<a href="./noticefiledown?fileNum=${f.fileNum}">${f.oriName}</a><br>
+	                      		</c:forEach>
+	                      </div>
+	                      <hr>
+	                      <div id="btn" class="col-sm-10">
+	                          	<a class="a1 btn btn-primary" href="./list">이전</a>
+	                          	<sec:authentication property="principal" var="user"/>
+									<c:if test="${user.position == 'ROLE_GENERAL'}">
+			                            <a class="a1 btn btn-primary" href="./update?noticeNum=${notice.noticeNum}">수정</a>
+			                            <button type="button" class="delete btn btn-primary">삭제</button>
+	                            	</c:if>
+	                      </div>
+	                    </div>
+	                  </div>
+	                    <!-- /Account -->
+	                  </div>
+				</div>
                 </div>
               </div>
               </div>
-              <!-- / Content --> 
-              
-              
-              <!-- Footer -->
-                <!-- <footer class="content-footer footer bg-footer-theme">
-                  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">
-                      ©
-                      <script>
-                        document.write(new Date().getFullYear());
-                      </script>
-                      , made with ❤️ by
-                      <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                    </div>
-                    <div>
-                      <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                      <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                      <a
-                        href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Documentation</a
-                      >
-
-                      <a
-                        href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Support</a
-                      >
-                    </div>
-                  </div>
-                </footer> -->
-                <!-- / Footer -->       
-
+              <!-- / Content -->
               <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->

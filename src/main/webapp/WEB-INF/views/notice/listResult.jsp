@@ -19,7 +19,7 @@
 					<tbody class="table-border-bottom-0">
 						<c:forEach items="${pinList}" var="p">
 							<tr class="table-primary pinFont">
-								<td>${p.noticeNum}</td>
+								<td><i class='bx bx-pin'></i></td>
 								<td><span class="badge bg-label-primary me-1">${p.category}</span>
 									<a class="a3" href="./detail?noticeNum=${p.noticeNum}">${p.title}</a></td>
 								<td>${p.name}</td>
@@ -27,9 +27,9 @@
 								<td>${p.hit}</td>
 							</tr>
 						</c:forEach>
-						<c:forEach items="${list}" var="li">
+						<c:forEach items="${list}" var="li" varStatus="i">
 							<tr>
-								<td>${li.noticeNum}</td>
+								<td>${i.index+1}</td>
 								<td><span class="badge bg-label-primary me-1">${li.category}</span>
 									<a class="a2" href="./detail?noticeNum=${li.noticeNum}">${li.title}</a></td>
 								<td>${li.name}</td>
