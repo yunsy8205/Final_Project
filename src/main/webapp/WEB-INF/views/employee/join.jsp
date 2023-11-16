@@ -35,8 +35,8 @@
         <!-- Content wrapper -->
         <div class="content-wrapper">
           <!-- Content 내용 여기로 -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="col-xxl">
+          <div class="container-xxl flex-grow-1 container-p-y" style=" margin-left: 2.4rem;">
+            <div class="col-xxl" style="width:92rem;">
               <div class="card mb-4">
                 <h3 class="emp_title card-header" style="text-align:center; margin:3rem 0;">직원 인적사항</h3>
                 <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" class="card-body" id="frm" action="./join">
