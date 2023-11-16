@@ -156,11 +156,39 @@
 
 
       const pro = document.getElementById("pro").value;
-
+      onerror="this.onerror=null; this.src='대체 이미지 주소';"
       if(pro == 'undefined'){
-        
+        let imgE = document.createElement("img");
+        imgE.setAttribute("src", "D:/pcy/bootWorkspace/upload/employee/basic.png")
       }
+
+
+
+
       console.log(pro);
+
+
+
+
+
+
+  function setThumbnail(event) {
+    for (let image of event.target.files) {
+      let reader = new FileReader();
+
+      reader.onload = function(event) {
+        let img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+        img.style.borderRadius = "50%";
+        document.querySelector("#imgDiv").appendChild(img);
+      };
+
+      reader.readAsDataURL(image);
+    }
+  }
     </script>
   </body>
 </html>

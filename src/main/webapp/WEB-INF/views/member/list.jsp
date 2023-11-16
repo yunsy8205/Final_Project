@@ -35,6 +35,9 @@
       justify-content: center !important;
     }
     .table > :not(:first-child) {box-shadow: 0 2px 3px rgba(0,0,0,0.01), 0 2px 3px rgba(0,0,0,0.12);}
+    .table th {
+      font-size: 0.9rem !important;
+    }
   </style>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 </head>
@@ -129,7 +132,7 @@
                   </div>
                   <div id="req_list" class="table-responsive text-nowrap">
                     <table class="table table-hover" style="text-align: center; background-color: white;">
-                      <thead>
+                      <thead style="background: #e7e7ff;;">
                         <tr>
                           <th>번호</th>
                           <th>이름</th>
