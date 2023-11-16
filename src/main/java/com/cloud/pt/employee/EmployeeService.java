@@ -259,12 +259,30 @@ public class EmployeeService implements UserDetailsService{
 
 	public List<EmployeeVO> getEmpList(EmployeeVO employeeVO, Pager pager)throws Exception{
 		Map<String, Object> map = new HashMap<>();
+		if(pager.getSearch().equals("대표")) {
+			pager.setSearch("ROLE_CEO");
+		}else if(pager.getSearch().equals("총괄")) {
+			pager.setSearch("ROLE_GENERAL");
+		}else if(pager.getSearch().equals("고객") || pager.getSearch().equals("고객관리") ) {
+			pager.setSearch("ROLE_CUSTOMER");
+		}else if(pager.getSearch().equals("인사")) {
+			pager.setSearch("ROLE_RESOURCES");
+		}else if(pager.getSearch().equals("시설")) {
+			pager.setSearch("ROLE_FACILITY");
+		}else if(pager.getSearch().equals("트레이너") || pager.getSearch().equals("트")) {
+			pager.setSearch("ROLE_TRAINER");
+		}else if(pager.getSearch().equals("가발령")) {
+			pager.setSearch("ROLE_EX");
+		}
 		pager.makeRowNum();
 		Long total = employeeDAO.getEmpTotal(pager);
 		pager.makePageNum(total);
 		
 		map.put("pager", pager);
 		map.put("emp", employeeVO);
+		
+		System.out.println(pager.getSearch());
+		
 		
 		return employeeDAO.getEmpList(map);
 	}
