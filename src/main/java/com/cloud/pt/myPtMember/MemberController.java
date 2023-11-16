@@ -49,7 +49,7 @@ public class MemberController {
 			EmployeeVO employeeVO = new EmployeeVO();
 			employeeVO.setEmployeeNum(b.getName());
 			List<MemVO> ar = memberService.getPtList(employeeVO, pager);
-			
+			log.info("startRow: {} >>",pager.getStartRow());
 			
 			mv.addObject("list", ar);
 			mv.addObject("pager", pager);

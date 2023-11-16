@@ -31,21 +31,23 @@ public class MemberService {
 	 * memberDAO.getPtList(memberVO); }
 	 */
 	
-	public Long getTotal() throws Exception{
-		return memberDAO.getTotal();
+	public Long getTotal(Pager pager) throws Exception{
+		return memberDAO.getTotal(pager);
 	}
 	
 	public List<MemVO> getPtList(EmployeeVO employeeVO , Pager pager) throws Exception{
-		
-		pager.setStartRow(0L);
-		pager.setLastRow(10L);
+		Map<String,Object> map = new HashMap<>();
+		pager.setPerPage(10L);
+		pager.makeRowNum();
+		Long total = memberDAO.getTotal(pager);
+		pager.makePageNum(total);
 		
 		SecurityContext context = SecurityContextHolder.getContext();
 	    org.springframework.security.core.Authentication b = context.getAuthentication();
 	    
 	    String employeeNum = b.getName();
 		
-		Map<String,Object> map = new HashMap<>();
+		
 		map.put("employeeNum", employeeVO.getEmployeeNum());
 		map.put("pager", pager);
 		
