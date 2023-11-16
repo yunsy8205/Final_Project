@@ -14,55 +14,11 @@
   data-template="vertical-menu-template-free"
 >
 <head>
-  <style>
-    h3 {
-      margin-top: 40px !important;
-      text-align: center;
-    }
-    #btn {
-      text-align: center;
-      margin: 3rem 0 0;
-    }
-    .form-control[readonly] {
-      background-color:rgba(105, 108, 255, 0.16) !important;
-    }
-    .card-body{
-      margin: 2.2rem 8rem;
-    }
-    .container-xxl {
-      margin: 0rem 2.5rem 0 !important;
-      max-width: calc(100% - 5.2rem) !important;
-    }
-    .form-label, .col-form-label {
-      font-size: 1rem !important;
-    }
-    #before_btn {
-      margin-right: 1rem;
-    }
-    .col-12 {
-      padding: 0 2rem !important;
-      margin-top: 2rem !important;
-    }
-    .col-md-2 {
-      width: 23% !important;
-    }
-    #frm > .row {
-      padding: 0 2rem;
-    }
-    .form-check-label {
-      padding-right: 1.7rem;
-      font-size: 1rem;
-    }
-    .col-md-10 {
-      width: 75% !important;
-    }
-  </style>
-
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
    
   <!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
-	
+	<link rel="stylesheet" href="/css/attendance/form.css"/>
 </head>
 
 <body>
@@ -127,7 +83,7 @@
                           <label for="content" class="form-label">요청사유</label>
                           <textarea name="requestContents" id="content" cols="30" rows="5" class="form-control" placeholder="요청사유를 입력해주세요"></textarea>
                         </div>
-                        <div id="btn">
+                        <div class="totalBtn">
                           <button type="button" id="before_btn" class="btn btn-primary">이전</button>
                           <button type="button" id="submit_btn" class="btn btn-primary">제출</button>
                         </div>

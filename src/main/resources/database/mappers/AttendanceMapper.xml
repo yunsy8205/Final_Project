@@ -63,11 +63,20 @@
 		FROM EMPLOYEE 
 	</select>
 	
+	<!-- 스케쥴러에서 사용 -->
+	<!-- 레코드를 삽입하고 기본키 또는 유니크 제약조건 위반 시 기존 레코드 업데이트 -->
 	<insert id="setEnd" parameterType="Map">
 		INSERT INTO ATTENDANCE
 		(EMPLOYEENUM, WORKDATE, STATE)
 		VALUES (#{vo.employeeNum}, #{date}, '결근')
+		ON DUPLICATE KEY UPDATE STATE='결근'
 	</insert>
+	
+<!-- 	<insert id="setEnd" parameterType="Map">
+		INSERT INTO ATTENDANCE
+		(EMPLOYEENUM, WORKDATE, STATE)
+		VALUES (#{vo.employeeNum}, #{date}, '결근')
+	</insert> -->
 
 	<update id="setState" parameterType="Map">
 		UPDATE ATTENDANCE

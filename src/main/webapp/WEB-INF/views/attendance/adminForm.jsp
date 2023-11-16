@@ -15,18 +15,8 @@
 >
 <head>
   <style>
-    h3 {
-      margin-top: 40px !important;
-      text-align: center;
-    }
     .modify_Con {
       display:flex; justify-content: space-between;
-    }
-    .form-control:disabled {
-      background-color:rgba(105, 108, 255, 0.16) !important;
-    }
-    .form-check-input, .form-check-label{
-      opacity: 1 !important;
     }
     table {
       height: 100%;
@@ -38,24 +28,9 @@
       margin-right: 30px;
     }
     .totalBtn {text-align:center;}
-    .container-xxl {
-      margin: 0rem 2.5rem 0 !important;
-      max-width: calc(100% - 5.2rem) !important;
-    }
-    .card-body{
-      margin: 2.2rem 8rem;
-    }
-    .form-label, .col-form-label {
-      font-size: 1rem !important;
-    }
-    .col-md-2 {
-      width: 23% !important;
-    }
-    .col-md-10 {
-      width: 75% !important;
-    }
   </style>
 
+  <link rel="stylesheet" href="/css/attendance/form.css"/>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 </head>
 
@@ -79,91 +54,90 @@
                   <div class="card">
                     <h3 class="card-header">근태 수정 요청안</h3>
                       <div class="card-body">
-                        <div class="modify_Con">
-                          <!-- <div class="card"> -->
-                            
-                          <!-- </div> -->
-
-                          <div id="form">
-                            <form>
-                              <div class="row g-3 mb-3">
-                                <div class="col-md-6">
-                                  <div class="mb-3 row">
-                                    <label for="writer" class="col-md-2 col-form-label">작성자</label>
-                                    <div class="col-md-10">                                    
-                                      <input type="text" id="writer" class="form-control" value="${vo.employeeVO.name}" disabled>
+                          <div class="divider">
+                            <div class="divider-text">요청정보</div>
+                            <div class="modify_Con">
+                              <div id="form">
+                                <form>
+                                  <div class="row g-3 mb-3">
+                                    <div class="col-md-6" style="width: 55%;">
+                                      <div class="mb-3 row">
+                                        <label for="writer" class="col-md-2 col-form-label">작성자</label>
+                                        <div class="col-md-10">                                    
+                                          <input type="text" id="writer" class="form-control" value="${vo.employeeVO.name}" disabled>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6" style="width: 45%;">
+                                      <c:set var="radioType" value="${vo.type}" />
+                                        <input type="radio" id="on" name="type" value="출근" ${radioType eq '출근' ? 'checked' : ''} class="form-check-input" disabled>
+                                        <label for="on" class="form-check-label">출근</label>
+                      
+                                        <input type="radio" id="off" name="type" value="퇴근" ${radioType eq '퇴근' ? 'checked' : ''} class="form-check-input" disabled>
+                                        <label for="off" class="form-check-label">퇴근</label>
                                     </div>
                                   </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <c:set var="radioType" value="${vo.type}" />
-                                    <input type="radio" id="on" name="type" value="출근" ${radioType eq '출근' ? 'checked' : ''} class="form-check-input" disabled>
-                                    <label for="on" class="form-check-label">출근</label>
-                  
-                                    <input type="radio" id="off" name="type" value="퇴근" ${radioType eq '퇴근' ? 'checked' : ''} class="form-check-input" disabled>
-                                    <label for="off" class="form-check-label">퇴근</label>
-                                </div>
-                              </div>
-                              <div class="row g-3 mb-3">
-                                  <label for="regDate" class="col-md-2 col-form-label">작성일</label>
-                                  <div class="col-md-10">                                    
-                                    <input type="date" id="regDate" name="regDate" class="form-control" value="${vo.regDate}" disabled>
+                                  <div class="row g-3 mb-3">
+                                      <label for="regDate" class="col-md-2 col-form-label">작성일</label>
+                                      <div class="col-md-10">                                    
+                                        <input type="date" id="regDate" name="regDate" class="form-control" value="${vo.regDate}" disabled>
+                                      </div>
                                   </div>
-                              </div>
-                              <div class="row g-3 mb-3">
-                                  <label for="requestDate" class="col-md-2 col-form-label">수정요청일</label>
-                                  <div class="col-md-10">                                    
-                                    <input type="date" id="requestDate" name="modifyDate" class="form-control" value="${vo.modifyDate}" disabled>
+                                  <div class="row g-3 mb-3">
+                                      <label for="requestDate" class="col-md-2 col-form-label">수정요청일</label>
+                                      <div class="col-md-10">                                    
+                                        <input type="date" id="requestDate" name="modifyDate" class="form-control" value="${vo.modifyDate}" disabled>
+                                      </div>
                                   </div>
-                              </div>
-                              <div class="row g-3 mb-3">
-                                  <label for="requestTime" class="col-md-2 col-form-label">수정요청시간</label>
-                                  <div class="col-md-10">
-                                    <input type="time" id="requestTime" name="modifyTime" class="form-control" value="${vo.modifyTime}" disabled>
+                                  <div class="row g-3 mb-3">
+                                      <label for="requestTime" class="col-md-2 col-form-label">수정요청시간</label>
+                                      <div class="col-md-10">
+                                        <input type="time" id="requestTime" name="modifyTime" class="form-control" value="${vo.modifyTime}" disabled>
+                                      </div>
                                   </div>
+                                  <div class="col-12">
+                                    <label for="content" class="form-label">요청사유</label>
+                                    <textarea name="requestContents" id="content" cols="30" rows="3" class="form-control" disabled>${vo.requestContents}</textarea>
+                                  </div>
+                                </form>
                               </div>
-                              <div class="col-12">
-                                <label for="content" class="form-label">요청사유</label>
-                                <textarea name="requestContents" id="content" cols="30" rows="3" class="form-control" disabled>${vo.requestContents}</textarea>
-                              </div>
-                            </form>
-                          </div>
 
-                          <div id="req_list" class="table-responsive text-nowrap">
-                            <table class="table table-bordered">
-                              <tr>
-                                <th>출근일</th>
-                                <td>${vo.attendanceVO.workDate}</td>
-                              </tr>
-                              <tr>
-                                <th>출근시간</th>
-                                <td>
-                                	<c:if test="${vo.type eq '출근'}">
-                                		${vo.originalTime}
-                                	</c:if>
-                                	<c:if test="${vo.type eq '퇴근'}">
-                                		${vo.attendanceVO.onTime}
-                                	</c:if>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th>퇴근시간</th>
-                                <td>
-                                	<c:if test="${vo.type eq '출근'}">
-                                		${vo.attendanceVO.offTime}
-                                	</c:if>
-                                	<c:if test="${vo.type eq '퇴근'}">
-                                		${vo.originalTime}
-                                	</c:if>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th>상태</th>
-                                <td>${vo.originalState}</td>
-                              </tr>
-                            </table>
+                              <div id="req_list" class="table-responsive text-nowrap">
+                                <table class="table table-bordered">
+                                  <tr>
+                                    <th>출근일</th>
+                                    <td>${vo.attendanceVO.workDate}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>출근시간</th>
+                                    <td>
+                                      <c:if test="${vo.type eq '출근'}">
+                                        ${vo.originalTime}
+                                      </c:if>
+                                      <c:if test="${vo.type eq '퇴근'}">
+                                        ${vo.attendanceVO.onTime}
+                                      </c:if>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th>퇴근시간</th>
+                                    <td>
+                                      <c:if test="${vo.type eq '출근'}">
+                                        ${vo.attendanceVO.offTime}
+                                      </c:if>
+                                      <c:if test="${vo.type eq '퇴근'}">
+                                        ${vo.originalTime}
+                                      </c:if>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th>상태</th>
+                                    <td>${vo.originalState}</td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
                           </div>
-                        </div>
                         <div>
                           <form id="frm" method="post" action="/admin/attendanceModify/update">
                             <div class="col-12">
@@ -179,7 +153,7 @@
                             <input type="hidden" name="type" value="${vo.type}">
                           </form>
                         </div>
-                        <div class="totalBtn m-5">
+                        <div class="totalBtn">
                           <button type="button" id="before_btn" class="btn btn-primary">이전</button>
                           <button type="button" id="approve_btn" class="btn btn-primary">승인</button>
                           <button type="button" id="reject_btn" class="btn btn-primary">반려</button>
