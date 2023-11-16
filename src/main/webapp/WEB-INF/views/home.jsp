@@ -109,6 +109,9 @@ uri="http://www.springframework.org/tags" %>
         overflow: hidden;
         margin: auto;
       }
+      .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+        min-height: 1rem;
+      }
     </style>
     <!-- moment lib -->
     <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js"></script>
@@ -133,8 +136,18 @@ uri="http://www.springframework.org/tags" %>
           right: "",
         },
         titleFormat: "YYYY년 M월",
-        height: "100%",
+        //height: "100%",
+        // contentHeight: 350,
+        contentHeight: function () {
+          if (screen.width < 800) {
+            return 350;
+          } else {
+            return 850;
+          }
+        },
+        contentHeight: 300,
         fixedWeekCount: false,
+        expandRows: true, // 화면에 맞게 높이 재설정
         events: "/attendance/month",
       });
       //캘린더 그리기
@@ -278,7 +291,12 @@ uri="http://www.springframework.org/tags" %>
                       <h5>총 회원 현황</h5>
                     </div>
                     <div class="chart1">
-                      <canvas id="myChart" width="582.5" height="330"></canvas>
+                      <canvas
+                        id="myChart"
+                        width="666"
+                        height="330"
+                        style="padding-bottom: 1rem"
+                      ></canvas>
                     </div>
                     <div>
                       <c:forEach items="${chart}" var="c">

@@ -107,7 +107,7 @@
 											</li>
 											<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 											   <li class="page-item">
-												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+												 <a class="page-link move b1" id="first" value="1" data-num="${i}" href="#">${i}</a>
 											   </li>
 											</c:forEach>
 											<li class="page-item next ${pager.next?'':'disabled'}">
@@ -366,5 +366,9 @@
     </div>
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+	<script>
+
+		console.log($("#first").attr("data-num"));
+	</script>
   </body>
 </html>
