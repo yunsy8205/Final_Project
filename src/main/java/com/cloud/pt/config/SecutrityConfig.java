@@ -59,6 +59,8 @@ public class SecutrityConfig {
 				.antMatchers("/membership/form").hasAnyRole("CUSTOMER")
 				.antMatchers("/membership/delete").hasAnyRole("CUSTOMER")
 				.antMatchers("/registration/form").hasAnyRole("CUSTOMER")
+				.antMatchers("/machine/add").hasAnyRole("GENRAL", "FACILITY")
+				.antMatchers("/locker/lockerList2").hasAnyRole("GENTAL","FACILITY")
 				.antMatchers("/").permitAll()
 				.and()
 				
