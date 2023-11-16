@@ -38,18 +38,22 @@ public class ApprovalController {
 		List<ApprovalVO> al = approvalService.getApprovalAllList(pager,approvalVO);
 		model.addAttribute("list", al);
 		model.addAttribute("pager", pager);
-		List<ApprovalVO> wl = approvalService.getApprovalWatingList(pager,approvalVO);
+		Pager pager1 = new Pager();
+		List<ApprovalVO> wl = approvalService.getApprovalWatingList(pager1,approvalVO);
 		model.addAttribute("wl",wl);
-		model.addAttribute("wp",pager);
-		List<ApprovalVO> pl = approvalService.getApprovalProceedingList(pager,approvalVO);
+		model.addAttribute("wp",pager1);
+		Pager pager2 = new Pager();
+		List<ApprovalVO> pl = approvalService.getApprovalProceedingList(pager2,approvalVO);
 		model.addAttribute("pl",pl);
-		model.addAttribute("pp",pager);
-		List<ApprovalVO> rl = approvalService.getApprovalRejectList(pager,approvalVO);
+		model.addAttribute("pp",pager2);
+		Pager pager3 = new Pager();
+		List<ApprovalVO> rl = approvalService.getApprovalRejectList(pager3,approvalVO);
 		model.addAttribute("rl",rl);
-		model.addAttribute("rp",pager);
-		List<ApprovalVO> cl = approvalService.getApprovalCompleteList(pager,approvalVO);
+		model.addAttribute("rp",pager3);
+		Pager pager4 = new Pager();
+		List<ApprovalVO> cl = approvalService.getApprovalCompleteList(pager4,approvalVO);
 		model.addAttribute("cl",cl);
-		model.addAttribute("cp",pager);
+		model.addAttribute("cp",pager4);
 ;	}
 	
 	@GetMapping("add")
@@ -70,9 +74,10 @@ public class ApprovalController {
 		List<ApprovalVO> abl = approvalService.getApproverAllBeforeList(pager,approvalVO);
 		model.addAttribute("abl", abl);
 		model.addAttribute("abpager", pager);
-		List<ApprovalVO> aal = approvalService.getApproverAllAfterList(pager,approvalVO);
+		Pager pager1 = new Pager();
+		List<ApprovalVO> aal = approvalService.getApproverAllAfterList(pager1,approvalVO);
 		model.addAttribute("aal", aal);
-		model.addAttribute("aapager", pager);
+		model.addAttribute("aapager", pager1);
 		
 		
 	}

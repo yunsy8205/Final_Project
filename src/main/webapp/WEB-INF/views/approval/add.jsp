@@ -375,11 +375,126 @@
 
 											</tr>
 											<tr>
-												<td style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 100px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; vertical-align: middle; background-color: rgb(255, 255, 255);"
-													colspan="4" class="dext_table_border_t"><span
-														style="font-weight: bold; font-family: &amp; amp; amp; quot; malgun gothic&amp;amp; amp; quot; , dotum , arial, tahoma; font-size: 11pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">휴가기준
-														제 13조에 의거 휴가를 신청하오니 허락하여 주시기 바랍니다.</span></td>
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													첨부파일</td>
+												<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3" class="dext_table_border_t">
+													<input type="file"> <p>*질병일경우 진단서 첨부</p>
+
+												</td>
 											</tr>
+										</tbody>
+									</table>
+									</c:if>
+									<c:if test="${param.division=='지출결의서'}">
+										<table
+										style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 10px; border-collapse: collapse;">
+										<!-- 품의서 -->
+										<colgroup>
+											<col width="200">
+											<col width="350">
+											<col width="200">
+											<col width="200">
+										</colgroup>
+										<tbody>
+										<tr>
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													제목</td>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3">
+													<input type="text" name="title">
+												</td>
+											</tr>
+
+											<tr id="leaveReasonRow">
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													내용</td>
+												<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3" class="dext_table_border_t">
+													<textarea id="summernote" name="contents"></textarea>
+
+												</td>
+
+											</tr>
+											<tr>
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													첨부파일</td>
+												<td style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													colspan="3" class="dext_table_border_t">
+													<input type="file">
+
+												</td>
+											</tr>
+											
+										</tbody>
+									</table>
+									<table
+										style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 10px; border-collapse: collapse;">
+										<!-- 품의서 -->
+										<colgroup>
+											<col width="200">
+											<col width="200">
+											<col width="200">
+											<col width="200">
+											<col width="200">
+											
+										</colgroup>
+										<tbody id="moneyBody">
+											<tr>
+												<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													일자</td>
+													<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													분류</td>
+													<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													금액</td>
+													<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													사용내역</td>
+													<td
+													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
+
+													비고</td>
+										
+												
+											</tr>
+											<tr>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													>
+													<input type="date" name="title">
+												</td>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													>
+													<input type="text" name="title">
+												</td>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													>
+													<input type="text" name="money">
+												</td>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													>
+													<input type="text" name="title">
+												</td>
+												<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
+													>
+													<input type="text" name="title">
+												</td>
+											</tr>
+											
 										</tbody>
 									</table>
 									</c:if>
@@ -387,7 +502,9 @@
 									<input type="hidden" id="last" name="last">
 									<input type="hidden" name="category" value="${param.division}">
 									<button type="button" id="approvalBtn" class="btn btn-primary">제출</button>
-									
+									<button type="button" id="backBtn" class="btn btn-primary">이전</button>
+								
+									  
 								
 								</form>
 

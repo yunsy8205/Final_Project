@@ -54,7 +54,7 @@
                           <div class="col-xxl">
                               <div class="card mb-4">
                                 <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;">
-                                  <h1 class="mb-0" style="font-size: calc(1.2875rem + 0.45vw);"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span> 정보</h1>
+                                  <h3 class="mb-0"><span style="font-weight: 600;">${employeeVO.name} ${employeeVO.position}</span> 정보</h3>
                                   <div class="proFile_con" style="width: 10rem; height:10rem; margin: 2rem;">
                                     <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" onerror="this.style.display='none'" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;">
                                   </div>

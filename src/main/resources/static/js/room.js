@@ -25,12 +25,12 @@
       
       //대상 채팅창 인풋 보이기
       $('#box2').attr("style", "");
+      $('.box3').attr("style", "");
       $('#userBox').attr("style", "");
+      $('#someone').attr("style", "");
       
    });
 
-   
-    
     socket.onclose=function(e){
         console.log('disconnet');
     };
@@ -50,12 +50,12 @@
       if(roomNum == jsonObj.roomNum){
          
          if(user==jsonObj.sender){
-            msgTag = '<div class="myMsg alert alert-primary msg" role="alert"><div style="font-size: 16px; font-weigth:bold">'
-                   +name+'</div><hr style="background-color:white !important;"><div>'
+            msgTag = '<div class="myMsg alert alert-primary msg" role="alert"><div>'
+                   +name+'</div><hr style="background-color:white !important;"><div class="mes">'
                    +jsonObj.message+'</div><div class="chatDate">'+jsonObj.chatDate+'</div></div>';
          }else{
             msgTag = '<div class="yourMsg alert msg" role="alert"><div>'
-                      +jsonObj.name+'</div><hr><div>'
+                      +jsonObj.name+'</div><hr><div class="mes">'
                       +jsonObj.message+'</div><div class="chatDate">'+jsonObj.chatDate+'</div></div>';
          }
       }
@@ -78,7 +78,7 @@
 		  
 		  let name = $("#searchName").val();
 	      $('#listBox').empty();
-	      getSearch(name);
+	      getTotalSearch(name);
 	  }
    });
    
@@ -94,8 +94,7 @@
        if (event.key === "Enter") {
           
           let memName = $("#searchName").val();
-      
-         $('#listBox').empty();
+     	$('#listBox').empty();
          getSearch(memName);
        }
    });
@@ -207,16 +206,41 @@
             
             if (response.list != null) {
             console.log("list 가져옴");
-                                    
+                                   
             searchList = response.list;
             
             $.each(searchList, function( index, value ) {
-                   let a = '<i class="mx-1 bx bx-message-square"></i><a href="#" class="chatList" data-empNum="'+value.employeeNum+'">'+value.name+' '+value.position+'</a><br>'
+                   let a = '<li class="ul2"><a href="#" class="chatList" data-empNum="'+value.employeeNum+'"><i class="mx-1 bx bx-message-square"></i>'+value.name+' '+value.position+'</a></li>'
                     $('#listBox').append(a);
                 });
             } else {
             console.log("list 가져오기 실패");
             }
+            
+         },
+         error:function(){
+            console.log("ajax 실패");
+         }
+         })   
+   }
+   
+   function getTotalSearch(name){
+      
+         $.ajax({
+         type:"get",
+         url:"./totalsearch",
+         data:{
+            "name":name
+         },
+         success:function(response){
+			if (response != null) { 
+			console.log(response);
+			$('#listBox').empty();
+			$('#listBox').append(response);
+			}else{
+				
+            console.log("list 가져오기 실패");
+			}
             
          },
          error:function(){

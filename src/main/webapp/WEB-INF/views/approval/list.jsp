@@ -47,7 +47,11 @@
 						<button type="submit" class="btn btn-primary">조회</button>
 					  </form>
 					</div>
+					
 				</div>
+				<div style="text-align: right; margin-bottom: 3rem; margin-right: 1rem;">
+					<a class="btn btn-primary" href="/approval/add?division=휴가신청서">새결재작성</a>
+				  </div>
 					<div class="nav-align-top mb-4">
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item" role="presentation">
@@ -101,19 +105,20 @@
 										</table>
 									</div>
 									
-										<ul class="pagination justify-content-center">
-											<li class="page-item prev ${pager.pre?'':'disabled'}">
-											  <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
-											</li>
-											<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-											   <li class="page-item">
-												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
-											   </li>
-											</c:forEach>
-											<li class="page-item next ${pager.next?'':'disabled'}">
-											  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
-											</li>
-										  </ul>
+									<ul class="pagination justify-content-center">
+										<li class="page-item prev ${pager.pre?'':'disabled'}">
+										  <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+										</li>
+										<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+										   <li class="page-item">
+										   	<a class="page-link move b1" value="1" data-num="${i}" href="./list?kind=${pager.kind}&search=${pager.search}&page=${i}">${i}</a>
+										   </li>
+										</c:forEach>
+										<li class="page-item next ${pager.next?'':'disabled'}">
+										  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+										</li>
+									</ul>
+									
 									
 								</div>
 								<!--/ Hoverable Table rows -->
@@ -310,7 +315,7 @@
 								</div>
 								<!--/ Hoverable Table rows -->
 							</div>
-							<a class="btn btn-primary" href="/approval/add?division=휴가신청서">새결재작성</a>
+							
 						</div>
 						
 					</div>
@@ -366,5 +371,9 @@
     </div>
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+	<script>
+
+		console.log($("#first").attr("data-num"));
+	</script>
   </body>
 </html>

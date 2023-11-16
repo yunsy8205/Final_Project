@@ -30,12 +30,16 @@
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
             <!-- Content wrapper -->
-            <div class="content-wrapper container-xxl flex-grow-1 container-p-y">
+            <div class="content-wrapper container-xxl flex-grow-1 container-p-y" style="width: 80%; justify-content: flex-start;">
               <!-- Content 내용 여기로 -->
-              <h3 style="text-align: center; margin:2rem 0 1rem;">전체 기구 목록</h3>
-              <div style="text-align: right; margin-bottom: 3rem; margin-right: 1rem;">
+              <h3 style="text-align: center; margin:1.5rem 0 4rem;">전체 기구 목록</h3>
+              <div style="text-align: right; margin-bottom: 5rem; margin-right: 1rem;">
                 <a href="/machine/add" class="btn btn-primary">기구 등록</a>
-                <button type="button" id="maDel" data-url="/machine/delete" class="btn btn-primary">기구 삭제</button>
+                <sec:authorize access="isAuthenticated()">
+                  <sec:authorize access="hasRole('ROLE_FACILITY')">
+                    <button type="button" id="maDel" data-url="/machine/delete" class="btn btn-primary">기구 삭제</button>
+                  </sec:authorize>
+                </sec:authorize>
               </div>
               <div class="row mb-5" style="margin-bottom: 5rem !important;">
                 <c:forEach items="${list}" var="vo" varStatus="i">
@@ -44,7 +48,7 @@
                       <div class="card-body" style="text-align: center;">
                         <input type="checkbox" value="${i.index+1}" data-machineNum="${vo.machineNum}" onclick="deleteSelected()" style="float:left;width:1.2rem;height:1.2rem;">
                         <div style="width: 13rem; height:13rem; margin: 2rem auto;"> 
-                          <img alt="직원 프로필" onerror="this.style.display='none'" style="width:100%; height: 100%; object-fit: cover;"
+                          <img alt="기구사진" onerror="this.style.display='none'" style="width:100%; height: 100%; object-fit: cover;"
                             class="img-fluid d-flex mx-auto my-4"
                             src="../file/machine/${vo.fileName}"
                           />

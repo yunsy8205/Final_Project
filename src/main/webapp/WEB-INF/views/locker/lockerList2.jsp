@@ -16,7 +16,12 @@
   data-assets-path="../assets/"
   data-template="vertical-menu-template-free"
 >
-
+<%! 
+    public long calculateDateDifference(java.util.Date startDate, java.util.Date finishDate) {
+        long diffInMilliseconds = finishDate.getTime() - startDate.getTime();
+        return diffInMilliseconds / (24 * 60 * 60 * 1000); // 밀리초를 일로 변환
+    }
+%>
 
 
 <head>
@@ -80,15 +85,11 @@
               <div class="container-xxl flex-grow-1 container-p-y">
                 
                 
-                	<table class="pull-right">
-                    <tr>
-                        <td>
-                          <h3>🔐 락커 관리</h3>
-                        </td>
-                    </tr>        
-                  </table>
+                	
+                          <h3 style="text-align: center; margin-bottom: 0">🔐 락커 관리</h3>
+                      
 
-                  <br>
+                
                   
   <div class="lockerPadding">
     <%
@@ -126,7 +127,7 @@
         >
             <!-- lockerInfo가 null이 아닌 경우에만 정보 출력 -->
             <% if (lockerVO != null) { %>
-                <div class="lockerInfo" style="font-size: 12px">
+                <div class="lockerInfo" style="font-size: 0.8rem">
                     <%-- memberNum이 null이고 state가 정상이면 lockerNum만 출력 --%>
                     <% if (lockerVO.getMemberNum() == null && "정상".equals(lockerVO.getState())) { %>
                         <%= lockerNum %>
@@ -137,8 +138,8 @@
                     <% } else if (lockerVO.getMemberNum() != null && "정상".equals(lockerVO.getState())) { %>
                        
                         <%= lockerVO.getMemberName() %><br>
-                    <%= lockerVO.getStartDate() %><br>
-                    <%= lockerVO.getFinishDate() %><br> 
+                    <%= "~"+lockerVO.getFinishDate() %><br> 
+                    <%= calculateDateDifference(lockerVO.getStartDate(), lockerVO.getFinishDate())+"일 후 만료" %><br>
                     <% } %>
                     <%-- <%= lockerVO.getMemberName() %><br>
                     <%= lockerVO.getStartDate() %><br>
@@ -220,7 +221,7 @@
                       </div>
                       <div class="modal-footer">
                       
-					        <button type="button" class="btn btn-primary"id="delUserBtn" onclick="postFormSubmit2('delUser');">라커회수</button>
+					        <button type="button" class="btn btn-primary"id="delUserBtn" onclick="postFormSubmit2('delUser');">락커회수</button>
 					   		<button type="button" class="btn btn-primary" id="recoverBtn" onclick="postFormSubmit2('recoverLocker');">라커수리</button>
 					    
 					    <!-- memberNum이 없을 경우에만 락커등록과 고장등록 버튼 표시 -->

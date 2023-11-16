@@ -57,7 +57,7 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
-              <div class="container-xxl flex-grow-1 container-p-y" style="padding: 1rem 0 !important;">
+              <div class="container-xxl flex-grow-1 container-p-y" style="padding: 1rem 0 !important; width: 80%;">
                 <h3 style="text-align: center; margin:2rem 0 1rem;">전체 회원 목록</h3>   
                 <div class="container-xxl flex-grow-1 container-p-y" style="padding-top: 0 !important; text-align: center;">
                   <div>

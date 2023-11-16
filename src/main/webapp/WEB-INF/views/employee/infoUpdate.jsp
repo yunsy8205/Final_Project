@@ -44,10 +44,10 @@
                       <c:if test="${fn:contains(['대표','총괄 매니저','고객관리 매니저','인사 매니저','시설 매니저','가발령'], employeeVO.position)}">
                         <div id="allDiv">
                           <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" id="frm" action="./infoUpdate">
-                            <div class="proFile_con" style="text-align: center;margin: 2rem auto 3rem;">
+                            <div class="proFile_con" style="text-align: center;margin: 2rem auto 3rem; display: flex; flex-direction: column;align-items: center;">
                               <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" style="width:10rem; height:10rem;border-radius: 50%; object-fit: cover;"  onerror="this.style.display='none'">
                               <p>${employeeVO.proOriginal}</p>
-                              <input type="file"  name="empfile" id="proFile" style="width: 13rem;" required/>
+                              <input type="file"  name="empfile" id="proFile" style="width: 13rem;"  class="form-control" required/>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: 5rem;">
                               <div  class="empLeft" style="width: 47%;">

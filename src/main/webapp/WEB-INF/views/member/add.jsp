@@ -35,9 +35,9 @@
         <!-- Content wrapper -->
         <div class="content-wrapper">
           <!-- Content 내용 여기로 -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="col-xxl">
-              <div class="card mb-4">
+          <div class="container-xxl flex-grow-1 container-p-y" style="margin-left: 2.4rem;">
+            <div class="col-xxl" style="width: 92rem;">
+              <div class="card mb-4" style="padding: 0 5rem 2rem;">
                   <h5 class="card-header" style="text-align: center; margin: 3rem 0;">신규 회원 등록</h5>
                   <form class="card-body" action="./add" method="post" enctype="multipart/form-data" id="frm">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5rem;" >

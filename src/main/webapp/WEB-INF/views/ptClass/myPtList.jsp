@@ -39,6 +39,12 @@ border-color: rgba(0,0,0,0) !important;
     box-shadow: 0 0.125rem 0.25rem 0 rgba(105,108,255,.4) !important;
     transform: translateY(-1px) !important;
 }
+.table th {
+      font-size: 0.9rem !important;
+    }
+    .table thead {
+      background: #e7e7ff;
+    }
 </style>
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -63,7 +69,7 @@ border-color: rgba(0,0,0,0) !important;
             <div class="content-wrapper">
               <!-- Content 내용 여기로 -->
               <div class="container-xxl flex-grow-1 container-p-y">
-                <p>회원조회</p>
+                <p style="text-align: center; font-size:1.5rem; font-weight: 700 ">회원조회</p>
                 
                 <div class="card">
                 	<div class="table-responsive text-nowrap">
@@ -105,7 +111,19 @@ border-color: rgba(0,0,0,0) !important;
 
               </div>
               <!-- / Content --> 
-              
+              <ul class="pagination justify-content-center">
+                <li class="page-item prev ${pager.pre?'':'disabled'}">
+                  <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+                </li>
+                <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+                   <li class="page-item">
+                     <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+                   </li>
+                </c:forEach>
+                <li class="page-item next ${pager.next?'':'disabled'}">
+                  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+                </li>
+              </ul>
               
              
                      
