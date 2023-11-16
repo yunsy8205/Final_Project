@@ -14,23 +14,8 @@
   data-template="vertical-menu-template-free"
 >
 <head>
-  <style>
-    h3 {
-      margin-top: 40px !important;
-      text-align: center;
-    }
-    #btn {
-      text-align: center;
-    }
-    .form-control:disabled {
-      background-color:#ffffff00 !important;
-    }
-    .form-check-input, .form-check-label{
-      opacity: 1 !important;
-    }
-  </style>
-
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+  <link rel="stylesheet" href="/css/attendance/form.css"/>
 </head>
 
 <body>

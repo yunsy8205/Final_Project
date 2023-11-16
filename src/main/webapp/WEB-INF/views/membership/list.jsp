@@ -32,6 +32,9 @@
     .table thead {
       background: #e7e7ff;
     }
+    .table {
+      text-align: center;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -97,7 +100,7 @@
                             </td>
                             <td>${vo.price}원</td>
                             <td>
-                              <button class="btn btn-primary del_btn" data-num="${vo.membershipNum}">삭제</button>
+                              <button class="btn btn-sm btn-primary del_btn" data-num="${vo.membershipNum}">삭제</button>
                             </td>
                           </tr>
                         </c:forEach>

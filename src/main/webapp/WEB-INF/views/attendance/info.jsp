@@ -139,6 +139,9 @@
     .close {
       width: 50%;
     }
+    .fc-license-message{
+      display: none !important;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>

@@ -52,7 +52,7 @@ pageEncoding="UTF-8"%>
             </td>
             <td>
               <a href="/admin/attendanceModify/detail?attendanceModifyNum=${vo.attendanceModifyNum}">
-                보기
+                <i class='bx bx-info-circle'></i>
               </a>
             </td>
           </tr>
