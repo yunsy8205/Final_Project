@@ -172,7 +172,7 @@
 
 
 
-      function setThumbnail(event) {
+  function setThumbnail(event) {
     for (let image of event.target.files) {
       let reader = new FileReader();
 
