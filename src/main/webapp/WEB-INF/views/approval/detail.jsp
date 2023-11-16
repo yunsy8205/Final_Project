@@ -51,7 +51,7 @@
 												colspan="2"
 												class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
 
-												휴가신청서</td>
+												${approvalVO.category}</td>
 										</tr>
 										<tr>
 											<td
@@ -197,6 +197,7 @@
 										</tr>
 									</tbody>
 								</table>
+								<c:if test="${approvalVO.category=='휴가신청서'}">
 								<table
 									style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 10px; border-collapse: collapse;">
 									<!-- 품의서 -->
@@ -296,7 +297,7 @@
 										</tr>
 									</tbody>
 								</table>
-								
+								</c:if>
 
 
 							</div>

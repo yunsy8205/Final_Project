@@ -16,7 +16,15 @@
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
   <script src='/fullcalendar-6.1.9/fullcalendar-6.1.9/dist/index.global.js'></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <style>
+    .table th{
+      font-size: 0.9rem !important;
+    }
+    .table thead{
+      background:#e7e7ff;
+    }
+  </style> 
 </head>
 
 <body>
@@ -88,7 +96,7 @@
               
                 <ul class="pagination justify-content-center">
                   <li class="page-item prev ${pager.pre?'':'disabled'}">
-                    <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+                    <a class="page-link move" data-num="${pager.startNum-1}" href="./list?kind=${pager.kind}&search=${pager.search}&page=${i-1}"><i class="tf-icon bx bx-chevrons-left"></i></a>
                   </li>
                   <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
                      <li class="page-item">
@@ -96,7 +104,7 @@
                      </li>
                   </c:forEach>
                   <li class="page-item next ${pager.next?'':'disabled'}">
-                    <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+                    <a class="page-link move" data-num="${pager.lastNum+1}" href="./list?kind=${pager.kind}&search=${pager.search}&page=${i+1}"><i class="tf-icon bx bx-chevrons-right"></i></a>
                   </li>
                   </ul>
               
