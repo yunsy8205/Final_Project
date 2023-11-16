@@ -37,7 +37,7 @@ public class MemberService {
 	
 	public List<MemVO> getPtList(EmployeeVO employeeVO , Pager pager) throws Exception{
 		Map<String,Object> map = new HashMap<>();
-		pager.setPerPage(10L);
+		
 		pager.makeRowNum();
 		Long total = memberDAO.getTotal(pager);
 		pager.makePageNum(total);

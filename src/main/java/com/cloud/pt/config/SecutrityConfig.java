@@ -56,6 +56,8 @@ public class SecutrityConfig {
 				.antMatchers("/notice/add").hasAnyRole("CEO", "GENERAL")
 				.antMatchers("/notice/update").hasAnyRole("CEO", "GENERAL")
 				.antMatchers("/notice/delete").hasAnyRole("CEO", "GENERAL")
+				.antMatchers("/machine/add").hasAnyRole("GENRAL", "FACILITY")
+				.antMatchers("/locker/lockerList2").hasAnyRole("GENTAL","FACILITY")
 				.antMatchers("/").permitAll()
 				.and()
 				

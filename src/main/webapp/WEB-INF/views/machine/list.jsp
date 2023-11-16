@@ -35,7 +35,11 @@
               <h3 style="text-align: center; margin:2rem 0 1rem;">전체 기구 목록</h3>
               <div style="text-align: right; margin-bottom: 3rem; margin-right: 1rem;">
                 <a href="/machine/add" class="btn btn-primary">기구 등록</a>
-                <button type="button" id="maDel" data-url="/machine/delete" class="btn btn-primary">기구 삭제</button>
+                <sec:authorize access="isAuthenticated()">
+                  <sec:authorize access="hasRole('ROLE_FACILITY')">
+                		<button type="button" id="maDel" data-url="/machine/delete" class="btn btn-primary">기구 삭제</button>
+                	</sec:authorize>
+                </sec:authorize>
               </div>
               <div class="row mb-5" style="margin-bottom: 5rem !important;">
                 <c:forEach items="${list}" var="vo" varStatus="i">

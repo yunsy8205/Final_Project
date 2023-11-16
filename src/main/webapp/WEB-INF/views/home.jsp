@@ -109,6 +109,10 @@ uri="http://www.springframework.org/tags" %>
         overflow: hidden;
         margin: auto;
       }
+     
+	
+/* 풀캘린더의 달력 요소에 대한 스타일 */
+
     </style>
     <!-- moment lib -->
     <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js"></script>
@@ -257,7 +261,7 @@ uri="http://www.springframework.org/tags" %>
                     </div>
                   </div>
                 </div>
-                <div class="card h-100" style="width: 28%">
+                <div class="card h-100" style="width: 28%;height: 100%;">
                   <div class="card-body calendarBox">
                     <div id="calendar"></div>
                   </div>
