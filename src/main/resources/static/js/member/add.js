@@ -158,7 +158,14 @@ for (addressInput of address) {
 for (b of birth) {
   b.addEventListener("change", function () {
     bMsg.innerHTML = "생일을 입력하세요.";
-    let first = birthCheck.test(b.value);
+    //현재 날짜
+    const today = new Date();
+    //원하는 형식으로 포맷
+    let formattedDay = moment(today).format("YYYY-MM-DD");
+    //현재 날짜 이후의 날짜 선택 불가하게 설정
+    let first = $("#birth").attr("max", formattedDay);
+
+    //let first = birthCheck.test(b.value);
     let check = emptyCheck(b);
     if (!first) {
       bMsg.innerHTML = "과거일자만 입력 가능합니다.";

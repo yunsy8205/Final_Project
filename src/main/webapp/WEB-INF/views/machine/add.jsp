@@ -114,6 +114,14 @@
   //현재 날짜 이후의 날짜 선택 불가하게 설정 
   $('#buyDate').attr('max', formattedDay);
 
+
+// 이전 페이지
+const backBtn = document.getElementById("backBtn");
+const r = document.referrer; // 이전 url 확인
+
+backBtn.addEventListener("click", function () {
+  window.location.href = "/machine/list";
+});
 </script>
 </body>
 </html>
