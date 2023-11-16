@@ -105,14 +105,14 @@
 													</tbody>
 												</table>
 											</div>
-											
+										
 												<ul class="pagination justify-content-center">
 													<li class="page-item prev ${abpager.pre?'':'disabled'}">
 													  <a class="page-link move" data-num="${abpager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
 													</li>
 													<c:forEach begin="${abpager.startNum}" end="${abpager.lastNum}" var="i">
 													   <li class="page-item">
-														 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+														 <a class="page-link move b1" value="1" data-num="${i}" href="./approverList?kind=${pager.kind}&search=${pager.search}&page=${i}">${i}</a>
 													   </li>
 													</c:forEach>
 													<li class="page-item next ${abpager.next?'':'disabled'}">
@@ -160,7 +160,7 @@
 													</li>
 													<c:forEach begin="${aapager.startNum}" end="${aapager.lastNum}" var="i">
 													   <li class="page-item">
-														 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+														 <a class="page-link move b1" value="1" data-num="${i}" href="./approverList?kind=${pager.kind}&search=${pager.search}&page=${i}">${i}</a>
 													   </li>
 													</c:forEach>
 													<li class="page-item next ${aapager.next?'':'disabled'}">
