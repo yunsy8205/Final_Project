@@ -135,7 +135,7 @@ uri="http://www.springframework.org/tags" %>
         titleFormat: "YYYY년 M월",
         height: "100%",
         fixedWeekCount: false,
-        events: "/attendance/month",
+        
       });
       //캘린더 그리기
       calendar.render();

@@ -32,6 +32,9 @@
     .table thead {
       background: #e7e7ff;
     }
+    .table {
+      text-align: center;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -90,7 +93,7 @@
                                 <span class="badge bg-label-warning me-1">${vo.status}</span>
                               </c:if>			
                             </td>
-                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyNum}">보기</a></td>
+                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyNum}"><i class='bx bx-info-circle'></i></a></td>
                           </tr>
                         </c:forEach>
                       </tbody>
@@ -132,8 +135,8 @@
   <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   
   <script>
-    const page = $('.page-link[data-num="1"]');
-    page.parent().addClass('active');
+    // const page = $('.page-link[data-num="1"]');
+    // page.parent().addClass('active');
     
     //근태수정요청버튼 클릭 시 
     $('#btn').on('click', function(){
