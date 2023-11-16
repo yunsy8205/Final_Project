@@ -13,7 +13,7 @@ SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,L.MEMBERNUM ,L.STATE F
   	</insert> -->
   	<!-- 라커에 회원 적용 -->
   	<update id="addUser" parameterType="LockerVO">
-  		UPDATE LOCKER SET MEMBERNUM = #{memberNum} , STARTDATE = #{startDate} ,FINISHDATE = DATE_ADD(NOW(), INTERVAL 1 MONTH) WHERE LOCKERNUM = #{lockerNum}
+  		UPDATE LOCKER SET MEMBERNUM = #{memberNum} , STARTDATE = #{startDate} ,FINISHDATE =#{finishDate} WHERE LOCKERNUM = #{lockerNum}
   	</update>
   	<!-- 라커 고장 등록 -->
   	<update id="setRepair" parameterType="LockerVO">
@@ -23,9 +23,12 @@ SELECT L.LOCKERNUM,M.MEMBERNAME ,L.STARTDATE,L.FINISHDATE,L.MEMBERNUM ,L.STATE F
   	<update id="recoverLocker" parameterType="LockerVO">
   		UPDATE LOCKER SET STATE = '정상' WHERE LOCKERNUM = #{lockerNum}
   	</update>
-  	<!-- 전체 멤버 조회(모달창에 띄우기) -->
+  	<!-- 전체 멤버 조회(모달창에 띄우기) DB에 저장되어있으면 출력 X -->
   	<select id="getUser" resultType="MemVO" parameterType="MemVO">
-  		SELECT MEMBERNAME,MEMBERNUM FROM MEMBER
+  		SELECT M.MEMBERNUM,M.MEMBERNAME  
+			FROM MEMBER M LEFT OUTER JOIN LOCKER L
+			ON M.MEMBERNUM = L.MEMBERNUM
+			WHERE L.MEMBERNUM IS NULL
   	</select>
   	<!-- 라커 회원 삭제 -->
   	<update id="delUser" parameterType="LockerVO">

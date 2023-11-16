@@ -297,5 +297,16 @@ uri="http://www.springframework.org/security/tags" %>
 
     <!-- Extended components -->
   </ul>
+  <script type="text/javascript">
+  
+//현재 URL 가져오기
+  var currentUrl = window.location.href;
+  var pathWithoutHost = currentUrl.replace('http://localhost:82', '');
+
+  console.log('현재 경로:', pathWithoutHost);
+  // 모든 메뉴 항목 가져오기
+  var menuItems = document.querySelectorAll('.menu-item');
+  console.log('a경로:',menuItems);
+  </script>
 </aside>
 <!-- / Menu -->
