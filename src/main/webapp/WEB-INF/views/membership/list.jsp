@@ -142,11 +142,12 @@
   <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   
   <script>
-    
+    //이용권등록버튼 클릭 시 
     $('#add_btn').on('click', function(){
       $(location).attr('href', '/membership/form');
     })
 
+    //삭제버튼 클릭 시
     $('.del_btn').on('click', function(){
       const result = confirm('정말 삭제하시겠습니까?');
       if(result==true){
@@ -156,6 +157,7 @@
       
     })
     
+    //이용권 삭제 
     function setDel(membershipNum){
       $.ajax({
         type: 'get',
@@ -174,6 +176,7 @@
       })  
     }
 
+    //페이지번호 클릭 시 
     $('.pagination').on('click', '.move', function(){
       const num = $(this).attr('data-num');
       $(location).attr('href', '?page='+num)

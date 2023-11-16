@@ -24,7 +24,7 @@
     .table th {
       width: 30%;
       font-size: 0.9rem !important;
-      background: rgb(231 231 255 / 53%) !important;
+      background: rgb(212 212 213 / 53%) !important;
     }
     /* .card {width:40%;} */
     #req_list {
@@ -158,7 +158,7 @@
                         <div>
                           <hr style="width: 97%; margin: 0 0 1.5rem; float: right;">
                             <form id="frm" method="post" action="/admin/attendanceModify/update">
-                              <div class="col-12" style="margin-top: 0">
+                              <div class="col-12" style="margin-top: 0 !important">
                                 <label for="contents" class="form-label">수정의견</label>
                                 <textarea name="modifyContents" id="contents" cols="30" rows="5" class="form-control" placeholder="수정의견을 입력해주세요"></textarea>
                               </div>
