@@ -16,6 +16,8 @@
 >
 <head>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
+     <!-- moment lib -->
+	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
 </head>
 
 <body>
@@ -87,7 +89,6 @@
 <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script  type="text/javascript" src="/js/member/add.js"></script>
 <script>
 
   // 기구 선택 시, 이미지 띄우기
@@ -105,6 +106,14 @@
       reader.readAsDataURL(image);
     }
   }
+
+  //현재 날짜
+  const today = new Date(); 
+  //원하는 형식으로 포맷
+  let formattedDay = moment(today).format("YYYY-MM-DD"); 
+  //현재 날짜 이후의 날짜 선택 불가하게 설정 
+  $('#buyDate').attr('max', formattedDay);
+
 </script>
 </body>
 </html>

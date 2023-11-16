@@ -371,5 +371,9 @@
     </div>
     <!-- / Layout wrapper -->
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
+	<script>
+
+		console.log($("#first").attr("data-num"));
+	</script>
   </body>
 </html>
