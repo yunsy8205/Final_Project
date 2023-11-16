@@ -133,7 +133,7 @@ uri="http://www.springframework.org/tags" %>
           right: "",
         },
         titleFormat: "YYYY년 M월",
-        height: "100%",
+        contentHeight: 'auto',
         fixedWeekCount: false,
         
       });
