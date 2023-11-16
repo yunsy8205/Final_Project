@@ -25,6 +25,7 @@ uri="http://www.springframework.org/tags" %>
   data-assets-path="../assets/"
   data-template="vertical-menu-template-free"
 >
+
   <head>
     <meta charset="utf-8" />
     <meta
@@ -56,6 +57,9 @@ uri="http://www.springframework.org/tags" %>
         padding-top: 1em;
         padding-left: 1em;
         padding-right: 1em;
+      }
+      #calendar{
+        background-color: white !important;
       }
     </style>
     <script>

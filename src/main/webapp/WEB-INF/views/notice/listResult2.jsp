@@ -14,10 +14,15 @@
 						</tr>
 					</thead>
 					<tbody class="table-border-bottom-0">
-						<c:forEach items="${list}" var="li">
+						<c:forEach items="${list}" var="li"  varStatus="i">
 							<tr>
-								<td>${li.noticeNum}</td>
-								<td><span class="badge bg-label-primary me-1" data-cat="${li.category}">${li.category}</span>
+								<td>${i.index+1}</td>
+								<td><span class="
+												<c:if test="${li.category == '인사'}">badge bg-label-primary me-1</c:if>
+												<c:if test="${li.category == '시설'}">badge bg-label-success me-1</c:if>
+												<c:if test="${li.category == '휴무'}">badge bg-label-info me-1</c:if>
+												<c:if test="${li.category == '기타'}">badge bg-label-warning me-1</c:if>
+									">${li.category}</span>
 									<a class="a2" href="./detail?noticeNum=${li.noticeNum}">${li.title}</a></td>
 								<td>${li.name}</td>
 								<td>${li.modDate}</td>

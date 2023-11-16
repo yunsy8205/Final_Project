@@ -57,6 +57,9 @@ uri="http://www.springframework.org/tags" %>
         padding-left: 1em;
         padding-right: 1em;
       }
+      #calendar{
+        background-color: white !important;
+      }
     </style>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
