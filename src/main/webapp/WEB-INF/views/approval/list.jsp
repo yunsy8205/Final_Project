@@ -160,7 +160,7 @@
 											</li>
 											<c:forEach begin="${wp.startNum}" end="${wp.lastNum}" var="i">
 											   <li class="page-item">
-												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+												 <a class="page-link move b1" value="1" data-num="${i}" href="./list?kind=${pager.kind}&search=${pager.search}&page=${i}">${i}</a>
 											   </li>
 											</c:forEach>
 											<li class="page-item next ${wp.next?'':'disabled'}">
@@ -208,7 +208,7 @@
 											</li>
 											<c:forEach begin="${pp.startNum}" end="${pp.lastNum}" var="i">
 											   <li class="page-item">
-												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+												 <a class="page-link move b1" value="1" data-num="${i}" href="./list?kind=${pager.kind}&search=${pager.search}&page=${i}">${i}</a>
 											   </li>
 											</c:forEach>
 											<li class="page-item next ${pp.next?'':'disabled'}">
@@ -256,7 +256,7 @@
 											</li>
 											<c:forEach begin="${rp.startNum}" end="${rp.lastNum}" var="i">
 											   <li class="page-item">
-												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+												 <a class="page-link move b1" value="1" data-num="${i}" href="./list?kind=${pager.kind}&search=${pager.search}&page=${i}">${i}</a>
 											   </li>
 											</c:forEach>
 											<li class="page-item next ${rp.next?'':'disabled'}">
@@ -304,7 +304,7 @@
 											</li>
 											<c:forEach begin="${cp.startNum}" end="${cp.lastNum}" var="i">
 											   <li class="page-item">
-												 <a class="page-link move b1" value="1" data-num="${i}" href="#">${i}</a>
+												 <a class="page-link move b1" value="1" data-num="${i}" href="./list?kind=${pager.kind}&search=${pager.search}&page=${i}">${i}</a>
 											   </li>
 											</c:forEach>
 											<li class="page-item next ${cp.next?'':'disabled'}">
