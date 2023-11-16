@@ -133,7 +133,11 @@
                         <%= lockerNum %>
                     <%-- memberNum이 null이고 state가 고장이면 state만 출력 --%>
                     <% } else if (lockerVO.getMemberNum() == null && "고장".equals(lockerVO.getState())) { %>
-                        <span style="color: red; font-size: 2rem;"><%= lockerVO.getState() %></span>
+                        <span style="    color: white;
+									    font-size: 2rem;
+									    background: red;
+									    padding: 0.5rem 1rem;
+									    border-radius: 10%;"><%= lockerVO.getState() %></span>
                     <%-- meberberNum이 null이 아니고 state 가 정상이면 memberNum을 출력 --%>
                     <% } else if (lockerVO.getMemberNum() != null && "정상".equals(lockerVO.getState())) { %>
                        
