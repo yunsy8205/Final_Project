@@ -179,7 +179,6 @@ uri="http://www.springframework.org/security/tags" %>
         </li>
       </ul>
     </li>
-
     <!-- Cards -->
     <li class="menu-item">
       <a href="#" class="menu-link menu-toggle">
@@ -212,13 +211,13 @@ uri="http://www.springframework.org/security/tags" %>
           </a>
         </li>
         <li class="menu-item">
-          <a href="/attendanceModify/list" class="menu-link">
-            <div data-i18n="Badges" class="subDiv">근태 수정 요청 목록</div>
+          <a id="attendance" href="/admin/attendance" class="menu-link">
+            <div data-i18n="Alerts" class="subDiv">전체 근태 조회</div>
           </a>
         </li>
         <li class="menu-item">
-          <a id="attendance" href="/admin/attendance" class="menu-link">
-            <div data-i18n="Alerts" class="subDiv">전체 근태 조회</div>
+          <a href="/attendanceModify/list" class="menu-link">
+            <div data-i18n="Badges" class="subDiv">근태 수정 요청 목록</div>
           </a>
         </li>
       </ul>
@@ -236,14 +235,14 @@ uri="http://www.springframework.org/security/tags" %>
           </a>
         </li>
         <sec:authorize access="isAuthenticated()">
-				<sec:authorize access="!hasRole('ROLE_TRAINER')">
-          <li class="menu-item">
-            <a href="/approval/approverList" class="menu-link">
-              <div data-i18n="Alerts" class="subDiv">결재문서함</div>
-            </a>
-          </li>
-				</sec:authorize>
-			  </sec:authorize>
+          <sec:authorize access="!hasRole('ROLE_TRAINER')">
+            <li class="menu-item">
+              <a href="/approval/approverList" class="menu-link">
+                <div data-i18n="Alerts" class="subDiv">결재문서함</div>
+              </a>
+            </li>
+          </sec:authorize>
+        </sec:authorize>
         <li class="menu-item">
           <a href="/approval/signMain" class="menu-link">
             <div data-i18n="Badges" class="subDiv">서명관리</div>
@@ -266,29 +265,28 @@ uri="http://www.springframework.org/security/tags" %>
       </a>
     </li>
 
-    <li class="menu-item">
-      <a href="javascript:void(0)" class="menu-link menu-toggle">
-        <i class="menu-icon fa-solid fa-circle-user"></i>
-        <div data-i18n="User interface">트레이너</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="#" class="menu-link">
-            <div data-i18n="Accordion" class="subDiv">운동 일지</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/trainer/ptLog" class="menu-link">
-            <div data-i18n="Alerts" class="subDiv">PT일지</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/trainer/diet" class="menu-link">
-            <div data-i18n="Badges" class="subDiv">식단 관리</div>
-          </a>
-        </li>
-      </ul>
-    </li>
+    <!--  <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon fa-solid fa-circle-user"></i>
+                <div data-i18n="User interface">트레이너</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="#" class="menu-link">
+                    <div data-i18n="Accordion">운동 일지</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/trainer/ptLog" class="menu-link">
+                    <div data-i18n="Alerts">PT일지</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/trainer/diet" class="menu-link">
+                    <div data-i18n="Badges">식단 관리</div>
+                  </a>
+                </li>
+                </ul> -->
 
     <li class="menu-item">
       <a href="/notice/list" class="menu-link">

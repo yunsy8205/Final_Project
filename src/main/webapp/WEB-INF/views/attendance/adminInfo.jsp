@@ -66,9 +66,6 @@
       max-width: calc(100% - 5.2rem) !important;
       padding: 0 !important;
     }
-    .table th{
-      font-size: 0.8rem;
-    }
     .fc-prev-button, .fc-next-button, .fc-myCustomButton-button{
       color: #fff !important;
       background-color: #5f61e6 !important; 
@@ -81,6 +78,12 @@
     }
     .nav-align-top{
       height: 100%;
+    }
+    .table th {
+      font-size: 0.9rem !important;
+    }
+    .table thead {
+      background: #e7e7ff;
     }
   </style>
 

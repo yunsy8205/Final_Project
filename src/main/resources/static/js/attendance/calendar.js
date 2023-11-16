@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         right: 'today prev,next' 
     },
     titleFormat: 'YYYY년 M월',
-    height: '90%',
+    height: '96%',
     fixedWeekCount: false,
     events: '/attendance/month',
 
@@ -24,12 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const off = info.event.extendedProps.offTime; //퇴근시간
         $('#date').text(date);
         $('#state').text(state);
-        $('#on').text('출근 - '+on);
-        $('#off').text('퇴근 - '+off);
+        $('#on').text(on);
+        $('#off').text(off);
 
         if(state == '결근'){ //결근일 때 출퇴근 시간 숨기기
-            $('#on').css('display', 'none');
-            $('#off').css('display', 'none');
+            $('.tt').css('display', 'none');
         }
 
         $('#smallModal').modal('show'); //모달 활성화

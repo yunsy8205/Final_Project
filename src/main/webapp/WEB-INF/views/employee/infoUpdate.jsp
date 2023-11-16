@@ -223,7 +223,7 @@
                               <button type="submit" id="upBtn" class="btn btn-primary">수정 완료</button>
                             </div>
                           </form:form>
-                          <div id="carcer" style="width:30rem;position:absolute;right:8rem;top:7rem;">
+                          <div id="carcer" style="width:30rem;position:absolute;right:8rem;top:17rem;">
                             <form id="careerFrm" style="text-align: center;">
                               <div class="row mb-3" style="display: flex;justify-content: center;">
                                 <div id="careerCon">

@@ -103,23 +103,23 @@ public class AttendanceController {
 	//관리자----------------------------------------------------------
 	@GetMapping("/admin/attendanceModify/detail")
 	public String getDetail(AttendanceModifyVO attendanceModifyVO, Model model) throws Exception {
-		AttendanceVO attendanceVO = attendanceService.getRequest(attendanceModifyVO);
-		model.addAttribute("vo", attendanceVO);
+		attendanceModifyVO = attendanceService.getRequest(attendanceModifyVO);
+		model.addAttribute("vo", attendanceModifyVO);
 		
 		return "attendance/adminDetail";
 	}
 	
 	@GetMapping("/admin/attendanceModify/update")
 	public String setUpdate(AttendanceModifyVO attendanceModifyVO, Model model) throws Exception {
-		AttendanceVO attendanceVO = attendanceService.getRequest(attendanceModifyVO);
-		model.addAttribute("vo", attendanceVO);
+		attendanceModifyVO = attendanceService.getRequest(attendanceModifyVO);
+		model.addAttribute("vo", attendanceModifyVO);
 		
 		return "attendance/adminForm";
 	}
 	
 	@GetMapping("/admin/attendanceModify/list")
 	public String getList(Model model, Pager pager) throws Exception {
-		List<AttendanceVO> ar = attendanceService.getRequestList(pager);
+		List<AttendanceModifyVO> ar = attendanceService.getRequestList(pager);
 
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
@@ -169,7 +169,7 @@ public class AttendanceController {
 	
 	@GetMapping("/attendanceModify/list")
 	public String getModifyList(@AuthenticationPrincipal EmployeeVO employeeVO, Model model, Pager pager) throws Exception {
-		List<AttendanceVO> ar = attendanceService.getModifyList(employeeVO, pager);
+		List<AttendanceModifyVO> ar = attendanceService.getModifyList(employeeVO, pager);
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		
@@ -187,7 +187,7 @@ public class AttendanceController {
 		int result = attendanceService.setModifyAdd(attendanceModifyVO, employeeVO);
 		String message = null;
 		if(result==0) {
-			message="해당 날짜의 근태수정요청이 이미 존재합니다";
+			message="근태수정요청이 이미 존재합니다";
 		}else if(result==-1){
 			message="당일 근태수정요청은 퇴근이후 가능합니다";
 		}else {

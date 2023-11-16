@@ -20,4 +20,6 @@ public interface LockerDAO {
 	public int setRepair(LockerVO lockerVO) throws Exception;
 	
 	public int delUser(LockerVO lockerVO) throws Exception;
+	
+	public int recoverLocker(LockerVO lockerVO) throws Exception;
 }

@@ -14,7 +14,7 @@ const pastErrMsg = document.getElementById("birthPastMsg");
 const past = "Failed to convert property value of type java.lang.String to required type java.sql.Date for property birth; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@javax.validation.constraints.Past java.sql.Date] for value []; nested exception is java.lang.IllegalArgumentException";
 const addBtn = document.getElementById("addBtn");
 const input = document.getElementsByClassName("input");
-let phoneCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+let phoneCheck = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
 let birthCheck = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
 let checks = [false,false, false, false, false];
 
@@ -130,7 +130,14 @@ for(addressInput of address){
 
 for(b of birth){
     bMsg.innerHTML="생일을 입력하세요."
-    let first = birthCheck.test(b.value);
+    //현재 날짜
+    const today = new Date(); 
+    //원하는 형식으로 포맷
+    let formattedDay = moment(today).format("YYYY-MM-DD"); 
+    //현재 날짜 이후의 날짜 선택 불가하게 설정 
+    let first = $('#birth').attr('max', formattedDay);
+
+    // let first = birthCheck.test(b.value);
     let check = emptyCheck(b);
     if(!first){
         bMsg.innerHTML="과거일자만 입력 가능합니다."

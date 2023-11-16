@@ -122,7 +122,6 @@ uri="http://www.springframework.org/tags" %>
           <a href="/employee/info">마이페이지</a>
           <a href="/employee/logout">로그아웃</a>
           <div class="dropdown">
-            <i class="far fa-bell dropbtn" style="font-size: 24px"></i>
             <div class="dropdown-content"></div>
           </div>
         </sec:authorize>

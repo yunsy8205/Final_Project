@@ -17,6 +17,9 @@
 <head>
   <style>
     .table > :not(:first-child) {box-shadow: 0 2px 3px rgba(0,0,0,0.01), 0 2px 3px rgba(0,0,0,0.12);}
+    .table th {
+      font-size: 0.9rem !important;
+    }
   </style>
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
 </head>
@@ -49,7 +52,7 @@
                         <option class="kind" value="stateEmpIn">재직 직원</option>
                         <option class="kind" value="stateOut">퇴직 직원</option>
                       </select> 
-                      <input type="text" name="search" value="${pager.search}" class="search form-control" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
+                      <input type="text" name="search" value="${pager.search}" class="search form-control" id="sInput" style="width: 30%;" aria-label="Search" placeholder="검색어를 입력하세요.">
                       <button type="submit" class="btn btn-primary">조회</button>
                     </form>
                   </div>
@@ -59,7 +62,7 @@
                 </div>
                 <div id="req_list" class="table-responsive text-nowrap">
                   <table class="table table-hover" style="text-align: center; background-color: white;">
-                    <thead>
+                    <thead style="background: #e7e7ff;;">
                       <tr>
                         <th>번호</th>
                         <th>사번</th>
@@ -122,41 +125,7 @@
 									</c:if>
 								</ul>
 							</nav> -->
-              <!-- / Content --> 
-              
-              
-              <!-- Footer -->
-                <!-- <footer class="content-footer footer bg-footer-theme">
-                  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">
-                      ©
-                      <script>
-                        document.write(new Date().getFullYear());
-                      </script>
-                      , made with ❤️ by
-                      <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                    </div>
-                    <div>
-                      <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                      <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                      <a
-                        href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Documentation</a
-                      >
-
-                      <a
-                        href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                        target="_blank"
-                        class="footer-link me-4"
-                        >Support</a
-                      >
-                    </div>
-                  </div>
-                </footer> -->
-                <!-- / Footer -->       
+              <!-- / Content -->   
 
               <div class="content-backdrop fade"></div>
             </div>
@@ -173,5 +142,29 @@
 
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
     <script type="text/javascript" src="/js/employee/list.js"></script>
+    <script>
+      // let si = document.getElementById("sInput").value;
+      // let k = document.getElementById("k").value;
+      // if(k == 'position'){
+
+      //   if(si == '총괄'){
+      //     si == 'ROLE_GENERAL';
+      //   }else if(si == '고객' && si == '고객인사'){
+      //     si == 'ROLE_CUSTOMER';
+      //   }else if(si == '인사'){
+      //     si == 'ROLE_RESOURCES';
+      //   }else if(si == '시설'){
+      //     si == 'ROLE_FACILITY';
+      //   }else if(si == '트레이너' && si == '트'){
+      //     si == 'ROLE_TRAINER';
+      //   }else if(si == '대표'){
+      //     si == 'ROLE_CEO';
+      //   }else if(si == '가발령' && si == '가'){
+      //     si == 'ROLE_EX';
+      //   }
+      // }
+      
+
+    </script>
   </body>
 </html>

@@ -32,17 +32,17 @@ public interface AttendanceDAO {
 	
 	public int setUpdateA(Map<String, Object> map) throws Exception;
 	public int setUpdateAM(AttendanceModifyVO attendanceModifyVO) throws Exception;
-	public AttendanceVO getRequest(AttendanceModifyVO attendanceModifyVO) throws Exception;
-	public List<AttendanceVO> getRequestList(Pager pager) throws Exception;
+	public AttendanceModifyVO getRequest(AttendanceModifyVO attendanceModifyVO) throws Exception;
+	public List<AttendanceModifyVO> getRequestList(Pager pager) throws Exception;
 	
 	//----------------------------------------
 	public Long getNum(Map<String, Object> map) throws Exception;
 	public AttendanceVO getDetail(Long num) throws Exception;
-	public AttendanceModifyVO getModify(Long num) throws Exception;
+	public AttendanceModifyVO getModify(AttendanceModifyVO attendanceModifyVO) throws Exception;
 	
 	public Long getModifyTotal(EmployeeVO employeeVO) throws Exception;
 	
 	public AttendanceModifyVO getModifyDetail(AttendanceModifyVO attendanceModifyVO) throws Exception;
-	public List<AttendanceVO> getModifyList(Map<String, Object> map) throws Exception;
+	public List<AttendanceModifyVO> getModifyList(Map<String, Object> map) throws Exception;
 	public int setModifyAdd(AttendanceModifyVO attendanceModifyVO) throws Exception;
 }
