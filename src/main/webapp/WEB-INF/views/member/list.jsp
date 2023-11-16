@@ -15,6 +15,25 @@
 >
 <head>
   <style>
+    .form-label, .col-form-label {
+      font-size: 0.8rem !important;
+      text-align: left !important;
+    }
+    .modal-body {
+      margin: 0 0 0 1rem;
+    }
+    .col-sm-2 {
+      width: 21% !important;
+    }
+    .col-sm-10 {
+      width: 75% !important;
+    }
+    .form-control[readonly] {
+      background-color:rgba(105, 108, 255, 0.16) !important;
+    }
+    .modal-footer {
+      justify-content: center !important;
+    }
     .table > :not(:first-child) {box-shadow: 0 2px 3px rgba(0,0,0,0.01), 0 2px 3px rgba(0,0,0,0.12);}
     .table th {
       font-size: 0.9rem !important;
@@ -59,7 +78,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">이용권</h5>
+                          <h5 class="modal-title">이용권 등록</h5>
                           <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -101,9 +120,6 @@
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">
-                            이전
-                          </button>
                           <button type="button" id="addRegistrationBtn" class="btn btn-primary close">
                             등록
                           </button>

@@ -14,31 +14,11 @@
   data-template="vertical-menu-template-free"
 >
 <head>
-  <style>
-    h3 {
-      margin-top: 40px !important;
-      text-align: center;
-    }
-    #btn {
-      text-align: center;
-    }
-    .form-control[readonly] {
-      background-color:#ffffff00 !important;
-    }
-    .card-body{
-      margin: 0 7%;
-    }
-    .container-xxl {
-      margin: 0rem 2.5rem 0 !important;
-      max-width: calc(100% - 5.2rem) !important;
-    }
-  </style>
-
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
    
   <!-- moment lib -->
 	<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
-	
+	<link rel="stylesheet" href="/css/attendance/form.css"/>
 </head>
 
 <body>
@@ -103,7 +83,7 @@
                           <label for="content" class="form-label">요청사유</label>
                           <textarea name="requestContents" id="content" cols="30" rows="5" class="form-control" placeholder="요청사유를 입력해주세요"></textarea>
                         </div>
-                        <div id="btn" class="m-5">
+                        <div class="totalBtn">
                           <button type="button" id="before_btn" class="btn btn-primary">이전</button>
                           <button type="button" id="submit_btn" class="btn btn-primary">제출</button>
                         </div>

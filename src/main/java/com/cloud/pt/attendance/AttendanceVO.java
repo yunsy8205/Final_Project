@@ -2,6 +2,7 @@ package com.cloud.pt.attendance;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 import com.cloud.pt.employee.EmployeeVO;
 
@@ -26,6 +27,6 @@ public class AttendanceVO {
 	//상태 
 	private String state;
 	
-	private AttendanceModifyVO attendanceModifyVO;
+	private List<AttendanceModifyVO> attendanceModifys;
 	private EmployeeVO employeeVO;
 }
