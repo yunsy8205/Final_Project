@@ -83,6 +83,7 @@
                       </div>
                       <div class="mb-3 row" >
                         <label for="buyDate" class="col-md-2 col-form-label">시작시간 :</label>
+                        <div class="col-md-10">
                          <input type="date"  id="date" onchange="validateDate()" class="form-control"/>  <select id="time" class="form-control">
 						    <option value="10:00:00">10:00:00</option>
 						    <option value="11:00:00">11:00:00</option>
@@ -92,6 +93,7 @@
 						    <option value="16:00:00">16:00:00</option>
 						    <option value="17:00:00">17:00:00</option>
   						</select>
+  						</div>
                       </div>
                       </div>
                     </div>

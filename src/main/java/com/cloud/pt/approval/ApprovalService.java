@@ -34,8 +34,10 @@ public class ApprovalService {
 		map.put("pager", pager);
 		Long total = approvalDAO.getMyCount(map);
 		pager.makePageNum(total);
-		map.put("pager", pager);
-		return approvalDAO.getApprovalAllList(map);
+		Map<String,Object> mapp = new HashMap<String,Object>();
+		mapp.put("id", approvalVO);
+		mapp.put("pager", pager);
+		return approvalDAO.getApprovalAllList(mapp);
 	}
 	public List<ApprovalVO> getApprovalWatingList(Pager pager,ApprovalVO approvalVO) throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();

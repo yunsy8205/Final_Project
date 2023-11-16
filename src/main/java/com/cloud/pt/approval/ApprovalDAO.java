@@ -26,7 +26,7 @@ public interface ApprovalDAO {
 	
 	public Long getTemporaryCount(Map<String,Object> map) throws Exception;
 	
-	public List<ApprovalVO> getApprovalAllList(Map<String, Object> map) throws Exception;
+	public List<ApprovalVO> getApprovalAllList(Map<String, Object> mapp) throws Exception;
 	public List<ApprovalVO> getApprovalWatingList(Map<String, Object>map) throws Exception;
 	public List<ApprovalVO> getApprovalProceedingList(Map<String, Object>map) throws Exception;
 	public List<ApprovalVO> getApprovalRejectList(Map<String, Object>map) throws Exception;
