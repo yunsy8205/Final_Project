@@ -175,7 +175,7 @@
 	                        <div class="row justify-content-end">
 	                          <div class="col-sm-10">
 	                          	<a class="a1 btn btn-primary" href="./list">이전</a>
-	                            <button id="addBtn" type="submit" class="btn btn-primary">등록</button>
+	                            <button id="addBtn" type="button" class="btn btn-primary">등록</button>
 	                          </div>
 	                        </div>
 	                      </form>
@@ -242,58 +242,33 @@
 	    })
 	    
 	    // 제목과 내용 검증
-	    const title = document.getElementById("title");
-		const contents = document.getElementById("summernote");
-		const addBtn = document.getElementById("addBtn");
-		const frm = document.getElementById("frm");
-	    
-		let checkResults=[false,false];
-		
-		title.addEventListener("blur", function(){
-		    console.log(title.value);
-			if(title.value==""){
-		        checkResults[0]=false;
-		    }else{
-		        checkResults[0]=true;
-		    }
-		});
-		
-		contents.addEventListener("blur", function(){
-			console.log(contents.innerText);
-			console.log(contents.value);
-		    if(contents.value==""){
-		        checkResults[1]=false;
-		    }else{
-		        checkResults[1]=true;
-		    }
-		});
-		
-		addBtn.addEventListener("click", function(){
-		    let c = checkResults.includes(false);
-		    console.log(checkResults[0]);
-		    console.log(checkResults[1]);
-		    console.log(c);
-		    if(!c){
-		        //form 전송
-		        console.log("form 전송해");
-		        frm.submit();
-		    }else{
-		        if(title.value==""){
-		        	console.log(title.value);
-		        	//커서를 제목으로
-		        	title.focus();
-		        }else{
-		        	if(contents.value==""){
-		        		//커서를 내용으로
-		        		console.log(contents.value);
-		        		contents.focus();
-		        	}
-		        }
-		    }
-		});
-		
-		
-	    
+		document.getElementById('addBtn').addEventListener('click', function (event) {
+			console.log("클릭");
+		    let checkResults=[false,false];
+		 	let notTitle = document.querySelector('input[name="title"]');        
+		 	let notContents = document.querySelector('textarea[name="contents"]');        
+			
+			if (notTitle.value.trim() === '') {            
+				event.preventDefault();            
+			 	alert('제목은 필수입니다.');
+			 	notTitle.focus();
+			 	checkResults[0]=false;
+			 }else{
+				 checkResults[0]=true;
+				 if (notContents.value.trim() === '') {            
+						event.preventDefault();            
+						alert('내용은 필수입니다.');
+						checkResults[1]=false;
+					 	}else{
+					 		checkResults[1]=true;
+					 		let c = checkResults.includes(false);
+					 		if(!c){
+					 			console.log(document.getElementById('frm'));
+					 			document.getElementById('frm').submit();
+					 		}
+					 	}
+			 }		 
+		 });
     </script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>

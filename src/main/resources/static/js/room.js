@@ -31,8 +31,6 @@
       
    });
 
-   
-    
     socket.onclose=function(e){
         console.log('disconnet');
     };
@@ -80,7 +78,7 @@
 		  
 		  let name = $("#searchName").val();
 	      $('#listBox').empty();
-	      getSearch(name);
+	      getTotalSearch(name);
 	  }
    });
    
@@ -96,8 +94,7 @@
        if (event.key === "Enter") {
           
           let memName = $("#searchName").val();
-      
-         $('#listBox').empty();
+     	$('#listBox').empty();
          getSearch(memName);
        }
    });
@@ -209,16 +206,41 @@
             
             if (response.list != null) {
             console.log("list 가져옴");
-                                    
+                                   
             searchList = response.list;
             
             $.each(searchList, function( index, value ) {
-                   let a = '<i class="mx-1 bx bx-message-square"></i><a href="#" class="chatList" data-empNum="'+value.employeeNum+'">'+value.name+' '+value.position+'</a><br>'
+                   let a = '<li class="ul2"><a href="#" class="chatList" data-empNum="'+value.employeeNum+'"><i class="mx-1 bx bx-message-square"></i>'+value.name+' '+value.position+'</a></li>'
                     $('#listBox').append(a);
                 });
             } else {
             console.log("list 가져오기 실패");
             }
+            
+         },
+         error:function(){
+            console.log("ajax 실패");
+         }
+         })   
+   }
+   
+   function getTotalSearch(name){
+      
+         $.ajax({
+         type:"get",
+         url:"./totalsearch",
+         data:{
+            "name":name
+         },
+         success:function(response){
+			if (response != null) { 
+			console.log(response);
+			$('#listBox').empty();
+			$('#listBox').append(response);
+			}else{
+				
+            console.log("list 가져오기 실패");
+			}
             
          },
          error:function(){

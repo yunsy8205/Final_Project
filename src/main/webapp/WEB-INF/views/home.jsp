@@ -14,7 +14,11 @@ uri="http://www.springframework.org/tags" %>
   data-template="vertical-menu-template-free"
 >
   <head>
-    
+    <style type="text/css">
+    	.fc-license-message{
+    		display: none !important;
+    	}
+    </style>
     <!-- moment lib -->
     <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js"></script>
     <!-- fullcalendar bundle -->

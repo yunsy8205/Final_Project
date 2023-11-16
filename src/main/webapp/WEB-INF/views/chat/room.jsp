@@ -41,7 +41,7 @@
               <!-- Basic Layout -->
               <div class="row">
                 <div class="col-xl1">
-                  <div class="box1 card mb-4">
+                  <div class="box1 card mb-4" style="background-color: #E7E7FF">
                     <div class="userBox card-header d-flex justify-content-between align-items-center">
                        <div class="userBox2">
                           <sec:authorize access="isAuthenticated()">
@@ -64,9 +64,9 @@
                              aria-label="Recipient's username"
                              aria-describedby="button-addon2"
                            />
-                           <button class="btn btn-outline-primary" type="button" id="search">조회</button>
+                           <button class="btn btn-primary" type="button" id="search">조회</button>
                          </div>
-                       <div id="listBox" style="background-color: #ECEEF1">
+                       <div id="listBox" style="background-color: white;">
                               <ul class="ul">
 					           <li class="li">관리자
 		                          <c:forEach items="${list}" var="li">
@@ -79,7 +79,7 @@
 					               </ol>
 		                          </c:forEach>
 					           </li>
-					           <li class="li">트레이너
+					           <li class="li" style="padding-top: 7%;">트레이너
 		                          <c:forEach items="${list}" var="li">
 					               <ol>
 					                  <li class="ul">

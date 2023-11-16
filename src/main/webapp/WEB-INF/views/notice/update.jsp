@@ -81,7 +81,7 @@
 	              <div class="row">
 	                <div class="mb-4">
 	                    <div class="card-body">
-	                      <form action="./update" method="post" enctype="multipart/form-data">
+	                      <form action="./update" id="frm" method="post" enctype="multipart/form-data">
 	                        <div class="row mb-3">
 	                          <label class="col-sm-2 col-form-label" for="check">상단고정</label>
 	                          <div class="radioBox col-md">
@@ -184,7 +184,7 @@
 	                        <div class="row justify-content-end">
 	                          <div class="col-sm-10">
 	                          	<a class="a1 btn btn-primary" href="./detail?noticeNum=${notice.noticeNum}">이전</a>
-	                            <button type="submit" class="btn btn-primary">수정</button>
+	                            <button type="button" id="updateBtn" class="btn btn-primary">수정</button>
 	                          </div>
 	                        </div>
 	                      </form>
@@ -287,6 +287,28 @@
 				}
 			})
 	    }
+	    
+	    // 제목과 내용 검증
+		document.getElementById('updateBtn').addEventListener('click', function (event) {
+			console.log("클릭");
+		 	let notTitle = document.querySelector('input[name="title"]');        
+		 	let notContents = document.querySelector('textarea[name="contents"]');        
+			
+			if (notTitle.value.trim() === '') {
+				event.preventDefault();            
+			 	alert('제목은 필수입니다.');
+			 	notTitle.focus();
+			 	
+			 }else{
+				 if (notContents.value.trim() === '') {
+						event.preventDefault();            
+						alert('내용은 필수입니다.');
+						
+			 	 }else{
+			 			document.getElementById('frm').submit();
+			 	 }
+			 }
+		 });
     </script>
     <c:import url="/WEB-INF/views/layout/js.jsp"></c:import>
   </body>

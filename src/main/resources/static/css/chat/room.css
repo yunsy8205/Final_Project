@@ -38,9 +38,12 @@ h3 {
 	box-shadow: inset 0px 0px 5px white;
 }
 #listBox{
-	height: 85%;
+	height: 88%;
 	width: 100%;
 	overflow-y: scroll;
+	background-color: white;
+    border-radius: 4px;
+    padding-top: 2rem;
 }
 #listBox::-webkit-scrollbar {
 	width: 8px;
@@ -121,9 +124,14 @@ h3 {
 	list-style: none; 
 	font-weight: normal;
 }
+.ul2{
+	list-style: none; 
+	padding-left: 9%;
+}
+
 .li{
 	color: #696CFF;
 	font-weight: bold;
-	padding-top: 5%;
-	font-size: 1rem;
- }
+	font-size: 1.1rem;
+}
+ 

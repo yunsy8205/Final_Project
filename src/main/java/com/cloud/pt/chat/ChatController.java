@@ -107,6 +107,20 @@ public class ChatController {
 		return listMap;
 	}
 	
+	@GetMapping("totalsearch")
+	
+	public String getString(EmployeeVO employeeVO, Model model) throws Exception{
+		log.info("totalsearch");
+		SecurityContext context = SecurityContextHolder.getContext();
+		org.springframework.security.core.Authentication b = context.getAuthentication();
+		employeeVO.setEmployeeNum(b.getName());
+		List<EmployeeVO> list = chatService.getSearch(employeeVO);
+		
+		model.addAttribute("list", list);
+
+		return "chat/chatList";
+	}
+	
 	@GetMapping("getsomeone")
 	@ResponseBody
 	public Object getSomeone(EmployeeVO employeeVO) throws Exception{
