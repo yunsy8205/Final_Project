@@ -2,6 +2,10 @@
 let check=false;
 let lineCheck=false;
 var toggler = document.getElementsByClassName("caret");
+$("#plusBtn").click(function(){
+	console.log("aa")
+// 	$("#moneyBody").append('<tr><td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><input type="date" name="title"></td><td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><input type="text" name="title"></td><td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><input type="text" name="money"></td><td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><input type="text" name="title"></td><td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><input type="text" name="title"></td></tr>')
+ })
 
 $("#okBtn").click(function(){
     $("#middleName").text($("#mLine").attr("data-name"))

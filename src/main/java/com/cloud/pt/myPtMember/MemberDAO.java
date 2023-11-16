@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cloud.pt.commons.Pager;
 import com.cloud.pt.member.MemVO;
 @Repository
 @Mapper
@@ -15,7 +16,7 @@ public interface MemberDAO {
 	
 	
 	
-	public Long getTotal() throws Exception;
+	public Long getTotal(Pager pager) throws Exception;
 
 	public List<MemVO> getPtList(Map<String, Object> map,String employeeNum) throws Exception;	
 

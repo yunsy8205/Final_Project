@@ -17,13 +17,18 @@
   <style>
     .attendance {display: flex;}
     .attendance #my {
-      width:calc(100% - 75%);
+      width:calc(100% - 79%);
       background-color: rgba(105, 108, 255, 0.16);
     }
-    .attendance #calendar {
-      width:75%;
-      margin-left: 3rem;
+    .attendance #c_box {
+      width:79%;
+      display: flex;
+      justify-content: center;
+      background: white;
     }   
+    #calendar {
+      width: 94.4%;
+    }
     .fc .fc-toolbar.fc-header-toolbar {
     	margin-top: 2.5em;
     }
@@ -66,10 +71,11 @@
     .tTitle{
 	  	width: 40%;
       margin-bottom: 3%;
+      font-size: 1.1rem;
 	  }
 	  .tTime{
 	  	width: 40%;
-	  	font-size: 16px;
+	  	font-size: 1.1rem;
 	  }	
     .timeBox{
 	  	display: flex;
@@ -87,14 +93,14 @@
       margin-top: 20%;
 	  }
     #proBox{
-	  	width: 150px;
-	    height: 150px; 
+      width: 170px;
+      height: 170px; 
 	    border-radius: 70%;
 	    overflow: hidden;
-	    margin: auto;
+	    margin: 6rem auto 0;
 	  }
     .user{
-	  	font-size: 17px;
+	  	font-size: 1.5rem;
 	  	font-weight: bold;
 	  }
     #user{
@@ -109,6 +115,29 @@
       margin: 0rem 2.5rem 0 !important;
       max-width: calc(100% - 5.2rem) !important;
       padding: 0 !important;
+    }
+    .col{
+      font-size: 1.2rem;
+    }
+    .modal-footer {
+      justify-content: center !important;
+    }
+    #date {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .modal-body {
+      margin: 0 2rem;
+    }
+    #state {
+      margin-top: 1rem;
+      text-align: end;
+    }
+    #on, #off {
+      margin-left: 2rem;
+    }
+    .close {
+      width: 50%;
     }
   </style>
 
@@ -163,16 +192,12 @@
                         </div>
                         <div class="row">
                           <div class="col mb-3">
-                            <p id="on">
-                              
-                            </p>
+                            <div class="tt">출근시간 <span id="on"></span></div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col mb-3">
-                            <p id="off">
-                               
-                            </p>
+                            <div class="tt">퇴근시간 <span id="off"></span></div>
                           </div>
                         </div>
                       </div>
@@ -197,7 +222,7 @@
                       ${user.name}
                     </div>
                     <div class="user" id="position" data-position="${user.position}">
-                      <span id="pInner" style="font-size: 0.9rem;">${user.position}</span>
+                      <span id="pInner" style="font-size: 1rem;">${user.position}</span>
                     </div>
                   </div>
                   <div class="b2">
@@ -221,9 +246,10 @@
                     <button class="btn btn-primary" id="req_btn">근태 수정 요청</button>
                   </div>
                 </div>
-                <div id="calendar">
+                <div id="c_box">
+                  <div id="calendar">
+                  </div>
                 </div>
-                
 
               </div>
               <!-- / Content -->  

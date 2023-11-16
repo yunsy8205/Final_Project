@@ -5,17 +5,8 @@
   
 <mapper namespace="com.cloud.pt.approval.ApprovalDAO">
 	<sql id="forPager">
-		<choose>
-			<when test="pager.kind=='title'">
-				AND TITLE LIKE CONCAT('%',#{pager.search},'%')
-			</when>
-			<when test="pager.kind=='contents'">
-				AND CONTENTS LIKE CONCAT('%',#{pager.search},'%')
-			</when>
-			<otherwise>
-				AND TITLE LIKE CONCAT('%','','%')
-			</otherwise>
-		</choose>
+		<if test="pager.kind=='title'">AND TITLE LIKE CONCAT('%',#{pager.search},'%')</if>
+		<if test="pager.kind=='contents'">AND CONTENTS LIKE CONCAT('%',#{pager.search},'%')</if>
 	</sql>
 	
 	<sql id="state">
@@ -60,8 +51,7 @@
 	<!-- 개인count  -->
 	<select id="getMyCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
-		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장')
-		<include refid="forPager"></include>
+		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장') <include refid="forPager"></include>
 	</select>
 	<select id="getMyWatingCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(APPROVALNUM) FROM APPROVAL
@@ -106,10 +96,10 @@
 	
 	<!-- 기안문서함 리스트-->
 	<!-- 전체 리스트 -->
-	<select id="getApprovalAllList" resultType="ApprovalVO" parameterType="Map">
+	<select id="getApprovalAllList" parameterType="Map" resultType="ApprovalVO">
 		SELECT APPROVALNUM,REGDATE,CATEGORY,TITLE,STATE FROM APPROVAL
 		WHERE EMPLOYEENUM=#{id.employeeNum} AND STATE NOT IN ('임시저장')
-		<include refid="forPager"></include>
+		<include refid="forPager"/>
 		ORDER BY APPROVALNUM DESC LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
 	<!--대기중 리스트 -->

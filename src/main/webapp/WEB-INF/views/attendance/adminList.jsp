@@ -35,23 +35,23 @@ pageEncoding="UTF-8"%>
           <tr>
             <td>${i.index+1}</td>
             <td>${vo.employeeVO.name}</td>
-            <td>${vo.attendanceModifyVO.regDate}</td>
-            <td>${vo.attendanceModifyVO.modifyDate}</td>
-            <td>${vo.attendanceModifyVO.type}</td>
+            <td>${vo.regDate}</td>
+            <td>${vo.modifyDate}</td>
+            <td>${vo.type}</td>
             <td>
               <c:choose>
-                <c:when test="${vo.attendanceModifyVO.status eq '요청'}">
-                          <a href="/admin/attendanceModify/update?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">
-                            ${vo.attendanceModifyVO.status}
+                <c:when test="${vo.status eq '요청'}">
+                          <a href="/admin/attendanceModify/update?attendanceModifyNum=${vo.attendanceModifyNum}">
+                            ${vo.status}
                           </a>				
                 </c:when>
                 <c:otherwise>
-                  ${vo.attendanceModifyVO.status}
+                  ${vo.status}
                 </c:otherwise>
               </c:choose>
             </td>
             <td>
-              <a href="/admin/attendanceModify/detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">
+              <a href="/admin/attendanceModify/detail?attendanceModifyNum=${vo.attendanceModifyNum}">
                 보기
               </a>
             </td>

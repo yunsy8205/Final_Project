@@ -12,11 +12,8 @@
       text-align: center;
     }
     #req_btn {
-      text-align: right;
-      margin: 30px;
-    }
-    .card {
-      margin: 30px;
+      text-align: end;
+      margin: 2.2rem 7rem 1.8rem;
     }
     #pager {
       margin-bottom: 50px;
@@ -25,6 +22,15 @@
       margin: 0rem 2.5rem 0 !important;
       max-width: calc(100% - 5.2rem) !important;
       padding: 0 !important;
+    }
+    .card {
+      margin: 1.2rem 7rem 1.8rem;
+    }
+    .table th {
+      font-size: 0.9rem !important;
+    }
+    .table thead {
+      background: #e7e7ff;
     }
   </style>
 
@@ -70,21 +76,21 @@
                           <tr>
                             <td>${i.index+1}</td>
                             <td>${vo.employeeVO.name}</td>
-                            <td>${vo.attendanceModifyVO.regDate}</td>
-                            <td>${vo.attendanceModifyVO.modifyDate}</td>
-                            <td>${vo.attendanceModifyVO.type}</td>
+                            <td>${vo.regDate}</td>
+                            <td>${vo.modifyDate}</td>
+                            <td>${vo.type}</td>
                             <td>
-                            	<c:if test="${vo.attendanceModifyVO.status eq '승인'}">
-                            		<span class="badge bg-label-success me-1">${vo.attendanceModifyVO.status}</span>
-                            	</c:if>
-                            	<c:if test="${vo.attendanceModifyVO.status eq '요청'}">
-                            		<span class="badge bg-label-primary me-1">${vo.attendanceModifyVO.status}</span>
-                            	</c:if>	
-                            	<c:if test="${vo.attendanceModifyVO.status eq '반려'}">
-                            		<span class="badge bg-label-warning me-1">${vo.attendanceModifyVO.status}</span>
-                            	</c:if>			
+                              <c:if test="${vo.status eq '승인'}">
+                                <span class="badge bg-label-success me-1">${vo.status}</span>
+                              </c:if>
+                              <c:if test="${vo.status eq '요청'}">
+                                <span class="badge bg-label-primary me-1">${vo.status}</span>
+                              </c:if>	
+                              <c:if test="${vo.status eq '반려'}">
+                                <span class="badge bg-label-warning me-1">${vo.status}</span>
+                              </c:if>			
                             </td>
-                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyVO.attendanceModifyNum}">보기</a></td>
+                            <td><a href="./detail?attendanceModifyNum=${vo.attendanceModifyNum}">보기</a></td>
                           </tr>
                         </c:forEach>
                       </tbody>
@@ -129,13 +135,15 @@
     const page = $('.page-link[data-num="1"]');
     page.parent().addClass('active');
     
+    //근태수정요청버튼 클릭 시 
     $('#btn').on('click', function(){
       $(location).attr('href', '/attendanceModify/add');
     })
     
+    //페이지번호 클릭 시 
     $('.pagination').on('click', '.move', function(){
       const num = $(this).attr('data-num');
-      $(location).attr('href', '?page='+num)
+      $(location).attr('href', '?page='+num);
     })
   </script>
 

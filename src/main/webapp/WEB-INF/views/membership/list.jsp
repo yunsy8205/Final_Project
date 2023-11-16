@@ -12,10 +12,26 @@
       text-align: center;
     }
     #membership {
-      text-align: right;
-      margin: 30px;
+      text-align: end;
+      margin: 2.2rem 7rem 1.8rem;
     }
-   
+    #pager {
+      margin-bottom: 50px;
+    }
+    .container-xxl {
+      margin: 0rem 2.5rem 0 !important;
+      max-width: calc(100% - 5.2rem) !important;
+      padding: 0 !important;
+    }
+    .card {
+      margin: 1.2rem 7rem 1.8rem;
+    }
+    .table th {
+      font-size: 0.9rem !important;
+    }
+    .table thead {
+      background: #e7e7ff;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
@@ -28,7 +44,7 @@
 		      <!-- sidebar -->
           <c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
           <!-- Layout container -->
-          <div class="layout-page">
+          <div class="layout-page" style="padding-left: 0 !important;">
             <!-- Navbar -->
             <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
@@ -91,22 +107,23 @@
                 </div>
               </div>
               
-              <c:if test="${not empty list}">
-	              <ul class="pagination justify-content-center">
-	                <li class="page-item prev ${pager.pre?'':'disabled'}">
-	                  <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
-	                </li>
-	                <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-		                <li class="page-item">
-		                  <a class="page-link move" data-num="${i}" href="#">${i}</a>
-		                </li>
-	                </c:forEach>
-	                <li class="page-item next ${pager.next?'':'disabled'}">
-	                  <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
-	                </li>
-	              </ul>
-			        </c:if>
-
+              <div id="pager">
+                <c:if test="${not empty list}">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item prev ${pager.pre?'':'disabled'}">
+                      <a class="page-link move" data-num="${pager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
+                    </li>
+                    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+                      <li class="page-item">
+                        <a class="page-link move" data-num="${i}" href="#">${i}</a>
+                      </li>
+                    </c:forEach>
+                    <li class="page-item next ${pager.next?'':'disabled'}">
+                      <a class="page-link move" data-num="${pager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
+                    </li>
+                  </ul>
+                </c:if>
+              </div>  
               <div class="content-backdrop fade"></div>
             </div>
             <!-- Content wrapper -->

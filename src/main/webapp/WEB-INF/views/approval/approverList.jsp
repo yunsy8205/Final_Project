@@ -63,6 +63,7 @@
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane fade show active" id="navs-justified-all" role="tabpanel">
+							<div id="box">
 							<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item" role="presentation">
 								<button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-before" aria-controls="navs-justified-before" aria-selected="true">결재전</button>
@@ -119,13 +120,13 @@
 													</li>
 												  </ul>
 											
-										</div>
+									</div>
 										<!--/ Hoverable Table rows -->
 								</div>
 								<div class="tab-pane fade show" id="navs-justified-after" role="tabpanel">
-									<div id="box">
+									<div id="box"><!-- Hoverable Table rows -->
 										
-										<!-- Hoverable Table rows -->
+										
 										
 											<div class="table-responsive text-nowrap">
 												<table class="table table-hover">
@@ -153,7 +154,6 @@
 													</tbody>
 												</table>
 											</div>
-											
 												<ul class="pagination justify-content-center">
 													<li class="page-item prev ${aapager.pre?'':'disabled'}">
 													  <a class="page-link move" data-num="${aapager.startNum-1}" href="#"><i class="tf-icon bx bx-chevrons-left"></i></a>
@@ -167,14 +167,14 @@
 													  <a class="page-link move" data-num="${aapager.lastNum+1}" href="#"><i class="tf-icon bx bx-chevrons-right"></i></a>
 													</li>
 												  </ul>
-											
-										</div>
-										<!--/ Hoverable Table rows -->
+				
+										
+									</div>	<!--/ Hoverable Table rows -->
 								</div>
 						
 							
+							</div>
 						</div>
-						
 					</div>
 					
 				<div>

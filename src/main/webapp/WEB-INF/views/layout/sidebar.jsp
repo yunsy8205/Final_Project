@@ -188,12 +188,12 @@ uri="http://www.springframework.org/security/tags" %>
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="/ptClass/ptList" class="menu-link">
-            <div data-i18n="Error">수업 조회</div>
+            <div data-i18n="Error" class="subDiv">수업 조회</div>
           </a>
         </li>
         <li class="menu-item">
           <a href="/ptClass/myPtList" class="menu-link">
-            <div data-i18n="Under Maintenance">회원 조회</div>
+            <div data-i18n="Under Maintenance" class="subDiv">회원 조회</div>
           </a>
         </li>
       </ul>
@@ -207,17 +207,17 @@ uri="http://www.springframework.org/security/tags" %>
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="/attendance/info" class="menu-link">
-            <div data-i18n="Accordion">내 근태 조회</div>
+            <div data-i18n="Accordion" class="subDiv">내 근태 조회</div>
           </a>
         </li>
         <li class="menu-item">
           <a id="attendance" href="/admin/attendance" class="menu-link">
-            <div data-i18n="Alerts">전체 근태 조회</div>
+            <div data-i18n="Alerts" class="subDiv">전체 근태 조회</div>
           </a>
         </li>
         <li class="menu-item">
           <a href="/attendanceModify/list" class="menu-link">
-            <div data-i18n="Badges">근태 수정 요청 목록</div>
+            <div data-i18n="Badges" class="subDiv">근태 수정 요청 목록</div>
           </a>
         </li>
       </ul>
@@ -231,21 +231,21 @@ uri="http://www.springframework.org/security/tags" %>
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="/approval/list" class="menu-link">
-            <div data-i18n="Accordion">기안문서함</div>
+            <div data-i18n="Accordion" class="subDiv">기안문서함</div>
           </a>
         </li>
         <sec:authorize access="isAuthenticated()">
           <sec:authorize access="!hasRole('ROLE_TRAINER')">
             <li class="menu-item">
               <a href="/approval/approverList" class="menu-link">
-                <div data-i18n="Alerts">결재문서함</div>
+                <div data-i18n="Alerts" class="subDiv">결재문서함</div>
               </a>
             </li>
           </sec:authorize>
         </sec:authorize>
         <li class="menu-item">
           <a href="/approval/signMain" class="menu-link">
-            <div data-i18n="Badges">서명관리</div>
+            <div data-i18n="Badges" class="subDiv">서명관리</div>
           </a>
         </li>
       </ul>
@@ -297,5 +297,16 @@ uri="http://www.springframework.org/security/tags" %>
 
     <!-- Extended components -->
   </ul>
+  <script type="text/javascript">
+  
+//현재 URL 가져오기
+  var currentUrl = window.location.href;
+  var pathWithoutHost = currentUrl.replace('http://localhost:82', '');
+
+  console.log('현재 경로:', pathWithoutHost);
+  // 모든 메뉴 항목 가져오기
+  var menuItems = document.querySelectorAll('.menu-item');
+  console.log('a경로:',menuItems);
+  </script>
 </aside>
 <!-- / Menu -->
