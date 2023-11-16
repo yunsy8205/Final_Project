@@ -85,6 +85,9 @@
     .table thead {
       background: #e7e7ff;
     }
+    .table {
+      text-align: center;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>

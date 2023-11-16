@@ -65,23 +65,19 @@
    };
    
    $('#search').click(function(){
+	  
       let name = $("#searchName").val();
+	  if($("#searchName").val()==''){
+		  getTotalSearch(name);
+	  }else{
+	      console.log(name);
+	      $('#listBox').empty();
+	      getSearch(name);
+	  }
       
-      console.log(name);
-      $('#listBox').empty();
-      getSearch(name);
 
    });
-   
-   $('#searchName').keyup(function(){
-      if($("#searchName").val()==''){
-		  
-		  let name = $("#searchName").val();
-	      $('#listBox').empty();
-	      getTotalSearch(name);
-	  }
-   });
-   
+  
    $("#msg").on("keyup", function(event) {
        if (event.key === "Enter") {
            let roomNum = $('#button-send').attr("data-room");
@@ -91,6 +87,12 @@
    });
    
    $("#searchName").on("keyup", function(event) {
+	   if($("#searchName").val()==''){
+		  
+		  let name = $("#searchName").val();
+	      getTotalSearch(name);
+	  }
+	   
        if (event.key === "Enter") {
           
           let memName = $("#searchName").val();
@@ -210,7 +212,7 @@
             searchList = response.list;
             
             $.each(searchList, function( index, value ) {
-                   let a = '<li class="ul2"><a href="#" class="chatList" data-empNum="'+value.employeeNum+'"><i class="mx-1 bx bx-message-square"></i>'+value.name+' '+value.position+'</a></li>'
+                   let a = '<li class="ul2"><a href="#" class="chatList" data-empNum="'+value.employeeNum+'"><i class="mx-1 bx bx-message-square"></i>'+value.name+' ['+value.position+']</a></li>'
                     $('#listBox').append(a);
                 });
             } else {
