@@ -31,8 +31,8 @@
 		}
 		
 		#btn{
-			padding-left: 40%;
-			margin-top: 50px;
+		    text-align: center;
+   			margin: auto;
 		}
 		table{
 			table-layout: fixed;
@@ -117,17 +117,16 @@
 	                   		  <c:forEach items="${notice.list}" var="f">
 	                   			  <a style="margin: 3%;" href="./noticefiledown?fileNum=${f.fileNum}">${f.oriName}</a><br>
 	                   		  </c:forEach>
-		                      <hr>
 	                      </c:if>
+	                    </div>
 	                      <div id="btn" class="col-sm-10">
 	                          	<a class="a1 btn btn-primary" href="./list">이전</a>
 	                          	<sec:authentication property="principal" var="user"/>
-									<c:if test="${user.position == 'ROLE_GENERAL'}">
-			                            <a class="a1 btn btn-primary" href="./update?noticeNum=${notice.noticeNum}">수정</a>
-			                            <button type="button" class="delete btn btn-primary">삭제</button>
-	                            	</c:if>
+								<c:if test="${user.position == 'ROLE_GENERAL'}">
+		                            <a class="a1 btn btn-primary" href="./update?noticeNum=${notice.noticeNum}">수정</a>
+		                            <button type="button" class="delete btn btn-primary">삭제</button>
+                            	</c:if>
 	                      </div>
-	                    </div>
 	                  </div>
 	                    <!-- /Account -->
 	                  </div>
