@@ -85,7 +85,7 @@
 	</select>
 	
 	<select id="getEmpDetail" parameterType="EmployeeVO" resultType="EmployeeVO" >
-		SELECT EMPLOYEENUM, NAME, PHONE, ADDRESS, BIRTH, JOINDATE, GENDER, STATE, LEAVEDATE, PROFILE, 
+		SELECT EMPLOYEENUM, NAME, PHONE, ADDRESS, BIRTH, JOINDATE, QUITDATE, GENDER, STATE, LEAVEDATE, PROFILE, 
 			<include refid="positionName"></include>
 		FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum}
 	</select>

@@ -159,7 +159,7 @@
                             <td class="ptCount" data-ptcount="${vo.ptCount}">${vo.ptCount}</td>
                             <td>${vo.employeeVO.name}</td>
                             <td id="ptAdd">
-                              <button class="membershipAddBtn btn btn-primary"
+                              <button class="membershipAddBtn btn btn-primary btn-sm "
                               data-num="${vo.memberNum}"
                               data-name="${vo.memberName}"
                               ></button>

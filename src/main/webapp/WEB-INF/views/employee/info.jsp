@@ -192,7 +192,7 @@
                               <div class="proBtn" style="text-align: center;">
                                 <button type="submit" id="upBtn" class="btn btn-primary">비밀번호 변경</button>
                               </div>
-                          </form:form>
+                        </form:form>
                       </p>
                     </div>
                   </div>
