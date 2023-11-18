@@ -121,11 +121,11 @@ uri="http://www.springframework.org/tags" %>
 									</div>
 									<hr id="hr1" />
 									<div class="table-responsive text-nowrap">
-										<table class="table table-hover">
+										<table class="table table-hover" border=0 cellpadding="0" cellspacing="1" style="table-layout:fixed;">
 											<tbody class="table-border-bottom-0">
 												<c:forEach items="${list}" var="n">
 													<tr>
-														<td>
+														<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; width: 400px;">
 															<span class="
 																		<c:if test="${n.category == '인사'}">badge bg-label-primary me-1</c:if>
 																		<c:if test="${n.category == '시설'}">badge bg-label-success me-1</c:if>

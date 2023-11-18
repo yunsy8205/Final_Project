@@ -85,10 +85,10 @@
 	                      			<th class="titleCss">제목</th>
 	                      			<td id="title1" data-num="${notice.noticeNum}" colspan="5">
 	                      			<strong class="
-												<c:if test="${notice.category == '인사'}">badge bg-label-primary me-1</c:if>
+												<c:if test="${notice.category == '인사'}">badge bg-label-warning me-1</c:if>
 												<c:if test="${notice.category == '시설'}">badge bg-label-success me-1</c:if>
 												<c:if test="${notice.category == '휴무'}">badge bg-label-info me-1</c:if>
-												<c:if test="${notice.category == '기타'}">badge bg-label-warning me-1</c:if>
+												<c:if test="${notice.category == '기타'}">badge bg-label-primary me-1</c:if>
 									">${notice.category}</strong
 	                      			> ${notice.title}</td>
 	                      		</tr>
