@@ -34,12 +34,12 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public String setNoticeAdd(MultipartFile [] multipartFiles, NoticeVO noticeVO)throws Exception{
+	public String setNoticeAdd(MultipartFile [] fileAdd, NoticeVO noticeVO)throws Exception{
 		SecurityContext context = SecurityContextHolder.getContext();
 		org.springframework.security.core.Authentication b = context.getAuthentication();
 		noticeVO.setEmployeeNum(Long.valueOf(b.getName()));
 		
-		noticeService.setNoticeAdd(noticeVO, multipartFiles);
+		noticeService.setNoticeAdd(noticeVO, fileAdd);
 	
 		return "redirect:./list";
 	}
@@ -102,14 +102,14 @@ public class NoticeController {
 	}
 	
 	@PostMapping("update")
-	public String setNoticeUpdate(NoticeVO noticeVO, MultipartFile [] files)throws Exception{
+	public String setNoticeUpdate(NoticeVO noticeVO, MultipartFile [] fileAdd)throws Exception{
 		SecurityContext context = SecurityContextHolder.getContext();
 		org.springframework.security.core.Authentication b = context.getAuthentication();
 		
 		log.info("수정내용: {}",noticeVO.getContents());
 		if(noticeVO.getEmployeeNum()==Long.parseLong(b.getName())) {//작성자와 같을때
 			
-			int result = noticeService.setNoticeUpdate(noticeVO, files);
+			int result = noticeService.setNoticeUpdate(noticeVO, fileAdd);
 			
 			if(result>0){
 				log.info("업데이트 성공");
