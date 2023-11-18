@@ -32,7 +32,7 @@ uri="http://www.springframework.org/security/tags" %>
   class="layout-menu menu-vertical menu bg-menu-theme"
   style="width: 23rem"
 >
-  <div class="app-brand demo">
+  <div class="app-brand demo" style="display: flex; justify-content: center;">
     <a href="/home" class="app-brand-link">
     	<img id="logo" alt="" src="/img/CLOUDPT.jpg">
     </a>
