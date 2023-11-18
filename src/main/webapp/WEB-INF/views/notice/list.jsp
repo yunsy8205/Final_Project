@@ -24,7 +24,7 @@
 	    }
 	    .a1{
 			color: white;
-			margin: 10px 0;
+			margin: 1rem;;
 			display: right;
 		}
 		.input-group{
@@ -52,6 +52,10 @@
 	    }
 	    .table thead {
 	      background: #e7e7ff;
+	    }
+	    #addBox{
+	    	display: flex !important; 
+	    	justify-content: flex-end;
 	    }
 	</style>
 	
@@ -92,7 +96,7 @@
 						</div>
 						<sec:authentication property="principal" var="user"/>
 						<c:if test="${user.position == 'ROLE_GENERAL'}">
-							<div style="display: flex; justify-content: flex-end;">
+							<div id="addBox">
 								<a class="a1 btn btn-primary" href="./add">글쓰기</a>
 							</div>
 						</c:if>
