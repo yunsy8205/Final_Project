@@ -127,10 +127,10 @@ uri="http://www.springframework.org/tags" %>
 													<tr>
 														<td style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; width: 400px;">
 															<span class="
-																		<c:if test="${n.category == '인사'}">badge bg-label-primary me-1</c:if>
+																		<c:if test="${n.category == '인사'}">badge bg-label-warning me-1</c:if>
 																		<c:if test="${n.category == '시설'}">badge bg-label-success me-1</c:if>
 																		<c:if test="${n.category == '휴무'}">badge bg-label-info me-1</c:if>
-																		<c:if test="${n.category == '기타'}">badge bg-label-warning me-1</c:if>
+																		<c:if test="${n.category == '기타'}">badge bg-label-primary me-1</c:if>
 															">${n.category}</span>
 															<a
 															class="a1"
