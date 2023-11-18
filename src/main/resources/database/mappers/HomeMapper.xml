@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="getApprovalList" parameterType="String" resultType="ApprovalVO">
-		SELECT CATEGORY, TITLE, STATE, REGDATE
+		SELECT APPROVALNUM, CATEGORY, TITLE, STATE, REGDATE
 		FROM APPROVAL
 		WHERE EMPLOYEENUM = #{employeeNum}
 		ORDER BY APPROVALNUM DESC
