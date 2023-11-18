@@ -3,6 +3,8 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <!-- beautify ignore:start -->
 <html
@@ -29,8 +31,8 @@
 		}
 		
 		#btn{
-			padding-left: 40%;
-			margin-top: 50px;
+		    text-align: center;
+   			margin: auto;
 		}
 		table{
 			table-layout: fixed;
@@ -39,7 +41,15 @@
 			font-size: 18px;
 			
 		}
-
+		.table:not(.table-dark) th {
+		    color: #566a7f;
+		    text-align: center;
+		}
+		.titleCss{
+		    background: rgb(229 229 229) !important;
+		    font-size: 1.2rem !important;
+		    line-height: 1.4rem;
+		}
 	</style>
 </head>
 <body>
@@ -63,11 +73,16 @@
 	
 	              <div class="row">
 	                <div class="mb-4">
-	                    <div class="card-body">
+	                    <div class="card-body" style="
+					    border: 1px solid #ccc;
+					    margin: 2rem 10rem;
+					    padding: 0;
+					    ">
 	                      <div>
+	                       
 	                      	<table class="table">
 	                      		<tr >
-	                      			<th>제목</th>
+	                      			<th class="titleCss">제목</th>
 	                      			<td id="title1" data-num="${notice.noticeNum}" colspan="5">
 	                      			<strong class="
 												<c:if test="${notice.category == '인사'}">badge bg-label-primary me-1</c:if>
@@ -78,39 +93,40 @@
 	                      			> ${notice.title}</td>
 	                      		</tr>
 	                      		<tr>
-	                      			<th>작성자</th>
+	                      			<th class="titleCss">작성자</th>
 	                      			<td colspan="2">${notice.name}</td>
 	                      			<td></td>
 	                      			<td></td>
 	                      			<td></td>
 	                      		</tr>
 	                      		<tr>
-	                      			<th>작성일</th>
+	                      			<th class="titleCss">작성일</th>
 	                      			<td>${notice.modDate}</td>
-	                      			<th>조회</th>
+	                      			<th class="titleCss">조회</th>
 	                      			<td>${notice.hit}</td>
 	                      			<td></td>
 	                      			<td></td>
 	                      		</tr>
 	                      	</table>
 	                      </div>
-	                      <div>
+	                      <div style="margin: 3%;">
 	                      		${notice.contents}<br>
-	                      		<hr>
-	                      		<c:forEach items="${notice.list}" var="f">
-	                      			<a href="./noticefiledown?fileNum=${f.fileNum}">${f.oriName}</a><br>
-	                      		</c:forEach>
 	                      </div>
-	                      <hr>
+                   		  <c:if test="${fn:length(notice.list) != 0}">
+	                   		  <hr>
+	                   		  <c:forEach items="${notice.list}" var="f">
+	                   			  <a style="margin: 3%;" href="./noticefiledown?fileNum=${f.fileNum}">${f.oriName}</a><br>
+	                   		  </c:forEach>
+	                      </c:if>
+	                    </div>
 	                      <div id="btn" class="col-sm-10">
 	                          	<a class="a1 btn btn-primary" href="./list">이전</a>
 	                          	<sec:authentication property="principal" var="user"/>
-									<c:if test="${user.position == 'ROLE_GENERAL'}">
-			                            <a class="a1 btn btn-primary" href="./update?noticeNum=${notice.noticeNum}">수정</a>
-			                            <button type="button" class="delete btn btn-primary">삭제</button>
-	                            	</c:if>
+								<c:if test="${user.position == 'ROLE_GENERAL'}">
+		                            <a class="a1 btn btn-primary" href="./update?noticeNum=${notice.noticeNum}">수정</a>
+		                            <button type="button" class="delete btn btn-primary">삭제</button>
+                            	</c:if>
 	                      </div>
-	                    </div>
 	                  </div>
 	                    <!-- /Account -->
 	                  </div>
