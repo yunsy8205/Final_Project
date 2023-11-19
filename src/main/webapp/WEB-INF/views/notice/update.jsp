@@ -184,7 +184,8 @@
 	                        <div class="row justify-content-end">
 	                          <div class="col-sm-10">
 	                          	<a class="a1 btn btn-primary" href="./detail?noticeNum=${notice.noticeNum}">이전</a>
-	                            <button type="button" id="updateBtn" class="btn btn-primary">수정</button>
+	                          	<button type="button" id="updateBtn" class="btn btn-primary">수정</button>
+								
 	                          </div>
 	                        </div>
 	                      </form>

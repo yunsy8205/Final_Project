@@ -121,8 +121,8 @@
 	                    </div>
 	                      <div id="btn" class="col-sm-10">
 	                          	<a class="a1 btn btn-primary" href="./list">이전</a>
-	                          	<sec:authentication property="principal" var="user"/>
-								<c:if test="${user.position == 'ROLE_GENERAL'}">
+								<sec:authentication property="principal" var="user"/>
+								<c:if test="${user.employeeNum == notice.employeeNum}">
 		                            <a class="a1 btn btn-primary" href="./update?noticeNum=${notice.noticeNum}">수정</a>
 		                            <button type="button" class="delete btn btn-primary">삭제</button>
                             	</c:if>

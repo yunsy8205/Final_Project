@@ -120,8 +120,9 @@
         sep,
         oct,
         nov,
-        dec,50
+        dec,100
       ];
+
 
       const ctx = document.getElementById("myChart").getContext("2d");
       new Chart(ctx, {
