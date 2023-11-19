@@ -181,6 +181,4 @@
 		SELECT EMPLOYEENUM, NAME, PHONE FROM EMPLOYEE WHERE EMPLOYEENUM = #{employeeNum} AND NAME = #{name} AND PHONE = #{phone}
 	</select>
 	
-	
-	
 </mapper>

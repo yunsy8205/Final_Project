@@ -18,6 +18,14 @@
 </head>
 
 <body>
+  <script>
+  // 이미지 안보일때 기본이미지 적용
+  const img = document.getElementById("pro");
+  function handleImageError(img) {
+    img.src = "/img/basicImg.png";
+    console.log("if");
+  }
+  </script>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -38,7 +46,7 @@
                     <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;padding-bottom:0;">
                       <h3 class="mb-0" style="margin-top: 1rem;"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span> 인적사항</h3>
                       <div style="width: 10rem; height:10rem; margin: 2rem;">
-                        <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" value="${employeeVO.proOriginal}" id="pro" onerror="this.style.display='none'" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;">
+                        <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" onerror="handleImageError(this)" value="${employeeVO.proOriginal}" id="pro" data-value="${employeeVO.proOriginal}" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;">
                       </div>
                     </div>
                     <div class="card-body">
@@ -153,42 +161,24 @@
         delBtn.style.display = 'none';
       }
 
+  // 이미지 크기
+  // function setThumbnail(event) {
+  //   for (let image of event.target.files) {
+  //     let reader = new FileReader();
 
+  //     reader.onload = function(event) {
+  //       let img = document.createElement("img");
+  //       img.setAttribute("src", event.target.result);
+  //       img.style.width = "100%";
+  //       img.style.height = "100%";
+  //       img.style.objectFit = "cover";
+  //       img.style.borderRadius = "50%";
+  //       document.querySelector("#imgDiv").appendChild(img);
+  //     };
 
-      const pro = document.getElementById("pro").value;
-      onerror="this.onerror=null; this.src='대체 이미지 주소';"
-      if(pro == 'undefined'){
-        let imgE = document.createElement("img");
-        imgE.setAttribute("src", "D:/pcy/bootWorkspace/upload/employee/basic.png")
-      }
-
-
-
-
-      console.log(pro);
-
-
-
-
-
-
-  function setThumbnail(event) {
-    for (let image of event.target.files) {
-      let reader = new FileReader();
-
-      reader.onload = function(event) {
-        let img = document.createElement("img");
-        img.setAttribute("src", event.target.result);
-        img.style.width = "100%";
-        img.style.height = "100%";
-        img.style.objectFit = "cover";
-        img.style.borderRadius = "50%";
-        document.querySelector("#imgDiv").appendChild(img);
-      };
-
-      reader.readAsDataURL(image);
-    }
-  }
+  //     reader.readAsDataURL(image);
+  //   }
+  // }
     </script>
   </body>
 </html>
