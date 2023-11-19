@@ -121,7 +121,7 @@
                   <ul class="nav nav-tabs nav-fill" role="tablist">
                     <li class="nav-item">
                       <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-home" aria-controls="navs-justified-home" aria-selected="true">
-                        전체 트레이너 근태 조회 
+                        전체 직원 근태 조회 
                       </button>
                     </li>
                     <li class="nav-item">
