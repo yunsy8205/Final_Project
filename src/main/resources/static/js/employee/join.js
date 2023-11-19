@@ -149,25 +149,27 @@ function emptyCheck(element) {
   }
 }
 
+
 $("#addBtn").click(function () {
   if (proFile.value == "") {
     alert("직원 사진은 필수입니다. 다시 작성해주세요.");
     checks[0] = false;
   } else {
     checks[0] = true;
+  }
 
-    let allCheck = checks.includes(false);
-    if (!allCheck) {
-      alert("등록하겠습니다!");
-      frm.submit();
-    } else {
-      for (let i = 0; i < checks.length; i++) {
-        if (checks[i] == false) {
-          input[i].focus();
-          alert("모든 항목은 필수작성입니다. 빈칸을 채워주세요!");
-          return;
-        }
+  let allCheck = checks.includes(false);
+  if (!allCheck) {
+    alert("등록하겠습니다!");
+    frm.submit();
+  } else {
+    for (let i = 1; i < checks.length; i++) {
+      if (checks[i]) {
+        input[i-1].focus();
+        alert("모든 항목은 필수작성입니다. 빈칸을 채워주세요!");
+        return;
       }
+      break;
     }
   }
 });

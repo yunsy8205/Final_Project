@@ -22,6 +22,7 @@
 		ON M.EMPLOYEENUM=E.EMPLOYEENUM
 		<if test="pager.kind=='name'">WHERE MEMBERNAME LIKE CONCAT('%',#{pager.search},'%')</if>
 		ORDER BY M.MEMBERNUM DESC
+		LIMIT #{pager.startRow},#{pager.lastRow}
 	</select>
 
 	<insert id="setMemberAdd" parameterType="MemVO">
