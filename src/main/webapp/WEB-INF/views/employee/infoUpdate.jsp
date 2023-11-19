@@ -228,7 +228,7 @@
                               <div class="row mb-3" style="display: flex;justify-content: center;">
                                 <div id="careerCon">
                                   <c:forEach items="${employeeVO.careers}" var="career" >
-                                    <div id="infoCareerText">
+                                    <!-- <div id="infoCareerText">
                                       <div class="row mb-3">
                                         <label for="career" class="col-sm-2 col-form-label" style="text-align: center;line-height: 77.88px;font-size: 0.9rem;font-weight: 600;">경력</label>
                                         <div class="col-sm-10">
@@ -236,7 +236,7 @@
                                           <input type="text" class="form-control career" id="basic-default-name" value="${career.caPassDate}" readonly/>
                                         </div>
                                       </div>
-                                    </div> 
+                                    </div>  -->
                                   </c:forEach>
                                   <div id="careerInputCon"></div>
                                 </div>
@@ -257,7 +257,7 @@
                               <div class="row mb-3" style="display: flex;justify-content: center;">
                                 <div id="certificationCon">
                                   <c:forEach items="${employeeVO.certifications}" var="certification">
-                                    <div id="certification">
+                                    <!-- <div id="certification">
                                       <div class="row mb-3">
                                         <label for="certification" class="col-sm-2 col-form-label" style="text-align: center;line-height: 77.88px;font-size: 0.9rem;font-weight: 600;">경력</label>
                                         <div class="col-sm-10">
@@ -265,7 +265,7 @@
                                           <input type="text" class="form-control certification" id="basic-default-name" value="${certification.cerPassDate}" readonly/>
                                         </div>
                                       </div>
-                                    </div>
+                                    </div> -->
                                   </c:forEach>
                                   <div id="certificationInputCon"></div>
                                 </div>  

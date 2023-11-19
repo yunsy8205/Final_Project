@@ -60,6 +60,19 @@ public class HomeController {
 			model.addAttribute("url", "/");
 			return "/commons/result";
 		}
+		// profile
+		System.out.println(a.getPrincipal());
+		Object principal = a.getPrincipal();
+
+		if (principal instanceof EmployeeVO) {
+		    EmployeeVO employeeVO = (EmployeeVO) principal;
+		    
+		    String proFileValue = employeeVO.getProFile();
+		    System.out.println("proFile value: " + proFileValue);
+		    model.addAttribute("emp", proFileValue);
+		} else {
+		    System.out.println("Principal is not an instance of EmployeeVO");
+		}
 		
 		//공지
 		List<NoticeVO> list = homeService.getNoticeList();

@@ -95,8 +95,9 @@ uri="http://www.springframework.org/tags" %>
             <div class="card-body" style="padding: 3rem 1rem">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
-                  <span class="app-brand-logo demo">
+                <a href="#" style="width: 6rem; height: 6rem;">
+                  <img src="/img/CLOUDPT.jpg" alt="메인 로고" id="logo" style="width: 100%;height: 100%;">
+                  <!-- <span class="app-brand-logo demo">
                     <svg
                       width="25"
                       viewBox="0 0 25 42"
@@ -180,12 +181,12 @@ uri="http://www.springframework.org/tags" %>
                   </span>
                   <span class="app-brand-text demo text-body fw-bolder"
                     >Sneat</span
-                  >
+                  > -->
                 </a>
               </div>
               <!-- /Logo -->
               <h4 class="mb-2" style="text-align: center">
-                Welcome to Sneat! 👋
+                Welcome to CloudPT! 👋
               </h4>
               <div class="errorMessage">
                 <!-- login 실패시 message가 뜸. code=키이름 var=키값을 담는 곳 -->
