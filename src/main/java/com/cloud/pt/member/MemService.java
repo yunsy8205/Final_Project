@@ -21,7 +21,6 @@ public class MemService {
 		pager.makeRowNum();
 		Long total = memDAO.getMemberTotal(pager);
 		pager.makePageNum(total);
-		
 		map.put("pager", pager);
 		map.put("member", memVO);
 		
