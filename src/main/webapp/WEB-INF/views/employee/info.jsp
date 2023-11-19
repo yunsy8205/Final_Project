@@ -20,6 +20,14 @@
 </head>
 
 <body>
+  <script>
+    // 이미지 안보일때 기본이미지 적용
+    const img = document.getElementById("infoPro");
+    function handleImageError(img) {
+      img.src = "/img/basicImg.png";
+      console.log("if");
+    }
+  </script>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -56,7 +64,7 @@
                                 <div class="card-header d-flex align-items-center justify-content-between" style="flex-direction: column;">
                                   <h3 class="mb-0"><span style="font-weight: 600;">${employeeVO.name} ${employeeVO.position}</span> 정보</h3>
                                   <div class="proFile_con" style="width: 10rem; height:10rem; margin: 2rem;">
-                                    <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" onerror="this.style.display='none'" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;">
+                                    <img src="../file/employee/${employeeVO.proFile}" alt="직원 프로필" id="infoPro" onerror="handleImageError(this)" style="width:100%; height: 100%; border-radius:50%;object-fit: cover;">
                                   </div>
                                 </div>
                                 <div class="card-body">
@@ -118,7 +126,7 @@
                                           <input type="text" class="form-control" id="basic-default-name" value="${employeeVO.leaveDate}" readonly/>
                                         </div>
                                       </div>
-                                      <c:if test="${employeeVO.position eq 'ROLE_TRAINER'}">
+                                      <c:if test="${employeeVO.position eq '트레이너'}">
                                         <div class="row mb-3">
                                           <label class="col-sm-2 col-form-label" for="basic-default-name">경력</label>
                                           <div class="col-sm-10">
@@ -192,7 +200,7 @@
                               <div class="proBtn" style="text-align: center;">
                                 <button type="submit" id="upBtn" class="btn btn-primary">비밀번호 변경</button>
                               </div>
-                          </form:form>
+                        </form:form>
                       </p>
                     </div>
                   </div>

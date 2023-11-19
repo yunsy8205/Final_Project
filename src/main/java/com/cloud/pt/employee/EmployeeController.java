@@ -167,7 +167,9 @@ public class EmployeeController {
 			return "/employee/info";
 		}
 		model.addAttribute("employeeVO", employeeVO);
-		return	"/employee/info"; 
+		model.addAttribute("message","새로운 비밀번호로 다시 로그인해주세요!");
+		model.addAttribute("url","/");
+		return	"commons/result"; 
 	}
 	
 	

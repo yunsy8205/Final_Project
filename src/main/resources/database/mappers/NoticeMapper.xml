@@ -75,7 +75,7 @@
 		FROM NOTICE N JOIN EMPLOYEE E
 		ON (N.EMPLOYEENUM=E.EMPLOYEENUM)
 		WHERE PIN=1
-		ORDER BY N.NOTICENUM DESC
+		ORDER BY N.MODDATE DESC
 	</select>
 	
 	<select id="getNoticeList" parameterType="Pager" resultType="NoticeVO">
@@ -85,7 +85,7 @@
 		WHERE
 			<include refid="forPager"></include>
 			LIKE CONCAT('%',#{search},'%')
-		ORDER BY N.NOTICENUM DESC
+		ORDER BY N.MODDATE DESC
 		LIMIT #{startRow}, #{lastRow}
 	</select>
 	
@@ -96,7 +96,7 @@
 		WHERE CATEGORY = #{notice.category} AND
 			<include refid="forCatPager"></include>
 			LIKE CONCAT('%',#{pager.search},'%')
-		ORDER BY N.NOTICENUM DESC
+		ORDER BY N.MODDATE DESC
 		LIMIT #{pager.startRow}, #{pager.lastRow}
 	</select>
 	

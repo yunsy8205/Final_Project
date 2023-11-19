@@ -95,8 +95,6 @@ gW.addEventListener("change", function () {
   }
 });
 
-
-
 // 업데이트 유효성검사
 for (n of nameI) {
   n.addEventListener("blur", function () {
@@ -115,7 +113,7 @@ for (p of phone) {
     if (p.value == "") {
       pMsg.innerHTML = "전화번호를 입력해주세요.";
     } else if (!phoneCheck.test(p.value)) {
-      pMsg.innerHTML = "010으로 시작하는 8자리를 입력해주세요.";
+      pMsg.innerHTML = "'-'를 빼고 010으로 시작하는 8자리를 입력해주세요.";
     } else {
       checks[1] = true;
     }
@@ -168,14 +166,10 @@ $("#addBtn").click(function () {
   }
 });
 
-
-
-
 // 이전 페이지
-const backBtn = document.getElementById("backBtn")
+const backBtn = document.getElementById("backBtn");
 const r = document.referrer; // 이전 url 확인
 
-backBtn.addEventListener("click", function() {
-    window.location.href="/employee/info";
+backBtn.addEventListener("click", function () {
+  window.location.href = "/employee/info";
 });
-

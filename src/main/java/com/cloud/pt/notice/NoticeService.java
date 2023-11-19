@@ -33,12 +33,12 @@ public class NoticeService {
 	private String noticeName;
 	
 	
-	public int setNoticeAdd(NoticeVO noticeVO, MultipartFile[] multipartFiles)throws Exception{
+	public int setNoticeAdd(NoticeVO noticeVO, MultipartFile[] fileAdd)throws Exception{
 		log.info("<============uploadPath:{}============>",uploadPath);
 		int result = noticeDAO.setNoticeAdd(noticeVO);
 		
-		if(multipartFiles != null) {//파일을 추가 안 했을 때
-			for(MultipartFile multipartFile : multipartFiles) {
+		if(fileAdd != null) {//파일을 추가 안 했을 때
+			for(MultipartFile multipartFile : fileAdd) {
 				
 				if(multipartFile.isEmpty()) {
 					continue;
@@ -120,7 +120,7 @@ public class NoticeService {
 		return result;
 	}
 	
-	public int setNoticeUpdate(NoticeVO noticeVO, MultipartFile[] files)throws Exception{
+	public int setNoticeUpdate(NoticeVO noticeVO, MultipartFile[] fileAdd)throws Exception{
 		log.info("{}",noticeVO.getCategory());
 		log.info("{}",noticeVO.getTitle());
 		log.info("{}",noticeVO.getContents());
@@ -132,21 +132,24 @@ public class NoticeService {
 			return result;//db 저장 실패
 		}
 			
-		for(MultipartFile multipartFile : files) {
+		if(fileAdd != null) {//파일을 추가 안 했을 때
 			
-			
-			if(multipartFile.isEmpty()) {
-				continue;
+			for(MultipartFile multipartFile : fileAdd) {
+				
+				
+				if(multipartFile.isEmpty()) {
+					continue;
+				}
+				
+				NoticeFileVO fileVO = new NoticeFileVO();
+				String fileName = fileManager.save(this.uploadPath+this.noticeName, multipartFile);
+				fileVO.setNoticeNum(noticeVO.getNoticeNum());
+				fileVO.setFileName(fileName);
+				fileVO.setOriName(multipartFile.getOriginalFilename());
+				
+				log.info("<============oriName:{}============>",fileVO.getOriName());
+				result = noticeDAO.fileAdd(fileVO);
 			}
-			
-			NoticeFileVO fileVO = new NoticeFileVO();
-			String fileName = fileManager.save(this.uploadPath+this.noticeName, multipartFile);
-			fileVO.setNoticeNum(noticeVO.getNoticeNum());
-			fileVO.setFileName(fileName);
-			fileVO.setOriName(multipartFile.getOriginalFilename());
-			
-			log.info("<============oriName:{}============>",fileVO.getOriName());
-			result = noticeDAO.fileAdd(fileVO);
 		}
 		
 		return result;
