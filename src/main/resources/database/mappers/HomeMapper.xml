@@ -33,6 +33,6 @@
 		FROM APPROVAL
 		WHERE EMPLOYEENUM = #{employeeNum}
 		ORDER BY APPROVALNUM DESC
-		LIMIT 0,6
+		LIMIT 0,7
 	</select>
 </mapper>
