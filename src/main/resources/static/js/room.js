@@ -74,8 +74,6 @@
 	      $('#listBox').empty();
 	      getSearch(name);
 	  }
-      
-
    });
   
    $("#msg").on("keyup", function(event) {
@@ -87,17 +85,19 @@
    });
    
    $("#searchName").on("keyup", function(event) {
+	   
+	  let name = $("#searchName").val();
 	   if($("#searchName").val()==''){
 		  
-		  let name = $("#searchName").val();
-	      getTotalSearch(name);
-	  }
+	   		getTotalSearch(name);
+	   }
 	   
        if (event.key === "Enter") {
-          
-          let memName = $("#searchName").val();
-     	$('#listBox').empty();
-         getSearch(memName);
+		   if($("#searchName").val()!=''){
+			  
+	       		$('#listBox').empty();
+	       		getSearch(name);
+		   }
        }
    });
    
