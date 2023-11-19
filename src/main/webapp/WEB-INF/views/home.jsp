@@ -33,6 +33,13 @@ uri="http://www.springframework.org/tags" %>
   </head>
   <script src="../js/home/calendar.js"></script>
   <body>
+	<script>
+		// // 이미지 안보일때 기본이미지 적용
+		function handleImageError(img) {
+			img.src = "/img/basicImg.png";
+			console.log("if");
+		}
+	</script>
 	<!-- Layout wrapper -->
 	<div class="layout-wrapper layout-content-navbar">
 		<div class="layout-container">
@@ -62,14 +69,17 @@ uri="http://www.springframework.org/tags" %>
 								<div class="card-body box1" style="height: 100%">
 									<div class="b1">
 										<!-- 이미지 이름 직책 -->
-										<sec:authentication property="principal" var="user" />
 										<div id="proBox">
 											<img
 											id="userProfile"
 											alt=""
-											src="../file/employee/${user.proFile}"
+											onerror="handleImageError(this)" 
+											src="../file/employee/${emp}" 
+											value="${emp}"
+											data-src="../file/employee/${emp}"
 											/>
 										</div>
+										<sec:authentication property="principal" var="user" />
 										<div
 										class="user mt-2"
 										id="user"
@@ -228,5 +238,20 @@ uri="http://www.springframework.org/tags" %>
     <script src="/js/attendance/work.js"></script>
     <script src="/js/home.js"></script>
     <script src="../js/home/home.js"></script>
+	<script>
+		const img = document.getElementById("userProfile")
+
+		console.log(user.proFile);
+		console.log(user.proOriginal);
+
+		// if (user.proFile == undefined) {
+		// 	img.src = "/img/basicImg.png";
+		// }else{
+		// 	img.src = img.getAttribute("data-src");
+		// }
+
+		
+
+	</script>
   </body>
 </html>
