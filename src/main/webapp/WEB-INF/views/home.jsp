@@ -165,7 +165,7 @@ uri="http://www.springframework.org/tags" %>
 							<div class="card h-100" style="width: 49%">
 								<div class="card-body chartBox">
 									<div style="width: 100%; height: 10%">
-										<h5>월별 신규회원수</h5>
+										<h5>월별 신규회원수 추이</h5>
 									</div>
 									<div class="chart1">
 										<canvas id="myChart" width="585" height="315"></canvas>

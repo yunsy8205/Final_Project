@@ -109,19 +109,20 @@
       let dec = Number($("#12").attr("data-member"));
 
       let chartData = [
-        97,
-        79,
-        66,
-        63,
-        84,
-        65,
-        44,
-        52,
-        88,
-        69,
-        50,
-        0,120
+        jan,
+        feb,
+        mar,
+        apr,
+        may,
+        jun,
+        jul,
+        aug,
+        sep,
+        oct,
+        nov,
+        dec,100
       ];
+
 
       const ctx = document.getElementById("myChart").getContext("2d");
       new Chart(ctx, {
