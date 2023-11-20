@@ -1,5 +1,5 @@
    
-   const socket = new WebSocket("ws://localhost:82/ws/chat");
+   const socket = new WebSocket("ws://192.168.9.71:82/ws/chat");
    
    let user = $('#my').attr("data-user");
    let name = $('#my').attr("data-name");
