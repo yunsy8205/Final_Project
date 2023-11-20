@@ -87,6 +87,12 @@
   overflow: hidden;
   margin: auto;
 }
-.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
-  min-height: 1rem;
+.fc-daygrid-day-top {
+  height: 1.3rem;
+}
+.card-body{
+  padding: 0.5rem 1.5rem !important;
+}
+.fc .fc-toolbar.fc-header-toolbar{
+  margin-bottom: 0.5rem;
 }
