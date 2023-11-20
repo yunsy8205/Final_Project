@@ -1,5 +1,5 @@
    
-   const socket = new WebSocket("ws://localhost:82/ws/chat");
+   const socket = new WebSocket("ws://192.168.9.71:82/ws/chat");
    
    let user = $('#my').attr("data-user");
    let name = $('#my').attr("data-name");
@@ -264,7 +264,7 @@
             console.log("대상정보 가져옴");
             
             y = '<div class="userBox2"><div id="proBox">'
-                        +'<img id="userProfile" alt="" src="../file/employee/'+response.one.proFile+'"></div>'
+                        +'<img id="userProfile" alt="" src="../file/employee/'+response.one.proFile+'" onerror="handleImageError(this)"></div>'
                    +'<div class="ms-3" id="my">'+response.one.name
                    +' <img width="25" height="25" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-exercise-lifestyles-flaticons-lineal-color-flat-icons-2.png" alt="external-exercise-lifestyles-flaticons-lineal-color-flat-icons-2"/> '
                    +response.one.position+'</div></div>';

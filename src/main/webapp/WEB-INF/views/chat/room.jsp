@@ -18,6 +18,13 @@
 	<link rel="stylesheet" href="../css/chat/room.css">  
 </head>
   <body>
+  	<script>
+		// // 이미지 안보일때 기본이미지 적용
+		function handleImageError(img) {
+			img.src = "/img/basicImg.png";
+			console.log("if");
+		}
+	</script>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -47,7 +54,7 @@
                           <sec:authorize access="isAuthenticated()">
                           <sec:authentication property="principal" var="user"/>
                              <div id="proBox">
-                                  <img id="userProfile" alt="" src="../file/employee/${user.proFile}">
+                                  <img id="userProfile" alt="" src="../file/employee/${user.proFile}" onerror="handleImageError(this)">
                               </div>
                               <div class="ms-3" id="my" data-position="${user.position}" data-user="${user.username}" data-name="${user.name}">${user.name}
                               <img width="25" height="25" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-exercise-lifestyles-flaticons-lineal-color-flat-icons-2.png" alt="external-exercise-lifestyles-flaticons-lineal-color-flat-icons-2"/>
