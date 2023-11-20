@@ -127,17 +127,21 @@
         >
             <!-- lockerInfo가 null이 아닌 경우에만 정보 출력 -->
             <% if (lockerVO != null) { %>
-                <div class="lockerInfo" style="font-size: 0.8rem">
+                <div class="lockerInfo" style="font-size: 0.8rem; text-align: center;">
                     <%-- memberNum이 null이고 state가 정상이면 lockerNum만 출력 --%>
                     <% if (lockerVO.getMemberNum() == null && "정상".equals(lockerVO.getState())) { %>
                         <%= lockerNum %>
                     <%-- memberNum이 null이고 state가 고장이면 state만 출력 --%>
                     <% } else if (lockerVO.getMemberNum() == null && "고장".equals(lockerVO.getState())) { %>
-                        <%= lockerVO.getState() %>
+                        <span style="    color: white;
+									    font-size: 2rem;
+									    background: red;
+									    padding: 0.5rem 1rem;
+									    border-radius: 10%;"><%= lockerVO.getState() %></span>
                     <%-- meberberNum이 null이 아니고 state 가 정상이면 memberNum을 출력 --%>
                     <% } else if (lockerVO.getMemberNum() != null && "정상".equals(lockerVO.getState())) { %>
                        
-                        <%= lockerVO.getMemberName() %><br>
+                        <span style="font-size: 1rem;"><%= lockerVO.getMemberName() %></span><br>
                     <%= "~"+lockerVO.getFinishDate() %><br> 
                     <%= calculateDateDifference(lockerVO.getStartDate(), lockerVO.getFinishDate())+"일 후 만료" %><br>
                     <% } %>
@@ -210,7 +214,7 @@
                         <div class="row g-2">
                           <div class="col mb-0">
                             <label for="emailBasic" class="form-label">시작일</label>
-                            <input class="form-control" type="date" name="startDate" value="${ today }" id="startDate" />
+                            <input class="form-control" type="date" name="startDate"  id="startDate" />
                           </div>
                           <div class="col mb-0">
                             <label for="dobBasic" class="form-label">종료일</label>
@@ -486,6 +490,7 @@
             });
         });
         
+        
     });
       /* document.addEventListener("DOMContentLoaded", function() {
         // "getNum"이라는 ID를 가진 엘리먼트 가져오기
@@ -508,6 +513,26 @@
         } 
     });  */
    
+</script>
+
+<script>
+  // 현재 날짜를 가져오는 함수
+  function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+
+    // 월과 일이 한 자리 수인 경우 앞에 0을 추가
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+
+    // 날짜를 YYYY-MM-DD 형식으로 반환
+    return `${year}-${month}-${day}`;
+  }
+
+  // 오늘 날짜를 가져와서 input 엘리먼트에 설정
+  document.getElementById('startDate').value = getCurrentDate();
 </script>
 
 

@@ -89,10 +89,10 @@ border-color: rgba(0,0,0,0) !important;
                 			</thead>
                 			<tbody class="table-border-bottom-0">
                 				
-               					<c:forEach items="${list}" var="vo">
+               					<c:forEach items="${list}" var="vo" varStatus="i">
 									<tr>
 										
-										<td>${vo.memberNum}</td>
+										<td>${i.index+1}</td>
 										<td>${vo.memberName}</td>
 										<td>${vo.phone}</td>
 										<td>${vo.gender}</td>
