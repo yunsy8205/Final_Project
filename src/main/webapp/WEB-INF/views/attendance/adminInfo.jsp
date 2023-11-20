@@ -88,6 +88,9 @@
     .table {
       text-align: center;
     }
+    .fc-license-message{
+    		display: none !important;
+    }
   </style>
 
   <c:import url="/WEB-INF/views/layout/base.jsp"></c:import>
