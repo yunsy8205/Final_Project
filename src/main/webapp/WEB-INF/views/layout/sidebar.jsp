@@ -118,6 +118,8 @@ uri="http://www.springframework.org/security/tags" %>
       </ul>
     </li>
     <!-- Cards -->
+    <sec:authorize access="isAuthenticated()">
+          <sec:authorize access="hasRole('ROLE_TRAINER')">
     <li class="menu-item">
       <a href="#" class="menu-link menu-toggle">
         <i class="menu-icon fa-solid fa-list-check"></i>
@@ -136,6 +138,8 @@ uri="http://www.springframework.org/security/tags" %>
         </li>
       </ul>
     </li>
+    </sec:authorize>
+        </sec:authorize>
     <!-- User interface -->
     <li class="menu-item">
       <a href="javascript:void(0)" class="menu-link menu-toggle">
