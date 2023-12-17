@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,6 +33,9 @@ public class ChatController {
 	@Autowired
 	private ChatService chatService;
 	
+	@Value("${app.chat.room}")
+	private String chatSocket;
+	
 	@GetMapping("chat")
     public String chatRoom(Model model, @RequestParam Long roomNum){
         RoomVO room = chatService.findRoomById(roomNum);
@@ -50,6 +54,7 @@ public class ChatController {
 		List<EmployeeVO> list = chatService.getChatList(b.getName());
 		
 		model.addAttribute("list", list);
+		model.addAttribute("chatSocket", chatSocket);
 		return "chat/room";
 	}
 	
@@ -132,4 +137,5 @@ public class ChatController {
 
 		return map;
 	}
+	
 }

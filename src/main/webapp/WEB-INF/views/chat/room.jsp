@@ -73,7 +73,7 @@
                            />
                            <button class="btn btn-primary" type="button" id="search">조회</button>
                          </div>
-                       <div id="listBox" style="background-color: white;">
+                       <div id="listBox" style="background-color: white;" data-socket="${chatSocket}">
                               <ul class="ul">
 					           <li class="li">관리자
 					           	  <c:forEach items="${list}" var="li">

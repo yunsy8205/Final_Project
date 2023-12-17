@@ -1,5 +1,7 @@
-   
-   const socket = new WebSocket("ws://192.168.9.71:82/ws/chat");
+
+   const listBox = document.getElementById("listBox");
+   const chatSocket = listBox.getAttribute("data-socket");
+   const socket = new WebSocket('ws://'+chatSocket+':8080/ws/chat');
    
    let user = $('#my').attr("data-user");
    let name = $('#my').attr("data-name");
@@ -100,7 +102,6 @@
 		   }
        }
    });
-   
    
    function roomCheck(employeeNum){
       

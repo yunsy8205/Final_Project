@@ -41,7 +41,7 @@
                   <div class="card mb-4">
                     <div class="card-header">
                       <h3 class="emp_title" style="text-align: center;margin-top: 1rem;"><span style="font-weight: 800;">${employeeVO.name} ${employeeVO.position}</span> 정보수정</h3>
-                      <c:if test="${fn:contains(['대표','총괄 매니저','고객관리 매니저','인사 매니저','시설 매니저','가발령'], employeeVO.position)}">
+                      <c:if test="${fn:contains({'대표','총괄 매니저','고객관리 매니저','인사 매니저','시설 매니저','가발령'}, employeeVO.position)}">
                         <div id="allDiv">
                           <form:form modelAttribute="employeeVO" method="post" enctype="multipart/form-data" id="frm" action="./infoUpdate">
                             <div class="proFile_con" style="text-align: center;margin: 2rem auto 3rem; display: flex; flex-direction: column;align-items: center;">

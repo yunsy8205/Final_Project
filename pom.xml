@@ -12,6 +12,7 @@
 	<artifactId>Final_Project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Final_Project</name>
+	<packaging>war</packaging>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -49,7 +50,7 @@
 	    	<groupId>org.springframework.boot</groupId>
 	    	<artifactId>spring-boot-starter-websocket</artifactId>
 		 </dependency>
-		 <!-- <https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper> -->
+			<!-- <https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper> -->
 		 <dependency>
 		   <groupId>org.apache.tomcat.embed</groupId>
 		   <artifactId>tomcat-embed-jasper</artifactId>
@@ -127,7 +128,12 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
+		
 	</build>
 
 </project>
