@@ -238,20 +238,12 @@ uri="http://www.springframework.org/tags" %>
     <script src="/js/attendance/work.js"></script>
     <script src="/js/home.js"></script>
     <script src="../js/home/home.js"></script>
-	<script>
-		const img = document.getElementById("userProfile")
+    <script>
+	const img = document.getElementById("userProfile")
 
-		console.log(user.proFile);
-		console.log(user.proOriginal);
-
-		// if (user.proFile == undefined) {
-		// 	img.src = "/img/basicImg.png";
-		// }else{
-		// 	img.src = img.getAttribute("data-src");
-		// }
-
-		
-
-	</script>
+	console.log(user.proFile);
+	console.log(user.proOriginal);
+	
+     </script>
   </body>
 </html>
